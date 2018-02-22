@@ -7,6 +7,7 @@
 <b>Token</b> - Токен дотупа к API
 
 #### Структура возвращаемого функцией `yadirGetBalance` дата фрейма:
+
 <table>
     <tr>
         <td><center>Поле</center></td><td><center>Тип данных</center></td><td><center>Описание</center></td>
@@ -21,7 +22,7 @@
         <td>Discount/td><td>int</td><td>Текущая скидка рекламодателя (в процентах). В настоящее время не применяется.</td>
     </tr>
     <tr>
-        <td>Login</td><td>chr</td><td>Логин рекламодателя — владельца общего счета.</a></td>
+        <td>Login</td><td>chr</td><td>Логин рекламодателя — владельца общего счета.</td>
     </tr>
     <tr>
         <td>AmountAvailableForTransfer</td><td>chr</td><td>Сумма, доступная для перевода с помощью операции TransferMoney (в валюте, указанной в параметре Currency).</td>
