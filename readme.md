@@ -1,3 +1,11 @@
+<head>
+<link rel="shortcut icon" type="image/x-icon" href="as.ico">
+</head>
+
+<p align="center">
+<img src="https://alexeyseleznev.files.wordpress.com/2017/03/as.png?w=40" data-canonical-src="https://selesnow.github.io/" style="max-width:100%;">
+</p>
+
 # Обо мне
 Меня зовут Алексей Селезнёв, на данный момент я возглавляю отдел аналитики в агентстве интернет маркетинга Netpeak. 
 Более подробно обо мне можно узнать [на моём блоге](alexeyseleznev.wordpress.com).
