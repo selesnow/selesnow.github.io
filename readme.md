@@ -10,6 +10,9 @@
 Меня зовут Алексей Селезнёв, на данный момент я возглавляю отдел аналитики в агентстве интернет маркетинга Netpeak. 
 Более подробно обо мне можно узнать [на моём блоге](alexeyseleznev.wordpress.com).
 
+<img class=" aligncenter" src="https://scontent.fods1-1.fna.fbcdn.net/v/t1.0-9/23519298_1723847460967555_7311750647506949501_n.jpg?oh=a88c93c1a1ea6600ee3268b3f8d74bd6&amp;oe=5B4B9D0E" alt="Фото Алексея Селезнёва.">
+
+
 ## Контакты
 * email: selesnow@gmail.com
 * facebook: [facebook.com/selesnow](https://www.facebook.com/selesnow)
