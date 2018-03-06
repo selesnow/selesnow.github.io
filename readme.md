@@ -1,7 +1,4 @@
 <head>
-
-  
-
   
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script>
@@ -13,8 +10,6 @@
   gtag('config', 'UA-114798296-1');
 </script>
 
-
-  ... 
 </head>
 
 <p align="center">
