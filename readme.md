@@ -1,16 +1,10 @@
-<head>
-  
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-114798296-1');
-</script>
-
-</head>
+---
+title: ""
+output: 
+  html_document:
+    includes:
+       in_header: ga.html
+---
 
 <p align="center">
 <a href="https://selesnow.github.io/"><img src="https://alexeyseleznev.files.wordpress.com/2017/03/as.png" height="80"></a>
