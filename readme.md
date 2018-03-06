@@ -1,4 +1,4 @@
-<head>
+
   
 <link rel="shortcut icon" type="image/x-icon" href="as.ico">
   
@@ -12,7 +12,7 @@
   gtag('config', 'UA-114798296-1');
 </script>
 
-</head>
+
 
 
 <p align="center">
