@@ -3,7 +3,7 @@
 </p>
 
 
-|ryandexdirect|rfacebookstat|rvkstat|rmytarget|rmixpanel|rGitHub|getProxy|
+|[ryandexdirect]()|rfacebookstat|rvkstat|rmytarget|rmixpanel|rGitHub|getProxy|
 | ----------- | ----------- | ----- | ------- | ------- | ----- | ------ |
 
 # Обо мне
