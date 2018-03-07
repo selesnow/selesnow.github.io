@@ -3,8 +3,8 @@
 </p>
 
 
-|[ryandexdirect]()|rfacebookstat|rvkstat|rmytarget|rmixpanel|rGitHub|getProxy|
-| ----------- | ----------- | ----- | ------- | ------- | ----- | ------ |
+|[ryandexdirect]()|[rfacebookstat]()|[rvkstat]()|[rmytarget]()|[rmixpanel]()|[rGitHub]()|[getProxy]()|
+| --------------- | ----------- | ----- | ------- | ------- | ----- | ------ |
 
 # Обо мне
 Меня зовут Алексей Селезнёв, на данный момент я возглавляю отдел аналитики в агентстве интернет маркетинга Netpeak. 
