@@ -1,6 +1,6 @@
 ---
 title: ""
-output: 
+readme: 
   html_document:
     includes:
        in_header: ga.html
