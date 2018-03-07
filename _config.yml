@@ -1,6 +1,6 @@
 theme: jekyll-theme-midnight
 title: "Alexey Seleznev R Packages-5"
-output:
+page.readme:
   html_document:
     includes:
        in_header: ga.html
