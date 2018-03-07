@@ -1,1 +1,8 @@
 theme: jekyll-theme-midnight
+---
+title: ""
+output: 
+  html_document:
+    includes:
+       in_header: ga.html
+---
