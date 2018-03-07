@@ -1,5 +1,6 @@
 theme: jekyll-theme-midnight
-title: "Alexey Seleznev R Packages-3"
+title: "Alexey Seleznev R Packages-4"
 readme:
-  includes:
-      in_header: ga.html
+  html_document:
+    includes:
+       in_header: ga.html
