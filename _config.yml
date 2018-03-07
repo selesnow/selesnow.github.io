@@ -1,4 +1,5 @@
 theme: jekyll-theme-midnight
 title: "Alexey Seleznev R Packages-3"
-includes:
-    in_header: ga.html
+readme:
+  includes:
+      in_header: ga.html
