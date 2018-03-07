@@ -1,5 +1,5 @@
 theme: jekyll-theme-midnight
-title: "Alexey Seleznev R Packages"
+title: "Alexey Seleznev R Packages-2"
 bookdown::gitbook:
   includes:
       in_header: ga.html
