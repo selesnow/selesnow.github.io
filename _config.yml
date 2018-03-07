@@ -1,5 +1,5 @@
 theme: jekyll-theme-midnight
-title: ""
+title: "Alexey Seleznev R Packages"
 output: 
   html_document:
     includes:
