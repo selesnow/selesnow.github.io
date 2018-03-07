@@ -1,6 +1,8 @@
 theme: jekyll-theme-midnight
+---
 title: "Alexey Seleznev R Packages"
-gitbook:
+output: 
   html_document:
     includes:
        in_header: ga.html
+---
