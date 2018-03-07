@@ -2,9 +2,17 @@
 <a href="https://selesnow.github.io/"><img src="https://alexeyseleznev.files.wordpress.com/2017/03/as.png" height="80"></a>
 </p>
 
-|[ryandexdirect]()|[rfacebookstat]()|[rvkstat]()|[rmytarget]()|[rmixpanel]()|[rGitHub]()|[getProxy]()|
-| --------------- | ----------- | ----- | ------- | ------- | ----- | ------ |
-
+<table>
+    <tr>
+      <td>[ryandexdirect]()</td>
+      <td>[rvkstat]()</td>
+      <td>[rmytarget]()</td>
+      <td>[rmixpanel]()</td>
+      <td>[rGitHub]()</td>
+      <td>[getProxy]()</td>
+    </tr>
+</table>
+  
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script>
 <script>
