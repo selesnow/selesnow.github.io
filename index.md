@@ -15,7 +15,7 @@
 
 <table>
     <tr>
-      <td>[ryandexdirect]()</td>
+      <td>[ryandexdirect](https://selesnow.github.io/ryandexdirect/)</td>
       <td>[rvkstat]()</td>
       <td>[rmytarget]()</td>
       <td>[rmixpanel]()</td>
