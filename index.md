@@ -76,6 +76,7 @@
 * [Документация](https://selesnow.github.io/getProxy/)
 * [Отчёт об ошибках и доработках](https://github.com/selesnow/getProxy/issues)
 * [Список релизов](https://github.com/selesnow/getProxy/releases)
+
 ---
 
 # Последние новости репозиториев
