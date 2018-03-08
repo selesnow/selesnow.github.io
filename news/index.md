@@ -34,6 +34,9 @@
         <a href="https://selesnow.github.io/getProxy/">getProxy</a>
       </td>
       <td>
+        <a href="https://selesnow.github.io/rGitHub/">rGitHub</a>
+      </td>
+      <td>
         <a href="https://selesnow.github.io/news/">NEWS</a>
       </td>
     </tr>
@@ -44,6 +47,12 @@
 ### 2018-03-02| rvkstat
 
 Добавлена возможность получения ключа доступа сообщества и списки диалогов Вконтакте, [релиз](https://github.com/selesnow/rvkstat/releases/tag/2.4.1).
+
+---
+
+### 2018-03-01
+
+Собрал в одной [статье](https://alexeyseleznev.wordpress.com/2018/03/01/%D0%BF%D0%BE%D1%80%D1%86%D0%B8%D1%8F-%D0%B7%D0%B8%D0%BC%D0%BD%D0%B8%D1%85-%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%BE%D0%B2-ryandexdirect-rfacebo/) все зимние обновления пакетов ryandexdirect, rfacebookstat, rvkstat.
 
 ---
 
