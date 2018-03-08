@@ -61,3 +61,9 @@
 В пакет rvkstat добавлена функция vkGetAdsLayout, возвращающая описание внешнего вида рекламных объявлений, подробности [тут](https://github.com/selesnow/rvkstat/releases/tag/2.3.0).
 
 ---
+
+### 2018-01-22| rvkstat, rfacebookstat
+
+[Михаил Гусев](https://www.facebook.com/profile.php?id=100012364206491&fref=mentions) из eLama написал подробную [статью](https://ppc.world/articles/zagruzka-statistiki-iz-vkontakte-i-facebook-v-google-bigquery/) для [ppc.world](https://ppc.world/) о том, как с помощью пакета rvkstat и bigrquery загрузить данные из Вконтакте в Google BigQuery.
+
+---
