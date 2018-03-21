@@ -53,6 +53,11 @@
 ---
 ### 2018-03-21| ryandexdirect
 
+Дмитрий Осиюк написал о том, как с помощью пакета ryandexdirect определить мошенничество CPA-сетей, [сылка на статью](https://iosiuk.blogspot.com/2018/03/cpa-logs-api-yandexmetrika-r.html).
+
+---
+### 2018-03-21| ryandexdirect
+
 В пакете ryandexdirect исправлена ошибка, при использовании оператора IN при фильтрации данных в функции yadirGetReport. [подробности](https://github.com/selesnow/ryandexdirect/issues/1).
 
 ---
