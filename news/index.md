@@ -51,6 +51,16 @@
 
 # Последние новости репозиториев
 ---
+### 2018-03-21| ryandexdirect
+
+В пакете ryandexdirect исправлена ошибка, при использовании оператора IN при фильтрации данных в функции yadirGetReport. [подробности](https://github.com/selesnow/ryandexdirect/issues/1).
+
+---
+### 2018-03-19| rvkstat
+
+Исправлена ошибка в функции vkGetUserWall,теперь она корректно обращается как к старой версии API, т.е. до 5ой, так и с новой версией 5.x. [подробности](https://github.com/selesnow/rvkstat/issues/4).
+
+---
 ### 2018-03-02| rvkstat
 
 Добавлена возможность получения ключа доступа сообщества и списки диалогов Вконтакте, [релиз](https://github.com/selesnow/rvkstat/releases/tag/2.4.1).
