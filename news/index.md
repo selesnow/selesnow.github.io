@@ -61,6 +61,11 @@
 В пакете ryandexdirect исправлена ошибка, при использовании оператора IN при фильтрации данных в функции yadirGetReport. [подробности](https://github.com/selesnow/ryandexdirect/issues/1).
 
 ---
+### 2018-03-20| rfacebookstat
+
+В пакете rfacebookstat исправлена ошибка при работе с actions breakdowns, ранее задваивались строки с прочей статистикой т.к. API отдаёт данные по actions в виде отдельных списков, теперь каждое событие будет в отдельном столбце, количество строк никак от этого не изменится. [подробности](https://github.com/selesnow/rfacebookstat/issues/1).
+
+---
 ### 2018-03-19| rvkstat
 
 Исправлена ошибка в функции vkGetUserWall,теперь она корректно обращается как к старой версии API, т.е. до 5ой, так и с новой версией 5.x. [подробности](https://github.com/selesnow/rvkstat/issues/4).
