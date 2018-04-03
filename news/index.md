@@ -51,6 +51,11 @@
 
 # Последние новости репозиториев
 ---
+### 2018-04-03| rvkstat 2.5.0
+
+Релиз rvkstat версии 2.5.0, в пакет добавлена возможность запрашивать подробную статистику о сообщенях на стене сообщества, подробности по [ссылке](https://github.com/selesnow/rvkstat/releases/tag/2.5.0).
+
+---
 ### 2018-04-02| Интервью
 
 Интервью для поортала посвящённого цифровым исследованиям "Цифровой Дискурс", пообщались на тему "Кто такие интернет-аналитики и какими инструментами они пользуются". Так же в ходе интервью речь зашла и про пакеты ryandexdirect, rvkstat, rfacebookstat, rmytarget, rmixpanel. Полный текст интервью доступен по [ссылке](https://discourse.digital/blogs/kto-takie-internet-analitiki-i-kakimi-instrumentami-oni-polzuyutsya/?utm_source=github&utm_medium=seleznev). 
