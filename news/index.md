@@ -51,7 +51,7 @@
 
 # Последние новости репозиториев
 ---
-### 2018-03-29
+### 2018-04-02| Интервью
 
 Интервью для поортала посвящённого цифровым исследованиям "Цифровой Дискурс", пообщались на тему "Кто такие интернет-аналитики и какими инструментами они пользуются". Так же в ходе интервью речь зашла и про пакеты ryandexdirect, rvkstat, rfacebookstat, rmytarget, rmixpanel. Полный текст интервью доступен по [ссылке](https://discourse.digital/blogs/kto-takie-internet-analitiki-i-kakimi-instrumentami-oni-polzuyutsya/?utm_source=github&utm_medium=seleznev). 
 
