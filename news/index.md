@@ -51,6 +51,11 @@
 
 # Последние новости репозиториев
 ---
+### 2018-04-10| ryandexdirect
+
+Написал статью о том как с помощью языка R получить данные из API Google AdWords и Яндекс Директ, с помощью пакетов RAdwords и ryandexdirect, с примерами кода, [ссылка на статью](https://www.owox.ru/blog/articles/r-language-and-api-of-ad-systems/).
+
+---
 ### 2018-04-10| rvkstat 2.5.1
 
 Исправлена ошибка в функции vkGetUserGroups, подробнее можно узнать из [тикета](https://github.com/selesnow/rvkstat/issues/11).
