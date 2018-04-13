@@ -63,3 +63,9 @@
 <gcse:search></gcse:search>
 
 На этой странице собраны все статьи посвящённые работе с представленными на этом сайта пакетами функций для языка R.
+
+Далее приведён  список статей с сопутсвующей информацией про автора, и пакеты о которых идёт речь в статье:
+
+1. **[Как перенести данные из ВКонтакте в Power BI](https://netpeak.net/ru/blog/kak-perenesti-dannyye-iz-vkontakte-v-power-bi/)**, Алексей Селезнёв, (rvkstat) | 22.09.2017
+2. **[Загрузка статистики из «ВКонтакте» и Facebook в Google BigQuery](https://ppc.world/articles/zagruzka-statistiki-iz-vkontakte-i-facebook-v-google-bigquery/)**, Михаил Гусев, (rvkstat) | 22.01.2018
+3. **[Как загрузить статистику из рекламных систем в Google BigQuery](https://ppc.world/articles/kak-zagruzit-statistiku-iz-reklamnyh-sistem-v-google-bigquery/)**, Антон Леонтьев, (ryandexdiretc, rfacebookstat, rvkstat, rmytarget) | 29.06.2017
