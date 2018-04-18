@@ -67,6 +67,19 @@
 Далее приведён  список статей с сопутсвующей информацией про автора, и пакеты о которых идёт речь в статье:
 
 ---
+## [Подключение Power BI к Yandex.Metrika](http://pm-partner.ru/articles/2017/podkluchenie-power-bi-yandex-metrika/) <Br>
+<b>Автор:</b> Дмитрий Малых <Br>
+<b>Впервые было опубликовано на:</b> [pm-partner](http://pm-partner.ru) <Br>
+<b>Дата публикации:</b> 19.05.2017 <Br>
+
+<img class="aligncenter" src="http://pm-partner.ru/upload/medialibrary/1cb/b234.png" alt="Как получить и обработать сырые данные из  Яндекс.Метрики" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
+
+*С тех пор, как мы начали работать с Microsoft Power BI, прошло значительное количество времени и, неожиданно было отмечено, что у нас осталась лишь одна область деятельности без визуализированных отчётов – Яндекс Метрика. 
+Однако, тривиальная в общем-то задача, оказалась не настолько простой, как ожидалось.*
+
+*[Читать продолжение в первоисточнике.](http://pm-partner.ru/articles/2017/podkluchenie-power-bi-yandex-metrika/)*
+
+---
 ## [Как получить и обработать сырые данные из Яндекс.Метрики](https://netpeak.net/ru/blog/kak-poluchit-i-obrabotat-syrye-dannye-iz-yandeks-metriki/) <Br>
 <b>Автор:</b> Алексей Селезнёв <Br>
 <b>Впервые было опубликовано на:</b> [Блог Netpeak](https://netpeak.net/ru/blog/) <Br>
