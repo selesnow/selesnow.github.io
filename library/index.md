@@ -72,7 +72,9 @@
 <b>Впервые было опубликовано на:</b> [pm-partner](http://pm-partner.ru) <Br>
 <b>Дата публикации:</b> 19.05.2017 <Br>
 
+<p align="center">
 <img class="aligncenter" src="http://pm-partner.ru/upload/medialibrary/1cb/b234.png" align="middle" alt="Подключение Power BI к Yandex.Metrika" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
+<p>
 
 *С тех пор, как мы начали работать с Microsoft Power BI, прошло значительное количество времени и, неожиданно было отмечено, что у нас осталась лишь одна область деятельности без визуализированных отчётов – Яндекс Метрика. 
 Однако, тривиальная в общем-то задача, оказалась не настолько простой, как ожидалось.*
