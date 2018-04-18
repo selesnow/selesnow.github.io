@@ -109,6 +109,22 @@
 *[Читать продолжение в первоисточнике.](https://iosiuk.blogspot.com/2018/03/cpa-logs-api-yandexmetrika-r.html)*
 
 ---
+## [Порция зимних обновлений пакетов ryandexdirect, rfacebookstat, rvkstat.](https://alexeyseleznev.wordpress.com/2018/03/01/%d0%bf%d0%be%d1%80%d1%86%d0%b8%d1%8f-%d0%b7%d0%b8%d0%bc%d0%bd%d0%b8%d1%85-%d0%be%d0%b1%d0%bd%d0%be%d0%b2%d0%bb%d0%b5%d0%bd%d0%b8%d0%b9-%d0%bf%d0%b0%d0%ba%d0%b5%d1%82%d0%be%d0%b2-ryandexdirect-rfacebo/) <Br>
+<b>Автор:</b> Алексей Селезнёв <Br>
+<b>Впервые было опубликовано на:</b> [Блог Алексея Селезнёва](https://alexeyseleznev.wordpress.com/) <Br>
+<b>Дата публикации:</b> 01.03.2018 <Br>
+
+<p align="center">
+<img class="aligncenter" src="http://vnimatelnostdetyam.com/wp-content/uploads/2016/12/8-910x480.jpg" align="middle" alt="Подключение Power BI к Yandex.Metrika" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
+</p>
+
+<i>Статья - дайджест зимних обновлений R клиентов для работы с API Яндекс Директ, Facebook и Вконтакте.</i>
+
+<i>Честно говоря за зиму было не так много обновлений, но тем не менее возможности некоторых пакетов было довольно значительно расширены. </i>
+
+*[Читать продолжение в первоисточнике.](https://alexeyseleznev.wordpress.com/2018/03/01/%d0%bf%d0%be%d1%80%d1%86%d0%b8%d1%8f-%d0%b7%d0%b8%d0%bc%d0%bd%d0%b8%d1%85-%d0%be%d0%b1%d0%bd%d0%be%d0%b2%d0%bb%d0%b5%d0%bd%d0%b8%d0%b9-%d0%bf%d0%b0%d0%ba%d0%b5%d1%82%d0%be%d0%b2-ryandexdirect-rfacebo/)*
+
+---
 ## [Загрузка статистики из «ВКонтакте» и Facebook в Google BigQuery — руководство](https://ppc.world/articles/zagruzka-statistiki-iz-vkontakte-i-facebook-v-google-bigquery/) <Br>
 <b>Автор:</b> Михаил Гусев <Br>
 <b>Впервые было опубликовано на:</b> [ppc.world](https://ppc.world) <Br>
@@ -122,6 +138,21 @@
 
 *[Читать продолжение в первоисточнике.](https://ppc.world/articles/zagruzka-statistiki-iz-vkontakte-i-facebook-v-google-bigquery/)*
 
+---
+## [rfacebookstat 1.5.0 - Как правильно использовать аргумент request_speed в функции fbGetMarketingStat.](https://alexeyseleznev.wordpress.com/2017/12/26/rfacebookstat-1-5-0-%d0%ba%d0%b0%d0%ba-%d0%bf%d1%80%d0%b0%d0%b2%d0%b8%d0%bb%d1%8c%d0%bd%d0%be-%d0%b8%d1%81%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d0%be%d0%b2%d0%b0%d1%82%d1%8c-%d0%b0%d1%80%d0%b3%d1%83%d0%bc/) <Br>
+<b>Автор:</b> Алексей Селезнёв <Br>
+<b>Впервые было опубликовано на:</b> [Блог Алексея Селезнёва](https://alexeyseleznev.wordpress.com/) <Br>
+<b>Дата публикации:</b> 26.12.2017 <Br>
+
+<p align="center">
+<img class="aligncenter" src="http://img.netpeak.ua/alsey/151428260475_kiss_14kb.png" align="middle" alt="Подключение Power BI к Yandex.Metrika" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
+</p>
+
+<i>В версии 1.5.0 была значительно улучшена основная функция пакета fbGetMarketingStat, в неё был добавлен аргумент request_speed, к тому же функция теперь автоматически обходит ограничение на количество вызовов к API, но для  максимально быстрой загрузки данных надо разобраться с тем как использовать данный аргумент. </i>
+
+*[Читать продолжение в первоисточнике.](https://alexeyseleznev.wordpress.com/2017/12/26/rfacebookstat-1-5-0-%d0%ba%d0%b0%d0%ba-%d0%bf%d1%80%d0%b0%d0%b2%d0%b8%d0%bb%d1%8c%d0%bd%d0%be-%d0%b8%d1%81%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d0%be%d0%b2%d0%b0%d1%82%d1%8c-%d0%b0%d1%80%d0%b3%d1%83%d0%bc/)*
+
+---
 ## [Все обновления пакетов ryandexdirect, rfacebookstat и rvkstat за осень 2017.](https://alexeyseleznev.wordpress.com/2017/12/01/%d0%b2%d1%81%d0%b5-%d0%be%d0%b1%d0%bd%d0%be%d0%b2%d0%bb%d0%b5%d0%bd%d0%b8%d1%8f-%d0%bf%d0%b0%d0%ba%d0%b5%d1%82%d0%be%d0%b2-ryandexdirect-rfacebookstat-%d0%b8-rvkstat-%d0%b7%d0%b0-%d0%be%d1%81%d0%b5/) <Br>
 <b>Автор:</b> Алексей Селезнёв <Br>
 <b>Впервые было опубликовано на:</b> [Блог Алексея Селезнёва](https://alexeyseleznev.wordpress.com/) <Br>
