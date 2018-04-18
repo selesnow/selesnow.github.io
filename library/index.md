@@ -73,7 +73,7 @@
 <b>Дата публикации:</b> 22.01.2018 <Br>
 
 <p align="center">
-<img class="aligncenter" src="https://images.netpeak.net/blog/card_facebook_kak-perenesti-dannyye-iz-vkontakte-v-power-bi.png" align="middle" alt="Подключение Power BI к Yandex.Metrika" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
+<img class="aligncenter" src="https://ppc.world/uploads/article_images/2018/01/vk_fb_to_bq/1_vk_otchet.png" align="middle" alt="Подключение Power BI к Yandex.Metrika" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
 </p>
 
 <i>В предыдущей статье мой коллега Антон Леонтьев рассказывал о том, как загрузить статистику из рекламных систем в Google BigQuery, а также строить отчетность на основании этих данных. Так, информацию по рекламе из «ВКонтакте» мы загружали вручную, а из Facebook — с помощью библиотеки rfacebookstat Алексея Селезнева. В этой статье мы рассмотрим иные способы загрузки данных для «ВКонтакте» и Facebook. </i>
