@@ -84,7 +84,7 @@
 * *для визуализации данных нужно вручную загружать TSV-файл в оболочку, предназначенную для построения графиков и таблиц.*
 *В этой статье я расскажу, как автоматизировать выгрузку сырых данных из Яндекс.Метрики и работать с полученной статистикой.*
 
-[Читать продолжение в первоисточнике.](https://netpeak.net/ru/blog/kak-poluchit-i-obrabotat-syrye-dannye-iz-yandeks-metriki/)
+*[Читать продолжение в первоисточнике.](https://netpeak.net/ru/blog/kak-poluchit-i-obrabotat-syrye-dannye-iz-yandeks-metriki/)*
 
 ---
 **Название:** [Как связать Яндекс.Директ с Microsoft Power BI](https://netpeak.net/ru/blog/kak-svyazat-yandeks-direkt-s-microsoft-power-bi/) <Br>
@@ -96,6 +96,6 @@
 
 *Яндекс.Директ собирает много данных, но, к сожалению, в веб-интерфейсе доступно очень мало информации для анализа. В этой статье я подробно опишу, как получить статистику о рекламных кампаниях c помощью языка R для визуализации в Power BI.*
 
-[Читать продолжение в первоисточнике.](https://netpeak.net/ru/blog/kak-svyazat-yandeks-direkt-s-microsoft-power-bi/)
+*[Читать продолжение в первоисточнике.](https://netpeak.net/ru/blog/kak-svyazat-yandeks-direkt-s-microsoft-power-bi/)*
 
 ---
