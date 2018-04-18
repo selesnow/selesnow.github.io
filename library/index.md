@@ -67,6 +67,20 @@
 Далее приведён  список статей с сопутсвующей информацией про автора, и пакеты о которых идёт речь в статье:
 
 ---
+## [Что такое язык R и как работать с API рекламных систем Google AdWords и Яндекс.Директ с его помощью](https://www.owox.ru/blog/articles/r-language-and-api-of-ad-systems/) <Br>
+<b>Автор:</b> Алексей Селезнёв <Br>
+<b>Впервые было опубликовано на:</b> [Блог OWOX](https://www.owox.ru/blog/) <Br>
+<b>Дата публикации:</b> 02.04.2018 <Br>
+
+<p align="center">
+<img class="aligncenter" src="https://pp.userapi.com/c837637/v837637057/7ddc6/1ZhyMvFK5TM.jpg" align="middle" alt="Подключение Power BI к Yandex.Metrika" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
+</p>
+
+<i>Если вы ведете несколько небольших рекламных кампаний в одном рекламном аккаунте, то для анализа их эффективности вам достаточно посмотреть нужные данные в Google AdWords / Яндекс.Директ и Google Analytics / Яндекс.Метрике. Но чтобы даже бегло оценить эффективность пары десятков рекламных кампаний в нескольких аккаунтах таким способом, вы потратите в лучшем случае несколько часов. А на детальный анализ могут уйти дни и недели, в течение которых рекламный бюджет будет тратиться и, возможно, далеко не самым эффективным образом. </i>
+
+*[Читать продолжение в первоисточнике.](https://www.owox.ru/blog/articles/r-language-and-api-of-ad-systems/)*
+
+---
 ## [Кто такие интернет-аналитики и какими инструментами они пользуются](https://discourse.digital/blogs/kto-takie-internet-analitiki-i-kakimi-instrumentami-oni-polzuyutsya/) <Br>
 <b>Автор:</b> Алексей Селезнёв, Андрей Чехлов <Br>
 <b>Впервые было опубликовано на:</b> [Цтфровой Дискурс](https://discourse.digital/) <Br>
