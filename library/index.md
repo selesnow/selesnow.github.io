@@ -123,8 +123,8 @@
 *[Читать продолжение в первоисточнике.](https://ppc.world/articles/zagruzka-statistiki-iz-vkontakte-i-facebook-v-google-bigquery/)*
 
 ## [Все обновления пакетов ryandexdirect, rfacebookstat и rvkstat за осень 2017.](https://alexeyseleznev.wordpress.com/2017/12/01/%d0%b2%d1%81%d0%b5-%d0%be%d0%b1%d0%bd%d0%be%d0%b2%d0%bb%d0%b5%d0%bd%d0%b8%d1%8f-%d0%bf%d0%b0%d0%ba%d0%b5%d1%82%d0%be%d0%b2-ryandexdirect-rfacebookstat-%d0%b8-rvkstat-%d0%b7%d0%b0-%d0%be%d1%81%d0%b5/) <Br>
-<b>Автор:</b> Михаил Гусев <Br>
-<b>Впервые было опубликовано на:</b> [ppc.world](https://ppc.world) <Br>
+<b>Автор:</b> Алексей Селезнёв <Br>
+<b>Впервые было опубликовано на:</b> [Блог Алексея Селезнёва](https://alexeyseleznev.wordpress.com/) <Br>
 <b>Дата публикации:</b> 22.01.2018 <Br>
 
 <p align="center">
