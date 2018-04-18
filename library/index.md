@@ -67,6 +67,20 @@
 Далее приведён  список статей с сопутсвующей информацией про автора, и пакеты о которых идёт речь в статье:
 
 ---
+## [Загрузка статистики из «ВКонтакте» и Facebook в Google BigQuery — руководство](https://iosiuk.blogspot.com/2018/03/cpa-logs-api-yandexmetrika-r.html) <Br>
+<b>Автор:</b> Дмитрий Осиюк <Br>
+<b>Впервые было опубликовано на:</b> [Блог Дмитрия Осиюка](https://iosiuk.blogspot.com/) <Br>
+<b>Дата публикации:</b> 20.03.2018 <Br>
+
+<p align="center">
+<img class="aligncenter" src="https://1.bp.blogspot.com/-iZUSFCIC27M/WrDHRljF_RI/AAAAAAAAXfg/rsfG84457g4pFJ3_gQ9xl1wJ9A47on0ugCLcBGAs/s640/%25D0%2591%25D0%25B5%25D0%25B7%2B%25D0%25BD%25D0%25B0%25D0%25B7%25D0%25B2%25D0%25B0%25D0%25BD%25D0%25B8%25D1%258F.png" align="middle" alt="Подключение Power BI к Yandex.Metrika" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
+</p>
+
+<i>Несколько дней назад я написал статью о том, [как можно определить мошенничество CPA-сетей с помощью API Google Analytics](https://iosiuk.blogspot.com/2018/03/cpa-google-analytics-r.html). В этой статье я решил реализовать тот же самый алгоритм, только используя Logs API Yandex.Metrika. </i>
+
+*[Читать продолжение в первоисточнике.](https://iosiuk.blogspot.com/2018/03/cpa-logs-api-yandexmetrika-r.html)*
+
+---
 ## [Загрузка статистики из «ВКонтакте» и Facebook в Google BigQuery — руководство](https://ppc.world/articles/zagruzka-statistiki-iz-vkontakte-i-facebook-v-google-bigquery/) <Br>
 <b>Автор:</b> Михаил Гусев <Br>
 <b>Впервые было опубликовано на:</b> [ppc.world](https://ppc.world) <Br>
