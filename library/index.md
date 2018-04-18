@@ -72,7 +72,7 @@
 **Впервые было опубликовано на:** [Блог Netpeak](https://netpeak.net/ru/blog/) <Br>
 **Дата публикации:** 09.02.2017 <Br>
 
-<img class="aligncenter" src="https://images.netpeak.net/blog/kak-polucit-i-obrabotat-syrye-dannye-iz-andeksmetriki.jpg" alt="Как получить и обработать сырые данные из  Яндекс.Метрики" style="position: relative; width: 150px; height: 150px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
+<img class="aligncenter" src="https://images.netpeak.net/blog/kak-polucit-i-obrabotat-syrye-dannye-iz-andeksmetriki.jpg" alt="Как получить и обработать сырые данные из  Яндекс.Метрики" style="position: relative; width: 150px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
 
 *Хотите качественно анализировать статистику из Яндекс.Метрики? Отследить сложные воронки продаж, объединить данные из разных систем аналитики, контролировать расхождения в статистике, — «сырые» данные помогут вам эффективно решить все эти сложные задачи.*
 
@@ -84,11 +84,18 @@
 * *для визуализации данных нужно вручную загружать TSV-файл в оболочку, предназначенную для построения графиков и таблиц.*
 *В этой статье я расскажу, как автоматизировать выгрузку сырых данных из Яндекс.Метрики и работать с полученной статистикой.*
 
+[Читать продолжение в первоисточнике.](https://netpeak.net/ru/blog/kak-poluchit-i-obrabotat-syrye-dannye-iz-yandeks-metriki/)
+
 ---
+**Название:** [Как связать Яндекс.Директ с Microsoft Power BI](https://netpeak.net/ru/blog/kak-svyazat-yandeks-direkt-s-microsoft-power-bi/) <Br>
+**Автор:** Алексей Селезнёв <Br>
+**Впервые было опубликовано на:** [Блог Netpeak](https://netpeak.net/ru/blog/) <Br>
+**Дата публикации:** 27.02.2017 <Br>
 
-**[Как перенести данные из ВКонтакте в Power BI](https://netpeak.net/ru/blog/kak-perenesti-dannyye-iz-vkontakte-v-power-bi/)**
+<img class="aligncenter" src="https://images.netpeak.net/blog/card_facebook_kak-svyazat-yandeks-direkt-s-microsoft-power-bi.png" alt="Как получить и обработать сырые данные из  Яндекс.Метрики" style="position: relative; width: 150px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
 
+*Яндекс.Директ собирает много данных, но, к сожалению, в веб-интерфейсе доступно очень мало информации для анализа. В этой статье я подробно опишу, как получить статистику о рекламных кампаниях c помощью языка R для визуализации в Power BI.*
 
-1. **[Как перенести данные из ВКонтакте в Power BI](https://netpeak.net/ru/blog/kak-perenesti-dannyye-iz-vkontakte-v-power-bi/)**, Алексей Селезнёв, (rvkstat) | 22.09.2017
-2. **[Загрузка статистики из «ВКонтакте» и Facebook в Google BigQuery](https://ppc.world/articles/zagruzka-statistiki-iz-vkontakte-i-facebook-v-google-bigquery/)**, Михаил Гусев, (rvkstat) | 22.01.2018
-3. **[Как загрузить статистику из рекламных систем в Google BigQuery](https://ppc.world/articles/kak-zagruzit-statistiku-iz-reklamnyh-sistem-v-google-bigquery/)**, Антон Леонтьев, (ryandexdiretc, rfacebookstat, rvkstat, rmytarget) | 29.06.2017
+[Читать продолжение в первоисточнике.](https://netpeak.net/ru/blog/kak-svyazat-yandeks-direkt-s-microsoft-power-bi/)
+
+---
