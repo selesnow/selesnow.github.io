@@ -74,7 +74,7 @@
 
 <p align="center">
 <img class="aligncenter" src="http://pm-partner.ru/upload/medialibrary/1cb/b234.png" align="middle" alt="Подключение Power BI к Yandex.Metrika" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
-<p>
+</p>
 
 *С тех пор, как мы начали работать с Microsoft Power BI, прошло значительное количество времени и, неожиданно было отмечено, что у нас осталась лишь одна область деятельности без визуализированных отчётов – Яндекс Метрика. 
 Однако, тривиальная в общем-то задача, оказалась не настолько простой, как ожидалось.*
@@ -87,8 +87,10 @@
 <b>Впервые было опубликовано на:</b> [Блог Netpeak](https://netpeak.net/ru/blog/) <Br>
 <b>Дата публикации:</b> 09.02.2017 <Br>
 
+<p align="center">
 <img class="aligncenter" src="https://images.netpeak.net/blog/kak-polucit-i-obrabotat-syrye-dannye-iz-andeksmetriki.jpg" align="middle" alt="Как получить и обработать сырые данные из  Яндекс.Метрики" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
-
+</p>
+  
 *Хотите качественно анализировать статистику из Яндекс.Метрики? Отследить сложные воронки продаж, объединить данные из разных систем аналитики, контролировать расхождения в статистике, — «сырые» данные помогут вам эффективно решить все эти сложные задачи.*
 
 *В 2016 году Яндекс заявили о публичном релизе программного интерфейса Logs API, который позволяет получить сырые данные из Яндекс.Метрики в файле формата TSV.*
@@ -107,7 +109,9 @@
 <b>Впервые было опубликовано на:</b> [Блог Netpeak](https://netpeak.net/ru/blog/) <Br>
 <b>Дата публикации:</b> 27.02.2017 <Br>
 
+<p align="center">
 <img class="aligncenter" src="https://images.netpeak.net/blog/card_facebook_kak-svyazat-yandeks-direkt-s-microsoft-power-bi.png" align="middle" alt="Как связать Яндекс.Директ с Microsoft Power BI" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
+</p>
 
 *Яндекс.Директ собирает много данных, но, к сожалению, в веб-интерфейсе доступно очень мало информации для анализа. В этой статье я подробно опишу, как получить статистику о рекламных кампаниях c помощью языка R для визуализации в Power BI.*
 
