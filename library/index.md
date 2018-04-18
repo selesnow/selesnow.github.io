@@ -104,9 +104,9 @@
 <img class="aligncenter" src="https://images.netpeak.net/blog/card_facebook_kak-perenesti-dannyye-iz-vkontakte-v-power-bi.png" align="middle" alt="Подключение Power BI к Yandex.Metrika" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
 </p>
 
-<i>Несмотря на недавнюю блокировку соцсети в Индии, ВКонтакте продолжает оставаться огромным источником полезной информации и статистики. В этой статье я расскажу, как с помощью написанного мной программного пакета [rvkstat](https://selesnow.github.io/rvkstat/) и коннектора  R получить данные из API ВКонтакте в Microsoft Power BI.
+<i>Несмотря на недавнюю блокировку соцсети в Индии, ВКонтакте продолжает оставаться огромным источником полезной информации и статистики. В этой статье я расскажу, как с помощью написанного мной программного пакета [rvkstat](https://selesnow.github.io/rvkstat/) и коннектора  R получить данные из API ВКонтакте в Microsoft Power BI.</i>
 
-Как использовать прокси в скриптах R: обходим блокировку API Яндекса, Mail.ru и ВКонтакте
+<i>Как использовать прокси в скриптах R: обходим блокировку API Яндекса, Mail.ru и ВКонтакте
 Причем получить эти данные можно даже в странах, где сама соцсеть официально [заблокирована](https://netpeak.net/ru/blog/kak-ispol-zovat-proksi-v-skriptakh-r-obkhodim-blokirovku-api-yandeksa-mail-ru-i-vkontakte/). </i>
 
 *[Читать продолжение в первоисточнике.](https://netpeak.net/ru/blog/kak-perenesti-dannyye-iz-vkontakte-v-power-bi/)*
@@ -121,9 +121,9 @@
 <img class="aligncenter" src="https://ppc.world/uploads/article_images/2017/06/bigquery/upload_to_bigquery_1.png" align="middle" alt="Подключение Power BI к Yandex.Metrika" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
 </p>
 
-<i>В еЛаме мы используем большое количество платных рекламных каналов. Кроме традиционных Яндекс.Директа, Google AdWords, Facebook, «ВКонтакте», MyTarget, мы можем покупать платные посты в партнерских группах во «ВКонтакте» или делать другие платные размещения.
+<i>В еЛаме мы используем большое количество платных рекламных каналов. Кроме традиционных Яндекс.Директа, Google AdWords, Facebook, «ВКонтакте», MyTarget, мы можем покупать платные посты в партнерских группах во «ВКонтакте» или делать другие платные размещения.</i>
 
-Чтобы корректно анализировать эффективность рекламы, нам необходимо все расходы агрегировать в одной системе и строить отчеты в едином стиле. Казалось бы, можно просто настроить импорт расходов в Google Analytics, используя OWOX BI Pipeline. Но нам этот вариант не подходит по нескольким причинам.</i>
+<i>Чтобы корректно анализировать эффективность рекламы, нам необходимо все расходы агрегировать в одной системе и строить отчеты в едином стиле. Казалось бы, можно просто настроить импорт расходов в Google Analytics, используя OWOX BI Pipeline. Но нам этот вариант не подходит по нескольким причинам.</i>
 
 *[Читать продолжение в первоисточнике.](https://ppc.world/articles/kak-zagruzit-statistiku-iz-reklamnyh-sistem-v-google-bigquery/)*
 
@@ -137,9 +137,9 @@
 <img class="aligncenter" src="https://esliklientov.net/images/articles/2017-06-20_08-30-21.png" align="middle" alt="Подключение Power BI к Yandex.Metrika" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
 </p>
 
-<i>Аналогично [скрипту на R для облака поисковых слов AdWords](https://esliklientov.net/articles/%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%BA%D1%81%D1%82%D0%BD%D0%B0%D1%8F-%D1%80%D0%B5%D0%BA%D0%BB%D0%B0%D0%BC%D0%B0/google-adwords/%D0%B1%D1%8B%D1%81%D1%82%D1%80%D0%B0%D1%8F-%D0%BE%D1%86%D0%B5%D0%BD%D0%BA%D0%B0-%D1%81%D0%BB%D0%BE%D0%B2-%D0%BD%D0%B5-%D0%BF%D1%80%D0%B8%D0%BD%D0%BE%D1%81%D1%8F%D1%89%D0%B8%D1%85-%D0%BA%D0%BE%D0%BD%D0%B2%D0%B5%D1%80%D1%81%D0%B8%D0%B8-%D0%B2-adwords-%D0%BF%D1%80%D0%B8-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D0%B8-%D1%8F%D0%B7%D1%8B%D0%BA%D0%B0-r.html) сделал и для Директа, но добавил больше интерактивности, благодаря  Shiny можно его открыть любым браузером и все изменения в настройках сразу изменяют данные на странице. 
-Скрипт скачивает поисковые запросы по всем кампаниям в аккаунте за последние 30 дней. 
-Можно выбрать кампанию, указать анализируемый период внутри 30 дней (по умолчанию стоит последние 7 дней). </i>
+<i>Аналогично [скрипту на R для облака поисковых слов AdWords](https://esliklientov.net/articles/%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%BA%D1%81%D1%82%D0%BD%D0%B0%D1%8F-%D1%80%D0%B5%D0%BA%D0%BB%D0%B0%D0%BC%D0%B0/google-adwords/%D0%B1%D1%8B%D1%81%D1%82%D1%80%D0%B0%D1%8F-%D0%BE%D1%86%D0%B5%D0%BD%D0%BA%D0%B0-%D1%81%D0%BB%D0%BE%D0%B2-%D0%BD%D0%B5-%D0%BF%D1%80%D0%B8%D0%BD%D0%BE%D1%81%D1%8F%D1%89%D0%B8%D1%85-%D0%BA%D0%BE%D0%BD%D0%B2%D0%B5%D1%80%D1%81%D0%B8%D0%B8-%D0%B2-adwords-%D0%BF%D1%80%D0%B8-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D0%B8-%D1%8F%D0%B7%D1%8B%D0%BA%D0%B0-r.html) сделал и для Директа, но добавил больше интерактивности, благодаря  Shiny можно его открыть любым браузером и все изменения в настройках сразу изменяют данные на странице. </i>
+<i>Скрипт скачивает поисковые запросы по всем кампаниям в аккаунте за последние 30 дней. </i>
+<i>Можно выбрать кампанию, указать анализируемый период внутри 30 дней (по умолчанию стоит последние 7 дней). </i>
 
 *[Читать продолжение в первоисточнике.](https://esliklientov.net/articles/%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%BA%D1%81%D1%82%D0%BD%D0%B0%D1%8F-%D1%80%D0%B5%D0%BA%D0%BB%D0%B0%D0%BC%D0%B0/%D1%8F%D0%BD%D0%B4%D0%B5%D0%BA%D1%81-%D0%B4%D0%B8%D1%80%D0%B5%D0%BA%D1%82/%D0%BE%D0%B1%D0%BB%D0%B0%D0%BA%D0%BE-%D0%BC%D0%B8%D0%BD%D1%83%D1%81-%D1%81%D0%BB%D0%BE%D0%B2-%D0%B4%D0%BB%D1%8F-%D1%8F%D0%BD%D0%B4%D0%B5%D0%BA%D1%81-%D0%B4%D0%B8%D1%80%D0%B5%D0%BA%D1%82.html)*
 
