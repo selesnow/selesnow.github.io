@@ -125,7 +125,7 @@
 ## [Все обновления пакетов ryandexdirect, rfacebookstat и rvkstat за осень 2017.](https://alexeyseleznev.wordpress.com/2017/12/01/%d0%b2%d1%81%d0%b5-%d0%be%d0%b1%d0%bd%d0%be%d0%b2%d0%bb%d0%b5%d0%bd%d0%b8%d1%8f-%d0%bf%d0%b0%d0%ba%d0%b5%d1%82%d0%be%d0%b2-ryandexdirect-rfacebookstat-%d0%b8-rvkstat-%d0%b7%d0%b0-%d0%be%d1%81%d0%b5/) <Br>
 <b>Автор:</b> Алексей Селезнёв <Br>
 <b>Впервые было опубликовано на:</b> [Блог Алексея Селезнёва](https://alexeyseleznev.wordpress.com/) <Br>
-<b>Дата публикации:</b> 22.01.2018 <Br>
+<b>Дата публикации:</b> 01.12.2017 <Br>
 
 <p align="center">
 <img class="aligncenter" src="https://cdn.lynda.com/course/378455/378455-636356279678627188-16x9.jpg" align="middle" alt="Подключение Power BI к Yandex.Metrika" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
@@ -200,6 +200,20 @@
 *[Читать продолжение в первоисточнике.](http://pm-partner.ru/articles/2017/podkluchenie-power-bi-yandex-metrika/)*
 
 ---
+## [Как связать Яндекс.Директ с Microsoft Power BI](https://netpeak.net/ru/blog/kak-svyazat-yandeks-direkt-s-microsoft-power-bi/) <Br>
+<b>Автор:</b> Алексей Селезнёв <Br>
+<b>Впервые было опубликовано на:</b> [Блог Netpeak](https://netpeak.net/ru/blog/) <Br>
+<b>Дата публикации:</b> 27.02.2017 <Br>
+
+<p align="center">
+<img class="aligncenter" src="https://images.netpeak.net/blog/card_facebook_kak-svyazat-yandeks-direkt-s-microsoft-power-bi.png" align="middle" alt="Как связать Яндекс.Директ с Microsoft Power BI" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
+</p>
+
+*Яндекс.Директ собирает много данных, но, к сожалению, в веб-интерфейсе доступно очень мало информации для анализа. В этой статье я подробно опишу, как получить статистику о рекламных кампаниях c помощью языка R для визуализации в Power BI.*
+
+*[Читать продолжение в первоисточнике.](https://netpeak.net/ru/blog/kak-svyazat-yandeks-direkt-s-microsoft-power-bi/)*
+
+---
 ## [Как получить и обработать сырые данные из Яндекс.Метрики](https://netpeak.net/ru/blog/kak-poluchit-i-obrabotat-syrye-dannye-iz-yandeks-metriki/) <Br>
 <b>Автор:</b> Алексей Селезнёв <Br>
 <b>Впервые было опубликовано на:</b> [Блог Netpeak](https://netpeak.net/ru/blog/) <Br>
@@ -220,19 +234,3 @@
 *В этой статье я расскажу, как автоматизировать выгрузку сырых данных из Яндекс.Метрики и работать с полученной статистикой.*
 
 *[Читать продолжение в первоисточнике.](https://netpeak.net/ru/blog/kak-poluchit-i-obrabotat-syrye-dannye-iz-yandeks-metriki/)*
-
----
-## [Как связать Яндекс.Директ с Microsoft Power BI](https://netpeak.net/ru/blog/kak-svyazat-yandeks-direkt-s-microsoft-power-bi/) <Br>
-<b>Автор:</b> Алексей Селезнёв <Br>
-<b>Впервые было опубликовано на:</b> [Блог Netpeak](https://netpeak.net/ru/blog/) <Br>
-<b>Дата публикации:</b> 27.02.2017 <Br>
-
-<p align="center">
-<img class="aligncenter" src="https://images.netpeak.net/blog/card_facebook_kak-svyazat-yandeks-direkt-s-microsoft-power-bi.png" align="middle" alt="Как связать Яндекс.Директ с Microsoft Power BI" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
-</p>
-
-*Яндекс.Директ собирает много данных, но, к сожалению, в веб-интерфейсе доступно очень мало информации для анализа. В этой статье я подробно опишу, как получить статистику о рекламных кампаниях c помощью языка R для визуализации в Power BI.*
-
-*[Читать продолжение в первоисточнике.](https://netpeak.net/ru/blog/kak-svyazat-yandeks-direkt-s-microsoft-power-bi/)*
-
----
