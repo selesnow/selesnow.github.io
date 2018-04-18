@@ -67,6 +67,22 @@
 Далее приведён  список статей с сопутсвующей информацией про автора, и пакеты о которых идёт речь в статье:
 
 ---
+## [Как загрузить статистику из рекламных систем в Google BigQuery](https://ppc.world/articles/kak-zagruzit-statistiku-iz-reklamnyh-sistem-v-google-bigquery/) <Br>
+<b>Автор:</b> Антон Леонтьев <Br>
+<b>Впервые было опубликовано на:</b> [ppc.world](http://ppc.world) <Br>
+<b>Дата публикации:</b> 29.07.2017 <Br>
+
+<p align="center">
+<img class="aligncenter" src="https://ppc.world/uploads/article_images/2017/06/bigquery/upload_to_bigquery_1.png" align="middle" alt="Подключение Power BI к Yandex.Metrika" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
+</p>
+
+<i>В еЛаме мы используем большое количество платных рекламных каналов. Кроме традиционных Яндекс.Директа, Google AdWords, Facebook, «ВКонтакте», MyTarget, мы можем покупать платные посты в партнерских группах во «ВКонтакте» или делать другие платные размещения.
+
+Чтобы корректно анализировать эффективность рекламы, нам необходимо все расходы агрегировать в одной системе и строить отчеты в едином стиле. Казалось бы, можно просто настроить импорт расходов в Google Analytics, используя OWOX BI Pipeline. Но нам этот вариант не подходит по нескольким причинам.</i>
+
+*[Читать продолжение в первоисточнике.](https://ppc.world/articles/kak-zagruzit-statistiku-iz-reklamnyh-sistem-v-google-bigquery/)*
+
+---
 ## [Облако минус слов для Яндекс Директ](https://esliklientov.net/articles/%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%BA%D1%81%D1%82%D0%BD%D0%B0%D1%8F-%D1%80%D0%B5%D0%BA%D0%BB%D0%B0%D0%BC%D0%B0/%D1%8F%D0%BD%D0%B4%D0%B5%D0%BA%D1%81-%D0%B4%D0%B8%D1%80%D0%B5%D0%BA%D1%82/%D0%BE%D0%B1%D0%BB%D0%B0%D0%BA%D0%BE-%D0%BC%D0%B8%D0%BD%D1%83%D1%81-%D1%81%D0%BB%D0%BE%D0%B2-%D0%B4%D0%BB%D1%8F-%D1%8F%D0%BD%D0%B4%D0%B5%D0%BA%D1%81-%D0%B4%D0%B8%D1%80%D0%B5%D0%BA%D1%82.html) <Br>
 <b>Автор:</b> Андрей Москалец <Br>
 <b>Впервые было опубликовано на:</b> [esliklientov.net](http://esliklientov.net) <Br>
