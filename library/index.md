@@ -67,10 +67,10 @@
 Далее приведён  список статей с сопутсвующей информацией про автора, и пакеты о которых идёт речь в статье:
 
 ---
-**Название:** [Как получить и обработать сырые данные из Яндекс.Метрики](https://netpeak.net/ru/blog/kak-poluchit-i-obrabotat-syrye-dannye-iz-yandeks-metriki/) <Br>
-**Автор:** Алексей Селезнёв <Br>
-**Впервые было опубликовано на:** [Блог Netpeak](https://netpeak.net/ru/blog/) <Br>
-**Дата публикации:** 09.02.2017 <Br>
+## Название: [Как получить и обработать сырые данные из Яндекс.Метрики](https://netpeak.net/ru/blog/kak-poluchit-i-obrabotat-syrye-dannye-iz-yandeks-metriki/) <Br>
+<b>Автор:</b> Алексей Селезнёв <Br>
+<b>Впервые было опубликовано на:</b> [Блог Netpeak](https://netpeak.net/ru/blog/) <Br>
+<b>Дата публикации:</b> 09.02.2017 <Br>
 
 <img class="aligncenter" src="https://images.netpeak.net/blog/kak-polucit-i-obrabotat-syrye-dannye-iz-andeksmetriki.jpg" alt="Как получить и обработать сырые данные из  Яндекс.Метрики" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
 
@@ -87,10 +87,10 @@
 *[Читать продолжение в первоисточнике.](https://netpeak.net/ru/blog/kak-poluchit-i-obrabotat-syrye-dannye-iz-yandeks-metriki/)*
 
 ---
-**Название:** [Как связать Яндекс.Директ с Microsoft Power BI](https://netpeak.net/ru/blog/kak-svyazat-yandeks-direkt-s-microsoft-power-bi/) <Br>
-**Автор:** Алексей Селезнёв <Br>
-**Впервые было опубликовано на:** [Блог Netpeak](https://netpeak.net/ru/blog/) <Br>
-**Дата публикации:** 27.02.2017 <Br>
+## Название: [Как связать Яндекс.Директ с Microsoft Power BI](https://netpeak.net/ru/blog/kak-svyazat-yandeks-direkt-s-microsoft-power-bi/) <Br>
+<b>Автор:</b> Алексей Селезнёв <Br>
+<b>Впервые было опубликовано на:</b> [Блог Netpeak](https://netpeak.net/ru/blog/) <Br>
+<b>Дата публикации:</b> 27.02.2017 <Br>
 
 <img class="aligncenter" src="https://images.netpeak.net/blog/card_facebook_kak-svyazat-yandeks-direkt-s-microsoft-power-bi.png" alt="Как получить и обработать сырые данные из  Яндекс.Метрики" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
 
