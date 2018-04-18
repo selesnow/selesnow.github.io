@@ -67,6 +67,20 @@
 Далее приведён  список статей с сопутсвующей информацией про автора, и пакеты о которых идёт речь в статье:
 
 ---
+## [Кто такие интернет-аналитики и какими инструментами они пользуются](https://discourse.digital/blogs/kto-takie-internet-analitiki-i-kakimi-instrumentami-oni-polzuyutsya/) <Br>
+<b>Автор:</b> Алексей Селезнёв, Андрей Чехлов <Br>
+<b>Впервые было опубликовано на:</b> [Цтфровой Дискурс](https://discourse.digital/) <Br>
+<b>Дата публикации:</b> 02.04.2018 <Br>
+
+<p align="center">
+<img class="aligncenter" src="https://pp.userapi.com/c621706/v621706997/82a45/Dq3UbN7BZns.jpg" align="middle" alt="Подключение Power BI к Yandex.Metrika" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
+</p>
+
+<i>Редакция «Цифрового дискурса» поговорила с руководителем отдела аналитики о необходимых для интернет-аналитика навыках и инструментах. </i>
+
+*[Читать продолжение в первоисточнике.](https://discourse.digital/blogs/kto-takie-internet-analitiki-i-kakimi-instrumentami-oni-polzuyutsya/)*
+
+---
 ## [Как определить мошенничество CPA-сетей с помощью Logs API Yandex.Metrika и R](https://iosiuk.blogspot.com/2018/03/cpa-logs-api-yandexmetrika-r.html) <Br>
 <b>Автор:</b> Дмитрий Осиюк <Br>
 <b>Впервые было опубликовано на:</b> [Блог Дмитрия Осиюка](https://iosiuk.blogspot.com/) <Br>
