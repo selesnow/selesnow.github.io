@@ -70,7 +70,7 @@
 ## [Что такое язык R и как работать с API рекламных систем Google AdWords и Яндекс.Директ с его помощью](https://www.owox.ru/blog/articles/r-language-and-api-of-ad-systems/) <Br>
 <b>Автор:</b> Алексей Селезнёв <Br>
 <b>Впервые было опубликовано на:</b> [Блог OWOX](https://www.owox.ru/blog/) <Br>
-<b>Дата публикации:</b> 02.04.2018 <Br>
+<b>Дата публикации:</b> 04.04.2018 <Br>
 
 <p align="center">
 <img class="aligncenter" src="https://pp.userapi.com/c837637/v837637057/7ddc6/1ZhyMvFK5TM.jpg" align="middle" alt="Подключение Power BI к Yandex.Metrika" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
@@ -121,6 +121,19 @@
 <i>В предыдущей статье мой коллега Антон Леонтьев рассказывал о том, как загрузить статистику из рекламных систем в Google BigQuery, а также строить отчетность на основании этих данных. Так, информацию по рекламе из «ВКонтакте» мы загружали вручную, а из Facebook — с помощью библиотеки rfacebookstat Алексея Селезнева. В этой статье мы рассмотрим иные способы загрузки данных для «ВКонтакте» и Facebook. </i>
 
 *[Читать продолжение в первоисточнике.](https://ppc.world/articles/zagruzka-statistiki-iz-vkontakte-i-facebook-v-google-bigquery/)*
+
+## [Все обновления пакетов ryandexdirect, rfacebookstat и rvkstat за осень 2017.](https://alexeyseleznev.wordpress.com/2017/12/01/%d0%b2%d1%81%d0%b5-%d0%be%d0%b1%d0%bd%d0%be%d0%b2%d0%bb%d0%b5%d0%bd%d0%b8%d1%8f-%d0%bf%d0%b0%d0%ba%d0%b5%d1%82%d0%be%d0%b2-ryandexdirect-rfacebookstat-%d0%b8-rvkstat-%d0%b7%d0%b0-%d0%be%d1%81%d0%b5/) <Br>
+<b>Автор:</b> Михаил Гусев <Br>
+<b>Впервые было опубликовано на:</b> [ppc.world](https://ppc.world) <Br>
+<b>Дата публикации:</b> 22.01.2018 <Br>
+
+<p align="center">
+<img class="aligncenter" src="https://cdn.lynda.com/course/378455/378455-636356279678627188-16x9.jpg" align="middle" alt="Подключение Power BI к Yandex.Metrika" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
+</p>
+
+<i>В этой статье я собрал все доработки R клиентов ryandexdirect, rfacebookstat и rvkstat за осень 2017 года. </i>
+
+*[Читать продолжение в первоисточнике.](https://alexeyseleznev.wordpress.com/2017/12/01/%d0%b2%d1%81%d0%b5-%d0%be%d0%b1%d0%bd%d0%be%d0%b2%d0%bb%d0%b5%d0%bd%d0%b8%d1%8f-%d0%bf%d0%b0%d0%ba%d0%b5%d1%82%d0%be%d0%b2-ryandexdirect-rfacebookstat-%d0%b8-rvkstat-%d0%b7%d0%b0-%d0%be%d1%81%d0%b5/)*
 
 ---
 ## [Как перенести данные из ВКонтакте в Power BI](https://netpeak.net/ru/blog/kak-perenesti-dannyye-iz-vkontakte-v-power-bi/) <Br>
