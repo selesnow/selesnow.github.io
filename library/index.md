@@ -67,6 +67,23 @@
 Далее приведён  список статей с сопутсвующей информацией про автора, и пакеты о которых идёт речь в статье:
 
 ---
+## [Как перенести данные из ВКонтакте в Power BI](https://netpeak.net/ru/blog/kak-perenesti-dannyye-iz-vkontakte-v-power-bi/) <Br>
+<b>Автор:</b> Алексей Селезнёв <Br>
+<b>Впервые было опубликовано на:</b> [Блог Netpeak](https://netpeak.net/ru/blog/) <Br>
+<b>Дата публикации:</b> 22.09.2017 <Br>
+
+<p align="center">
+<img class="aligncenter" src="https://images.netpeak.net/blog/card_facebook_kak-perenesti-dannyye-iz-vkontakte-v-power-bi.png" align="middle" alt="Подключение Power BI к Yandex.Metrika" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
+</p>
+
+<i>Несмотря на недавнюю блокировку соцсети в Индии, ВКонтакте продолжает оставаться огромным источником полезной информации и статистики. В этой статье я расскажу, как с помощью написанного мной программного пакета [rvkstat](https://selesnow.github.io/rvkstat/) и коннектора  R получить данные из API ВКонтакте в Microsoft Power BI.
+
+Как использовать прокси в скриптах R: обходим блокировку API Яндекса, Mail.ru и ВКонтакте
+Причем получить эти данные можно даже в странах, где сама соцсеть официально [заблокирована](https://netpeak.net/ru/blog/kak-ispol-zovat-proksi-v-skriptakh-r-obkhodim-blokirovku-api-yandeksa-mail-ru-i-vkontakte/).</i>
+
+*[Читать продолжение в первоисточнике.](https://netpeak.net/ru/blog/kak-perenesti-dannyye-iz-vkontakte-v-power-bi/)*
+
+---
 ## [Как загрузить статистику из рекламных систем в Google BigQuery](https://ppc.world/articles/kak-zagruzit-statistiku-iz-reklamnyh-sistem-v-google-bigquery/) <Br>
 <b>Автор:</b> Антон Леонтьев <Br>
 <b>Впервые было опубликовано на:</b> [ppc.world](http://ppc.world) <Br>
