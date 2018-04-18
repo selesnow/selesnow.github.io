@@ -67,6 +67,22 @@
 Далее приведён  список статей с сопутсвующей информацией про автора, и пакеты о которых идёт речь в статье:
 
 ---
+## [Облако минус слов для Яндекс Директ](https://esliklientov.net/articles/%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%BA%D1%81%D1%82%D0%BD%D0%B0%D1%8F-%D1%80%D0%B5%D0%BA%D0%BB%D0%B0%D0%BC%D0%B0/%D1%8F%D0%BD%D0%B4%D0%B5%D0%BA%D1%81-%D0%B4%D0%B8%D1%80%D0%B5%D0%BA%D1%82/%D0%BE%D0%B1%D0%BB%D0%B0%D0%BA%D0%BE-%D0%BC%D0%B8%D0%BD%D1%83%D1%81-%D1%81%D0%BB%D0%BE%D0%B2-%D0%B4%D0%BB%D1%8F-%D1%8F%D0%BD%D0%B4%D0%B5%D0%BA%D1%81-%D0%B4%D0%B8%D1%80%D0%B5%D0%BA%D1%82.html) <Br>
+<b>Автор:</b> Андрей Москалец <Br>
+<b>Впервые было опубликовано на:</b> [esliklientov.net](http://esliklientov.net) <Br>
+<b>Дата публикации:</b> 20.06.2017 <Br>
+
+<p align="center">
+<img class="aligncenter" src="http://pm-partner.ru/upload/medialibrary/1cb/b234.png" align="middle" alt="Подключение Power BI к Yandex.Metrika" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
+</p>
+
+*Аналогично [скрипту на R для облака поисковых слов AdWords](https://esliklientov.net/articles/%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%BA%D1%81%D1%82%D0%BD%D0%B0%D1%8F-%D1%80%D0%B5%D0%BA%D0%BB%D0%B0%D0%BC%D0%B0/google-adwords/%D0%B1%D1%8B%D1%81%D1%82%D1%80%D0%B0%D1%8F-%D0%BE%D1%86%D0%B5%D0%BD%D0%BA%D0%B0-%D1%81%D0%BB%D0%BE%D0%B2-%D0%BD%D0%B5-%D0%BF%D1%80%D0%B8%D0%BD%D0%BE%D1%81%D1%8F%D1%89%D0%B8%D1%85-%D0%BA%D0%BE%D0%BD%D0%B2%D0%B5%D1%80%D1%81%D0%B8%D0%B8-%D0%B2-adwords-%D0%BF%D1%80%D0%B8-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D0%B8-%D1%8F%D0%B7%D1%8B%D0%BA%D0%B0-r.html) сделал и для Директа, но добавил больше интерактивности, благодаря  Shiny можно его открыть любым браузером и все изменения в настройках сразу изменяют данные на странице. 
+Скрипт скачивает поисковые запросы по всем кампаниям в аккаунте за последние 30 дней. 
+Можно выбрать кампанию, указать анализируемый период внутри 30 дней (по умолчанию стоит последние 7 дней). *
+
+*[Читать продолжение в первоисточнике.](https://esliklientov.net/articles/%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%BA%D1%81%D1%82%D0%BD%D0%B0%D1%8F-%D1%80%D0%B5%D0%BA%D0%BB%D0%B0%D0%BC%D0%B0/%D1%8F%D0%BD%D0%B4%D0%B5%D0%BA%D1%81-%D0%B4%D0%B8%D1%80%D0%B5%D0%BA%D1%82/%D0%BE%D0%B1%D0%BB%D0%B0%D0%BA%D0%BE-%D0%BC%D0%B8%D0%BD%D1%83%D1%81-%D1%81%D0%BB%D0%BE%D0%B2-%D0%B4%D0%BB%D1%8F-%D1%8F%D0%BD%D0%B4%D0%B5%D0%BA%D1%81-%D0%B4%D0%B8%D1%80%D0%B5%D0%BA%D1%82.html)*
+
+---
 ## [Подключение Power BI к Yandex.Metrika](http://pm-partner.ru/articles/2017/podkluchenie-power-bi-yandex-metrika/) <Br>
 <b>Автор:</b> Дмитрий Малых <Br>
 <b>Впервые было опубликовано на:</b> [pm-partner](http://pm-partner.ru) <Br>
