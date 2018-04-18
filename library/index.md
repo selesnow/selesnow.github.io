@@ -23,13 +23,13 @@
 <table>
     <tr>
       <td align="center">
-        <a href="https://selesnow.github.io/ryandexdirect/">ryandexdirect</a>
+        <a href="https://selesnow.github.io/ryandexdirect/" align="center">ryandexdirect</a>
       </td>
       <td align="center">
         <a href="https://selesnow.github.io/rfacebookstat/">rfacebookstat</a>
       </td>
       <td align="center">
-        <a href="https://selesnow.github.io/rvkstat/">rvkstat</a>
+        <a href="https://selesnow.github.io/rvkstat/" align="center">rvkstat</a>
       </td>
       <td align="center">
         <a href="https://selesnow.github.io/rmytarget/">rmytarget</a>
