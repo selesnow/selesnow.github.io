@@ -22,36 +22,36 @@
 
 <table>
     <tr>
-      <td>
+      <td align="center">
         <a href="https://selesnow.github.io/ryandexdirect/">ryandexdirect</a>
       </td>
-      <td>
+      <td align="center">
         <a href="https://selesnow.github.io/rfacebookstat/">rfacebookstat</a>
       </td>
-      <td>
+      <td align="center">
         <a href="https://selesnow.github.io/rvkstat/">rvkstat</a>
       </td>
-      <td>
+      <td align="center">
         <a href="https://selesnow.github.io/rmytarget/">rmytarget</a>
       </td>
-      <td>
+      <td align="center">
         <a href="https://selesnow.github.io/rmixpanel/">rmixpanel</a>
       </td>
     </tr>
     <tr>
-      <td>
+      <td align="center">
         <a href="https://selesnow.github.io/RYM/">RYM</a>
       </td>
-      <td>
+      <td align="center">
         <a href="https://selesnow.github.io/getProxy/">getProxy</a>
       </td>
-      <td>
+      <td align="center">
         <a href="https://selesnow.github.io/rGitHub/">rGitHub</a>
       </td>
-      <td>
+      <td align="center">
         <a href="https://selesnow.github.io/library/">Статьи</a>
       </td>
-      <td>
+      <td align="center">
         <a href="https://selesnow.github.io/news/">NEWS</a>
       </td>
     </tr>
