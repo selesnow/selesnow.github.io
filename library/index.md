@@ -73,7 +73,7 @@
 <b>Дата публикации:</b> 20.06.2017 <Br>
 
 <p align="center">
-<img class="aligncenter" src="http://pm-partner.ru/upload/medialibrary/1cb/b234.png" align="middle" alt="Подключение Power BI к Yandex.Metrika" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
+<img class="aligncenter" src="https://esliklientov.net/images/articles/2017-06-20_08-30-21.png" align="middle" alt="Подключение Power BI к Yandex.Metrika" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
 </p>
 
 *Аналогично [скрипту на R для облака поисковых слов AdWords](https://esliklientov.net/articles/%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%BA%D1%81%D1%82%D0%BD%D0%B0%D1%8F-%D1%80%D0%B5%D0%BA%D0%BB%D0%B0%D0%BC%D0%B0/google-adwords/%D0%B1%D1%8B%D1%81%D1%82%D1%80%D0%B0%D1%8F-%D0%BE%D1%86%D0%B5%D0%BD%D0%BA%D0%B0-%D1%81%D0%BB%D0%BE%D0%B2-%D0%BD%D0%B5-%D0%BF%D1%80%D0%B8%D0%BD%D0%BE%D1%81%D1%8F%D1%89%D0%B8%D1%85-%D0%BA%D0%BE%D0%BD%D0%B2%D0%B5%D1%80%D1%81%D0%B8%D0%B8-%D0%B2-adwords-%D0%BF%D1%80%D0%B8-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D0%B8-%D1%8F%D0%B7%D1%8B%D0%BA%D0%B0-r.html) сделал и для Директа, но добавил больше интерактивности, благодаря  Shiny можно его открыть любым браузером и все изменения в настройках сразу изменяют данные на странице. 
