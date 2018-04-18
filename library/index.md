@@ -72,7 +72,7 @@
 **Впервые было опубликовано на:** [Блог Netpeak](https://netpeak.net/ru/blog/) <Br>
 **Дата публикации:** 09.02.2017 <Br>
 
-<img class="aligncenter" src="https://images.netpeak.net/blog/kak-polucit-i-obrabotat-syrye-dannye-iz-andeksmetriki.jpg" alt="Как получить и обработать сырые данные из  Яндекс.Метрики" style="position: relative; width: 150px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
+<img class="aligncenter" src="https://images.netpeak.net/blog/kak-polucit-i-obrabotat-syrye-dannye-iz-andeksmetriki.jpg" alt="Как получить и обработать сырые данные из  Яндекс.Метрики" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
 
 *Хотите качественно анализировать статистику из Яндекс.Метрики? Отследить сложные воронки продаж, объединить данные из разных систем аналитики, контролировать расхождения в статистике, — «сырые» данные помогут вам эффективно решить все эти сложные задачи.*
 
@@ -92,7 +92,7 @@
 **Впервые было опубликовано на:** [Блог Netpeak](https://netpeak.net/ru/blog/) <Br>
 **Дата публикации:** 27.02.2017 <Br>
 
-<img class="aligncenter" src="https://images.netpeak.net/blog/card_facebook_kak-svyazat-yandeks-direkt-s-microsoft-power-bi.png" alt="Как получить и обработать сырые данные из  Яндекс.Метрики" style="position: relative; width: 150px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
+<img class="aligncenter" src="https://images.netpeak.net/blog/card_facebook_kak-svyazat-yandeks-direkt-s-microsoft-power-bi.png" alt="Как получить и обработать сырые данные из  Яндекс.Метрики" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
 
 *Яндекс.Директ собирает много данных, но, к сожалению, в веб-интерфейсе доступно очень мало информации для анализа. В этой статье я подробно опишу, как получить статистику о рекламных кампаниях c помощью языка R для визуализации в Power BI.*
 
