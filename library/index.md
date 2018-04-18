@@ -67,7 +67,7 @@
 Далее приведён  список статей с сопутсвующей информацией про автора, и пакеты о которых идёт речь в статье:
 
 ---
-## [Загрузка статистики из «ВКонтакте» и Facebook в Google BigQuery — руководство](https://iosiuk.blogspot.com/2018/03/cpa-logs-api-yandexmetrika-r.html) <Br>
+## [Как определить мошенничество CPA-сетей с помощью Logs API Yandex.Metrika и R](https://iosiuk.blogspot.com/2018/03/cpa-logs-api-yandexmetrika-r.html) <Br>
 <b>Автор:</b> Дмитрий Осиюк <Br>
 <b>Впервые было опубликовано на:</b> [Блог Дмитрия Осиюка](https://iosiuk.blogspot.com/) <Br>
 <b>Дата публикации:</b> 20.03.2018 <Br>
