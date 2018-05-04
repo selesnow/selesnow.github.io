@@ -51,6 +51,13 @@
 
 # Последние новости репозиториев
 ---
+### 2018-05-03| ryandexdirect
+
+В сервис Repots, доступный в API Яндекс Диркта добален новый тип отчёта REACH_AND_FREQUENCY_PERFORMANCE_REPORT, в котором доступны новые поля AvgCpm (средняя стоимость тысячи показов), AvgImpressionFrequency (средняя частота показов одному пользователю) и ImpressionReach (охват по показам) и для поля CampaignType добавлено значение CPM_BANNER_CAMPAIGN.
+
+Это значит что с помощью функции yadirGetReport теперь так же можно запрашивать эту информацию, [подробнее](https://yandex.ru/blog/ya-direct-api/ctatistika-dlya-mediynykh-kampaniy-v-reports).
+
+---
 ### 2018-05-02| ryandexdirect
 
 Доработана функция `yadirGetBalance`, запрашивающая остаток средств на счетах в аккаунтах Яндекс Директ, обновление касаются запроса остатков балансов по клиентах агентских аккаунтов, ранее можно было за раз запросить данные максимум по 50 аккаунтам, сейчас можно запрашивать данные по любому количеству клиентов, [подробнее](https://github.com/selesnow/ryandexdirect/issues/4#issuecomment-384208899).
