@@ -51,6 +51,11 @@
 
 # Последние новости репозиториев
 ---
+### 2018-05-07| ryandexdirect
+
+ryandexdirect 2.6.0, в пакет добавлена функция `yadirGetSiteLinks`, с помощью которой вы можете получить список быстрых ссылок, другие подообности релиза доступны по [ссылке](https://github.com/selesnow/ryandexdirect/releases/tag/2.6.0).
+
+---
 ### 2018-05-03| ryandexdirect
 
 В сервис Repots, доступный в API Яндекс Диркта добален новый тип отчёта REACH_AND_FREQUENCY_PERFORMANCE_REPORT, в котором доступны новые поля AvgCpm (средняя стоимость тысячи показов), AvgImpressionFrequency (средняя частота показов одному пользователю) и ImpressionReach (охват по показам) и для поля CampaignType добавлено значение CPM_BANNER_CAMPAIGN.
