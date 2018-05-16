@@ -94,6 +94,7 @@
 <i>В конце статьи приведены примеры кода для загрузки статистики из рекламных аккаунтов Яндекс Директ.</i>
 
 *[Читать продолжение в первоисточнике.](https://alexeyseleznev.wordpress.com/2018/05/16/ryandexdirect-3-0-0-%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D1%91%D0%BD%D0%BD%D1%8B%D0%B9-r-%D0%BA%D0%BB%D0%B8%D0%B5%D0%BD%D1%82-%D0%B4%D0%BB%D1%8F-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D1%81-api/)*
+
 ---
 ## [Что такое язык R и как работать с API рекламных систем Google AdWords и Яндекс.Директ с его помощью](https://www.owox.ru/blog/articles/r-language-and-api-of-ad-systems/) <Br>
 <b>Автор:</b> Алексей Селезнёв <Br>
