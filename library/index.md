@@ -73,7 +73,27 @@
 На этой странице собраны все статьи посвящённые работе с представленными на этом сайта пакетами функций расширяющих базовые возможности языка R.
 
 Далее приведён  список статей с сопутсвующей информацией про автора, и пакеты о которых идёт речь в статье:
- 
+
+---
+## [ryandexdirect 3.0.0 — обновлённый R клиент для работы с API Яндекс Директ](https://alexeyseleznev.wordpress.com/2018/05/16/ryandexdirect-3-0-0-%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D1%91%D0%BD%D0%BD%D1%8B%D0%B9-r-%D0%BA%D0%BB%D0%B8%D0%B5%D0%BD%D1%82-%D0%B4%D0%BB%D1%8F-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D1%81-api/) <Br>
+<b>Автор:</b> Алексей Селезнёв <Br>
+<b>Впервые было опубликовано на:</b> [alexeyseleznev.wordpress.com](https://alexeyseleznev.wordpress.com) <Br>
+<b>Дата публикации:</b> 16.05.2018 <Br>
+
+<p align="center">
+<img class="aligncenter" src="https://ericlevelsdotcom.files.wordpress.com/2015/05/greatnews.png?w=1400&h=9999" align="middle" alt="Подключение Power BI к Yandex.Metrika" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
+</p>
+
+<i>Пакет для работы с API Яндекс Директ на языке R, ryandexdirect был значительно доработан:</i>
+
+<i>+ Был улучшен процесс авторизации в API</i>
+<i>+ Приведёны в порядок имена аргументов функций</i>
+<i>+ Во все функции был добавлен ряд новых аргументов</i>
+<i>+ Эта статья содержит все основные обновления доступные в версии 3.0.0.</i>
+
+<i>В конце статьи приведены примеры кода для загрузки статистики из рекламных аккаунтов Яндекс Директ.</i>
+
+*[Читать продолжение в первоисточнике.](https://alexeyseleznev.wordpress.com/2018/05/16/ryandexdirect-3-0-0-%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D1%91%D0%BD%D0%BD%D1%8B%D0%B9-r-%D0%BA%D0%BB%D0%B8%D0%B5%D0%BD%D1%82-%D0%B4%D0%BB%D1%8F-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D1%81-api/)*
 ---
 ## [Что такое язык R и как работать с API рекламных систем Google AdWords и Яндекс.Директ с его помощью](https://www.owox.ru/blog/articles/r-language-and-api-of-ad-systems/) <Br>
 <b>Автор:</b> Алексей Селезнёв <Br>
