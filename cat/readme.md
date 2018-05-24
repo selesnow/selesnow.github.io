@@ -11,7 +11,7 @@
 </script>
 
 <style type="text/css">
- .menu {
+ ul.menu {
   list-style: none; /*убираем маркеры списка*/
   margin: 0; /*убираем отступы*/
   padding-left: 0; /*убираем отступы*/
