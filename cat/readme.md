@@ -25,6 +25,7 @@ a.amenu {
   color: #000000; /*меняем цвет ссылок*/
   padding:0px 15px; /*добавляем отступ*/
   font-family: monospace; /*меняем шрифт*/
+  font-size: 8pt;
   line-height:50px; /*ровняем меню по вертикали*/
   display: block; 
   border-right: 1px solid #F36262; /*добавляем бордюр справа*/
