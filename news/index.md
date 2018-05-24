@@ -66,7 +66,19 @@ li.menu {
 </center>
 <Br>
 <h2>Search:</h2>
-
+<script>
+  (function() {
+    var cx = '002735389418227325972:fdikniadyig';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+  
 # Последние новости репозиториев
 ---
 ### 2018-05-16| ryandexdirect
