@@ -26,7 +26,7 @@ a.amenu {
   padding:0px 15px; /*добавляем отступ*/
   font-family: sans-serif; /*меняем шрифт*/
   font-size: 8pt;
-  line-height:50px; /*ровняем меню по вертикали*/
+  line-height:40px; /*ровняем меню по вертикали*/
   display: block; 
   border-right: 1px solid #F36262; /*добавляем бордюр справа*/
   -moz-transition: all 0.3s 0.01s ease; /*делаем плавный переход*/
@@ -36,7 +36,7 @@ a.amenu {
 a:hover {
   background:#808080;/*добавляем эффект при наведении*/
 }
-li {
+li.menu {
   float:left; /*Размещаем список горизонтально для реализации меню*/
 }
 </style>
