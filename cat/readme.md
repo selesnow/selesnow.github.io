@@ -11,7 +11,7 @@
 </script>
 
 <style type="text/css">
- ul {
+ .menu {
   list-style: none; /*убираем маркеры списка*/
   margin: 0; /*убираем отступы*/
   padding-left: 0; /*убираем отступы*/
@@ -46,7 +46,7 @@ li {
 <a href="https://selesnow.github.io/"><img src="https://alexeyseleznev.files.wordpress.com/2017/03/as.png" height="80"></a>
 </p>
 
-<ul>
+<ul class="menu">
 <li><a href="#">Главная</a></li>
 <li><a href="#">Услуги</a></li>
 <li><a href="#">Цены</a></li>
