@@ -49,15 +49,15 @@ li.menu {
 <h2>Menu</h2>
 <center>
 <ul class="menu">
-  <li class="menu"><a href="ryandexdirect" class="amenu">ryandexdirect</a></li>
-  <li class="menu"><a href="rmytarget" class="amenu">rvkstat</a></li>
-  <li class="menu"><a href="rfacebookstat" class="amenu">rfacebookstat</a></li>
-  <li class="menu"><a href="rmytarget" class="amenu">rmytarget</a></li>
-  <li class="menu"><a href="rmixpanel" class="amenu">rmixpanel</a></li>
-  <li class="menu"><a href="rgithub" class="amenu">rGitHub</a></li>
-  <li class="menu"><a href="getproxy" class="amenu">getProxy</a></li>
-  <li class="menu"><a href="news" class="amenu">NEWS</a></li>
-  <li class="menu"><a href="library" class="amenu">Статьи</a></li>
+  <li class="menu"><a href="https://selesnow.github.io/ryandexdirect" class="amenu">ryandexdirect</a></li>
+  <li class="menu"><a href="https://selesnow.github.io/rmytarget" class="amenu">rvkstat</a></li>
+  <li class="menu"><a href="https://selesnow.github.io/rfacebookstat" class="amenu">rfacebookstat</a></li>
+  <li class="menu"><a href="https://selesnow.github.io/rmytarget" class="amenu">rmytarget</a></li>
+  <li class="menu"><a href="https://selesnow.github.io/rmixpanel" class="amenu">rmixpanel</a></li>
+  <li class="menu"><a href="https://selesnow.github.io/rgithub" class="amenu">rGitHub</a></li>
+  <li class="menu"><a href="https://selesnow.github.io/getproxy" class="amenu">getProxy</a></li>
+  <li class="menu"><a href="https://selesnow.github.io/news" class="amenu">NEWS</a></li>
+  <li class="menu"><a href="https://selesnow.github.io/library" class="amenu">Статьи</a></li>
 </ul>
 </center>
 <Br>
