@@ -48,14 +48,14 @@ li.menu {
 </p>
 
 <ul class="menu">
-<li><a href="#" class="amenu">ryandexdirect</a></li>
-<li><a href="#" class="amenu">rvkstat</a></li>
-<li><a href="#" class="amenu">rfacebookstat</a></li>
-<li><a href="#" class="amenu">rmytarget</a></li>
-<li><a href="#" class="amenu">rmixpanel</a></li>
-<li><a href="#" class="amenu">rGitHub</a></li>
-<li><a href="#" class="amenu">getProxy</a></li>
-<li><a href="#" class="amenu">NEWS</a></li>
+<li class="menu"><a href="#" class="amenu">ryandexdirect</a></li>
+<li class="menu"><a href="#" class="amenu">rvkstat</a></li>
+<li class="menu"><a href="#" class="amenu">rfacebookstat</a></li>
+<li class="menu"><a href="#" class="amenu">rmytarget</a></li>
+<li class="menu"><a href="#" class="amenu">rmixpanel</a></li>
+<li class="menu"><a href="#" class="amenu">rGitHub</a></li>
+<li class="menu"><a href="#" class="amenu">getProxy</a></li>
+<li class="menu"><a href="#" class="amenu">NEWS</a></li>
 </ul>
 
 # Обо мне
