@@ -11,9 +11,7 @@
 </script>
 
 <style type="text/css">
- 
-</style>
-ul {
+ ul {
   list-style: none; /*убираем маркеры списка*/
   margin: 0; /*убираем отступы*/
   padding-left: 0; /*убираем отступы*/
@@ -40,6 +38,8 @@ a:hover {
 li {
   float:left; /*Размещаем список горизонтально для реализации меню*/
 }
+</style>
+
 </head>
 
 <p align="center">
