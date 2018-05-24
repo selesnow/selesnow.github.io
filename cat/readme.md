@@ -47,7 +47,7 @@ li.menu {
 <a href="https://selesnow.github.io/"><img src="https://alexeyseleznev.files.wordpress.com/2017/03/as.png" height="80"></a>
 </p>
 <h2>Menu</h2>
-<cener>
+<center>
 <ul class="menu">
   <li class="menu"><a href="#" class="amenu">ryandexdirect</a></li>
   <li class="menu"><a href="#" class="amenu">rvkstat</a></li>
