@@ -24,7 +24,7 @@ a.amenu {
   background: #C0C0C0; /*добавляем фон к пункту меню (заменив этот параметр, вы поменяете цвет всех пунктов меню)*/
   color: #000000; /*меняем цвет ссылок*/
   padding:0px 15px; /*добавляем отступ*/
-  font-family: monospace; /*меняем шрифт*/
+  font-family: sans-serif; /*меняем шрифт*/
   font-size: 8pt;
   line-height:50px; /*ровняем меню по вертикали*/
   display: block; 
