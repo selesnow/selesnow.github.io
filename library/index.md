@@ -49,7 +49,7 @@ li.menu {
 }
 </style>
 
-<h2>Menu</h2>
+<h2>Menu:</h2>
 <center>
 <ul class="menu">
   <li class="menu"><a href="https://selesnow.github.io/ryandexdirect" class="amenu">ryandexdirect</a></li>
@@ -93,7 +93,7 @@ li.menu {
   float:left; /*Размещаем список горизонтально для реализации меню*/
 }
 </style>
-
+<h2>Search:</h2>
 <script>
   (function() {
     var cx = '002735389418227325972:fdikniadyig';
