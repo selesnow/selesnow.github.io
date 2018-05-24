@@ -51,8 +51,6 @@ li {
 <li><a href="#" class="amenu">rvkstat</a></li>
 <li><a href="#" class="amenu">rfacebookstat</a></li>
 <li><a href="#" class="amenu">rmytarget</a></li>
-</ul>
-<ul class="menu">
 <li><a href="#" class="amenu">rmixpanel</a></li>
 <li><a href="#" class="amenu">rGitHub</a></li>
 <li><a href="#" class="amenu">getProxy</a></li>
