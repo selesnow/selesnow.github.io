@@ -46,17 +46,20 @@ li.menu {
 <p align="center">
 <a href="https://selesnow.github.io/"><img src="https://alexeyseleznev.files.wordpress.com/2017/03/as.png" height="80"></a>
 </p>
-
+<h2>Menu</h2>
+<cener>
 <ul class="menu">
-<li class="menu"><a href="#" class="amenu">ryandexdirect</a></li>
-<li class="menu"><a href="#" class="amenu">rvkstat</a></li>
-<li class="menu"><a href="#" class="amenu">rfacebookstat</a></li>
-<li class="menu"><a href="#" class="amenu">rmytarget</a></li>
-<li class="menu"><a href="#" class="amenu">rmixpanel</a></li>
-<li class="menu"><a href="#" class="amenu">rGitHub</a></li>
-<li class="menu"><a href="#" class="amenu">getProxy</a></li>
-<li class="menu"><a href="#" class="amenu">NEWS</a></li>
+  <li class="menu"><a href="#" class="amenu">ryandexdirect</a></li>
+  <li class="menu"><a href="#" class="amenu">rvkstat</a></li>
+  <li class="menu"><a href="#" class="amenu">rfacebookstat</a></li>
+  <li class="menu"><a href="#" class="amenu">rmytarget</a></li>
+  <li class="menu"><a href="#" class="amenu">rmixpanel</a></li>
+  <li class="menu"><a href="#" class="amenu">rGitHub</a></li>
+  <li class="menu"><a href="#" class="amenu">getProxy</a></li>
+  <li class="menu"><a href="#" class="amenu">NEWS</a></li>
+  <li class="menu"><a href="#" class="amenu">Статьи</a></li>
 </ul>
+</center>
 
 # Обо мне
 Меня зовут Алексей Селезнёв, на данный момент я возглавляю отдел аналитики в агентстве интернет маркетинга Netpeak. 
