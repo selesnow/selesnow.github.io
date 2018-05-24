@@ -28,7 +28,7 @@ a.amenu {
   font-size: 9pt;
   line-height:40px; /*ровняем меню по вертикали*/
   display: block; 
-  border-right: 1px solid #F36262; /*добавляем бордюр справа*/
+  border-right: 1px solid #808080; /*добавляем бордюр справа*/
   -moz-transition: all 0.3s 0.01s ease; /*делаем плавный переход*/
   -o-transition: all 0.3s 0.01s ease;
   -webkit-transition: all 0.3s 0.01s ease;
