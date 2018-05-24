@@ -18,6 +18,7 @@
   gtag('js', new Date());
   gtag('config', 'UA-114798296-1');
 </script>
+
 <style type="text/css">
  ul.menu {
   list-style: none; /*убираем маркеры списка*/
@@ -63,36 +64,7 @@ li.menu {
   <li class="menu"><a href="https://selesnow.github.io/library" class="amenu">Статьи</a></li>
 </ul>
 </center>
-<Br><style type="text/css">
- ul.menu {
-  list-style: none; /*убираем маркеры списка*/
-  margin: 0; /*убираем отступы*/
-  padding-left: 0; /*убираем отступы*/
-  margin-top:25px; /*делаем отступ сверху*/
-  background:#C0C0C0; /*добавляем фон всему меню (заменив этот параметр, вы поменяете цвет всего меню)*/
-  height: 40px; /*задаем высоту*/
-}
-a.amenu {
-  text-decoration: none; /*убираем подчеркивание текста ссылок*/
-  background: #C0C0C0; /*добавляем фон к пункту меню (заменив этот параметр, вы поменяете цвет всех пунктов меню)*/
-  color: #000000; /*меняем цвет ссылок*/
-  padding:0px 10px; /*добавляем отступ*/
-  font-family: sans-serif; /*меняем шрифт*/
-  font-size: 9pt;
-  line-height:40px; /*ровняем меню по вертикали*/
-  display: block; 
-  border-right: 1px solid #808080; /*добавляем бордюр справа*/
-  -moz-transition: all 0.3s 0.01s ease; /*делаем плавный переход*/
-  -o-transition: all 0.3s 0.01s ease;
-  -webkit-transition: all 0.3s 0.01s ease;
-}
-a:hover {
-  background:#808080;/*добавляем эффект при наведении*/
-}
-li.menu {
-  float:left; /*Размещаем список горизонтально для реализации меню*/
-}
-</style>
+<Br>
 <h2>Search:</h2>
 <script>
   (function() {
@@ -106,7 +78,7 @@ li.menu {
   })();
 </script>
 <gcse:search></gcse:search>
-
+<Br>
 На этой странице собраны все статьи посвящённые работе с представленными на этом сайта пакетами функций расширяющих базовые возможности языка R.
 
 Далее приведён  список статей с сопутсвующей информацией про автора, и пакеты о которых идёт речь в статье:
