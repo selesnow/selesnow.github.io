@@ -17,7 +17,7 @@
   padding-left: 0; /*убираем отступы*/
   margin-top:25px; /*делаем отступ сверху*/
   background:#C0C0C0; /*добавляем фон всему меню (заменив этот параметр, вы поменяете цвет всего меню)*/
-  height: 50px; /*задаем высоту*/
+  height: 40px; /*задаем высоту*/
 }
 a.amenu {
   text-decoration: none; /*убираем подчеркивание текста ссылок*/
@@ -47,10 +47,16 @@ li {
 </p>
 
 <ul class="menu">
-<li><a href="#" class="amenu">Главная</a></li>
-<li><a href="#" class="amenu">Услуги</a></li>
-<li><a href="#" class="amenu">Цены</a></li>
-<li><a href="#" class="amenu">Контакты</a></li>
+<li><a href="#" class="amenu">ryandexdirect</a></li>
+<li><a href="#" class="amenu">rvkstat</a></li>
+<li><a href="#" class="amenu">rfacebookstat</a></li>
+<li><a href="#" class="amenu">rmytarget</a></li>
+</ul>
+<ul class="menu">
+<li><a href="#" class="amenu">rmixpanel</a></li>
+<li><a href="#" class="amenu">rGitHub</a></li>
+<li><a href="#" class="amenu">getProxy</a></li>
+<li><a href="#" class="amenu">NEWS</a></li>
 </ul>
 
 # Обо мне
