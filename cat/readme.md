@@ -49,15 +49,15 @@ li.menu {
 <h2>Menu</h2>
 <center>
 <ul class="menu">
-  <li class="menu"><a href="#" class="amenu">ryandexdirect</a></li>
-  <li class="menu"><a href="#" class="amenu">rvkstat</a></li>
-  <li class="menu"><a href="#" class="amenu">rfacebookstat</a></li>
-  <li class="menu"><a href="#" class="amenu">rmytarget</a></li>
-  <li class="menu"><a href="#" class="amenu">rmixpanel</a></li>
-  <li class="menu"><a href="#" class="amenu">rGitHub</a></li>
-  <li class="menu"><a href="#" class="amenu">getProxy</a></li>
-  <li class="menu"><a href="#" class="amenu">NEWS</a></li>
-  <li class="menu"><a href="#" class="amenu">Статьи</a></li>
+  <li class="menu"><a href="ryandexdirect" class="amenu">ryandexdirect</a></li>
+  <li class="menu"><a href="rmytarget" class="amenu">rvkstat</a></li>
+  <li class="menu"><a href="rfacebookstat" class="amenu">rfacebookstat</a></li>
+  <li class="menu"><a href="rmytarget" class="amenu">rmytarget</a></li>
+  <li class="menu"><a href="rmixpanel" class="amenu">rmixpanel</a></li>
+  <li class="menu"><a href="rgithub" class="amenu">rGitHub</a></li>
+  <li class="menu"><a href="getproxy" class="amenu">getProxy</a></li>
+  <li class="menu"><a href="news" class="amenu">NEWS</a></li>
+  <li class="menu"><a href="library" class="amenu">Статьи</a></li>
 </ul>
 </center>
 <Br>
