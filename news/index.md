@@ -81,6 +81,11 @@ li.menu {
   
 # Последние новости репозиториев
 ---
+### 2018-07-16| rfacebookstat
+
+Релиз версии rfacebookstat 1.7.0, в которую было добавлено 4 новые функции, с помощью которых вы можете загружаьт список рекламных кампаний, групп объявлений, объявлений и контента объявлений, подробнее на [GitHub](https://github.com/selesnow/rfacebookstat/releases/tag/1.7.0).
+
+---
 ### 2018-05-16| ryandexdirect
 
 ryandexdirect был хначительно улучшен, подробнее с детальным описанием всех обновлений можно в [статье на блоге](https://alexeyseleznev.wordpress.com/2018/05/16/ryandexdirect-3-0-0-%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D1%91%D0%BD%D0%BD%D1%8B%D0%B9-r-%D0%BA%D0%BB%D0%B8%D0%B5%D0%BD%D1%82-%D0%B4%D0%BB%D1%8F-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D1%81-api/), или из [релиза на GitHub](https://github.com/selesnow/ryandexdirect/releases/tag/3.0.0).
