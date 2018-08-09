@@ -80,6 +80,24 @@ li.menu {
 <gcse:search></gcse:search>
   
 # Последние новости репозиториев
+
+---
+### 2018-08-08| rfacebookstat
+
+Новая статья в нашей библиотеке, автор [Макс Гапчук](https://www.facebook.com/maks.hapchuk), рассказал как импортировать данные о расходах из Facebook в Google Analytics с помощью пакетов **rfacebookstat**, googleAnalyticsR и googleAuthR.
+
+---
+### 2018-08-08| rfacebookstat
+
+Пакет rfacebookstat переведён на работу с версий API Facebook v3.1, рекомендую всем обновить пакет для избежания ошибок при отвправке запросов к API Facebook. [Подробности на GitHub](https://github.com/selesnow/rfacebookstat/releases/tag/1.8.2).
+
+Для обновления пакета запустите следующую команду `devtools::install_github('selesnow/rfacebookstat')`.
+
+---
+### 2018-08-08| ryandexdirect
+
+В сервис Reports, предназначеный для получения статистики с Яндекс Директ добавлены новые поля AvgTrafficVolume, WeightedCtr, WeightedImpressions. Соответсвенно теперь вы можете запрашивать данные поля при работе с функцией yadirGetReports. [Подробности в блоге Яндекс Директ](https://yandex.ru/blog/ya-direct-api?from=email).
+
 ---
 ### 2018-07-16| rfacebookstat
 
