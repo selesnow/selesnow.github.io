@@ -84,6 +84,20 @@ li.menu {
 Далее приведён  список статей с сопутсвующей информацией про автора, и пакеты о которых идёт речь в статье:
 
 ---
+## [Импорт данных о расходах в Google Analytics с помощью R](https://analytics-tips.com/import-dannyh-o-raskhodah-v-google-analytics-s-pomoshchyu-r/) <Br>
+<b>Автор:</b> Макс Гапчук <Br>
+<b>Впервые было опубликовано на:</b> [analytics-tips.com](https://analytics-tips.com) <Br>
+<b>Дата публикации:</b> 08.08.2018 <Br>
+
+<p align="center">
+<img class="aligncenter" src="https://analytics-tips.com/wp-content/uploads/2018/08/Import-dannyh-o-raskhodah-v-Google-Analytics-s-pomoshchyu-R-780x408.png" align="middle" alt="Импорт данных о расходах в Google Analytics с помощью R" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
+</p>
+
+<i>При работе с Google Analytics очень часто необходимо импортировать какие-то данные в эту систему. Обычно этими данными являются данные о расходах в Facebook и других рекламных системах (хотя бывают и другие виды импорта). Такая необходимость возникает, как при настройке сквозной аналитики, так и в более общих случаях работы с Google Analytics.</i>
+
+*[Читать продолжение в первоисточнике.](https://analytics-tips.com/import-dannyh-o-raskhodah-v-google-analytics-s-pomoshchyu-r/)*
+---
+
 ## [ryandexdirect 3.0.0 — обновлённый R клиент для работы с API Яндекс Директ](https://alexeyseleznev.wordpress.com/2018/05/16/ryandexdirect-3-0-0-%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D1%91%D0%BD%D0%BD%D1%8B%D0%B9-r-%D0%BA%D0%BB%D0%B8%D0%B5%D0%BD%D1%82-%D0%B4%D0%BB%D1%8F-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D1%81-api/) <Br>
 <b>Автор:</b> Алексей Селезнёв <Br>
 <b>Впервые было опубликовано на:</b> [alexeyseleznev.wordpress.com](https://alexeyseleznev.wordpress.com) <Br>
