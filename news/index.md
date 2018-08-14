@@ -82,6 +82,19 @@ li.menu {
 # Последние новости репозиториев
 
 ---
+### 2018-08-14| rfacebookstat
+Пакет rfacebookstat прошел все проверки и был загружен в основной репозиторий для хранения пакетов на R - CRAN (Comprehensive R Archive Network).
+
+Для установки пакета из CRAN можно использовать следующую команду.
+
+`install.packages("rfacebookstat", repos = "https://cran.r-project.org/")`
+
+В ближайшее время можно будет установить пакет без явного указания репозитория т.е. просто `install.packages("rfacebookstat")`.
+
+[Страница пакета](https://CRAN.R-project.org/package=rfacebookstat)()
+[Документация по rfacebookstat на CRAN](https://cran.r-project.org/web/packages/rfacebookstat/rfacebookstat.pdf)
+
+---
 ### 2018-08-08| rfacebookstat
 
 Новая статья в нашей библиотеке, автор [Макс Гапчук](https://www.facebook.com/maks.hapchuk), рассказал как импортировать данные о расходах из Facebook в Google Analytics с помощью пакетов **rfacebookstat**, googleAnalyticsR и googleAuthR.
