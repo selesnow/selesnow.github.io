@@ -87,7 +87,7 @@ li.menu {
 
 Для установки пакета из CRAN можно использовать следующую команду.
 
-`install.packages("rfacebookstat", repos = "https://cran.r-project.org/")`
+`install.packages("rfacebookstat")`
 
 В ближайшее время можно будет установить пакет без явного указания репозитория т.е. просто `install.packages("rfacebookstat")`.
 
