@@ -82,6 +82,10 @@ li.menu {
 # Последние новости репозиториев
 
 ---
+### 2018-08-17| rmytarget
+Пакет rmytarget получил доступ к схеме авторизации Authorization Code Grant, теперь для работы с API MyTarget через функции rmytarget вам не требуется запрашивать доступ к API MyTarget. Подробнее на [GitHub](https://github.com/selesnow/rmytarget/releases/tag/v1.1).
+
+---
 ### 2018-08-14| rfacebookstat
 Пакет rfacebookstat прошел все проверки и был загружен в основной репозиторий для хранения пакетов на R - CRAN (Comprehensive R Archive Network).
 
