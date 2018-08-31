@@ -82,6 +82,14 @@ li.menu {
 # Последние новости репозиториев
 
 ---
+### 2018-08-20| getProxy
+Пакет getProxy прошел все проверки и был добавлен на CRAN.
+
+---
+### 2018-08-18| getProxy
+В [документацию](https://selesnow.github.io/getProxy) пакета getProxy добавлен видео мануал по работе с пакетом.
+
+---
 ### 2018-08-17| rmytarget
 Пакет rmytarget получил доступ к схеме авторизации Authorization Code Grant, теперь для работы с API MyTarget через функции rmytarget вам не требуется запрашивать доступ к API MyTarget. Подробнее на [GitHub](https://github.com/selesnow/rmytarget/releases/tag/v1.1).
 
