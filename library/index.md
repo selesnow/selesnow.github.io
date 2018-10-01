@@ -118,6 +118,20 @@ li.nm_li {
 Далее приведён  список статей с сопутсвующей информацией про автора, и пакеты о которых идёт речь в статье:
 
 ---
+## [Как работать с API Яндекс.Метрики с помощью языка R](https://netpeak.net/ru/blog/kak-rabotat-s-api-yandeks-metriki-s-pomoshch-yu-yazyka-r/) <Br>
+<b>Автор:</b> Алексей Селезнёв <Br>
+<b>Впервые было опубликовано на:</b> [Блог Netpeak](https://netpeak.net/ru/blog/) <Br>
+<b>Дата публикации:</b> 01.10.2018 <Br>
+
+<p align="center">
+<img class="aligncenter" src="https://images.netpeak.net/blog/rectangle_kak-zagruzit-dannyye-iz-yandeks-metriki-v-r.png" align="middle" alt="Как работать с API Яндекс.Метрики с помощью языка R" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
+</p>
+
+<i>Такие платформы, как Google Analytics и Яндекс.Метрика — инструменты, которые ежедневно используют в своей работе тысячи интернет-маркетологов и веб-аналитиков. Если вы продвигаете пару тройку-сайтов, думаю, достаточно веб-интерфейса этих сервисов. Когда же речь идёт о десятке сайтов, то для оперативной реакции на изменение поведенческих или других качественных показателей недостаточно функций и возможностей интерфейсов. К тому же приходится тратить много времени на переход из одного аккаунта в другой.</i>
+
+*[Читать продолжение в первоисточнике.](https://netpeak.net/ru/blog/kak-rabotat-s-api-yandeks-metriki-s-pomoshch-yu-yazyka-r/)*
+
+---
 ## [Импорт данных о расходах в Google Analytics с помощью R](https://analytics-tips.com/import-dannyh-o-raskhodah-v-google-analytics-s-pomoshchyu-r/) <Br>
 <b>Автор:</b> Макс Гапчук <Br>
 <b>Впервые было опубликовано на:</b> [analytics-tips.com](https://analytics-tips.com) <Br>
