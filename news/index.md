@@ -116,6 +116,20 @@ li.nm_li {
 # Последние новости репозиториев
 
 ---
+### 2018-10-01| rmytarget
+Написал [статью](https://netpeak.net/ru/blog/kak-rabotat-s-api-yandeks-metriki-s-pomoshch-yu-yazyka-r/), о том, как с помощью пакета `rym` работать со всеми API Яндекс.Метрики.
+
+---
+### 2018-09-28| rmytarget
+rmytarget, пакет предназначенный для работы с API платформы MyTarget был опубликован на CRAN, для установки еперь можно использовать стандартную команду `install.packages("rmytarget")`.
+
+---
+### 2018-09-03| rym
+Новый пакет [rym](https://selesnow.gihub.io/rym), предназначенный для работы с API Яндекс.Метрики изначально был написан согласно всех правил репозитория CRAN и сразу был опубликован и на GitHub и на CRAN. 
+Установка с CRAN: `install.packages("rym")`
+Установка с GitHub: `devtools::install_github("selesnow/rym")`
+
+---
 ### 2018-08-20| getProxy
 Пакет getProxy прошел все проверки и был добавлен на CRAN.
 
