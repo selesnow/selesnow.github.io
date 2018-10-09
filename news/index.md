@@ -116,7 +116,19 @@ li.nm_li {
 # Последние новости репозиториев
 
 ---
-### 2018-10-01| rmytarget
+### 2018-10-09| rfacebookstat
+rfacebookstat попал в [топ 40](https://rviews.rstudio.com/2018/09/26/august-2018-top-40-new-packages/) пакетов опубликованных на CRAN в августе 2018 года.
+
+---
+### 2018-10-05
+Опубиковал [обзор R пакетов для интренет маркетинга](https://habr.com/post/425425/) на хабре.
+
+---
+### 2018-10-02| rym
+Готова [официальная документация](https://selesnow.github.io/rym) к пакету rym.
+
+---
+### 2018-10-01| rym
 Написал [статью](https://netpeak.net/ru/blog/kak-rabotat-s-api-yandeks-metriki-s-pomoshch-yu-yazyka-r/), о том, как с помощью пакета `rym` работать со всеми API Яндекс.Метрики.
 
 ---
