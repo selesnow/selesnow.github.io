@@ -119,6 +119,23 @@ li.nm_li {
 Далее приведён  список статей с сопутсвующей информацией про автора, и пакеты о которых идёт речь в статье:
 
 ---
+## [Как использовать Rscript в качестве источника данных в Microsoft Power BI на примере Яндекс.Метрики](https://www.mediaguru.ru/blog/kak-ispolzovat-rscript-v-kachestve-istochnika-dannyh-v-microsoft-power-bi-na-primere-yandeks-metriki/) <Br>
+<b>Автор:</b> Павел Мрыкин <Br>
+<b>Впервые было опубликовано на:</b> [mediaguru.ru](https://www.mediaguru.ru/) <Br>
+<b>Дата публикации:</b> 23.10.2018 <Br>
+
+<p align="center">
+<img class="aligncenter" src="https://external.fods1-1.fna.fbcdn.net/safe_image.php?d=AQBgFL8bT7VuDcGm&w=540&h=282&url=https%3A%2F%2Fwww.mediaguru.ru%2Fwp-content%2Fuploads%2F2018%2F10%2Fresearch-development.jpg&cfs=1&upscale=1&fallback=news_d_placeholder_publisher&_nc_hash=AQAJF459UYomZSaC" align="middle" alt="Обзор R пакетов для интернет маркетинга, часть 1" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
+</p>
+
+<i>Интерес к инструменту визуализации Microsoft Power BI неумолимо растёт.
+Основная проблема, с которой может столкнуться начинающий пользователь Power BI — это получение данных из API рекламных и аналитических систем.
+
+Однако есть решение — использовать в качестве коннектора язык R и готовые пакеты (расширения), которые позволяют подключиться к необходимым источникам.</i>
+
+*[Читать продолжение в первоисточнике.](https://www.mediaguru.ru/blog/kak-ispolzovat-rscript-v-kachestve-istochnika-dannyh-v-microsoft-power-bi-na-primere-yandeks-metriki/)*
+
+---
 ## [Обзор R пакетов для интернет маркетинга, часть 1](https://habr.com/post/425425/) <Br>
 <b>Автор:</b> Алексей Селезнёв <Br>
 <b>Впервые было опубликовано на:</b> [Хабр](https://habr.com/) <Br>
