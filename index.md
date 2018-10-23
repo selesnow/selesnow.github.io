@@ -135,7 +135,7 @@ li.nm_li {
 
 По сути с помощью этих пакетов можно автоматизировать свои повседневные задачи по сбору данных из перечисленных выше сервисов, при этом навыков программирования вам не понадобится, достаточно будет скачать и установить актуальную версию языка программирования R и среды разработки RStudio, ознакомится с документацией по работе с нужным пакет и получить доступ к API интересующего вас сервиса.
 
-Разработанные мной пакеты используются в таких компаниях как [Netpeak](https://netpeak.net), [IT-Agency](http://www.it-agency.ru/), [eLama](https://elama.ru/), [MediaGuru](https://www.mediaguru.ru/), [templatemonster](https://www.templatemonster.com) и многих другие.
+Разработанные мной пакеты используются в таких компаниях как [Netpeak](https://netpeak.net), [IT-Agency](http://www.it-agency.ru/), [eLama](https://elama.ru/), [MediaGuru](https://www.mediaguru.ru/), [templatemonster](https://www.templatemonster.com), [Юлмарт](https://www.ulmart.ru/) и многих другие.
 
 # Ссылки для скачивания необходимого программного обеспечения
 * [Язык R](https://cran.r-project.org/)
