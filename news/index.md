@@ -117,6 +117,10 @@ li.nm_li {
 # Последние новости репозиториев
 
 ---
+### 2018-10-24| ryandexdirect
+В ryandexdirect реализован функционал, который был добавлен [8 июня в сервис Reports](https://yandex.ru/blog/ya-direct-api/modeli-atributsii-i-tseli-v-reports), а именно в функцию yadirGetReport добавлены аргументы Goals и AttributionModels с помощью которых вы можете запрашивать данные полей ConversionRate, Conversions, CostPerConversion, GoalsRoi и Revenue по каждой отдельной настроеной цели, к тому же получить расчёт по трём различнам моделям аттрибуции, подробности релиза и пример кода можно посмотреь на [GitHub](https://github.com/selesnow/ryandexdirect/releases/tag/3.0.8).
+
+---
 ### 2018-10-09| rfacebookstat
 rfacebookstat попал в [топ 40](https://rviews.rstudio.com/2018/09/26/august-2018-top-40-new-packages/) пакетов опубликованных на CRAN в августе 2018 года.
 
