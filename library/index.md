@@ -119,6 +119,20 @@ li.nm_li {
 Далее приведён  список статей с сопутсвующей информацией про автора, и пакеты о которых идёт речь в статье:
 
 ---
+## [Язык R в веб-аналитике и интернет-маркетинге](https://leadzavod.com/jazyk-r-v-veb-analitike-i-internet-marketinge/) <Br>
+<b>Автор:</b> Андрей Чехлов, Алексей Селезнёв <Br>
+<b>Впервые было опубликовано на:</b> [Лидзавод](https://leadzavod.com/) <Br>
+<b>Дата публикации:</b> 27.10.2018 <Br>
+
+<p align="center">
+<img class="aligncenter" src="https://leadzavod.com/wp-content/uploads/2018/10/jazyk-r-v-veb-analitike-i-internet-marketinge.jpg" align="middle" alt="Язык R в веб-аналитике и интернет-маркетинге" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
+</p>
+
+<i>Маркетологи и аналитики все чаще обращаются к языку программирования R в повседневной работе. Зачем это нужно и какая польза от программирования на R в интернет-маркетинге, редакция «Лидзавода» спросила руководителя отдела аналитики агентства Netpeak Алексея Селезнева.</i>
+
+*[Читать продолжение в первоисточнике.](https://leadzavod.com/jazyk-r-v-veb-analitike-i-internet-marketinge/)*
+
+---
 ## [Как использовать Rscript в качестве источника данных в Microsoft Power BI на примере Яндекс.Метрики](https://www.mediaguru.ru/blog/kak-ispolzovat-rscript-v-kachestve-istochnika-dannyh-v-microsoft-power-bi-na-primere-yandeks-metriki/) <Br>
 <b>Автор:</b> Павел Мрыкин <Br>
 <b>Впервые было опубликовано на:</b> [mediaguru.ru](https://www.mediaguru.ru/) <Br>
