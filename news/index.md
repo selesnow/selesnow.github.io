@@ -117,6 +117,10 @@ li.nm_li {
 # Последние новости репозиториев
 
 ---
+### 2018-12-11| ryandexdirect
+На стороне API Яндекс.Директ был полностью переработан справочник валют, о чём они [сообщили в своём блоге](https://yandex.ru/blog/ya-direct-api/otklyuchaem-podderzhku-u-e-v-spravochnike-valyut) 29 ноября, данные изменения затронули функции `yadirGetDictionary` и `yadirCurrencyRates` пакета ryandexdirect. Подробнее о внесённых изменениях можно узнать в описании [релиза на GitHub](https://github.com/selesnow/ryandexdirect/releases/tag/3.0.11.0).
+
+---
 ### 2018-12-05| ryandexdirect
 Полностью переписана функция `yadirGetClientList`, и переведена на API Яндекс.Директ версии 5. Синтаксис функции не изменился, но значительно расширился список полей который вы с её помошью можете получить. Все подробности можно узнать в релизе на [GitHub] (https://github.com/selesnow/ryandexdirect/releases/tag/3.0.10).
 
