@@ -86,7 +86,8 @@ li.nm_li {
     </li>
 	<li class="nm_li"><a href="#" class="nm_a">Онлайн Книги</a>
 	    <ul class="nm_ul">
-            <li class="nm_li"><a href="/r_for_marketing" class="nm_a">Язык R в Интернет Маркетинге</a></li>
+            <li class="nm_li"><a href="https://r-for-marketing.netpeak.net/" class="nm_a">Язык R в Интернет Маркетинге</a></li>
+            <li class="nm_li"><a href="https://netpeak.net/files/whitepapers/10-fishek-web-analitiki.pdf" class="nm_a">10 фишек Google Analytics</a></li>
         </ul>
 	</li>
 	<li class="nm_li"><a href="#" class="nm_a">Онлайн Курсы</a>
@@ -118,14 +119,17 @@ li.nm_li {
 <Br>
 
 # Обо мне
-Меня зовут Алексей Селезнёв, на данный момент я возглавляю отдел аналитики в агентстве интернет маркетинга [Netpeak](https://netpeak.net). 
+Меня зовут Алексей Селезнёв, на данный момент я возглавляю отдел аналитики в агентстве интернет маркетинга [Netpeak](https://netpeak.net). Являюсь автором и преподователем курса ["Язык R для интернет - маркетинга"](https://learn.needfordata.ru/r). 
 Более подробно обо мне можно узнать [на моём блоге](alexeyseleznev.wordpress.com).
 
-<img class=" aligncenter" src="https://scontent.fods1-1.fna.fbcdn.net/v/t1.0-9/23519298_1723847460967555_7311750647506949501_n.jpg?oh=a88c93c1a1ea6600ee3268b3f8d74bd6&amp;oe=5B4B9D0E" alt="Фото Алексея Селезнёва.">
+Так же являюсь автором телеграм канала [R4marketing](http://t.me/R4marketing), в котором публикую различные полезные материалы о применении языка программирования R в интернет - маркетинге.
+
+<img class=" aligncenter" src="https://images.netpeak.net/blog/r-vsemu-golova.jpg" alt="Фото Алексея Селезнёва.">
 
 
 ## Контакты
 * email: selesnow@gmail.com
+* telegram channel: [R4marketing](http://t.me/R4marketing)
 * facebook: [facebook.com/selesnow](https://www.facebook.com/selesnow)
 * linkedin: [linkedin.com/in/selesnow](https://www.linkedin.com/in/selesnow)
 * GitHub: [github.com/selesnow](https://github.com/selesnow/)
