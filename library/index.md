@@ -170,7 +170,7 @@ li.nm_li {
 <b>Дата публикации:</b> 27.10.2018 <Br>
 
 <p align="center">
-<img class="aligncenter" src="https://leadzavod.com/wp-content/uploads/2018/10/jazyk-r-v-veb-analitike-i-internet-marketinge.jpg" align="middle" alt="Язык R в веб-аналитике и интернет-маркетинге" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
+<img class="aligncenter" src="http://img.netpeak.ua/alsey/154823988782_kiss_439kb.png" align="middle" alt="Язык R в веб-аналитике и интернет-маркетинге" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
 </p>
 
 <i>Маркетологи и аналитики все чаще обращаются к языку программирования R в повседневной работе. Зачем это нужно и какая польза от программирования на R в интернет-маркетинге, редакция «Лидзавода» спросила руководителя отдела аналитики агентства Netpeak Алексея Селезнева.</i>
