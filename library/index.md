@@ -120,6 +120,34 @@ li.nm_li {
 Далее приведён  список статей с сопутсвующей информацией про автора, и пакеты о которых идёт речь в статье:
 
 ---
+## [Как ускорить работу с API на языке R с помощью параллельных вычислений, на примере API Яндекс.Директ](https://habr.com/ru/post/437078/) <Br>
+<b>Автор:</b> Алексей Селезнёв <Br>
+<b>Впервые было опубликовано на:</b> [Хабра](https://habr.com/) <Br>
+<b>Дата публикации:</b> 23.01.2019 <Br>
+
+<p align="center">
+<img class="aligncenter" src="https://habrastorage.org/getpro/habr/post_images/86f/042/b60/86f042b609e10a79893f2dfbc24fd6f8.jpg" align="middle" alt="Как ускорить работу с API на языке R с помощью параллельных вычислений, на примере API Яндекс.Директ" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
+</p>
+
+<i>Язык R на сегодняшний день является одним из мощнейших и многофункциональных инструментов для работы с данными, но как мы знаем практически всегда, в любой бочке мёда найдётся ложка дёгтя. Дело в том, что R по умолчанию является однопоточным.</i>
+
+*[Читать продолжение в первоисточнике.](https://netpeak.net/ru/blog/zachem-uchit-yazyk-r-internet-marketologu-i-kak-sdelat-eto-maksimal-no-bystro/)*
+
+---
+## [Зачем учить язык R интернет-маркетологу, и как сделать это максимально быстро](https://netpeak.net/ru/blog/zachem-uchit-yazyk-r-internet-marketologu-i-kak-sdelat-eto-maksimal-no-bystro/) <Br>
+<b>Автор:</b> Алексей Селезнёв <Br>
+<b>Впервые было опубликовано на:</b> [Блог Netpeak](https://netpeak.net/ru/blog/) <Br>
+<b>Дата публикации:</b> 11.12.2018 <Br>
+
+<p align="center">
+<img class="aligncenter" src="https://images.netpeak.net/blog/r-vsemu-golova.jpg" align="middle" alt="Зачем учить язык R интернет-маркетологу, и как сделать это максимально быстро" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
+</p>
+
+<i>Друзья, у меня для вас хорошая новость: 1 ноября стартовал первый поток моего авторского онлайн-курса «Язык R для интернет-маркетинга». В этой статье я расскажу о том, когда и зачем я начал учить R, с какими сложностями столкнулся, как появилась и реализовывалась идея создания курса и чем этот курс может помочь именно вам. Поехали!</i>
+
+*[Читать продолжение в первоисточнике.](https://netpeak.net/ru/blog/zachem-uchit-yazyk-r-internet-marketologu-i-kak-sdelat-eto-maksimal-no-bystro/)*
+
+---
 ## [Насколько безопасно использовать R пакеты для работы с API рекламных систем](https://habr.com/post/430888/) <Br>
 <b>Автор:</b> Алексей Селезнёв <Br>
 <b>Впервые было опубликовано на:</b> [Хабрахабр](https://habr.com/) <Br>
