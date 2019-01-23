@@ -131,7 +131,7 @@ li.nm_li {
 
 <i>Язык R на сегодняшний день является одним из мощнейших и многофункциональных инструментов для работы с данными, но как мы знаем практически всегда, в любой бочке мёда найдётся ложка дёгтя. Дело в том, что R по умолчанию является однопоточным.</i>
 
-*[Читать продолжение в первоисточнике.](https://netpeak.net/ru/blog/zachem-uchit-yazyk-r-internet-marketologu-i-kak-sdelat-eto-maksimal-no-bystro/)*
+*[Читать продолжение в первоисточнике.](https://habr.com/ru/post/437078/)*
 
 ---
 ## [Зачем учить язык R интернет-маркетологу, и как сделать это максимально быстро](https://netpeak.net/ru/blog/zachem-uchit-yazyk-r-internet-marketologu-i-kak-sdelat-eto-maksimal-no-bystro/) <Br>
