@@ -120,6 +120,20 @@ li.nm_li {
 Далее приведён  список статей с сопутсвующей информацией про автора, и пакеты о которых идёт речь в статье:
 
 ---
+## [Зачем интернет-маркетологу язык R](https://www.comagic.ru/blog/posts/feb/zachem_internet_marketologu_yazyk_r/) <Br>
+<b>Автор:</b> Анастасия Скороходова, Алексей Селезнёв <Br>
+<b>Впервые было опубликовано на:</b> [Блог CoMagic](https://www.comagic.ru/blog/) <Br>
+<b>Дата публикации:</b> 25.02.2019 <Br>
+
+<p align="center">
+<img class="aligncenter" src="https://www.comagic.ru/images/blog/yazyk-r/33.jpg" align="middle" alt="Зачем интернет-маркетологу язык R" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
+</p>
+
+<i>Язык R набирает популярность в Digital-тусовке. Что это такое и как он может прокачать интернет-маркетинг, рассказывает руководитель отдела аналитики агентства Netpeak и автор онлайн-курса «Язык R для интернет-маркетинга» Алексей Селезнев.</i>
+
+*[Читать продолжение в первоисточнике.](https://www.comagic.ru/blog/posts/feb/zachem_internet_marketologu_yazyk_r/)*
+
+---
 ## [Как ускорить работу с API на языке R с помощью параллельных вычислений, на примере API Яндекс.Директ](https://habr.com/ru/post/437078/) <Br>
 <b>Автор:</b> Алексей Селезнёв <Br>
 <b>Впервые было опубликовано на:</b> [Хабра](https://habr.com/) <Br>
