@@ -120,6 +120,36 @@ li.nm_li {
 Далее приведён  список статей с сопутсвующей информацией про автора, и пакеты о которых идёт речь в статье:
 
 ---
+## [ryandexdirect и выгрузка данных из Яндекс.Директ в RStudio](https://osipenkov.ru/ryandexdirect-direkt-r-step1/) <Br>
+<b>Автор:</b> Яков Осипенков <Br>
+<b>Впервые было опубликовано на:</b> [Блог Якова Осипенкова](https://osipenkov.ru/blog/) <Br>
+<b>Дата публикации:</b> 16.06.2019 <Br>
+
+<p align="center">
+<img class="aligncenter" src="https://osipenkov.ru/wp-content/uploads/2019/06/ryandexdirect-step1.jpg" align="middle" alt="ryandexdirect и выгрузка данных из Яндекс.Директ в RStudio" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
+</p>
+
+<i>В этой статье познакомимся с пакетом ryandexdirect Алексея Селезнева (Netpeak) и выгрузим первые данные из Яндекс.Директ в RStudio.</i>
+
+*[Читать продолжение в первоисточнике.](https://osipenkov.ru/ryandexdirect-direkt-r-step1/)*
+
+---
+## [Как ускорить работу с API на языке R с помощью параллельных вычислений, на примере API Яндекс.Директ (Часть 2)](https://habr.com/ru/post/448404/) <Br>
+<b>Автор:</b> Алексей Селезнёв <Br>
+<b>Впервые было опубликовано на:</b> [Хабра](https://habr.com/) <Br>
+<b>Дата публикации:</b> 23.04.2019 <Br>
+
+<p align="center">
+<img class="aligncenter" src="https://habrastorage.org/getpro/habr/post_images/302/1a1/570/3021a15709dae984b328e3af5364d1de.png" align="middle" alt="Зачем интернет-маркетологу язык R" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
+</p>
+
+<i>В прошлой статье я рассказал о том, что такое многопоточность, и привёл примеры её реализации на языке R при работе с API Яндекс.Директ с помощью пакетов doSNOW, doParallel и конструкции foreach.
+
+Данная статья является продолжением, но может быть рассмотрена как автономное руководство по многопоточности в R.</i>
+
+*[Читать продолжение в первоисточнике.](https://habr.com/ru/post/448404/)*
+
+---
 ## [Зачем интернет-маркетологу язык R](https://www.comagic.ru/blog/posts/feb/zachem_internet_marketologu_yazyk_r/) <Br>
 <b>Автор:</b> Анастасия Скороходова, Алексей Селезнёв <Br>
 <b>Впервые было опубликовано на:</b> [Блог CoMagic](https://www.comagic.ru/blog/) <Br>
@@ -134,7 +164,7 @@ li.nm_li {
 *[Читать продолжение в первоисточнике.](https://www.comagic.ru/blog/posts/feb/zachem_internet_marketologu_yazyk_r/)*
 
 ---
-## [Как ускорить работу с API на языке R с помощью параллельных вычислений, на примере API Яндекс.Директ](https://habr.com/ru/post/437078/) <Br>
+## [Как ускорить работу с API на языке R с помощью параллельных вычислений, на примере API Яндекс.Директ (Часть 1)](https://habr.com/ru/post/437078/) <Br>
 <b>Автор:</b> Алексей Селезнёв <Br>
 <b>Впервые было опубликовано на:</b> [Хабра](https://habr.com/) <Br>
 <b>Дата публикации:</b> 23.01.2019 <Br>
