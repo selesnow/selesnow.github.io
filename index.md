@@ -155,21 +155,21 @@ li.nm_li {
 ---
 
 # Ссылки на репозитории
-## ryandexdirect
+## ryandexdirect <a href='https://selesnow.github.io/ryandexdirect'><img src='https://raw.githubusercontent.com/selesnow/ryandexdirect/master/inst/logo/ryandexdirect.png' align="right" height="139" /></a>
 *Пакет для работы с API системы контектсной рекламы Яндекс.Директ, позволяет загружать статистику из рекламного аккаунта, останавливать и запускать показы на уровне объявлений, ключевых слов и рекламных кампаний.*
 * [Документация](https://selesnow.github.io/ryandexdirect/)
 * [Отчёт об ошибках и доработках](https://github.com/selesnow/ryandexdirect/issues)
 * [Список релизов](https://github.com/selesnow/ryandexdirect/releases)
 
 ---
-## rym
+## rym <a href='https://selesnow.github.io/rym'><img src='https://raw.githubusercontent.com/selesnow/rym/master/inst/logo/rym.png' align="right" height="139" /></a>
 *Пакет для работы с API Яндекс.Метрики.*
 * [Документация](https://selesnow.github.io/rym/)
 * [Отчёт об ошибках и доработках](https://github.com/selesnow/rym/issues)
 * [Список релизов](https://github.com/selesnow/rym/releases)
 
 ---
-## rfacebookstat
+## rfacebookstat <a href='https://selesnow.github.io/rfacebookstat'><img src='https://raw.githubusercontent.com/selesnow/rfacebookstat/master/inst/logo/rfacebookstat.png' align="right" height="139" /></a>
 *Пакет для работы с API рекламного кабинета Facebook.*
 * [Документация](https://selesnow.github.io/rfacebookstat/)
 * [Отчёт об ошибках и доработках](https://github.com/selesnow/rfacebookstat/issues)
@@ -183,7 +183,7 @@ li.nm_li {
 * [Список релизов](https://github.com/selesnow/rvkstat/releases)
 
 ---
-## rmytarget
+## rmytarget <a href='https://selesnow.github.io/rmytarget'><img src='https://raw.githubusercontent.com/selesnow/rmytarget/master/inst/logo/rmytarget.png' align="right" height="139" /></a>
 *Пакет для загрузки статистики по рекламным кампаниям в системе MyTarget.*
 * [Документация](https://selesnow.github.io/rmytarget/)
 * [Отчёт об ошибках и доработках](https://github.com/selesnow/rmytarget/issues)
@@ -204,7 +204,7 @@ li.nm_li {
 * [Список релизов](https://github.com/selesnow/rGitHub/releases)
 
 ---
-## getProxy
+## getProxy <a href='https://selesnow.github.io/getProxy'><img src='https://raw.githubusercontent.com/selesnow/getProxy/master/inst/logo/getProxy.png' align="right" height="139" /></a>
 *Перенаправления интернет соединения в R скриптах через бесплатные Proxy сервера.*
 * [Документация](https://selesnow.github.io/getProxy/)
 * [Отчёт об ошибках и доработках](https://github.com/selesnow/getProxy/issues)
