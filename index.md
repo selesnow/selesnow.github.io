@@ -155,7 +155,7 @@ li.nm_li {
 ---
 
 # Ссылки на репозитории
-## ryandexdirect <a href='https://selesnow.github.io/ryandexdirect'><img src='https://raw.githubusercontent.com/selesnow/ryandexdirect/master/inst/logo/ryandexdirect.png' align="right" height="139" /></a>
+## ryandexdirect <a href='https:/selesnow/github.io/ryandexdirect'><img src='https://raw.githubusercontent.com/selesnow/ryandexdirect/master/inst/ryandexdirect.png' align="right" height="139" /></a>
 *Пакет для работы с API системы контектсной рекламы Яндекс.Директ, позволяет загружать статистику из рекламного аккаунта, останавливать и запускать показы на уровне объявлений, ключевых слов и рекламных кампаний.*
 * [Документация](https://selesnow.github.io/ryandexdirect/)
 * [Отчёт об ошибках и доработках](https://github.com/selesnow/ryandexdirect/issues)
