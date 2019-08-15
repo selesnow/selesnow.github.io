@@ -107,6 +107,20 @@ li.nm_li {
 Далее приведён  список статей с сопутсвующей информацией про автора, и пакеты о которых идёт речь в статье:
 
 ---
+## [Построение поведенческих воронок на языке R, на основе данных полученных из Logs API Яндекс.Метрики](https://habr.com/post/462279/) <Br>
+<b>Автор:</b> Алексей Селезнёв <Br>
+<b>Впервые было опубликовано на:</b> [Хабра](https://habr.com) <Br>
+<b>Дата публикации:</b> 12.08.2019 <Br>
+
+<p align="center">
+<img class="aligncenter" src="https://habrastorage.org/webt/sd/ub/l0/sdubl0akv-cz00lehed6ym5xa-0.jpeg" align="middle" alt="Построение поведенческих воронок на языке R" style="position: relative; width: 350px; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
+</p>
+
+<i>В этой статье я расскажу о том, как на языке R запрашивать данные из Logs API Яндекс Метрики, строить и визуализировать на их основе воронку.</i>
+
+*[Читать продолжение в первоисточнике.](https://habr.com/post/462279/)*
+
+---
 ## [ryandexdirect и выгрузка данных из Яндекс.Директ в RStudio](https://osipenkov.ru/ryandexdirect-direkt-r-step1/) <Br>
 <b>Автор:</b> Яков Осипенков <Br>
 <b>Впервые было опубликовано на:</b> [Блог Якова Осипенкова](https://osipenkov.ru/blog/) <Br>
