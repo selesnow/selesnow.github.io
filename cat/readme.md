@@ -49,15 +49,16 @@ li.menu {
 <h2>Menu</h2>
 <center>
 <ul class="menu">
-  <li class="menu"><a href="https://selesnow.github.io/ryandexdirect" class="amenu">ryandexdirect</a></li>
-  <li class="menu"><a href="https://selesnow.github.io/rmytarget" class="amenu">rvkstat</a></li>
-  <li class="menu"><a href="https://selesnow.github.io/rfacebookstat" class="amenu">rfacebookstat</a></li>
-  <li class="menu"><a href="https://selesnow.github.io/rmytarget" class="amenu">rmytarget</a></li>
-  <li class="menu"><a href="https://selesnow.github.io/rmixpanel" class="amenu">rmixpanel</a></li>
-  <li class="menu"><a href="https://selesnow.github.io/rgithub" class="amenu">rGitHub</a></li>
-  <li class="menu"><a href="https://selesnow.github.io/getproxy" class="amenu">getProxy</a></li>
-  <li class="menu"><a href="https://selesnow.github.io/news" class="amenu">NEWS</a></li>
-  <li class="menu"><a href="https://selesnow.github.io/library" class="amenu">Статьи</a></li>
+            <li class="nm_li"><a href="/galigor" class="nm_a">galigor</a></li>
+            <li class="nm_li"><a href="/ryandexdirect" class="nm_a">ryandexdirect</a></li>
+            <li class="nm_li"><a href="/rym" class="nm_a">rym</a></li>
+            <li class="nm_li"><a href="/rfacebookstat" class="nm_a">rfacebookstat</a></li>
+            <li class="nm_li"><a href="/rvkstat" class="nm_a">rvkstat</a></li>
+	    <li class="nm_li"><a href="/rmytarget" class="nm_a">rmytarget</a></li>
+            <li class="nm_li"><a href="/timeperiodsR" class="nm_a">timeperiodsR</a></li>
+	    <li class="nm_li"><a href="/rmixpanel" class="nm_a">rmixpanel</a></li>
+	    <li class="nm_li"><a href="/rGitHub" class="nm_a">rGitHub</a></li>
+	    <li class="nm_li"><a href="/getProxy" class="nm_a">getProxy</a></li>
 </ul>
 </center>
 <Br>
