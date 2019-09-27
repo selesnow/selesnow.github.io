@@ -178,6 +178,20 @@ li.nm_li {
 * [Список релизов](https://github.com/selesnow/rmytarget/releases)
 
 ---
+## timeperiodsR <a href='https://selesnow.github.io/getProxy'><img src='https://raw.githubusercontent.com/selesnow/timeperiodsR/master/inst/timeperiodsR_logo.png' align="right" height="139" /></a>
+*Упрощённое создание объектов временных периодов.*
+* [Документация](https://selesnow.github.io/timeperiodsR/)
+* [Отчёт об ошибках и доработках](https://github.com/selesnow/timeperiodsR/issues)
+* [Список релизов](https://github.com/selesnow/timeperiodsR/releases)
+
+---
+## getProxy <a href='https://selesnow.github.io/getProxy'><img src='https://raw.githubusercontent.com/selesnow/getProxy/master/inst/logo/getProxy.png' align="right" height="139" /></a>
+*Перенаправления интернет соединения в R скриптах через бесплатные Proxy сервера.*
+* [Документация](https://selesnow.github.io/getProxy/)
+* [Отчёт об ошибках и доработках](https://github.com/selesnow/getProxy/issues)
+* [Список релизов](https://github.com/selesnow/getProxy/releases)
+
+---
 ## rmixpanel
 *Пакет для загрузки данных из API платформы веб аналитики Mixpanel.*
 * [Документация](https://selesnow.github.io/rmixpanel/)
@@ -191,12 +205,6 @@ li.nm_li {
 * [Отчёт об ошибках и доработках](https://github.com/selesnow/rGitHub/issues)
 * [Список релизов](https://github.com/selesnow/rGitHub/releases)
 
----
-## getProxy <a href='https://selesnow.github.io/getProxy'><img src='https://raw.githubusercontent.com/selesnow/getProxy/master/inst/logo/getProxy.png' align="right" height="139" /></a>
-*Перенаправления интернет соединения в R скриптах через бесплатные Proxy сервера.*
-* [Документация](https://selesnow.github.io/getProxy/)
-* [Отчёт об ошибках и доработках](https://github.com/selesnow/getProxy/issues)
-* [Список релизов](https://github.com/selesnow/getProxy/releases)
 
 ---
 
