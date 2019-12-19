@@ -160,6 +160,7 @@ li.nm_li {
 ## rfacebookstat <a href='https://selesnow.github.io/rfacebookstat'><img src='https://raw.githubusercontent.com/selesnow/rfacebookstat/master/inst/logo/rfacebookstat.png' align="right" height="139" /></a>
 *Пакет для работы с API рекламного кабинета Facebook.*
 * [Документация](https://selesnow.github.io/rfacebookstat/)
+* [ВИдео уроки](https://www.youtube.com/playlist?list=PLD2LDq8edf4pItOb-vZTG5AXZK2niJ8_R)
 * [Отчёт об ошибках и доработках](https://github.com/selesnow/rfacebookstat/issues)
 * [Список релизов](https://github.com/selesnow/rfacebookstat/releases)
 
