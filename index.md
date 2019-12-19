@@ -165,7 +165,7 @@ li.nm_li {
 * [Список релизов](https://github.com/selesnow/rfacebookstat/releases)
 
 ---
-## rvkstat <img src='https://raw.githubusercontent.com/selesnow/rvkstat/master/inst/logo/rvkstat.png' align="right" height="139" /></a>
+## rvkstat <img src='https://raw.githubusercontent.com/selesnow/rvkstat/master/inst/logo/rvkstat.png' align="right" height="139"></a>
 *Пакет для работы с API социальной сети Вконтакте, позволяет загружать справочную информацию, статистику сообществ, сообщения из стены сообщества и пользователей, списки друзей пользователей и статитику из рекламного кабинета.*
 * [Документация](https://selesnow.github.io/rvkstat/)
 * [Отчёт об ошибках и доработках](https://github.com/selesnow/rvkstat/issues)
