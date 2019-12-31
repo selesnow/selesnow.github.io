@@ -122,6 +122,13 @@ li.nm_li {
 * linkedin: [linkedin.com/in/selesnow](https://www.linkedin.com/in/selesnow)
 * GitHub: [github.com/selesnow](https://github.com/selesnow/)
 
+## Другие мои ресурсы
+* Телеграм канал [R4marketing](https://t.me/R4marketing)
+* YouTube канал [R4marketing](https://www.youtube.com/channel/UCyHC6R3mCCP8bhD9tPbjnzQ/?sub_confirmation=1)
+* Группа в Facebook [R Language Talks](https://www.facebook.com/groups/rtalks/)
+* Группа в Вконтакте [Data Club](https://vk.com/data_club)
+* Личный [блог](https://alexeyseleznev.wordpress.com)
+
 ## Какие возможности дают представленные на данном ресурсе пакеты для языка R
 Данный сайт содержит документацию к разработанным мной пакетам функций на языке R, каждый из пакетов представляет из себя набор функций для упрощённой работы с API различных сервисов: Facebook, Вконтакте, Яндекс.Директ, Яндекс.Метрика, MyTarget, Mixpanel, GitHub.
 
