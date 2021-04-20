@@ -65,7 +65,7 @@
 * Статистика по данным сервиса telemetr оступна по [ссылке](https://telemetr.me/analytics/?name=https://tmtr.me/r4marketing)
 
 ## Аудитория канала
-[Ссылка](https://telemetr.me/activity_cross/?permalink=859b904b60b1f63bda6d8fd70d3c2fed) на анализ аудитории по данным сервиса telemetr, данные от 11 нваря 2021 года.
+[Ссылка](https://telemetr.me/activity_cross/?permalink=768540b88b0c17ccb5d4120a168bdd5b) на анализ аудитории по данным сервиса telemetr, данные от 20 апреля 2021 года.
 
 ### География канала
 Опрос проводился 16 января 2021 года, [ссылка](https://t.me/R4marketing/592) на опрос. 
