@@ -358,9 +358,9 @@ li.nm_li {
 *[Читать продолжение в первоисточнике.](https://www.owox.ru/blog/articles/r-language-and-api-of-ad-systems/)*
 
 ---
-## [Кто такие интернет-аналитики и какими инструментами они пользуются](https://discourse.digital/blogs/kto-takie-internet-analitiki-i-kakimi-instrumentami-oni-polzuyutsya/) <Br>
+## [Кто такие интернет-аналитики и какими инструментами они пользуются](https://jms.university/blog/56048-kto-takie-internet-analitiki-i-kakimi-instrumentami-oni-polzuyutsya/) <Br>
 <b>Автор:</b> Алексей Селезнёв, Андрей Чехлов <Br>
-<b>Впервые было опубликовано на:</b> [Цифровой Дискурс](https://discourse.digital/) <Br>
+<b>Впервые было опубликовано на:</b> [JMS University](https://jms.university/) <Br>
 <b>Дата публикации:</b> 02.04.2018 <Br>
 
 <p align="center">
