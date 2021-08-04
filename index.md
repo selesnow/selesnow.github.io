@@ -174,6 +174,7 @@ li.nm_li {
 ## ryandexdirect <a href='https:/selesnow/github.io/ryandexdirect'><img src='https://raw.githubusercontent.com/selesnow/ryandexdirect/master/inst/ryandexdirect.png' align="right" height="139" /></a>
 *Пакет для работы с API системы контектсной рекламы Яндекс.Директ, позволяет загружать статистику из рекламного аккаунта, останавливать и запускать показы на уровне объявлений, ключевых слов и рекламных кампаний.*
 * [Документация](https://selesnow.github.io/ryandexdirect/)
+* [Видео уроки](https://www.youtube.com/watch?v=hbUXttDFKNE&list=PLD2LDq8edf4oUo0L9Kw77ZXf0KcV1hu67)
 * [Отчёт об ошибках и доработках](https://github.com/selesnow/ryandexdirect/issues)
 * [Список релизов](https://github.com/selesnow/ryandexdirect/releases)
 
@@ -188,7 +189,7 @@ li.nm_li {
 ## rfacebookstat <a href='https://selesnow.github.io/rfacebookstat'><img src='https://raw.githubusercontent.com/selesnow/rfacebookstat/master/inst/logo/rfacebookstat.png' align="right" height="139" /></a>
 *Пакет для работы с API рекламного кабинета Facebook.*
 * [Документация](https://selesnow.github.io/rfacebookstat/)
-* [ВИдео уроки](https://www.youtube.com/playlist?list=PLD2LDq8edf4pItOb-vZTG5AXZK2niJ8_R)
+* [Видео уроки](https://www.youtube.com/playlist?list=PLD2LDq8edf4pItOb-vZTG5AXZK2niJ8_R)
 * [Отчёт об ошибках и доработках](https://github.com/selesnow/rfacebookstat/issues)
 * [Список релизов](https://github.com/selesnow/rfacebookstat/releases)
 
@@ -196,6 +197,7 @@ li.nm_li {
 ## rvkstat <img src='https://raw.githubusercontent.com/selesnow/rvkstat/master/inst/logo/rvkstat.png' align="right" height="139"></a>
 *Пакет для работы с API социальной сети Вконтакте, позволяет загружать справочную информацию, статистику сообществ, сообщения из стены сообщества и пользователей, списки друзей пользователей и статитику из рекламного кабинета.*
 * [Документация](https://selesnow.github.io/rvkstat/)
+* [Видео уроки](https://www.youtube.com/watch?v=49-HTLOPSnU&list=PLD2LDq8edf4pQcy0zMmkTlk-o_Z6nRm5N)
 * [Отчёт об ошибках и доработках](https://github.com/selesnow/rvkstat/issues)
 * [Список релизов](https://github.com/selesnow/rvkstat/releases)
 
@@ -210,6 +212,7 @@ li.nm_li {
 ## rappsflyer <a href='https://selesnow.github.io/rappsflyer'><img src='https://raw.githubusercontent.com/selesnow/rmytarget/master/inst/logo/rappsflyer.png' align="right" height="139" /></a>
 *Пакет для загрузки статистики по рекламным кампаниям в системе MyTarget.*
 * [Документация](https://selesnow.github.io/rappsflyer/)
+* [Видео урок](https://www.youtube.com/watch?v=9Wn8n2A6x2w)
 * [Отчёт об ошибках и доработках](https://github.com/selesnow/rappsflyer/issues)
 * [Список релизов](https://github.com/selesnow/rappsflyer/releases)
 
@@ -217,6 +220,7 @@ li.nm_li {
 ## timeperiodsR <a href='https://selesnow.github.io/getProxy'><img src='https://raw.githubusercontent.com/selesnow/timeperiodsR/master/inst/timeperiodsR_logo.png' align="right" height="139" /></a>
 *Упрощённое создание объектов временных периодов.*
 * [Документация](https://selesnow.github.io/timeperiodsR/)
+* [Видео уроки](https://www.youtube.com/watch?v=NgfWELbM6Fk&list=PLD2LDq8edf4qed2KVKfXmKdh0OQcdj9gw)
 * [Отчёт об ошибках и доработках](https://github.com/selesnow/timeperiodsR/issues)
 * [Список релизов](https://github.com/selesnow/timeperiodsR/releases)
 
