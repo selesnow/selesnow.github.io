@@ -164,6 +164,13 @@ li.nm_li {
 ---
 
 # Ссылки на репозитории
+## rgoogleads <a href='https:/selesnow/github.io/rgoogleads'><img src='https://github.com/selesnow/rgoogleads/raw/master/man/figures/rgoogleads.png' align="right" height="139" /></a>
+*Пакет для работы с API Google Ads.*
+* [Документация](https://selesnow.github.io/rgoogleads/ru)
+* [Отчёт об ошибках и доработках](https://github.com/selesnow/rgoogleads/issues)
+* [Список релизов](https://github.com/selesnow/rgoogleads/releases)
+
+---
 ## ryandexdirect <a href='https:/selesnow/github.io/ryandexdirect'><img src='https://raw.githubusercontent.com/selesnow/ryandexdirect/master/inst/ryandexdirect.png' align="right" height="139" /></a>
 *Пакет для работы с API системы контектсной рекламы Яндекс.Директ, позволяет загружать статистику из рекламного аккаунта, останавливать и запускать показы на уровне объявлений, ключевых слов и рекламных кампаний.*
 * [Документация](https://selesnow.github.io/ryandexdirect/)
@@ -198,6 +205,13 @@ li.nm_li {
 * [Документация](https://selesnow.github.io/rmytarget/)
 * [Отчёт об ошибках и доработках](https://github.com/selesnow/rmytarget/issues)
 * [Список релизов](https://github.com/selesnow/rmytarget/releases)
+
+---
+## rappsflyer <a href='https://selesnow.github.io/rappsflyer'><img src='https://raw.githubusercontent.com/selesnow/rmytarget/master/inst/logo/rappsflyer.png' align="right" height="139" /></a>
+*Пакет для загрузки статистики по рекламным кампаниям в системе MyTarget.*
+* [Документация](https://selesnow.github.io/rappsflyer/)
+* [Отчёт об ошибках и доработках](https://github.com/selesnow/rappsflyer/issues)
+* [Список релизов](https://github.com/selesnow/rappsflyer/releases)
 
 ---
 ## timeperiodsR <a href='https://selesnow.github.io/getProxy'><img src='https://raw.githubusercontent.com/selesnow/timeperiodsR/master/inst/timeperiodsR_logo.png' align="right" height="139" /></a>
