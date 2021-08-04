@@ -209,7 +209,7 @@ li.nm_li {
 * [Список релизов](https://github.com/selesnow/rmytarget/releases)
 
 ---
-## rappsflyer <a href='https://selesnow.github.io/rappsflyer'><img src='https://raw.githubusercontent.com/selesnow/rmytarget/master/inst/logo/rappsflyer.png' align="right" height="139" /></a>
+## rappsflyer <a href='https://selesnow.github.io/rappsflyer'><img src='https://raw.githubusercontent.com/selesnow/rappsflyer/master/inst/rappsflyer.png' align="right" height="139" /></a>
 *Пакет для загрузки статистики по рекламным кампаниям в системе MyTarget.*
 * [Документация](https://selesnow.github.io/rappsflyer/)
 * [Видео урок](https://www.youtube.com/watch?v=9Wn8n2A6x2w)
