@@ -16,6 +16,8 @@
   gtag('config', 'UA-114798296-1');
 </script>
 
+<title>Реклама в telegram канале R4marketing</title>
+
 # Реклама в Telegram канале R4marketing
 
 Дата обновления: 21 апреля 2021
