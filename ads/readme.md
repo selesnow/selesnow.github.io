@@ -88,7 +88,7 @@
 
 Узнать свободную дату можно либо обратившись напрямую ко [мне](https://t.me/AlexeySeleznev), либо посмотреть [график публикаций](https://docs.google.com/spreadsheets/d/1k1wDhJJpIW6ULJgtCw8Ctioz_tUvF5Xk6JookaMlHaw/edit#gid=542813862).
 
-Даты отмечанные белым, зелёным, синим и оранжевым цветом доступны для размещения рекламы. Даты отмечанные красным цветом - заняты, даты отмечанные желтым цветом обсуждаются в индивидуальном порядке.
+Даты отмеченные белым, зелёным, синим и оранжевым цветом доступны для размещения рекламы. Даты отмечанные красным цветом - заняты, даты отмечанные желтым цветом обсуждаются в индивидуальном порядке.
 
 <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQq0oIDAzmXgT5Ckry4tQEexSJQJPvsA421qpdm7jEJ_uERtxN7o9je2BAXNABVHTgH1FwQDoBPvku8/pubhtml?gid=542813862&amp;single=true&amp;widget=true&amp;headers=false" width="630" height="400"></iframe>
 
