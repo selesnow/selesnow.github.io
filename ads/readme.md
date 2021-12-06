@@ -29,6 +29,7 @@
 * [Стоимость](#стоимость)
 * [Условия](#условия)
 * [Как происходит оплата](#как-происходит-оплата)
+* [График публикаций](#график-публикаций)
 * [Статистика канала](#статистика-канала)
 * [Аудитория канала](#аудитория-канала)
   *  [География подписчиков](#география-канала)
@@ -89,7 +90,7 @@
 
 Даты отмечанные белым и зелёным цветом доступны для размещения рекламы.
 
-<iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQq0oIDAzmXgT5Ckry4tQEexSJQJPvsA421qpdm7jEJ_uERtxN7o9je2BAXNABVHTgH1FwQDoBPvku8/pubhtml?gid=542813862&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+<iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQq0oIDAzmXgT5Ckry4tQEexSJQJPvsA421qpdm7jEJ_uERtxN7o9je2BAXNABVHTgH1FwQDoBPvku8/pubhtml?gid=542813862&amp;single=true&amp;widget=true&amp;headers=false" width="1200" height="400"></iframe>
 
 ## Статистика канала
 Ознакомится со статистикой канала можно по следующим ссылкам:
