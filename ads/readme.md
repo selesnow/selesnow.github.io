@@ -83,6 +83,14 @@
 2. Так же оптлатить публикацию можно через telegram бота, но в любом случае изначально со мной необходимо договориться, согласовать рекламный пост, дату и время публикации.
 3. Рекламу так же можно заказать через биржу [telega.in](https://telega.in/channels/R4marketing/card), но в таком случае стоимоть публикации будет выше, и условия размещения немного инные. Условия размещения через биржу можно посмотреть на [этой странице](https://telega.in/channels/R4marketing/card).
 
+## График публикаций
+
+Узнать свободную дату можно либо обратившись напрямую ко мне, либо посмотреть [график публикаций](https://docs.google.com/spreadsheets/d/1k1wDhJJpIW6ULJgtCw8Ctioz_tUvF5Xk6JookaMlHaw/edit#gid=542813862).
+
+Даты отмечанные белым и зелёным цветом доступны для размещения рекламы.
+
+<iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQq0oIDAzmXgT5Ckry4tQEexSJQJPvsA421qpdm7jEJ_uERtxN7o9je2BAXNABVHTgH1FwQDoBPvku8/pubhtml?gid=542813862&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+
 ## Статистика канала
 Ознакомится со статистикой канала можно по следующим ссылкам:
 
