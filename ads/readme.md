@@ -20,7 +20,7 @@
 
 # Реклама в Telegram канале R4marketing
 
-Дата обновления: 1 декабря 2021
+Дата обновления: 9 декабря 2021
 
 # Содержание
 
@@ -99,7 +99,7 @@
 * Статистика по данным сервиса telemetr оступна по [ссылке](https://telemetr.me/analytics/?name=https://tmtr.me/r4marketing)
 
 ## Аудитория канала
-[Ссылка](https://telemetr.me/activity_cross/?permalink=cff0539749fa8850f8f0af494f0eda7e) на анализ аудитории по данным сервиса telemetr, данные от 17 сентября 2021 года.
+[Ссылка](https://telemetr.me/activity_cross/?permalink=e4e8818a860ea8108bd00f94c9893ce5) на анализ аудитории по данным сервиса telemetr, данные от 9 декабря 2021 года.
 
 ### География канала
 Опрос проводился 16 января 2021 года, [ссылка](https://t.me/R4marketing/592) на опрос. 
