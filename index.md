@@ -124,6 +124,7 @@ li.nm_li {
 
 ## Контакты
 * email: selesnow@gmail.com
+* telegram: [@AlexeySeleznev](https://t.me/AlexeySeleznev)
 * telegram channel: [R4marketing](http://t.me/R4marketing)
 * facebook: [facebook.com/selesnow](https://www.facebook.com/selesnow)
 * linkedin: [linkedin.com/in/selesnow](https://www.linkedin.com/in/selesnow)
