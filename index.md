@@ -119,7 +119,7 @@ li.nm_li {
 Так же являюсь автором телеграм канала [R4marketing](http://t.me/R4marketing), в котором публикую различные полезные материалы о применении языка программирования R в интернет - маркетинге.
 
 Более подробно обо мне можно узнать [на моём блоге](https://alexeyseleznev.wordpress.com).
-<img class=" aligncenter" src="https://images.netpeak.net/blog/r-vsemu-golova.jpg" alt="Фото Алексея Селезнёва.">
+<img class="aligncenter" align="middle" src="https://images.netpeak.net/blog/r-vsemu-golova.jpg" alt="Фото Алексея Селезнёва." style="border-radius: 8px;box-shadow:0 .5rem 1rem rgba(0,0,0,.15)">
 
 
 ## Контакты
