@@ -181,7 +181,7 @@ li.nm_li {
 
 ---
 ## rym <a href='https://selesnow.github.io/rym'><img src='https://raw.githubusercontent.com/selesnow/rym/master/inst/logo/rym.png' align="right" height="139" /></a>
-*Пакет для работы с API Яндекс.Метрики.*
+*Пакет для работы с API Яндекс.Метрики. (рекомендованно Яндекс.Метрикой)*
 * [Документация](https://selesnow.github.io/rym/)
 * [Отчёт об ошибках и доработках](https://github.com/selesnow/rym/issues)
 * [Список релизов](https://github.com/selesnow/rym/releases)
@@ -211,7 +211,7 @@ li.nm_li {
 
 ---
 ## rytstat <a href='https://selesnow.github.io/rytstat'><img src='https://raw.githubusercontent.com/selesnow/rytstat/master/man/figures/logo.png' align="right" height="139" /></a>
-*Пакет для с YouTube API.*
+*Пакет для с YouTube API. (рекомендованно TGStat)*
 * [Документация](https://selesnow.github.io/rytstat/docs)
 * [Отчёт об ошибках и доработках](https://github.com/selesnow/rytstat/issues)
 * [Список релизов](https://github.com/selesnow/rytstat/releases)
@@ -233,7 +233,7 @@ li.nm_li {
 
 ---
 ## timeperiodsR <a href='https://selesnow.github.io/getProxy'><img src='https://raw.githubusercontent.com/selesnow/timeperiodsR/master/inst/timeperiodsR_logo.png' align="right" height="139" /></a>
-*Упрощённое создание объектов временных периодов.*
+*Упрощённое создание объектов временных периодов. (рекомендованно isDayOff() API)*
 * [Документация](https://selesnow.github.io/timeperiodsR/)
 * [Видео уроки](https://www.youtube.com/watch?v=NgfWELbM6Fk&list=PLD2LDq8edf4qed2KVKfXmKdh0OQcdj9gw)
 * [Отчёт об ошибках и доработках](https://github.com/selesnow/timeperiodsR/issues)
@@ -245,6 +245,28 @@ li.nm_li {
 * [Документация](https://selesnow.github.io/getProxy/)
 * [Отчёт об ошибках и доработках](https://github.com/selesnow/getProxy/issues)
 * [Список релизов](https://github.com/selesnow/getProxy/releases)
+	
+---
+## ractivecampaign <a href='https://selesnow.github.io/getProxy'><img src='https://raw.githubusercontent.com/selesnow/ractivecampaign/master/man/figures/logo.png' align="right" height="139" /></a>
+*Пакет для работы с ActiveCampaign API v3.*
+* [Документация](https://selesnow.github.io/ractivecampaign/)
+* [Отчёт об ошибках и доработках](https://github.com/selesnow/ractivecampaign/issues)
+* [Список релизов](https://github.com/selesnow/ractivecampaign/releases)
+	
+---
+## ringostat <a href='https://selesnow.github.io/getProxy'><img src='https://raw.githubusercontent.com/selesnow/ringostat/master/man/figures/logo.png' align="right" height="139" /></a>
+*Пакет для работы с Ringostat API.*
+* [Документация](https://selesnow.github.io/ringostat/)
+* [Отчёт об ошибках и доработках](https://github.com/selesnow/ringostat/issues)
+* [Список релизов](https://github.com/selesnow/ringostat/releases)
+* [Статья о работе с пакетом](https://blog.ringostat.com/ru/kak-rabotat-s-ringostat-api-na-yazyke-r/)
+
+---
+## racademyocean <a href='https://selesnow.github.io/getProxy'><img src='https://raw.githubusercontent.com/selesnow/racademyocean/master/man/figures/logo.png' align="right" height="139" /></a>
+*Пакет для работы с AcademyOcean API.*
+* [Документация](https://selesnow.github.io/racademyocean/)
+* [Отчёт об ошибках и доработках](https://github.com/selesnow/racademyocean/issues)
+* [Список релизов](https://github.com/selesnow/racademyocean/releases)
 
 ---
 ## rmixpanel
