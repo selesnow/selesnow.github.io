@@ -211,14 +211,14 @@ li.nm_li {
 
 ---
 ## rytstat <a href='https://selesnow.github.io/rytstat'><img src='https://raw.githubusercontent.com/selesnow/rytstat/master/man/figures/logo.png' align="right" height="139" /></a>
-*Пакет для с YouTube API. (рекомендованно TGStat)*
+*Пакет для с YouTube API.*
 * [Документация](https://selesnow.github.io/rytstat/docs)
 * [Отчёт об ошибках и доработках](https://github.com/selesnow/rytstat/issues)
 * [Список релизов](https://github.com/selesnow/rytstat/releases)
 
 ---
 ## rtgstat <a href='https://selesnow.github.io/rtgstat'><img src='https://raw.githubusercontent.com/selesnow/rtgstat/master/man/figures/logo.png' align="right" height="139" /></a>
-*Пакет для аналитики telegram каналов, и работы с TGStat API.*
+*Пакет для аналитики telegram каналов, и работы с TGStat API. (рекомендованно TGStat)*
 * [Документация](https://selesnow.github.io/rtgstat/)
 * [Отчёт об ошибках и доработках](https://github.com/selesnow/rtgstat/issues)
 * [Список релизов](https://github.com/selesnow/rtgstat/releases)
