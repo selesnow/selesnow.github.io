@@ -90,7 +90,7 @@
 * Статистика по данным сервиса telemetr оступна по [ссылке](https://telemetr.me/analytics/?name=https://tmtr.me/r4marketing)
 
 <!-- TGStat.ru Widget Stat -->
-<img src="//tgstat.ru/channel/@{username}/widget.png" />
+<img src="//tgstat.ru/channel/@R4marketing/widget.png" />
 
 ## Аудитория канала
 [Ссылка](https://telemetr.me/activity_cross/?permalink=e4e8818a860ea8108bd00f94c9893ce5) на анализ аудитории по данным сервиса telemetr, данные от 9 декабря 2021 года.
