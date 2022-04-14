@@ -168,6 +168,7 @@ li.nm_li {
 ## rgoogleads <a href='https:/selesnow/github.io/rgoogleads'><img src='https://github.com/selesnow/rgoogleads/raw/master/man/figures/rgoogleads.png' align="right" height="139" /></a>
 *Пакет для работы с API Google Ads.*
 * [Документация](https://selesnow.github.io/rgoogleads/ru)
+* [Видео уроки](https://www.youtube.com/playlist?list=PLD2LDq8edf4qprTxRcflDwV9IvStiChHi)
 * [Отчёт об ошибках и доработках](https://github.com/selesnow/rgoogleads/issues)
 * [Список релизов](https://github.com/selesnow/rgoogleads/releases)
 
