@@ -244,6 +244,7 @@ li.nm_li {
 ## getProxy <a href='https://selesnow.github.io/getProxy'><img src='https://raw.githubusercontent.com/selesnow/getProxy/master/inst/logo/getProxy.png' align="right" height="139" /></a>
 *Перенаправления интернет соединения в R скриптах через бесплатные Proxy сервера.*
 * [Документация](https://selesnow.github.io/getProxy/)
+* [Видео урок](https://www.youtube.com/watch?v=gZKw_laVxC4)
 * [Отчёт об ошибках и доработках](https://github.com/selesnow/getProxy/issues)
 * [Список релизов](https://github.com/selesnow/getProxy/releases)
 	
