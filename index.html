@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Алексей Селезнёв | Head of Analytics & R Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #020617; /* Slate 950 */
+            color: #e2e8f0; 
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+        /* Utilities */
+        .glass {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .glass:hover {
+            background: rgba(30, 41, 59, 0.7);
+            border-color: rgba(139, 92, 246, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #818cf8, #c084fc, #f472b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Decorative Backgrounds */
+        .mesh-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -1;
+            background: 
+                radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+                radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
+                radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
+            opacity: 0.6;
+        }
+
+        /* Carousel helper */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="relative">
+
+    <div class="mesh-bg"></div>
+
+    <nav class="fixed w-full z-50 top-0 left-0 border-b border-white/5 backdrop-blur-md bg-slate-900/80">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="#" class="text-xl font-bold tracking-tight uppercase">Selesnow<span class="text-purple-500">.</span></a>
+            <div class="hidden lg:flex gap-8 text-sm font-medium text-slate-400">
+                <a href="#about" class="hover:text-white transition-colors">Обо мне</a>
+                <a href="#career" class="hover:text-white transition-colors">Карьера</a>
+                <a href="#courses" class="hover:text-white transition-colors">Курсы</a>
+                <a href="#opensource" class="hover:text-white transition-colors">Open Source</a>
+                <a href="#speaking" class="hover:text-white transition-colors">Выступления</a>
+                <a href="#interviews" class="hover:text-white transition-colors">Интервью</a>
+            </div>
+            <div class="flex gap-4">
+                <a href="https://t.me/R4marketing" target="_blank" class="text-slate-400 hover:text-blue-400 transition-colors"><i class="fa-brands fa-telegram text-xl"></i></a>
+                <a href="https://github.com/selesnow" target="_blank" class="text-slate-400 hover:text-white transition-colors"><i class="fa-brands fa-github text-xl"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="about" class="pt-32 pb-20 px-6 max-w-7xl mx-auto min-h-[90vh] flex items-center">
+        <div class="flex flex-col-reverse md:flex-row gap-12 items-center w-full">
+            <div class="flex-1 space-y-8" data-aos="fade-right">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-bold tracking-widest uppercase mb-4">
+                        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                        Available for consulting
+                    </div>
+                    <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight leading-tight">
+                        Алексей <br> <span class="text-gradient">Селезнёв</span>
+                    </h1>
+                </div>
+                <p class="text-lg text-slate-300 leading-relaxed max-w-2xl font-light">
+                    Практикующий аналитик с 2008 года. Возглавляю отдел аналитики в <strong class="text-white">Netpeak Group</strong>. 
+                    Автор образовательных курсов по языку R, спикер топовых конференций и создатель Open Source инструментов.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#courses" class="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-full font-bold transition-all shadow-lg shadow-purple-900/40">Мои курсы</a>
+                    <a href="https://t.me/R4marketing" target="_blank" class="glass px-8 py-3 rounded-full font-bold hover:bg-white/10 transition-all text-blue-400"><i class="fa-brands fa-telegram mr-2"></i> Telegram</a>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 pt-8 border-t border-white/10 mt-8">
+                    <div>
+                        <div class="text-3xl font-bold text-white">350k+</div>
+                        <div class="text-xs text-slate-500 uppercase font-semibold">Downloads</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-white">15+</div>
+                        <div class="text-xs text-slate-500 uppercase font-semibold">Years Exp.</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-white">15</div>
+                        <div class="text-xs text-slate-500 uppercase font-semibold">Packages</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-white">7.5k</div>
+                        <div class="text-xs text-slate-500 uppercase font-semibold">Community</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="relative w-72 h-72 md:w-96 md:h-96 flex-shrink-0" data-aos="zoom-in">
+                <div class="absolute inset-0 bg-gradient-to-tr from-purple-600 to-blue-600 rounded-full blur-3xl opacity-30 animate-pulse"></div>
+                <img src="https://github.com/selesnow.png" alt="Alexey Seleznev" class="relative w-full h-full object-cover rounded-full border-4 border-slate-800/50 shadow-2xl">
+                <div class="absolute top-0 right-0 bg-slate-900 p-3 rounded-2xl border border-slate-800 shadow-xl animate-bounce" style="animation-duration: 3s;">
+                    <i class="fa-brands fa-r-project text-3xl text-blue-500"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <section id="career" class="py-20 px-6 bg-slate-900/50">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold mb-12 flex items-center gap-3">
+                <i class="fa-solid fa-briefcase text-purple-500 text-xl"></i> Карьерный путь
+            </h2>
+            
+            <div class="space-y-8 relative pl-8 border-l-2 border-slate-800">
+                <div class="relative group" data-aos="fade-left">
+                    <div class="absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-purple-500 border-4 border-slate-900 group-hover:scale-125 transition-transform"></div>
+                    <div class="glass-card p-6 rounded-2xl">
+                        <div class="text-sm text-purple-400 font-mono mb-1">2016 — Настоящее время</div>
+                        <h3 class="text-xl font-bold text-white">Head of Analytics Dept.</h3>
+                        <p class="text-slate-400">Netpeak Group</p>
+                    </div>
+                </div>
+
+                <div class="relative group" data-aos="fade-left" data-aos-delay="100">
+                    <div class="absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-slate-600 border-4 border-slate-900 group-hover:bg-blue-500 transition-colors"></div>
+                    <div class="glass-card p-6 rounded-2xl">
+                        <div class="text-sm text-slate-500 font-mono mb-1">2014 — 2016</div>
+                        <h3 class="text-xl font-bold text-white">Data / BI / PPC Analyst</h3>
+                        <p class="text-slate-400">Netpeak</p>
+                    </div>
+                </div>
+
+                <div class="relative group" data-aos="fade-left" data-aos-delay="200">
+                    <div class="absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-slate-600 border-4 border-slate-900 group-hover:bg-blue-500 transition-colors"></div>
+                    <div class="glass-card p-6 rounded-2xl">
+                        <div class="text-sm text-slate-500 font-mono mb-1">2012 — 2014</div>
+                        <h3 class="text-xl font-bold text-white">Data Analyst</h3>
+                        <p class="text-slate-400">Senturia</p>
+                    </div>
+                </div>
+                
+                <div class="relative group" data-aos="fade-left" data-aos-delay="300">
+                    <div class="absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-slate-600 border-4 border-slate-900 group-hover:bg-blue-500 transition-colors"></div>
+                    <div class="glass-card p-6 rounded-2xl">
+                        <div class="text-sm text-slate-500 font-mono mb-1">2010 — 2012</div>
+                        <h3 class="text-xl font-bold text-white">Head of Analytics dept</h3>
+                        <p class="text-slate-400">Citrus.ua</p>
+                    </div>
+                </div>
+
+                <div class="relative group" data-aos="fade-left" data-aos-delay="400">
+                    <div class="absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-slate-600 border-4 border-slate-900 group-hover:bg-blue-500 transition-colors"></div>
+                    <div class="glass-card p-6 rounded-2xl">
+                        <div class="text-sm text-slate-500 font-mono mb-1">2008 — 2010</div>
+                        <h3 class="text-xl font-bold text-white">Auditor</h3>
+                        <p class="text-slate-400">Citrus.ua</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="courses" class="py-24 px-6 max-w-[1400px] mx-auto overflow-hidden">
+        <div class="flex justify-between items-end mb-10 px-4">
+            <div>
+                <h2 class="text-4xl font-bold mb-2">Авторские курсы</h2>
+                <p class="text-slate-400">7 бесплатных курсов от новичка до PRO</p>
+            </div>
+            <div class="flex gap-2">
+                <button id="slideLeft" class="w-12 h-12 rounded-full border border-slate-700 hover:bg-slate-800 text-white flex items-center justify-center transition-colors"><i class="fa-solid fa-chevron-left"></i></button>
+                <button id="slideRight" class="w-12 h-12 rounded-full border border-purple-500 bg-purple-500/10 hover:bg-purple-500 text-white flex items-center justify-center transition-colors"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+        </div>
+
+        <div id="courseSlider" class="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth pb-10 snap-x px-4">
+            <div class="min-w-[350px] md:min-w-[400px] snap-center glass rounded-2xl overflow-hidden flex flex-col group">
+                <div class="h-52 bg-slate-800 relative flex items-center justify-center overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent z-10"></div>
+                    <i class="fa-solid fa-chart-line text-7xl text-slate-700 group-hover:scale-110 transition-transform duration-500"></i>
+                    <div class="absolute top-4 left-4 z-20 bg-green-500/20 text-green-400 text-[10px] font-bold px-2 py-1 rounded">BEGINNER</div>
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h3 class="text-xl font-bold mb-2">R для интернет маркетинга</h3>
+                    <p class="text-slate-400 text-sm mb-4 flex-1">Сбор данных из API рекламных сервисов и их визуализация.</p>
+                    <a href="https://www.youtube.com/playlist?list=PLD2LDq8edf4o6dSZ4BIr7J08gT97nimH_" class="text-purple-400 font-bold hover:text-white transition-colors text-sm">Смотреть курс →</a>
+                </div>
+            </div>
+
+            <div class="min-w-[350px] md:min-w-[400px] snap-center glass rounded-2xl overflow-hidden flex flex-col group">
+                <div class="h-52 bg-slate-800 relative overflow-hidden">
+                    <img src="https://selesnow.github.io/r4excel_users/cover.png" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute top-4 left-4 bg-green-500/20 text-green-400 text-[10px] font-bold px-2 py-1 rounded">BEGINNER</div>
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h3 class="text-xl font-bold mb-2">R для пользователей Excel</h3>
+                    <p class="text-slate-400 text-sm mb-4 flex-1">Легкий старт в R через tidyverse: замена ВПР и Сводных таблиц кодом.</p>
+                    <a href="https://selesnow.github.io/r4excel_users/" class="text-purple-400 font-bold hover:text-white transition-colors text-sm">Перейти к курсу →</a>
+                </div>
+            </div>
+
+            <div class="min-w-[350px] md:min-w-[400px] snap-center glass rounded-2xl overflow-hidden flex flex-col group">
+                <div class="h-52 bg-slate-800 relative overflow-hidden">
+                    <img src="https://selesnow.github.io/dplyr_1_0_0_course/img/cover.png" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute top-4 left-4 bg-blue-500/20 text-blue-400 text-[10px] font-bold px-2 py-1 rounded">MIDDLE</div>
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h3 class="text-xl font-bold mb-2">Введение в dplyr 1.0.0</h3>
+                    <p class="text-slate-400 text-sm mb-4 flex-1">Грамматика манипуляции данными. Полный разбор синтаксиса.</p>
+                    <a href="https://selesnow.github.io/dplyr_1_0_0_course" class="text-purple-400 font-bold hover:text-white transition-colors text-sm">Перейти к курсу →</a>
+                </div>
+            </div>
+
+            <div class="min-w-[350px] md:min-w-[400px] snap-center glass rounded-2xl overflow-hidden flex flex-col group">
+                <div class="h-52 bg-slate-800 relative overflow-hidden">
+                    <img src="https://selesnow.github.io/iterations_in_r/img/cover.png" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute top-4 left-4 bg-blue-500/20 text-blue-400 text-[10px] font-bold px-2 py-1 rounded">MIDDLE</div>
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h3 class="text-xl font-bold mb-2">Циклы и функционалы</h3>
+                    <p class="text-slate-400 text-sm mb-4 flex-1">Эффективное использование итераций, purrr и параллельные вычисления.</p>
+                    <a href="https://selesnow.github.io/iterations_in_r/" class="text-purple-400 font-bold hover:text-white transition-colors text-sm">Перейти к курсу →</a>
+                </div>
+            </div>
+
+            <div class="min-w-[350px] md:min-w-[400px] snap-center glass rounded-2xl overflow-hidden flex flex-col group">
+                <div class="h-52 bg-slate-800 relative overflow-hidden">
+                    <img src="https://selesnow.github.io/build_telegram_bot_using_r/cover.png" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute top-4 left-4 bg-orange-500/20 text-orange-400 text-[10px] font-bold px-2 py-1 rounded">ADVANCED</div>
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h3 class="text-xl font-bold mb-2">Telegram боты на R</h3>
+                    <p class="text-slate-400 text-sm mb-4 flex-1">Создание логических ботов, Docker и деплой в облако.</p>
+                    <a href="https://selesnow.github.io/build_telegram_bot_using_r/" class="text-purple-400 font-bold hover:text-white transition-colors text-sm">Перейти к курсу →</a>
+                </div>
+            </div>
+
+            <div class="min-w-[350px] md:min-w-[400px] snap-center glass rounded-2xl overflow-hidden flex flex-col group">
+                <div class="h-52 bg-slate-800 relative overflow-hidden">
+                    <img src="https://selesnow.github.io/r_package_course/img/cover.png" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute top-4 left-4 bg-orange-500/20 text-orange-400 text-[10px] font-bold px-2 py-1 rounded">ADVANCED</div>
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h3 class="text-xl font-bold mb-2">Разработка пакетов</h3>
+                    <p class="text-slate-400 text-sm mb-4 flex-1">От создания структуры до публикации на CRAN.</p>
+                    <a href="https://selesnow.github.io/r_package_course/" class="text-purple-400 font-bold hover:text-white transition-colors text-sm">Перейти к курсу →</a>
+                </div>
+            </div>
+
+            <div class="min-w-[350px] md:min-w-[400px] snap-center glass rounded-2xl overflow-hidden flex flex-col group ring-1 ring-purple-500/50">
+                <div class="h-52 bg-slate-800 relative overflow-hidden">
+                    <img src="https://selesnow.github.io/build_ai_tools_using_r/img/cover.png" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute top-4 left-4 bg-purple-500 text-white text-[10px] font-bold px-2 py-1 rounded">NEW</div>
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h3 class="text-xl font-bold mb-2">AI инструменты на R</h3>
+                    <p class="text-slate-400 text-sm mb-4 flex-1">Работа с LLM API (ChatGPT, Claude), RAG приложения и Shiny.</p>
+                    <a href="https://selesnow.github.io/build_ai_tools_using_r" class="text-purple-400 font-bold hover:text-white transition-colors text-sm">Перейти к курсу →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="opensource" class="py-20 px-6 max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold mb-10 border-b border-white/10 pb-4">Open Source Пакеты (13)</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            
+            <a href="https://github.com/selesnow/rgoogleads" class="glass p-5 rounded-xl block group">
+                <div class="flex justify-between items-start mb-2"><h4 class="font-bold text-white group-hover:text-purple-400">rgoogleads</h4><i class="fa-brands fa-google text-slate-500"></i></div>
+                <p class="text-xs text-slate-400">Google Ads API</p>
+            </a>
+            <a href="https://github.com/selesnow/rfacebookstat" class="glass p-5 rounded-xl block group">
+                <div class="flex justify-between items-start mb-2"><h4 class="font-bold text-white group-hover:text-purple-400">rfacebookstat</h4><i class="fa-brands fa-facebook text-slate-500"></i></div>
+                <p class="text-xs text-slate-400">FB Marketing API</p>
+            </a>
+            <a href="https://github.com/selesnow/rym" class="glass p-5 rounded-xl block group">
+                <div class="flex justify-between items-start mb-2"><h4 class="font-bold text-white group-hover:text-purple-400">rym</h4><i class="fa-brands fa-yandex text-slate-500"></i></div>
+                <p class="text-xs text-slate-400">Yandex Metrica API</p>
+            </a>
+            <a href="https://github.com/selesnow/rtiktokads" class="glass p-5 rounded-xl block group">
+                <div class="flex justify-between items-start mb-2"><h4 class="font-bold text-white group-hover:text-purple-400">rtiktokads</h4><i class="fa-brands fa-tiktok text-slate-500"></i></div>
+                <p class="text-xs text-slate-400">TikTok Ads API</p>
+            </a>
+            <a href="https://github.com/selesnow/rappleads" class="glass p-5 rounded-xl block group">
+                <div class="flex justify-between items-start mb-2"><h4 class="font-bold text-white group-hover:text-purple-400">rappleads</h4><i class="fa-brands fa-apple text-slate-500"></i></div>
+                <p class="text-xs text-slate-400">Apple Search Ads</p>
+            </a>
+            <a href="https://github.com/selesnow/rytstat" class="glass p-5 rounded-xl block group">
+                <div class="flex justify-between items-start mb-2"><h4 class="font-bold text-white group-hover:text-purple-400">rytstat</h4><i class="fa-brands fa-youtube text-slate-500"></i></div>
+                <p class="text-xs text-slate-400">YouTube Analytics API</p>
+            </a>
+            <a href="https://github.com/selesnow/timeperiodsR" class="glass p-5 rounded-xl block group">
+                <div class="flex justify-between items-start mb-2"><h4 class="font-bold text-white group-hover:text-purple-400">timeperiodsR</h4><i class="fa-solid fa-clock text-slate-500"></i></div>
+                <p class="text-xs text-slate-400">Date Manipulation</p>
+            </a>
+            <a href="https://github.com/selesnow/getProxy" class="glass p-5 rounded-xl block group">
+                <div class="flex justify-between items-start mb-2"><h4 class="font-bold text-white group-hover:text-purple-400">getProxy</h4><i class="fa-solid fa-shield-halved text-slate-500"></i></div>
+                <p class="text-xs text-slate-400">Free Proxy Management</p>
+            </a>
+            <a href="https://github.com/selesnow/ractivecampaign" class="glass p-5 rounded-xl block group">
+                <div class="flex justify-between items-start mb-2"><h4 class="font-bold text-white group-hover:text-purple-400">ractivecampaign</h4><i class="fa-solid fa-envelope text-slate-500"></i></div>
+                <p class="text-xs text-slate-400">ActiveCampaign API</p>
+            </a>
+            <a href="https://github.com/selesnow/rappsflyer" class="glass p-5 rounded-xl block group">
+                <div class="flex justify-between items-start mb-2"><h4 class="font-bold text-white group-hover:text-purple-400">rappsflyer</h4><i class="fa-solid fa-plane text-slate-500"></i></div>
+                <p class="text-xs text-slate-400">AppsFlyer API</p>
+            </a>
+            <a href="https://github.com/selesnow/rlinkedinads" class="glass p-5 rounded-xl block group">
+                <div class="flex justify-between items-start mb-2"><h4 class="font-bold text-white group-hover:text-purple-400">rlinkedinads</h4><i class="fa-brands fa-linkedin text-slate-500"></i></div>
+                <p class="text-xs text-slate-400">LinkedIn Ads API</p>
+            </a>
+            <a href="https://github.com/selesnow/rtgstat" class="glass p-5 rounded-xl block group">
+                <div class="flex justify-between items-start mb-2"><h4 class="font-bold text-white group-hover:text-purple-400">rtgstat</h4><i class="fa-brands fa-telegram text-slate-500"></i></div>
+                <p class="text-xs text-slate-400">TGStat API</p>
+            </a>
+             <a href="https://github.com/selesnow/racademyocean" class="glass p-5 rounded-xl block group">
+                <div class="flex justify-between items-start mb-2"><h4 class="font-bold text-white group-hover:text-purple-400">racademyocean</h4><i class="fa-solid fa-graduation-cap text-slate-500"></i></div>
+                <p class="text-xs text-slate-400">AcademyOcean API</p>
+            </a>
+             <a href="https://github.com/selesnow/ringostat" class="glass p-5 rounded-xl block group">
+                <div class="flex justify-between items-start mb-2"><h4 class="font-bold text-white group-hover:text-purple-400">ringostat</h4><i class="fa-solid fa-phone text-slate-500"></i></div>
+                <p class="text-xs text-slate-400">Ringostat API</p>
+            </a>
+
+        </div>
+    </section>
+
+    <section id="speaking" class="py-24 px-6 bg-slate-900/50 border-t border-white/5">
+        <div class="max-w-7xl mx-auto">
+            
+            <div class="mb-20">
+                <h2 class="text-3xl font-bold mb-8 flex items-center gap-3"><i class="fa-solid fa-microphone-lines text-purple-500"></i> Конференции (15)</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    
+                    <a href="https://www.youtube.com/watch?v=EnImByySQEE" class="glass p-4 rounded-xl hover:bg-white/5 transition-all group">
+                        <div class="text-[10px] text-purple-400 font-bold mb-1">SEP 2023 • KAZAKHSTAN SOC LAB</div>
+                        <div class="font-semibold text-sm group-hover:text-purple-300">Анализ показателя качества ключевых слов в Google Ads</div>
+                    </a>
+
+                    <a href="https://youtu.be/wtXVwOBo518" class="glass p-4 rounded-xl hover:bg-white/5 transition-all group">
+                        <div class="text-[10px] text-purple-400 font-bold mb-1">JUL 2021 • 8P</div>
+                        <div class="font-semibold text-sm group-hover:text-purple-300">Зачем интернет маркетологу понимать API (Google Ads)</div>
+                    </a>
+
+                    <a href="https://youtu.be/uAF3YmjRTqU" class="glass p-4 rounded-xl hover:bg-white/5 transition-all group">
+                        <div class="text-[10px] text-purple-400 font-bold mb-1">DEC 2020 • EXCEL & POWER BI</div>
+                        <div class="font-semibold text-sm group-hover:text-purple-300">R коннектор: данные из Вконтакте в Power BI</div>
+                    </a>
+
+                    <a href="https://youtu.be/bbYC-uq250A" class="glass p-4 rounded-xl hover:bg-white/5 transition-all group">
+                        <div class="text-[10px] text-purple-400 font-bold mb-1">NOV 2020 • PRODUCT STAR</div>
+                        <div class="font-semibold text-sm group-hover:text-purple-300">Учим язык R на примере SQL запросов</div>
+                    </a>
+
+                    <a href="https://youtu.be/QrTCa4wLWjI" class="glass p-4 rounded-xl hover:bg-white/5 transition-all group">
+                        <div class="text-[10px] text-purple-400 font-bold mb-1">AUG 2020 • ZM CONF</div>
+                        <div class="font-semibold text-sm group-hover:text-purple-300">Telegram бот для получения данных из Метрики</div>
+                    </a>
+
+                    <a href="https://youtu.be/p2D_iLZ1f-8" class="glass p-4 rounded-xl hover:bg-white/5 transition-all group">
+                        <div class="text-[10px] text-purple-400 font-bold mb-1">JUL 2020 • 8P ONLINE</div>
+                        <div class="font-semibold text-sm group-hover:text-purple-300">Как работать с API Google Analytics на языке R</div>
+                    </a>
+
+                    <a href="https://netpeak.ua/education/speech/453/" class="glass p-4 rounded-xl hover:bg-white/5 transition-all group">
+                        <div class="text-[10px] text-purple-400 font-bold mb-1">SEP 2019 • ANALYZE! LVIV</div>
+                        <div class="font-semibold text-sm group-hover:text-purple-300">Работа с Facebook Marketing API на языке R</div>
+                    </a>
+
+                    <a href="https://netpeak.ua/education/speech/432/" class="glass p-4 rounded-xl hover:bg-white/5 transition-all group">
+                        <div class="text-[10px] text-purple-400 font-bold mb-1">APR 2019 • GOANALYTICS</div>
+                        <div class="font-semibold text-sm group-hover:text-purple-300">Информационные дайджесты для контроля маркетологов</div>
+                    </a>
+
+                    <a href="https://netpeak.ua/education/speech/420/" class="glass p-4 rounded-xl hover:bg-white/5 transition-all group">
+                        <div class="text-[10px] text-purple-400 font-bold mb-1">DEC 2018 • LVIV ICAMP</div>
+                        <div class="font-semibold text-sm group-hover:text-purple-300">Три шага для построения отдела аналитики</div>
+                    </a>
+
+                    <a href="https://youtu.be/G_JWto5eFpI" class="glass p-4 rounded-xl hover:bg-white/5 transition-all group">
+                        <div class="text-[10px] text-purple-400 font-bold mb-1">NOV 2018 • MATEMARKETING</div>
+                        <div class="font-semibold text-sm group-hover:text-purple-300">Как избавиться от рутины с помощью R (Доклад)</div>
+                    </a>
+
+                    <a href="https://youtu.be/1X1EKt6tDHU" class="glass p-4 rounded-xl hover:bg-white/5 transition-all group">
+                        <div class="text-[10px] text-purple-400 font-bold mb-1">NOV 2018 • MATEMARKETING</div>
+                        <div class="font-semibold text-sm group-hover:text-purple-300">R для маркетолога: Мастер класс</div>
+                    </a>
+
+                    <a href="https://netpeak.ua/conference/390/" class="glass p-4 rounded-xl hover:bg-white/5 transition-all group">
+                        <div class="text-[10px] text-purple-400 font-bold mb-1">MAY 2018 • KYIV DATA SPRING</div>
+                        <div class="font-semibold text-sm group-hover:text-purple-300">Как построить отдел аналитики в крупной компании</div>
+                    </a>
+
+                    <a href="https://netpeak.ua/conference/382/" class="glass p-4 rounded-xl hover:bg-white/5 transition-all group">
+                        <div class="text-[10px] text-purple-400 font-bold mb-1">APR 2018 • ANALYZE</div>
+                        <div class="font-semibold text-sm group-hover:text-purple-300">Язык R в маркетинге и бизнесе</div>
+                    </a>
+
+                    <a href="https://netpeak.ua/conference/354/" class="glass p-4 rounded-xl hover:bg-white/5 transition-all group">
+                        <div class="text-[10px] text-purple-400 font-bold mb-1">NOV 2017 • ECOMMERCE</div>
+                        <div class="font-semibold text-sm group-hover:text-purple-300">Как разобраться со своими данными, если ты не аналитик</div>
+                    </a>
+
+                    <a href="https://netpeak.ua/conference/322/" class="glass p-4 rounded-xl hover:bg-white/5 transition-all group">
+                        <div class="text-[10px] text-purple-400 font-bold mb-1">APR 2017 • ANALYZE</div>
+                        <div class="font-semibold text-sm group-hover:text-purple-300">BI решение для отдела контекстной рекламы</div>
+                    </a>
+                </div>
+            </div>
+
+            <div>
+                <h2 class="text-3xl font-bold mb-8 flex items-center gap-3"><i class="fa-solid fa-video text-blue-500"></i> Вебинары (7)</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    
+                    <a href="https://youtu.be/zJyDxd4JGg0" class="glass p-4 rounded-xl hover:bg-white/5 transition-all group border-l-2 border-l-blue-500">
+                        <div class="text-[10px] text-blue-400 font-bold mb-1">SEP 2021 • YAGLA</div>
+                        <div class="font-semibold text-sm">API Google Analytics 4 на языке R (Воркшоп)</div>
+                    </a>
+
+                    <a href="https://youtu.be/I2KjERuZ3XY?t=3789" class="glass p-4 rounded-xl hover:bg-white/5 transition-all group border-l-2 border-l-blue-500">
+                        <div class="text-[10px] text-blue-400 font-bold mb-1">JUL 2020 • PRODUCTSTAR</div>
+                        <div class="font-semibold text-sm">Основы Python. Работа с библиотекой Pandas</div>
+                    </a>
+
+                    <a href="https://youtu.be/zWGocRhDumk" class="glass p-4 rounded-xl hover:bg-white/5 transition-all group border-l-2 border-l-blue-500">
+                        <div class="text-[10px] text-blue-400 font-bold mb-1">APR 2020 • EUSP</div>
+                        <div class="font-semibold text-sm">R meetup: Чем нас порадует dplyr 1.0.0</div>
+                    </a>
+
+                    <a href="https://netology.ru/free-lessons/skolko-deneg-prinosit-vash-kontent-razbiraemsya-s-pomoshchyu-business-intelligence#/features" class="glass p-4 rounded-xl hover:bg-white/5 transition-all group border-l-2 border-l-blue-500">
+                        <div class="text-[10px] text-blue-400 font-bold mb-1">FEB 2019 • NETOLOGY</div>
+                        <div class="font-semibold text-sm">Сколько денег приносит ваш контент (BI)</div>
+                    </a>
+
+                    <a href="https://youtu.be/mUn2Uwsvy0U" class="glass p-4 rounded-xl hover:bg-white/5 transition-all group border-l-2 border-l-blue-500">
+                        <div class="text-[10px] text-blue-400 font-bold mb-1">NOV 2018 • AUTOMATIONDAY</div>
+                        <div class="font-semibold text-sm">Избавляемся от рутины с помощью R</div>
+                    </a>
+
+                    <a href="https://www.cybermarketing.ru/vebinary/kak_avtomatizirovat_rabotu_s_dannymi_yandeks_metriki.html" class="glass p-4 rounded-xl hover:bg-white/5 transition-all group border-l-2 border-l-blue-500">
+                        <div class="text-[10px] text-blue-400 font-bold mb-1">NOV 2018 • CYBERMARKETING</div>
+                        <div class="font-semibold text-sm">Автоматизация Яндекс Метрики через пакет rym</div>
+                    </a>
+
+                    <a href="https://webpromoexperts.com.ua/vebinars/kak-marketologu-izbavitsa-ot-rutiny-s-pomosu-azyka-r-i-nakonec-to-zanatsa-marketingom/" class="glass p-4 rounded-xl hover:bg-white/5 transition-all group border-l-2 border-l-blue-500">
+                        <div class="text-[10px] text-blue-400 font-bold mb-1">NOV 2018 • WPE</div>
+                        <div class="font-semibold text-sm">Как маркетологу заняться маркетингом</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="interviews" class="py-24 px-6 max-w-5xl mx-auto">
+        <h2 class="text-3xl font-bold mb-12 flex items-center gap-3"><i class="fa-regular fa-newspaper text-slate-400"></i> Интервью и Статьи (13)</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
+            
+            <a href="https://jms.university/blog/52849-yazyk-r-dlya-analitikov-i-internet-marketologov/" class="flex items-start gap-4 p-3 rounded-lg hover:bg-white/5 transition-colors group">
+                <div class="text-xs font-mono text-slate-500 whitespace-nowrap mt-1">Aug 2020</div>
+                <div>
+                    <h4 class="font-medium text-slate-200 group-hover:text-purple-400 transition-colors">Язык R для аналитиков и интернет-маркетологов</h4>
+                    <div class="text-xs text-slate-500">JMS University</div>
+                </div>
+            </a>
+
+            <a href="https://netpeak.net/ru/blog/kak-sozdat-lichnyy-brend-v-kompanii-keys-alekseya-selezneva-rukovoditelya-otdela-analitiki-netpeak/" class="flex items-start gap-4 p-3 rounded-lg hover:bg-white/5 transition-colors group">
+                <div class="text-xs font-mono text-slate-500 whitespace-nowrap mt-1">Apr 2020</div>
+                <div>
+                    <h4 class="font-medium text-slate-200 group-hover:text-purple-400 transition-colors">Как создать личный бренд в компании — кейс</h4>
+                    <div class="text-xs text-slate-500">Блог Netpeak</div>
+                </div>
+            </a>
+
+            <a href="https://vc.ru/marketing/88194-skvoznaya-analitika-vse-li-ponimayut-etot-termin-odinakovo-chast-1-analitiki" class="flex items-start gap-4 p-3 rounded-lg hover:bg-white/5 transition-colors group">
+                <div class="text-xs font-mono text-slate-500 whitespace-nowrap mt-1">Oct 2019</div>
+                <div>
+                    <h4 class="font-medium text-slate-200 group-hover:text-purple-400 transition-colors">Сквозная аналитика. Все ли понимают этот термин одинаково?</h4>
+                    <div class="text-xs text-slate-500">vc.ru</div>
+                </div>
+            </a>
+
+            <a href="https://www.comagic.ru/blog/posts/apr/r_python_javascript_ili_excel_chto_uchit_internet_marketologu_dlya_professionalnogo_rosta/" class="flex items-start gap-4 p-3 rounded-lg hover:bg-white/5 transition-colors group">
+                <div class="text-xs font-mono text-slate-500 whitespace-nowrap mt-1">Apr 2019</div>
+                <div>
+                    <h4 class="font-medium text-slate-200 group-hover:text-purple-400 transition-colors">R, Python, JS или… Excel? Что учить маркетологу</h4>
+                    <div class="text-xs text-slate-500">CoMagic</div>
+                </div>
+            </a>
+
+            <a href="https://www.seonews.ru/analytics/trendy-veb-analitiki-2019-uskorennye-testirovaniya-borba-s-divergentnostyu-i-uvazhenie-k-lyudyam/" class="flex items-start gap-4 p-3 rounded-lg hover:bg-white/5 transition-colors group">
+                <div class="text-xs font-mono text-slate-500 whitespace-nowrap mt-1">Apr 2019</div>
+                <div>
+                    <h4 class="font-medium text-slate-200 group-hover:text-purple-400 transition-colors">Тренды веб-аналитики 2019</h4>
+                    <div class="text-xs text-slate-500">SEOnews</div>
+                </div>
+            </a>
+
+            <a href="https://www.comagic.ru/blog/posts/feb/zachem_internet_marketologu_yazyk_r/" class="flex items-start gap-4 p-3 rounded-lg hover:bg-white/5 transition-colors group">
+                <div class="text-xs font-mono text-slate-500 whitespace-nowrap mt-1">Feb 2019</div>
+                <div>
+                    <h4 class="font-medium text-slate-200 group-hover:text-purple-400 transition-colors">Зачем интернет-маркетологу язык R</h4>
+                    <div class="text-xs text-slate-500">CoMagic</div>
+                </div>
+            </a>
+
+            <a href="https://jms.university/blog/56058-r-i-python-dlya-gumanitariev-i-neprogrammistov/" class="flex items-start gap-4 p-3 rounded-lg hover:bg-white/5 transition-colors group">
+                <div class="text-xs font-mono text-slate-500 whitespace-nowrap mt-1">Feb 2019</div>
+                <div>
+                    <h4 class="font-medium text-slate-200 group-hover:text-purple-400 transition-colors">R и Python для гуманитариев и непрограммистов</h4>
+                    <div class="text-xs text-slate-500">JMS University</div>
+                </div>
+            </a>
+
+            <a href="https://leadzavod.com/jazyk-r-v-veb-analitike-i-internet-marketinge/" class="flex items-start gap-4 p-3 rounded-lg hover:bg-white/5 transition-colors group">
+                <div class="text-xs font-mono text-slate-500 whitespace-nowrap mt-1">Oct 2018</div>
+                <div>
+                    <h4 class="font-medium text-slate-200 group-hover:text-purple-400 transition-colors">Язык R в веб-аналитике и интернет-маркетинге</h4>
+                    <div class="text-xs text-slate-500">Лидзавод</div>
+                </div>
+            </a>
+
+            <a href="https://jms.university/blog/56048-kto-takie-internet-analitiki-i-kakimi-instrumentami-oni-polzuyutsya/" class="flex items-start gap-4 p-3 rounded-lg hover:bg-white/5 transition-colors group">
+                <div class="text-xs font-mono text-slate-500 whitespace-nowrap mt-1">Apr 2018</div>
+                <div>
+                    <h4 class="font-medium text-slate-200 group-hover:text-purple-400 transition-colors">Кто такие интернет-аналитики и их инструменты</h4>
+                    <div class="text-xs text-slate-500">JMS University</div>
+                </div>
+            </a>
+
+            <a href="https://ain.ua/2017/12/27/itogi-2017-blokirovki/" class="flex items-start gap-4 p-3 rounded-lg hover:bg-white/5 transition-colors group">
+                <div class="text-xs font-mono text-slate-500 whitespace-nowrap mt-1">Dec 2017</div>
+                <div>
+                    <h4 class="font-medium text-slate-200 group-hover:text-purple-400 transition-colors">Итоги-2017: как бан российских сайтов повлиял на рынок</h4>
+                    <div class="text-xs text-slate-500">AIN.UA</div>
+                </div>
+            </a>
+
+            <a href="https://ain.ua/2017/08/21/ban-rossijskix-sajtov-tri-mesyaca-spustya/" class="flex items-start gap-4 p-3 rounded-lg hover:bg-white/5 transition-colors group">
+                <div class="text-xs font-mono text-slate-500 whitespace-nowrap mt-1">Aug 2017</div>
+                <div>
+                    <h4 class="font-medium text-slate-200 group-hover:text-purple-400 transition-colors">Результаты бана российских сайтов: падение охватов</h4>
+                    <div class="text-xs text-slate-500">AIN.UA</div>
+                </div>
+            </a>
+
+            <a href="https://ain.ua/2017/08/18/kak-pomenyalis-ceny-na-reklamu/" class="flex items-start gap-4 p-3 rounded-lg hover:bg-white/5 transition-colors group">
+                <div class="text-xs font-mono text-slate-500 whitespace-nowrap mt-1">Aug 2017</div>
+                <div>
+                    <h4 class="font-medium text-slate-200 group-hover:text-purple-400 transition-colors">Как поменялись цены на рекламу: блиц-опрос</h4>
+                    <div class="text-xs text-slate-500">AIN.UA</div>
+                </div>
+            </a>
+
+            <a href="https://netpeak.net/ru/blog/chto-delayut-internet-marketologi-pod-novyi-god/" class="flex items-start gap-4 p-3 rounded-lg hover:bg-white/5 transition-colors group">
+                <div class="text-xs font-mono text-slate-500 whitespace-nowrap mt-1">Dec 2016</div>
+                <div>
+                    <h4 class="font-medium text-slate-200 group-hover:text-purple-400 transition-colors">Что делают интернет-маркетологи под Новый год?</h4>
+                    <div class="text-xs text-slate-500">Блог Netpeak</div>
+                </div>
+            </a>
+
+        </div>
+    </section>
+
+    <footer class="border-t border-white/5 bg-slate-950 pt-20 pb-10 text-center">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-2xl font-bold mb-8">Следите за обновлениями в R4marketing</h2>
+            <div class="flex justify-center gap-8 mb-12">
+                <a href="https://t.me/R4marketing" class="w-14 h-14 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-400 text-2xl hover:bg-blue-500 hover:text-white transition-all transform hover:scale-110 border border-blue-500/20"><i class="fa-brands fa-telegram"></i></a>
+                <a href="https://www.youtube.com/R4marketing" class="w-14 h-14 rounded-full bg-red-500/10 flex items-center justify-center text-red-500 text-2xl hover:bg-red-500 hover:text-white transition-all transform hover:scale-110 border border-red-500/20"><i class="fa-brands fa-youtube"></i></a>
+                <a href="https://habr.com/ru/users/selesnow/" class="w-14 h-14 rounded-full bg-slate-700/30 flex items-center justify-center text-white text-2xl hover:bg-slate-600 transition-all transform hover:scale-110 border border-slate-600/50"><i class="fa-solid fa-h"></i></a>
+            </div>
+            <p class="text-slate-600 text-sm font-mono">© 2026 Alexey Seleznev. Built with Tailwind CSS.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Init Animation on Scroll
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 50
+        });
+
+        // Carousel Logic
+        const slider = document.getElementById('courseSlider');
+        const leftBtn = document.getElementById('slideLeft');
+        const rightBtn = document.getElementById('slideRight');
+
+        rightBtn.addEventListener('click', () => {
+            slider.scrollBy({ left: 340, behavior: 'smooth' });
+        });
+
+        leftBtn.addEventListener('click', () => {
+            slider.scrollBy({ left: -340, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
