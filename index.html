@@ -40,6 +40,18 @@
             box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
         }
 
+        /* Stronger glass for important cards */
+        .glass-accent {
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.6), rgba(15, 23, 42, 0.9));
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s ease;
+        }
+        .glass-accent:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6);
+        }
+
         .text-gradient {
             background: linear-gradient(to right, #818cf8, #c084fc, #f472b6);
             -webkit-background-clip: text;
@@ -70,14 +82,17 @@
     <nav class="fixed w-full z-50 top-0 left-0 border-b border-white/5 backdrop-blur-md bg-slate-900/80">
         <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
             <a href="#" class="text-xl font-bold tracking-tight uppercase">Selesnow<span class="text-purple-500">.</span></a>
-            <div class="hidden lg:flex gap-8 text-sm font-medium text-slate-400">
+            <div class="hidden xl:flex gap-6 text-sm font-medium text-slate-400">
                 <a href="#about" class="hover:text-white transition-colors">Обо мне</a>
                 <a href="#career" class="hover:text-white transition-colors">Карьера</a>
                 <a href="#courses" class="hover:text-white transition-colors">Курсы</a>
+                <a href="#content" class="hover:text-white transition-colors text-purple-400">Медиа</a>
                 <a href="#opensource" class="hover:text-white transition-colors">Open Source</a>
                 <a href="#speaking" class="hover:text-white transition-colors">Выступления</a>
                 <a href="#interviews" class="hover:text-white transition-colors">Интервью</a>
             </div>
+            <div class="xl:hidden text-slate-400 text-sm">Menu available on desktop</div>
+
             <div class="flex gap-4">
                 <a href="https://t.me/R4marketing" target="_blank" class="text-slate-400 hover:text-blue-400 transition-colors"><i class="fa-brands fa-telegram text-xl"></i></a>
                 <a href="https://github.com/selesnow" target="_blank" class="text-slate-400 hover:text-white transition-colors"><i class="fa-brands fa-github text-xl"></i></a>
@@ -136,7 +151,7 @@
         </div>
     </section>
 
-        <section id="career" class="py-20 px-6 bg-slate-900/50">
+    <section id="career" class="py-20 px-6 bg-slate-900/50">
         <div class="max-w-4xl mx-auto">
             <h2 class="text-3xl font-bold mb-12 flex items-center gap-3">
                 <i class="fa-solid fa-briefcase text-purple-500 text-xl"></i> Карьерный путь
@@ -145,7 +160,7 @@
             <div class="space-y-8 relative pl-8 border-l-2 border-slate-800">
                 <div class="relative group" data-aos="fade-left">
                     <div class="absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-purple-500 border-4 border-slate-900 group-hover:scale-125 transition-transform"></div>
-                    <div class="glass-card p-6 rounded-2xl">
+                    <div class="glass p-6 rounded-2xl">
                         <div class="text-sm text-purple-400 font-mono mb-1">2016 — Настоящее время</div>
                         <h3 class="text-xl font-bold text-white">Head of Analytics Dept.</h3>
                         <p class="text-slate-400">Netpeak Group</p>
@@ -154,7 +169,7 @@
 
                 <div class="relative group" data-aos="fade-left" data-aos-delay="100">
                     <div class="absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-slate-600 border-4 border-slate-900 group-hover:bg-blue-500 transition-colors"></div>
-                    <div class="glass-card p-6 rounded-2xl">
+                    <div class="glass p-6 rounded-2xl">
                         <div class="text-sm text-slate-500 font-mono mb-1">2014 — 2016</div>
                         <h3 class="text-xl font-bold text-white">Data / BI / PPC Analyst</h3>
                         <p class="text-slate-400">Netpeak</p>
@@ -163,7 +178,7 @@
 
                 <div class="relative group" data-aos="fade-left" data-aos-delay="200">
                     <div class="absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-slate-600 border-4 border-slate-900 group-hover:bg-blue-500 transition-colors"></div>
-                    <div class="glass-card p-6 rounded-2xl">
+                    <div class="glass p-6 rounded-2xl">
                         <div class="text-sm text-slate-500 font-mono mb-1">2012 — 2014</div>
                         <h3 class="text-xl font-bold text-white">Data Analyst</h3>
                         <p class="text-slate-400">Senturia</p>
@@ -172,7 +187,7 @@
                 
                 <div class="relative group" data-aos="fade-left" data-aos-delay="300">
                     <div class="absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-slate-600 border-4 border-slate-900 group-hover:bg-blue-500 transition-colors"></div>
-                    <div class="glass-card p-6 rounded-2xl">
+                    <div class="glass p-6 rounded-2xl">
                         <div class="text-sm text-slate-500 font-mono mb-1">2010 — 2012</div>
                         <h3 class="text-xl font-bold text-white">Head of Analytics dept</h3>
                         <p class="text-slate-400">Citrus.ua</p>
@@ -181,7 +196,7 @@
 
                 <div class="relative group" data-aos="fade-left" data-aos-delay="400">
                     <div class="absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-slate-600 border-4 border-slate-900 group-hover:bg-blue-500 transition-colors"></div>
-                    <div class="glass-card p-6 rounded-2xl">
+                    <div class="glass p-6 rounded-2xl">
                         <div class="text-sm text-slate-500 font-mono mb-1">2008 — 2010</div>
                         <h3 class="text-xl font-bold text-white">Auditor</h3>
                         <p class="text-slate-400">Citrus.ua</p>
@@ -288,6 +303,72 @@
                     <a href="https://selesnow.github.io/build_ai_tools_using_r" class="text-purple-400 font-bold hover:text-white transition-colors text-sm">Перейти к курсу →</a>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <section id="content" class="py-24 px-6 max-w-7xl mx-auto bg-slate-900/30">
+        <h2 class="text-3xl font-bold mb-12 flex items-center gap-3">
+            <i class="fa-solid fa-users-viewfinder text-purple-500"></i> Контент проекты
+        </h2>
+        
+        <div class="grid md:grid-cols-2 gap-6 mb-6">
+            <a href="https://t.me/R4marketing" target="_blank" class="glass-accent p-8 rounded-3xl relative overflow-hidden group hover:bg-blue-600/10 block">
+                <div class="relative z-10">
+                    <div class="flex justify-between items-start mb-6">
+                        <i class="fa-brands fa-telegram text-5xl text-blue-400"></i>
+                        <div class="px-3 py-1 bg-blue-500/20 border border-blue-500/30 rounded-full text-blue-300 text-xs font-bold uppercase tracking-wider">Top Channel</div>
+                    </div>
+                    <div class="text-5xl font-extrabold text-white mb-2 group-hover:scale-105 transition-transform origin-left">4 200+</div>
+                    <p class="text-slate-400 font-medium">Подписчиков в Telegram канале R4marketing</p>
+                    <div class="mt-8 text-blue-400 text-sm font-bold flex items-center gap-2 group-hover:gap-4 transition-all">
+                        Присоединиться <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+                <div class="absolute -right-12 -bottom-12 text-9xl text-blue-500/5 group-hover:text-blue-500/10 transition-colors transform -rotate-12 pointer-events-none">
+                    <i class="fa-brands fa-telegram"></i>
+                </div>
+            </a>
+
+            <a href="https://www.youtube.com/R4marketing/?sub_confirmation=1" target="_blank" class="glass-accent p-8 rounded-3xl relative overflow-hidden group hover:bg-red-600/10 block">
+                <div class="relative z-10">
+                    <div class="flex justify-between items-start mb-6">
+                        <i class="fa-brands fa-youtube text-5xl text-red-500"></i>
+                        <div class="px-3 py-1 bg-red-500/20 border border-red-500/30 rounded-full text-red-300 text-xs font-bold uppercase tracking-wider">Tutorials</div>
+                    </div>
+                    <div class="text-5xl font-extrabold text-white mb-2 group-hover:scale-105 transition-transform origin-left">3 300+</div>
+                    <p class="text-slate-400 font-medium">Подписчиков на YouTube канале R4marketing</p>
+                    <div class="mt-8 text-red-400 text-sm font-bold flex items-center gap-2 group-hover:gap-4 transition-all">
+                        Смотреть видео <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+                <div class="absolute -right-12 -bottom-12 text-9xl text-red-500/5 group-hover:text-red-500/10 transition-colors transform -rotate-12 pointer-events-none">
+                    <i class="fa-brands fa-youtube"></i>
+                </div>
+            </a>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+            <a href="https://alexeyseleznev.wordpress.com/" target="_blank" class="glass p-6 rounded-2xl flex items-center gap-6 group hover:border-purple-500/50 transition-all">
+                <div class="w-16 h-16 bg-purple-500/10 rounded-2xl flex items-center justify-center text-purple-400 text-2xl group-hover:bg-purple-500 group-hover:text-white transition-all shrink-0">
+                    <i class="fa-solid fa-pen-nib"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 group-hover:text-purple-300 transition-colors">Личный Блог</h3>
+                    <p class="text-slate-400 text-sm">Технические статьи, кейсы и заметки про аналитику.</p>
+                </div>
+                <i class="fa-solid fa-arrow-up-right-from-square text-slate-600 group-hover:text-white transition-colors"></i>
+            </a>
+
+            <a href="https://habr.com/users/selesnow/" target="_blank" class="glass p-6 rounded-2xl flex items-center gap-6 group hover:border-slate-500/50 transition-all">
+                <div class="w-16 h-16 bg-slate-700/30 rounded-2xl flex items-center justify-center text-slate-300 text-2xl group-hover:bg-slate-200 group-hover:text-black transition-all shrink-0">
+                    <i class="fa-solid fa-h"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 group-hover:text-slate-300 transition-colors">Профиль на Habr</h3>
+                    <p class="text-slate-400 text-sm">Профессиональные публикации и туториалы.</p>
+                </div>
+                <i class="fa-solid fa-arrow-up-right-from-square text-slate-600 group-hover:text-white transition-colors"></i>
+            </a>
         </div>
     </section>
 
@@ -619,13 +700,15 @@
         const leftBtn = document.getElementById('slideLeft');
         const rightBtn = document.getElementById('slideRight');
 
-        rightBtn.addEventListener('click', () => {
-            slider.scrollBy({ left: 340, behavior: 'smooth' });
-        });
+        if(slider && leftBtn && rightBtn) {
+            rightBtn.addEventListener('click', () => {
+                slider.scrollBy({ left: 340, behavior: 'smooth' });
+            });
 
-        leftBtn.addEventListener('click', () => {
-            slider.scrollBy({ left: -340, behavior: 'smooth' });
-        });
+            leftBtn.addEventListener('click', () => {
+                slider.scrollBy({ left: -340, behavior: 'smooth' });
+            });
+        }
     </script>
 </body>
 </html>
