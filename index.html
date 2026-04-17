@@ -117,8 +117,8 @@
 
     <!-- NAVIGATION -->
     <nav class="fixed w-full z-50 top-0 left-0 border-b border-white/5 bg-slate-950/60 backdrop-blur-xl">
-        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="#" class="text-xl font-black tracking-tight uppercase outfit-font">ALEXEY SELEZNEV<span class="text-purple-500">.</span></a>
+        <div class="max-w-7xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
+            <a href="#" class="text-base md:text-xl font-black tracking-tight uppercase outfit-font shrink w-[130px] md:w-auto overflow-hidden text-ellipsis whitespace-nowrap">ALEXEY SELEZNEV<span class="text-purple-500">.</span></a>
             <div class="hidden xl:flex gap-6 text-sm font-semibold text-slate-400">
                 <a href="#about" class="hover:text-white transition-colors"><span class="ru-text">Обо мне</span><span class="en-text">About</span></a>
                 <a href="#career" class="hover:text-white transition-colors"><span class="ru-text">Карьера</span><span class="en-text">Career</span></a>
@@ -129,15 +129,15 @@
                 <a href="#contacts" class="hover:text-white transition-colors"><span class="ru-text">Контакты</span><span class="en-text">Contacts</span></a>
             </div>
             
-            <div class="flex items-center gap-4">
-                <div class="lang-switcher flex gap-2 text-xs font-bold border-r border-white/10 pr-4 mr-2 outfit-font">
+            <div class="flex items-center gap-2 md:gap-4 shrink-0">
+                <div class="lang-switcher flex gap-1 md:gap-2 text-xs md:text-sm font-bold border-r border-white/10 pr-2 md:pr-4 mr-1 md:mr-2 outfit-font">
                     <button onclick="changeLang('ru')" id="btn-ru" class="active hover:text-white transition-colors">RU</button>
                     <span class="text-slate-600">/</span>
                     <button onclick="changeLang('en')" id="btn-en" class="text-slate-500 hover:text-white transition-colors">EN</button>
                 </div>
 
-                <a href="https://t.me/R4marketing" target="_blank" class="text-slate-400 hover:text-blue-400 transition-colors"><i class="fa-brands fa-telegram text-xl"></i></a>
-                <a href="https://github.com/selesnow" target="_blank" class="text-slate-400 hover:text-white transition-colors"><i class="fa-brands fa-github text-xl"></i></a>
+                <a href="https://t.me/R4marketing" target="_blank" class="text-slate-400 hover:text-blue-400 transition-colors hidden sm:block"><i class="fa-brands fa-telegram text-lg md:text-xl"></i></a>
+                <a href="https://github.com/selesnow" target="_blank" class="text-slate-400 hover:text-white transition-colors"><i class="fa-brands fa-github text-lg md:text-xl"></i></a>
             </div>
         </div>
     </nav>
@@ -462,7 +462,7 @@
     <section id="opensource" class="py-24 px-6 max-w-7xl mx-auto relative z-10">
         <div class="flex items-center justify-between border-b border-white/10 pb-6 mb-12" data-aos="fade-up">
             <h2 class="text-4xl font-extrabold outfit-font">Open Source <span class="ru-text">Пакеты</span><span class="en-text">Packages</span></h2>
-            <div class="px-4 py-2 bg-slate-800 rounded-full text-sm font-bold text-slate-300">14 Projects</div>
+            <div class="px-4 py-2 bg-slate-800 rounded-full text-sm font-bold text-slate-300">21 Projects</div>
         </div>
 
 		<div id="github-repos-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -648,6 +648,99 @@
 					</div>
 				</div>
 			</a>
+
+			<!-- Additional 7 packages -->
+			<a id="ryandexdirect" href="https://github.com/selesnow/ryandexdirect" class="bento-glass p-6 rounded-2xl block group" data-aos="zoom-in" data-aos-delay="100">
+				<div class="bento-content flex justify-between items-start mb-4"><h4 class="font-bold text-lg text-white group-hover:text-purple-400 outfit-font">ryandexdirect</h4><i class="fa-brands fa-yandex text-slate-500 text-xl group-hover:text-red-500 transition-colors"></i></div>
+				<p class="bento-content text-sm text-slate-400 mb-5">Yandex.Direct API</p>
+				<div class="bento-content flex items-center gap-4 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5">
+					<div class="flex items-center gap-2 text-slate-400 group-hover:text-yellow-500 transition-colors">
+						<i class="fa-solid fa-star"></i><span class="star-count font-bold">...</span>
+					</div>
+					<div class="flex items-center gap-2 text-slate-400 group-hover:text-blue-400 transition-colors cran-downloads">
+						<i class="fa-solid fa-download"></i><span class="download-count font-bold">...</span>
+					</div>
+				</div>
+			</a>
+
+			<a id="rmytarget" href="https://github.com/selesnow/rmytarget" class="bento-glass p-6 rounded-2xl block group" data-aos="zoom-in" data-aos-delay="150">
+				<div class="bento-content flex justify-between items-start mb-4"><h4 class="font-bold text-lg text-white group-hover:text-purple-400 outfit-font">rmytarget</h4><i class="fa-solid fa-bullseye text-slate-500 text-xl group-hover:text-orange-500 transition-colors"></i></div>
+				<p class="bento-content text-sm text-slate-400 mb-5">MyTarget API v2</p>
+				<div class="bento-content flex items-center gap-4 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5">
+					<div class="flex items-center gap-2 text-slate-400 group-hover:text-yellow-500 transition-colors">
+						<i class="fa-solid fa-star"></i><span class="star-count font-bold">...</span>
+					</div>
+					<div class="flex items-center gap-2 text-slate-400 group-hover:text-blue-400 transition-colors cran-downloads">
+						<i class="fa-solid fa-download"></i><span class="download-count font-bold">...</span>
+					</div>
+				</div>
+			</a>
+
+			<a id="rvkstat" href="https://github.com/selesnow/rvkstat" class="bento-glass p-6 rounded-2xl block group" data-aos="zoom-in" data-aos-delay="0">
+				<div class="bento-content flex justify-between items-start mb-4"><h4 class="font-bold text-lg text-white group-hover:text-purple-400 outfit-font">rvkstat</h4><i class="fa-brands fa-vk text-slate-500 text-xl group-hover:text-blue-500 transition-colors"></i></div>
+				<p class="bento-content text-sm text-slate-400 mb-5">VKontakte API</p>
+				<div class="bento-content flex items-center gap-4 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5">
+					<div class="flex items-center gap-2 text-slate-400 group-hover:text-yellow-500 transition-colors">
+						<i class="fa-solid fa-star"></i><span class="star-count font-bold">...</span>
+					</div>
+					<div class="flex items-center gap-2 text-slate-400 group-hover:text-blue-400 transition-colors cran-downloads">
+						<i class="fa-solid fa-download"></i><span class="download-count font-bold">...</span>
+					</div>
+				</div>
+			</a>
+
+			<a id="galigor" href="https://github.com/selesnow/galigor" class="bento-glass p-6 rounded-2xl block group" data-aos="zoom-in" data-aos-delay="50">
+				<div class="bento-content flex justify-between items-start mb-4"><h4 class="font-bold text-lg text-white group-hover:text-purple-400 outfit-font">galigor</h4><i class="fa-solid fa-toolbox text-slate-500 text-xl group-hover:text-gray-400 transition-colors"></i></div>
+				<p class="bento-content text-sm text-slate-400 mb-5">Internet Marketing Kit</p>
+				<div class="bento-content flex items-center gap-4 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5">
+					<div class="flex items-center gap-2 text-slate-400 group-hover:text-yellow-500 transition-colors">
+						<i class="fa-solid fa-star"></i><span class="star-count font-bold">...</span>
+					</div>
+					<div class="flex items-center gap-2 text-slate-400 group-hover:text-blue-400 transition-colors cran-downloads">
+						<i class="fa-solid fa-download"></i><span class="download-count font-bold">...</span>
+					</div>
+				</div>
+			</a>
+
+			<a id="rmixpanel" href="https://github.com/selesnow/rmixpanel" class="bento-glass p-6 rounded-2xl block group" data-aos="zoom-in" data-aos-delay="100">
+				<div class="bento-content flex justify-between items-start mb-4"><h4 class="font-bold text-lg text-white group-hover:text-purple-400 outfit-font">rmixpanel</h4><i class="fa-solid fa-chart-pie text-slate-500 text-xl group-hover:text-purple-400 transition-colors"></i></div>
+				<p class="bento-content text-sm text-slate-400 mb-5">Mixpanel API</p>
+				<div class="bento-content flex items-center gap-4 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5">
+					<div class="flex items-center gap-2 text-slate-400 group-hover:text-yellow-500 transition-colors">
+						<i class="fa-solid fa-star"></i><span class="star-count font-bold">...</span>
+					</div>
+					<div class="flex items-center gap-2 text-slate-400 group-hover:text-blue-400 transition-colors">
+						<i class="fa-brands fa-github"></i>
+					</div>
+				</div>
+			</a>
+
+			<a id="rGitHub" href="https://github.com/selesnow/rGitHub" class="bento-glass p-6 rounded-2xl block group" data-aos="zoom-in" data-aos-delay="150">
+				<div class="bento-content flex justify-between items-start mb-4"><h4 class="font-bold text-lg text-white group-hover:text-purple-400 outfit-font">rGitHub</h4><i class="fa-brands fa-github text-slate-500 text-xl group-hover:text-white transition-colors"></i></div>
+				<p class="bento-content text-sm text-slate-400 mb-5">GitHub API stats</p>
+				<div class="bento-content flex items-center gap-4 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5">
+					<div class="flex items-center gap-2 text-slate-400 group-hover:text-yellow-500 transition-colors">
+						<i class="fa-solid fa-star"></i><span class="star-count font-bold">...</span>
+					</div>
+					<div class="flex items-center gap-2 text-slate-400 group-hover:text-blue-400 transition-colors">
+						<i class="fa-brands fa-github"></i>
+					</div>
+				</div>
+			</a>
+
+			<a id="habR" href="https://github.com/selesnow/habR" class="bento-glass p-6 rounded-2xl block group" data-aos="zoom-in" data-aos-delay="0">
+				<div class="bento-content flex justify-between items-start mb-4"><h4 class="font-bold text-lg text-white group-hover:text-purple-400 outfit-font">habR</h4><i class="fa-solid fa-h text-slate-500 text-xl group-hover:text-teal-400 transition-colors"></i></div>
+				<p class="bento-content text-sm text-slate-400 mb-5">Habr.com Parsing</p>
+				<div class="bento-content flex items-center gap-4 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5">
+					<div class="flex items-center gap-2 text-slate-400 group-hover:text-yellow-500 transition-colors">
+						<i class="fa-solid fa-star"></i><span class="star-count font-bold">...</span>
+					</div>
+					<div class="flex items-center gap-2 text-slate-400 group-hover:text-blue-400 transition-colors">
+						<i class="fa-brands fa-github"></i>
+					</div>
+				</div>
+			</a>
+
 		</div>
     </section>
 
