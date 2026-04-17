@@ -48,7 +48,7 @@
         /* Interactive Vanta Background Container */
         #vanta-bg {
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
+            top: 0; left: 0; width: 100%; height: 100%;
             z-index: -20;
         }
 
@@ -1180,8 +1180,15 @@
         AOS.init({
             duration: 900,
             once: true,
-            offset: 40,
+            offset: 20, // Lower offset for mobile
             easing: 'ease-out-cubic'
+        });
+
+        // Ensure AOS refreshes on mobile after fully loading images/fonts
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                AOS.refresh();
+            }, 100);
         });
 
         // Carousel Logic
@@ -1217,6 +1224,11 @@
             }
             
             localStorage.setItem('preferredLang', lang);
+            
+            // Refund AOS after text layout shifts
+            setTimeout(() => {
+                if (typeof AOS !== 'undefined') AOS.refresh();
+            }, 50);
         }
 
         window.addEventListener('DOMContentLoaded', () => {
