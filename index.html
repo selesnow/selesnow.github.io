@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru" class="scroll-smooth">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,10 +30,11 @@
         }
 
         /* --- СОСТОЯНИЕ ЯЗЫКОВ С АНИМАЦИЕЙ --- */
-        .lang-en .ru-text { display: none; }
-        .lang-ru .en-text { display: none; }
+        .lang-en .ru-text, .lang-en .ua-text { display: none; }
+        .lang-ru .en-text, .lang-ru .ua-text { display: none; }
+        .lang-ua .en-text, .lang-ua .ru-text { display: none; }
 
-        .ru-text, .en-text {
+        .ru-text, .en-text, .ua-text {
             animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
@@ -116,7 +117,7 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
-<body class="relative lang-ru">
+<body class="relative lang-en">
 
     <!-- Interactive Background -->
     <div id="vanta-bg"></div>
@@ -126,20 +127,22 @@
         <div class="max-w-7xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
             <a href="#" class="text-base md:text-xl font-black tracking-tight uppercase outfit-font whitespace-nowrap">ALEXEY SELEZNEV<span class="text-purple-500">.</span></a>
             <div class="hidden xl:flex gap-6 text-sm font-semibold text-slate-400">
-                <a href="#about" class="hover:text-white transition-colors"><span class="ru-text">Обо мне</span><span class="en-text">About</span></a>
-                <a href="#career" class="hover:text-white transition-colors"><span class="ru-text">Карьера</span><span class="en-text">Career</span></a>
+                <a href="#about" class="hover:text-white transition-colors"><span class="ru-text">Обо мне</span><span class="ua-text">Про мене</span><span class="en-text">About</span></a>
+                <a href="#career" class="hover:text-white transition-colors"><span class="ru-text">Карьера</span><span class="ua-text">Кар'єра</span><span class="en-text">Career</span></a>
                 <a href="#opensource" class="hover:text-white transition-colors">Open Source</a>
-                <a href="#courses" class="hover:text-white transition-colors"><span class="ru-text">Курсы</span><span class="en-text">Courses</span></a>
-                <a href="#content" class="hover:text-white transition-colors"><span class="ru-text">Медиа</span><span class="en-text">Media</span></a>
-                <a href="#speaking" class="hover:text-white transition-colors"><span class="ru-text">Выступления</span><span class="en-text">Speaking</span></a>
-                <a href="#contacts" class="hover:text-white transition-colors"><span class="ru-text">Контакты</span><span class="en-text">Contacts</span></a>
+                <a href="#courses" class="hover:text-white transition-colors"><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a>
+                <a href="#content" class="hover:text-white transition-colors"><span class="ru-text">Медиа</span><span class="ua-text">Медіа</span><span class="en-text">Media</span></a>
+                <a href="#speaking" class="hover:text-white transition-colors"><span class="ru-text">Выступления</span><span class="ua-text">Виступи</span><span class="en-text">Speaking</span></a>
+                <a href="#contacts" class="hover:text-white transition-colors"><span class="ru-text">Контакты</span><span class="ua-text">Контакти</span><span class="en-text">Contacts</span></a>
             </div>
             
             <div class="flex items-center gap-2 md:gap-4 shrink-0">
                 <div class="lang-switcher flex gap-1 md:gap-2 text-xs md:text-sm font-bold border-r border-white/10 pr-2 md:pr-4 mr-1 md:mr-2 outfit-font">
-                    <button onclick="changeLang('ru')" id="btn-ru" class="active hover:text-white transition-colors">RU</button>
+                    <button onclick="changeLang('en')" id="btn-en" class="active hover:text-white transition-colors">EN</button>
                     <span class="text-slate-600">/</span>
-                    <button onclick="changeLang('en')" id="btn-en" class="text-slate-500 hover:text-white transition-colors">EN</button>
+                    <button onclick="changeLang('ru')" id="btn-ru" class="text-slate-500 hover:text-white transition-colors">RU</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ua')" id="btn-ua" class="text-slate-500 hover:text-white transition-colors">UA</button>
                 </div>
 
                 <a href="https://t.me/R4marketing" target="_blank" class="text-slate-400 hover:text-blue-400 transition-colors hidden sm:block"><i class="fa-brands fa-telegram text-lg md:text-xl"></i></a>
@@ -158,7 +161,7 @@
                         Available for consulting
                     </div>
                     <h1 class="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-tight uppercase mb-2">
-                        <span class="ru-text">Алексей <span class="text-gradient">Селезнёв</span></span>
+                        <span class="ru-text">Алексей <span class="text-gradient">Селезнёв</span></span><span class="ua-text">Олексій <span class="text-gradient">Селезньов</span></span>
                         <span class="en-text">Alexey <span class="text-gradient">Seleznev</span></span>
                     </h1>
                 </div>
@@ -167,13 +170,13 @@
                         <i class="fa-solid fa-quote-right text-6xl text-white"></i>
                     </div>
                     <p class="text-xl md:text-2xl text-slate-200 leading-relaxed font-medium relative z-10">
-                        <span class="ru-text">Практикующий аналитик с 2008 года. Возглавляю отдел аналитики в <strong class="text-white font-bold decoration-purple-500/50 underline underline-offset-8">Netpeak Group</strong>. Автор образовательных курсов по языку R, спикер топовых конференций и создатель Open Source инструментов.</span>
+                        <span class="ru-text">Практикующий аналитик с 2008 года. Возглавляю отдел аналитики в <strong class="text-white font-bold decoration-purple-500/50 underline underline-offset-8">Netpeak Group</strong>. Автор образовательных курсов по языку R, спикер топовых конференций и создатель Open Source инструментов.</span><span class="ua-text">Практикуючий аналітик з 2008 року. Очолюю відділ аналітики в <strong class="text-white font-bold decoration-purple-500/50 underline underline-offset-8">Netpeak Group</strong>. Автор освітніх курсів з мови R, спікер топових конференцій та творець Open Source інструментів.</span>
                         <span class="en-text">Practicing analyst since 2008. Head of Analytics at <strong class="text-white font-bold decoration-purple-500/50 underline underline-offset-8">Netpeak Group</strong>. Author of R courses, speaker at top conferences, and creator of Open Source tools.</span>
                     </p>
                 </div>
                 <div class="flex flex-wrap gap-4 pt-4">
                     <a href="#courses" class="bg-purple-600 hover:bg-purple-500 text-white px-8 py-4 rounded-full font-bold transition-all shadow-[0_0_20px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]">
-                        <span class="ru-text">Мои курсы</span><span class="en-text">My Courses</span>
+                        <span class="ru-text">Мои курсы</span><span class="ua-text">Мої курси</span><span class="en-text">My Courses</span>
                     </a>
                     <a href="https://t.me/R4marketing" target="_blank" class="bento-glass px-8 py-4 rounded-full font-bold hover:bg-white/10 transition-all text-blue-400 flex items-center group">
                         <i class="fa-brands fa-telegram mr-3 text-xl group-hover:scale-110 transition-transform"></i> Telegram
@@ -187,7 +190,7 @@
                     </div>
                     <div class="bento-content">
                         <div class="text-4xl font-extrabold text-white outfit-font">15+</div>
-                        <div class="text-xs text-slate-400 uppercase font-bold mt-1"><span class="ru-text">Лет опыта</span><span class="en-text">Years Exp.</span></div>
+                        <div class="text-xs text-slate-400 uppercase font-bold mt-1"><span class="ru-text">Лет опыта</span><span class="ua-text">Років досвіду</span><span class="en-text">Years Exp.</span></div>
                     </div>
                     <div class="bento-content">
                         <div class="text-4xl font-extrabold text-white outfit-font">15</div>
@@ -217,7 +220,7 @@
                 <div class="w-12 h-12 bg-purple-500/20 flex items-center justify-center rounded-2xl border border-purple-500/30">
                     <i class="fa-solid fa-briefcase text-purple-500 text-2xl"></i>
                 </div>
-                <span class="ru-text">Карьерный путь</span><span class="en-text">Career Path</span>
+                <span class="ru-text">Карьерный путь</span><span class="ua-text">Кар'єрний шлях</span><span class="en-text">Career Path</span>
             </h2>
             
             <div class="relative border-l-2 border-purple-500/30 pl-8 space-y-12 md:pl-12 ml-4 md:ml-8">
@@ -226,10 +229,10 @@
                 <div class="relative group" data-aos="fade-up">
                     <span class="absolute -left-[41px] md:-left-[57px] top-1 w-5 h-5 bg-purple-500 rounded-full border-[4px] border-[#030712] shadow-[0_0_15px_rgba(168,85,247,0.8)]"></span>
                     <div class="bento-glass p-8 group-hover:border-purple-500/50 transition-colors">
-                        <div class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-xs font-bold font-mono mb-4 border border-purple-500/20"><span class="ru-text">2016 — Настоящее время</span><span class="en-text">2016 — Present</span></div>
+                        <div class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-xs font-bold font-mono mb-4 border border-purple-500/20"><span class="ru-text">2016 — Настоящее время</span><span class="ua-text">2016 — Теперішній час</span><span class="en-text">2016 — Present</span></div>
                         <h3 class="text-3xl font-extrabold text-white mb-2 outfit-font group-hover:text-purple-300 transition-colors">Head of Analytics Dept.</h3>
                         <p class="text-xl text-slate-400 mb-4 font-semibold">Netpeak Group</p>
-                        <p class="text-slate-500 font-light leading-relaxed"><span class="ru-text">Построил с нуля аналитическую инфраструктуру холдинга. Создал системный процесс найма, онбординга и непрерывного обучения аналитиков — от уровня Junior до Senior. Занимался поиском и внедрением передовых методологий и инструментов. Интегрировал в рабочие процессы R, Power BI, Looker Studio, Git и LLM.</span><span class="en-text">Built the holding's analytical infrastructure from scratch. Created a systematic process for hiring, onboarding, and continuous training of analysts — from Junior to Senior levels. Researched and implemented cutting-edge methodologies and tools. Integrated R, Power BI, Looker Studio, Git, and LLM into workflows.</span></p>
+                        <p class="text-slate-500 font-light leading-relaxed"><span class="ru-text">Построил с нуля аналитическую инфраструктуру холдинга. Создал системный процесс найма, онбординга и непрерывного обучения аналитиков — от уровня Junior до Senior. Занимался поиском и внедрением передовых методологий и инструментов. Интегрировал в рабочие процессы R, Power BI, Looker Studio, Git и LLM.</span><span class="ua-text">Побудвав з нуля аналітичну інфраструктуру холдингу. Створив системний процес найму, онбордингу та безперервного навчання аналітиків — від рівня Junior до Senior. Займався пошуком та впровадженням передових методологій та інструментів. Інтегрував у робочі процеси R, Power BI, Looker Studio, Git та LLM.</span><span class="en-text">Built the holding's analytical infrastructure from scratch. Created a systematic process for hiring, onboarding, and continuous training of analysts — from Junior to Senior levels. Researched and implemented cutting-edge methodologies and tools. Integrated R, Power BI, Looker Studio, Git, and LLM into workflows.</span></p>
                     </div>
                 </div>
 
@@ -277,13 +280,13 @@
     <!-- OPEN SOURCE -->
     <section id="opensource" class="py-24 px-6 max-w-7xl mx-auto relative z-10">
         <div class="flex items-center justify-between border-b border-white/10 pb-6 mb-12" data-aos="fade-up">
-            <h2 class="text-4xl font-extrabold outfit-font">Open Source <span class="ru-text">Пакеты</span><span class="en-text">Packages</span></h2>
+            <h2 class="text-4xl font-extrabold outfit-font">Open Source <span class="ru-text">Пакеты</span><span class="ua-text">Пакети</span><span class="en-text">Packages</span></h2>
             <div class="px-4 py-2 bg-slate-800 rounded-full text-sm font-bold text-slate-300">21 Projects</div>
         </div>
         
         <div class="bento-glass p-6 md:p-10 mb-12 border-l-4 border-blue-500/50" data-aos="fade-up" data-aos-delay="100">
             <p class="text-lg md:text-xl text-slate-300 leading-relaxed font-light">
-                <span class="ru-text">Внёс значительный вклад в развитие экосистемы языка R среди сообщества аналитиков и маркетологов. Мои разработки упростили процесс сбора данных из крупнейших рекламных и веб-аналитических платформ, позволив специалистам без навыков программирования автоматизировать отчетность и строить полноценную маркетинговую аналитику. <br><br> На сегодняшний день моими решениями пользуются тысячи экспертов и сотни компаний, а общее количество скачиваний пакетов превысило 350 000.</span>
+                <span class="ru-text">Внёс значительный вклад в развитие экосистемы языка R среди сообщества аналитиков и маркетологов. Мои разработки упростили процесс сбора данных из крупнейших рекламных и веб-аналитических платформ, позволив специалистам без навыков программирования автоматизировать отчетность и строить полноценную маркетинговую аналитику. <br><br> На сегодняшний день моими решениями пользуются тысячи экспертов и сотни компаний, а общее количество скачиваний пакетов превысило 350 000.</span><span class="ua-text">Зробив значний внесок у розвиток екосистеми мови R серед спільноти аналітиків та маркетологів. Мої розробки спростили процес збору даних із найбільших рекламних та веб-аналітичних платформ, дозволивши спеціалістам без навичок програмування автоматизувати звітність та будувати повноцінну маркетингову аналітику. <br><br> На сьогоднішній день моїми рішеннями користуються тисячі експертів та сотні компаній, а загальна кількість завантажень пакетів перевищила 350 000.</span>
                 <span class="en-text">Contributed significantly to the R language ecosystem within the analyst and marketer community. My developments simplified data collection from major advertising and web analytics platforms, allowing specialists without programming skills to automate reporting and build robust marketing analytics. <br><br> Today, my solutions are used by thousands of experts and hundreds of companies, with total package downloads exceeding 350,000.</span>
             </p>
         </div>
@@ -570,8 +573,8 @@
     <section id="courses" class="py-24 px-6 max-w-[1400px] mx-auto overflow-hidden relative z-10">
         <div class="flex justify-between items-end mb-12 px-4" data-aos="fade-up">
             <div>
-                <h2 class="text-4xl font-extrabold mb-2 outfit-font"><span class="ru-text">Авторские курсы</span><span class="en-text">Original Courses</span></h2>
-                <p class="text-slate-400 text-lg"><span class="ru-text">7 бесплатных курсов от новичка до PRO</span><span class="en-text">7 free courses from beginner to PRO</span></p>
+                <h2 class="text-4xl font-extrabold mb-2 outfit-font"><span class="ru-text">Авторские курсы</span><span class="ua-text">Авторські курси</span><span class="en-text">Original Courses</span></h2>
+                <p class="text-slate-400 text-lg"><span class="ru-text">7 бесплатных курсов от новичка до PRO</span><span class="ua-text">7 безкоштовних курсів від новачка до PRO</span><span class="en-text">7 free courses from beginner to PRO</span></p>
             </div>
             <div class="flex gap-3 hidden md:flex">
                 <button id="slideLeft" class="w-14 h-14 rounded-full border border-white/10 bg-slate-900/50 hover:bg-slate-800 text-white flex items-center justify-center transition-all hover:scale-110 backdrop-blur-md"><i class="fa-solid fa-chevron-left"></i></button>
@@ -581,7 +584,7 @@
         
         <div class="bento-glass p-6 md:p-10 mb-12 border-l-4 border-purple-500/50 mx-4" data-aos="fade-up" data-aos-delay="100">
             <p class="text-lg md:text-xl text-slate-300 leading-relaxed font-light">
-                <span class="ru-text">Для систематизации и повышения качества обучения аналитиков в своем отделе я разработал серию курсов по ключевым технологиям, в частности по глубокому погружению в язык R. <br><br> Позже все учебные программы были опубликованы в открытом доступе и стали востребованы среди тысяч специалистов далеко за пределами Netpeak. Также имею богатый опыт коммерческого преподавания: разработал курс «Язык R для интернет-маркетинга» для платформы <strong class="text-white font-semibold">NeedForData</strong>, а также выступал соавтором и лектором курса «Веб-аналитика PRO» в академии <strong class="text-white font-semibold">WebPromoExperts</strong>.</span>
+                <span class="ru-text">Для систематизации и повышения качества обучения аналитиков в своем отделе я разработал серию курсов по ключевым технологиям, в частности по глубокому погружению в язык R. <br><br> Позже все учебные программы были опубликованы в открытом доступе и стали востребованы среди тысяч специалистов далеко за пределами Netpeak. Также имею богатый опыт коммерческого преподавания: разработал курс «Язык R для интернет-маркетинга» для платформы <strong class="text-white font-semibold">NeedForData</strong>, а также выступал соавтором и лектором курса «Веб-аналитика PRO» в академии <strong class="text-white font-semibold">WebPromoExperts</strong>.</span><span class="ua-text">Для систематизації та підвищення якості навчання аналітиків у своєму відділі я розробив серію курсів із ключових технологій, зокрема з глибокого занурення в мову R. <br><br> Пізніше всі навчальні програми були опубліковані у відкритому доступі та стали затребуваними серед тисяч фахівців далеко за межами Netpeak. Також маю багатий досвід комерційного викладання: розробив курс «Мова R для інтернет-маркетингу» для платформи <strong class="text-white font-semibold">NeedForData</strong>, а також виступав співавтором та лектором курсу «Веб-аналітика PRO» в академії <strong class="text-white font-semibold">WebPromoExperts</strong>.</span>
                 <span class="en-text">To systematize and improve the quality of training for analysts in my department, I developed a series of courses on key technologies, specifically focusing on a deep dive into the R language. <br><br> Later, all training programs were published openly and became in demand among thousands of specialists far beyond Netpeak. I also have extensive experience in commercial teaching: I developed the 'R for Digital Marketing' course for the <strong class="text-white font-semibold">NeedForData</strong> platform and served as a co-author and lecturer for the 'Web Analytics PRO' course at the <strong class="text-white font-semibold">WebPromoExperts</strong> Academy.</span>
             </p>
         </div>
@@ -596,9 +599,9 @@
                         <div class="absolute top-4 left-4 z-20 bg-green-500/20 border border-green-500/50 text-green-400 text-[10px] uppercase font-bold px-3 py-1 rounded-full backdrop-blur-lg">BEGINNER</div>
                     </div>
                     <div class="px-4 pb-4 flex-1 flex flex-col">
-                        <h3 class="text-2xl font-bold mb-3 outfit-font"><span class="ru-text">R для интернет маркетинга</span><span class="en-text">R for Digital Marketing</span></h3>
-                        <p class="text-slate-400 text-sm mb-6 flex-1"><span class="ru-text">Сбор данных из API рекламных сервисов и их визуализация.</span><span class="en-text">Data collection from advertising API and visualization.</span></p>
-                        <a href="https://www.youtube.com/playlist?list=PLD2LDq8edf4o6dSZ4BIr7J08gT97nimH_" class="inline-flex items-center gap-2 text-purple-400 font-bold hover:text-white transition-colors bg-purple-500/10 px-4 py-2 rounded-xl w-max"><span class="ru-text">Смотреть курс</span><span class="en-text">Watch course</span> <i class="fa-solid fa-arrow-right"></i></a>
+                        <h3 class="text-2xl font-bold mb-3 outfit-font"><span class="ru-text">R для интернет маркетинга</span><span class="ua-text">R для інтернет-маркетингу</span><span class="en-text">R for Digital Marketing</span></h3>
+                        <p class="text-slate-400 text-sm mb-6 flex-1"><span class="ru-text">Сбор данных из API рекламных сервисов и их визуализация.</span><span class="ua-text">Збір даних з API рекламних сервісів та їх візуалізація.</span><span class="en-text">Data collection from advertising API and visualization.</span></p>
+                        <a href="https://www.youtube.com/playlist?list=PLD2LDq8edf4o6dSZ4BIr7J08gT97nimH_" class="inline-flex items-center gap-2 text-purple-400 font-bold hover:text-white transition-colors bg-purple-500/10 px-4 py-2 rounded-xl w-max"><span class="ru-text">Смотреть курс</span><span class="ua-text">Дивитися курс</span><span class="en-text">Watch course</span> <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -611,9 +614,9 @@
                         <div class="absolute top-4 left-4 bg-green-500/20 border border-green-500/50 text-green-400 text-[10px] uppercase font-bold px-3 py-1 rounded-full backdrop-blur-lg">BEGINNER</div>
                     </div>
                     <div class="px-4 pb-4 flex-1 flex flex-col">
-                        <h3 class="text-2xl font-bold mb-3 outfit-font"><span class="ru-text">R для пользователей Excel</span><span class="en-text">R for Excel Users</span></h3>
-                        <p class="text-slate-400 text-sm mb-6 flex-1"><span class="ru-text">Легкий старт в R через tidyverse: замена ВПР и Сводных таблиц кодом.</span><span class="en-text">Easy start in R via tidyverse: replacing VLOOKUP and Pivots with code.</span></p>
-                        <a href="https://selesnow.github.io/r4excel_users/" class="inline-flex items-center gap-2 text-purple-400 font-bold hover:text-white transition-colors bg-purple-500/10 px-4 py-2 rounded-xl w-max"><span class="ru-text">Перейти к курсу</span><span class="en-text">Go to course</span> <i class="fa-solid fa-arrow-right"></i></a>
+                        <h3 class="text-2xl font-bold mb-3 outfit-font"><span class="ru-text">R для пользователей Excel</span><span class="ua-text">R для користувачів Excel</span><span class="en-text">R for Excel Users</span></h3>
+                        <p class="text-slate-400 text-sm mb-6 flex-1"><span class="ru-text">Легкий старт в R через tidyverse: замена ВПР и Сводных таблиц кодом.</span><span class="ua-text">Легкий старт в R через tidyverse: заміна ВПР та Зведених таблиць кодом.</span><span class="en-text">Easy start in R via tidyverse: replacing VLOOKUP and Pivots with code.</span></p>
+                        <a href="https://selesnow.github.io/r4excel_users/" class="inline-flex items-center gap-2 text-purple-400 font-bold hover:text-white transition-colors bg-purple-500/10 px-4 py-2 rounded-xl w-max"><span class="ru-text">Перейти к курсу</span><span class="ua-text">Перейти до курсу</span><span class="en-text">Go to course</span> <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -626,9 +629,9 @@
                         <div class="absolute top-4 left-4 bg-blue-500/20 border border-blue-500/50 text-blue-400 text-[10px] uppercase font-bold px-3 py-1 rounded-full backdrop-blur-lg">MIDDLE</div>
                     </div>
                     <div class="px-4 pb-4 flex-1 flex flex-col">
-                        <h3 class="text-2xl font-bold mb-3 outfit-font"><span class="ru-text">Введение в dplyr 1.0.0</span><span class="en-text">Intro to dplyr 1.0.0</span></h3>
-                        <p class="text-slate-400 text-sm mb-6 flex-1"><span class="ru-text">Грамматика манипуляции данными. Полный разбор синтаксиса.</span><span class="en-text">Data manipulation grammar. Full syntax guide.</span></p>
-                        <a href="https://selesnow.github.io/dplyr_1_0_0_course" class="inline-flex items-center gap-2 text-purple-400 font-bold hover:text-white transition-colors bg-purple-500/10 px-4 py-2 rounded-xl w-max"><span class="ru-text">Перейти к курсу</span><span class="en-text">Go to course</span> <i class="fa-solid fa-arrow-right"></i></a>
+                        <h3 class="text-2xl font-bold mb-3 outfit-font"><span class="ru-text">Введение в dplyr 1.0.0</span><span class="ua-text">Вступ до dplyr 1.0.0</span><span class="en-text">Intro to dplyr 1.0.0</span></h3>
+                        <p class="text-slate-400 text-sm mb-6 flex-1"><span class="ru-text">Грамматика манипуляции данными. Полный разбор синтаксиса.</span><span class="ua-text">Грамматика маніпулювання даними. Повний розбір синтаксису.</span><span class="en-text">Data manipulation grammar. Full syntax guide.</span></p>
+                        <a href="https://selesnow.github.io/dplyr_1_0_0_course" class="inline-flex items-center gap-2 text-purple-400 font-bold hover:text-white transition-colors bg-purple-500/10 px-4 py-2 rounded-xl w-max"><span class="ru-text">Перейти к курсу</span><span class="ua-text">Перейти до курсу</span><span class="en-text">Go to course</span> <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -641,9 +644,9 @@
                         <div class="absolute top-4 left-4 bg-blue-500/20 border border-blue-500/50 text-blue-400 text-[10px] uppercase font-bold px-3 py-1 rounded-full backdrop-blur-lg">MIDDLE</div>
                     </div>
                     <div class="px-4 pb-4 flex-1 flex flex-col">
-                        <h3 class="text-2xl font-bold mb-3 outfit-font"><span class="ru-text">Циклы и функционалы</span><span class="en-text">Loops and Functionals</span></h3>
-                        <p class="text-slate-400 text-sm mb-6 flex-1"><span class="ru-text">Эффективное использование итераций, purrr и параллельные вычисления.</span><span class="en-text">Efficient iterations, purrr, and parallel computing.</span></p>
-                        <a href="https://selesnow.github.io/iterations_in_r/" class="inline-flex items-center gap-2 text-purple-400 font-bold hover:text-white transition-colors bg-purple-500/10 px-4 py-2 rounded-xl w-max"><span class="ru-text">Перейти к курсу</span><span class="en-text">Go to course</span> <i class="fa-solid fa-arrow-right"></i></a>
+                        <h3 class="text-2xl font-bold mb-3 outfit-font"><span class="ru-text">Циклы и функционалы</span><span class="ua-text">Цикли та функціонали</span><span class="en-text">Loops and Functionals</span></h3>
+                        <p class="text-slate-400 text-sm mb-6 flex-1"><span class="ru-text">Эффективное использование итераций, purrr и параллельные вычисления.</span><span class="ua-text">Ефективне використання ітерацій, purrr та паралельні обчислення.</span><span class="en-text">Efficient iterations, purrr, and parallel computing.</span></p>
+                        <a href="https://selesnow.github.io/iterations_in_r/" class="inline-flex items-center gap-2 text-purple-400 font-bold hover:text-white transition-colors bg-purple-500/10 px-4 py-2 rounded-xl w-max"><span class="ru-text">Перейти к курсу</span><span class="ua-text">Перейти до курсу</span><span class="en-text">Go to course</span> <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -656,9 +659,9 @@
                         <div class="absolute top-4 left-4 bg-orange-500/20 border border-orange-500/50 text-orange-400 text-[10px] uppercase font-bold px-3 py-1 rounded-full backdrop-blur-lg">ADVANCED</div>
                     </div>
                     <div class="px-4 pb-4 flex-1 flex flex-col">
-                        <h3 class="text-2xl font-bold mb-3 outfit-font"><span class="ru-text">Telegram боты на R</span><span class="en-text">Telegram Bots on R</span></h3>
-                        <p class="text-slate-400 text-sm mb-6 flex-1"><span class="ru-text">Создание логических ботов, Docker и деплой в облако.</span><span class="en-text">Logic bots creation, Docker, and cloud deployment.</span></p>
-                        <a href="https://selesnow.github.io/build_telegram_bot_using_r/" class="inline-flex items-center gap-2 text-purple-400 font-bold hover:text-white transition-colors bg-purple-500/10 px-4 py-2 rounded-xl w-max"><span class="ru-text">Перейти к курсу</span><span class="en-text">Go to course</span> <i class="fa-solid fa-arrow-right"></i></a>
+                        <h3 class="text-2xl font-bold mb-3 outfit-font"><span class="ru-text">Telegram боты на R</span><span class="ua-text">Telegram боти на R</span><span class="en-text">Telegram Bots on R</span></h3>
+                        <p class="text-slate-400 text-sm mb-6 flex-1"><span class="ru-text">Создание логических ботов, Docker и деплой в облако.</span><span class="ua-text">Створення логічних ботів, Docker та деплой у хмару.</span><span class="en-text">Logic bots creation, Docker, and cloud deployment.</span></p>
+                        <a href="https://selesnow.github.io/build_telegram_bot_using_r/" class="inline-flex items-center gap-2 text-purple-400 font-bold hover:text-white transition-colors bg-purple-500/10 px-4 py-2 rounded-xl w-max"><span class="ru-text">Перейти к курсу</span><span class="ua-text">Перейти до курсу</span><span class="en-text">Go to course</span> <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -671,9 +674,9 @@
                         <div class="absolute top-4 left-4 bg-orange-500/20 border border-orange-500/50 text-orange-400 text-[10px] uppercase font-bold px-3 py-1 rounded-full backdrop-blur-lg">ADVANCED</div>
                     </div>
                     <div class="px-4 pb-4 flex-1 flex flex-col">
-                        <h3 class="text-2xl font-bold mb-3 outfit-font"><span class="ru-text">Разработка пакетов</span><span class="en-text">Package Development</span></h3>
-                        <p class="text-slate-400 text-sm mb-6 flex-1"><span class="ru-text">От создания структуры до публикации на CRAN.</span><span class="en-text">From structure to CRAN publication.</span></p>
-                        <a href="https://selesnow.github.io/r_package_course/" class="inline-flex items-center gap-2 text-purple-400 font-bold hover:text-white transition-colors bg-purple-500/10 px-4 py-2 rounded-xl w-max"><span class="ru-text">Перейти к курсу</span><span class="en-text">Go to course</span> <i class="fa-solid fa-arrow-right"></i></a>
+                        <h3 class="text-2xl font-bold mb-3 outfit-font"><span class="ru-text">Разработка пакетов</span><span class="ua-text">Розробка пакетів</span><span class="en-text">Package Development</span></h3>
+                        <p class="text-slate-400 text-sm mb-6 flex-1"><span class="ru-text">От создания структуры до публикации на CRAN.</span><span class="ua-text">Від створення структури до публікації на CRAN.</span><span class="en-text">From structure to CRAN publication.</span></p>
+                        <a href="https://selesnow.github.io/r_package_course/" class="inline-flex items-center gap-2 text-purple-400 font-bold hover:text-white transition-colors bg-purple-500/10 px-4 py-2 rounded-xl w-max"><span class="ru-text">Перейти к курсу</span><span class="ua-text">Перейти до курсу</span><span class="en-text">Go to course</span> <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -686,9 +689,9 @@
                         <div class="absolute top-4 left-4 bg-purple-500 border border-purple-400/50 text-white shadow-[0_0_15px_rgba(168,85,247,0.6)] text-[10px] uppercase font-bold px-3 py-1 rounded-full">NEW</div>
                     </div>
                     <div class="px-4 pb-4 flex-1 flex flex-col">
-                        <h3 class="text-2xl font-bold mb-3 outfit-font"><span class="ru-text">AI инструменты на R</span><span class="en-text">AI Tools on R</span></h3>
+                        <h3 class="text-2xl font-bold mb-3 outfit-font"><span class="ru-text">AI инструменты на R</span><span class="ua-text">AI інструменти на R</span><span class="en-text">AI Tools on R</span></h3>
                         <p class="text-slate-400 text-sm mb-6 flex-1"><span class="ru-text">Работа с LLM API (ChatGPT, Claude), RAG приложения и Shiny.</span><span class="en-text">LLM API (ChatGPT, Claude), RAG apps, and Shiny.</span></p>
-                        <a href="https://selesnow.github.io/build_ai_tools_using_r" class="inline-flex items-center gap-2 text-purple-400 font-bold hover:text-white transition-colors bg-purple-500/30 border border-purple-500/50 px-4 py-2 rounded-xl w-max"><span class="ru-text">Перейти к курсу</span><span class="en-text">Go to course</span> <i class="fa-solid fa-arrow-right"></i></a>
+                        <a href="https://selesnow.github.io/build_ai_tools_using_r" class="inline-flex items-center gap-2 text-purple-400 font-bold hover:text-white transition-colors bg-purple-500/30 border border-purple-500/50 px-4 py-2 rounded-xl w-max"><span class="ru-text">Перейти к курсу</span><span class="ua-text">Перейти до курсу</span><span class="en-text">Go to course</span> <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -698,12 +701,12 @@
     <!-- CONTENT PROJECTS -->
     <section id="content" class="py-24 px-6 max-w-7xl mx-auto relative z-10">
         <h2 class="text-4xl font-extrabold mb-12 flex items-center gap-4 outfit-font" data-aos="fade-up">
-            <i class="fa-solid fa-users-viewfinder text-purple-500"></i> <span class="ru-text">Медиа проекты</span><span class="en-text">Content Projects</span>
+            <i class="fa-solid fa-users-viewfinder text-purple-500"></i> <span class="ru-text">Медиа проекты</span><span class="ua-text">Медіапроєкти</span><span class="en-text">Content Projects</span>
         </h2>
 
         <div class="bento-glass p-6 md:p-10 mb-12 border-l-4 border-blue-400/50" data-aos="fade-up" data-aos-delay="100">
             <p class="text-lg md:text-xl text-slate-300 leading-relaxed font-light">
-                <span class="ru-text">В рамках проекта <strong class="text-white font-semibold">R4marketing</strong> я развиваю экспертное сообщество в Telegram и на YouTube. Основная цель проекта — популяризация языка R среди аналитиков и обучение современным методам работы с данными в маркетинге.</span>
+                <span class="ru-text">В рамках проекта <strong class="text-white font-semibold">R4marketing</strong> я развиваю экспертное сообщество в Telegram и на YouTube. Основная цель проекта — популяризация языка R среди аналитиков и обучение современным методам работы с данными в маркетинге.</span><span class="ua-text">У межах проєкту <strong class="text-white font-semibold">R4marketing</strong> я розвиваю експертну спільноту в Telegram та на YouTube. Основна мета проєкту — популяризація мови R серед аналітиків та навчання сучасних методів роботи з даними у маркетингу.</span>
                 <span class="en-text">Through the <strong class="text-white font-semibold">R4marketing</strong> project, I am building an expert community on Telegram and YouTube. The main goal of the project is to popularize the R language among analysts and teach modern data handling methods in marketing.</span>
             </p>
         </div>
@@ -716,9 +719,9 @@
                         <div class="px-4 py-1 bg-blue-500/20 border border-blue-500/30 rounded-full text-blue-300 text-xs font-bold uppercase tracking-wider">Top Channel</div>
                     </div>
                     <div class="text-6xl font-black text-white mb-2 outfit-font group-hover:tracking-wider transition-all">4 200+</div>
-                    <p class="text-slate-400 font-medium text-lg"><span class="ru-text">Подписчиков в Telegram канале R4marketing</span><span class="en-text">Subscribers on R4marketing Telegram</span></p>
+                    <p class="text-slate-400 font-medium text-lg"><span class="ru-text">Подписчиков в Telegram канале R4marketing</span><span class="ua-text">Підписників у Telegram-каналі R4marketing</span><span class="en-text">Subscribers on R4marketing Telegram</span></p>
                     <div class="mt-8 pt-6 border-t border-white/5 text-blue-400 text-sm font-bold flex items-center justify-between group-hover:px-2 transition-all">
-                        <span><span class="ru-text">Присоединиться</span><span class="en-text">Join now</span></span>
+                        <span><span class="ru-text">Присоединиться</span><span class="ua-text">Приєднатися</span><span class="en-text">Join now</span></span>
                         <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center group-hover:bg-blue-500 group-hover:text-white transition-colors"><i class="fa-solid fa-arrow-right"></i></div>
                     </div>
                 </div>
@@ -734,9 +737,9 @@
                         <div class="px-4 py-1 bg-red-500/20 border border-red-500/30 rounded-full text-red-300 text-xs font-bold uppercase tracking-wider">Tutorials</div>
                     </div>
                     <div class="text-6xl font-black text-white mb-2 outfit-font group-hover:tracking-wider transition-all">3 300+</div>
-                    <p class="text-slate-400 font-medium text-lg"><span class="ru-text">Подписчиков на YouTube канале R4marketing</span><span class="en-text">Subscribers on R4marketing YouTube</span></p>
+                    <p class="text-slate-400 font-medium text-lg"><span class="ru-text">Подписчиков на YouTube канале R4marketing</span><span class="ua-text">Підписників на YouTube-каналі R4marketing</span><span class="en-text">Subscribers on R4marketing YouTube</span></p>
                     <div class="mt-8 pt-6 border-t border-white/5 text-red-400 text-sm font-bold flex items-center justify-between group-hover:px-2 transition-all">
-                        <span><span class="ru-text">Смотреть видео</span><span class="en-text">Watch videos</span></span>
+                        <span><span class="ru-text">Смотреть видео</span><span class="ua-text">Дивитися відео</span><span class="en-text">Watch videos</span></span>
                         <div class="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center group-hover:bg-red-500 group-hover:text-white transition-colors"><i class="fa-solid fa-arrow-right"></i></div>
                     </div>
                 </div>
@@ -752,8 +755,8 @@
                     <i class="fa-solid fa-pen-nib"></i>
                 </div>
                 <div class="bento-content flex-1">
-                    <h3 class="text-xl font-bold text-white mb-1 outfit-font group-hover:text-purple-300 transition-colors"><span class="ru-text">Личный Блог</span><span class="en-text">Personal Blog</span></h3>
-                    <p class="text-slate-400 text-sm"><span class="ru-text">Технические статьи, кейсы и заметки про аналитику.</span><span class="en-text">Technical articles, cases, and analytics notes.</span></p>
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font group-hover:text-purple-300 transition-colors"><span class="ru-text">Личный Блог</span><span class="ua-text">Особистий blog</span><span class="en-text">Personal Blog</span><span class="ua-text">Особистий блог</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Технические статьи, кейсы и заметки про аналитику.</span><span class="ua-text">Технічні статті, кейси та нотатки про аналітику.</span><span class="en-text">Technical articles, cases, and analytics notes.</span></p>
                 </div>
                 <div class="bento-content w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-colors shrink-0">
                     <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>
@@ -765,8 +768,8 @@
                     <i class="fa-solid fa-h"></i>
                 </div>
                 <div class="bento-content flex-1">
-                    <h3 class="text-xl font-bold text-white mb-1 outfit-font group-hover:text-blue-300 transition-colors"><span class="ru-text">Профиль на Habr</span><span class="en-text">Habr Profile</span></h3>
-                    <p class="text-slate-400 text-sm"><span class="ru-text">Профессиональные публикации и туториалы.</span><span class="en-text">Professional publications and tutorials.</span></p>
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font group-hover:text-blue-300 transition-colors"><span class="ru-text">Профиль на Habr</span><span class="ua-text">Профіль на Habr</span><span class="en-text">Habr Profile</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Профессиональные публикации и туториалы.</span><span class="ua-text">Професійні публікації та туторіали.</span><span class="en-text">Professional publications and tutorials.</span></p>
                 </div>
                 <div class="bento-content w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-colors shrink-0">
                     <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>
@@ -784,14 +787,14 @@
                 <h2 class="text-4xl font-extrabold mb-10 flex items-center gap-4 outfit-font" data-aos="fade-up">
                     <i class="fa-solid fa-microphone-lines text-purple-500 px-4 py-3 bg-purple-500/10 rounded-2xl"></i> 
                     <div>
-                        <span class="ru-text">Конференции</span><span class="en-text">Conferences</span>
+                        <span class="ru-text">Конференции</span><span class="ua-text">Конференції</span><span class="en-text">Conferences</span>
                         <div class="text-sm font-medium text-slate-500 mt-1">15 Talks</div>
                     </div>
                 </h2>
 
                 <div class="bento-glass p-6 md:p-10 mb-12 border-l-4 border-purple-500/50" data-aos="fade-up" data-aos-delay="100">
                     <p class="text-lg md:text-xl text-slate-300 leading-relaxed font-light">
-                        <span class="ru-text">Регулярно выступаю в качестве спикера на крупнейших конференциях по аналитике и интернет-маркетингу. Делюсь практическим опытом автоматизации и внедрения передовых технологий на таких площадках, как <strong class="text-white font-semibold">8P</strong>, <strong class="text-white font-semibold">Матемаркетинг</strong>, <strong class="text-white font-semibold">GoAnalytics</strong> и других значимых отраслевых событиях.</span>
+                        <span class="ru-text">Регулярно выступаю в качестве спикера на крупнейших конференциях по аналитике и интернет-маркетингу. Делюсь практическим опытом автоматизации и внедрения передовых технологий на таких площадках, как <strong class="text-white font-semibold">8P</strong>, <strong class="text-white font-semibold">Матемаркетинг</strong>, <strong class="text-white font-semibold">GoAnalytics</strong> и других значимых отраслевых событиях.</span><span class="ua-text">Регулярно виступаю як спікер на найбільших конференціях з аналітики та інтернет-маркетингу. Ділюся практичним досвідом автоматизації та впровадження передових технологій на таких майданчиках, як <strong class="text-white font-semibold">8P</strong>, <strong class="text-white font-semibold">Матемаркетинг</strong>, <strong class="text-white font-semibold">GoAnalytics</strong> та інших важливих галузевих подіях.</span>
                         <span class="en-text">Regularly speak at major analytics and digital marketing conferences. Share practical experience in automation and cutting-edge technology implementation at venues such as <strong class="text-white font-semibold">8P</strong>, <strong class="text-white font-semibold">Matemarketing</strong>, <strong class="text-white font-semibold">GoAnalytics</strong>, and other significant industry events.</span>
                     </p>
                 </div>
@@ -800,7 +803,7 @@
                     <a href="https://www.youtube.com/watch?v=EnImByySQEE" class="bento-glass p-5 rounded-2xl group block" data-aos="fade-up">
                         <div class="bento-content">
                             <div class="text-[10px] bg-purple-500/10 w-max px-2 py-1 rounded text-purple-400 font-bold mb-3 font-mono border border-purple-500/20">SEP 2023 • KAZAKHSTAN SOC LAB</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">Анализ показателя качества ключевых слов в Google Ads</span><span class="en-text">Google Ads Keyword Quality Score Analysis</span></div>
+                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">Анализ показателя качества ключевых слов в Google Ads</span><span class="ua-text">Аналіз показника якості ключових слів у Google Ads</span><span class="en-text">Google Ads Keyword Quality Score Analysis</span></div>
                         </div>
                     </a>
 
@@ -814,49 +817,49 @@
                     <a href="https://youtu.be/uAF3YmjRTqU" class="bento-glass p-5 rounded-2xl group block" data-aos="fade-up" data-aos-delay="100">
                         <div class="bento-content">
                             <div class="text-[10px] bg-purple-500/10 w-max px-2 py-1 rounded text-purple-400 font-bold mb-3 font-mono border border-purple-500/20">DEC 2020 • EXCEL & POWER BI</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">R коннектор: данные из Вконтакте в Power BI</span><span class="en-text">R connector: VK data to Power BI</span></div>
+                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">R коннектор: данные из Вконтакте в Power BI</span><span class="ua-text">R коннектор: дані з Вконтакте у Power BI</span><span class="en-text">R connector: VK data to Power BI</span></div>
                         </div>
                     </a>
 
                     <a href="https://youtu.be/bbYC-uq250A" class="bento-glass p-5 rounded-2xl group block" data-aos="fade-up">
                         <div class="bento-content">
                             <div class="text-[10px] bg-purple-500/10 w-max px-2 py-1 rounded text-purple-400 font-bold mb-3 font-mono border border-purple-500/20">NOV 2020 • PRODUCT STAR</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">Учим язык R на примере SQL запросов</span><span class="en-text">Learning R through SQL queries</span></div>
+                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">Учим язык R на примере SQL запросов</span><span class="ua-text">Вчимо мову R на прикладі SQL запитів</span><span class="en-text">Learning R through SQL queries</span></div>
                         </div>
                     </a>
 
                     <a href="https://youtu.be/QrTCa4wLWjI" class="bento-glass p-5 rounded-2xl group block" data-aos="fade-up" data-aos-delay="50">
                         <div class="bento-content">
                             <div class="text-[10px] bg-purple-500/10 w-max px-2 py-1 rounded text-purple-400 font-bold mb-3 font-mono border border-purple-500/20">AUG 2020 • ZM CONF</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">Telegram бот для получения данных из Метрики</span><span class="en-text">Telegram bot for Yandex Metrica data</span></div>
+                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">Telegram бот для получения данных из Метрики</span><span class="ua-text">Telegram-бот для отримання даних з Метрики</span><span class="en-text">Telegram bot for Yandex Metrica data</span></div>
                         </div>
                     </a>
 
                     <a href="https://youtu.be/p2D_iLZ1f-8" class="bento-glass p-5 rounded-2xl group block" data-aos="fade-up" data-aos-delay="100">
                         <div class="bento-content">
                             <div class="text-[10px] bg-purple-500/10 w-max px-2 py-1 rounded text-purple-400 font-bold mb-3 font-mono border border-purple-500/20">JUL 2020 • 8P ONLINE</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">Как работать с API Google Analytics на языке R</span><span class="en-text">How to work with Google Analytics API using R</span></div>
+                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">Как работать с API Google Analytics на языке R</span><span class="ua-text">Як працювати з API Google Analytics мовою R</span><span class="en-text">How to work with Google Analytics API using R</span></div>
                         </div>
                     </a>
 
                     <a href="https://youtu.be/de1QW80FsiA" class="bento-glass p-5 rounded-2xl group block" data-aos="fade-up">
                         <div class="bento-content">
                             <div class="text-[10px] bg-purple-500/10 w-max px-2 py-1 rounded text-purple-400 font-bold mb-3 font-mono border border-purple-500/20">SEP 2019 • ANALYZE! LVIV</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">Работа с Facebook Marketing API на языке R</span><span class="en-text">Working with Facebook Marketing API using R</span></div>
+                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">Работа с Facebook Marketing API на языке R</span><span class="ua-text">Робота з Facebook Marketing API мовою R</span><span class="en-text">Working with Facebook Marketing API using R</span></div>
                         </div>
                     </a>
 
                     <a href="https://www.youtube.com/watch?v=fLP0gbsYF1k" class="bento-glass p-5 rounded-2xl group block" data-aos="fade-up" data-aos-delay="50">
                         <div class="bento-content">
                             <div class="text-[10px] bg-purple-500/10 w-max px-2 py-1 rounded text-purple-400 font-bold mb-3 font-mono border border-purple-500/20">APR 2019 • GOANALYTICS</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">Информационные дайджесты для контроля маркетологов</span><span class="en-text">Information digests for marketer control</span></div>
+                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">Информационные дайджесты для контроля маркетологов</span><span class="ua-text">Інформаційні дайджести для контролю маркетологів</span><span class="en-text">Information digests for marketer control</span></div>
                         </div>
                     </a>
 
                     <a href="https://www.youtube.com/watch?v=Ju98kWnec14" class="bento-glass p-5 rounded-2xl group block" data-aos="fade-up" data-aos-delay="100">
                         <div class="bento-content">
                             <div class="text-[10px] bg-purple-500/10 w-max px-2 py-1 rounded text-purple-400 font-bold mb-3 font-mono border border-purple-500/20">DEC 2018 • LVIV ICAMP</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">Три шага для построения отдела аналитики</span><span class="en-text">Three steps to build an analytics dept</span></div>
+                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">Три шага для построения отдела аналитики</span><span class="ua-text">Три кроки для побудови відділу аналітики</span><span class="en-text">Three steps to build an analytics dept</span></div>
                         </div>
                     </a>
 
@@ -870,35 +873,35 @@
                     <a href="https://youtu.be/1X1EKt6tDHU" class="bento-glass p-5 rounded-2xl group block" data-aos="fade-up" data-aos-delay="50">
                         <div class="bento-content">
                             <div class="text-[10px] bg-purple-500/10 w-max px-2 py-1 rounded text-purple-400 font-bold mb-3 font-mono border border-purple-500/20">NOV 2018 • MATEMARKETING</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">R для маркетолога: Мастер класс</span><span class="en-text">R for Marketers: Master Class</span></div>
+                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">R для маркетолога: Мастер класс</span><span class="ua-text">R для маркетолога: Майстер-клас</span><span class="en-text">R for Marketers: Master Class</span></div>
                         </div>
                     </a>
 
                     <a href="https://netpeak.ua/conference/390/" class="bento-glass p-5 rounded-2xl group block" data-aos="fade-up" data-aos-delay="100">
                         <div class="bento-content">
                             <div class="text-[10px] bg-purple-500/10 w-max px-2 py-1 rounded text-purple-400 font-bold mb-3 font-mono border border-purple-500/20">MAY 2018 • KYIV DATA SPRING</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">Как построить отдел аналитики в крупной компании</span><span class="en-text">Building an analytics dept in a large corp</span></div>
+                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">Как построить отдел аналитики в крупной компании</span><span class="ua-text">Як побудувати відділ аналітики у великій компанії</span><span class="en-text">Building an analytics dept in a large corp</span></div>
                         </div>
                     </a>
                     
                     <a href="https://www.youtube.com/watch?v=wRlRd_b-qAs" class="bento-glass p-5 rounded-2xl group block" data-aos="fade-up">
                         <div class="bento-content">
                             <div class="text-[10px] bg-purple-500/10 w-max px-2 py-1 rounded text-purple-400 font-bold mb-3 font-mono border border-purple-500/20">APR 2018 • ANALYZE</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">Язык R в маркетине и бизнесе</span><span class="en-text">R language in marketing and business</span></div>
+                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">Язык R в маркетине и бизнесе</span><span class="ua-text">Мова R у маркетингу та бізнесі</span><span class="en-text">R language in marketing and business</span></div>
                         </div>
                     </a>
 
                     <a href="https://www.youtube.com/watch?v=L1ApUOea7Qc" class="bento-glass p-5 rounded-2xl group block" data-aos="fade-up" data-aos-delay="50">
                         <div class="bento-content">
                             <div class="text-[10px] bg-purple-500/10 w-max px-2 py-1 rounded text-purple-400 font-bold mb-3 font-mono border border-purple-500/20">NOV 2017 • ECOMMERCE</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">Как разобраться со своими данными, если ты не аналитик</span><span class="en-text">Handling data if you're not an analyst</span></div>
+                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">Как разобраться со своими данными, если ты не аналитик</span><span class="ua-text">Як розібратися зі своїми даними, якщо ти не аналітик</span><span class="en-text">Handling data if you're not an analyst</span></div>
                         </div>
                     </a>
 
                     <a href="https://www.youtube.com/watch?v=pM8DQ0lLM6k" class="bento-glass p-5 rounded-2xl group block" data-aos="fade-up" data-aos-delay="100">
                         <div class="bento-content">
                             <div class="text-[10px] bg-purple-500/10 w-max px-2 py-1 rounded text-purple-400 font-bold mb-3 font-mono border border-purple-500/20">APR 2017 • ANALYZE</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">BI решение для отдела контекстной рекламы</span><span class="en-text">BI solution for PPC department</span></div>
+                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">BI решение для отдела контекстной рекламы</span><span class="ua-text">BI рішення для відділу контекстної реклами</span><span class="en-text">BI solution for PPC department</span></div>
                         </div>
                     </a>
                 </div>
@@ -908,7 +911,7 @@
                 <h2 class="text-4xl font-extrabold mb-10 flex items-center gap-4 outfit-font" data-aos="fade-up">
                     <i class="fa-solid fa-video text-blue-500 px-4 py-3 bg-blue-500/10 rounded-2xl"></i>
                     <div>
-                        <span class="ru-text">Вебинары</span><span class="en-text">Webinars</span>
+                        <span class="ru-text">Вебинары</span><span class="ua-text">Вебінари</span><span class="en-text">Webinars</span>
                         <div class="text-sm font-medium text-slate-500 mt-1">7 Sessions</div>
                     </div>
                 </h2>
@@ -924,14 +927,14 @@
                     <a href="https://youtu.be/I2KjERuZ3XY?t=3789" class="bento-glass p-5 rounded-2xl group block border-l-[3px] border-l-blue-500" data-aos="fade-up" data-aos-delay="50">
                         <div class="bento-content">
                             <div class="text-[10px] bg-blue-500/10 w-max px-2 py-1 rounded text-blue-400 font-bold mb-3 font-mono">JUL 2020 • PRODUCTSTAR</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 outfit-font group-hover:text-white"><span class="ru-text">Основы Python. Работа с библиотекой Pandas</span><span class="en-text">Python Basics. Pandas library</span></div>
+                            <div class="font-bold text-[15px] leading-tight text-slate-200 outfit-font group-hover:text-white"><span class="ru-text">Основы Python. Работа с библиотекой Pandas</span><span class="ua-text">Основи Python. Робота з бібліотекою Pandas</span><span class="en-text">Python Basics. Pandas library</span></div>
                         </div>
                     </a>
 
                     <a href="https://youtu.be/zWGocRhDumk" class="bento-glass p-5 rounded-2xl group block border-l-[3px] border-l-blue-500" data-aos="fade-up" data-aos-delay="100">
                         <div class="bento-content">
                             <div class="text-[10px] bg-blue-500/10 w-max px-2 py-1 rounded text-blue-400 font-bold mb-3 font-mono">APR 2020 • EUSP</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 outfit-font group-hover:text-white"><span class="ru-text">R meetup: Чем нас порадует dplyr 1.0.0</span><span class="en-text">R meetup: What's new in dplyr 1.0.0</span></div>
+                            <div class="font-bold text-[15px] leading-tight text-slate-200 outfit-font group-hover:text-white"><span class="ru-text">R meetup: Чем нас порадует dplyr 1.0.0</span><span class="ua-text">R meetup: Чим нас порадує dplyr 1.0.0</span><span class="en-text">R meetup: What's new in dplyr 1.0.0</span></div>
                         </div>
                     </a>
 
@@ -945,21 +948,21 @@
                     <a href="https://youtu.be/mUn2Uwsvy0U" class="bento-glass p-5 rounded-2xl group block border-l-[3px] border-l-blue-500" data-aos="fade-up" data-aos-delay="50">
                         <div class="bento-content">
                             <div class="text-[10px] bg-blue-500/10 w-max px-2 py-1 rounded text-blue-400 font-bold mb-3 font-mono">NOV 2018 • AUTOMATIONDAY</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 outfit-font group-hover:text-white"><span class="ru-text">Избавляемся от рутины с помощью R</span><span class="en-text">Getting rid of routine with R</span></div>
+                            <div class="font-bold text-[15px] leading-tight text-slate-200 outfit-font group-hover:text-white"><span class="ru-text">Избавляемся от рутины с помощью R</span><span class="ua-text">Позбуваємося рутини за допомогою R</span><span class="en-text">Getting rid of routine with R</span></div>
                         </div>
                     </a>
 
                     <a href="https://www.youtube.com/watch?v=sCp2D6068es" class="bento-glass p-5 rounded-2xl group block border-l-[3px] border-l-blue-500" data-aos="fade-up" data-aos-delay="100">
                         <div class="bento-content">
                             <div class="text-[10px] bg-blue-500/10 w-max px-2 py-1 rounded text-blue-400 font-bold mb-3 font-mono">NOV 2018 • CYBERMARKETING</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 outfit-font group-hover:text-white"><span class="ru-text">Автоматизация Яндекс Метрики через пакет rym</span><span class="en-text">Yandex Metrica automation via rym</span></div>
+                            <div class="font-bold text-[15px] leading-tight text-slate-200 outfit-font group-hover:text-white"><span class="ru-text">Автоматизация Яндекс Метрики через пакет rym</span><span class="ua-text">Автоматизація Яндекс Метрики через пакет rym</span><span class="en-text">Yandex Metrica automation via rym</span></div>
                         </div>
                     </a>
 
                     <a href="https://www.youtube.com/watch?v=Kh-wyU-VXRU" class="bento-glass p-5 rounded-2xl group block border-l-[3px] border-l-blue-500" data-aos="fade-up">
                         <div class="bento-content">
                             <div class="text-[10px] bg-blue-500/10 w-max px-2 py-1 rounded text-blue-400 font-bold mb-3 font-mono">NOV 2018 • WPE</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 outfit-font group-hover:text-white"><span class="ru-text">Как маркетологу заняться маркетингом</span><span class="en-text">How to let marketers do marketing</span></div>
+                            <div class="font-bold text-[15px] leading-tight text-slate-200 outfit-font group-hover:text-white"><span class="ru-text">Как маркетологу заняться маркетингом</span><span class="ua-text">Як маркетологу зайнятися маркетингом</span><span class="en-text">How to let marketers do marketing</span></div>
                         </div>
                     </a>
                 </div>
@@ -972,7 +975,7 @@
         <h2 class="text-4xl font-extrabold mb-12 flex items-center gap-4 outfit-font" data-aos="fade-up">
             <i class="fa-regular fa-newspaper text-slate-400"></i>
             <div>
-                <span class="ru-text">Интервью и Статьи</span><span class="en-text">Interviews & Articles</span>
+                <span class="ru-text">Интервью и Статьи</span><span class="ua-text">Інтерв'ю та статті</span><span class="en-text">Interviews & Articles</span>
                 <div class="text-sm font-medium text-slate-500 mt-1">13 Publications</div>
             </div>
         </h2>
@@ -982,7 +985,7 @@
             <a href="https://jms.university/blog/52849-yazyk-r-dlya-analitikov-i-internet-marketologov/" class="bento-glass p-4 rounded-xl flex items-start gap-4 group hover:bg-white/5 transition-all" data-aos="fade-up">
                 <div class="bento-content text-xs font-mono text-slate-500 whitespace-nowrap mt-1 uppercase font-bold">Aug 2020</div>
                 <div class="bento-content">
-                    <h4 class="font-semibold text-slate-200 group-hover:text-purple-400 transition-colors outfit-font"><span class="ru-text">Язык R для аналитиков и интернет-маркетологов</span><span class="en-text">R language for analysts and marketers</span></h4>
+                    <h4 class="font-semibold text-slate-200 group-hover:text-purple-400 transition-colors outfit-font"><span class="ru-text">Язык R для аналитиков и интернет-маркетологов</span><span class="ua-text">Мова R для аналітиків та інтернет-маркетологів</span><span class="en-text">R language for analysts and marketers</span></h4>
                     <div class="text-xs text-slate-400 mt-2 flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-slate-500"></div> JMS University</div>
                 </div>
             </a>
@@ -990,7 +993,7 @@
             <a href="https://netpeak.net/ru/blog/kak-sozdat-lichnyy-brend-v-kompanii-keys-alekseya-selezneva-rukovoditelya-otdela-analitiki-netpeak/" class="bento-glass p-4 rounded-xl flex items-start gap-4 group hover:bg-white/5 transition-all" data-aos="fade-up">
                 <div class="bento-content text-xs font-mono text-slate-500 whitespace-nowrap mt-1 uppercase font-bold">Apr 2020</div>
                 <div class="bento-content">
-                    <h4 class="font-semibold text-slate-200 group-hover:text-purple-400 transition-colors outfit-font"><span class="ru-text">Как создать личный бренд в компании — кейс</span><span class="en-text">How to build a personal brand - case study</span></h4>
+                    <h4 class="font-semibold text-slate-200 group-hover:text-purple-400 transition-colors outfit-font"><span class="ru-text">Как создать личный бренд в компании — кейс</span><span class="ua-text">Як створити особистий бренд у компанії — кейс</span><span class="en-text">How to build a personal brand - case study</span></h4>
                     <div class="text-xs text-slate-400 mt-2 flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-blue-500"></div> Блог Netpeak</div>
                 </div>
             </a>
@@ -1014,7 +1017,7 @@
             <a href="https://www.seonews.ru/analytics/trendy-veb-analitiki-2019-uskorennye-testirovaniya-borba-s-divergentnostyu-i-uvazhenie-k-lyudyam/" class="bento-glass p-4 rounded-xl flex items-start gap-4 group hover:bg-white/5 transition-all" data-aos="fade-up">
                 <div class="bento-content text-xs font-mono text-slate-500 whitespace-nowrap mt-1 uppercase font-bold">Apr 2019</div>
                 <div class="bento-content">
-                    <h4 class="font-semibold text-slate-200 group-hover:text-purple-400 transition-colors outfit-font"><span class="ru-text">Тренды веб-аналитики 2019</span><span class="en-text">Web analytics trends 2019</span></h4>
+                    <h4 class="font-semibold text-slate-200 group-hover:text-purple-400 transition-colors outfit-font"><span class="ru-text">Тренды веб-аналитики 2019</span><span class="ua-text">Тренди веб-аналітики 2019</span><span class="en-text">Web analytics trends 2019</span></h4>
                     <div class="text-xs text-slate-400 mt-2 flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-green-500"></div> SEOnews</div>
                 </div>
             </a>
@@ -1022,7 +1025,7 @@
             <a href="https://www.comagic.ru/blog/posts/feb/zachem_internet_marketologu_yazyk_r/" class="bento-glass p-4 rounded-xl flex items-start gap-4 group hover:bg-white/5 transition-all" data-aos="fade-up">
                 <div class="bento-content text-xs font-mono text-slate-500 whitespace-nowrap mt-1 uppercase font-bold">Feb 2019</div>
                 <div class="bento-content">
-                    <h4 class="font-semibold text-slate-200 group-hover:text-purple-400 transition-colors outfit-font"><span class="ru-text">Зачем интернет-маркетологу язык R</span><span class="en-text">Why marketers need R language</span></h4>
+                    <h4 class="font-semibold text-slate-200 group-hover:text-purple-400 transition-colors outfit-font"><span class="ru-text">Зачем интернет-маркетологу язык R</span><span class="ua-text">Навіщо інтернет-маркетологу мова R</span><span class="en-text">Why marketers need R language</span></h4>
                     <div class="text-xs text-slate-400 mt-2 flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-slate-500"></div> CoMagic</div>
                 </div>
             </a>
@@ -1030,7 +1033,7 @@
             <a href="https://jms.university/blog/56058-r-i-python-dlya-gumanitariev-i-neprogrammistov/" class="bento-glass p-4 rounded-xl flex items-start gap-4 group hover:bg-white/5 transition-all" data-aos="fade-up">
                 <div class="bento-content text-xs font-mono text-slate-500 whitespace-nowrap mt-1 uppercase font-bold">Feb 2019</div>
                 <div class="bento-content">
-                    <h4 class="font-semibold text-slate-200 group-hover:text-purple-400 transition-colors outfit-font"><span class="ru-text">R и Python для гуманитариев и непрограммистов</span><span class="en-text">R and Python for non-programmers</span></h4>
+                    <h4 class="font-semibold text-slate-200 group-hover:text-purple-400 transition-colors outfit-font"><span class="ru-text">R и Python для гуманитариев и непрограммистов</span><span class="ua-text">R та Python для гуманітаріїв та непрограмістів</span><span class="en-text">R and Python for non-programmers</span></h4>
                     <div class="text-xs text-slate-400 mt-2 flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-slate-500"></div> JMS University</div>
                 </div>
             </a>
@@ -1038,7 +1041,7 @@
             <a href="https://leadzavod.com/jazyk-r-v-veb-analitike-i-internet-marketinge/" class="bento-glass p-4 rounded-xl flex items-start gap-4 group hover:bg-white/5 transition-all" data-aos="fade-up">
                 <div class="bento-content text-xs font-mono text-slate-500 whitespace-nowrap mt-1 uppercase font-bold">Oct 2018</div>
                 <div class="bento-content">
-                    <h4 class="font-semibold text-slate-200 group-hover:text-purple-400 transition-colors outfit-font"><span class="ru-text">Язык R в веб-аналитике и интернет-маркетинге</span><span class="en-text">R in web analytics and marketing</span></h4>
+                    <h4 class="font-semibold text-slate-200 group-hover:text-purple-400 transition-colors outfit-font"><span class="ru-text">Язык R в веб-аналитике и интернет-маркетинге</span><span class="ua-text">Мова R у веб-аналітиці та інтернет-маркетингу</span><span class="en-text">R in web analytics and marketing</span></h4>
                     <div class="text-xs text-slate-400 mt-2 flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-slate-500"></div> Лидзавод</div>
                 </div>
             </a>
@@ -1046,7 +1049,7 @@
             <a href="https://jms.university/blog/56048-kto-takie-internet-analitiki-i-kakimi-instrumentami-oni-polzuyutsya/" class="bento-glass p-4 rounded-xl flex items-start gap-4 group hover:bg-white/5 transition-all" data-aos="fade-up">
                 <div class="bento-content text-xs font-mono text-slate-500 whitespace-nowrap mt-1 uppercase font-bold">Apr 2018</div>
                 <div class="bento-content">
-                    <h4 class="font-semibold text-slate-200 group-hover:text-purple-400 transition-colors outfit-font"><span class="ru-text">Кто такие интернет-аналитики и их инструменты</span><span class="en-text">Who are analysts and what tools they use</span></h4>
+                    <h4 class="font-semibold text-slate-200 group-hover:text-purple-400 transition-colors outfit-font"><span class="ru-text">Кто такие интернет-аналитики и их инструменты</span><span class="ua-text">Хто такі інтернет-аналітики та їхні інструменти</span><span class="en-text">Who are analysts and what tools they use</span></h4>
                     <div class="text-xs text-slate-400 mt-2 flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-slate-500"></div> JMS University</div>
                 </div>
             </a>
@@ -1054,7 +1057,7 @@
             <a href="https://ain.ua/2017/12/27/itogi-2017-blokirovki/" class="bento-glass p-4 rounded-xl flex items-start gap-4 group hover:bg-white/5 transition-all" data-aos="fade-up">
                 <div class="bento-content text-xs font-mono text-slate-500 whitespace-nowrap mt-1 uppercase font-bold">Dec 2017</div>
                 <div class="bento-content">
-                    <h4 class="font-semibold text-slate-200 group-hover:text-purple-400 transition-colors outfit-font"><span class="ru-text">Итоги-2017: как бан российских сайтов повлиял на рынок</span><span class="en-text">2017 results: impact of Russian site bans</span></h4>
+                    <h4 class="font-semibold text-slate-200 group-hover:text-purple-400 transition-colors outfit-font"><span class="ru-text">Итоги-2017: как бан российских сайтов повлиял на рынок</span><span class="ua-text">Підсумки-2017: як бан російських сайтів вплинув на ринок</span><span class="en-text">2017 results: impact of Russian site bans</span></h4>
                     <div class="text-xs text-slate-400 mt-2 flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-indigo-500"></div> AIN.UA</div>
                 </div>
             </a>
@@ -1062,7 +1065,7 @@
             <a href="https://ain.ua/2017/08/21/ban-rossijskix-sajtov-tri-mesyaca-spustya/" class="bento-glass p-4 rounded-xl flex items-start gap-4 group hover:bg-white/5 transition-all" data-aos="fade-up">
                 <div class="bento-content text-xs font-mono text-slate-500 whitespace-nowrap mt-1 uppercase font-bold">Aug 2017</div>
                 <div class="bento-content">
-                    <h4 class="font-semibold text-slate-200 group-hover:text-purple-400 transition-colors outfit-font"><span class="ru-text">Результаты бана российских сайтов: падение охватов</span><span class="en-text">Russian site ban results: reach drop</span></h4>
+                    <h4 class="font-semibold text-slate-200 group-hover:text-purple-400 transition-colors outfit-font"><span class="ru-text">Результаты бана российских сайтов: падение охватов</span><span class="ua-text">Результати бану російських сайтів: падіння охоплень</span><span class="en-text">Russian site ban results: reach drop</span></h4>
                     <div class="text-xs text-slate-400 mt-2 flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-indigo-500"></div> AIN.UA</div>
                 </div>
             </a>
@@ -1070,7 +1073,7 @@
             <a href="https://ain.ua/2017/08/18/kak-pomenyalis-ceny-na-reklamu/" class="bento-glass p-4 rounded-xl flex items-start gap-4 group hover:bg-white/5 transition-all" data-aos="fade-up">
                 <div class="bento-content text-xs font-mono text-slate-500 whitespace-nowrap mt-1 uppercase font-bold">Aug 2017</div>
                 <div class="bento-content">
-                    <h4 class="font-semibold text-slate-200 group-hover:text-purple-400 transition-colors outfit-font"><span class="ru-text">Как поменялись цены на рекламу: блиц-опрос</span><span class="en-text">Ad price changes: blitz survey</span></h4>
+                    <h4 class="font-semibold text-slate-200 group-hover:text-purple-400 transition-colors outfit-font"><span class="ru-text">Как поменялись цены на рекламу: блиц-опрос</span><span class="ua-text">Як змінилися ціни на рекламу: бліц-опитування</span><span class="en-text">Ad price changes: blitz survey</span></h4>
                     <div class="text-xs text-slate-400 mt-2 flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-indigo-500"></div> AIN.UA</div>
                 </div>
             </a>
@@ -1093,11 +1096,11 @@
                 </div>
                 <div>
                     <h3 class="text-2xl font-bold text-white outfit-font group-hover:text-purple-300 mb-1"><span class="ru-text">Более 140+ публикаций и статей</span><span class="en-text">Over 140+ publications and articles</span></h3>
-                    <p class="text-slate-400 text-sm"><span class="ru-text">Полный архив профессиональных материалов, кейсов и переводов.</span><span class="en-text">Full archive of professional materials, cases, and translations.</span></p>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Полный архив профессиональных материалов, кейсов и переводов.</span><span class="ua-text">Повний архів професійних матеріалів, кейсів та перекладів.</span><span class="en-text">Full archive of professional materials, cases, and translations.</span></p>
                 </div>
             </div>
             <div class="bento-content px-6 py-3 bg-white/5 border border-white/10 rounded-full font-bold text-sm text-white group-hover:bg-white group-hover:text-black transition-all whitespace-nowrap">
-                <span class="ru-text">Смотреть все</span><span class="en-text">View all</span> <i class="fa-solid fa-arrow-right ml-2"></i>
+                <span class="ru-text">Смотреть все</span><span class="ua-text">Дивитися все</span><span class="en-text">View all</span> <i class="fa-solid fa-arrow-right ml-2"></i>
             </div>
         </a>
     </section>
@@ -1105,13 +1108,13 @@
     <!-- CONTACTS -->
     <section id="contacts" class="py-24 px-6 max-w-7xl mx-auto relative z-10" data-aos="fade-up">
         <h2 class="text-4xl font-extrabold mb-12 flex items-center gap-4 outfit-font">
-            <i class="fa-solid fa-address-book text-purple-500 text-3xl"></i> <span class="ru-text">Контакты и соцсети</span><span class="en-text">Contacts & Social</span>
+            <i class="fa-solid fa-address-book text-purple-500 text-3xl"></i> <span class="ru-text">Контакты и соцсети</span><span class="ua-text">Контакти та соцмережі</span><span class="en-text">Contacts & Social</span>
         </h2>
         
         <div class="grid md:grid-cols-2 gap-8">
             <div class="bento-glass p-10 rounded-[2rem] space-y-8" style="background: linear-gradient(145deg, rgba(30,41,59,0.7), rgba(15,23,42,0.9)); border-color: rgba(168,85,247,0.3);">
                 <div class="bento-content">
-                    <h3 class="text-2xl font-bold text-white border-b border-white/10 pb-6 mb-8 outfit-font"><span class="ru-text">Напишите мне</span><span class="en-text">Message me</span></h3>
+                    <h3 class="text-2xl font-bold text-white border-b border-white/10 pb-6 mb-8 outfit-font"><span class="ru-text">Напишите мне</span><span class="ua-text">Напишіть мені</span><span class="en-text">Message me</span></h3>
                     <div class="space-y-8">
                         <div class="flex items-center gap-6 group">
                             <div class="w-14 h-14 bg-purple-500/10 rounded-2xl flex items-center justify-center text-purple-400 group-hover:bg-purple-500 group-hover:text-white transition-all group-hover:scale-110 shadow-lg">
@@ -1138,24 +1141,24 @@
 
             <div class="bento-glass p-10 rounded-[2rem]">
                 <div class="bento-content">
-                    <h3 class="text-2xl font-bold text-white mb-6 border-b border-white/10 pb-6 outfit-font"><span class="ru-text">Соцсети</span><span class="en-text">Social Media</span></h3>
+                    <h3 class="text-2xl font-bold text-white mb-6 border-b border-white/10 pb-6 outfit-font"><span class="ru-text">Соцсети</span><span class="ua-text">Соцмережі</span><span class="en-text">Social Media</span></h3>
                     <ul class="space-y-4">
                         <li>
                             <a href="https://github.com/selesnow" target="_blank" class="flex items-center gap-5 p-4 rounded-2xl hover:bg-white/5 transition-all group border border-transparent hover:border-white/10">
                                 <i class="fa-brands fa-github text-3xl text-slate-500 group-hover:text-white transition-colors group-hover:scale-110"></i>
-                                <span class="text-slate-300 group-hover:text-white font-medium text-lg"><span class="ru-text">Профиль на GitHub</span><span class="en-text">GitHub Profile</span></span>
+                                <span class="text-slate-300 group-hover:text-white font-medium text-lg"><span class="ru-text">Профиль на GitHub</span><span class="ua-text">Профіль на GitHub</span><span class="en-text">GitHub Profile</span></span>
                             </a>
                         </li>
                         <li>
                             <a href="https://linkedin.com/in/selesnow" target="_blank" class="flex items-center gap-5 p-4 rounded-2xl hover:bg-white/5 transition-all group border border-transparent hover:border-white/10">
                                 <i class="fa-brands fa-linkedin text-3xl text-slate-500 group-hover:text-blue-500 transition-colors group-hover:scale-110"></i>
-                                <span class="text-slate-300 group-hover:text-white font-medium text-lg"><span class="ru-text">Профиль на Linkedin</span><span class="en-text">Linkedin Profile</span></span>
+                                <span class="text-slate-300 group-hover:text-white font-medium text-lg"><span class="ru-text">Профиль на Linkedin</span><span class="ua-text">Профіль на Linkedin</span><span class="en-text">Linkedin Profile</span></span>
                             </a>
                         </li>
                         <li>
                             <a href="https://facebook.com/selesnow" target="_blank" class="flex items-center gap-5 p-4 rounded-2xl hover:bg-white/5 transition-all group border border-transparent hover:border-white/10">
                                 <i class="fa-brands fa-facebook text-3xl text-slate-500 group-hover:text-blue-600 transition-colors group-hover:scale-110"></i>
-                                <span class="text-slate-300 group-hover:text-white font-medium text-lg"><span class="ru-text">Страница в Facebook</span><span class="en-text">Facebook Page</span></span>
+                                <span class="text-slate-300 group-hover:text-white font-medium text-lg"><span class="ru-text">Страница в Facebook</span><span class="ua-text">Сторінка у Facebook</span><span class="en-text">Facebook Page</span></span>
                             </a>
                         </li>
                         <li>
@@ -1173,7 +1176,7 @@
     <!-- FOOTER -->
     <footer class="border-t border-white/5 bg-slate-950/80 backdrop-blur-md pt-20 pb-10 text-center relative z-10">
         <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-3xl font-extrabold mb-10 outfit-font"><span class="ru-text">Следите за обновлениями в R4marketing</span><span class="en-text">Follow R4marketing updates</span></h2>
+            <h2 class="text-3xl font-extrabold mb-10 outfit-font"><span class="ru-text">Следите за обновлениями в R4marketing</span><span class="ua-text">Стежте за оновленнями в R4marketing</span><span class="en-text">Follow R4marketing updates</span></h2>
             <div class="flex justify-center gap-8 mb-16">
                 <a href="https://t.me/R4marketing" class="w-16 h-16 rounded-3xl bg-blue-500/10 flex items-center justify-center text-blue-400 text-3xl hover:bg-blue-500 hover:text-white transition-all transform hover:scale-110 hover:-translate-y-2 border border-blue-500/20 shadow-lg"><i class="fa-brands fa-telegram"></i></a>
                 <a href="https://www.youtube.com/R4marketing" class="w-16 h-16 rounded-3xl bg-red-500/10 flex items-center justify-center text-red-500 text-3xl hover:bg-red-500 hover:text-white transition-all transform hover:scale-110 hover:-translate-y-2 border border-red-500/20 shadow-lg"><i class="fa-brands fa-youtube"></i></a>
@@ -1338,21 +1341,23 @@
             });
         }
 
-        // --- ЛОГИКА ПЕРЕКЛЮЧЕНИЯ ЯЗЫКА ---
         function changeLang(lang) {
-            document.body.classList.remove('lang-ru', 'lang-en');
+            document.body.classList.remove('lang-ru', 'lang-en', 'lang-ua');
             // Принудительный reflow для обнуления CSS анимаций
             void document.body.offsetWidth;
             
             document.body.classList.add('lang-' + lang);
             
-            const btnRu = document.getElementById('btn-ru');
             const btnEn = document.getElementById('btn-en');
-            if(btnRu && btnEn) {
-                btnRu.classList.toggle('active', lang === 'ru');
-                btnRu.classList.toggle('text-slate-500', lang !== 'ru');
+            const btnRu = document.getElementById('btn-ru');
+            const btnUa = document.getElementById('btn-ua');
+            if(btnEn && btnRu && btnUa) {
                 btnEn.classList.toggle('active', lang === 'en');
                 btnEn.classList.toggle('text-slate-500', lang !== 'en');
+                btnRu.classList.toggle('active', lang === 'ru');
+                btnRu.classList.toggle('text-slate-500', lang !== 'ru');
+                btnUa.classList.toggle('active', lang === 'ua');
+                btnUa.classList.toggle('text-slate-500', lang !== 'ua');
             }
             
             localStorage.setItem('preferredLang', lang);
@@ -1364,7 +1369,7 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            const savedLang = localStorage.getItem('preferredLang') || 'ru';
+            const savedLang = localStorage.getItem('preferredLang') || 'en';
             changeLang(savedLang);
         });
 
