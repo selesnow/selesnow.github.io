@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <title>Алексей Селезнёв | Head of Analytics & R Developer</title>
+    <link rel="icon" type="image/jpeg" href="logo.jpg">
+    <link rel="apple-touch-icon" href="logo.jpg">
+    <meta property="og:image" content="https://alexey-seleznev.pro/logo.jpg">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -127,7 +131,10 @@
     <!-- NAVIGATION -->
     <nav class="fixed w-full z-50 top-0 left-0 border-b border-white/5 bg-slate-950/60 backdrop-blur-xl">
         <div class="max-w-7xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
-            <a href="#" class="text-base md:text-xl font-black tracking-tight uppercase outfit-font whitespace-nowrap">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></a>
+            <a href="#" class="flex items-center gap-2.5 sm:gap-3 group">
+                <img src="logo.jpg" alt="Alexey Seleznev" class="w-8 h-8 md:w-9 md:h-9 rounded-xl object-cover shadow-md border border-white/10 group-hover:border-purple-500/50 group-hover:scale-105 transition-all">
+                <span class="text-base md:text-xl font-black tracking-tight uppercase outfit-font whitespace-nowrap text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+            </a>
             <div class="hidden xl:flex gap-6 text-sm font-semibold text-slate-400">
                 <a href="#about" class="hover:text-white transition-colors"><span class="ru-text">Обо мне</span><span class="ua-text">Про мене</span><span class="en-text">About</span></a>
                 <a href="#career" class="hover:text-white transition-colors"><span class="ru-text">Карьера</span><span class="ua-text">Кар'єра</span><span class="en-text">Career</span></a>
@@ -833,193 +840,875 @@
 
 
     <!-- SPEAKING & WEBINARS -->
-    <section id="speaking" class="py-24 px-6 relative z-10" style="background: linear-gradient(180deg, transparent, rgba(15, 23, 42, 0.5) 50%, transparent);">
-        <div class="max-w-7xl mx-auto">
-            
-            <div class="mb-24">
-                <h2 class="text-4xl font-extrabold mb-10 flex items-center gap-4 outfit-font" data-aos="fade-up">
-                    <i class="fa-solid fa-microphone-lines text-purple-500 px-4 py-3 bg-purple-500/10 rounded-2xl"></i> 
-                    <div>
-                        <span class="ru-text">Конференции</span><span class="ua-text">Конференції</span><span class="en-text">Conferences</span>
-                        <div class="text-sm font-medium text-slate-500 mt-1">15 Talks</div>
-                    </div>
-                </h2>
-
-                <div class="bento-glass p-6 md:p-10 mb-12 border-l-4 border-purple-500/50" data-aos="fade-up" data-aos-delay="100">
-                    <p class="text-lg md:text-xl text-slate-300 leading-relaxed font-light">
-                        <span class="ru-text">Регулярно выступаю в качестве спикера на крупнейших конференциях по аналитике и интернет-маркетингу. Делюсь практическим опытом автоматизации и внедрения передовых технологий на таких площадках, как <strong class="text-white font-semibold">8P</strong>, <strong class="text-white font-semibold">Матемаркетинг</strong>, <strong class="text-white font-semibold">GoAnalytics</strong> и других значимых отраслевых событиях.</span><span class="ua-text">Регулярно виступаю як спікер на найбільших конференціях з аналітики та інтернет-маркетингу. Ділюся практичним досвідом автоматизації та впровадження передових технологій на таких майданчиках, як <strong class="text-white font-semibold">8P</strong>, <strong class="text-white font-semibold">Матемаркетинг</strong>, <strong class="text-white font-semibold">GoAnalytics</strong> та інших важливих галузевих подіях.</span>
-                        <span class="en-text">Regularly speak at major analytics and digital marketing conferences. Share practical experience in automation and cutting-edge technology implementation at venues such as <strong class="text-white font-semibold">8P</strong>, <strong class="text-white font-semibold">Matemarketing</strong>, <strong class="text-white font-semibold">GoAnalytics</strong>, and other significant industry events.</span>
-                    </p>
+    <section id="speaking" class="py-24 px-6 max-w-[1400px] mx-auto overflow-hidden relative z-10" style="background: linear-gradient(180deg, transparent, rgba(15, 23, 42, 0.5) 50%, transparent);">
+        <div class="mb-10 px-4" data-aos="fade-up">
+            <h2 class="text-4xl font-extrabold mb-2 outfit-font flex items-center gap-4">
+                <i class="fa-solid fa-microphone-lines text-purple-500 px-4 py-3 bg-purple-500/10 rounded-2xl"></i>
+                <div>
+                    <span class="ru-text">Выступления и вебинары</span><span class="ua-text">Виступи та вебінари</span><span class="en-text">Talks & Webinars</span>
                 </div>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-                    <!-- Cards -->
-                    <a href="https://www.youtube.com/watch?v=EnImByySQEE" class="bento-glass p-5 rounded-2xl group block" data-aos="fade-up">
-                        <div class="bento-content">
-                            <div class="text-[10px] bg-purple-500/10 w-max px-2 py-1 rounded text-purple-400 font-bold mb-3 font-mono border border-purple-500/20">SEP 2023 • KAZAKHSTAN SOC LAB</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">Анализ показателя качества ключевых слов в Google Ads</span><span class="ua-text">Аналіз показника якості ключових слів у Google Ads</span><span class="en-text">Google Ads Keyword Quality Score Analysis</span></div>
-                        </div>
-                    </a>
+            </h2>
+            <p class="text-slate-400 text-lg">
+                <span class="ru-text">22 видеозаписи докладов с крупнейших конференций и воркшопов</span>
+                <span class="ua-text">22 відеозаписи доповідей з наибольших конференций та воркшопів</span>
+                <span class="en-text">22 recorded speeches from major tech conferences and workshops</span>
+            </p>
+        </div>
 
-                    <a href="https://youtu.be/wtXVwOBo518" class="bento-glass p-5 rounded-2xl group block" data-aos="fade-up" data-aos-delay="50">
-                        <div class="bento-content">
-                            <div class="text-[10px] bg-purple-500/10 w-max px-2 py-1 rounded text-purple-400 font-bold mb-3 font-mono border border-purple-500/20">JUL 2021 • 8P</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">Зачем интернет маркетологу понимать API (Google Ads)</span><span class="en-text">Why marketers need to understand API (Google Ads)</span></div>
-                        </div>
-                    </a>
+        <!-- SECTION DESCRIPTION -->
+        <div class="bento-glass p-6 md:p-8 mb-10 border-l-4 border-purple-500/50 mx-4" data-aos="fade-up" data-aos-delay="50">
+            <p class="text-base md:text-lg text-slate-300 leading-relaxed font-light">
+                <span class="ru-text">Регулярно выступаю в качестве спикера на крупнейших отраслевых конференциях по аналитике и интернет-маркетингу. Делюсь практическим опытом автоматизации и внедрения передовых инструментов на таких площадках, как <strong class="text-white font-semibold">8P</strong>, <strong class="text-white font-semibold">Матемаркетинг</strong>, <strong class="text-white font-semibold">GoAnalytics</strong>, <strong class="text-white font-semibold">Analyze!</strong> и других ключевых событиях. Выберите любой доклад ниже, чтобы запустить его прямо в плеере.</span>
+                <span class="ua-text">Регулярно виступаю як спікер на найбільших галузевих конференціях з аналітики та інтернет-маркетингу. Ділюся практичним досвідом автоматизації та впровадження передових інструментів на таких майданчиках, як <strong class="text-white font-semibold">8P</strong>, <strong class="text-white font-semibold">Матемаркетинг</strong>, <strong class="text-white font-semibold">GoAnalytics</strong>, <strong class="text-white font-semibold">Analyze!</strong> та інших ключових подіях. Оберіть будь-яку доповідь нижче, щоб запустити її у плеєрі.</span>
+                <span class="en-text">Regular speaker at premier analytics and digital marketing conferences (8P, Matemarketing, GoAnalytics, Analyze!). Select any talk below to stream it right here in the main player.</span>
+            </p>
+        </div>
 
-                    <a href="https://youtu.be/uAF3YmjRTqU" class="bento-glass p-5 rounded-2xl group block" data-aos="fade-up" data-aos-delay="100">
-                        <div class="bento-content">
-                            <div class="text-[10px] bg-purple-500/10 w-max px-2 py-1 rounded text-purple-400 font-bold mb-3 font-mono border border-purple-500/20">DEC 2020 • EXCEL & POWER BI</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">R коннектор: данные из Вконтакте в Power BI</span><span class="ua-text">R коннектор: дані з Вконтакте у Power BI</span><span class="en-text">R connector: VK data to Power BI</span></div>
+        <!-- FEATURED SPOTLIGHT SHOWCASE -->
+        <div id="speakingSpotlight" class="bento-glass p-5 sm:p-7 lg:p-8 rounded-3xl mb-14 mx-4 border border-purple-500/30 shadow-[0_0_35px_rgba(168,85,247,0.15)]" data-aos="fade-up" data-aos-delay="70">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+                <!-- Video Screen (Left 7 cols) -->
+                <div class="lg:col-span-7">
+                    <div id="spotlightPlayerWrapper" class="relative w-full pb-[56.25%] rounded-2xl overflow-hidden bg-slate-950 shadow-2xl border border-white/10 group cursor-pointer" onclick="playSpotlightVideo()">
+                        <img id="spotlightThumb" src="https://img.youtube.com/vi/EnImByySQEE/hqdefault.jpg" alt="Featured Talk" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-black/30"></div>
+                        <div id="spotlightPlayBtn" class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-red-600/95 text-white flex items-center justify-center shadow-[0_0_30px_rgba(239,68,68,0.6)] backdrop-blur-md group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300">
+                                <i class="fa-solid fa-play ml-1.5 text-xl sm:text-2xl"></i>
+                            </div>
                         </div>
-                    </a>
+                        <iframe id="spotlightIframe" class="absolute inset-0 w-full h-full border-0 hidden" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                    </div>
 
-                    <a href="https://youtu.be/bbYC-uq250A" class="bento-glass p-5 rounded-2xl group block" data-aos="fade-up">
-                        <div class="bento-content">
-                            <div class="text-[10px] bg-purple-500/10 w-max px-2 py-1 rounded text-purple-400 font-bold mb-3 font-mono border border-purple-500/20">NOV 2020 • PRODUCT STAR</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">Учим язык R на примере SQL запросов</span><span class="ua-text">Вчимо мову R на прикладі SQL запитів</span><span class="en-text">Learning R through SQL queries</span></div>
+                    <!-- Local file notice -->
+                    <div id="fileProtocolNotice" class="hidden mt-3 p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs leading-relaxed flex items-start gap-2.5">
+                        <i class="fa-solid fa-triangle-exclamation text-base mt-0.5 shrink-0 text-amber-400"></i>
+                        <div>
+                            <strong class="font-bold">Локальный запуск (file://):</strong> YouTube из соображений безопасности блокирует запуск на file:// (Error 153). На веб-сервере (<code class="bg-black/40 px-1 py-0.5 rounded font-mono">http://localhost:8000</code>) или на рабочем домене <a href="https://alexey-seleznev.pro/#speaking" target="_blank" class="underline font-bold text-amber-200 hover:text-white">alexey-seleznev.pro</a> видео работает штатно.
                         </div>
-                    </a>
+                    </div>
+                </div>
 
-                    <a href="https://youtu.be/QrTCa4wLWjI" class="bento-glass p-5 rounded-2xl group block" data-aos="fade-up" data-aos-delay="50">
-                        <div class="bento-content">
-                            <div class="text-[10px] bg-purple-500/10 w-max px-2 py-1 rounded text-purple-400 font-bold mb-3 font-mono border border-purple-500/20">AUG 2020 • ZM CONF</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">Telegram бот для получения данных из Метрики</span><span class="ua-text">Telegram-бот для отримання даних з Метрики</span><span class="en-text">Telegram bot for Yandex Metrica data</span></div>
+                <!-- Info & Metadata (Right 5 cols) -->
+                <div class="lg:col-span-5 flex flex-col justify-between h-full py-1">
+                    <div>
+                        <div class="flex items-center gap-2.5 mb-3">
+                            <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-purple-500/20 text-purple-300 border border-purple-500/40 flex items-center gap-1.5">
+                                <i class="fa-solid fa-star text-[10px] text-yellow-400"></i>
+                                <span class="ru-text">В центре внимания</span><span class="ua-text">У центрі уваги</span><span class="en-text">Featured Spotlight</span>
+                            </span>
+                            <span id="spotlightBadge" class="text-xs font-mono font-bold px-2.5 py-1 rounded-md bg-purple-500/20 border border-purple-500/30 text-purple-300 uppercase">CONF</span>
                         </div>
-                    </a>
+                        
+                        <div id="spotlightEvent" class="text-xs font-mono font-bold text-purple-400 uppercase tracking-widest mb-2">
+                            SEP 2023 • KAZAKHSTAN SOC LAB
+                        </div>
 
-                    <a href="https://youtu.be/p2D_iLZ1f-8" class="bento-glass p-5 rounded-2xl group block" data-aos="fade-up" data-aos-delay="100">
-                        <div class="bento-content">
-                            <div class="text-[10px] bg-purple-500/10 w-max px-2 py-1 rounded text-purple-400 font-bold mb-3 font-mono border border-purple-500/20">JUL 2020 • 8P ONLINE</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">Как работать с API Google Analytics на языке R</span><span class="ua-text">Як працювати з API Google Analytics мовою R</span><span class="en-text">How to work with Google Analytics API using R</span></div>
-                        </div>
-                    </a>
+                        <h3 id="spotlightTitle" class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white leading-snug outfit-font mb-4">
+                            <span class="ru-text">Анализ показателя качества ключевых слов в Google Ads</span>
+                            <span class="ua-text">Аналіз показника якості ключових слів у Google Ads</span>
+                            <span class="en-text">Google Ads Keyword Quality Score Analysis</span>
+                        </h3>
 
-                    <a href="https://youtu.be/de1QW80FsiA" class="bento-glass p-5 rounded-2xl group block" data-aos="fade-up">
-                        <div class="bento-content">
-                            <div class="text-[10px] bg-purple-500/10 w-max px-2 py-1 rounded text-purple-400 font-bold mb-3 font-mono border border-purple-500/20">SEP 2019 • ANALYZE! LVIV</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">Работа с Facebook Marketing API на языке R</span><span class="ua-text">Робота з Facebook Marketing API мовою R</span><span class="en-text">Working with Facebook Marketing API using R</span></div>
+                        <div class="space-y-2 mb-6">
+                            <div class="flex items-center gap-2 text-xs font-mono text-purple-300">
+                                <i class="fa-solid fa-circle-info"></i>
+                                <span class="ru-text">Информация о докладе</span><span class="ua-text">Інформація про доповідь</span><span class="en-text">Session Details</span>
+                            </div>
+                            <p id="spotlightDesc" class="text-sm text-slate-300 leading-relaxed font-light">
+                                <span class="ru-text">Практический доклад о методологии оценки и прогнозирования показателя качества ключевых фраз через API Google Ads с использованием статистических алгоритмов и пакетов на языке R.</span>
+                                <span class="ua-text">Практична доповідь про методологію оцінки та прогнозування показника якості ключових фраз через API Google Ads з використанням статистичних алгоритмів та пакетів мовою R.</span>
+                                <span class="en-text">Practical talk on the methodology of evaluating and forecasting keyword Quality Score via the Google Ads API using statistical algorithms and R packages.</span>
+                            </p>
                         </div>
-                    </a>
+                    </div>
 
-                    <a href="https://www.youtube.com/watch?v=fLP0gbsYF1k" class="bento-glass p-5 rounded-2xl group block" data-aos="fade-up" data-aos-delay="50">
-                        <div class="bento-content">
-                            <div class="text-[10px] bg-purple-500/10 w-max px-2 py-1 rounded text-purple-400 font-bold mb-3 font-mono border border-purple-500/20">APR 2019 • GOANALYTICS</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">Информационные дайджесты для контроля маркетологов</span><span class="ua-text">Інформаційні дайджести для контролю маркетологів</span><span class="en-text">Information digests for marketer control</span></div>
-                        </div>
-                    </a>
-
-                    <a href="https://www.youtube.com/watch?v=Ju98kWnec14" class="bento-glass p-5 rounded-2xl group block" data-aos="fade-up" data-aos-delay="100">
-                        <div class="bento-content">
-                            <div class="text-[10px] bg-purple-500/10 w-max px-2 py-1 rounded text-purple-400 font-bold mb-3 font-mono border border-purple-500/20">DEC 2018 • LVIV ICAMP</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">Три шага для построения отдела аналитики</span><span class="ua-text">Три кроки для побудови відділу аналітики</span><span class="en-text">Three steps to build an analytics dept</span></div>
-                        </div>
-                    </a>
-
-                    <a href="https://youtu.be/G_JWto5eFpI" class="bento-glass p-5 rounded-2xl group block" data-aos="fade-up">
-                        <div class="bento-content">
-                            <div class="text-[10px] bg-purple-500/10 w-max px-2 py-1 rounded text-purple-400 font-bold mb-3 font-mono border border-purple-500/20">NOV 2018 • MATEMARKETING</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">Как избавиться от рутины с помощью R (Доклад)</span><span class="en-text">Getting rid of routine with R (Speech)</span></div>
-                        </div>
-                    </a>
-
-                    <a href="https://youtu.be/1X1EKt6tDHU" class="bento-glass p-5 rounded-2xl group block" data-aos="fade-up" data-aos-delay="50">
-                        <div class="bento-content">
-                            <div class="text-[10px] bg-purple-500/10 w-max px-2 py-1 rounded text-purple-400 font-bold mb-3 font-mono border border-purple-500/20">NOV 2018 • MATEMARKETING</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">R для маркетолога: Мастер класс</span><span class="ua-text">R для маркетолога: Майстер-клас</span><span class="en-text">R for Marketers: Master Class</span></div>
-                        </div>
-                    </a>
-
-                    <a href="https://netpeak.ua/conference/390/" class="bento-glass p-5 rounded-2xl group block" data-aos="fade-up" data-aos-delay="100">
-                        <div class="bento-content">
-                            <div class="text-[10px] bg-purple-500/10 w-max px-2 py-1 rounded text-purple-400 font-bold mb-3 font-mono border border-purple-500/20">MAY 2018 • KYIV DATA SPRING</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">Как построить отдел аналитики в крупной компании</span><span class="ua-text">Як побудувати відділ аналітики у великій компанії</span><span class="en-text">Building an analytics dept in a large corp</span></div>
-                        </div>
-                    </a>
-                    
-                    <a href="https://www.youtube.com/watch?v=wRlRd_b-qAs" class="bento-glass p-5 rounded-2xl group block" data-aos="fade-up">
-                        <div class="bento-content">
-                            <div class="text-[10px] bg-purple-500/10 w-max px-2 py-1 rounded text-purple-400 font-bold mb-3 font-mono border border-purple-500/20">APR 2018 • ANALYZE</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">Язык R в маркетине и бизнесе</span><span class="ua-text">Мова R у маркетингу та бізнесі</span><span class="en-text">R language in marketing and business</span></div>
-                        </div>
-                    </a>
-
-                    <a href="https://www.youtube.com/watch?v=L1ApUOea7Qc" class="bento-glass p-5 rounded-2xl group block" data-aos="fade-up" data-aos-delay="50">
-                        <div class="bento-content">
-                            <div class="text-[10px] bg-purple-500/10 w-max px-2 py-1 rounded text-purple-400 font-bold mb-3 font-mono border border-purple-500/20">NOV 2017 • ECOMMERCE</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">Как разобраться со своими данными, если ты не аналитик</span><span class="ua-text">Як розібратися зі своїми даними, якщо ти не аналітик</span><span class="en-text">Handling data if you're not an analyst</span></div>
-                        </div>
-                    </a>
-
-                    <a href="https://www.youtube.com/watch?v=pM8DQ0lLM6k" class="bento-glass p-5 rounded-2xl group block" data-aos="fade-up" data-aos-delay="100">
-                        <div class="bento-content">
-                            <div class="text-[10px] bg-purple-500/10 w-max px-2 py-1 rounded text-purple-400 font-bold mb-3 font-mono border border-purple-500/20">APR 2017 • ANALYZE</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 group-hover:text-white transition-colors outfit-font"><span class="ru-text">BI решение для отдела контекстной рекламы</span><span class="ua-text">BI рішення для відділу контекстної реклами</span><span class="en-text">BI solution for PPC department</span></div>
-                        </div>
-                    </a>
+                    <div class="flex flex-wrap items-center gap-3 pt-4 border-t border-white/10">
+                        <button onclick="playSpotlightVideo()" class="px-5 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-sm transition-all flex items-center gap-2 shadow-[0_0_20px_rgba(168,85,247,0.4)] hover:scale-105">
+                            <i class="fa-solid fa-play text-xs"></i>
+                            <span class="ru-text">Смотреть прямо здесь</span><span class="ua-text">Дивитися тут</span><span class="en-text">Play Video</span>
+                        </button>
+                        <a id="spotlightYtLink" href="https://www.youtube.com/watch?v=EnImByySQEE" target="_blank" class="px-4 py-3 rounded-xl border border-white/10 hover:border-white/20 bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white font-semibold text-sm transition-all flex items-center gap-2">
+                            <i class="fa-brands fa-youtube text-red-500"></i> YouTube
+                        </a>
+                    </div>
                 </div>
             </div>
+        </div>
 
+        <!-- CATALOG CONTROLS (HEADER & ARROWS) -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 px-4" data-aos="fade-up">
             <div>
-                <h2 class="text-4xl font-extrabold mb-10 flex items-center gap-4 outfit-font" data-aos="fade-up">
-                    <i class="fa-solid fa-video text-blue-500 px-4 py-3 bg-blue-500/10 rounded-2xl"></i>
-                    <div>
-                        <span class="ru-text">Вебинары</span><span class="ua-text">Вебінари</span><span class="en-text">Webinars</span>
-                        <div class="text-sm font-medium text-slate-500 mt-1">7 Sessions</div>
+                <h3 class="text-2xl font-bold text-white outfit-font">
+                    <span class="ru-text">Каталог всех материалов</span><span class="ua-text">Каталог усіх матеріалів</span><span class="en-text">All Talks Catalog</span>
+                </h3>
+                <p class="text-sm text-slate-400 mt-0.5">
+                    <span class="ru-text">Нажмите на карточку, чтобы переключить главное видео выше</span>
+                    <span class="ua-text">Натисніть на картку, щоб переключити головне відео вгорі</span>
+                    <span class="en-text">Click any card to switch the main featured video above</span>
+                </p>
+            </div>
+            <div class="flex items-center gap-3">
+                <button id="speakingSlideLeft" aria-label="Previous video" class="w-12 h-12 rounded-full border border-white/10 bg-slate-900/50 hover:bg-slate-800 text-white flex items-center justify-center transition-all hover:scale-110 backdrop-blur-md">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <button id="speakingSlideRight" aria-label="Next video" class="w-12 h-12 rounded-full border border-purple-500/50 bg-purple-500/20 hover:bg-purple-500 text-white flex items-center justify-center transition-all hover:scale-110 backdrop-blur-md shadow-[0_0_15px_rgba(168,85,247,0.3)]">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- FILTER TABS -->
+        <div class="flex flex-wrap items-center gap-3 mb-8 px-4" data-aos="fade-up">
+            <button onclick="filterSpeaking('all')" id="filter-speaking-all" class="speaking-filter-btn px-5 py-2.5 rounded-xl text-sm font-bold transition-all border border-purple-500/50 bg-purple-500/20 text-white shadow-[0_0_15px_rgba(168,85,247,0.25)] flex items-center gap-2">
+                <i class="fa-solid fa-layer-group text-xs text-purple-400"></i>
+                <span class="ru-text">Все материалы</span><span class="ua-text">Всі матеріали</span><span class="en-text">All Videos</span>
+                <span class="ml-1 text-xs opacity-80 bg-white/10 px-2 py-0.5 rounded-full font-mono">22</span>
+            </button>
+            <button onclick="filterSpeaking('conference')" id="filter-speaking-conf" class="speaking-filter-btn px-5 py-2.5 rounded-xl text-sm font-semibold transition-all border border-white/10 bg-slate-900/60 text-slate-400 hover:text-white hover:border-white/20 flex items-center gap-2">
+                <i class="fa-solid fa-microphone text-xs text-purple-400"></i>
+                <span class="ru-text">Конференции</span><span class="ua-text">Конференції</span><span class="en-text">Conferences</span>
+                <span class="ml-1 text-xs opacity-80 bg-white/10 px-2 py-0.5 rounded-full font-mono">15</span>
+            </button>
+            <button onclick="filterSpeaking('webinar')" id="filter-speaking-web" class="speaking-filter-btn px-5 py-2.5 rounded-xl text-sm font-semibold transition-all border border-white/10 bg-slate-900/60 text-slate-400 hover:text-white hover:border-white/20 flex items-center gap-2">
+                <i class="fa-solid fa-video text-xs text-blue-400"></i>
+                <span class="ru-text">Вебинары</span><span class="ua-text">Вебінари</span><span class="en-text">Webinars</span>
+                <span class="ml-1 text-xs opacity-80 bg-white/10 px-2 py-0.5 rounded-full font-mono">7</span>
+            </button>
+        </div>
+
+        <!-- CAROUSEL SLIDER -->
+        <div id="speakingSlider" class="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth pb-8 snap-x px-4">
+            
+            <!-- 1. KAZAKHSTAN SOC LAB -->
+            <div class="speaking-card ring-2 ring-purple-500 bg-purple-500/10 min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-center bento-glass flex flex-col group p-3 transition-all duration-300 hover:border-purple-500/40 hover:-translate-y-1.5 cursor-pointer"
+                 data-category="conference"
+                 onclick="selectSpotlightVideo(this, 'EnImByySQEE')">
+                <div class="relative w-full h-48 sm:h-52 rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center mb-4">
+                    <img src="https://img.youtube.com/vi/EnImByySQEE/hqdefault.jpg" alt="Google Ads Keyword Quality Score" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent"></div>
+                    <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300">
+                        SEP 2023 • KAZAKHSTAN SOC LAB
                     </div>
-                </h2>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-                    
-                    <a href="https://youtu.be/zJyDxd4JGg0" class="bento-glass p-5 rounded-2xl group block border-l-[3px] border-l-blue-500" data-aos="fade-up">
-                        <div class="bento-content">
-                            <div class="text-[10px] bg-blue-500/10 w-max px-2 py-1 rounded text-blue-400 font-bold mb-3 font-mono">SEP 2021 • YAGLA</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 outfit-font group-hover:text-white"><span class="ru-text">API Google Analytics 4 на языке R (Воркшоп)</span><span class="en-text">GA4 API using R (Workshop)</span></div>
-                        </div>
-                    </a>
-
-                    <a href="https://youtu.be/I2KjERuZ3XY?t=3789" class="bento-glass p-5 rounded-2xl group block border-l-[3px] border-l-blue-500" data-aos="fade-up" data-aos-delay="50">
-                        <div class="bento-content">
-                            <div class="text-[10px] bg-blue-500/10 w-max px-2 py-1 rounded text-blue-400 font-bold mb-3 font-mono">JUL 2020 • PRODUCTSTAR</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 outfit-font group-hover:text-white"><span class="ru-text">Основы Python. Работа с библиотекой Pandas</span><span class="ua-text">Основи Python. Робота з бібліотекою Pandas</span><span class="en-text">Python Basics. Pandas library</span></div>
-                        </div>
-                    </a>
-
-                    <a href="https://youtu.be/zWGocRhDumk" class="bento-glass p-5 rounded-2xl group block border-l-[3px] border-l-blue-500" data-aos="fade-up" data-aos-delay="100">
-                        <div class="bento-content">
-                            <div class="text-[10px] bg-blue-500/10 w-max px-2 py-1 rounded text-blue-400 font-bold mb-3 font-mono">APR 2020 • EUSP</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 outfit-font group-hover:text-white"><span class="ru-text">R meetup: Чем нас порадует dplyr 1.0.0</span><span class="ua-text">R meetup: Чим нас порадує dplyr 1.0.0</span><span class="en-text">R meetup: What's new in dplyr 1.0.0</span></div>
-                        </div>
-                    </a>
-
-                    <a href="https://www.youtube.com/watch?v=ESl3NR01IXI" class="bento-glass p-5 rounded-2xl group block border-l-[3px] border-l-blue-500" data-aos="fade-up">
-                        <div class="bento-content">
-                            <div class="text-[10px] bg-blue-500/10 w-max px-2 py-1 rounded text-blue-400 font-bold mb-3 font-mono">FEB 2019 • NETOLOGY</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 outfit-font group-hover:text-white"><span class="ru-text">Сколько денег приносит ваш контент (BI)</span><span class="en-text">How much money your content brings (BI)</span></div>
-                        </div>
-                    </a>
-
-                    <a href="https://youtu.be/mUn2Uwsvy0U" class="bento-glass p-5 rounded-2xl group block border-l-[3px] border-l-blue-500" data-aos="fade-up" data-aos-delay="50">
-                        <div class="bento-content">
-                            <div class="text-[10px] bg-blue-500/10 w-max px-2 py-1 rounded text-blue-400 font-bold mb-3 font-mono">NOV 2018 • AUTOMATIONDAY</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 outfit-font group-hover:text-white"><span class="ru-text">Избавляемся от рутины с помощью R</span><span class="ua-text">Позбуваємося рутини за допомогою R</span><span class="en-text">Getting rid of routine with R</span></div>
-                        </div>
-                    </a>
-
-                    <a href="https://www.youtube.com/watch?v=sCp2D6068es" class="bento-glass p-5 rounded-2xl group block border-l-[3px] border-l-blue-500" data-aos="fade-up" data-aos-delay="100">
-                        <div class="bento-content">
-                            <div class="text-[10px] bg-blue-500/10 w-max px-2 py-1 rounded text-blue-400 font-bold mb-3 font-mono">NOV 2018 • CYBERMARKETING</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 outfit-font group-hover:text-white"><span class="ru-text">Автоматизация Яндекс Метрики через пакет rym</span><span class="ua-text">Автоматизація Яндекс Метрики через пакет rym</span><span class="en-text">Yandex Metrica automation via rym</span></div>
-                        </div>
-                    </a>
-
-                    <a href="https://www.youtube.com/watch?v=Kh-wyU-VXRU" class="bento-glass p-5 rounded-2xl group block border-l-[3px] border-l-blue-500" data-aos="fade-up">
-                        <div class="bento-content">
-                            <div class="text-[10px] bg-blue-500/10 w-max px-2 py-1 rounded text-blue-400 font-bold mb-3 font-mono">NOV 2018 • WPE</div>
-                            <div class="font-bold text-[15px] leading-tight text-slate-200 outfit-font group-hover:text-white"><span class="ru-text">Как маркетологу заняться маркетингом</span><span class="ua-text">Як маркетологу зайнятися маркетингом</span><span class="en-text">How to let marketers do marketing</span></div>
-                        </div>
-                    </a>
+                    <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                        CONF
+                    </div>
+                    <div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]">
+                        <i class="fa-solid fa-play ml-1 text-lg"></i>
+                    </div>
+                </div>
+                <div class="px-2 pb-2 flex flex-col justify-between flex-grow">
+                    <h4 class="font-bold text-[15px] leading-snug text-slate-200 group-hover:text-white transition-colors outfit-font line-clamp-2">
+                        <span class="ru-text">Анализ показателя качества ключевых слов в Google Ads</span>
+                        <span class="ua-text">Аналіз показника якості ключових слів у Google Ads</span>
+                        <span class="en-text">Google Ads Keyword Quality Score Analysis</span>
+                    </h4>
+                    <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                        <span class="flex items-center gap-1.5 font-semibold">
+                            <i class="fa-brands fa-youtube text-red-500 text-sm"></i>
+                            <span class="ru-text">Смотреть доклад</span><span class="ua-text">Дивитися доповідь</span><span class="en-text">Watch Talk</span>
+                        </span>
+                        <i class="fa-solid fa-circle-play text-sm opacity-60 group-hover:opacity-100 transition-all"></i>
+                    </div>
                 </div>
             </div>
+
+            <!-- 2. 8P 2021 -->
+            <div class="speaking-card min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-center bento-glass flex flex-col group p-3 transition-all duration-300 hover:border-purple-500/40 hover:-translate-y-1.5 cursor-pointer"
+                 data-category="conference"
+                 onclick="selectSpotlightVideo(this, 'wtXVwOBo518')">
+                <div class="relative w-full h-48 sm:h-52 rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center mb-4">
+                    <img src="https://img.youtube.com/vi/wtXVwOBo518/hqdefault.jpg" alt="API Google Ads" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent"></div>
+                    <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300">
+                        JUL 2021 • 8P
+                    </div>
+                    <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                        CONF
+                    </div>
+                    <div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]">
+                        <i class="fa-solid fa-play ml-1 text-lg"></i>
+                    </div>
+                </div>
+                <div class="px-2 pb-2 flex flex-col justify-between flex-grow">
+                    <h4 class="font-bold text-[15px] leading-snug text-slate-200 group-hover:text-white transition-colors outfit-font line-clamp-2">
+                        <span class="ru-text">Зачем интернет маркетологу понимать API (Google Ads)</span>
+                        <span class="ua-text">Навіщо інтернет-маркетологу розуміти API (Google Ads)</span>
+                        <span class="en-text">Why marketers need to understand API (Google Ads)</span>
+                    </h4>
+                    <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                        <span class="flex items-center gap-1.5 font-semibold">
+                            <i class="fa-brands fa-youtube text-red-500 text-sm"></i>
+                            <span class="ru-text">Смотреть доклад</span><span class="ua-text">Дивитися доповідь</span><span class="en-text">Watch Talk</span>
+                        </span>
+                        <i class="fa-solid fa-circle-play text-sm opacity-60 group-hover:opacity-100 transition-all"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. EXCEL & POWER BI -->
+            <div class="speaking-card min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-center bento-glass flex flex-col group p-3 transition-all duration-300 hover:border-purple-500/40 hover:-translate-y-1.5 cursor-pointer"
+                 data-category="conference"
+                 onclick="selectSpotlightVideo(this, 'uAF3YmjRTqU')">
+                <div class="relative w-full h-48 sm:h-52 rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center mb-4">
+                    <img src="https://img.youtube.com/vi/uAF3YmjRTqU/hqdefault.jpg" alt="R connector Power BI" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent"></div>
+                    <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300">
+                        DEC 2020 • EXCEL & POWER BI
+                    </div>
+                    <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                        CONF
+                    </div>
+                    <div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]">
+                        <i class="fa-solid fa-play ml-1 text-lg"></i>
+                    </div>
+                </div>
+                <div class="px-2 pb-2 flex flex-col justify-between flex-grow">
+                    <h4 class="font-bold text-[15px] leading-snug text-slate-200 group-hover:text-white transition-colors outfit-font line-clamp-2">
+                        <span class="ru-text">R коннектор: данные из Вконтакте в Power BI</span>
+                        <span class="ua-text">R коннектор: дані з Вконтакте у Power BI</span>
+                        <span class="en-text">R connector: VK data to Power BI</span>
+                    </h4>
+                    <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                        <span class="flex items-center gap-1.5 font-semibold">
+                            <i class="fa-brands fa-youtube text-red-500 text-sm"></i>
+                            <span class="ru-text">Смотреть доклад</span><span class="ua-text">Дивитися доповідь</span><span class="en-text">Watch Talk</span>
+                        </span>
+                        <i class="fa-solid fa-circle-play text-sm opacity-60 group-hover:opacity-100 transition-all"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. PRODUCT STAR -->
+            <div class="speaking-card min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-center bento-glass flex flex-col group p-3 transition-all duration-300 hover:border-purple-500/40 hover:-translate-y-1.5 cursor-pointer"
+                 data-category="conference"
+                 onclick="selectSpotlightVideo(this, 'bbYC-uq250A')">
+                <div class="relative w-full h-48 sm:h-52 rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center mb-4">
+                    <img src="https://img.youtube.com/vi/bbYC-uq250A/hqdefault.jpg" alt="R and SQL" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent"></div>
+                    <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300">
+                        NOV 2020 • PRODUCT STAR
+                    </div>
+                    <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                        CONF
+                    </div>
+                    <div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]">
+                        <i class="fa-solid fa-play ml-1 text-lg"></i>
+                    </div>
+                </div>
+                <div class="px-2 pb-2 flex flex-col justify-between flex-grow">
+                    <h4 class="font-bold text-[15px] leading-snug text-slate-200 group-hover:text-white transition-colors outfit-font line-clamp-2">
+                        <span class="ru-text">Учим язык R на примере SQL запросов</span>
+                        <span class="ua-text">Вчимо мову R на прикладі SQL запитів</span>
+                        <span class="en-text">Learning R through SQL queries</span>
+                    </h4>
+                    <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                        <span class="flex items-center gap-1.5 font-semibold">
+                            <i class="fa-brands fa-youtube text-red-500 text-sm"></i>
+                            <span class="ru-text">Смотреть доклад</span><span class="ua-text">Дивитися доповідь</span><span class="en-text">Watch Talk</span>
+                        </span>
+                        <i class="fa-solid fa-circle-play text-sm opacity-60 group-hover:opacity-100 transition-all"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. ZM CONF -->
+            <div class="speaking-card min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-center bento-glass flex flex-col group p-3 transition-all duration-300 hover:border-purple-500/40 hover:-translate-y-1.5 cursor-pointer"
+                 data-category="conference"
+                 onclick="selectSpotlightVideo(this, 'QrTCa4wLWjI')">
+                <div class="relative w-full h-48 sm:h-52 rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center mb-4">
+                    <img src="https://img.youtube.com/vi/QrTCa4wLWjI/hqdefault.jpg" alt="Telegram Bot" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent"></div>
+                    <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300">
+                        AUG 2020 • ZM CONF
+                    </div>
+                    <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                        CONF
+                    </div>
+                    <div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]">
+                        <i class="fa-solid fa-play ml-1 text-lg"></i>
+                    </div>
+                </div>
+                <div class="px-2 pb-2 flex flex-col justify-between flex-grow">
+                    <h4 class="font-bold text-[15px] leading-snug text-slate-200 group-hover:text-white transition-colors outfit-font line-clamp-2">
+                        <span class="ru-text">Telegram бот для получения данных из Метрики</span>
+                        <span class="ua-text">Telegram-бот для отримання даних з Метрики</span>
+                        <span class="en-text">Telegram bot for Yandex Metrica data</span>
+                    </h4>
+                    <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                        <span class="flex items-center gap-1.5 font-semibold">
+                            <i class="fa-brands fa-youtube text-red-500 text-sm"></i>
+                            <span class="ru-text">Смотреть доклад</span><span class="ua-text">Дивитися доповідь</span><span class="en-text">Watch Talk</span>
+                        </span>
+                        <i class="fa-solid fa-circle-play text-sm opacity-60 group-hover:opacity-100 transition-all"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. 8P ONLINE -->
+            <div class="speaking-card min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-center bento-glass flex flex-col group p-3 transition-all duration-300 hover:border-purple-500/40 hover:-translate-y-1.5 cursor-pointer"
+                 data-category="conference"
+                 onclick="selectSpotlightVideo(this, 'p2D_iLZ1f-8')">
+                <div class="relative w-full h-48 sm:h-52 rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center mb-4">
+                    <img src="https://img.youtube.com/vi/p2D_iLZ1f-8/hqdefault.jpg" alt="Google Analytics API R" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent"></div>
+                    <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300">
+                        JUL 2020 • 8P ONLINE
+                    </div>
+                    <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                        CONF
+                    </div>
+                    <div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]">
+                        <i class="fa-solid fa-play ml-1 text-lg"></i>
+                    </div>
+                </div>
+                <div class="px-2 pb-2 flex flex-col justify-between flex-grow">
+                    <h4 class="font-bold text-[15px] leading-snug text-slate-200 group-hover:text-white transition-colors outfit-font line-clamp-2">
+                        <span class="ru-text">Как работать с API Google Analytics на языке R</span>
+                        <span class="ua-text">Як працювати з API Google Analytics мовою R</span>
+                        <span class="en-text">How to work with Google Analytics API using R</span>
+                    </h4>
+                    <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                        <span class="flex items-center gap-1.5 font-semibold">
+                            <i class="fa-brands fa-youtube text-red-500 text-sm"></i>
+                            <span class="ru-text">Смотреть доклад</span><span class="ua-text">Дивитися доповідь</span><span class="en-text">Watch Talk</span>
+                        </span>
+                        <i class="fa-solid fa-circle-play text-sm opacity-60 group-hover:opacity-100 transition-all"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. ANALYZE! LVIV -->
+            <div class="speaking-card min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-center bento-glass flex flex-col group p-3 transition-all duration-300 hover:border-purple-500/40 hover:-translate-y-1.5 cursor-pointer"
+                 data-category="conference"
+                 onclick="selectSpotlightVideo(this, 'de1QW80FsiA')">
+                <div class="relative w-full h-48 sm:h-52 rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center mb-4">
+                    <img src="https://img.youtube.com/vi/de1QW80FsiA/hqdefault.jpg" alt="Facebook Marketing API R" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent"></div>
+                    <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300">
+                        SEP 2019 • ANALYZE! LVIV
+                    </div>
+                    <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                        CONF
+                    </div>
+                    <div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]">
+                        <i class="fa-solid fa-play ml-1 text-lg"></i>
+                    </div>
+                </div>
+                <div class="px-2 pb-2 flex flex-col justify-between flex-grow">
+                    <h4 class="font-bold text-[15px] leading-snug text-slate-200 group-hover:text-white transition-colors outfit-font line-clamp-2">
+                        <span class="ru-text">Работа с Facebook Marketing API на языке R</span>
+                        <span class="ua-text">Робота з Facebook Marketing API мовою R</span>
+                        <span class="en-text">Working with Facebook Marketing API using R</span>
+                    </h4>
+                    <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                        <span class="flex items-center gap-1.5 font-semibold">
+                            <i class="fa-brands fa-youtube text-red-500 text-sm"></i>
+                            <span class="ru-text">Смотреть доклад</span><span class="ua-text">Дивитися доповідь</span><span class="en-text">Watch Talk</span>
+                        </span>
+                        <i class="fa-solid fa-circle-play text-sm opacity-60 group-hover:opacity-100 transition-all"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8. GOANALYTICS -->
+            <div class="speaking-card min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-center bento-glass flex flex-col group p-3 transition-all duration-300 hover:border-purple-500/40 hover:-translate-y-1.5 cursor-pointer"
+                 data-category="conference"
+                 onclick="selectSpotlightVideo(this, 'fLP0gbsYF1k')">
+                <div class="relative w-full h-48 sm:h-52 rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center mb-4">
+                    <img src="https://img.youtube.com/vi/fLP0gbsYF1k/hqdefault.jpg" alt="Informational Digests" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent"></div>
+                    <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300">
+                        APR 2019 • GOANALYTICS
+                    </div>
+                    <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                        CONF
+                    </div>
+                    <div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]">
+                        <i class="fa-solid fa-play ml-1 text-lg"></i>
+                    </div>
+                </div>
+                <div class="px-2 pb-2 flex flex-col justify-between flex-grow">
+                    <h4 class="font-bold text-[15px] leading-snug text-slate-200 group-hover:text-white transition-colors outfit-font line-clamp-2">
+                        <span class="ru-text">Информационные дайджесты для контроля маркетологов</span>
+                        <span class="ua-text">Інформаційні дайджести для контролю маркетологів</span>
+                        <span class="en-text">Information digests for marketer control</span>
+                    </h4>
+                    <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                        <span class="flex items-center gap-1.5 font-semibold">
+                            <i class="fa-brands fa-youtube text-red-500 text-sm"></i>
+                            <span class="ru-text">Смотреть доклад</span><span class="ua-text">Дивитися доповідь</span><span class="en-text">Watch Talk</span>
+                        </span>
+                        <i class="fa-solid fa-circle-play text-sm opacity-60 group-hover:opacity-100 transition-all"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 9. LVIV ICAMP -->
+            <div class="speaking-card min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-center bento-glass flex flex-col group p-3 transition-all duration-300 hover:border-purple-500/40 hover:-translate-y-1.5 cursor-pointer"
+                 data-category="conference"
+                 onclick="selectSpotlightVideo(this, 'Ju98kWnec14')">
+                <div class="relative w-full h-48 sm:h-52 rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center mb-4">
+                    <img src="https://img.youtube.com/vi/Ju98kWnec14/hqdefault.jpg" alt="Building Analytics Department" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent"></div>
+                    <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300">
+                        DEC 2018 • LVIV ICAMP
+                    </div>
+                    <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                        CONF
+                    </div>
+                    <div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]">
+                        <i class="fa-solid fa-play ml-1 text-lg"></i>
+                    </div>
+                </div>
+                <div class="px-2 pb-2 flex flex-col justify-between flex-grow">
+                    <h4 class="font-bold text-[15px] leading-snug text-slate-200 group-hover:text-white transition-colors outfit-font line-clamp-2">
+                        <span class="ru-text">Три шага для построения отдела аналитики</span>
+                        <span class="ua-text">Три кроки для побудови відділу аналітики</span>
+                        <span class="en-text">Three steps to build an analytics dept</span>
+                    </h4>
+                    <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                        <span class="flex items-center gap-1.5 font-semibold">
+                            <i class="fa-brands fa-youtube text-red-500 text-sm"></i>
+                            <span class="ru-text">Смотреть доклад</span><span class="ua-text">Дивитися доповідь</span><span class="en-text">Watch Talk</span>
+                        </span>
+                        <i class="fa-solid fa-circle-play text-sm opacity-60 group-hover:opacity-100 transition-all"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 10. MATEMARKETING SPEECH -->
+            <div class="speaking-card min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-center bento-glass flex flex-col group p-3 transition-all duration-300 hover:border-purple-500/40 hover:-translate-y-1.5 cursor-pointer"
+                 data-category="conference"
+                 onclick="selectSpotlightVideo(this, 'G_JWto5eFpI')">
+                <div class="relative w-full h-48 sm:h-52 rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center mb-4">
+                    <img src="https://img.youtube.com/vi/G_JWto5eFpI/hqdefault.jpg" alt="R for marketing automation" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent"></div>
+                    <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300">
+                        NOV 2018 • MATEMARKETING
+                    </div>
+                    <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                        CONF
+                    </div>
+                    <div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]">
+                        <i class="fa-solid fa-play ml-1 text-lg"></i>
+                    </div>
+                </div>
+                <div class="px-2 pb-2 flex flex-col justify-between flex-grow">
+                    <h4 class="font-bold text-[15px] leading-snug text-slate-200 group-hover:text-white transition-colors outfit-font line-clamp-2">
+                        <span class="ru-text">Как избавиться от рутины с помощью R (Доклад)</span>
+                        <span class="ua-text">Як позбутися рутини за допомогою R (Доповідь)</span>
+                        <span class="en-text">Getting rid of routine with R (Speech)</span>
+                    </h4>
+                    <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                        <span class="flex items-center gap-1.5 font-semibold">
+                            <i class="fa-brands fa-youtube text-red-500 text-sm"></i>
+                            <span class="ru-text">Смотреть доклад</span><span class="ua-text">Дивитися доповідь</span><span class="en-text">Watch Talk</span>
+                        </span>
+                        <i class="fa-solid fa-circle-play text-sm opacity-60 group-hover:opacity-100 transition-all"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 11. MATEMARKETING MASTERCLASS -->
+            <div class="speaking-card min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-center bento-glass flex flex-col group p-3 transition-all duration-300 hover:border-purple-500/40 hover:-translate-y-1.5 cursor-pointer"
+                 data-category="conference"
+                 onclick="selectSpotlightVideo(this, '1X1EKt6tDHU')">
+                <div class="relative w-full h-48 sm:h-52 rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center mb-4">
+                    <img src="https://img.youtube.com/vi/1X1EKt6tDHU/hqdefault.jpg" alt="R Master Class" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent"></div>
+                    <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300">
+                        NOV 2018 • MATEMARKETING
+                    </div>
+                    <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                        CONF
+                    </div>
+                    <div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]">
+                        <i class="fa-solid fa-play ml-1 text-lg"></i>
+                    </div>
+                </div>
+                <div class="px-2 pb-2 flex flex-col justify-between flex-grow">
+                    <h4 class="font-bold text-[15px] leading-snug text-slate-200 group-hover:text-white transition-colors outfit-font line-clamp-2">
+                        <span class="ru-text">R для маркетолога: Мастер класс</span>
+                        <span class="ua-text">R для маркетолога: Майстер-клас</span>
+                        <span class="en-text">R for Marketers: Master Class</span>
+                    </h4>
+                    <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                        <span class="flex items-center gap-1.5 font-semibold">
+                            <i class="fa-brands fa-youtube text-red-500 text-sm"></i>
+                            <span class="ru-text">Смотреть доклад</span><span class="ua-text">Дивитися доповідь</span><span class="en-text">Watch Talk</span>
+                        </span>
+                        <i class="fa-solid fa-circle-play text-sm opacity-60 group-hover:opacity-100 transition-all"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 12. KYIV DATA SPRING (EXTERNAL) -->
+            <a href="https://netpeak.ua/conference/390/" target="_blank"
+               class="speaking-card min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-center bento-glass flex flex-col group p-3 transition-all duration-300 hover:border-purple-500/40 hover:-translate-y-1.5 cursor-pointer block"
+               data-category="conference">
+                <div class="relative w-full h-48 sm:h-52 rounded-2xl overflow-hidden bg-gradient-to-br from-slate-900 via-purple-950/30 to-slate-900 flex items-center justify-center mb-4 border border-white/5">
+                    <div class="text-center p-6">
+                        <i class="fa-solid fa-users-gear text-4xl text-purple-400/80 mb-2 group-hover:scale-110 transition-transform"></i>
+                        <div class="text-xs text-slate-400 font-mono">KYIV DATA SPRING</div>
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent"></div>
+                    <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300">
+                        MAY 2018 • KYIV DATA SPRING
+                    </div>
+                    <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                        CONF
+                    </div>
+                    <div class="w-14 h-14 rounded-full bg-purple-600/80 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-purple-500 transition-all duration-300">
+                        <i class="fa-solid fa-arrow-up-right-from-square text-base"></i>
+                    </div>
+                </div>
+                <div class="px-2 pb-2 flex flex-col justify-between flex-grow">
+                    <h4 class="font-bold text-[15px] leading-snug text-slate-200 group-hover:text-white transition-colors outfit-font line-clamp-2">
+                        <span class="ru-text">Как построить отдел аналитики в крупной компании</span>
+                        <span class="ua-text">Як побудувати відділ аналітики у великій компанії</span>
+                        <span class="en-text">Building an analytics dept in a large corp</span>
+                    </h4>
+                    <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                        <span class="flex items-center gap-1.5 font-semibold">
+                            <i class="fa-solid fa-file-lines text-purple-400 text-sm"></i>
+                            <span class="ru-text">Материалы конференции</span><span class="ua-text">Матеріали конференції</span><span class="en-text">Conference Page</span>
+                        </span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-60 group-hover:opacity-100 transition-all"></i>
+                    </div>
+                </div>
+            </a>
+
+            <!-- 13. ANALYZE 2018 -->
+            <div class="speaking-card min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-center bento-glass flex flex-col group p-3 transition-all duration-300 hover:border-purple-500/40 hover:-translate-y-1.5 cursor-pointer"
+                 data-category="conference"
+                 onclick="selectSpotlightVideo(this, 'wRlRd_b-qAs')">
+                <div class="relative w-full h-48 sm:h-52 rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center mb-4">
+                    <img src="https://img.youtube.com/vi/wRlRd_b-qAs/hqdefault.jpg" alt="R in marketing and business" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent"></div>
+                    <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300">
+                        APR 2018 • ANALYZE
+                    </div>
+                    <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                        CONF
+                    </div>
+                    <div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]">
+                        <i class="fa-solid fa-play ml-1 text-lg"></i>
+                    </div>
+                </div>
+                <div class="px-2 pb-2 flex flex-col justify-between flex-grow">
+                    <h4 class="font-bold text-[15px] leading-snug text-slate-200 group-hover:text-white transition-colors outfit-font line-clamp-2">
+                        <span class="ru-text">Язык R в маркетинге и бизнесе</span>
+                        <span class="ua-text">Мова R у маркетингу та бізнесі</span>
+                        <span class="en-text">R language in marketing and business</span>
+                    </h4>
+                    <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                        <span class="flex items-center gap-1.5 font-semibold">
+                            <i class="fa-brands fa-youtube text-red-500 text-sm"></i>
+                            <span class="ru-text">Смотреть доклад</span><span class="ua-text">Дивитися доповідь</span><span class="en-text">Watch Talk</span>
+                        </span>
+                        <i class="fa-solid fa-circle-play text-sm opacity-60 group-hover:opacity-100 transition-all"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 14. ECOMMERCE 2017 -->
+            <div class="speaking-card min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-center bento-glass flex flex-col group p-3 transition-all duration-300 hover:border-purple-500/40 hover:-translate-y-1.5 cursor-pointer"
+                 data-category="conference"
+                 onclick="selectSpotlightVideo(this, 'L1ApUOea7Qc')">
+                <div class="relative w-full h-48 sm:h-52 rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center mb-4">
+                    <img src="https://img.youtube.com/vi/L1ApUOea7Qc/hqdefault.jpg" alt="Handling data" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent"></div>
+                    <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300">
+                        NOV 2017 • ECOMMERCE
+                    </div>
+                    <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                        CONF
+                    </div>
+                    <div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]">
+                        <i class="fa-solid fa-play ml-1 text-lg"></i>
+                    </div>
+                </div>
+                <div class="px-2 pb-2 flex flex-col justify-between flex-grow">
+                    <h4 class="font-bold text-[15px] leading-snug text-slate-200 group-hover:text-white transition-colors outfit-font line-clamp-2">
+                        <span class="ru-text">Как разобраться со своими данными, если ты не аналитик</span>
+                        <span class="ua-text">Як розібратися зі своїми даними, якщо ти не аналітик</span>
+                        <span class="en-text">Handling data if you're not an analyst</span>
+                    </h4>
+                    <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                        <span class="flex items-center gap-1.5 font-semibold">
+                            <i class="fa-brands fa-youtube text-red-500 text-sm"></i>
+                            <span class="ru-text">Смотреть доклад</span><span class="ua-text">Дивитися доповідь</span><span class="en-text">Watch Talk</span>
+                        </span>
+                        <i class="fa-solid fa-circle-play text-sm opacity-60 group-hover:opacity-100 transition-all"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 15. ANALYZE 2017 -->
+            <div class="speaking-card min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-center bento-glass flex flex-col group p-3 transition-all duration-300 hover:border-purple-500/40 hover:-translate-y-1.5 cursor-pointer"
+                 data-category="conference"
+                 onclick="selectSpotlightVideo(this, 'pM8DQ0lLM6k')">
+                <div class="relative w-full h-48 sm:h-52 rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center mb-4">
+                    <img src="https://img.youtube.com/vi/pM8DQ0lLM6k/hqdefault.jpg" alt="BI solution for PPC" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent"></div>
+                    <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300">
+                        APR 2017 • ANALYZE
+                    </div>
+                    <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                        CONF
+                    </div>
+                    <div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]">
+                        <i class="fa-solid fa-play ml-1 text-lg"></i>
+                    </div>
+                </div>
+                <div class="px-2 pb-2 flex flex-col justify-between flex-grow">
+                    <h4 class="font-bold text-[15px] leading-snug text-slate-200 group-hover:text-white transition-colors outfit-font line-clamp-2">
+                        <span class="ru-text">BI решение для отдела контекстной рекламы</span>
+                        <span class="ua-text">BI рішення для відділу контекстної реклами</span>
+                        <span class="en-text">BI solution for PPC department</span>
+                    </h4>
+                    <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                        <span class="flex items-center gap-1.5 font-semibold">
+                            <i class="fa-brands fa-youtube text-red-500 text-sm"></i>
+                            <span class="ru-text">Смотреть доклад</span><span class="ua-text">Дивитися доповідь</span><span class="en-text">Watch Talk</span>
+                        </span>
+                        <i class="fa-solid fa-circle-play text-sm opacity-60 group-hover:opacity-100 transition-all"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 16. YAGLA (WEBINAR) -->
+            <div class="speaking-card min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-center bento-glass flex flex-col group p-3 transition-all duration-300 hover:border-blue-500/40 hover:-translate-y-1.5 cursor-pointer"
+                 data-category="webinar"
+                 onclick="selectSpotlightVideo(this, 'zJyDxd4JGg0')">
+                <div class="relative w-full h-48 sm:h-52 rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center mb-4">
+                    <img src="https://img.youtube.com/vi/zJyDxd4JGg0/hqdefault.jpg" alt="GA4 API R Workshop" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent"></div>
+                    <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-blue-300">
+                        SEP 2021 • YAGLA
+                    </div>
+                    <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                        WEBINAR
+                    </div>
+                    <div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]">
+                        <i class="fa-solid fa-play ml-1 text-lg"></i>
+                    </div>
+                </div>
+                <div class="px-2 pb-2 flex flex-col justify-between flex-grow">
+                    <h4 class="font-bold text-[15px] leading-snug text-slate-200 group-hover:text-white transition-colors outfit-font line-clamp-2">
+                        <span class="ru-text">API Google Analytics 4 на языке R (Воркшоп)</span>
+                        <span class="ua-text">API Google Analytics 4 на мові R (Воркшоп)</span>
+                        <span class="en-text">GA4 API using R (Workshop)</span>
+                    </h4>
+                    <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-blue-300 transition-colors">
+                        <span class="flex items-center gap-1.5 font-semibold">
+                            <i class="fa-brands fa-youtube text-red-500 text-sm"></i>
+                            <span class="ru-text">Смотреть вебинар</span><span class="ua-text">Дивитися вебінар</span><span class="en-text">Watch Webinar</span>
+                        </span>
+                        <i class="fa-solid fa-circle-play text-sm opacity-60 group-hover:opacity-100 transition-all"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 17. PRODUCTSTAR PYTHON PANDAS (WEBINAR) -->
+            <div class="speaking-card min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-center bento-glass flex flex-col group p-3 transition-all duration-300 hover:border-blue-500/40 hover:-translate-y-1.5 cursor-pointer"
+                 data-category="webinar"
+                 onclick="selectSpotlightVideo(this, 'I2KjERuZ3XY?start=3789')">
+                <div class="relative w-full h-48 sm:h-52 rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center mb-4">
+                    <img src="https://img.youtube.com/vi/I2KjERuZ3XY/hqdefault.jpg" alt="Python Pandas" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent"></div>
+                    <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-blue-300">
+                        JUL 2020 • PRODUCTSTAR
+                    </div>
+                    <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                        WEBINAR
+                    </div>
+                    <div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]">
+                        <i class="fa-solid fa-play ml-1 text-lg"></i>
+                    </div>
+                </div>
+                <div class="px-2 pb-2 flex flex-col justify-between flex-grow">
+                    <h4 class="font-bold text-[15px] leading-snug text-slate-200 group-hover:text-white transition-colors outfit-font line-clamp-2">
+                        <span class="ru-text">Основы Python. Работа с библиотекой Pandas</span>
+                        <span class="ua-text">Основи Python. Робота з бібліотекою Pandas</span>
+                        <span class="en-text">Python Basics. Pandas library</span>
+                    </h4>
+                    <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-blue-300 transition-colors">
+                        <span class="flex items-center gap-1.5 font-semibold">
+                            <i class="fa-brands fa-youtube text-red-500 text-sm"></i>
+                            <span class="ru-text">Смотреть вебинар</span><span class="ua-text">Дивитися вебінар</span><span class="en-text">Watch Webinar</span>
+                        </span>
+                        <i class="fa-solid fa-circle-play text-sm opacity-60 group-hover:opacity-100 transition-all"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 18. EUSP DPLYR 1.0 (WEBINAR) -->
+            <div class="speaking-card min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-center bento-glass flex flex-col group p-3 transition-all duration-300 hover:border-blue-500/40 hover:-translate-y-1.5 cursor-pointer"
+                 data-category="webinar"
+                 onclick="selectSpotlightVideo(this, 'zWGocRhDumk')">
+                <div class="relative w-full h-48 sm:h-52 rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center mb-4">
+                    <img src="https://img.youtube.com/vi/zWGocRhDumk/hqdefault.jpg" alt="dplyr 1.0.0 meetup" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent"></div>
+                    <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-blue-300">
+                        APR 2020 • EUSP
+                    </div>
+                    <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                        WEBINAR
+                    </div>
+                    <div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]">
+                        <i class="fa-solid fa-play ml-1 text-lg"></i>
+                    </div>
+                </div>
+                <div class="px-2 pb-2 flex flex-col justify-between flex-grow">
+                    <h4 class="font-bold text-[15px] leading-snug text-slate-200 group-hover:text-white transition-colors outfit-font line-clamp-2">
+                        <span class="ru-text">R meetup: Чем нас порадует dplyr 1.0.0</span>
+                        <span class="ua-text">R meetup: Чим нас порадує dplyr 1.0.0</span>
+                        <span class="en-text">R meetup: What's new in dplyr 1.0.0</span>
+                    </h4>
+                    <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-blue-300 transition-colors">
+                        <span class="flex items-center gap-1.5 font-semibold">
+                            <i class="fa-brands fa-youtube text-red-500 text-sm"></i>
+                            <span class="ru-text">Смотреть вебинар</span><span class="ua-text">Дивитися вебінар</span><span class="en-text">Watch Webinar</span>
+                        </span>
+                        <i class="fa-solid fa-circle-play text-sm opacity-60 group-hover:opacity-100 transition-all"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 19. NETOLOGY (WEBINAR) -->
+            <div class="speaking-card min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-center bento-glass flex flex-col group p-3 transition-all duration-300 hover:border-blue-500/40 hover:-translate-y-1.5 cursor-pointer"
+                 data-category="webinar"
+                 onclick="selectSpotlightVideo(this, 'ESl3NR01IXI')">
+                <div class="relative w-full h-48 sm:h-52 rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center mb-4">
+                    <img src="https://img.youtube.com/vi/ESl3NR01IXI/hqdefault.jpg" alt="Content BI" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent"></div>
+                    <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-blue-300">
+                        FEB 2019 • NETOLOGY
+                    </div>
+                    <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                        WEBINAR
+                    </div>
+                    <div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]">
+                        <i class="fa-solid fa-play ml-1 text-lg"></i>
+                    </div>
+                </div>
+                <div class="px-2 pb-2 flex flex-col justify-between flex-grow">
+                    <h4 class="font-bold text-[15px] leading-snug text-slate-200 group-hover:text-white transition-colors outfit-font line-clamp-2">
+                        <span class="ru-text">Сколько денег приносит ваш контент (BI)</span>
+                        <span class="ua-text">Скільки грошей приносить ваш контент (BI)</span>
+                        <span class="en-text">How much money your content brings (BI)</span>
+                    </h4>
+                    <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-blue-300 transition-colors">
+                        <span class="flex items-center gap-1.5 font-semibold">
+                            <i class="fa-brands fa-youtube text-red-500 text-sm"></i>
+                            <span class="ru-text">Смотреть вебинар</span><span class="ua-text">Дивитися вебінар</span><span class="en-text">Watch Webinar</span>
+                        </span>
+                        <i class="fa-solid fa-circle-play text-sm opacity-60 group-hover:opacity-100 transition-all"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 20. AUTOMATIONDAY (WEBINAR) -->
+            <div class="speaking-card min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-center bento-glass flex flex-col group p-3 transition-all duration-300 hover:border-blue-500/40 hover:-translate-y-1.5 cursor-pointer"
+                 data-category="webinar"
+                 onclick="selectSpotlightVideo(this, 'mUn2Uwsvy0U')">
+                <div class="relative w-full h-48 sm:h-52 rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center mb-4">
+                    <img src="https://img.youtube.com/vi/mUn2Uwsvy0U/hqdefault.jpg" alt="Automation with R" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent"></div>
+                    <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-blue-300">
+                        NOV 2018 • AUTOMATIONDAY
+                    </div>
+                    <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                        WEBINAR
+                    </div>
+                    <div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]">
+                        <i class="fa-solid fa-play ml-1 text-lg"></i>
+                    </div>
+                </div>
+                <div class="px-2 pb-2 flex flex-col justify-between flex-grow">
+                    <h4 class="font-bold text-[15px] leading-snug text-slate-200 group-hover:text-white transition-colors outfit-font line-clamp-2">
+                        <span class="ru-text">Избавляемся от рутины с помощью R</span>
+                        <span class="ua-text">Позбуваємося рутини за допомогою R</span>
+                        <span class="en-text">Getting rid of routine with R</span>
+                    </h4>
+                    <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-blue-300 transition-colors">
+                        <span class="flex items-center gap-1.5 font-semibold">
+                            <i class="fa-brands fa-youtube text-red-500 text-sm"></i>
+                            <span class="ru-text">Смотреть вебинар</span><span class="ua-text">Дивитися вебінар</span><span class="en-text">Watch Webinar</span>
+                        </span>
+                        <i class="fa-solid fa-circle-play text-sm opacity-60 group-hover:opacity-100 transition-all"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 21. CYBERMARKETING (WEBINAR) -->
+            <div class="speaking-card min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-center bento-glass flex flex-col group p-3 transition-all duration-300 hover:border-blue-500/40 hover:-translate-y-1.5 cursor-pointer"
+                 data-category="webinar"
+                 onclick="selectSpotlightVideo(this, 'sCp2D6068es')">
+                <div class="relative w-full h-48 sm:h-52 rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center mb-4">
+                    <img src="https://img.youtube.com/vi/sCp2D6068es/hqdefault.jpg" alt="rym Metrica automation" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent"></div>
+                    <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-blue-300">
+                        NOV 2018 • CYBERMARKETING
+                    </div>
+                    <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                        WEBINAR
+                    </div>
+                    <div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]">
+                        <i class="fa-solid fa-play ml-1 text-lg"></i>
+                    </div>
+                </div>
+                <div class="px-2 pb-2 flex flex-col justify-between flex-grow">
+                    <h4 class="font-bold text-[15px] leading-snug text-slate-200 group-hover:text-white transition-colors outfit-font line-clamp-2">
+                        <span class="ru-text">Автоматизация Яндекс Метрики через пакет rym</span>
+                        <span class="ua-text">Автоматизація Яндекс Метрики через пакет rym</span>
+                        <span class="en-text">Yandex Metrica automation via rym</span>
+                    </h4>
+                    <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-blue-300 transition-colors">
+                        <span class="flex items-center gap-1.5 font-semibold">
+                            <i class="fa-brands fa-youtube text-red-500 text-sm"></i>
+                            <span class="ru-text">Смотреть вебинар</span><span class="ua-text">Дивитися вебінар</span><span class="en-text">Watch Webinar</span>
+                        </span>
+                        <i class="fa-solid fa-circle-play text-sm opacity-60 group-hover:opacity-100 transition-all"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 22. WPE (WEBINAR) -->
+            <div class="speaking-card min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-center bento-glass flex flex-col group p-3 transition-all duration-300 hover:border-blue-500/40 hover:-translate-y-1.5 cursor-pointer"
+                 data-category="webinar"
+                 onclick="selectSpotlightVideo(this, 'Kh-wyU-VXRU')">
+                <div class="relative w-full h-48 sm:h-52 rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center mb-4">
+                    <img src="https://img.youtube.com/vi/Kh-wyU-VXRU/hqdefault.jpg" alt="How to let marketers market" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent"></div>
+                    <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-blue-300">
+                        NOV 2018 • WPE
+                    </div>
+                    <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                        WEBINAR
+                    </div>
+                    <div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]">
+                        <i class="fa-solid fa-play ml-1 text-lg"></i>
+                    </div>
+                </div>
+                <div class="px-2 pb-2 flex flex-col justify-between flex-grow">
+                    <h4 class="font-bold text-[15px] leading-snug text-slate-200 group-hover:text-white transition-colors outfit-font line-clamp-2">
+                        <span class="ru-text">Как маркетологу заняться маркетингом</span>
+                        <span class="ua-text">Як маркетологу зайнятися маркетингом</span>
+                        <span class="en-text">How to let marketers do marketing</span>
+                    </h4>
+                    <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-blue-300 transition-colors">
+                        <span class="flex items-center gap-1.5 font-semibold">
+                            <i class="fa-brands fa-youtube text-red-500 text-sm"></i>
+                            <span class="ru-text">Смотреть вебинар</span><span class="ua-text">Дивитися вебінар</span><span class="en-text">Watch Webinar</span>
+                        </span>
+                        <i class="fa-solid fa-circle-play text-sm opacity-60 group-hover:opacity-100 transition-all"></i>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -1483,6 +2172,225 @@
                 }
             });
         }
+    </script>
+
+    <!-- VIDEO MODAL (CINEMA LIGHTBOX) -->
+    <div id="videoModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-3 sm:p-6 md:p-10 bg-slate-950/90 backdrop-blur-xl transition-opacity duration-300 opacity-0" onclick="handleModalBackdropClick(event)">
+        <div class="relative w-full max-w-5xl bg-slate-900 rounded-2xl md:rounded-3xl border border-white/10 overflow-hidden shadow-2xl flex flex-col transform transition-transform duration-300 scale-95" id="videoModalContent">
+            <div class="flex items-center justify-between p-4 md:px-6 md:py-4 border-b border-white/10 bg-slate-950/80">
+                <div id="videoModalTitle" class="text-sm md:text-base font-bold text-white truncate max-w-[85%] outfit-font"></div>
+                <button onclick="closeVideoModal()" aria-label="Close video" class="w-10 h-10 rounded-full bg-white/5 hover:bg-white/15 text-slate-300 hover:text-white flex items-center justify-center transition-colors">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div class="relative w-full pb-[56.25%] bg-black">
+                <iframe id="videoModalIframe" class="absolute inset-0 w-full h-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- SPEAKING CAROUSEL & MODAL SCRIPT -->
+    <script>
+        // Speaking Slider Scrolling
+        const speakingSlider = document.getElementById('speakingSlider');
+        const speakingLeftBtn = document.getElementById('speakingSlideLeft');
+        const speakingRightBtn = document.getElementById('speakingSlideRight');
+
+        if (speakingSlider && speakingLeftBtn && speakingRightBtn) {
+            speakingRightBtn.addEventListener('click', () => {
+                speakingSlider.scrollBy({ left: 390, behavior: 'smooth' });
+            });
+
+            speakingLeftBtn.addEventListener('click', () => {
+                speakingSlider.scrollBy({ left: -390, behavior: 'smooth' });
+            });
+        }
+
+        // Speaking Filter Tabs
+        function filterSpeaking(category) {
+            const cards = document.querySelectorAll('.speaking-card');
+            cards.forEach(card => {
+                const cardCat = card.getAttribute('data-category');
+                if (category === 'all' || cardCat === category) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+
+            const buttons = {
+                'all': document.getElementById('filter-speaking-all'),
+                'conference': document.getElementById('filter-speaking-conf'),
+                'webinar': document.getElementById('filter-speaking-web')
+            };
+
+            Object.keys(buttons).forEach(key => {
+                const btn = buttons[key];
+                if (!btn) return;
+                if (key === category) {
+                    btn.classList.add('border-purple-500/50', 'bg-purple-500/20', 'text-white', 'shadow-[0_0_15px_rgba(168,85,247,0.25)]');
+                    btn.classList.remove('border-white/10', 'bg-slate-900/60', 'text-slate-400');
+                } else {
+                    btn.classList.remove('border-purple-500/50', 'bg-purple-500/20', 'text-white', 'shadow-[0_0_15px_rgba(168,85,247,0.25)]');
+                    btn.classList.add('border-white/10', 'bg-slate-900/60', 'text-slate-400');
+                }
+            });
+
+            if (speakingSlider) {
+                speakingSlider.scrollTo({ left: 0, behavior: 'smooth' });
+            }
+        }
+
+        // --- SPOTLIGHT VIDEO PLAYER ---
+        let currentSpotlightId = 'EnImByySQEE';
+
+        function playSpotlightVideo() {
+            const iframe = document.getElementById('spotlightIframe');
+            const playBtn = document.getElementById('spotlightPlayBtn');
+            const thumb = document.getElementById('spotlightThumb');
+            if (!iframe) return;
+
+            if (window.location.protocol === 'file:') {
+                const notice = document.getElementById('fileProtocolNotice');
+                if (notice) notice.classList.remove('hidden');
+            }
+
+            const separator = currentSpotlightId.includes('?') ? '&' : '?';
+            iframe.src = `https://www.youtube.com/embed/${currentSpotlightId}${separator}autoplay=1&enablejsapi=1&rel=0`;
+            iframe.classList.remove('hidden');
+            if (playBtn) playBtn.classList.add('hidden');
+            if (thumb) thumb.classList.add('opacity-0');
+        }
+
+        function selectSpotlightVideo(card, videoId) {
+            if (!videoId) return;
+            currentSpotlightId = videoId;
+
+            // Highlight selected card in carousel
+            document.querySelectorAll('.speaking-card').forEach(c => {
+                c.classList.remove('ring-2', 'ring-purple-500', 'bg-purple-500/10');
+            });
+            card.classList.add('ring-2', 'ring-purple-500', 'bg-purple-500/10');
+
+            // Extract info from card
+            const rawId = videoId.split('?')[0];
+            const eventBadge = card.querySelector('.font-mono.font-bold');
+            const catBadge = card.getAttribute('data-category');
+            const titleElement = card.querySelector('h4');
+
+            // Update Thumbnail
+            const thumb = document.getElementById('spotlightThumb');
+            if (thumb) {
+                thumb.src = `https://img.youtube.com/vi/${rawId}/hqdefault.jpg`;
+                thumb.classList.remove('opacity-0');
+            }
+
+            // Reset player wrapper to thumbnail mode then auto play
+            const iframe = document.getElementById('spotlightIframe');
+            const playBtn = document.getElementById('spotlightPlayBtn');
+            if (iframe) iframe.classList.add('hidden');
+            if (playBtn) playBtn.classList.remove('hidden');
+
+            // Update Event & Category Badges
+            const eventEl = document.getElementById('spotlightEvent');
+            if (eventEl && eventBadge) {
+                eventEl.textContent = eventBadge.textContent.trim();
+            }
+
+            const badgeEl = document.getElementById('spotlightBadge');
+            if (badgeEl) {
+                if (catBadge === 'conference') {
+                    badgeEl.textContent = 'CONF';
+                    badgeEl.className = 'text-xs font-mono font-bold px-2.5 py-1 rounded-md bg-purple-500/20 border border-purple-500/30 text-purple-300 uppercase';
+                } else {
+                    badgeEl.textContent = 'WEBINAR';
+                    badgeEl.className = 'text-xs font-mono font-bold px-2.5 py-1 rounded-md bg-blue-500/20 border border-blue-500/30 text-blue-300 uppercase';
+                }
+            }
+
+            // Copy Title
+            const titleTarget = document.getElementById('spotlightTitle');
+            if (titleTarget && titleElement) {
+                titleTarget.innerHTML = titleElement.innerHTML;
+            }
+
+            // Update external YouTube link
+            const ytLink = document.getElementById('spotlightYtLink');
+            if (ytLink) {
+                ytLink.href = `https://www.youtube.com/watch?v=${rawId}`;
+            }
+
+            // Start playing immediately
+            playSpotlightVideo();
+
+            // Smooth scroll spotlight into view if out of viewport
+            const spotlight = document.getElementById('speakingSpotlight');
+            if (spotlight) {
+                const rect = spotlight.getBoundingClientRect();
+                if (rect.top < 0 || rect.bottom > window.innerHeight) {
+                    spotlight.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+        }
+
+        // Cinema Video Modal Controls
+        function openVideoModal(videoId, title) {
+            const modal = document.getElementById('videoModal');
+            const content = document.getElementById('videoModalContent');
+            const iframe = document.getElementById('videoModalIframe');
+            const titleEl = document.getElementById('videoModalTitle');
+            if (!modal || !iframe) return;
+
+            if (titleEl) titleEl.textContent = title || 'Видеозапись доклада';
+            const separator = videoId.includes('?') ? '&' : '?';
+            iframe.src = `https://www.youtube.com/embed/${videoId}${separator}autoplay=1&enablejsapi=1&rel=0`;
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modal.classList.add('opacity-100');
+                if (content) {
+                    content.classList.remove('scale-95');
+                    content.classList.add('scale-100');
+                }
+            }, 10);
+        }
+
+        function closeVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const content = document.getElementById('videoModalContent');
+            const iframe = document.getElementById('videoModalIframe');
+            if (!modal || !iframe) return;
+
+            modal.classList.remove('opacity-100');
+            modal.classList.add('opacity-0');
+            if (content) {
+                content.classList.remove('scale-100');
+                content.classList.add('scale-95');
+            }
+
+            setTimeout(() => {
+                iframe.src = '';
+                modal.classList.remove('flex');
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }, 250);
+        }
+
+        function handleModalBackdropClick(event) {
+            if (event.target.id === 'videoModal') {
+                closeVideoModal();
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeVideoModal();
+            }
+        });
     </script>
     
     <!-- Vanta.js Interactive Background -->
