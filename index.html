@@ -57,6 +57,8 @@
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -20;
+            opacity: 0.35;
+            transition: opacity 0.5s ease-in-out;
         }
 
         /* Bento UI & Glassmorphism */
@@ -1112,59 +1114,59 @@
         </h2>
         
         <div class="grid md:grid-cols-2 gap-8">
-            <div class="bento-glass p-10 rounded-[2rem] space-y-8" style="background: linear-gradient(145deg, rgba(30,41,59,0.7), rgba(15,23,42,0.9)); border-color: rgba(168,85,247,0.3);">
+            <div class="bento-glass p-6 sm:p-10 rounded-[2rem] space-y-8" style="background: linear-gradient(145deg, rgba(30,41,59,0.7), rgba(15,23,42,0.9)); border-color: rgba(168,85,247,0.3);">
                 <div class="bento-content">
                     <h3 class="text-2xl font-bold text-white border-b border-white/10 pb-6 mb-8 outfit-font"><span class="ru-text">Напишите мне</span><span class="ua-text">Напишіть мені</span><span class="en-text">Message me</span></h3>
-                    <div class="space-y-8">
-                        <div class="flex items-center gap-6 group">
-                            <div class="w-14 h-14 bg-purple-500/10 rounded-2xl flex items-center justify-center text-purple-400 group-hover:bg-purple-500 group-hover:text-white transition-all group-hover:scale-110 shadow-lg">
+                    <div class="space-y-6 sm:space-y-8">
+                        <div class="flex items-center gap-4 sm:gap-6 group">
+                            <div class="w-14 h-14 shrink-0 bg-purple-500/10 rounded-2xl flex items-center justify-center text-purple-400 group-hover:bg-purple-500 group-hover:text-white transition-all group-hover:scale-110 shadow-lg">
                                 <i class="fa-solid fa-envelope text-2xl"></i>
                             </div>
-                            <div>
+                            <div class="min-w-0">
                                 <p class="text-xs text-slate-400 uppercase font-bold tracking-widest mb-1">Email</p>
-                                <a href="mailto:selesnow@gmail.com" class="text-xl font-medium text-white hover:text-purple-400 transition-colors">selesnow@gmail.com</a>
+                                <a href="mailto:selesnow@gmail.com" class="text-lg sm:text-xl font-medium text-white hover:text-purple-400 transition-colors break-all">selesnow@gmail.com</a>
                             </div>
                         </div>
                         
-                        <div class="flex items-center gap-6 group">
-                            <div class="w-14 h-14 bg-blue-500/10 rounded-2xl flex items-center justify-center text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition-all group-hover:scale-110 shadow-lg">
+                        <div class="flex items-center gap-4 sm:gap-6 group">
+                            <div class="w-14 h-14 shrink-0 bg-blue-500/10 rounded-2xl flex items-center justify-center text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition-all group-hover:scale-110 shadow-lg">
                                 <i class="fa-brands fa-telegram text-2xl"></i>
                             </div>
-                            <div>
+                            <div class="min-w-0">
                                 <p class="text-xs text-slate-400 uppercase font-bold tracking-widest mb-1">Telegram</p>
-                                <a href="https://t.me/AlexeySeleznev" target="_blank" class="text-xl font-medium text-white hover:text-blue-400 transition-colors">@AlexeySeleznev</a>
+                                <a href="https://t.me/AlexeySeleznev" target="_blank" class="text-lg sm:text-xl font-medium text-white hover:text-blue-400 transition-colors break-words">@AlexeySeleznev</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="bento-glass p-10 rounded-[2rem]">
+            <div class="bento-glass p-6 sm:p-10 rounded-[2rem]">
                 <div class="bento-content">
                     <h3 class="text-2xl font-bold text-white mb-6 border-b border-white/10 pb-6 outfit-font"><span class="ru-text">Соцсети</span><span class="ua-text">Соцмережі</span><span class="en-text">Social Media</span></h3>
                     <ul class="space-y-4">
                         <li>
-                            <a href="https://github.com/selesnow" target="_blank" class="flex items-center gap-5 p-4 rounded-2xl hover:bg-white/5 transition-all group border border-transparent hover:border-white/10">
-                                <i class="fa-brands fa-github text-3xl text-slate-500 group-hover:text-white transition-colors group-hover:scale-110"></i>
-                                <span class="text-slate-300 group-hover:text-white font-medium text-lg"><span class="ru-text">Профиль на GitHub</span><span class="ua-text">Профіль на GitHub</span><span class="en-text">GitHub Profile</span></span>
+                            <a href="https://github.com/selesnow" target="_blank" class="flex items-center gap-4 sm:gap-5 p-3 sm:p-4 rounded-2xl hover:bg-white/5 transition-all group border border-transparent hover:border-white/10">
+                                <i class="fa-brands fa-github text-3xl w-8 text-center shrink-0 text-slate-500 group-hover:text-white transition-colors group-hover:scale-110"></i>
+                                <span class="text-slate-300 group-hover:text-white font-medium text-base sm:text-lg"><span class="ru-text">Профиль на GitHub</span><span class="ua-text">Профіль на GitHub</span><span class="en-text">GitHub Profile</span></span>
                             </a>
                         </li>
                         <li>
-                            <a href="https://linkedin.com/in/selesnow" target="_blank" class="flex items-center gap-5 p-4 rounded-2xl hover:bg-white/5 transition-all group border border-transparent hover:border-white/10">
-                                <i class="fa-brands fa-linkedin text-3xl text-slate-500 group-hover:text-blue-500 transition-colors group-hover:scale-110"></i>
-                                <span class="text-slate-300 group-hover:text-white font-medium text-lg"><span class="ru-text">Профиль на Linkedin</span><span class="ua-text">Профіль на Linkedin</span><span class="en-text">Linkedin Profile</span></span>
+                            <a href="https://linkedin.com/in/selesnow" target="_blank" class="flex items-center gap-4 sm:gap-5 p-3 sm:p-4 rounded-2xl hover:bg-white/5 transition-all group border border-transparent hover:border-white/10">
+                                <i class="fa-brands fa-linkedin text-3xl w-8 text-center shrink-0 text-slate-500 group-hover:text-blue-500 transition-colors group-hover:scale-110"></i>
+                                <span class="text-slate-300 group-hover:text-white font-medium text-base sm:text-lg"><span class="ru-text">Профиль на Linkedin</span><span class="ua-text">Профіль на Linkedin</span><span class="en-text">Linkedin Profile</span></span>
                             </a>
                         </li>
                         <li>
-                            <a href="https://facebook.com/selesnow" target="_blank" class="flex items-center gap-5 p-4 rounded-2xl hover:bg-white/5 transition-all group border border-transparent hover:border-white/10">
-                                <i class="fa-brands fa-facebook text-3xl text-slate-500 group-hover:text-blue-600 transition-colors group-hover:scale-110"></i>
-                                <span class="text-slate-300 group-hover:text-white font-medium text-lg"><span class="ru-text">Страница в Facebook</span><span class="ua-text">Сторінка у Facebook</span><span class="en-text">Facebook Page</span></span>
+                            <a href="https://facebook.com/selesnow" target="_blank" class="flex items-center gap-4 sm:gap-5 p-3 sm:p-4 rounded-2xl hover:bg-white/5 transition-all group border border-transparent hover:border-white/10">
+                                <i class="fa-brands fa-facebook text-3xl w-8 text-center shrink-0 text-slate-500 group-hover:text-blue-600 transition-colors group-hover:scale-110"></i>
+                                <span class="text-slate-300 group-hover:text-white font-medium text-base sm:text-lg"><span class="ru-text">Страница в Facebook</span><span class="ua-text">Сторінка у Facebook</span><span class="en-text">Facebook Page</span></span>
                             </a>
                         </li>
                         <li>
-                            <a href="https://www.instagram.com/alexey.selesnow" target="_blank" class="flex items-center gap-5 p-4 rounded-2xl hover:bg-white/5 transition-all group border border-transparent hover:border-white/10">
-                                <i class="fa-brands fa-instagram text-3xl text-slate-500 group-hover:text-pink-500 transition-colors group-hover:scale-110"></i>
-                                <span class="text-slate-300 group-hover:text-white font-medium text-lg">Instagram</span>
+                            <a href="https://www.instagram.com/alexey.selesnow" target="_blank" class="flex items-center gap-4 sm:gap-5 p-3 sm:p-4 rounded-2xl hover:bg-white/5 transition-all group border border-transparent hover:border-white/10">
+                                <i class="fa-brands fa-instagram text-3xl w-8 text-center shrink-0 text-slate-500 group-hover:text-pink-500 transition-colors group-hover:scale-110"></i>
+                                <span class="text-slate-300 group-hover:text-white font-medium text-base sm:text-lg">Instagram</span>
                             </a>
                         </li>
                     </ul>
@@ -1389,11 +1391,11 @@
                 minWidth: 200.00,
                 scale: 1.00,
                 scaleMobile: 1.00,
-                color: 0x8b5cf6, // purple-500
+                color: 0x6366f1, // indigo-500: мягкий, благородный тон вместо едкого фиолетового
                 backgroundColor: 0x020617, // slate-950
-                points: 15.00,
-                maxDistance: 22.00,
-                spacing: 16.00,
+                points: 9.00,   // разреженная сетка, исключающая визуальную перегрузку
+                maxDistance: 19.00,
+                spacing: 18.00,
                 showDots: true
             });
         });
