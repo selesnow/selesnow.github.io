@@ -1,0 +1,61 @@
+[
+  {
+    "date": "2019-10", "outlet": "vc.ru", "url": "https://vc.ru/marketing/88194-skvoznaya-analitika-vse-li-ponimayut-etot-termin-odinakovo-chast-1-analitiki",
+    "img": "https://api.vc.ru/v2.9/cover/fb/c/88194/1792946334/cover.jpg", "kind": "survey",
+    "title": {"ru": "Сквозная аналитика. Все ли понимают этот термин одинаково? Часть 1. Аналитики", "ua": "Наскрізна аналітика. Чи всі розуміють цей термін однаково? Частина 1. Аналітики", "en": "End-to-end analytics: does everyone mean the same thing? Part 1. Analysts"},
+    "desc": {"ru": "Опрос K50 среди аналитиков: что такое сквозная аналитика, какие задачи она решает и с чего начинать её внедрение.", "ua": "Опитування K50 серед аналітиків: що таке наскрізна аналітика, які задачі вона вирішує і з чого починати її впровадження.", "en": "A K50 survey of analysts: what end-to-end analytics is, what problems it solves and where to start."},
+    "quote": {"ru": "Сквозная аналитика позволяет увидеть всю картину целиком: рекламные системы, CRM, веб-аналитика и внутренние базы — это шестерёнки, которые нужно соединить в единый механизм.", "ua": "Наскрізна аналітика дозволяє побачити всю картину цілком: рекламні системи, CRM, веб-аналітика та внутрішні бази — це шестерні, які треба з'єднати в єдиний механізм.", "en": "End-to-end analytics shows you the whole picture: ad platforms, CRM, web analytics and internal databases are gears that need to be joined into a single mechanism."}
+  },
+  {
+    "date": "2019-04", "outlet": "SEOnews", "url": "https://www.seonews.ru/analytics/trendy-veb-analitiki-2019-uskorennye-testirovaniya-borba-s-divergentnostyu-i-uvazhenie-k-lyudyam/",
+    "img": "https://www.seonews.ru/upload/iblock/c52/c52a1086aa4e9cace1f635d82d15a572.png", "kind": "survey",
+    "title": {"ru": "Тренды веб-аналитики 2019: ускоренные тестирования, борьба с дивергентностью и уважение к людям", "ua": "Тренди веб-аналітики 2019: прискорені тестування, боротьба з дивергентністю та повага до людей", "en": "Web analytics trends 2019: faster testing, fighting data divergence and respect for people"},
+    "desc": {"ru": "Спикеры GoAnalytics — Симо Ахава, Василий Сабиров, Евгений Вербов и другие — о том, куда движется веб-аналитика.", "ua": "Спікери GoAnalytics — Сімо Ахава, Василь Сабіров, Євген Вербов та інші — про те, куди рухається веб-аналітика.", "en": "GoAnalytics speakers — Simo Ahava, Vasily Sabirov, Evgeny Verbov and others — on where web analytics is heading."},
+    "quote": {"ru": "Анализировать только онлайн уже недостаточно: нужны аналитические системы, которые оценивают влияние онлайна на офлайн и наоборот.", "ua": "Аналізувати лише онлайн уже недостатньо: потрібні аналітичні системи, які оцінюють вплив онлайну на офлайн і навпаки.", "en": "Analyzing online alone is no longer enough: you need analytics systems that measure how online affects offline and vice versa."}
+  },
+  {
+    "date": "2019-04", "outlet": "CoMagic", "url": "https://www.uiscom.ru/blog/r-python-javascript-ili-excel-chto-uchit-internet-marketologu-dlya-professionalnogo-rosta/",
+    "img": "https://uiscom.ru/upload/uf/559/i3r59ju902oygfqjtrgko6zgmij0lxf8.jpg", "kind": "survey",
+    "title": {"ru": "R, Python, JavaScript или… Excel? Что учить интернет-маркетологу для профессионального роста", "ua": "R, Python, JavaScript чи… Excel? Що вчити інтернет-маркетологу для професійного зростання", "en": "R, Python, JavaScript or… Excel? What should a marketer learn to grow"},
+    "desc": {"ru": "Эксперты CoMagic (сейчас UIS) сравнивают языки программирования и инструменты, которые стоит освоить маркетологу.", "ua": "Експерти CoMagic (зараз UIS) порівнюють мови програмування та інструменти, які варто опанувати маркетологу.", "en": "Experts at CoMagic (now UIS) compare the languages and tools a marketer should learn."}
+  },
+  {
+    "date": "2019-02", "outlet": "Цифровой дискурс", "outletEn": "Digital Discourse", "url": "https://alexeyseleznev.wordpress.com/2019/02/21/опрос-r-и-python-для-гуманитариев-и-непрогра/", "via": "blog",
+    "img": "https://www.digitalvidya.com/wp-content/uploads/2018/03/r-vs-python-1170x630.jpg", "kind": "survey",
+    "title": {"ru": "R и Python для гуманитариев и непрограммистов", "ua": "R та Python для гуманітаріїв і непрограмістів", "en": "R and Python for humanities scholars and non-programmers"},
+    "desc": {"ru": "Опрос портала о цифровых исследованиях: какой язык выбрать тем, кто не планирует становиться программистом.", "ua": "Опитування порталу про цифрові дослідження: яку мову обрати тим, хто не планує ставати програмістом.", "en": "A digital-humanities portal survey: which language to choose if you don't plan to become a programmer."},
+    "quote": {"ru": "Практически любую задачу по сбору, очистке и визуализации данных одинаково эффективно решают и R, и Python. R удобнее для манипуляции данными и визуализации, Python — если планируете веб-программирование.", "ua": "Практично будь-яку задачу зі збору, очищення та візуалізації даних однаково ефективно вирішують і R, і Python. R зручніший для маніпуляції даними та візуалізації, Python — якщо плануєте веб-програмування.", "en": "R and Python handle almost any data collection, cleaning or visualization task equally well. R is more convenient for data manipulation and dataviz; Python, if you also plan to do web development."}
+  },
+  {
+    "date": "2018-10", "outlet": "Лидзавод", "outletEn": "Leadzavod", "url": "https://leadzavod.com/jazyk-r-v-veb-analitike-i-internet-marketinge/",
+    "img": "https://leadzavod.com/wp-content/uploads/2018/10/jazyk-r-v-veb-analitike-i-internet-marketinge.jpg", "kind": "interview",
+    "title": {"ru": "Язык R в веб-аналитике и интернет-маркетинге", "ua": "Мова R у веб-аналітиці та інтернет-маркетингу", "en": "R in web analytics and digital marketing"},
+    "desc": {"ru": "Зачем маркетологам и аналитикам программирование на R, какую пользу оно даёт в повседневной работе и с чего начать.", "ua": "Навіщо маркетологам і аналітикам програмування на R, яку користь воно дає в повсякденній роботі і з чого почати.", "en": "Why marketers and analysts need R, how it helps day to day, and where to start."},
+    "quote": {"ru": "Преимущество R — в огромном количестве пакетов: они автоматизируют работу с рекламными и аналитическими платформами, то есть 80% работы за вас уже выполнили.", "ua": "Перевага R — у величезній кількості пакетів: вони автоматизують роботу з рекламними та аналітичними платформами, тобто 80% роботи за вас уже виконали.", "en": "R's strength is its huge number of packages: they automate work with ad and analytics platforms, so 80% of the job is already done for you."}
+  },
+  {
+    "date": "2018-04", "outlet": "Цифровой дискурс", "outletEn": "Digital Discourse", "url": "https://alexeyseleznev.wordpress.com/2018/04/02/интервью-для-портала-цифровой-дискур/", "via": "blog",
+    "img": "", "kind": "interview",
+    "title": {"ru": "Кто такие интернет-аналитики и какими инструментами они пользуются", "ua": "Хто такі інтернет-аналітики та якими інструментами вони користуються", "en": "Who web analysts are and which tools they use"},
+    "desc": {"ru": "Какие навыки нужны интернет-аналитику, как устроена работа отдела аналитики и при чём здесь язык R.", "ua": "Які навички потрібні інтернет-аналітику, як влаштована робота відділу аналітики і до чого тут мова R.", "en": "The skills a web analyst needs, how an analytics department works, and where R fits in."},
+    "quote": {"ru": "Аналитический склад ума говорит о том, что человек умеет размышлять логично и последовательно.", "ua": "Аналітичний склад розуму говорить про те, що людина вміє міркувати логічно й послідовно.", "en": "An analytical mind means a person can reason logically and consistently."}
+  },
+  {
+    "date": "2017-12", "outlet": "AIN.UA", "url": "https://ain.ua/ru/2017/12/27/itogi-2017-blokirovki/",
+    "img": "https://cdn.ain.ua/ua/og-images/LKjntMTzot8qGOwy75zIrfjn6IrL6ESTUffxanSk.jpg", "kind": "comment",
+    "title": {"ru": "Итоги-2017: как бан российских сайтов повлиял на украинский рекламный рынок", "ua": "Підсумки-2017: як бан російських сайтів вплинув на український рекламний ринок", "en": "2017 in review: how the ban on Russian websites changed Ukraine's ad market"},
+    "desc": {"ru": "Как изменились интересы пользователей и рейтинги сайтов и куда перетекли рекламные бюджеты по итогам года.", "ua": "Як змінилися інтереси користувачів і рейтинги сайтів та куди перетекли рекламні бюджети за підсумками року.", "en": "How user interests and site rankings shifted, and where ad budgets moved by year-end."}
+  },
+  {
+    "date": "2017-08", "outlet": "AIN.UA", "url": "https://ain.ua/ru/2017/08/21/ban-rossijskix-sajtov-tri-mesyaca-spustya/",
+    "img": "https://cdn.ain.ua/ua/og-images/o2ZugCnymrvFJaqvtJjZyaUEy2Mt317kKgQR57ak.jpg", "kind": "comment",
+    "title": {"ru": "Результаты бана российских сайтов: падение охватов и передел бюджетов", "ua": "Результати бану російських сайтів: падіння охоплень і переділ бюджетів", "en": "The Russian website ban three months on: falling reach and reshuffled budgets"},
+    "desc": {"ru": "Три месяца после блокировок: что произошло с популярностью сайтов и как рекламодатели перераспределили бюджеты.", "ua": "Три місяці після блокувань: що сталося з популярністю сайтів і як рекламодавці перерозподілили бюджети.", "en": "Three months after the blocks: what happened to site popularity and how advertisers reallocated budgets."}
+  },
+  {
+    "date": "2017-08", "outlet": "AIN.UA", "url": "https://ain.ua/ru/2017/08/18/kak-pomenyalis-ceny-na-reklamu/",
+    "img": "https://cdn.ain.ua/ua/og-images/pQFi0CRIP3BOpDj8AHKlpM8PIxi49wFoY5D99kIL.jpg", "kind": "survey",
+    "title": {"ru": "Как поменялись цены на рекламу после бана российских сайтов: блиц-опрос", "ua": "Як змінилися ціни на рекламу після бану російських сайтів: бліц-опитування", "en": "How ad prices changed after the Russian website ban: a quick survey"},
+    "desc": {"ru": "Эксперты рынка — о ценах на рекламу в Google, росте его доли и перераспределении рекламных бюджетов.", "ua": "Експерти ринку — про ціни на рекламу в Google, зростання його частки та перерозподіл рекламних бюджетів.", "en": "Market experts on Google ad prices, its growing share and how budgets were redistributed."}
+  }
+]

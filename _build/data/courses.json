@@ -1,0 +1,513 @@
+[
+ {
+  "id": "r4excel",
+  "level": "beginner",
+  "year": "2020",
+  "cover": "https://selesnow.github.io/r4excel_users/cover.png",
+  "url": "https://selesnow.github.io/r4excel_users/",
+  "playlist": "https://www.youtube.com/playlist?list=PLD2LDq8edf4pgGg16wYMobvIYy_0MI0kF",
+  "article": "https://habr.com/ru/articles/495438/",
+  "title": {
+   "ru": "Язык R для пользователей Excel",
+   "ua": "Мова R для користувачів Excel",
+   "en": "R for Excel Users"
+  },
+  "tagline": {
+   "ru": "Самый простой вход в R — через задачи, которые вы сегодня решаете в Excel.",
+   "ua": "Найпростіший вхід у R — через задачі, які ви сьогодні вирішуєте в Excel.",
+   "en": "The easiest way into R — through the tasks you solve in Excel today."
+  },
+  "desc": {
+   "ru": "Курс построен вокруг tidyverse — readr, vroom, dplyr, tidyr и ggplot2 — и проводит через весь цикл анализа данных: от загрузки до визуализации готового результата. Синтаксис tidyverse легко читается даже без опыта программирования, а функциональный стиль R пользователям Excel освоить проще, чем классическое ООП. К каждому уроку есть тест с теоретическими вопросами и задачами на программирование, а также разобранные решения.",
+   "ua": "Курс побудований навколо tidyverse — readr, vroom, dplyr, tidyr та ggplot2 — і проводить через увесь цикл аналізу даних: від завантаження до візуалізації готового результату. Синтаксис tidyverse легко читається навіть без досвіду програмування, а функціональний стиль R користувачам Excel опанувати простіше, ніж класичне ООП. До кожного уроку є тест із теоретичними питаннями та задачами на програмування, а також розібрані рішення.",
+   "en": "Built around the tidyverse — readr, vroom, dplyr, tidyr and ggplot2 — the course walks you through the full analysis cycle, from loading data to visualizing the result. tidyverse syntax reads easily even with no coding background, and R's functional style is easier for Excel users than classic OOP. Every lesson comes with a quiz mixing theory and coding tasks, plus worked solutions."
+  },
+  "audience": {
+   "ru": "Тем, кто открывает Excel хотя бы раз в неделю. Навыки программирования не нужны.",
+   "ua": "Тим, хто відкриває Excel хоча б раз на тиждень. Навички програмування не потрібні.",
+   "en": "Anyone who opens Excel at least once a week. No programming skills required."
+  },
+  "stats": [
+   {
+    "ru": "13 уроков",
+    "ua": "13 уроків",
+    "en": "13 lessons"
+   },
+   {
+    "ru": "Тесты и задачи",
+    "ua": "Тести та задачі",
+    "en": "Quizzes & tasks"
+   },
+   {
+    "ru": "Бесплатно",
+    "ua": "Безкоштовно",
+    "en": "Free"
+   }
+  ],
+  "program": {
+   "ru": [
+    "Установка R и RStudio, структуры данных",
+    "Чтение CSV, Excel и Google Таблиц",
+    "Фильтрация, выбор столбцов, пайплайны",
+    "Группировка, агрегация и объединение таблиц",
+    "Оконные функции и аналог сводных таблиц",
+    "Визуализация с ggplot2"
+   ],
+   "ua": [
+    "Встановлення R і RStudio, структури даних",
+    "Читання CSV, Excel і Google Таблиць",
+    "Фільтрація, вибір стовпців, пайплайни",
+    "Групування, агрегація та об'єднання таблиць",
+    "Віконні функції та аналог зведених таблиць",
+    "Візуалізація з ggplot2"
+   ],
+   "en": [
+    "Installing R & RStudio, data structures",
+    "Reading CSV, Excel and Google Sheets",
+    "Filtering, selecting columns, pipelines",
+    "Grouping, aggregation and joins",
+    "Window functions and pivot-table equivalents",
+    "Visualization with ggplot2"
+   ]
+  }
+ },
+ {
+  "id": "r4marketing",
+  "level": "beginner",
+  "year": "2018",
+  "cover": "https://selesnow.github.io/r_for_marketing/cover.png",
+  "url": "https://r-for-marketing.netpeak.net/",
+  "playlist": "https://www.youtube.com/playlist?list=PLD2LDq8edf4o6dSZ4BIr7J08gT97nimH_",
+  "article": "https://habr.com/ru/articles/669104/",
+  "materials": "https://github.com/selesnow/r_for_marketing",
+  "note": {
+   "ru": "Полная версия с методичкой требует бесплатной регистрации",
+   "ua": "Повна версія з методичкою потребує безкоштовної реєстрації",
+   "en": "The full version with the handbook requires free registration"
+  },
+  "title": {
+   "ru": "Язык R для интернет-маркетинга",
+   "ua": "Мова R для інтернет-маркетингу",
+   "en": "R for Digital Marketing"
+  },
+  "tagline": {
+   "ru": "Автоматизация рутины маркетолога и веб-аналитика: от основ синтаксиса до Telegram-ботов.",
+   "ua": "Автоматизація рутини маркетолога та веб-аналітика: від основ синтаксису до Telegram-ботів.",
+   "en": "Automating marketing and web-analytics routine: from syntax basics to Telegram bots."
+  },
+  "desc": {
+   "ru": "Первый и самый объёмный курс, созданный в 2018 году вместе с NeedForData и Netpeak и с тех пор неоднократно дополненный. Три модуля: основы языка и работа с табличными данными; сбор данных из API рекламных и аналитических систем — Google Ads, Яндекс.Директ, Facebook, ВКонтакте, MyTarget, Google Analytics, Яндекс.Метрика, Search Console, YouTube — и парсинг сайтов; использование собранных данных — Google Таблицы, ggplot2, базы данных, рассылка писем, запуск скриптов по расписанию и Telegram-боты.",
+   "ua": "Перший і найоб'ємніший курс, створений у 2018 році разом із NeedForData та Netpeak і відтоді неодноразово доповнений. Три модулі: основи мови та робота з табличними даними; збір даних з API рекламних і аналітичних систем — Google Ads, Яндекс.Директ, Facebook, ВКонтакте, MyTarget, Google Analytics, Яндекс.Метрика, Search Console, YouTube — і парсинг сайтів; використання зібраних даних — Google Таблиці, ggplot2, бази даних, розсилка листів, запуск скриптів за розкладом і Telegram-боти.",
+   "en": "The first and most extensive course, created in 2018 with NeedForData and Netpeak and expanded many times since. Three modules: language basics and tabular data; collecting data from ad and analytics APIs — Google Ads, Yandex.Direct, Facebook, VK, MyTarget, Google Analytics, Yandex.Metrica, Search Console, YouTube — plus web scraping; and putting the data to work — Google Sheets, ggplot2, databases, email, scheduled scripts and Telegram bots."
+  },
+  "audience": {
+   "ru": "Интернет-маркетологам и веб-аналитикам без опыта программирования.",
+   "ua": "Інтернет-маркетологам і веб-аналітикам без досвіду програмування.",
+   "en": "Digital marketers and web analysts with no coding experience."
+  },
+  "stats": [
+   {
+    "ru": "3 модуля",
+    "ua": "3 модулі",
+    "en": "3 modules"
+   },
+   {
+    "ru": "Видео + методичка",
+    "ua": "Відео + методичка",
+    "en": "Videos + handbook"
+   },
+   {
+    "ru": "Бесплатно",
+    "ua": "Безкоштовно",
+    "en": "Free"
+   }
+  ],
+  "program": {
+   "ru": [
+    "Основы синтаксиса, строки, даты, циклы и функции",
+    "R-скрипты внутри Power BI",
+    "API рекламных систем и веб-аналитики",
+    "Парсинг сайтов и HTTP-запросы",
+    "Базы данных, Google Таблицы, ggplot2",
+    "Расписание скриптов и Telegram-боты"
+   ],
+   "ua": [
+    "Основи синтаксису, рядки, дати, цикли та функції",
+    "R-скрипти всередині Power BI",
+    "API рекламних систем і веб-аналітики",
+    "Парсинг сайтів і HTTP-запити",
+    "Бази даних, Google Таблиці, ggplot2",
+    "Розклад скриптів і Telegram-боти"
+   ],
+   "en": [
+    "Syntax basics, strings, dates, loops and functions",
+    "R scripts inside Power BI",
+    "Ad-platform and web-analytics APIs",
+    "Web scraping and HTTP requests",
+    "Databases, Google Sheets, ggplot2",
+    "Scheduled scripts and Telegram bots"
+   ]
+  }
+ },
+ {
+  "id": "dplyr",
+  "level": "middle",
+  "year": "2020",
+  "cover": "https://selesnow.github.io/dplyr_1_0_0_course/img/cover.png",
+  "url": "https://selesnow.github.io/dplyr_1_0_0_course/",
+  "playlist": "https://www.youtube.com/playlist?list=PLD2LDq8edf4qETNK0JPCjtsoQ7lq9BBV1",
+  "article": "https://habr.com/ru/articles/501028/",
+  "title": {
+   "ru": "Введение в dplyr 1.0.0",
+   "ua": "Вступ до dplyr 1.0.0",
+   "en": "Introduction to dplyr 1.0.0"
+  },
+  "tagline": {
+   "ru": "Всё, что изменилось в главном пакете для манипуляции данными, — от 1.0.0 до 1.2.0.",
+   "ua": "Усе, що змінилося в головному пакеті для маніпуляції даними, — від 1.0.0 до 1.2.0.",
+   "en": "Everything that changed in R's core data-manipulation package — from 1.0.0 to 1.2.0."
+  },
+  "desc": {
+   "ru": "dplyr реализует грамматику манипуляции данными в R, а версия 1.0.0 весной 2020 года закрепила его устоявшийся синтаксис. Мини-курс вырос из серии видео по статьям Хедли Викхема о нововведениях и с тех пор дополнен обзорами релизов 1.1.0 и 1.2.0. К каждому уроку прилагается код из видео и короткие упражнения на 5–10 минут с решениями.",
+   "ua": "dplyr реалізує граматику маніпуляції даними в R, а версія 1.0.0 навесні 2020 року закріпила його усталений синтаксис. Міні-курс виріс із серії відео за статтями Гедлі Вікхема про нововведення і відтоді доповнений оглядами релізів 1.1.0 та 1.2.0. До кожного уроку додається код із відео та короткі вправи на 5–10 хвилин із рішеннями.",
+   "en": "dplyr implements a grammar of data manipulation in R, and version 1.0.0 in spring 2020 settled its syntax. The mini-course grew out of videos based on Hadley Wickham's posts about the new features and has since added reviews of releases 1.1.0 and 1.2.0. Every lesson includes the code from the video and short 5–10 minute exercises with solutions."
+  },
+  "audience": {
+   "ru": "Тем, у кого уже есть базовые навыки работы с tidyverse.",
+   "ua": "Тим, хто вже має базові навички роботи з tidyverse.",
+   "en": "Those who already have basic tidyverse skills."
+  },
+  "stats": [
+   {
+    "ru": "7 уроков",
+    "ua": "7 уроків",
+    "en": "7 lessons"
+   },
+   {
+    "ru": "Упражнения",
+    "ua": "Вправи",
+    "en": "Exercises"
+   },
+   {
+    "ru": "Бесплатно",
+    "ua": "Безкоштовно",
+    "en": "Free"
+   }
+  ],
+  "program": {
+   "ru": [
+    "select(), rename_with() и relocate()",
+    "across() — операции над столбцами",
+    "rowwise() — перебор строк",
+    "Обновлённая summarise()",
+    "rows_*() — изменение строк",
+    "dplyr 1.1.0 и 1.2.0: .by, join_by(), reframe(), filter_out()"
+   ],
+   "ua": [
+    "select(), rename_with() і relocate()",
+    "across() — операції над стовпцями",
+    "rowwise() — перебір рядків",
+    "Оновлена summarise()",
+    "rows_*() — зміна рядків",
+    "dplyr 1.1.0 і 1.2.0: .by, join_by(), reframe(), filter_out()"
+   ],
+   "en": [
+    "select(), rename_with() and relocate()",
+    "across() — working across columns",
+    "rowwise() — working within rows",
+    "The new summarise()",
+    "rows_*() — modifying rows",
+    "dplyr 1.1.0 & 1.2.0: .by, join_by(), reframe(), filter_out()"
+   ]
+  }
+ },
+ {
+  "id": "iterations",
+  "level": "middle",
+  "year": "2022",
+  "cover": "https://selesnow.github.io/iterations_in_r/img/cover.png",
+  "url": "https://selesnow.github.io/iterations_in_r/",
+  "article": "https://habr.com/ru/articles/651979/",
+  "title": {
+   "ru": "Циклы и функционалы в языке R",
+   "ua": "Цикли та функціонали в мові R",
+   "en": "Loops and Functionals in R"
+  },
+  "tagline": {
+   "ru": "Эффективные итерации, функциональный стиль и многопоточность.",
+   "ua": "Ефективні ітерації, функціональний стиль і багатопотоковість.",
+   "en": "Efficient iteration, functional style and parallel computing."
+  },
+  "desc": {
+   "ru": "«В R не принято использовать циклы» — курс объясняет, почему так говорят и как писать итерации правильно. Путь от базовых for, while и repeat через обработку ошибок к функциональному стилю: семейство apply() и пакет purrr. Завершают курс параллельные вычисления — foreach, pbapply, furrr и низкоуровневый интерфейс пакета future. После каждой лекции — тест, а по сумме баллов — итоговая оценка за курс.",
+   "ua": "«У R не прийнято використовувати цикли» — курс пояснює, чому так кажуть і як правильно писати ітерації. Шлях від базових for, while і repeat через обробку помилок до функціонального стилю: сімейство apply() і пакет purrr. Завершують курс паралельні обчислення — foreach, pbapply, furrr і низькорівневий інтерфейс пакета future. Після кожної лекції — тест, а за сумою балів — підсумкова оцінка за курс.",
+   "en": "\"You don't use loops in R\" — the course explains why people say that and how to iterate properly. It goes from basic for, while and repeat loops, through error handling, to functional style with the apply() family and purrr. It finishes with parallel computing — foreach, pbapply, furrr and the low-level future package. Each lecture ends with a quiz, and your total score becomes your final course grade."
+  },
+  "audience": {
+   "ru": "Тем, кто уже освоил основы R (например, после курса для пользователей Excel).",
+   "ua": "Тим, хто вже опанував основи R (наприклад, після курсу для користувачів Excel).",
+   "en": "Those who know R basics (e.g. after the R for Excel Users course)."
+  },
+  "stats": [
+   {
+    "ru": "7 лекций",
+    "ua": "7 лекцій",
+    "en": "7 lectures"
+   },
+   {
+    "ru": "2 ч 55 мин",
+    "ua": "2 год 55 хв",
+    "en": "2 h 55 min"
+   },
+   {
+    "ru": "30 вопросов",
+    "ua": "30 питань",
+    "en": "30 questions"
+   }
+  ],
+  "program": {
+   "ru": [
+    "Циклы for, while и repeat",
+    "Обработка ошибок в циклах",
+    "Функционалы семейства apply()",
+    "Пакет purrr",
+    "Ошибки в функционалах",
+    "Многопоточность: foreach, pbapply, furrr, future"
+   ],
+   "ua": [
+    "Цикли for, while і repeat",
+    "Обробка помилок у циклах",
+    "Функціонали сімейства apply()",
+    "Пакет purrr",
+    "Помилки у функціоналах",
+    "Багатопотоковість: foreach, pbapply, furrr, future"
+   ],
+   "en": [
+    "for, while and repeat loops",
+    "Error handling in loops",
+    "The apply() family",
+    "The purrr package",
+    "Errors in functionals",
+    "Parallelism: foreach, pbapply, furrr, future"
+   ]
+  }
+ },
+ {
+  "id": "tgbot",
+  "level": "advanced",
+  "year": "2020",
+  "cover": "https://selesnow.github.io/build_telegram_bot_using_r/cover.png",
+  "url": "https://selesnow.github.io/build_telegram_bot_using_r/",
+  "article": "https://habr.com/ru/articles/511222/",
+  "kindLabel": {
+   "ru": "Онлайн-учебник",
+   "ua": "Онлайн-підручник",
+   "en": "Online book"
+  },
+  "title": {
+   "ru": "Разработка Telegram-ботов на языке R",
+   "ua": "Розробка Telegram-ботів мовою R",
+   "en": "Building Telegram Bots in R"
+  },
+  "tagline": {
+   "ru": "Веб-учебник: от первого сообщения до AI-бота в облаке.",
+   "ua": "Веб-підручник: від першого повідомлення до AI-бота в хмарі.",
+   "en": "A web book: from your first message to an AI bot in the cloud."
+  },
+  "desc": {
+   "ru": "Последовательный учебник на базе пакета telegram.bot. В первой главе вы отправите сообщение из R в Telegram, к четвёртой — создадите бота, который ведёт логический диалог с пользователем. Дальше — команды, фильтры, клавиатуры и коллбэки, подключение внешних API, Google Sheets и баз данных, интеграция LLM (OpenAI, Gemini, Claude), асинхронная обработка задач, Docker и деплой в Heroku и Google Cloud Run. Каждая глава заканчивается заданием и тестом.",
+   "ua": "Послідовний підручник на базі пакета telegram.bot. У першому розділі ви надішлете повідомлення з R у Telegram, до четвертого — створите бота, який веде логічний діалог із користувачем. Далі — команди, фільтри, клавіатури та колбеки, підключення зовнішніх API, Google Sheets і баз даних, інтеграція LLM (OpenAI, Gemini, Claude), асинхронна обробка задач, Docker і деплой у Heroku та Google Cloud Run. Кожен розділ завершується завданням і тестом.",
+   "en": "A step-by-step book built on the telegram.bot package. In chapter one you send a message from R to Telegram; by chapter four you build a bot that holds a logical dialogue. Then come commands, filters, keyboards and callbacks, external APIs, Google Sheets and databases, LLM integration (OpenAI, Gemini, Claude), async tasks, Docker and deployment to Heroku and Google Cloud Run. Every chapter ends with an assignment and a quiz."
+  },
+  "audience": {
+   "ru": "Тем, кто уверенно владеет циклами, функциями, строками и dplyr.",
+   "ua": "Тим, хто впевнено володіє циклами, функціями, рядками та dplyr.",
+   "en": "Those comfortable with loops, functions, strings and dplyr."
+  },
+  "stats": [
+   {
+    "ru": "Веб-книга",
+    "ua": "Веб-книга",
+    "en": "Web book"
+   },
+   {
+    "ru": "Задания и тесты",
+    "ua": "Завдання та тести",
+    "en": "Tasks & quizzes"
+   },
+   {
+    "ru": "Бесплатно",
+    "ua": "Безкоштовно",
+    "en": "Free"
+   }
+  ],
+  "program": {
+   "ru": [
+    "Отправка сообщений из R в Telegram",
+    "Команды и фильтры сообщений",
+    "Клавиатуры и логический диалог",
+    "Права пользователей бота",
+    "Интеграция LLM и внешних API",
+    "Docker и деплой в облако"
+   ],
+   "ua": [
+    "Надсилання повідомлень з R у Telegram",
+    "Команди та фільтри повідомлень",
+    "Клавіатури та логічний діалог",
+    "Права користувачів бота",
+    "Інтеграція LLM і зовнішніх API",
+    "Docker і деплой у хмару"
+   ],
+   "en": [
+    "Sending messages from R to Telegram",
+    "Commands and message filters",
+    "Keyboards and logical dialogues",
+    "Bot user permissions",
+    "LLM and external API integration",
+    "Docker and cloud deployment"
+   ]
+  }
+ },
+ {
+  "id": "packages",
+  "level": "advanced",
+  "year": "2023",
+  "cover": "https://selesnow.github.io/r_package_course/img/cover.png",
+  "url": "https://selesnow.github.io/r_package_course/",
+  "playlist": "https://www.youtube.com/playlist?list=PLD2LDq8edf4oImDbA4N9rOTzRtRFbzuud",
+  "title": {
+   "ru": "Разработка пакетов на языке R",
+   "ua": "Розробка пакетів мовою R",
+   "en": "R Package Development"
+  },
+  "tagline": {
+   "ru": "От первого пакета до публикации на CRAN — опыт автора 15 пакетов на CRAN.",
+   "ua": "Від першого пакета до публікації на CRAN — досвід автора 15 пакетів на CRAN.",
+   "en": "From your first package to CRAN — from the author of 15 CRAN packages."
+  },
+  "desc": {
+   "ru": "Курс основан на книге Хедли Викхема и Дженни Брайан «R Packages (2e)» и дополнен семилетним практическим опытом автора. Самые теоретические главы опущены, зато добавлены темы, которых нет в книге: разработка обёрток над API, в том числе Google API, и мета-пакетов. Свой первый пакет вы напишете уже на первом уроке. К каждому уроку — конспект с тайм-кодами и тест.",
+   "ua": "Курс базується на книзі Гедлі Вікхема та Дженні Браян «R Packages (2e)» і доповнений семирічним практичним досвідом автора. Найбільш теоретичні розділи опущено, натомість додано теми, яких немає в книзі: розробка обгорток над API, зокрема Google API, і мета-пакетів. Свій перший пакет ви напишете вже на першому уроці. До кожного уроку — конспект із тайм-кодами та тест.",
+   "en": "Based on Hadley Wickham and Jennifer Bryan's \"R Packages (2e)\" and extended with the author's seven years of hands-on experience. The most theoretical chapters are skipped, while topics missing from the book are added: API wrapper packages, including Google APIs, and meta-packages. You write your first package in lesson one. Every lesson includes notes with timestamps and a quiz."
+  },
+  "audience": {
+   "ru": "Тем, у кого уже есть опыт написания кода на R.",
+   "ua": "Тим, хто вже має досвід написання коду на R.",
+   "en": "Those who already write R code."
+  },
+  "stats": [
+   {
+    "ru": "14 лекций",
+    "ua": "14 лекцій",
+    "en": "14 lectures"
+   },
+   {
+    "ru": "6+ часов",
+    "ua": "6+ годин",
+    "en": "6+ hours"
+   },
+   {
+    "ru": "Конспекты и тесты",
+    "ua": "Конспекти та тести",
+    "en": "Notes & quizzes"
+   }
+  ],
+  "program": {
+   "ru": [
+    "Рабочий процесс и интеграция с GitHub",
+    "Организация кода, данные, DESCRIPTION",
+    "Зависимости и NAMESPACE",
+    "Юнит-тесты и документация",
+    "Сайт пакета и публикация на CRAN",
+    "Обёртки над API и мета-пакеты"
+   ],
+   "ua": [
+    "Робочий процес та інтеграція з GitHub",
+    "Організація коду, дані, DESCRIPTION",
+    "Залежності та NAMESPACE",
+    "Юніт-тести та документація",
+    "Сайт пакета та публікація на CRAN",
+    "Обгортки над API та мета-пакети"
+   ],
+   "en": [
+    "Workflow and GitHub integration",
+    "Code organization, data, DESCRIPTION",
+    "Dependencies and NAMESPACE",
+    "Unit tests and documentation",
+    "Package website and CRAN release",
+    "API wrappers and meta-packages"
+   ]
+  }
+ },
+ {
+  "id": "ai",
+  "level": "new",
+  "year": "2026",
+  "cover": "https://selesnow.github.io/build_ai_tools_using_r/img/cover.png",
+  "url": "https://selesnow.github.io/build_ai_tools_using_r/",
+  "playlist": "https://www.youtube.com/playlist?list=PLD2LDq8edf4rMEIeUfGVnZlgrYLuDDiuf",
+  "title": {
+   "ru": "Язык R для разработки AI-инструментов",
+   "ua": "Мова R для розробки AI-інструментів",
+   "en": "Building AI Tools with R"
+  },
+  "tagline": {
+   "ru": "Не просто пользоваться LLM, а строить на R собственных AI-ассистентов.",
+   "ua": "Не просто користуватися LLM, а будувати на R власних AI-асистентів.",
+   "en": "Go beyond chatting with LLMs — build your own AI assistants in R."
+  },
+  "desc": {
+   "ru": "Курс о системной разработке AI-решений на R — без игрушечных демо. Начинаем с API разных LLM-провайдеров (ChatGPT, Claude, Gemini) и управления контекстом, затем строим веб-интерфейс AI-чата на Shiny, учим ассистента пользоваться инструментами и выполнять действия, подключаем собственную базу знаний через RAG. В итоге из ellmer, mcptools, ragnar, shinychat, querychat и mini007 собирается цельное приложение, которым можно пользоваться в реальной работе.",
+   "ua": "Курс про системну розробку AI-рішень на R — без іграшкових демо. Починаємо з API різних LLM-провайдерів (ChatGPT, Claude, Gemini) та керування контекстом, потім будуємо веб-інтерфейс AI-чату на Shiny, вчимо асистента користуватися інструментами та виконувати дії, підключаємо власну базу знань через RAG. У результаті з ellmer, mcptools, ragnar, shinychat, querychat і mini007 збирається цілісний застосунок, яким можна користуватися в реальній роботі.",
+   "en": "A systematic approach to building AI solutions in R — no toy demos. You start with the APIs of different LLM providers (ChatGPT, Claude, Gemini) and context management, then build a Shiny chat interface, teach the assistant to use tools and take actions, and connect your own knowledge base via RAG. ellmer, mcptools, ragnar, shinychat, querychat and mini007 come together into a complete app you can use in real work."
+  },
+  "audience": {
+   "ru": "Тем, у кого уже есть опыт программирования на R.",
+   "ua": "Тим, хто вже має досвід програмування на R.",
+   "en": "Those with R programming experience."
+  },
+  "stats": [
+   {
+    "ru": "4 лекции",
+    "ua": "4 лекції",
+    "en": "4 lectures"
+   },
+   {
+    "ru": "2+ часа",
+    "ua": "2+ години",
+    "en": "2+ hours"
+   },
+   {
+    "ru": "Конспекты",
+    "ua": "Конспекти",
+    "en": "Lecture notes"
+   }
+  ],
+  "program": {
+   "ru": [
+    "Работа с LLM API через ellmer",
+    "AI-чат на Shiny и shinychat",
+    "Инструменты (tool calling) и MCP",
+    "RAG и собственная база знаний (ragnar)",
+    "Запросы к данным на естественном языке (querychat)",
+    "Мультиагентные системы (mini007)"
+   ],
+   "ua": [
+    "Робота з LLM API через ellmer",
+    "AI-чат на Shiny і shinychat",
+    "Інструменти (tool calling) і MCP",
+    "RAG і власна база знань (ragnar)",
+    "Запити до даних природною мовою (querychat)",
+    "Мультиагентні системи (mini007)"
+   ],
+   "en": [
+    "LLM APIs with ellmer",
+    "AI chat with Shiny and shinychat",
+    "Tool calling and MCP",
+    "RAG and your own knowledge base (ragnar)",
+    "Natural-language data queries (querychat)",
+    "Multi-agent systems (mini007)"
+   ]
+  }
+ }
+]

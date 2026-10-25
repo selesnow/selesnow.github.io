@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Alexey Seleznev">
+    <meta name="theme-color" content="#030712">
+    <link rel="canonical" href="https://alexey-seleznev.pro/videos/">
+
+    <title>Видеоуроки по R | Алексей Селезнёв</title>
+    <meta name="title" content="Видеоуроки по R | Алексей Селезнёв">
+    <meta name="description" content="51 бесплатных видеоуроков Алексея Селезнёва по языку R: серии по пакетам для работы с API рекламных систем, работа с данными, автоматизация, деплой и AI.">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alexey-seleznev.pro/videos/">
+    <meta property="og:site_name" content="ALEXEY-SELEZNEV.pro">
+    <meta property="og:title" content="Видеоуроки по R | Алексей Селезнёв">
+    <meta property="og:description" content="51 бесплатных видеоуроков Алексея Селезнёва по языку R: серии по пакетам для работы с API рекламных систем, работа с данными, автоматизация, деплой и AI.">
+    <meta property="og:image" content="https://i.ytimg.com/vi/JgvlZm7GxBo/hqdefault.jpg">
+    <meta property="og:image:alt" content="Алексей Селезнёв">
+    <meta property="og:locale" content="ru_RU">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="https://alexey-seleznev.pro/videos/">
+    <meta name="twitter:title" content="Видеоуроки по R | Алексей Селезнёв">
+    <meta name="twitter:description" content="51 бесплатных видеоуроков Алексея Селезнёва по языку R: серии по пакетам для работы с API рекламных систем, работа с данными, автоматизация, деплой и AI.">
+    <meta name="twitter:image" content="https://i.ytimg.com/vi/JgvlZm7GxBo/hqdefault.jpg">
+
+    <link rel="icon" type="image/jpeg" href="../logo.jpg">
+    <link rel="apple-touch-icon" href="../logo.jpg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body class="relative lang-en">
+
+    <!-- Interactive Background -->
+    <div id="vanta-bg"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full z-50 top-0 left-0 border-b border-white/5 bg-slate-950/60 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 h-16 flex items-center justify-between">
+            <a href="../" class="flex items-center gap-2 sm:gap-2.5 md:gap-3 group shrink min-w-0">
+                <img src="../logo.jpg" alt="Alexey Seleznev" class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 rounded-lg sm:rounded-xl object-cover shadow-md border border-white/10 group-hover:border-purple-500/50 group-hover:scale-105 transition-all shrink-0">
+                <span class="text-xs min-[400px]:text-sm sm:text-base md:text-xl font-black tracking-tight uppercase outfit-font whitespace-nowrap text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+            </a>
+            <div class="hidden xl:flex gap-6 text-sm font-semibold text-slate-400">
+                <a href="../" class="nav-link hover:text-white transition-colors"><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a>
+                <a href="../courses/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a>
+                <a href="../videos/" class="nav-link hover:text-white transition-colors active"><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a>
+                <a href="../talks/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a>
+                <a href="../articles/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a>
+                <a href="../interviews/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a>
+            </div>
+
+            <div class="flex items-center gap-1.5 sm:gap-2 md:gap-4 shrink-0">
+                <div class="lang-switcher flex gap-1 sm:gap-1.5 md:gap-2 text-[11px] sm:text-xs md:text-sm font-bold border-r border-white/10 pr-1.5 sm:pr-3 md:pr-4 mr-0.5 sm:mr-1 md:mr-2 outfit-font">
+                    <button onclick="changeLang('en')" id="btn-en" class="active hover:text-white transition-colors">EN</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ru')" id="btn-ru" class="text-slate-500 hover:text-white transition-colors">RU</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ua')" id="btn-ua" class="text-slate-500 hover:text-white transition-colors">UA</button>
+                </div>
+
+                <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="text-slate-400 hover:text-blue-400 transition-colors hidden sm:block" aria-label="Telegram"><i class="fa-brands fa-telegram text-lg md:text-xl"></i></a>
+                <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="text-slate-400 hover:text-white transition-colors hidden sm:block" aria-label="GitHub"><i class="fa-brands fa-github text-lg md:text-xl"></i></a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="xl:hidden w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-purple-500/20 hover:border-purple-500/40 transition-all focus:outline-none" aria-label="Toggle Navigation Menu">
+                    <i class="fa-solid fa-bars text-sm sm:text-lg" id="mobile-menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div id="mobile-menu" class="hidden xl:hidden border-t border-white/10 bg-slate-950/95 backdrop-blur-2xl shadow-2xl overflow-y-auto max-h-[calc(100vh-4rem)] transition-all">
+            <div class="max-w-7xl mx-auto px-6 py-6 space-y-1">
+                <a href="../" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-house text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span>
+                </a>
+                <a href="../courses/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-graduation-cap text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span>
+                </a>
+                <a href="../videos/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-white bg-white/5 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-circle-play text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span>
+                </a>
+                <a href="../talks/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-microphone-lines text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span>
+                </a>
+                <a href="../articles/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-pen-nib text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span>
+                </a>
+                <a href="../interviews/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-regular fa-newspaper text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span>
+                </a>
+
+                <div class="pt-4 mt-3 border-t border-white/10 flex items-center justify-around text-slate-400">
+                    <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-blue-400 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-telegram text-xl"></i> Telegram
+                    </a>
+                    <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="p-2 hover:text-white transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-github text-xl"></i> GitHub
+                    </a>
+                    <a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-red-500 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-youtube text-xl"></i> YouTube
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="pt-32 pb-12 px-6 max-w-7xl mx-auto relative z-10">
+        <a href="../" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-400 hover:text-white transition-colors mb-8 group" data-aos="fade-right">
+            <i class="fa-solid fa-arrow-left text-xs group-hover:-translate-x-1 transition-transform"></i>
+            <span class="ru-text">На главную</span><span class="ua-text">На головну</span><span class="en-text">Back to home</span>
+        </a>
+        <div data-aos="fade-up">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-bold tracking-widest uppercase mb-5 outfit-font">
+                <i class="fa-solid fa-circle-play"></i> <span class="ru-text">YouTube · R4marketing</span><span class="ua-text">YouTube · R4marketing</span><span class="en-text">YouTube · R4marketing</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-black tracking-tight leading-tight uppercase mb-8"><span class="ru-text">Видео<span class="text-gradient">уроки</span></span><span class="ua-text">Відео<span class="text-gradient">уроки</span></span><span class="en-text">Video <span class="text-gradient">Lessons</span></span></h1>
+        </div>
+        <div class="bento-glass no-lift p-6 md:p-10 border-l-4 border-purple-500/50 mb-8" data-aos="fade-up" data-aos-delay="100">
+            <p class="text-lg md:text-xl text-slate-300 leading-relaxed font-light relative z-10"><span class="ru-text">Бесплатные видеоуроки с YouTube-канала R4marketing: серии по моим R-пакетам для работы с API рекламных и аналитических систем, а также отдельные уроки по работе с данными, автоматизации, деплою и AI. Уроки, которые вошли в полноценные курсы, собраны на <a href="../courses/" class="text-purple-300 underline underline-offset-4 hover:text-white">странице курсов</a>.</span><span class="ua-text">Безкоштовні відеоуроки з YouTube-каналу R4marketing: серії з моїх R-пакетів для роботи з API рекламних і аналітичних систем, а також окремі уроки з роботи з даними, автоматизації, деплою та AI. Уроки, що увійшли до повноцінних курсів, зібрані на <a href="../courses/" class="text-purple-300 underline underline-offset-4 hover:text-white">сторінці курсів</a>.</span><span class="en-text">Free video lessons from the R4marketing YouTube channel: series on my R packages for ad and analytics APIs, plus standalone lessons on data, automation, deployment and AI. Lessons that became full courses live on the <a href="../courses/" class="text-purple-300 underline underline-offset-4 hover:text-white">courses page</a>.</span></p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 bento-glass no-lift p-6 rounded-3xl" data-aos="fade-up" data-aos-delay="150">
+                <div class="bento-content">
+                    <div class="text-3xl md:text-4xl font-extrabold text-white outfit-font">51</div>
+                    <div class="text-xs text-slate-400 uppercase font-bold mt-1"><span class="ru-text">Видео</span><span class="ua-text">Відео</span><span class="en-text">Videos</span></div>
+                </div>
+                <div class="bento-content">
+                    <div class="text-3xl md:text-4xl font-extrabold text-white outfit-font">6</div>
+                    <div class="text-xs text-slate-400 uppercase font-bold mt-1"><span class="ru-text">Серий по пакетам</span><span class="ua-text">Серій за пакетами</span><span class="en-text">Package series</span></div>
+                </div>
+                <div class="bento-content">
+                    <div class="text-3xl md:text-4xl font-extrabold text-white outfit-font">20</div>
+                    <div class="text-xs text-slate-400 uppercase font-bold mt-1"><span class="ru-text">Отдельных уроков</span><span class="ua-text">Окремих уроків</span><span class="en-text">Standalone lessons</span></div>
+                </div>
+                <div class="bento-content">
+                    <div class="text-3xl md:text-4xl font-extrabold text-white outfit-font">2019–2026</div>
+                    <div class="text-xs text-slate-400 uppercase font-bold mt-1"><span class="ru-text">Годы</span><span class="ua-text">Роки</span><span class="en-text">Years</span></div>
+                </div>
+        </div>
+    </header>
+
+    <!-- SERIES -->
+    <section class="px-6 max-w-7xl mx-auto pb-20 relative z-10">
+        <h2 class="text-3xl font-extrabold mb-3 flex items-center gap-4 outfit-font" data-aos="fade-up">
+            <div class="w-12 h-12 bg-purple-500/20 flex items-center justify-center rounded-2xl border border-purple-500/30"><i class="fa-solid fa-box-open text-purple-500 text-xl"></i></div>
+            <span class="ru-text">Серии по R-пакетам</span><span class="ua-text">Серії з R-пакетів</span><span class="en-text">R package series</span>
+        </h2>
+        <p class="text-slate-400 mb-10 max-w-3xl" data-aos="fade-up"><span class="ru-text">Пошаговые плейлисты по пакетам, которые я разработал: от авторизации до готовых сценариев автоматизации.</span><span class="ua-text">Покрокові плейлисти з пакетів, які я розробив: від авторизації до готових сценаріїв автоматизації.</span><span class="en-text">Step-by-step playlists for the packages I built: from authorization to ready-made automation scenarios.</span></p>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <article id="rytstat" class="bento-glass no-lift rounded-[2rem] p-3 flex flex-col scroll-mt-24" data-aos="fade-up" data-aos-delay="0">
+                <div class="bento-content flex flex-col h-full">
+                    <button type="button" data-video="JgvlZm7GxBo" class="block text-left group">
+                        <div class="cover h-56 rounded-[1.5rem]">
+                            <div class="cover-fallback"><i class="fa-brands fa-youtube text-5xl"></i></div>
+                            <img src="https://i.ytimg.com/vi/JgvlZm7GxBo/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent"></div>
+                            <div class="absolute top-4 left-4 text-[11px] font-mono font-bold px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300 flex items-center gap-2"><i class="fa-brands fa-youtube"></i>rytstat</div>
+                            <div class="absolute top-4 right-4 text-[11px] font-bold px-2.5 py-1 rounded-lg backdrop-blur-md bg-red-500/20 border border-red-500/30 text-red-200">4 <span class="ru-text">видео</span><span class="ua-text">відео</span><span class="en-text">videos</span></div>
+                            <div class="absolute inset-0 flex items-center justify-center"><div class="w-16 h-16 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-xl"></i></div></div>
+                            <span class="hidden" data-video-title><span class="ru-text">Авторизация в YouTube API на языке R</span><span class="ua-text">Авторизація в YouTube API мовою R</span><span class="en-text">Authorizing in the YouTube API with R</span></span>
+                        </div>
+                    </button>
+                    <div class="px-3 pt-5 flex flex-col flex-1">
+                        <div class="text-xs font-mono font-bold uppercase tracking-widest text-slate-500 mb-2"><span class="ru-text">Серия</span><span class="ua-text">Серія</span><span class="en-text">Series</span> · 2022</div>
+                        <h3 class="text-2xl font-bold text-white outfit-font leading-snug mb-2"><span class="ru-text">rytstat: работа с YouTube API на языке R</span><span class="ua-text">rytstat: робота з YouTube API мовою R</span><span class="en-text">rytstat: working with the YouTube API in R</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed mb-5"><span class="ru-text">Авторизация и три интерфейса YouTube API: Data API для поиска и данных о каналах, Analytics API для статистики и Reporting API для массовых отчётов.</span><span class="ua-text">Авторизація та три інтерфейси YouTube API: Data API для пошуку й даних про канали, Analytics API для статистики та Reporting API для масових звітів.</span><span class="en-text">Authorization and the three YouTube APIs: Data API for search and channel data, Analytics API for stats and Reporting API for bulk reports.</span></p>
+                        <div class="space-y-1 max-h-80 overflow-y-auto pr-1 -mx-1 mb-4">
+                            <button type="button" data-video="JgvlZm7GxBo" class="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 transition-all text-left group/ep">
+                                <div class="relative w-24 h-14 rounded-lg overflow-hidden shrink-0 bg-slate-900">
+                                    <img src="https://i.ytimg.com/vi/JgvlZm7GxBo/hqdefault.jpg" alt="" loading="lazy" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 flex items-center justify-center bg-slate-950/30 group-hover/ep:bg-slate-950/10 transition-colors"><i class="fa-solid fa-play text-white text-xs drop-shadow"></i></div>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <div class="text-[11px] font-mono font-bold text-purple-400 mb-0.5">#1</div>
+                                    <div class="text-sm font-semibold text-slate-200 group-hover/ep:text-white leading-snug line-clamp-2" data-video-title><span class="ru-text">Авторизация в YouTube API на языке R</span><span class="ua-text">Авторизація в YouTube API мовою R</span><span class="en-text">Authorizing in the YouTube API with R</span></div>
+                                </div>
+                            </button>
+                            <button type="button" data-video="mPoK0VRoxVM" class="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 transition-all text-left group/ep">
+                                <div class="relative w-24 h-14 rounded-lg overflow-hidden shrink-0 bg-slate-900">
+                                    <img src="https://i.ytimg.com/vi/mPoK0VRoxVM/hqdefault.jpg" alt="" loading="lazy" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 flex items-center justify-center bg-slate-950/30 group-hover/ep:bg-slate-950/10 transition-colors"><i class="fa-solid fa-play text-white text-xs drop-shadow"></i></div>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <div class="text-[11px] font-mono font-bold text-purple-400 mb-0.5">#2</div>
+                                    <div class="text-sm font-semibold text-slate-200 group-hover/ep:text-white leading-snug line-clamp-2" data-video-title><span class="ru-text">YouTube Data API: поиск, данные о каналах, плейлистах и видео</span><span class="ua-text">YouTube Data API: пошук, дані про канали, плейлисти та відео</span><span class="en-text">YouTube Data API: search, channel, playlist and video data</span></div>
+                                </div>
+                            </button>
+                            <button type="button" data-video="-0kWIvWNA0A" class="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 transition-all text-left group/ep">
+                                <div class="relative w-24 h-14 rounded-lg overflow-hidden shrink-0 bg-slate-900">
+                                    <img src="https://i.ytimg.com/vi/-0kWIvWNA0A/hqdefault.jpg" alt="" loading="lazy" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 flex items-center justify-center bg-slate-950/30 group-hover/ep:bg-slate-950/10 transition-colors"><i class="fa-solid fa-play text-white text-xs drop-shadow"></i></div>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <div class="text-[11px] font-mono font-bold text-purple-400 mb-0.5">#3</div>
+                                    <div class="text-sm font-semibold text-slate-200 group-hover/ep:text-white leading-snug line-clamp-2" data-video-title><span class="ru-text">YouTube Analytics API: статистика по видео, плейлистам и рекламе</span><span class="ua-text">YouTube Analytics API: статистика за відео, плейлистами та рекламою</span><span class="en-text">YouTube Analytics API: video, playlist and ad statistics</span></div>
+                                </div>
+                            </button>
+                            <button type="button" data-video="FJwEPr8qHq8" class="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 transition-all text-left group/ep">
+                                <div class="relative w-24 h-14 rounded-lg overflow-hidden shrink-0 bg-slate-900">
+                                    <img src="https://i.ytimg.com/vi/FJwEPr8qHq8/hqdefault.jpg" alt="" loading="lazy" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 flex items-center justify-center bg-slate-950/30 group-hover/ep:bg-slate-950/10 transition-colors"><i class="fa-solid fa-play text-white text-xs drop-shadow"></i></div>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <div class="text-[11px] font-mono font-bold text-purple-400 mb-0.5">#4</div>
+                                    <div class="text-sm font-semibold text-slate-200 group-hover/ep:text-white leading-snug line-clamp-2" data-video-title><span class="ru-text">Работа с YouTube Reporting API</span><span class="ua-text">Робота з YouTube Reporting API</span><span class="en-text">Working with the YouTube Reporting API</span></div>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="mt-auto pt-4 pb-2 border-t border-white/5">
+                            <a href="https://www.youtube.com/playlist?list=PLD2LDq8edf4o7kZuTh3ufEOIPF8qmxIhe" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-300 hover:text-white transition-colors"><i class="fa-brands fa-youtube text-red-500"></i><span class="ru-text">Весь плейлист на YouTube</span><span class="ua-text">Увесь плейлист на YouTube</span><span class="en-text">Full playlist on YouTube</span> <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-60"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article id="rgoogleads" class="bento-glass no-lift rounded-[2rem] p-3 flex flex-col scroll-mt-24" data-aos="fade-up" data-aos-delay="80">
+                <div class="bento-content flex flex-col h-full">
+                    <button type="button" data-video="nYak5sVj07k" class="block text-left group">
+                        <div class="cover h-56 rounded-[1.5rem]">
+                            <div class="cover-fallback"><i class="fa-brands fa-google text-5xl"></i></div>
+                            <img src="https://i.ytimg.com/vi/nYak5sVj07k/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent"></div>
+                            <div class="absolute top-4 left-4 text-[11px] font-mono font-bold px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300 flex items-center gap-2"><i class="fa-brands fa-google"></i>rgoogleads</div>
+                            <div class="absolute top-4 right-4 text-[11px] font-bold px-2.5 py-1 rounded-lg backdrop-blur-md bg-red-500/20 border border-red-500/30 text-red-200">2 <span class="ru-text">видео</span><span class="ua-text">відео</span><span class="en-text">videos</span></div>
+                            <div class="absolute inset-0 flex items-center justify-center"><div class="w-16 h-16 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-xl"></i></div></div>
+                            <span class="hidden" data-video-title><span class="ru-text">Авторизация в Google Ads API и запрос иерархии аккаунтов</span><span class="ua-text">Авторизація в Google Ads API та запит ієрархії акаунтів</span><span class="en-text">Google Ads API authorization and account hierarchy</span></span>
+                        </div>
+                    </button>
+                    <div class="px-3 pt-5 flex flex-col flex-1">
+                        <div class="text-xs font-mono font-bold uppercase tracking-widest text-slate-500 mb-2"><span class="ru-text">Серия</span><span class="ua-text">Серія</span><span class="en-text">Series</span> · 2022</div>
+                        <h3 class="text-2xl font-bold text-white outfit-font leading-snug mb-2"><span class="ru-text">rgoogleads: работа с Google Ads API</span><span class="ua-text">rgoogleads: робота з Google Ads API</span><span class="en-text">rgoogleads: working with the Google Ads API</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed mb-5"><span class="ru-text">Как пройти авторизацию в Google Ads API, получить иерархию аккаунтов и запрашивать отчёты с помощью пакета rgoogleads.</span><span class="ua-text">Як пройти авторизацію в Google Ads API, отримати ієрархію акаунтів і запитувати звіти за допомогою пакета rgoogleads.</span><span class="en-text">Authorizing in the Google Ads API, getting the account hierarchy and requesting reports with rgoogleads.</span></p>
+                        <div class="space-y-1 max-h-80 overflow-y-auto pr-1 -mx-1 mb-4">
+                            <button type="button" data-video="nYak5sVj07k" class="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 transition-all text-left group/ep">
+                                <div class="relative w-24 h-14 rounded-lg overflow-hidden shrink-0 bg-slate-900">
+                                    <img src="https://i.ytimg.com/vi/nYak5sVj07k/hqdefault.jpg" alt="" loading="lazy" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 flex items-center justify-center bg-slate-950/30 group-hover/ep:bg-slate-950/10 transition-colors"><i class="fa-solid fa-play text-white text-xs drop-shadow"></i></div>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <div class="text-[11px] font-mono font-bold text-purple-400 mb-0.5">#1</div>
+                                    <div class="text-sm font-semibold text-slate-200 group-hover/ep:text-white leading-snug line-clamp-2" data-video-title><span class="ru-text">Авторизация в Google Ads API и запрос иерархии аккаунтов</span><span class="ua-text">Авторизація в Google Ads API та запит ієрархії акаунтів</span><span class="en-text">Google Ads API authorization and account hierarchy</span></div>
+                                </div>
+                            </button>
+                            <button type="button" data-video="np67MNj2-JU" class="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 transition-all text-left group/ep">
+                                <div class="relative w-24 h-14 rounded-lg overflow-hidden shrink-0 bg-slate-900">
+                                    <img src="https://i.ytimg.com/vi/np67MNj2-JU/hqdefault.jpg" alt="" loading="lazy" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 flex items-center justify-center bg-slate-950/30 group-hover/ep:bg-slate-950/10 transition-colors"><i class="fa-solid fa-play text-white text-xs drop-shadow"></i></div>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <div class="text-[11px] font-mono font-bold text-purple-400 mb-0.5">#2</div>
+                                    <div class="text-sm font-semibold text-slate-200 group-hover/ep:text-white leading-snug line-clamp-2" data-video-title><span class="ru-text">Запрос отчётов из Google Ads API в R</span><span class="ua-text">Запит звітів з Google Ads API в R</span><span class="en-text">Requesting Google Ads API reports in R</span></div>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="mt-auto pt-4 pb-2 border-t border-white/5">
+                            <a href="https://www.youtube.com/playlist?list=PLD2LDq8edf4qprTxRcflDwV9IvStiChHi" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-300 hover:text-white transition-colors"><i class="fa-brands fa-youtube text-red-500"></i><span class="ru-text">Весь плейлист на YouTube</span><span class="ua-text">Увесь плейлист на YouTube</span><span class="en-text">Full playlist on YouTube</span> <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-60"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article id="rvkstat" class="bento-glass no-lift rounded-[2rem] p-3 flex flex-col scroll-mt-24" data-aos="fade-up" data-aos-delay="0">
+                <div class="bento-content flex flex-col h-full">
+                    <button type="button" data-video="49-HTLOPSnU" class="block text-left group">
+                        <div class="cover h-56 rounded-[1.5rem]">
+                            <div class="cover-fallback"><i class="fa-brands fa-vk text-5xl"></i></div>
+                            <img src="https://i.ytimg.com/vi/49-HTLOPSnU/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent"></div>
+                            <div class="absolute top-4 left-4 text-[11px] font-mono font-bold px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300 flex items-center gap-2"><i class="fa-brands fa-vk"></i>rvkstat</div>
+                            <div class="absolute top-4 right-4 text-[11px] font-bold px-2.5 py-1 rounded-lg backdrop-blur-md bg-red-500/20 border border-red-500/30 text-red-200">3 <span class="ru-text">видео</span><span class="ua-text">відео</span><span class="en-text">videos</span></div>
+                            <div class="absolute inset-0 flex items-center justify-center"><div class="w-16 h-16 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-xl"></i></div></div>
+                            <span class="hidden" data-video-title><span class="ru-text">Авторизация в API ВКонтакте на языке R</span><span class="ua-text">Авторизація в API ВКонтакте мовою R</span><span class="en-text">Authorizing in the VK API with R</span></span>
+                        </div>
+                    </button>
+                    <div class="px-3 pt-5 flex flex-col flex-1">
+                        <div class="text-xs font-mono font-bold uppercase tracking-widest text-slate-500 mb-2"><span class="ru-text">Серия</span><span class="ua-text">Серія</span><span class="en-text">Series</span> · 2021</div>
+                        <h3 class="text-2xl font-bold text-white outfit-font leading-snug mb-2"><span class="ru-text">rvkstat: работа с API ВКонтакте</span><span class="ua-text">rvkstat: робота з API ВКонтакте</span><span class="en-text">rvkstat: working with the VK API</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed mb-5"><span class="ru-text">Авторизация в API ВКонтакте, статистика сообществ и рекламного кабинета с помощью пакета rvkstat.</span><span class="ua-text">Авторизація в API ВКонтакте, статистика спільнот і рекламного кабінету за допомогою пакета rvkstat.</span><span class="en-text">Authorizing in the VK API and getting community and ad-account statistics with rvkstat.</span></p>
+                        <div class="space-y-1 max-h-80 overflow-y-auto pr-1 -mx-1 mb-4">
+                            <button type="button" data-video="49-HTLOPSnU" class="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 transition-all text-left group/ep">
+                                <div class="relative w-24 h-14 rounded-lg overflow-hidden shrink-0 bg-slate-900">
+                                    <img src="https://i.ytimg.com/vi/49-HTLOPSnU/hqdefault.jpg" alt="" loading="lazy" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 flex items-center justify-center bg-slate-950/30 group-hover/ep:bg-slate-950/10 transition-colors"><i class="fa-solid fa-play text-white text-xs drop-shadow"></i></div>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <div class="text-[11px] font-mono font-bold text-purple-400 mb-0.5">#1</div>
+                                    <div class="text-sm font-semibold text-slate-200 group-hover/ep:text-white leading-snug line-clamp-2" data-video-title><span class="ru-text">Авторизация в API ВКонтакте на языке R</span><span class="ua-text">Авторизація в API ВКонтакте мовою R</span><span class="en-text">Authorizing in the VK API with R</span></div>
+                                </div>
+                            </button>
+                            <button type="button" data-video="yTg0gknsiBU" class="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 transition-all text-left group/ep">
+                                <div class="relative w-24 h-14 rounded-lg overflow-hidden shrink-0 bg-slate-900">
+                                    <img src="https://i.ytimg.com/vi/yTg0gknsiBU/hqdefault.jpg" alt="" loading="lazy" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 flex items-center justify-center bg-slate-950/30 group-hover/ep:bg-slate-950/10 transition-colors"><i class="fa-solid fa-play text-white text-xs drop-shadow"></i></div>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <div class="text-[11px] font-mono font-bold text-purple-400 mb-0.5">#2</div>
+                                    <div class="text-sm font-semibold text-slate-200 group-hover/ep:text-white leading-snug line-clamp-2" data-video-title><span class="ru-text">Как получить статистику сообщества ВКонтакте</span><span class="ua-text">Як отримати статистику спільноти ВКонтакте</span><span class="en-text">Getting VK community statistics</span></div>
+                                </div>
+                            </button>
+                            <button type="button" data-video="xVbd2JXlkmc" class="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 transition-all text-left group/ep">
+                                <div class="relative w-24 h-14 rounded-lg overflow-hidden shrink-0 bg-slate-900">
+                                    <img src="https://i.ytimg.com/vi/xVbd2JXlkmc/hqdefault.jpg" alt="" loading="lazy" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 flex items-center justify-center bg-slate-950/30 group-hover/ep:bg-slate-950/10 transition-colors"><i class="fa-solid fa-play text-white text-xs drop-shadow"></i></div>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <div class="text-[11px] font-mono font-bold text-purple-400 mb-0.5">#3</div>
+                                    <div class="text-sm font-semibold text-slate-200 group-hover/ep:text-white leading-snug line-clamp-2" data-video-title><span class="ru-text">Как получить статистику рекламного кабинета ВКонтакте</span><span class="ua-text">Як отримати статистику рекламного кабінету ВКонтакте</span><span class="en-text">Getting VK ad-account statistics</span></div>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="mt-auto pt-4 pb-2 border-t border-white/5">
+                            <a href="https://www.youtube.com/playlist?list=PLD2LDq8edf4pQcy0zMmkTlk-o_Z6nRm5N" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-300 hover:text-white transition-colors"><i class="fa-brands fa-youtube text-red-500"></i><span class="ru-text">Весь плейлист на YouTube</span><span class="ua-text">Увесь плейлист на YouTube</span><span class="en-text">Full playlist on YouTube</span> <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-60"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article id="ryandexdirect" class="bento-glass no-lift rounded-[2rem] p-3 flex flex-col scroll-mt-24" data-aos="fade-up" data-aos-delay="80">
+                <div class="bento-content flex flex-col h-full">
+                    <button type="button" data-video="hbUXttDFKNE" class="block text-left group">
+                        <div class="cover h-56 rounded-[1.5rem]">
+                            <div class="cover-fallback"><i class="fa-brands fa-yandex text-5xl"></i></div>
+                            <img src="https://i.ytimg.com/vi/hbUXttDFKNE/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent"></div>
+                            <div class="absolute top-4 left-4 text-[11px] font-mono font-bold px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300 flex items-center gap-2"><i class="fa-brands fa-yandex"></i>ryandexdirect</div>
+                            <div class="absolute top-4 right-4 text-[11px] font-bold px-2.5 py-1 rounded-lg backdrop-blur-md bg-red-500/20 border border-red-500/30 text-red-200">5 <span class="ru-text">видео</span><span class="ua-text">відео</span><span class="en-text">videos</span></div>
+                            <div class="absolute inset-0 flex items-center justify-center"><div class="w-16 h-16 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-xl"></i></div></div>
+                            <span class="hidden" data-video-title><span class="ru-text">Авторизация в API Яндекс.Директа, опции пакета и переменные среды</span><span class="ua-text">Авторизація в API Яндекс.Директу, опції пакета та змінні середовища</span><span class="en-text">Yandex.Direct API authorization, package options and env variables</span></span>
+                        </div>
+                    </button>
+                    <div class="px-3 pt-5 flex flex-col flex-1">
+                        <div class="text-xs font-mono font-bold uppercase tracking-widest text-slate-500 mb-2"><span class="ru-text">Серия</span><span class="ua-text">Серія</span><span class="en-text">Series</span> · 2020</div>
+                        <h3 class="text-2xl font-bold text-white outfit-font leading-snug mb-2"><span class="ru-text">ryandexdirect: работа с API Яндекс.Директа</span><span class="ua-text">ryandexdirect: робота з API Яндекс.Директу</span><span class="en-text">ryandexdirect: working with the Yandex.Direct API</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed mb-5"><span class="ru-text">От авторизации и опций пакета до прогноза бюджета, отчётов WordStat, загрузки статистики, передачи расходов в Google Analytics и уведомлений о балансе.</span><span class="ua-text">Від авторизації та опцій пакета до прогнозу бюджету, звітів WordStat, завантаження статистики, передачі витрат у Google Analytics і сповіщень про баланс.</span><span class="en-text">From authorization and package options to budget forecasts, WordStat reports, statistics, sending costs to Google Analytics and low-balance alerts.</span></p>
+                        <div class="space-y-1 max-h-80 overflow-y-auto pr-1 -mx-1 mb-4">
+                            <button type="button" data-video="hbUXttDFKNE" class="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 transition-all text-left group/ep">
+                                <div class="relative w-24 h-14 rounded-lg overflow-hidden shrink-0 bg-slate-900">
+                                    <img src="https://i.ytimg.com/vi/hbUXttDFKNE/hqdefault.jpg" alt="" loading="lazy" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 flex items-center justify-center bg-slate-950/30 group-hover/ep:bg-slate-950/10 transition-colors"><i class="fa-solid fa-play text-white text-xs drop-shadow"></i></div>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <div class="text-[11px] font-mono font-bold text-purple-400 mb-0.5">#1</div>
+                                    <div class="text-sm font-semibold text-slate-200 group-hover/ep:text-white leading-snug line-clamp-2" data-video-title><span class="ru-text">Авторизация в API Яндекс.Директа, опции пакета и переменные среды</span><span class="ua-text">Авторизація в API Яндекс.Директу, опції пакета та змінні середовища</span><span class="en-text">Yandex.Direct API authorization, package options and env variables</span></div>
+                                </div>
+                            </button>
+                            <button type="button" data-video="g9lwjsgAhyY" class="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 transition-all text-left group/ep">
+                                <div class="relative w-24 h-14 rounded-lg overflow-hidden shrink-0 bg-slate-900">
+                                    <img src="https://i.ytimg.com/vi/g9lwjsgAhyY/hqdefault.jpg" alt="" loading="lazy" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 flex items-center justify-center bg-slate-950/30 group-hover/ep:bg-slate-950/10 transition-colors"><i class="fa-solid fa-play text-white text-xs drop-shadow"></i></div>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <div class="text-[11px] font-mono font-bold text-purple-400 mb-0.5">#2</div>
+                                    <div class="text-sm font-semibold text-slate-200 group-hover/ep:text-white leading-snug line-clamp-2" data-video-title><span class="ru-text">Прогноз кликов, показов и трат, отчёты WordStat</span><span class="ua-text">Прогноз кліків, показів і витрат, звіти WordStat</span><span class="en-text">Forecasting clicks, impressions and spend; WordStat reports</span></div>
+                                </div>
+                            </button>
+                            <button type="button" data-video="T9y0Iuh5EWk" class="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 transition-all text-left group/ep">
+                                <div class="relative w-24 h-14 rounded-lg overflow-hidden shrink-0 bg-slate-900">
+                                    <img src="https://i.ytimg.com/vi/T9y0Iuh5EWk/hqdefault.jpg" alt="" loading="lazy" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 flex items-center justify-center bg-slate-950/30 group-hover/ep:bg-slate-950/10 transition-colors"><i class="fa-solid fa-play text-white text-xs drop-shadow"></i></div>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <div class="text-[11px] font-mono font-bold text-purple-400 mb-0.5">#3</div>
+                                    <div class="text-sm font-semibold text-slate-200 group-hover/ep:text-white leading-snug line-clamp-2" data-video-title><span class="ru-text">Как загрузить расходы из Яндекс.Директа в Google Analytics</span><span class="ua-text">Як завантажити витрати з Яндекс.Директу в Google Analytics</span><span class="en-text">Loading Yandex.Direct costs into Google Analytics</span></div>
+                                </div>
+                            </button>
+                            <button type="button" data-video="2QPI0pAJUPE" class="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 transition-all text-left group/ep">
+                                <div class="relative w-24 h-14 rounded-lg overflow-hidden shrink-0 bg-slate-900">
+                                    <img src="https://i.ytimg.com/vi/2QPI0pAJUPE/hqdefault.jpg" alt="" loading="lazy" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 flex items-center justify-center bg-slate-950/30 group-hover/ep:bg-slate-950/10 transition-colors"><i class="fa-solid fa-play text-white text-xs drop-shadow"></i></div>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <div class="text-[11px] font-mono font-bold text-purple-400 mb-0.5">#4</div>
+                                    <div class="text-sm font-semibold text-slate-200 group-hover/ep:text-white leading-snug line-clamp-2" data-video-title><span class="ru-text">Как загрузить статистику из Яндекс.Директа</span><span class="ua-text">Як завантажити статистику з Яндекс.Директу</span><span class="en-text">Loading Yandex.Direct statistics</span></div>
+                                </div>
+                            </button>
+                            <button type="button" data-video="XCOQD7KW7JA" class="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 transition-all text-left group/ep">
+                                <div class="relative w-24 h-14 rounded-lg overflow-hidden shrink-0 bg-slate-900">
+                                    <img src="https://i.ytimg.com/vi/XCOQD7KW7JA/hqdefault.jpg" alt="" loading="lazy" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 flex items-center justify-center bg-slate-950/30 group-hover/ep:bg-slate-950/10 transition-colors"><i class="fa-solid fa-play text-white text-xs drop-shadow"></i></div>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <div class="text-[11px] font-mono font-bold text-purple-400 mb-0.5">#5</div>
+                                    <div class="text-sm font-semibold text-slate-200 group-hover/ep:text-white leading-snug line-clamp-2" data-video-title><span class="ru-text">Уведомления о том, что на балансе Директа осталось мало средств</span><span class="ua-text">Сповіщення про те, що на балансі Директу залишилося мало коштів</span><span class="en-text">Alerts when the Yandex.Direct balance runs low</span></div>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="mt-auto pt-4 pb-2 border-t border-white/5">
+                            <a href="https://www.youtube.com/playlist?list=PLD2LDq8edf4oUo0L9Kw77ZXf0KcV1hu67" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-300 hover:text-white transition-colors"><i class="fa-brands fa-youtube text-red-500"></i><span class="ru-text">Весь плейлист на YouTube</span><span class="ua-text">Увесь плейлист на YouTube</span><span class="en-text">Full playlist on YouTube</span> <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-60"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article id="rfacebookstat" class="bento-glass no-lift rounded-[2rem] p-3 flex flex-col scroll-mt-24" data-aos="fade-up" data-aos-delay="0">
+                <div class="bento-content flex flex-col h-full">
+                    <button type="button" data-video="SgcxDqZ-5Qg" class="block text-left group">
+                        <div class="cover h-56 rounded-[1.5rem]">
+                            <div class="cover-fallback"><i class="fa-brands fa-facebook text-5xl"></i></div>
+                            <img src="https://i.ytimg.com/vi/SgcxDqZ-5Qg/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent"></div>
+                            <div class="absolute top-4 left-4 text-[11px] font-mono font-bold px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300 flex items-center gap-2"><i class="fa-brands fa-facebook"></i>rfacebookstat</div>
+                            <div class="absolute top-4 right-4 text-[11px] font-bold px-2.5 py-1 rounded-lg backdrop-blur-md bg-red-500/20 border border-red-500/30 text-red-200">11 <span class="ru-text">видео</span><span class="ua-text">відео</span><span class="en-text">videos</span></div>
+                            <div class="absolute inset-0 flex items-center justify-center"><div class="w-16 h-16 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-xl"></i></div></div>
+                            <span class="hidden" data-video-title><span class="ru-text">Простая авторизация в Facebook Marketing API</span><span class="ua-text">Проста авторизація в Facebook Marketing API</span><span class="en-text">Simple Facebook Marketing API authorization</span></span>
+                        </div>
+                    </button>
+                    <div class="px-3 pt-5 flex flex-col flex-1">
+                        <div class="text-xs font-mono font-bold uppercase tracking-widest text-slate-500 mb-2"><span class="ru-text">Серия</span><span class="ua-text">Серія</span><span class="en-text">Series</span> · 2019–2020</div>
+                        <h3 class="text-2xl font-bold text-white outfit-font leading-snug mb-2"><span class="ru-text">rfacebookstat: работа с Facebook Marketing API</span><span class="ua-text">rfacebookstat: робота з Facebook Marketing API</span><span class="en-text">rfacebookstat: working with the Facebook Marketing API</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed mb-5"><span class="ru-text">Самая подробная серия: все способы авторизации, загрузка объектов, статистики и конверсий, выгрузка данных в Power BI, Google Analytics и Яндекс.Метрику, работа с бизнес-менеджером.</span><span class="ua-text">Найдокладніша серія: усі способи авторизації, завантаження об&#x27;єктів, статистики та конверсій, вивантаження даних у Power BI, Google Analytics і Яндекс.Метрику, робота з бізнес-менеджером.</span><span class="en-text">The most detailed series: every authorization method, loading objects, stats and conversions, exporting data to Power BI, Google Analytics and Yandex.Metrica, and Business Manager.</span></p>
+                        <div class="space-y-1 max-h-80 overflow-y-auto pr-1 -mx-1 mb-4">
+                            <button type="button" data-video="SgcxDqZ-5Qg" class="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 transition-all text-left group/ep">
+                                <div class="relative w-24 h-14 rounded-lg overflow-hidden shrink-0 bg-slate-900">
+                                    <img src="https://i.ytimg.com/vi/SgcxDqZ-5Qg/hqdefault.jpg" alt="" loading="lazy" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 flex items-center justify-center bg-slate-950/30 group-hover/ep:bg-slate-950/10 transition-colors"><i class="fa-solid fa-play text-white text-xs drop-shadow"></i></div>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <div class="text-[11px] font-mono font-bold text-purple-400 mb-0.5">#1</div>
+                                    <div class="text-sm font-semibold text-slate-200 group-hover/ep:text-white leading-snug line-clamp-2" data-video-title><span class="ru-text">Простая авторизация в Facebook Marketing API</span><span class="ua-text">Проста авторизація в Facebook Marketing API</span><span class="en-text">Simple Facebook Marketing API authorization</span></div>
+                                </div>
+                            </button>
+                            <button type="button" data-video="VLhsQDAyx5E" class="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 transition-all text-left group/ep">
+                                <div class="relative w-24 h-14 rounded-lg overflow-hidden shrink-0 bg-slate-900">
+                                    <img src="https://i.ytimg.com/vi/VLhsQDAyx5E/hqdefault.jpg" alt="" loading="lazy" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 flex items-center justify-center bg-slate-950/30 group-hover/ep:bg-slate-950/10 transition-colors"><i class="fa-solid fa-play text-white text-xs drop-shadow"></i></div>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <div class="text-[11px] font-mono font-bold text-purple-400 mb-0.5">#2</div>
+                                    <div class="text-sm font-semibold text-slate-200 group-hover/ep:text-white leading-snug line-clamp-2" data-video-title><span class="ru-text">Авторизация через собственное приложение</span><span class="ua-text">Авторизація через власний застосунок</span><span class="en-text">Authorization via your own app</span></div>
+                                </div>
+                            </button>
+                            <button type="button" data-video="oZhV1U5fMZ0" class="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 transition-all text-left group/ep">
+                                <div class="relative w-24 h-14 rounded-lg overflow-hidden shrink-0 bg-slate-900">
+                                    <img src="https://i.ytimg.com/vi/oZhV1U5fMZ0/hqdefault.jpg" alt="" loading="lazy" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 flex items-center justify-center bg-slate-950/30 group-hover/ep:bg-slate-950/10 transition-colors"><i class="fa-solid fa-play text-white text-xs drop-shadow"></i></div>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <div class="text-[11px] font-mono font-bold text-purple-400 mb-0.5">#3</div>
+                                    <div class="text-sm font-semibold text-slate-200 group-hover/ep:text-white leading-snug line-clamp-2" data-video-title><span class="ru-text">Автоматическая авторизация, файл .Renviron</span><span class="ua-text">Автоматична авторизація, файл .Renviron</span><span class="en-text">Automatic authorization with .Renviron</span></div>
+                                </div>
+                            </button>
+                            <button type="button" data-video="zoNvu2T6IFc" class="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 transition-all text-left group/ep">
+                                <div class="relative w-24 h-14 rounded-lg overflow-hidden shrink-0 bg-slate-900">
+                                    <img src="https://i.ytimg.com/vi/zoNvu2T6IFc/hqdefault.jpg" alt="" loading="lazy" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 flex items-center justify-center bg-slate-950/30 group-hover/ep:bg-slate-950/10 transition-colors"><i class="fa-solid fa-play text-white text-xs drop-shadow"></i></div>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <div class="text-[11px] font-mono font-bold text-purple-400 mb-0.5">#4</div>
+                                    <div class="text-sm font-semibold text-slate-200 group-hover/ep:text-white leading-snug line-clamp-2" data-video-title><span class="ru-text">Автоматическая авторизация и переменные среды в Windows</span><span class="ua-text">Автоматична авторизація та змінні середовища у Windows</span><span class="en-text">Automatic authorization and env variables on Windows</span></div>
+                                </div>
+                            </button>
+                            <button type="button" data-video="ZaOvO5k6Ses" class="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 transition-all text-left group/ep">
+                                <div class="relative w-24 h-14 rounded-lg overflow-hidden shrink-0 bg-slate-900">
+                                    <img src="https://i.ytimg.com/vi/ZaOvO5k6Ses/hqdefault.jpg" alt="" loading="lazy" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 flex items-center justify-center bg-slate-950/30 group-hover/ep:bg-slate-950/10 transition-colors"><i class="fa-solid fa-play text-white text-xs drop-shadow"></i></div>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <div class="text-[11px] font-mono font-bold text-purple-400 mb-0.5">#5</div>
+                                    <div class="text-sm font-semibold text-slate-200 group-hover/ep:text-white leading-snug line-clamp-2" data-video-title><span class="ru-text">Опции пакета и загрузка объектов рекламных кабинетов</span><span class="ua-text">Опції пакета та завантаження об&#x27;єктів рекламних кабінетів</span><span class="en-text">Package options and loading ad-account objects</span></div>
+                                </div>
+                            </button>
+                            <button type="button" data-video="hc_hknCWZc4" class="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 transition-all text-left group/ep">
+                                <div class="relative w-24 h-14 rounded-lg overflow-hidden shrink-0 bg-slate-900">
+                                    <img src="https://i.ytimg.com/vi/hc_hknCWZc4/hqdefault.jpg" alt="" loading="lazy" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 flex items-center justify-center bg-slate-950/30 group-hover/ep:bg-slate-950/10 transition-colors"><i class="fa-solid fa-play text-white text-xs drop-shadow"></i></div>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <div class="text-[11px] font-mono font-bold text-purple-400 mb-0.5">#6</div>
+                                    <div class="text-sm font-semibold text-slate-200 group-hover/ep:text-white leading-snug line-clamp-2" data-video-title><span class="ru-text">Статистика, конверсии и окна атрибуции</span><span class="ua-text">Статистика, конверсії та вікна атрибуції</span><span class="en-text">Statistics, conversions and attribution windows</span></div>
+                                </div>
+                            </button>
+                            <button type="button" data-video="WuOw33JjvGM" class="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 transition-all text-left group/ep">
+                                <div class="relative w-24 h-14 rounded-lg overflow-hidden shrink-0 bg-slate-900">
+                                    <img src="https://i.ytimg.com/vi/WuOw33JjvGM/hqdefault.jpg" alt="" loading="lazy" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 flex items-center justify-center bg-slate-950/30 group-hover/ep:bg-slate-950/10 transition-colors"><i class="fa-solid fa-play text-white text-xs drop-shadow"></i></div>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <div class="text-[11px] font-mono font-bold text-purple-400 mb-0.5">#7</div>
+                                    <div class="text-sm font-semibold text-slate-200 group-hover/ep:text-white leading-snug line-clamp-2" data-video-title><span class="ru-text">Статистика рекламных аккаунтов Facebook в Power BI</span><span class="ua-text">Статистика рекламних акаунтів Facebook у Power BI</span><span class="en-text">Facebook ad-account stats in Power BI</span></div>
+                                </div>
+                            </button>
+                            <button type="button" data-video="j61dikcATQI" class="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 transition-all text-left group/ep">
+                                <div class="relative w-24 h-14 rounded-lg overflow-hidden shrink-0 bg-slate-900">
+                                    <img src="https://i.ytimg.com/vi/j61dikcATQI/hqdefault.jpg" alt="" loading="lazy" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 flex items-center justify-center bg-slate-950/30 group-hover/ep:bg-slate-950/10 transition-colors"><i class="fa-solid fa-play text-white text-xs drop-shadow"></i></div>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <div class="text-[11px] font-mono font-bold text-purple-400 mb-0.5">#8</div>
+                                    <div class="text-sm font-semibold text-slate-200 group-hover/ep:text-white leading-snug line-clamp-2" data-video-title><span class="ru-text">Расходы из Facebook в Google Analytics</span><span class="ua-text">Витрати з Facebook у Google Analytics</span><span class="en-text">Facebook costs into Google Analytics</span></div>
+                                </div>
+                            </button>
+                            <button type="button" data-video="yAxMQfrVzEc" class="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 transition-all text-left group/ep">
+                                <div class="relative w-24 h-14 rounded-lg overflow-hidden shrink-0 bg-slate-900">
+                                    <img src="https://i.ytimg.com/vi/yAxMQfrVzEc/hqdefault.jpg" alt="" loading="lazy" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 flex items-center justify-center bg-slate-950/30 group-hover/ep:bg-slate-950/10 transition-colors"><i class="fa-solid fa-play text-white text-xs drop-shadow"></i></div>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <div class="text-[11px] font-mono font-bold text-purple-400 mb-0.5">#9</div>
+                                    <div class="text-sm font-semibold text-slate-200 group-hover/ep:text-white leading-snug line-clamp-2" data-video-title><span class="ru-text">Расходы и клики из Facebook в Яндекс.Метрику</span><span class="ua-text">Витрати та кліки з Facebook у Яндекс.Метрику</span><span class="en-text">Facebook costs and clicks into Yandex.Metrica</span></div>
+                                </div>
+                            </button>
+                            <button type="button" data-video="O2BhRNO_ul4" class="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 transition-all text-left group/ep">
+                                <div class="relative w-24 h-14 rounded-lg overflow-hidden shrink-0 bg-slate-900">
+                                    <img src="https://i.ytimg.com/vi/O2BhRNO_ul4/hqdefault.jpg" alt="" loading="lazy" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 flex items-center justify-center bg-slate-950/30 group-hover/ep:bg-slate-950/10 transition-colors"><i class="fa-solid fa-play text-white text-xs drop-shadow"></i></div>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <div class="text-[11px] font-mono font-bold text-purple-400 mb-0.5">#10</div>
+                                    <div class="text-sm font-semibold text-slate-200 group-hover/ep:text-white leading-snug line-clamp-2" data-video-title><span class="ru-text">Данные из бизнес-менеджера Facebook</span><span class="ua-text">Дані з бізнес-менеджера Facebook</span><span class="en-text">Data from Facebook Business Manager</span></div>
+                                </div>
+                            </button>
+                            <button type="button" data-video="ZN9-aYqq2tQ" class="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 transition-all text-left group/ep">
+                                <div class="relative w-24 h-14 rounded-lg overflow-hidden shrink-0 bg-slate-900">
+                                    <img src="https://i.ytimg.com/vi/ZN9-aYqq2tQ/hqdefault.jpg" alt="" loading="lazy" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 flex items-center justify-center bg-slate-950/30 group-hover/ep:bg-slate-950/10 transition-colors"><i class="fa-solid fa-play text-white text-xs drop-shadow"></i></div>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <div class="text-[11px] font-mono font-bold text-purple-400 mb-0.5">#11</div>
+                                    <div class="text-sm font-semibold text-slate-200 group-hover/ep:text-white leading-snug line-clamp-2" data-video-title><span class="ru-text">Разбиваем большой запрос на подзапросы по периодам (fetch_by)</span><span class="ua-text">Розбиваємо великий запит на підзапити за періодами (fetch_by)</span><span class="en-text">Splitting a large request by period (fetch_by)</span></div>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="mt-auto pt-4 pb-2 border-t border-white/5">
+                            <a href="https://www.youtube.com/playlist?list=PLD2LDq8edf4pItOb-vZTG5AXZK2niJ8_R" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-300 hover:text-white transition-colors"><i class="fa-brands fa-youtube text-red-500"></i><span class="ru-text">Весь плейлист на YouTube</span><span class="ua-text">Увесь плейлист на YouTube</span><span class="en-text">Full playlist on YouTube</span> <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-60"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article id="timeperiodsR" class="bento-glass no-lift rounded-[2rem] p-3 flex flex-col scroll-mt-24" data-aos="fade-up" data-aos-delay="80">
+                <div class="bento-content flex flex-col h-full">
+                    <button type="button" data-video="NgfWELbM6Fk" class="block text-left group">
+                        <div class="cover h-56 rounded-[1.5rem]">
+                            <div class="cover-fallback"><i class="fa-solid fa-calendar-days text-5xl"></i></div>
+                            <img src="https://i.ytimg.com/vi/NgfWELbM6Fk/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent"></div>
+                            <div class="absolute top-4 left-4 text-[11px] font-mono font-bold px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300 flex items-center gap-2"><i class="fa-solid fa-calendar-days"></i>timeperiodsR</div>
+                            <div class="absolute top-4 right-4 text-[11px] font-bold px-2.5 py-1 rounded-lg backdrop-blur-md bg-red-500/20 border border-red-500/30 text-red-200">6 <span class="ru-text">видео</span><span class="ua-text">відео</span><span class="en-text">videos</span></div>
+                            <div class="absolute inset-0 flex items-center justify-center"><div class="w-16 h-16 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-xl"></i></div></div>
+                            <span class="hidden" data-video-title><span class="ru-text">Начальная и конечная дата прошлого месяца</span><span class="ua-text">Початкова та кінцева дата минулого місяця</span><span class="en-text">First and last day of last month</span></span>
+                        </div>
+                    </button>
+                    <div class="px-3 pt-5 flex flex-col flex-1">
+                        <div class="text-xs font-mono font-bold uppercase tracking-widest text-slate-500 mb-2"><span class="ru-text">Серия</span><span class="ua-text">Серія</span><span class="en-text">Series</span> · 2019–2020</div>
+                        <h3 class="text-2xl font-bold text-white outfit-font leading-snug mb-2"><span class="ru-text">timeperiodsR: простое определение временных периодов</span><span class="ua-text">timeperiodsR: просте визначення часових періодів</span><span class="en-text">timeperiodsR: working with time periods made easy</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed mb-5"><span class="ru-text">Как одной функцией получить границы прошлого месяца, будни и выходные, официальные праздники стран СНГ и проверить полноту данных в базе за период.</span><span class="ua-text">Як однією функцією отримати межі минулого місяця, будні та вихідні, офіційні свята країн СНД і перевірити повноту даних у базі за період.</span><span class="en-text">Get last month&#x27;s boundaries, workdays and weekends, official holidays and check data completeness for a period — each with a single function.</span></p>
+                        <div class="space-y-1 max-h-80 overflow-y-auto pr-1 -mx-1 mb-4">
+                            <button type="button" data-video="NgfWELbM6Fk" class="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 transition-all text-left group/ep">
+                                <div class="relative w-24 h-14 rounded-lg overflow-hidden shrink-0 bg-slate-900">
+                                    <img src="https://i.ytimg.com/vi/NgfWELbM6Fk/hqdefault.jpg" alt="" loading="lazy" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 flex items-center justify-center bg-slate-950/30 group-hover/ep:bg-slate-950/10 transition-colors"><i class="fa-solid fa-play text-white text-xs drop-shadow"></i></div>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <div class="text-[11px] font-mono font-bold text-purple-400 mb-0.5">#1</div>
+                                    <div class="text-sm font-semibold text-slate-200 group-hover/ep:text-white leading-snug line-clamp-2" data-video-title><span class="ru-text">Начальная и конечная дата прошлого месяца</span><span class="ua-text">Початкова та кінцева дата минулого місяця</span><span class="en-text">First and last day of last month</span></div>
+                                </div>
+                            </button>
+                            <button type="button" data-video="jwJA-fgQwoQ" class="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 transition-all text-left group/ep">
+                                <div class="relative w-24 h-14 rounded-lg overflow-hidden shrink-0 bg-slate-900">
+                                    <img src="https://i.ytimg.com/vi/jwJA-fgQwoQ/hqdefault.jpg" alt="" loading="lazy" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 flex items-center justify-center bg-slate-950/30 group-hover/ep:bg-slate-950/10 transition-colors"><i class="fa-solid fa-play text-white text-xs drop-shadow"></i></div>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <div class="text-[11px] font-mono font-bold text-purple-400 mb-0.5">#2</div>
+                                    <div class="text-sm font-semibold text-slate-200 group-hover/ep:text-white leading-snug line-clamp-2" data-video-title><span class="ru-text">Вектор будних и выходных дней</span><span class="ua-text">Вектор будніх і вихідних днів</span><span class="en-text">Vectors of workdays and weekends</span></div>
+                                </div>
+                            </button>
+                            <button type="button" data-video="meYb5LRV3k8" class="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 transition-all text-left group/ep">
+                                <div class="relative w-24 h-14 rounded-lg overflow-hidden shrink-0 bg-slate-900">
+                                    <img src="https://i.ytimg.com/vi/meYb5LRV3k8/hqdefault.jpg" alt="" loading="lazy" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 flex items-center justify-center bg-slate-950/30 group-hover/ep:bg-slate-950/10 transition-colors"><i class="fa-solid fa-play text-white text-xs drop-shadow"></i></div>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <div class="text-[11px] font-mono font-bold text-purple-400 mb-0.5">#3</div>
+                                    <div class="text-sm font-semibold text-slate-200 group-hover/ep:text-white leading-snug line-clamp-2" data-video-title><span class="ru-text">Официальные выходные и рабочие дни в странах СНГ</span><span class="ua-text">Офіційні вихідні та робочі дні в країнах СНД</span><span class="en-text">Official holidays and workdays by country</span></div>
+                                </div>
+                            </button>
+                            <button type="button" data-video="W-rUYf3AHqA" class="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 transition-all text-left group/ep">
+                                <div class="relative w-24 h-14 rounded-lg overflow-hidden shrink-0 bg-slate-900">
+                                    <img src="https://i.ytimg.com/vi/W-rUYf3AHqA/hqdefault.jpg" alt="" loading="lazy" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 flex items-center justify-center bg-slate-950/30 group-hover/ep:bg-slate-950/10 transition-colors"><i class="fa-solid fa-play text-white text-xs drop-shadow"></i></div>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <div class="text-[11px] font-mono font-bold text-purple-400 mb-0.5">#4</div>
+                                    <div class="text-sm font-semibold text-slate-200 group-hover/ep:text-white leading-snug line-clamp-2" data-video-title><span class="ru-text">Расширение класса tpr с помощью переменных среды</span><span class="ua-text">Розширення класу tpr за допомогою змінних середовища</span><span class="en-text">Extending the tpr class with env variables</span></div>
+                                </div>
+                            </button>
+                            <button type="button" data-video="c_WQmN6yBl0" class="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 transition-all text-left group/ep">
+                                <div class="relative w-24 h-14 rounded-lg overflow-hidden shrink-0 bg-slate-900">
+                                    <img src="https://i.ytimg.com/vi/c_WQmN6yBl0/hqdefault.jpg" alt="" loading="lazy" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 flex items-center justify-center bg-slate-950/30 group-hover/ep:bg-slate-950/10 transition-colors"><i class="fa-solid fa-play text-white text-xs drop-shadow"></i></div>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <div class="text-[11px] font-mono font-bold text-purple-400 mb-0.5">#5</div>
+                                    <div class="text-sm font-semibold text-slate-200 group-hover/ep:text-white leading-snug line-clamp-2" data-video-title><span class="ru-text">Пользовательский список выходных дней</span><span class="ua-text">Користувацький список вихідних днів</span><span class="en-text">A custom list of days off</span></div>
+                                </div>
+                            </button>
+                            <button type="button" data-video="UMQ_S5w-T9c" class="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 transition-all text-left group/ep">
+                                <div class="relative w-24 h-14 rounded-lg overflow-hidden shrink-0 bg-slate-900">
+                                    <img src="https://i.ytimg.com/vi/UMQ_S5w-T9c/hqdefault.jpg" alt="" loading="lazy" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 flex items-center justify-center bg-slate-950/30 group-hover/ep:bg-slate-950/10 transition-colors"><i class="fa-solid fa-play text-white text-xs drop-shadow"></i></div>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <div class="text-[11px] font-mono font-bold text-purple-400 mb-0.5">#6</div>
+                                    <div class="text-sm font-semibold text-slate-200 group-hover/ep:text-white leading-snug line-clamp-2" data-video-title><span class="ru-text">Проверка наличия данных в БД за период</span><span class="ua-text">Перевірка наявності даних у БД за період</span><span class="en-text">Checking database data for a period</span></div>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="mt-auto pt-4 pb-2 border-t border-white/5">
+                            <a href="https://www.youtube.com/playlist?list=PLD2LDq8edf4qed2KVKfXmKdh0OQcdj9gw" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-300 hover:text-white transition-colors"><i class="fa-brands fa-youtube text-red-500"></i><span class="ru-text">Весь плейлист на YouTube</span><span class="ua-text">Увесь плейлист на YouTube</span><span class="en-text">Full playlist on YouTube</span> <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-60"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- LESSONS -->
+    <section class="px-6 max-w-7xl mx-auto pb-16 relative z-10">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8" data-aos="fade-up">
+            <div>
+                <h2 class="text-3xl font-extrabold flex items-center gap-4 outfit-font mb-2">
+                    <div class="w-12 h-12 bg-blue-500/20 flex items-center justify-center rounded-2xl border border-blue-500/30"><i class="fa-solid fa-film text-blue-400 text-xl"></i></div>
+                    <span class="ru-text">Отдельные уроки</span><span class="ua-text">Окремі уроки</span><span class="en-text">Standalone lessons</span>
+                </h2>
+                <p class="text-slate-400 text-sm"><span class="ru-text">Показано</span><span class="ua-text">Показано</span><span class="en-text">Showing</span>: <span data-filter-count class="font-mono text-white">20</span></p>
+            </div>
+            <div class="relative w-full md:w-80"><i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-sm"></i><input type="search" data-filter-search class="search-input w-full rounded-xl pl-11 pr-4 py-2.5 text-sm text-white placeholder-slate-500" placeholder="Search lessons…" data-ph-ru="Поиск по урокам…" data-ph-ua="Пошук за уроками…" data-ph-en="Search lessons…"></div>
+        </div>
+        <div class="flex flex-wrap items-center gap-3 mb-8" data-aos="fade-up"><button type="button" data-filter-group="topic" data-filter-value="all" class="filter-btn active px-4 py-2 rounded-xl text-sm font-semibold flex items-center gap-2"><i class="fa-solid fa-layer-group text-xs text-purple-400"></i><span class="ru-text">Все</span><span class="ua-text">Усі</span><span class="en-text">All</span><span class="text-xs opacity-80 bg-white/10 px-2 py-0.5 rounded-full font-mono">20</span></button><button type="button" data-filter-group="topic" data-filter-value="api" class="filter-btn px-4 py-2 rounded-xl text-sm font-semibold flex items-center gap-2"><i class="fa-solid fa-plug text-xs text-purple-400"></i><span class="ru-text">API и пакеты</span><span class="ua-text">API та пакети</span><span class="en-text">APIs & packages</span><span class="text-xs opacity-80 bg-white/10 px-2 py-0.5 rounded-full font-mono">4</span></button><button type="button" data-filter-group="topic" data-filter-value="data" class="filter-btn px-4 py-2 rounded-xl text-sm font-semibold flex items-center gap-2"><i class="fa-solid fa-table-cells text-xs text-purple-400"></i><span class="ru-text">Работа с данными</span><span class="ua-text">Робота з даними</span><span class="en-text">Working with data</span><span class="text-xs opacity-80 bg-white/10 px-2 py-0.5 rounded-full font-mono">5</span></button><button type="button" data-filter-group="topic" data-filter-value="deploy" class="filter-btn px-4 py-2 rounded-xl text-sm font-semibold flex items-center gap-2"><i class="fa-solid fa-gears text-xs text-purple-400"></i><span class="ru-text">Автоматизация и деплой</span><span class="ua-text">Автоматизація та деплой</span><span class="en-text">Automation & deploy</span><span class="text-xs opacity-80 bg-white/10 px-2 py-0.5 rounded-full font-mono">6</span></button><button type="button" data-filter-group="topic" data-filter-value="basics" class="filter-btn px-4 py-2 rounded-xl text-sm font-semibold flex items-center gap-2"><i class="fa-solid fa-screwdriver-wrench text-xs text-purple-400"></i><span class="ru-text">Основы R</span><span class="ua-text">Основи R</span><span class="en-text">R essentials</span><span class="text-xs opacity-80 bg-white/10 px-2 py-0.5 rounded-full font-mono">3</span></button><button type="button" data-filter-group="topic" data-filter-value="ai" class="filter-btn px-4 py-2 rounded-xl text-sm font-semibold flex items-center gap-2"><i class="fa-solid fa-wand-magic-sparkles text-xs text-purple-400"></i><span class="ru-text">AI</span><span class="ua-text">AI</span><span class="en-text">AI</span><span class="text-xs opacity-80 bg-white/10 px-2 py-0.5 rounded-full font-mono">2</span></button></div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <a href="https://www.youtube.com/watch?v=puIbAG2Ms4c" target="_blank" rel="noopener" data-video="puIbAG2Ms4c" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-topic="ai" data-search="автоматизация разработки в rstudio с помощью gemini cli автоматизація розробки в rstudio за допомогою gemini cli automating development in rstudio with gemini cli как подключить консольного ai-агента gemini cli к работе в rstudio и делегировать ему рутинные задачи разработки." data-aos="fade-up" data-aos-delay="0">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-wand-magic-sparkles text-5xl"></i></div>
+                        <img src="https://i.ytimg.com/vi/puIbAG2Ms4c/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">апр. 2026</span><span class="ua-text">квіт. 2026</span><span class="en-text">Apr 2026</span></div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2 flex items-center gap-2"><i class="fa-solid fa-wand-magic-sparkles"></i><span class="ru-text">AI</span><span class="ua-text">AI</span><span class="en-text">AI</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">Автоматизация разработки в RStudio с помощью Gemini CLI</span><span class="ua-text">Автоматизація розробки в RStudio за допомогою Gemini CLI</span><span class="en-text">Automating development in RStudio with Gemini CLI</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">Как подключить консольного AI-агента Gemini CLI к работе в RStudio и делегировать ему рутинные задачи разработки.</span><span class="ua-text">Як підключити консольного AI-агента Gemini CLI до роботи в RStudio та делегувати йому рутинні задачі розробки.</span><span class="en-text">Connecting the Gemini CLI agent to your RStudio workflow and delegating routine development tasks to it.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i><span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=TJRxWS0W7UY" target="_blank" rel="noopener" data-video="TJRxWS0W7UY" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-topic="deploy" data-search="разворачиваем telegram-бота на платформе heroku розгортаємо telegram-бота на платформі heroku deploying a telegram bot to heroku пошаговый деплой написанного на r telegram-бота в облачную платформу heroku." data-aos="fade-up" data-aos-delay="60">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-gears text-5xl"></i></div>
+                        <img src="https://i.ytimg.com/vi/TJRxWS0W7UY/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">авг. 2024</span><span class="ua-text">серп. 2024</span><span class="en-text">Aug 2024</span></div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2 flex items-center gap-2"><i class="fa-solid fa-gears"></i><span class="ru-text">Автоматизация и деплой</span><span class="ua-text">Автоматизація та деплой</span><span class="en-text">Automation & deploy</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">Разворачиваем Telegram-бота на платформе Heroku</span><span class="ua-text">Розгортаємо Telegram-бота на платформі Heroku</span><span class="en-text">Deploying a Telegram bot to Heroku</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">Пошаговый деплой написанного на R Telegram-бота в облачную платформу Heroku.</span><span class="ua-text">Покроковий деплой написаного на R Telegram-бота в хмарну платформу Heroku.</span><span class="en-text">Step-by-step deployment of an R Telegram bot to the Heroku cloud platform.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i><span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=YCXTjodFmqo" target="_blank" rel="noopener" data-video="YCXTjodFmqo" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-topic="deploy" data-search="разворачиваем telegram-бота в google cloud run розгортаємо telegram-бота в google cloud run deploying a telegram bot to google cloud run упаковываем бота в docker-контейнер и запускаем его в google cloud run." data-aos="fade-up" data-aos-delay="120">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-gears text-5xl"></i></div>
+                        <img src="https://i.ytimg.com/vi/YCXTjodFmqo/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">авг. 2024</span><span class="ua-text">серп. 2024</span><span class="en-text">Aug 2024</span></div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2 flex items-center gap-2"><i class="fa-solid fa-gears"></i><span class="ru-text">Автоматизация и деплой</span><span class="ua-text">Автоматизація та деплой</span><span class="en-text">Automation & deploy</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">Разворачиваем Telegram-бота в Google Cloud Run</span><span class="ua-text">Розгортаємо Telegram-бота в Google Cloud Run</span><span class="en-text">Deploying a Telegram bot to Google Cloud Run</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">Упаковываем бота в Docker-контейнер и запускаем его в Google Cloud Run.</span><span class="ua-text">Пакуємо бота в Docker-контейнер і запускаємо його в Google Cloud Run.</span><span class="en-text">Packaging the bot into a Docker container and running it on Google Cloud Run.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i><span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=zdqRR-3ZFkM" target="_blank" rel="noopener" data-video="zdqRR-3ZFkM" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-topic="deploy" data-search="запуск r-скриптов по расписанию с помощью google cloud run jobs запуск r-скриптів за розкладом за допомогою google cloud run jobs scheduling r scripts with google cloud run jobs как перенести регулярные r-скрипты в облако: контейнер, cloud run job и расписание запуска." data-aos="fade-up" data-aos-delay="0">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-gears text-5xl"></i></div>
+                        <img src="https://i.ytimg.com/vi/zdqRR-3ZFkM/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">авг. 2024</span><span class="ua-text">серп. 2024</span><span class="en-text">Aug 2024</span></div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2 flex items-center gap-2"><i class="fa-solid fa-gears"></i><span class="ru-text">Автоматизация и деплой</span><span class="ua-text">Автоматизація та деплой</span><span class="en-text">Automation & deploy</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">Запуск R-скриптов по расписанию с помощью Google Cloud Run Jobs</span><span class="ua-text">Запуск R-скриптів за розкладом за допомогою Google Cloud Run Jobs</span><span class="en-text">Scheduling R scripts with Google Cloud Run Jobs</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">Как перенести регулярные R-скрипты в облако: контейнер, Cloud Run Job и расписание запуска.</span><span class="ua-text">Як перенести регулярні R-скрипти в хмару: контейнер, Cloud Run Job і розклад запуску.</span><span class="en-text">Moving recurring R scripts to the cloud: a container, a Cloud Run Job and a schedule.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i><span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=SR69O1bkzmI" target="_blank" rel="noopener" data-video="SR69O1bkzmI" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-topic="deploy" data-search="запуск r-скриптов по расписанию с помощью github actions запуск r-скриптів за розкладом за допомогою github actions scheduling r scripts with github actions бесплатный способ запускать r-скрипты по расписанию прямо из репозитория на github." data-aos="fade-up" data-aos-delay="60">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-gears text-5xl"></i></div>
+                        <img src="https://i.ytimg.com/vi/SR69O1bkzmI/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">июль 2024</span><span class="ua-text">лип. 2024</span><span class="en-text">Jul 2024</span></div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2 flex items-center gap-2"><i class="fa-solid fa-gears"></i><span class="ru-text">Автоматизация и деплой</span><span class="ua-text">Автоматизація та деплой</span><span class="en-text">Automation & deploy</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">Запуск R-скриптов по расписанию с помощью GitHub Actions</span><span class="ua-text">Запуск R-скриптів за розкладом за допомогою GitHub Actions</span><span class="en-text">Scheduling R scripts with GitHub Actions</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">Бесплатный способ запускать R-скрипты по расписанию прямо из репозитория на GitHub.</span><span class="ua-text">Безкоштовний спосіб запускати R-скрипти за розкладом прямо з репозиторію на GitHub.</span><span class="en-text">A free way to run R scripts on a schedule straight from a GitHub repository.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i><span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=P93BqWhT_Ck" target="_blank" rel="noopener" data-video="P93BqWhT_Ck" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-topic="ai" data-search="chatgpt для аналитика данных: успешные и неуспешные кейсы chatgpt для аналітика даних: успішні та неуспішні кейси chatgpt for data analysts: what worked and what didn&#x27;t реальные примеры из работы аналитика: где chatgpt экономит время, а где ошибается и требует проверки." data-aos="fade-up" data-aos-delay="120">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-wand-magic-sparkles text-5xl"></i></div>
+                        <img src="https://i.ytimg.com/vi/P93BqWhT_Ck/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">июль 2024</span><span class="ua-text">лип. 2024</span><span class="en-text">Jul 2024</span></div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2 flex items-center gap-2"><i class="fa-solid fa-wand-magic-sparkles"></i><span class="ru-text">AI</span><span class="ua-text">AI</span><span class="en-text">AI</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">ChatGPT для аналитика данных: успешные и неуспешные кейсы</span><span class="ua-text">ChatGPT для аналітика даних: успішні та неуспішні кейси</span><span class="en-text">ChatGPT for data analysts: what worked and what didn&#x27;t</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">Реальные примеры из работы аналитика: где ChatGPT экономит время, а где ошибается и требует проверки.</span><span class="ua-text">Реальні приклади з роботи аналітика: де ChatGPT економить час, а де помиляється й потребує перевірки.</span><span class="en-text">Real examples from analytics work: where ChatGPT saves time and where it gets things wrong.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i><span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=7PPP8q0lE_o" target="_blank" rel="noopener" data-video="7PPP8q0lE_o" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-topic="basics" data-search="как правильно хранить секретные данные и работать с ними в r як правильно зберігати секретні дані та працювати з ними в r storing and using secrets safely in r токены, пароли и ключи api: почему их нельзя хранить в коде и какие есть безопасные способы." data-aos="fade-up" data-aos-delay="0">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-screwdriver-wrench text-5xl"></i></div>
+                        <img src="https://i.ytimg.com/vi/7PPP8q0lE_o/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">янв. 2023</span><span class="ua-text">січ. 2023</span><span class="en-text">Jan 2023</span></div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2 flex items-center gap-2"><i class="fa-solid fa-screwdriver-wrench"></i><span class="ru-text">Основы R</span><span class="ua-text">Основи R</span><span class="en-text">R essentials</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">Как правильно хранить секретные данные и работать с ними в R</span><span class="ua-text">Як правильно зберігати секретні дані та працювати з ними в R</span><span class="en-text">Storing and using secrets safely in R</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">Токены, пароли и ключи API: почему их нельзя хранить в коде и какие есть безопасные способы.</span><span class="ua-text">Токени, паролі та ключі API: чому їх не можна зберігати в коді та які є безпечні способи.</span><span class="en-text">Tokens, passwords and API keys: why they don&#x27;t belong in code and safer ways to handle them.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i><span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=W-hwi9zbxlM" target="_blank" rel="noopener" data-video="W-hwi9zbxlM" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-topic="data" data-search="как загрузить данные из google bigquery в google таблицу встроенным коннектором як завантажити дані з google bigquery у google таблицю вбудованим конектором loading google bigquery data into google sheets with the built-in connector подключаем таблицы bigquery к google таблицам без кода с помощью connected sheets." data-aos="fade-up" data-aos-delay="60">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-table-cells text-5xl"></i></div>
+                        <img src="https://i.ytimg.com/vi/W-hwi9zbxlM/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">авг. 2022</span><span class="ua-text">серп. 2022</span><span class="en-text">Aug 2022</span></div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2 flex items-center gap-2"><i class="fa-solid fa-table-cells"></i><span class="ru-text">Работа с данными</span><span class="ua-text">Робота з даними</span><span class="en-text">Working with data</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">Как загрузить данные из Google BigQuery в Google Таблицу встроенным коннектором</span><span class="ua-text">Як завантажити дані з Google BigQuery у Google Таблицю вбудованим конектором</span><span class="en-text">Loading Google BigQuery data into Google Sheets with the built-in connector</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">Подключаем таблицы BigQuery к Google Таблицам без кода с помощью Connected Sheets.</span><span class="ua-text">Підключаємо таблиці BigQuery до Google Таблиць без коду за допомогою Connected Sheets.</span><span class="en-text">Connecting BigQuery tables to Google Sheets without code using Connected Sheets.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i><span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=QZCCRbGCms8" target="_blank" rel="noopener" data-video="QZCCRbGCms8" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-topic="api" data-search="rtgstat: аналитика telegram-каналов с помощью tgstat api rtgstat: аналітика telegram-каналів за допомогою tgstat api rtgstat: telegram channel analytics with the tgstat api как с помощью пакета rtgstat получать статистику telegram-каналов и публикаций из tgstat api." data-aos="fade-up" data-aos-delay="120">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-plug text-5xl"></i></div>
+                        <img src="https://i.ytimg.com/vi/QZCCRbGCms8/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">июль 2022</span><span class="ua-text">лип. 2022</span><span class="en-text">Jul 2022</span></div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2 flex items-center gap-2"><i class="fa-solid fa-plug"></i><span class="ru-text">API и пакеты</span><span class="ua-text">API та пакети</span><span class="en-text">APIs & packages</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">rtgstat: аналитика Telegram-каналов с помощью TGStat API</span><span class="ua-text">rtgstat: аналітика Telegram-каналів за допомогою TGStat API</span><span class="en-text">rtgstat: Telegram channel analytics with the TGStat API</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">Как с помощью пакета rtgstat получать статистику Telegram-каналов и публикаций из TGStat API.</span><span class="ua-text">Як за допомогою пакета rtgstat отримувати статистику Telegram-каналів і публікацій з TGStat API.</span><span class="en-text">Getting Telegram channel and post statistics from the TGStat API with rtgstat.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i><span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=Af5ZIAPMjJs" target="_blank" rel="noopener" data-video="Af5ZIAPMjJs" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-topic="data" data-search="ускоряем dplyr: бекенды dtplyr, dbplyr и multidplyr прискорюємо dplyr: бекенди dtplyr, dbplyr і multidplyr speeding up dplyr: the dtplyr, dbplyr and multidplyr backends тот же синтаксис dplyr, но с data.table, sql-базами и многопоточностью под капотом." data-aos="fade-up" data-aos-delay="0">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-table-cells text-5xl"></i></div>
+                        <img src="https://i.ytimg.com/vi/Af5ZIAPMjJs/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">май 2022</span><span class="ua-text">трав. 2022</span><span class="en-text">May 2022</span></div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2 flex items-center gap-2"><i class="fa-solid fa-table-cells"></i><span class="ru-text">Работа с данными</span><span class="ua-text">Робота з даними</span><span class="en-text">Working with data</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">Ускоряем dplyr: бекенды dtplyr, dbplyr и multidplyr</span><span class="ua-text">Прискорюємо dplyr: бекенди dtplyr, dbplyr і multidplyr</span><span class="en-text">Speeding up dplyr: the dtplyr, dbplyr and multidplyr backends</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">Тот же синтаксис dplyr, но с data.table, SQL-базами и многопоточностью под капотом.</span><span class="ua-text">Той самий синтаксис dplyr, але з data.table, SQL-базами та багатопотоковістю під капотом.</span><span class="en-text">The same dplyr syntax, powered by data.table, SQL databases and parallelism under the hood.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i><span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=PrxyYMH7GB4" target="_blank" rel="noopener" data-video="PrxyYMH7GB4" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-topic="data" data-search="работа со срезами в dplyr: функции семейства slice() робота зі зрізами в dplyr: функції сімейства slice() slicing data in dplyr: the slice() family slice_head(), slice_max(), slice_sample() и другие способы выбрать нужные строки таблицы." data-aos="fade-up" data-aos-delay="60">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-table-cells text-5xl"></i></div>
+                        <img src="https://i.ytimg.com/vi/PrxyYMH7GB4/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">июнь 2021</span><span class="ua-text">черв. 2021</span><span class="en-text">Jun 2021</span></div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2 flex items-center gap-2"><i class="fa-solid fa-table-cells"></i><span class="ru-text">Работа с данными</span><span class="ua-text">Робота з даними</span><span class="en-text">Working with data</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">Работа со срезами в dplyr: функции семейства slice()</span><span class="ua-text">Робота зі зрізами в dplyr: функції сімейства slice()</span><span class="en-text">Slicing data in dplyr: the slice() family</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">slice_head(), slice_max(), slice_sample() и другие способы выбрать нужные строки таблицы.</span><span class="ua-text">slice_head(), slice_max(), slice_sample() та інші способи вибрати потрібні рядки таблиці.</span><span class="en-text">slice_head(), slice_max(), slice_sample() and other ways to pick the rows you need.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i><span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=FWE028d6RPI" target="_blank" rel="noopener" data-video="FWE028d6RPI" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-topic="deploy" data-search="как настроить запуск r-скриптов по расписанию в windows як налаштувати запуск r-скриптів за розкладом у windows scheduling r scripts on windows настраиваем планировщик заданий windows, чтобы r-скрипты запускались автоматически, без участия человека." data-aos="fade-up" data-aos-delay="120">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-gears text-5xl"></i></div>
+                        <img src="https://i.ytimg.com/vi/FWE028d6RPI/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">май 2021</span><span class="ua-text">трав. 2021</span><span class="en-text">May 2021</span></div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2 flex items-center gap-2"><i class="fa-solid fa-gears"></i><span class="ru-text">Автоматизация и деплой</span><span class="ua-text">Автоматизація та деплой</span><span class="en-text">Automation & deploy</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">Как настроить запуск R-скриптов по расписанию в Windows</span><span class="ua-text">Як налаштувати запуск R-скриптів за розкладом у Windows</span><span class="en-text">Scheduling R scripts on Windows</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">Настраиваем Планировщик заданий Windows, чтобы R-скрипты запускались автоматически, без участия человека.</span><span class="ua-text">Налаштовуємо Планувальник завдань Windows, щоб R-скрипти запускалися автоматично, без участі людини.</span><span class="en-text">Setting up Windows Task Scheduler so your R scripts run automatically, hands-free.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i><span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=XC-6y-sQ8js" target="_blank" rel="noopener" data-video="XC-6y-sQ8js" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-topic="data" data-search="работа с датой и временем на языке r: пакет clock робота з датою та часом мовою r: пакет clock dates and times in r: the clock package современный пакет для арифметики дат, часовых поясов и форматирования времени." data-aos="fade-up" data-aos-delay="0">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-table-cells text-5xl"></i></div>
+                        <img src="https://i.ytimg.com/vi/XC-6y-sQ8js/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">апр. 2021</span><span class="ua-text">квіт. 2021</span><span class="en-text">Apr 2021</span></div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2 flex items-center gap-2"><i class="fa-solid fa-table-cells"></i><span class="ru-text">Работа с данными</span><span class="ua-text">Робота з даними</span><span class="en-text">Working with data</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">Работа с датой и временем на языке R: пакет clock</span><span class="ua-text">Робота з датою та часом мовою R: пакет clock</span><span class="en-text">Dates and times in R: the clock package</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">Современный пакет для арифметики дат, часовых поясов и форматирования времени.</span><span class="ua-text">Сучасний пакет для арифметики дат, часових поясів і форматування часу.</span><span class="en-text">A modern package for date arithmetic, time zones and formatting.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i><span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=9Wn8n2A6x2w" target="_blank" rel="noopener" data-video="9Wn8n2A6x2w" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-topic="api" data-search="rappsflyer: как получить данные из pull api appsflyer rappsflyer: як отримати дані з pull api appsflyer rappsflyer: getting data from the appsflyer pull api загрузка данных мобильной атрибуции из appsflyer в r с помощью пакета rappsflyer." data-aos="fade-up" data-aos-delay="60">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-plug text-5xl"></i></div>
+                        <img src="https://i.ytimg.com/vi/9Wn8n2A6x2w/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">март 2021</span><span class="ua-text">берез. 2021</span><span class="en-text">Mar 2021</span></div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2 flex items-center gap-2"><i class="fa-solid fa-plug"></i><span class="ru-text">API и пакеты</span><span class="ua-text">API та пакети</span><span class="en-text">APIs & packages</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">rappsflyer: как получить данные из Pull API AppsFlyer</span><span class="ua-text">rappsflyer: як отримати дані з Pull API AppsFlyer</span><span class="en-text">rappsflyer: getting data from the AppsFlyer Pull API</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">Загрузка данных мобильной атрибуции из AppsFlyer в R с помощью пакета rappsflyer.</span><span class="ua-text">Завантаження даних мобільної атрибуції з AppsFlyer в R за допомогою пакета rappsflyer.</span><span class="en-text">Loading mobile attribution data from AppsFlyer into R with rappsflyer.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i><span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=xA8YGxQH1Ws" target="_blank" rel="noopener" data-video="xA8YGxQH1Ws" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-topic="deploy" data-search="логирование выполнения r-скриптов: пакеты lgr и lgrextra логування виконання r-скриптів: пакети lgr і lgrextra logging r script execution with lgr and lgrextra зачем скриптам, работающим по расписанию, логи и как настроить их запись с помощью lgr и lgrextra." data-aos="fade-up" data-aos-delay="120">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-gears text-5xl"></i></div>
+                        <img src="https://i.ytimg.com/vi/xA8YGxQH1Ws/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">янв. 2021</span><span class="ua-text">січ. 2021</span><span class="en-text">Jan 2021</span></div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2 flex items-center gap-2"><i class="fa-solid fa-gears"></i><span class="ru-text">Автоматизация и деплой</span><span class="ua-text">Автоматизація та деплой</span><span class="en-text">Automation & deploy</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">Логирование выполнения R-скриптов: пакеты lgr и lgrExtra</span><span class="ua-text">Логування виконання R-скриптів: пакети lgr і lgrExtra</span><span class="en-text">Logging R script execution with lgr and lgrExtra</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">Зачем скриптам, работающим по расписанию, логи и как настроить их запись с помощью lgr и lgrExtra.</span><span class="ua-text">Навіщо скриптам, що працюють за розкладом, логи та як налаштувати їх запис за допомогою lgr і lgrExtra.</span><span class="en-text">Why scheduled scripts need logs and how to set up logging with lgr and lgrExtra.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i><span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=1UvrWoZugic" target="_blank" rel="noopener" data-video="1UvrWoZugic" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-topic="basics" data-search="как установить пакет r из cran, github или локальных файлов як встановити пакет r з cran, github або локальних файлів installing r packages from cran, github or local files все способы установки пакетов и типичные ошибки, с которыми сталкиваются новички." data-aos="fade-up" data-aos-delay="0">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-screwdriver-wrench text-5xl"></i></div>
+                        <img src="https://i.ytimg.com/vi/1UvrWoZugic/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">июль 2020</span><span class="ua-text">лип. 2020</span><span class="en-text">Jul 2020</span></div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2 flex items-center gap-2"><i class="fa-solid fa-screwdriver-wrench"></i><span class="ru-text">Основы R</span><span class="ua-text">Основи R</span><span class="en-text">R essentials</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">Как установить пакет R из CRAN, GitHub или локальных файлов</span><span class="ua-text">Як встановити пакет R з CRAN, GitHub або локальних файлів</span><span class="en-text">Installing R packages from CRAN, GitHub or local files</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">Все способы установки пакетов и типичные ошибки, с которыми сталкиваются новички.</span><span class="ua-text">Усі способи встановлення пакетів і типові помилки, з якими стикаються новачки.</span><span class="en-text">Every way to install packages and the typical errors beginners run into.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i><span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=e6bqFeJgaa0" target="_blank" rel="noopener" data-video="e6bqFeJgaa0" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-topic="data" data-search="tidyr 1.1.0: обзор релиза tidyr 1.1.0: огляд релізу tidyr 1.1.0: release overview что нового в пакете tidyr версии 1.1.0 из ядра tidyverse." data-aos="fade-up" data-aos-delay="60">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-table-cells text-5xl"></i></div>
+                        <img src="https://i.ytimg.com/vi/e6bqFeJgaa0/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">июнь 2020</span><span class="ua-text">черв. 2020</span><span class="en-text">Jun 2020</span></div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2 flex items-center gap-2"><i class="fa-solid fa-table-cells"></i><span class="ru-text">Работа с данными</span><span class="ua-text">Робота з даними</span><span class="en-text">Working with data</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">tidyr 1.1.0: обзор релиза</span><span class="ua-text">tidyr 1.1.0: огляд релізу</span><span class="en-text">tidyr 1.1.0: release overview</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">Что нового в пакете tidyr версии 1.1.0 из ядра tidyverse.</span><span class="ua-text">Що нового в пакеті tidyr версії 1.1.0 з ядра tidyverse.</span><span class="en-text">What&#x27;s new in tidyr 1.1.0, part of the core tidyverse.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i><span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=no75MyT87l0" target="_blank" rel="noopener" data-video="no75MyT87l0" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-topic="api" data-search="как работать с api google таблиц на языке r: пакет googlesheets4 як працювати з api google таблиць мовою r: пакет googlesheets4 working with the google sheets api in r: googlesheets4 чтение, запись и управление google таблицами из r с помощью googlesheets4." data-aos="fade-up" data-aos-delay="120">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-plug text-5xl"></i></div>
+                        <img src="https://i.ytimg.com/vi/no75MyT87l0/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">февр. 2020</span><span class="ua-text">лют. 2020</span><span class="en-text">Feb 2020</span></div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2 flex items-center gap-2"><i class="fa-solid fa-plug"></i><span class="ru-text">API и пакеты</span><span class="ua-text">API та пакети</span><span class="en-text">APIs & packages</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">Как работать с API Google Таблиц на языке R: пакет googlesheets4</span><span class="ua-text">Як працювати з API Google Таблиць мовою R: пакет googlesheets4</span><span class="en-text">Working with the Google Sheets API in R: googlesheets4</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">Чтение, запись и управление Google Таблицами из R с помощью googlesheets4.</span><span class="ua-text">Читання, запис і керування Google Таблицями з R за допомогою googlesheets4.</span><span class="en-text">Reading, writing and managing Google Sheets from R with googlesheets4.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i><span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=H2CgzIIH0Ps" target="_blank" rel="noopener" data-video="H2CgzIIH0Ps" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-topic="basics" data-search="как обновить r до актуальной версии: пакет installr як оновити r до актуальної версії: пакет installr updating r to the latest version with installr самый простой способ обновить r в windows и перенести установленные пакеты." data-aos="fade-up" data-aos-delay="0">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-screwdriver-wrench text-5xl"></i></div>
+                        <img src="https://i.ytimg.com/vi/H2CgzIIH0Ps/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">дек. 2019</span><span class="ua-text">груд. 2019</span><span class="en-text">Dec 2019</span></div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2 flex items-center gap-2"><i class="fa-solid fa-screwdriver-wrench"></i><span class="ru-text">Основы R</span><span class="ua-text">Основи R</span><span class="en-text">R essentials</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">Как обновить R до актуальной версии: пакет installr</span><span class="ua-text">Як оновити R до актуальної версії: пакет installr</span><span class="en-text">Updating R to the latest version with installr</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">Самый простой способ обновить R в Windows и перенести установленные пакеты.</span><span class="ua-text">Найпростіший спосіб оновити R у Windows і перенести встановлені пакети.</span><span class="en-text">The easiest way to update R on Windows and carry over your installed packages.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i><span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=gZKw_laVxC4" target="_blank" rel="noopener" data-video="gZKw_laVxC4" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-topic="api" data-search="пример работы с пакетом getproxy приклад роботи з пакетом getproxy using the getproxy package как подключать бесплатные прокси-серверы в r-сессии с помощью пакета getproxy." data-aos="fade-up" data-aos-delay="60">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-plug text-5xl"></i></div>
+                        <img src="https://i.ytimg.com/vi/gZKw_laVxC4/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">март 2019</span><span class="ua-text">берез. 2019</span><span class="en-text">Mar 2019</span></div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2 flex items-center gap-2"><i class="fa-solid fa-plug"></i><span class="ru-text">API и пакеты</span><span class="ua-text">API та пакети</span><span class="en-text">APIs & packages</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">Пример работы с пакетом getProxy</span><span class="ua-text">Приклад роботи з пакетом getProxy</span><span class="en-text">Using the getProxy package</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">Как подключать бесплатные прокси-серверы в R-сессии с помощью пакета getProxy.</span><span class="ua-text">Як підключати безкоштовні проксі-сервери в R-сесії за допомогою пакета getProxy.</span><span class="en-text">Using free proxy servers in an R session with the getProxy package.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i><span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div data-filter-empty class="hidden bento-glass no-lift p-10 text-center text-slate-400 rounded-3xl">
+            <i class="fa-solid fa-magnifying-glass text-3xl text-purple-400/60 mb-4"></i>
+            <p><span class="ru-text">Ничего не найдено — попробуйте изменить фильтр или запрос.</span><span class="ua-text">Нічого не знайдено — спробуйте змінити фільтр або запит.</span><span class="en-text">Nothing found — try another filter or query.</span></p>
+        </div>
+    </section>
+
+    <section class="px-6 max-w-7xl mx-auto pb-24 relative z-10">
+        <div class="grid md:grid-cols-2 gap-6" data-aos="fade-up">
+            <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(59, 130, 246, 0.1));">
+                <div class="bento-content w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center text-blue-400 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-telegram"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">Telegram-канал R4marketing</span><span class="ua-text">Telegram-канал R4marketing</span><span class="en-text">R4marketing on Telegram</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Новые статьи, видео и заметки по R — первыми.</span><span class="ua-text">Нові статті, відео та нотатки з R — першими.</span><span class="en-text">New articles, videos and R notes — first.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-blue-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+            <a href="https://www.youtube.com/R4marketing/?sub_confirmation=1" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(239, 68, 68, 0.1));">
+                <div class="bento-content w-16 h-16 bg-red-500/20 rounded-2xl flex items-center justify-center text-red-500 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-youtube"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">YouTube-канал R4marketing</span><span class="ua-text">YouTube-канал R4marketing</span><span class="en-text">R4marketing on YouTube</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Видеоуроки по R, аналитике и AI-инструментам.</span><span class="ua-text">Відеоуроки з R, аналітики та AI-інструментів.</span><span class="en-text">Video lessons on R, analytics and AI tools.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-red-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/5 bg-slate-950/80 backdrop-blur-md pt-20 pb-10 text-center relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-3xl font-extrabold mb-10 outfit-font"><span class="ru-text">Следите за обновлениями в R4marketing</span><span class="ua-text">Стежте за оновленнями в R4marketing</span><span class="en-text">Follow R4marketing updates</span></h2>
+            <div class="flex justify-center gap-8 mb-16">
+                <a href="https://t.me/R4marketing" class="w-16 h-16 rounded-3xl bg-blue-500/10 flex items-center justify-center text-blue-400 text-3xl hover:bg-blue-500 hover:text-white transition-all transform hover:scale-110 hover:-translate-y-2 border border-blue-500/20 shadow-lg" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                <a href="https://www.youtube.com/R4marketing" class="w-16 h-16 rounded-3xl bg-red-500/10 flex items-center justify-center text-red-500 text-3xl hover:bg-red-500 hover:text-white transition-all transform hover:scale-110 hover:-translate-y-2 border border-red-500/20 shadow-lg" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                <a href="https://habr.com/ru/users/selesnow/" class="w-16 h-16 rounded-3xl bg-slate-700/30 flex items-center justify-center text-white text-3xl hover:bg-slate-600 transition-all transform hover:scale-110 hover:-translate-y-2 border border-slate-600/50 shadow-lg" aria-label="Habr"><i class="fa-solid fa-h"></i></a>
+            </div>
+            <div class="mb-6"><a href="../" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-400 hover:text-white transition-colors outfit-font"><i class="fa-solid fa-house text-purple-400/80 text-xs"></i> ALEXEY-SELEZNEV<span class="text-purple-500 -ml-2">.pro</span></a></div>
+            <nav class="flex flex-wrap justify-center gap-x-8 gap-y-3 mb-12 text-sm font-semibold text-slate-400 outfit-font" aria-label="Site pages">
+                <a href="../courses/" class="flex items-center gap-2 hover:text-white transition-colors"><i class="fa-solid fa-graduation-cap text-purple-400/80 text-xs"></i> <span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a>
+                <a href="../videos/" class="flex items-center gap-2 hover:text-white transition-colors"><i class="fa-solid fa-circle-play text-purple-400/80 text-xs"></i> <span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a>
+                <a href="../talks/" class="flex items-center gap-2 hover:text-white transition-colors"><i class="fa-solid fa-microphone-lines text-purple-400/80 text-xs"></i> <span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a>
+                <a href="../articles/" class="flex items-center gap-2 hover:text-white transition-colors"><i class="fa-solid fa-pen-nib text-purple-400/80 text-xs"></i> <span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a>
+                <a href="../interviews/" class="flex items-center gap-2 hover:text-white transition-colors"><i class="fa-regular fa-newspaper text-purple-400/80 text-xs"></i> <span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a>
+            </nav>
+            <p class="text-slate-500 text-sm font-mono tracking-widest uppercase">© 2026 Alexey Seleznev. Modernized Vision.</p>
+        </div>
+    </footer>
+
+    <!-- VIDEO MODAL (CINEMA LIGHTBOX) -->
+    <div id="videoModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-3 sm:p-6 md:p-10 bg-slate-950/90 backdrop-blur-xl transition-opacity duration-300 opacity-0" onclick="if (event.target.id === 'videoModal') closeVideoModal()">
+        <div class="relative w-full max-w-5xl bg-slate-900 rounded-2xl md:rounded-3xl border border-white/10 overflow-hidden shadow-2xl flex flex-col transform transition-transform duration-300 scale-95" id="videoModalContent">
+            <div class="flex items-center justify-between p-4 md:px-6 md:py-4 border-b border-white/10 bg-slate-950/80">
+                <div id="videoModalTitle" class="text-sm md:text-base font-bold text-white truncate max-w-[85%] outfit-font"></div>
+                <button onclick="closeVideoModal()" aria-label="Close video" class="w-10 h-10 rounded-full bg-white/5 hover:bg-white/15 text-slate-300 hover:text-white flex items-center justify-center transition-colors">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div class="relative w-full pb-[56.25%] bg-black">
+                <iframe id="videoModalIframe" class="absolute inset-0 w-full h-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script src="../assets/site.js"></script>
+</body>
+</html>

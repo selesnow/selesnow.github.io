@@ -1,0 +1,112 @@
+[
+  {
+    "yt": "EnImByySQEE", "date": "2023-09", "event": "Kazakhstan Sociology Lab", "cat": "conference", "kind": {"ru": "Воркшоп", "ua": "Воркшоп", "en": "Workshop"},
+    "title": {"ru": "Анализ показателя качества ключевых слов в Google Ads с помощью пакета rgoogleads", "ua": "Аналіз показника якості ключових слів у Google Ads за допомогою пакета rgoogleads", "en": "Analyzing Google Ads keyword Quality Score with the rgoogleads package"},
+    "desc": {"ru": "С нуля проходим авторизацию в Google Ads API, запрашиваем отчёты и анализируем показатель качества ключевых слов рекламного аккаунта с помощью R.", "ua": "З нуля проходимо авторизацію в Google Ads API, запитуємо звіти та аналізуємо показник якості ключових слів рекламного акаунта за допомогою R.", "en": "From scratch: authorizing in the Google Ads API, requesting reports and analyzing the account's keyword Quality Score with R."}
+  },
+  {
+    "yt": "wtXVwOBo518", "date": "2021-07", "event": "8P", "cat": "conference", "kind": {"ru": "Доклад", "ua": "Доповідь", "en": "Talk"},
+    "title": {"ru": "Зачем интернет-маркетологу понимать, что такое API. Разбираем устройство API Google Ads", "ua": "Навіщо інтернет-маркетологу розуміти, що таке API. Розбираємо устрій API Google Ads", "en": "Why marketers should understand APIs: inside the Google Ads API"},
+    "desc": {"ru": "Как навыки программирования облегчают работу маркетолога, как устроен Google Ads API, переход с AdWords API и возможности нового пакета rgoogleads.", "ua": "Як навички програмування полегшують роботу маркетолога, як влаштований Google Ads API, перехід з AdWords API та можливості нового пакета rgoogleads.", "en": "How coding skills make a marketer's life easier, how the Google Ads API works, migrating from the AdWords API, and the new rgoogleads package."}
+  },
+  {
+    "yt": "uAF3YmjRTqU", "date": "2020-12", "event": "Excel & Power BI Conf", "cat": "conference", "kind": {"ru": "Доклад", "ua": "Доповідь", "en": "Talk"},
+    "title": {"ru": "Как через R-коннектор получить данные из ВКонтакте в Power BI", "ua": "Як через R-конектор отримати дані з ВКонтакте в Power BI", "en": "Loading VK data into Power BI via the R connector"},
+    "desc": {"ru": "Все способы применения R внутри Power BI: R-коннектор для загрузки данных из API, R-скрипты в Power Query и визуальный элемент R.", "ua": "Усі способи застосування R всередині Power BI: R-конектор для завантаження даних з API, R-скрипти в Power Query та візуальний елемент R.", "en": "Every way to use R inside Power BI: the R connector for API data, R scripts in Power Query and the R visual."}
+  },
+  {
+    "yt": "bbYC-uq250A", "date": "2020-11", "event": "Product Star Conference", "cat": "conference", "kind": {"ru": "Доклад", "ua": "Доповідь", "en": "Talk"},
+    "title": {"ru": "Учим язык R на примере SQL-запросов", "ua": "Вивчаємо мову R на прикладі SQL-запитів", "en": "Learning R through SQL queries"},
+    "desc": {"ru": "Быстрый вход в R для тех, кто уже знает SQL: основные операции манипуляции данными в dplyr через аналогии с привычными SQL-запросами.", "ua": "Швидкий вхід у R для тих, хто вже знає SQL: основні операції маніпуляції даними в dplyr через аналогії зі звичними SQL-запитами.", "en": "A fast start in R for SQL users: core dplyr data-manipulation verbs explained through familiar SQL queries."}
+  },
+  {
+    "yt": "QrTCa4wLWjI", "date": "2020-08", "event": "ZM CONF", "cat": "conference", "kind": {"ru": "Доклад", "ua": "Доповідь", "en": "Talk"},
+    "title": {"ru": "Разработка Telegram-бота для получения данных из Яндекс.Метрики", "ua": "Розробка Telegram-бота для отримання даних з Яндекс.Метрики", "en": "Building a Telegram bot that reports Yandex.Metrica data"},
+    "desc": {"ru": "Создаём бота, запрашиваем данные из Метрики, строим график, отправляем сообщение из R в Telegram и ставим бота на расписание.", "ua": "Створюємо бота, запитуємо дані з Метрики, будуємо графік, надсилаємо повідомлення з R у Telegram і ставимо бота на розклад.", "en": "Create a bot, query Metrica, build a chart, send messages from R to Telegram and run the bot on a schedule."}
+  },
+  {
+    "yt": "p2D_iLZ1f-8", "date": "2020-07", "event": "8P Online Edition", "cat": "conference", "kind": {"ru": "Воркшоп", "ua": "Воркшоп", "en": "Workshop"},
+    "title": {"ru": "Как работать с API Google Analytics на языке R (googleAnalyticsR)", "ua": "Як працювати з API Google Analytics мовою R (googleAnalyticsR)", "en": "Working with the Google Analytics API in R (googleAnalyticsR)"},
+    "desc": {"ru": "Почему аналитики уходят от интерфейса GA к API и как с помощью пакета googleAnalyticsR получать и обрабатывать данные Google Analytics.", "ua": "Чому аналітики переходять від інтерфейсу GA до API та як за допомогою пакета googleAnalyticsR отримувати й обробляти дані Google Analytics.", "en": "Why analysts move from the GA interface to its API, and how to pull and process Google Analytics data with googleAnalyticsR."}
+  },
+  {
+    "yt": "de1QW80FsiA", "date": "2019-09", "event": "Analyze! Lviv", "cat": "conference", "kind": {"ru": "Доклад", "ua": "Доповідь", "en": "Talk"},
+    "title": {"ru": "Как работать с Facebook Marketing API на языке R", "ua": "Як працювати з Facebook Marketing API мовою R", "en": "Working with the Facebook Marketing API in R"},
+    "desc": {"ru": "Пакет rfacebookstat: авторизация, загрузка объектов и статистики рекламного кабинета, передача расходов в Google Analytics и запись данных в СУБД.", "ua": "Пакет rfacebookstat: авторизація, завантаження об'єктів і статистики рекламного кабінету, передача витрат у Google Analytics і запис даних у СУБД.", "en": "The rfacebookstat package: authorization, loading ad-account objects and stats, sending costs to Google Analytics and storing data in a database."}
+  },
+  {
+    "yt": "fLP0gbsYF1k", "date": "2019-04", "event": "GoAnalytics", "cat": "conference", "kind": {"ru": "Доклад", "ua": "Доповідь", "en": "Talk"},
+    "title": {"ru": "Как информационные дайджесты помогают контролировать работу десятков маркетологов по сотням проектов", "ua": "Як інформаційні дайджести допомагають контролювати роботу десятків маркетологів на сотнях проєктів", "en": "How information digests help oversee dozens of marketers across hundreds of projects"},
+    "desc": {"ru": "Почему дайджесты, а не Power BI: дайджест аномалий трафика, показателя качества Google Ads и временных затрат по проектам — и инструменты для их разработки.", "ua": "Чому дайджести, а не Power BI: дайджест аномалій трафіку, показника якості Google Ads і часових витрат за проєктами — та інструменти для їх розробки.", "en": "Why digests instead of Power BI: traffic-anomaly, Google Ads Quality Score and time-tracking digests, plus the tools used to build them."}
+  },
+  {
+    "yt": "Ju98kWnec14", "date": "2018-12", "event": "Lviv iCamp", "cat": "conference", "kind": {"ru": "Доклад", "ua": "Доповідь", "en": "Talk"},
+    "title": {"ru": "Три шага для построения отдела аналитики в компании", "ua": "Три кроки для побудови відділу аналітики в компанії", "en": "Three steps to building an analytics department"},
+    "desc": {"ru": "Зачем нужен отдел аналитики, что такое BI, основные этапы внедрения BI-решений и три практических кейса Netpeak.", "ua": "Навіщо потрібен відділ аналітики, що таке BI, основні етапи впровадження BI-рішень і три практичні кейси Netpeak.", "en": "Why a company needs an analytics team, what BI is, the main stages of a BI rollout, and three Netpeak case studies."}
+  },
+  {
+    "yt": "G_JWto5eFpI", "date": "2018-11", "event": "Matemarketing", "cat": "conference", "kind": {"ru": "Доклад", "ua": "Доповідь", "en": "Talk"},
+    "title": {"ru": "Как маркетологу избавиться от рутины с помощью языка R и наконец-то заняться маркетингом", "ua": "Як маркетологу позбутися рутини за допомогою мови R і нарешті зайнятися маркетингом", "en": "How marketers can escape routine with R and finally do marketing"},
+    "desc": {"ru": "На что уходит время маркетолога, как устроены API и HTTP-запросы, и как R автоматизирует работу с API Яндекс.Директа и других рекламных систем.", "ua": "На що йде час маркетолога, як влаштовані API та HTTP-запити, і як R автоматизує роботу з API Яндекс.Директу та інших рекламних систем.", "en": "Where a marketer's time goes, how APIs and HTTP requests work, and how R automates work with Yandex.Direct and other ad platforms."}
+  },
+  {
+    "yt": "1X1EKt6tDHU", "date": "2018-11", "event": "Matemarketing", "cat": "conference", "kind": {"ru": "Мастер-класс", "ua": "Майстер-клас", "en": "Master class"},
+    "title": {"ru": "Как маркетологу избавиться от рутины с помощью R — мастер-класс", "ua": "Як маркетологу позбутися рутини за допомогою R — майстер-клас", "en": "Escaping marketing routine with R — master class"},
+    "desc": {"ru": "Практика в RStudio: установка пакетов, работа с API Яндекс.Директа (ryandexdirect), Google Ads и Яндекс.Метрики (rym).", "ua": "Практика в RStudio: встановлення пакетів, робота з API Яндекс.Директу (ryandexdirect), Google Ads та Яндекс.Метрики (rym).", "en": "Hands-on in RStudio: installing packages, working with the Yandex.Direct (ryandexdirect), Google Ads and Yandex.Metrica (rym) APIs."}
+  },
+  {
+    "url": "https://netpeak.ua/conference/390/", "date": "2018-05", "event": "Kyiv Data Spring", "cat": "conference", "kind": {"ru": "Доклад", "ua": "Доповідь", "en": "Talk"},
+    "title": {"ru": "Как построить отдел аналитики в крупной компании. Команда, задачи и KPI", "ua": "Як побудувати відділ аналітики у великій компанії. Команда, задачі та KPI", "en": "Building an analytics department in a large company: team, tasks and KPIs"},
+    "desc": {"ru": "Опыт Netpeak: из кого состоит команда аналитики, какие задачи она решает и как оценивать её эффективность. Видеозаписи нет — материалы на странице конференции.", "ua": "Досвід Netpeak: з кого складається команда аналітики, які задачі вона вирішує та як оцінювати її ефективність. Відеозапису немає — матеріали на сторінці конференції.", "en": "Netpeak's experience: who makes up an analytics team, what it does and how to measure it. No recording — materials are on the conference page."}
+  },
+  {
+    "yt": "wRlRd_b-qAs", "date": "2018-04", "event": "Analyze!", "cat": "conference", "kind": {"ru": "Доклад", "ua": "Доповідь", "en": "Talk"},
+    "title": {"ru": "Язык R в маркетинге и бизнесе", "ua": "Мова R у маркетингу та бізнесі", "en": "R in marketing and business"},
+    "desc": {"ru": "Что такое R, какие задачи бизнеса он решает — от статистики и ML до парсинга и визуализации, полезные пакеты, слабые стороны языка и как выучить его бесплатно.", "ua": "Що таке R, які задачі бізнесу він вирішує — від статистики та ML до парсингу й візуалізації, корисні пакети, слабкі сторони мови та як вивчити її безкоштовно.", "en": "What R is and which business tasks it solves — from statistics and ML to scraping and dataviz, useful packages, weak spots, and how to learn it for free."}
+  },
+  {
+    "yt": "L1ApUOea7Qc", "date": "2017-11", "event": "eCommerce 2017", "cat": "conference", "kind": {"ru": "Доклад", "ua": "Доповідь", "en": "Talk"},
+    "title": {"ru": "Как разобраться со своими данными, если ты не аналитик", "ua": "Як розібратися зі своїми даними, якщо ти не аналітик", "en": "Making sense of your data when you're not an analyst"},
+    "desc": {"ru": "Для владельцев бизнеса: из чего состоит аналитическая задача и как решать её связкой недорогих инструментов — база данных, R и Power BI. Кейсы OLX и блога Netpeak.", "ua": "Для власників бізнесу: з чого складається аналітична задача і як вирішувати її зв'язкою недорогих інструментів — база даних, R і Power BI. Кейси OLX та блогу Netpeak.", "en": "For business owners: what an analytics task consists of and how to solve it with an inexpensive stack — a database, R and Power BI. OLX and Netpeak blog cases."}
+  },
+  {
+    "yt": "pM8DQ0lLM6k", "date": "2017-04", "event": "Analyze!", "cat": "conference", "kind": {"ru": "Доклад", "ua": "Доповідь", "en": "Talk"},
+    "title": {"ru": "BI-решение для отдела контекстной рекламы", "ua": "BI-рішення для відділу контекстної реклами", "en": "A BI solution for a PPC department"},
+    "desc": {"ru": "Как Netpeak автоматизировал отчётность отдела контекстной рекламы: сбор данных из рекламных систем, хранение и визуализация в BI.", "ua": "Як Netpeak автоматизував звітність відділу контекстної реклами: збір даних з рекламних систем, зберігання та візуалізація в BI.", "en": "How Netpeak automated PPC reporting: collecting ad-platform data, storing it and visualizing it in BI."}
+  },
+  {
+    "yt": "zJyDxd4JGg0", "date": "2021-09", "event": "Yagla", "cat": "webinar", "kind": {"ru": "Воркшоп", "ua": "Воркшоп", "en": "Workshop"},
+    "title": {"ru": "Как работать с API Google Analytics 4 на языке R — воркшоп для новичков", "ua": "Як працювати з API Google Analytics 4 мовою R — воркшоп для новачків", "en": "Working with the Google Analytics 4 API in R — beginner workshop"},
+    "desc": {"ru": "Пошагово: авторизация в Google Analytics Data API и запрос отчётов GA4 с помощью пакета googleAnalyticsR.", "ua": "Покроково: авторизація в Google Analytics Data API та запит звітів GA4 за допомогою пакета googleAnalyticsR.", "en": "Step by step: authorizing in the Google Analytics Data API and querying GA4 reports with googleAnalyticsR."}
+  },
+  {
+    "yt": "I2KjERuZ3XY?start=3789", "date": "2020-07", "event": "ProductStar", "cat": "webinar", "kind": {"ru": "Вебинар", "ua": "Вебінар", "en": "Webinar"},
+    "title": {"ru": "Основы Python. Работа с библиотекой Pandas", "ua": "Основи Python. Робота з бібліотекою Pandas", "en": "Python basics: working with Pandas"},
+    "desc": {"ru": "Установка Anaconda, структуры данных Pandas, загрузка данных и основные преобразования, эквивалентные сводным таблицам Excel.", "ua": "Встановлення Anaconda, структури даних Pandas, завантаження даних і основні перетворення, еквівалентні зведеним таблицям Excel.", "en": "Installing Anaconda, Pandas data structures, loading data and core transformations equivalent to Excel pivot tables."}
+  },
+  {
+    "yt": "zWGocRhDumk", "date": "2020-04", "event": "EUSP R meetup", "cat": "webinar", "kind": {"ru": "Митап", "ua": "Мітап", "en": "Meetup"},
+    "title": {"ru": "R meetup: чем нас порадует dplyr 1.0.0", "ua": "R meetup: чим нас порадує dplyr 1.0.0", "en": "R meetup: what's new in dplyr 1.0.0"},
+    "desc": {"ru": "Митап Европейского университета в Санкт-Петербурге: обзор статей Хедли Викхема о нововведениях dplyr 1.0.0.", "ua": "Мітап Європейського університету в Санкт-Петербурзі: огляд статей Гедлі Вікхема про нововведення dplyr 1.0.0.", "en": "A European University at St. Petersburg meetup reviewing Hadley Wickham's posts on what's new in dplyr 1.0.0."}
+  },
+  {
+    "yt": "ESl3NR01IXI", "date": "2019-02", "event": "Netology", "cat": "webinar", "kind": {"ru": "Вебинар", "ua": "Вебінар", "en": "Webinar"},
+    "title": {"ru": "Сколько денег приносит ваш контент. Разбираемся с помощью Business Intelligence", "ua": "Скільки грошей приносить ваш контент. Розбираємося за допомогою Business Intelligence", "en": "How much money does your content make? Answering with Business Intelligence"},
+    "desc": {"ru": "Как оценить «продающесть» корпоративного блога: источники данных, метрики и BI-система, построенная для блога Netpeak.", "ua": "Як оцінити «продажність» корпоративного блогу: джерела даних, метрики та BI-система, побудована для блогу Netpeak.", "en": "Measuring how well a corporate blog sells: data sources, metrics and the BI system built for the Netpeak blog."}
+  },
+  {
+    "yt": "mUn2Uwsvy0U", "date": "2018-11", "event": "AutomationDay", "cat": "webinar", "kind": {"ru": "Онлайн-доклад", "ua": "Онлайн-доповідь", "en": "Online talk"},
+    "title": {"ru": "Как маркетологу избавиться от рутины с помощью языка R", "ua": "Як маркетологу позбутися рутини за допомогою мови R", "en": "Escaping marketing routine with R"},
+    "desc": {"ru": "Онлайн-конференция об автоматизации: что такое R и как работать с API Яндекс.Директа, Google Ads и Google Analytics.", "ua": "Онлайн-конференція про автоматизацію: що таке R і як працювати з API Яндекс.Директу, Google Ads та Google Analytics.", "en": "An online automation conference: what R is and how to work with the Yandex.Direct, Google Ads and Google Analytics APIs."}
+  },
+  {
+    "yt": "sCp2D6068es", "date": "2018-11", "event": "CyberMarketing", "cat": "webinar", "kind": {"ru": "Вебинар", "ua": "Вебінар", "en": "Webinar"},
+    "title": {"ru": "Как автоматизировать работу с данными Яндекс.Метрики с помощью R и пакета rym", "ua": "Як автоматизувати роботу з даними Яндекс.Метрики за допомогою R і пакета rym", "en": "Automating Yandex.Metrica data with R and the rym package"},
+    "desc": {"ru": "Какие API есть у Яндекс.Метрики, как работать с ними через пакет rym и как связать Метрику с Power BI для визуализации.", "ua": "Які API є в Яндекс.Метрики, як працювати з ними через пакет rym і як зв'язати Метрику з Power BI для візуалізації.", "en": "Yandex.Metrica's APIs, using them through the rym package, and connecting Metrica to Power BI for visualization."}
+  },
+  {
+    "yt": "Kh-wyU-VXRU", "date": "2018-11", "event": "WebPromoExperts", "cat": "webinar", "kind": {"ru": "Вебинар", "ua": "Вебінар", "en": "Webinar"},
+    "title": {"ru": "Как маркетологу избавиться от рутины с помощью языка R и наконец-то заняться маркетингом", "ua": "Як маркетологу позбутися рутини за допомогою мови R і нарешті зайнятися маркетингом", "en": "How marketers can escape routine with R and finally do marketing"},
+    "desc": {"ru": "Для маркетологов и руководителей: что такое R, API и пакеты, и как автоматизировать работу с Яндекс.Директом, Google Ads и Google Analytics.", "ua": "Для маркетологів і керівників: що таке R, API та пакети, і як автоматизувати роботу з Яндекс.Директом, Google Ads та Google Analytics.", "en": "For marketers and managers: what R, APIs and packages are, and how to automate work with Yandex.Direct, Google Ads and Google Analytics."}
+  }
+]

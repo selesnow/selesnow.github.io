@@ -1,0 +1,1819 @@
+[
+ {
+  "i": 145,
+  "title": "Google BigQuery: Динамический UPSERT с помощью EXECUTE IMMEDIATE",
+  "src": "Блог Алексея Селезнёва",
+  "y": 2022,
+  "m": 9,
+  "url": "https://alexeyseleznev.wordpress.com/2022/09/16/google-bigquery-динамический-upsert-с-помощью-execute-immediate/",
+  "img": "",
+  "desc": "Обычный паттерн обновления данных в BigQuery — добавление новых записей, даже если это означает дублирование данных. А затем обрабатывать дубликаты при чтении с помощью группировки или оконных функций, или удаление записей, и…",
+  "via": "",
+  "topics": [
+   "bq"
+  ]
+ },
+ {
+  "i": 143,
+  "title": "Бесплатный курс “Язык R для интернет маркетинга”",
+  "src": "Хабр",
+  "y": 2022,
+  "m": 6,
+  "url": "https://habr.com/ru/articles/669104/",
+  "img": "https://habrastorage.org/getpro/habr/upload_files/05d/c96/aa6/05dc96aa6e4faaa653c57827988e1d3b.png",
+  "desc": "Курс \"Язык R для интернет маркетинга\" был записан в 2018 году, с момента запуска, курс неоднократно дорабатывался и расширялся, тем не менее частично он утратил актуальность. Но он по прежнему будет...",
+  "via": "",
+  "topics": [
+   "r"
+  ]
+ },
+ {
+  "i": 144,
+  "title": "Оборачиваем API с помощью httr2",
+  "src": "Хабр",
+  "y": 2022,
+  "m": 6,
+  "url": "https://habr.com/ru/articles/665716/",
+  "img": "https://habrastorage.org/getpro/habr/upload_files/d0c/8b6/c49/d0c8b6c49b4c3588ef0cb67679ede23a.png",
+  "desc": "Пакет httr2 зачастую используется для разработки обёрток над каким нибудь API и предоставление её в виде R пакета, в котором каждая конечная точка API (то есть URL-адрес с параметрами) становится...",
+  "via": "",
+  "topics": [
+   "r"
+  ]
+ },
+ {
+  "i": 141,
+  "title": "Циклы и функционалы в языке R (бесплатный видео курс)",
+  "src": "Хабр",
+  "y": 2022,
+  "m": 3,
+  "url": "https://habr.com/ru/articles/651979/",
+  "img": "https://habrastorage.org/getpro/habr/upload_files/624/154/b9c/624154b9c5f278bf3e304dd4046d3e5a.png",
+  "desc": "Друзья, рад представить вам свой новый курс \"Циклы и функционалы в R\". Курс и все сопутствующие материалы к нему распространяются бесплатно, и являются общедоступными. Содержание Если вы интересуетесь...",
+  "via": "",
+  "topics": [
+   "r"
+  ]
+ },
+ {
+  "i": 142,
+  "title": "Ускоряем dplyr: бекенды dtplyr, multidplyr и dbplyr (видео урок + конспект)",
+  "src": "Хабр",
+  "y": 2022,
+  "m": 3,
+  "url": "https://habr.com/ru/articles/665680/",
+  "img": "https://habrastorage.org/getpro/habr/upload_files/e49/753/280/e49753280f7708ea4a2a5101b4d6e965.png",
+  "desc": "dplyr один из наиболее популярных пакетов для языка R, основным преимуществом которого является удобочитаемый и понятный синтаксис. Из недостатков данного пакета можно отметить, что при работе с...",
+  "via": "",
+  "topics": [
+   "r"
+  ]
+ },
+ {
+  "i": 140,
+  "title": "Работа с API на языке R, введение в пакет httr2",
+  "src": "Хабр",
+  "y": 2022,
+  "m": 2,
+  "url": "https://habr.com/ru/articles/594855/",
+  "img": "https://habrastorage.org/getpro/habr/upload_files/c66/28d/b0c/c6628db0c5f4502926aa5f77081896ac.png",
+  "desc": "Цель этой статьи - показать вам основы httr2 . httr2 - переосмысленная реализация пакета httr , т.е. интерфейс для работы с HTTP запросами на языке R. Из статьи вы узнаете, как создавать и...",
+  "via": "",
+  "topics": [
+   "r"
+  ]
+ },
+ {
+  "i": 139,
+  "title": "Программирование с dplyr",
+  "src": "Хабр",
+  "y": 2022,
+  "m": 1,
+  "url": "https://habr.com/ru/articles/593367/",
+  "img": "https://habrastorage.org/getpro/habr/upload_files/d25/833/12e/d2583312ea9b9e3d7334443e21140fb5.png",
+  "desc": "Большинство глаголов dplyr так или иначе используют аккуратную оценку ( tidy evaluation ). Tidy evaluation - это особый тип нестандартной оценки, используемый во всём tidyverse . В dplyr есть две...",
+  "via": "",
+  "topics": [
+   "r"
+  ]
+ },
+ {
+  "i": 138,
+  "title": "Заметки по языку R. Часть 2: Используем синтаксический сахар и приёмы Python в R",
+  "src": "Хабр",
+  "y": 2021,
+  "m": 12,
+  "url": "https://habr.com/ru/articles/587480/",
+  "img": "https://habrastorage.org/getpro/habr/upload_files/d47/b5e/bcd/d47b5ebcdfd565a1891c8d3216475963.png",
+  "desc": "Заметки по языку R - это серия статей, в которых я собираю наиболее интересные публикации канала R4marketing из рубрики \"#заметки_по_R\" . В прошлый раз мы говорили о нетипичных визуализациях,...",
+  "via": "",
+  "topics": [
+   "r",
+   "python"
+  ]
+ },
+ {
+  "i": 137,
+  "title": "Заметки по языку R. Часть 1: Построение нетипичных диаграмм, и подписи данных в ggplot2",
+  "src": "Хабр",
+  "y": 2021,
+  "m": 11,
+  "url": "https://habr.com/ru/articles/577784/",
+  "img": "https://habrastorage.org/getpro/habr/upload_files/a7a/efd/6b0/a7aefd6b0908a0bfba013be22b6f482c.png",
+  "desc": "В ноябре 2018 года я запустил телеграм канал R4marketing посвящённый языку R. Публикации канала разделены по рубрикам, одна из таких рубрик - \"Заметки по R\" . В неё входят небольшие заметки, с...",
+  "via": "",
+  "topics": [
+   "r"
+  ]
+ },
+ {
+  "i": 136,
+  "title": "Как работать с Ringostat API на языке R",
+  "src": "Блог Ringostat",
+  "y": 2021,
+  "m": 10,
+  "url": "https://blog.ringostat.com/ru/kak-rabotat-s-ringostat-api-na-yazyke-r/",
+  "img": "",
+  "desc": "Как с помощью языка R и пакета ringostat загружать данные о звонках, статистику и справочную информацию из Ringostat API для сквозной аналитики.",
+  "via": "",
+  "topics": [
+   "r"
+  ]
+ },
+ {
+  "i": 135,
+  "title": "Обзор R пакетов для интернет маркетинга, часть 2",
+  "src": "Хабр",
+  "y": 2021,
+  "m": 9,
+  "url": "https://habr.com/ru/articles/575744/",
+  "img": "https://habrastorage.org/getpro/habr/upload_files/293/923/618/293923618469e2e189fdef9b2dad0938.png",
+  "desc": "Первой моей публикацией на Хабре была \"Обзор R пакетов для интернет маркетинга, часть 1\" , с тех пор прошло почти 3 года. За это время какие-то пакеты стали не актуальны, какие-то сильно изменились и...",
+  "via": "",
+  "topics": [
+   "r"
+  ]
+ },
+ {
+  "i": 134,
+  "title": "Миграция с Google AdWords API на Google Ads API: подробный мануал",
+  "src": "Netpeak Journal",
+  "y": 2021,
+  "m": 7,
+  "url": "https://netpeak.net/ru/blog/migratsiya-s-google-adwords-api-na-google-ads-api-podrobnyy-manual/",
+  "img": "https://netpeak.net/blog/facebook_c948265709e4e0c59ae7ec4bcf73206b78650a0f.png?v=1643187950",
+  "desc": "Как и зачем мигрировать со старой на новую версию API на языке R. С пакета RAdwords на rgoogleads. Руководство от Алексея Селезнева. Читать дальше!",
+  "via": "",
+  "topics": [
+   "ppc"
+  ]
+ },
+ {
+  "i": 133,
+  "title": "Вращение таблиц в Google BigQuery (PIVOT)",
+  "src": "Хабр",
+  "y": 2021,
+  "m": 6,
+  "url": "https://habr.com/ru/articles/551368/",
+  "img": "https://habrastorage.org/getpro/habr/upload_files/967/7dd/26e/9677dd26e6f119d6c0d8d8352d8a37c5.png",
+  "desc": "Сводные таблицы в Excel являются чрезвычайно мощным инструментом, поскольку позволяют быстро изменять форму данных в пару кликов мышки. Например, вам необходимо построить отчёт продаж по магазинам за...",
+  "via": "",
+  "topics": [
+   "bq"
+  ]
+ },
+ {
+  "i": 132,
+  "title": "3 видеоурока по работе с API «ВКонтакте» на языке R",
+  "src": "ppc.world",
+  "y": 2021,
+  "m": 5,
+  "url": "https://www.youtube.com/playlist?list=PLD2LDq8edf4pQcy0zMmkTlk-o_Z6nRm5N",
+  "img": "https://i.ytimg.com/vi/49-HTLOPSnU/hqdefault.jpg",
+  "desc": "Серия видеоуроков по пакету rvkstat: авторизация в API ВКонтакте, статистика сообществ и рекламного кабинета с помощью языка R.",
+  "via": "youtube",
+  "topics": [
+   "r",
+   "ppc"
+  ]
+ },
+ {
+  "i": 131,
+  "title": "Как использовать конструкцию SELECT FROM UNNEST для анализа параметров в повторяющихся записях Google BigQuery",
+  "src": "Хабр",
+  "y": 2021,
+  "m": 4,
+  "url": "https://habr.com/ru/articles/537570/",
+  "img": "https://habrastorage.org/getpro/habr/upload_files/dbd/fb5/3cb/dbdfb53cbcb39f05c9ddff7554014c0f.gif",
+  "desc": "В предыдущей статье я показал вам, как использовать функцию UNNEST в BigQuery для анализа параметров событий в данных Google Analytics для Firebase. Мы использовали функцию UNNEST , потому что обычно...",
+  "via": "",
+  "topics": [
+   "bq"
+  ]
+ },
+ {
+  "i": 130,
+  "title": "Как использовать функцию UNNEST в Google BigQuery для анализа параметров событий Google Analytics",
+  "src": "Хабр",
+  "y": 2021,
+  "m": 1,
+  "url": "https://habr.com/ru/articles/532690/",
+  "img": "https://habrastorage.org/getpro/habr/upload_files/496/972/c02/496972c02b8e554cd1234cee76dc4f13.png",
+  "desc": "В этой статье я расскажу о том, как использовать функцию UNNEST в Google BigQuery для анализа параметров событий и свойств пользователей, которые вы получаете вместе с данными Google Analytics. От...",
+  "via": "",
+  "topics": [
+   "bq",
+   "ga"
+  ]
+ },
+ {
+  "i": 129,
+  "title": "Логирование выполнения скриптов на языке R, пакет lgr",
+  "src": "Хабр",
+  "y": 2020,
+  "m": 12,
+  "url": "https://habr.com/ru/articles/529118/",
+  "img": "https://habrastorage.org/webt/nd/he/1s/ndhe1suehacc95vwrxok6ndlmle.png",
+  "desc": "При проведении разового анализа логирование вам не понадобится. Но в случае разработки скриптов, которые будут по расписанию запускаться в пакетном режиме, логирование упростит вам процесс определения...",
+  "via": "",
+  "topics": [
+   "r"
+  ]
+ },
+ {
+  "i": 128,
+  "title": "ООП в языке R (часть 2): R6 классы",
+  "src": "Хабр",
+  "y": 2020,
+  "m": 11,
+  "url": "https://habr.com/ru/articles/521310/",
+  "img": "https://habrastorage.org/webt/bo/ct/yv/boctyvkro_bo7tyi4n3ckrka4eu.png",
+  "desc": "В прошлой публикации мы разобрали S3 классы, которые являются наиболее популярными в языке R. Теперь разберёмся с R6 классами, которые максимально приближённые к классическому объектно...",
+  "via": "",
+  "topics": [
+   "r"
+  ]
+ },
+ {
+  "i": 126,
+  "title": "Пишем telegram бота на языке R (часть 5): Управление правами пользователей бота",
+  "src": "Хабр",
+  "y": 2020,
+  "m": 10,
+  "url": "https://habr.com/ru/articles/520208/",
+  "img": "https://habrastorage.org/webt/zx/1m/k2/zx1mk2dp30i1bh61-bf4iodlrra.png",
+  "desc": "В предыдущих статьях мы достаточно подробно разобрали тему ботостроения, от отправки первого сообщения до программирования логического диалога с ботом. Это последняя статья из данной серии, в которой...",
+  "via": "",
+  "topics": [
+   "r",
+   "bot"
+  ]
+ },
+ {
+  "i": 127,
+  "title": "Как загружать данные о расходах, офлайн-конверсиях и звонках в Яндекс Метрику",
+  "src": "Блог Алексея Селезнёва",
+  "y": 2020,
+  "m": 10,
+  "url": "https://alexeyseleznev.wordpress.com/2021/09/01/как-загружать-данные-о-расходах-офлай/",
+  "img": "https://lh5.googleusercontent.com/Hyhk67ZdG9FiaArScfJ6b2Bx9HIW0lO2T2udreqSohkueMSnu7v0hfh2CyqQn8GkJ00_bWZ9Hc2rLBtIH554KKxX6ON6TnVwR4Qe69NdeqZyMA758UDCRMGPf555wdPLhORZSc2u=s0",
+  "desc": "Весной 2020 года в Яндекс Метрике появился отчёт «Источники, расходы и ROI». Отчет автоматически посчитает ROI по всем рекламным источникам, при одном условии: вам необходимо передать в Метрику всю информацию для расчетов…",
+  "via": "blog",
+  "topics": [
+   "ga"
+  ]
+ },
+ {
+  "i": 121,
+  "title": "Пишем telegram бота на языке R (часть 3): Как добавить боту поддержку клавиатуры",
+  "src": "Хабр",
+  "y": 2020,
+  "m": 9,
+  "url": "https://habr.com/ru/articles/516908/",
+  "img": "https://habrastorage.org/webt/xv/xz/t0/xvxzt04r_e6svczshzxmppuilz8.png",
+  "desc": "Это третья статья из серии \"Пишем telegram бота на языке R\". В предыдущих публикациях мы научились создавать телеграм бота, отправлять через него сообщения, добавили боту команды и фильтры...",
+  "via": "",
+  "topics": [
+   "r",
+   "bot"
+  ]
+ },
+ {
+  "i": 122,
+  "title": "Пишем telegram бота на языке R (часть 4): Построение последовательного, логического диалога с ботом",
+  "src": "Хабр",
+  "y": 2020,
+  "m": 9,
+  "url": "https://habr.com/ru/articles/518470/",
+  "img": "https://habrastorage.org/webt/m5/vv/89/m5vv894lc6u0bafbsun9-amuvoe.png",
+  "desc": "Если вы уже ознакомились с предыдущими тремя статьями из данной серии, то вы уже умеете писать полноценных telegram ботов с клавиатурой. В этой статье мы с вами научимся писать бота, который будет...",
+  "via": "",
+  "topics": [
+   "r",
+   "bot"
+  ]
+ },
+ {
+  "i": 123,
+  "title": "Сколько стоит клик в Google Ads в Украине: исследование",
+  "src": "ain.ua",
+  "y": 2020,
+  "m": 9,
+  "url": "https://ain.ua/ru/2020/09/23/skolko-stoit-klik-v-google-ads-v-ukraine-issledovanie/",
+  "img": "https://cdn.ain.ua/ua/og-images/Hc3Vh45TGQMEaxZFNdW7w4ddzS0gy3VYLYej3rMM.jpg",
+  "desc": "С 2016 года Алексей Селезнев, руководитель отдела аналитики агентства интернет-маркетинга Netpeak, проводит ежеквартальные исследования стоимости клика в Украине. В этом материале он делится данными по цене клика и доле…",
+  "via": "",
+  "topics": [
+   "research"
+  ]
+ },
+ {
+  "i": 125,
+  "title": "5 видеоуроков по работе с API Яндекс.Директа с помощью языка R",
+  "src": "ppc.world",
+  "y": 2020,
+  "m": 9,
+  "url": "https://www.youtube.com/playlist?list=PLD2LDq8edf4oUo0L9Kw77ZXf0KcV1hu67",
+  "img": "https://i.ytimg.com/vi/hbUXttDFKNE/hqdefault.jpg",
+  "desc": "Серия видеоуроков по пакету ryandexdirect: авторизация в API Яндекс.Директа, прогноз бюджета и WordStat, загрузка статистики и расходов в Google Analytics, уведомления о балансе.",
+  "via": "youtube",
+  "topics": [
+   "r",
+   "ppc"
+  ]
+ },
+ {
+  "i": 119,
+  "title": "Пишем telegram бота на языке R (часть 1): Создаём бота, и отправляем с его помощью сообщения в telegram",
+  "src": "Хабр",
+  "y": 2020,
+  "m": 8,
+  "url": "https://habr.com/ru/articles/511222/",
+  "img": "https://habrastorage.org/webt/mz/ef/op/mzefopqcvltbomddoh8pmx45hzc.png",
+  "desc": "Аудитория telegram ежедневно растёт с геометрической прогрессией, этому способствует удобство мессенджера, наличие каналов, чатов, и конечно возможность создавать ботов. Боты могут использоваться в...",
+  "via": "",
+  "topics": [
+   "r",
+   "bot"
+  ]
+ },
+ {
+  "i": 120,
+  "title": "Пишем telegram бота на языке R (часть 2): Добавляем боту поддержку команд и фильтры сообщений",
+  "src": "Хабр",
+  "y": 2020,
+  "m": 8,
+  "url": "https://habr.com/ru/articles/515148/",
+  "img": "https://habrastorage.org/webt/qu/zh/a1/quzha12axnh68qnfap4yo1jbevm.png",
+  "desc": "В предыдущей публикации мы разобрались как создать бота, инициализировали экземпляр класса Bot и ознакомились с методами отправки сообщений с его помощью. В этой статье я продолжаю данную тему,...",
+  "via": "",
+  "topics": [
+   "r",
+   "bot"
+  ]
+ },
+ {
+  "i": 118,
+  "title": "9 видеоуроков по работе с Facebook Marketing API на языке R",
+  "src": "ppc.world",
+  "y": 2020,
+  "m": 7,
+  "url": "https://www.youtube.com/playlist?list=PLD2LDq8edf4pItOb-vZTG5AXZK2niJ8_R",
+  "img": "https://i.ytimg.com/vi/SgcxDqZ-5Qg/hqdefault.jpg",
+  "desc": "Серия видеоуроков по пакету rfacebookstat: авторизация в Facebook Marketing API, загрузка объектов рекламного кабинета, статистики и конверсий, выгрузка расходов в Google Analytics и Power BI.",
+  "via": "youtube",
+  "topics": [
+   "r",
+   "ppc"
+  ]
+ },
+ {
+  "i": 113,
+  "title": "dplyr 1.0.0 опубликован на CRAN: Видео обзор новых возможностей и произошедших в нём изменений",
+  "src": "Хабр",
+  "y": 2020,
+  "m": 6,
+  "url": "https://habr.com/ru/articles/501028/",
+  "img": "https://habrastorage.org/webt/ej/ta/wj/ejtawj7lbl16cxb7bntmw9swwpe.jpeg",
+  "desc": "dplyr — R пакет, реализующий грамматику манипуляции данными, состоящую из набора согласованных между собой глаголов, которые помогут вам решить наиболее распространенные проблемы манипулирования...",
+  "via": "",
+  "topics": [
+   "r"
+  ]
+ },
+ {
+  "i": 114,
+  "title": "5 видеороликов о пакете dplyr языка R",
+  "src": "proglib",
+  "y": 2020,
+  "m": 6,
+  "url": "https://proglib.io/p/5-videorolikov-o-pakete-dplyr-yazyka-r-2020-06-09",
+  "img": "https://media.proglib.io/posts/2020/06/08/93e90a60511d8d5cf35230a43a27e5f4.jpg",
+  "desc": "dplyr – популярный пакет для обработки данных в языке R. Небольшой плейлист из 10-15-минутных роликов познакомит с основным функциями пакета dplyr с учётом последних нововведений версии 1.0.0.",
+  "via": "",
+  "topics": [
+   "r"
+  ]
+ },
+ {
+  "i": 115,
+  "title": "Сколько стоил клик в Google Ads в России в первом квартале 2020 года",
+  "src": "searchengines.ru",
+  "y": 2020,
+  "m": 6,
+  "url": "https://searchengines.guru/ru/articles/2047389",
+  "img": "https://d.searchengines.guru/20/52/google_feed_specs_stock_hd.jpg",
+  "desc": "Свежие данные по стоимости клика в разрезе тематик",
+  "via": "",
+  "topics": [
+   "research"
+  ]
+ },
+ {
+  "i": 116,
+  "title": "Сколько стоил клик в Яндекс.Директе в России в первом квартале 2020 года",
+  "src": "searchengines.ru",
+  "y": 2020,
+  "m": 6,
+  "url": "https://searchengines.guru/ru/articles/2047463",
+  "img": "https://d.searchengines.guru/20/37/Direct_media_hd.jpg",
+  "desc": "Исследование агентства интернет-маркетинга Netpeak",
+  "via": "",
+  "topics": [
+   "research"
+  ]
+ },
+ {
+  "i": 117,
+  "title": "Сколько стоит клик: Google Ads в Казахстане в I кв 2020",
+  "src": "profit.kz",
+  "y": 2020,
+  "m": 6,
+  "url": "https://profit.kz/news/58439/Skolko-stoit-klik-Google-Ads-v-Kazahstane-v-I-kv-2020/",
+  "img": "https://profit.kz/Content/Images/ClickCostKazakhstanGoogleAds.jpg",
+  "desc": "Самыми дорогими регионами для поискового продвижения стали Алматинская и Карагандинская области.",
+  "via": "",
+  "topics": [
+   "research"
+  ]
+ },
+ {
+  "i": 111,
+  "title": "Язык R для пользователей Excel (бесплатный видео курс)",
+  "src": "Хабр",
+  "y": 2020,
+  "m": 5,
+  "url": "https://habr.com/ru/articles/495438/",
+  "img": "https://habrastorage.org/webt/ep/_j/kv/ep_jkvadiwc5mpynu8yrfqgrdek.jpeg",
+  "desc": "В связи с карантином многие сейчас львиную долю времени проводят дома, и это время можно, и даже нужно провести с пользой. В начале карантина я решил довести до ума некоторые проекты начатые несколько...",
+  "via": "",
+  "topics": [
+   "r",
+   "excel"
+  ]
+ },
+ {
+  "i": 112,
+  "title": "Исследование: контекстная реклама дешевеет и перемещается на смартфоны",
+  "src": "internetua.com",
+  "y": 2020,
+  "m": 5,
+  "url": "http://internetua.com/internet-biznes-vynujden-optimizirovat-mobilnye-versii",
+  "img": "",
+  "desc": "Эксперты отмечают, что независимо от региона, мобильный трафик составляет более 75% от всего закупаемого трафика в Google Украины.",
+  "via": "",
+  "topics": [
+   "research"
+  ]
+ },
+ {
+  "i": 108,
+  "title": "Бесплатный видеокурс «Язык R для пользователей Excel»",
+  "src": "proglib",
+  "y": 2020,
+  "m": 4,
+  "url": "https://proglib.io/p/besplatnyy-videokurs-yazyk-r-dlya-polzovateley-excel-2020-04-14",
+  "img": "https://media.proglib.io/posts/2020/04/14/9adb79fa277875cd4403842805b4b108.PNG",
+  "desc": "Курс по языку R для пользователей Microsoft Excel: 12 уроков об архитектуре tidyverse и входящих в неё пакетах: readr, vroom, dplyr, tidyr и ggplot2.",
+  "via": "",
+  "topics": [
+   "r",
+   "excel"
+  ]
+ },
+ {
+  "i": 109,
+  "title": "Сколько стоил клик в Google Ads в Украине в первом квартале 2020 года — анализ Netpeak",
+  "src": "delo.ua",
+  "y": 2020,
+  "m": 4,
+  "url": "https://delo.ua/business/skolko-stoil-klik-v-google-ads-v-ukraine-v-perv-367949/",
+  "img": "https://delo.ua/static/content/thumbs/1200x630/9/54/sb52ns---c1200x630x50px50p--6f0cff95bb705fb4e179e114875fc549.jpg",
+  "desc": "Самым дешевым регионом для контекстной рекламы остается Восток Украины, а \"Доски объявлений\" и \"Туризм\" — самые дешевые тематики. При этом мобильный трафик независимо от региона составляет 75% от всего закупаемого трафика",
+  "via": "",
+  "topics": [
+   "research"
+  ]
+ },
+ {
+  "i": 110,
+  "title": "Python: Как создать оформленную HTML таблицу из pandas DataFrame",
+  "src": "Блог Алексея Селезнёва",
+  "y": 2020,
+  "m": 4,
+  "url": "https://alexeyseleznev.wordpress.com/2020/04/30/python-как-создать-оформленную-html-таблицу-из-pa/",
+  "img": "https://alexeyseleznev.wordpress.com/wp-content/uploads/2020/04/analytics_binary_code_network_digital-transformation-100777428-large1.jpg",
+  "desc": "Как преобразовать pandas DataFrame в HTML таблицу для отправки электронном письме.",
+  "via": "",
+  "topics": [
+   "python"
+  ]
+ },
+ {
+  "i": 106,
+  "title": "Какой язык выбрать для работы с данными R или Python? Оба! Мигрируем с pandas на tidyverse и data.table и обратно",
+  "src": "Хабр",
+  "y": 2020,
+  "m": 3,
+  "url": "https://habr.com/ru/articles/475210/",
+  "img": "https://habrastorage.org/webt/d5/q7/ay/d5q7aybtr5ws_f-ad_k1yn8cwla.jpeg",
+  "desc": "По запросу R или Python в интернете вы найдёте миллионы статей и километровых обсуждений по теме какой из них лучше, быстрее и удобнее для работы с данными. Но к сожалению особой пользы все эти статьи...",
+  "via": "",
+  "topics": [
+   "r",
+   "python"
+  ]
+ },
+ {
+  "i": 107,
+  "title": "Разворачиваем вложенные столбцы — списки с помощью языка R (пакет tidyr)",
+  "src": "Хабр",
+  "y": 2020,
+  "m": 3,
+  "url": "https://habr.com/ru/articles/491726/",
+  "img": "https://habrastorage.org/webt/7s/yf/gr/7syfgrnpyegv-ihhcguupzuwm9c.jpeg",
+  "desc": "В большинстве случаев при работе с ответом полученным от API, или с любыми другими данными которые имеют сложную древовидную структуру, вы сталкиваетесь с форматами JSON и XML. Эти форматы имеют...",
+  "via": "",
+  "topics": [
+   "r"
+  ]
+ },
+ {
+  "i": 104,
+  "title": "Как загрузить данные из API Google Analytics в R: часть 2",
+  "src": "Netpeak Journal",
+  "y": 2020,
+  "m": 2,
+  "url": "https://netpeak.net/ru/blog/kak-zagruzit-dannyye-iz-api-google-analytics-v-r-chast-2/",
+  "img": "https://netpeak.net/blog/card_facebook_undefinedk5f594h1.png?v=1579083158",
+  "desc": "Пример использования пакета googleAnalyticsR от Марка Эдмондса",
+  "via": "",
+  "topics": [
+   "r",
+   "ga"
+  ]
+ },
+ {
+  "i": 105,
+  "title": "Как работать с API Google Таблиц (Google Sheets API v4) на языке R с помощью нового пакета googlesheets4",
+  "src": "Хабр",
+  "y": 2020,
+  "m": 2,
+  "url": "https://habr.com/ru/articles/488756/",
+  "img": "https://habrastorage.org/webt/n1/__/9d/n1__9dqocq9-gixyov6cahqn5ge.jpeg",
+  "desc": "Электронные таблицы по-прежнему остаются довольно популярным инструментом для работы с данными, а среди различных процессоров электронных таблиц наиболее популярными являются Google Таблицы....",
+  "via": "",
+  "topics": [
+   "r",
+   "excel"
+  ]
+ },
+ {
+  "i": 103,
+  "title": "rfacebookstat 2.0.0 - Обзор релиза и 6 видео уроков по работе с Facebook Marketing API на языке R",
+  "src": "Блог Алексея Селезнёва",
+  "y": 2019,
+  "m": 12,
+  "url": "https://alexeyseleznev.wordpress.com/2019/12/23/rfacebookstat-2-0-0-обзор-релиза-и-6-видео-уроков-по-раб/",
+  "img": "",
+  "desc": "Последние несколько месяцев я много работал над функционалом пакета rfacebookstat, предназначенным для работы с Facebook Marketing API на языке R. В результате чего пакет был значительно улучшен, и работать с его помощью с одним…",
+  "via": "",
+  "topics": [
+   "r",
+   "ppc"
+  ]
+ },
+ {
+  "i": 100,
+  "title": "Работа с датами на языке R (базовые возможности, а также пакеты lubridate и timeperiodsR)",
+  "src": "Хабр",
+  "y": 2019,
+  "m": 11,
+  "url": "https://habr.com/ru/articles/469215/",
+  "img": "https://habrastorage.org/webt/l2/mg/nl/l2mgnl_5u7eejcuu1hazlp5xocg.jpeg",
+  "desc": "Получить текущую дату в любом языке программирования, операция эквивалентная \"Hello world!\". Язык R не является исключением. В этой статье мы разберёмся с тем, как устроена работа с датами в...",
+  "via": "",
+  "topics": [
+   "r"
+  ]
+ },
+ {
+  "i": 98,
+  "title": "Построение поведенческих воронок на языке R, на основе данных полученных из Logs API Яндекс.Метрики",
+  "src": "Хабр",
+  "y": 2019,
+  "m": 8,
+  "url": "https://habr.com/ru/articles/462279/",
+  "img": "https://habrastorage.org/webt/sd/ub/l0/sdubl0akv-cz00lehed6ym5xa-0.jpeg",
+  "desc": "Анализ воронки продаж — типичная задача для интернет маркетинга, и в частности электронной коммерции. С её помощью вы можете: Выяснить на каком из шагов к покупке вы теряете потенциальных клиентов....",
+  "via": "",
+  "topics": [
+   "r",
+   "ga"
+  ]
+ },
+ {
+  "i": 94,
+  "title": "Взаимодействие R с базами данных на примере Microsoft SQL Server и других СУБД",
+  "src": "Хабр",
+  "y": 2019,
+  "m": 7,
+  "url": "https://habr.com/ru/articles/461063/",
+  "img": "https://habr.com/share/publication/461063/23a95392c184e18b84897cc6cf10069a/",
+  "desc": "Поскольку львиная доля бизнес информации храниться в базах данных. На каком бы языке программирования вы не писали, вам придётся производить различные действия с ними. В этой статье я расскажу о двух...",
+  "via": "",
+  "topics": [
+   "r"
+  ]
+ },
+ {
+  "i": 95,
+  "title": "Сколько стоил клик в Google Ads и Facebook в Украине во втором квартале 2019 года",
+  "src": "Netpeak Journal",
+  "y": 2019,
+  "m": 7,
+  "url": "https://netpeak.net/ru/blog/skol-ko-stoil-klik-v-google-ads-i-facebook-v-ukraine-vo-vtorom-kvartale-2019-goda/",
+  "img": "https://netpeak.net/blog/card_facebook_undefinedjypnwuzh.png?v=1564481635",
+  "desc": "Данные по 24 миллионам кликов в 24 тематиках и 391 городу",
+  "via": "",
+  "topics": [
+   "research"
+  ]
+ },
+ {
+  "i": 92,
+  "title": "ООП в языке R (часть 1): S3 классы",
+  "src": "Хабр",
+  "y": 2019,
+  "m": 6,
+  "url": "https://habr.com/ru/articles/453964/",
+  "img": "https://habr.com/share/publication/453964/12e94decd9f449c7a1833f9e38690e12/",
+  "desc": "R — это объектно ориентированный язык. В нём абсолютно всё является объектом, начиная от функций и заканчивая таблицами. В свою очередь, каждый объект в R относится к какому-либо классу. На самом...",
+  "via": "",
+  "topics": [
+   "r"
+  ]
+ },
+ {
+  "i": 91,
+  "title": "Сколько стоил клик в Google Ads и Facebook в Украине в первом квартале 2019 года",
+  "src": "Netpeak Journal",
+  "y": 2019,
+  "m": 5,
+  "url": "https://netpeak.net/ru/blog/skol-ko-stoil-klik-v-google-ads-i-facebook-v-ukraine-v-pervom-kvartale-2019-goda/",
+  "img": "https://netpeak.net/blog/card_facebook_undefinedjvdm8q5f.png?v=1557222843",
+  "desc": "Данные по 42,5 млн кликов в 25 тематиках и 391 городу",
+  "via": "",
+  "topics": [
+   "research"
+  ]
+ },
+ {
+  "i": 87,
+  "title": "Как ускорить работу с API на языке R с помощью параллельных вычислений, на примере API Яндекс.Директ (Часть 2)",
+  "src": "Хабр",
+  "y": 2019,
+  "m": 4,
+  "url": "https://habr.com/ru/articles/448404/",
+  "img": "https://habr.com/share/publication/448404/3ff157a52e74f94831916c9c40cc7cdd/",
+  "desc": "В прошлой статье я рассказал о том, что такое многопоточность, и привёл примеры её реализации на языке R при работе с API Яндекс.Директ с помощью пакетов doSNOW , doParallel и конструкции foreach ....",
+  "via": "",
+  "topics": [
+   "r",
+   "ppc"
+  ]
+ },
+ {
+  "i": 89,
+  "title": "Аналитический инструмент для Concert.ua — контролируем рекламные бюджеты сотен мероприятий в реальном времени",
+  "src": "Netpeak Journal",
+  "y": 2019,
+  "m": 4,
+  "url": "https://netpeak.net/ru/blog/analiticheskiy-instrument-dlya-concert-ua-kontroliruyem-reklamnyye-byudzhety-soten-meropriyatiy-v-real-nom-vremeni/",
+  "img": "https://netpeak.net/blog/card_facebook_undefinedjuwd7o3o.jpg?v=1556179789",
+  "desc": "как автоматизировать целый участок в работе команды специалистов по контекстной рекламе. кейс concert.ua",
+  "via": "",
+  "topics": [
+   "bi"
+  ]
+ },
+ {
+  "i": 85,
+  "title": "Наиболее простой способ обновить язык R (пакет installr)",
+  "src": "Блог Алексея Селезнёва",
+  "y": 2019,
+  "m": 3,
+  "url": "https://alexeyseleznev.wordpress.com/2019/03/15/наиболее-простой-способ-обновить-язы/",
+  "img": "https://i0.wp.com/img.netpeak.ua/alsey/157493452245_kiss_411kb.png",
+  "desc": "Несколько раз в год выходят обновления для языка R, примерно раз в пол года выходят достаточно важные обновления. Для того, что бы не упустить последний функционал, и оптимизацию языка я всегда рекомендую обновлять его при выходе…",
+  "via": "",
+  "topics": [
+   "r"
+  ]
+ },
+ {
+  "i": 86,
+  "title": "R пакет tidyr и его новые функции pivot_long и pivot_wide",
+  "src": "Хабр",
+  "y": 2019,
+  "m": 3,
+  "url": "https://habr.com/ru/articles/444622/",
+  "img": "https://habr.com/share/publication/444622/ab70fe7d864578c1eaf49f87f4a8beed/",
+  "desc": "Пакет tidyr входит в ядро одной из наиболее популярных библиотек на языке R — tidyverse . Основное назначение пакета — приведение данных к аккуратному виду. На Хабре уже есть публикация посвящённая...",
+  "via": "",
+  "topics": [
+   "r"
+  ]
+ },
+ {
+  "i": 81,
+  "title": "Сколько стоил клик в Google Ads и Facebook в Украине в четвёртом квартале 2018 года",
+  "src": "Netpeak Journal",
+  "y": 2019,
+  "m": 1,
+  "url": "https://netpeak.net/ru/blog/skol-ko-stoil-klik-v-google-ads-i-facebook-v-ukraine-v-chetvertom-kvartale-2018-goda/",
+  "img": "https://netpeak.net/blog/card_facebook_undefinedjqp9l0sy.png?v=1547043277",
+  "desc": "Исследование по 38,5 миллионам кликов в 24 тематиках 391 городе страны.",
+  "via": "",
+  "topics": [
+   "research"
+  ]
+ },
+ {
+  "i": 84,
+  "title": "Как ускорить работу с API на языке R с помощью параллельных вычислений, на примере API Яндекс.Директ (Часть 1)",
+  "src": "Хабр",
+  "y": 2019,
+  "m": 1,
+  "url": "https://habr.com/ru/articles/437078/",
+  "img": "https://habr.com/share/publication/437078/58f6fdc0c42dd7e2ed9a17ac4e0882b5/",
+  "desc": "Язык R на сегодняшний день является одним из мощнейших и многофункциональных инструментов для работы с данными, но как мы знаем практически всегда, в любой бочке мёда найдётся ложка дёгтя. Дело в том,...",
+  "via": "",
+  "topics": [
+   "r",
+   "ppc"
+  ]
+ },
+ {
+  "i": 79,
+  "title": "Зачем учить язык R интернет-маркетологу, и как сделать это максимально быстро",
+  "src": "Блог Алексея Селезнёва",
+  "y": 2018,
+  "m": 12,
+  "url": "https://alexeyseleznev.wordpress.com/2018/12/24/зачем-учить-язык-r-интернет-маркетолог/",
+  "img": "https://images.netpeak.net/blog/videokurs-alsea-po-r.png",
+  "desc": "Друзья, у меня для вас хорошая новость: 1 ноября стартовал первый поток моего авторского онлайн-курса «Язык R для интернет-маркетинга». В этой статье я расскажу о том, когда и зачем я начал учить R, с какими сложностями…",
+  "via": "blog",
+  "topics": [
+   "r"
+  ]
+ },
+ {
+  "i": 80,
+  "title": "Дайджест обновлений R пакетов для интернет маркетинга — ryandexdirect, rfacebookstat, rvkstat, rym за март — декабрь 2018 года",
+  "src": "Блог Алексея Селезнёва",
+  "y": 2018,
+  "m": 12,
+  "url": "https://alexeyseleznev.wordpress.com/2018/12/28/дайджест-обновлений-r-пакетов-для-инте/",
+  "img": "https://alexeyseleznev.wordpress.com/wp-content/uploads/2018/12/1ff9671.jpg",
+  "desc": "Дайджест обновлений R пакетов для интернет маркетинга, rfacebookstat, ryandexdirect, rym, rvkstat и других, за март – декабрь 2018 года.",
+  "via": "",
+  "topics": [
+   "r",
+   "ppc"
+  ]
+ },
+ {
+  "i": 77,
+  "title": "rmytarget 2.0.1 — перевод пакета на работу с MyTarget API v2",
+  "src": "Блог Алексея Селезнёва",
+  "y": 2018,
+  "m": 11,
+  "url": "https://alexeyseleznev.wordpress.com/2018/11/22/rmytarget-2-0-1-перевод-пакета-на-работу-с-mytarget-api-v2/",
+  "img": "https://i0.wp.com/hdwpro.com/wp-content/uploads/2017/01/Awesome-Nice-Wallpaper.jpg",
+  "desc": "Данное обновление связано с недавней новостью от поддержки API MyTarget, о том, что с 1 декабря 2018 года полностью прекращается поддержка API v1, а rmytarget изначально был написан именно на основе этого API.",
+  "via": "",
+  "topics": [
+   "r",
+   "ppc"
+  ]
+ },
+ {
+  "i": 78,
+  "title": "Насколько безопасно использовать R пакеты для работы с API рекламных систем",
+  "src": "Хабр",
+  "y": 2018,
+  "m": 11,
+  "url": "https://habr.com/ru/articles/430888/",
+  "img": "https://habr.com/share/publication/430888/3497b1fbd960d6175117b3e5abfac322/",
+  "desc": "Последнее время мне довольно часто стали задавать вопрос о том, насколько безопасно использовать различные готовые расширения, т.е. пакеты, написанные для языка R, есть ли вероятность того, что...",
+  "via": "",
+  "topics": [
+   "r"
+  ]
+ },
+ {
+  "i": 73,
+  "title": "Как работать с API Яндекс.Метрики с помощью языка R",
+  "src": "Блог Алексея Селезнёва",
+  "y": 2018,
+  "m": 10,
+  "url": "https://alexeyseleznev.wordpress.com/2018/10/08/как-работать-с-api-яндекс-метрики-с-помощ/",
+  "img": "https://natgeo.imgix.net/factsheets/thumbnails/HEADER_NewZealandSpace.jpg?auto=compress,format&amp;w=1024&amp;h=560&amp;fit=crop",
+  "desc": "Такие платформы, как Google Analytics и Яндекс.Метрика — инструменты, которые ежедневно используют в своей работе тысячи интернет-маркетологов и веб-аналитиков. Если вы продвигаете пару тройку-сайтов, думаю, достаточно…",
+  "via": "blog",
+  "topics": [
+   "r",
+   "ga"
+  ]
+ },
+ {
+  "i": 74,
+  "title": "Обзор R пакетов для интернет маркетинга, часть 1",
+  "src": "Хабр",
+  "y": 2018,
+  "m": 10,
+  "url": "https://habr.com/ru/articles/425425/",
+  "img": "https://habr.com/share/publication/425425/30a0b17a31026a9c0e06d2c7190af77d/",
+  "desc": "Всем привет, если вы занимаетесь интернет маркетингом наверняка вам ежедневно приходится сталкиваться со множеством рекламных сервисов и как минимум одной платформой веб аналитики, если вам требуется...",
+  "via": "",
+  "topics": [
+   "r"
+  ]
+ },
+ {
+  "i": 76,
+  "title": "Сколько стоил клик в Google Ads и Facebook в Украине в третьем квартале 2018 года",
+  "src": "Netpeak Journal",
+  "y": 2018,
+  "m": 10,
+  "url": "https://netpeak.net/ru/blog/skol-ko-stoil-klik-v-google-ads-i-facebook-v-ukraine-v-tret-yem-kvartale-2018-goda/",
+  "img": "https://netpeak.net/blog/card_facebook_skol-ko-stoil-klik-v-google-ads-i-facebook-v-ukraine-v-tret-yem-kvartale-2018-goda.png?v=1540197397",
+  "desc": "Данные по 43 миллионам кликов в 27 тематиках и 391 городах страны",
+  "via": "",
+  "topics": [
+   "research"
+  ]
+ },
+ {
+  "i": 71,
+  "title": "Всемогущая функция Query — подробное руководство",
+  "src": "Netpeak Journal",
+  "y": 2018,
+  "m": 8,
+  "url": "https://netpeak.net/ru/blog/vsemogushchaya-funktsiya-query-podrobnoe-rukovodstvo/",
+  "img": "https://netpeak.net/blog/facebook_a726681a4be11db27e3e24c17593265beb8c3e05.png?v=1683824791",
+  "desc": "Как пользоваться одной из самых важных функций Google Таблиц — подробное руководство по Query.",
+  "via": "",
+  "topics": [
+   "excel"
+  ]
+ },
+ {
+  "i": 72,
+  "title": "Ошибки при установке R пакетов на Windows",
+  "src": "Блог Алексея Селезнёва",
+  "y": 2018,
+  "m": 8,
+  "url": "https://alexeyseleznev.wordpress.com/2018/08/08/ошибка-при-установке-r-пакетов-на-windows-оши/",
+  "img": "https://i2.wp.com/cdn.windowsreport.com/wp-content/uploads/2019/02/Ddkmd.sys-blue-screen-errors-in-Windows.jpg?resize=1400%2C9999&amp;ssl=1",
+  "desc": "В большинстве случаев, особенно при установке пакетов из CRAN никаких проблем не возникает, но периодически всё таки вы можете столкнуться с некоторыми ошибками. В этой статье я со временем буду добавлять материал с описанием…",
+  "via": "",
+  "topics": [
+   "r"
+  ]
+ },
+ {
+  "i": 69,
+  "title": "Сколько стоил клик Google Ads и Facebook в Украине во втором квартале 2018 года",
+  "src": "Netpeak Journal",
+  "y": 2018,
+  "m": 7,
+  "url": "https://netpeak.net/ru/blog/skol-ko-stol-klik-google-ads-i-facebook-v-ukraine-vo-vtorom-kvartale-2018-goda/",
+  "img": "https://netpeak.net/blog/card_facebook_issledovaniye-po-stoimosti-klika.png?v=1532689157",
+  "desc": "Ежеквартальное исследование Netpeak по стоимости клика",
+  "via": "",
+  "topics": [
+   "research"
+  ]
+ },
+ {
+  "i": 66,
+  "title": "Как обойти блокировку API запрещенных сервисов с помощью скриптов R",
+  "src": "Блог Алексея Селезнёва",
+  "y": 2018,
+  "m": 5,
+  "url": "https://alexeyseleznev.wordpress.com/2017/05/30/как-использовать-прокси-в-скриптах-r-об/",
+  "img": "https://700700.ru/images/stories/razdel/vzlom_zamok_1435653.jpg",
+  "desc": "Если вы из Украины и до 16 мая использовали API Яндекса, Mail.Ru и ВКонтакте, то после этой даты, очевидно, столкнулись с определенными трудностями. В этой статье я расскажу, как обойти блокировку API запрещенных сервисов в…",
+  "via": "blog",
+  "topics": [
+   "r"
+  ]
+ },
+ {
+  "i": 67,
+  "title": "ryandexdirect 3.0.0 — обновлённый R клиент для работы с API Яндекс Директ",
+  "src": "Блог Алексея Селезнёва",
+  "y": 2018,
+  "m": 5,
+  "url": "https://alexeyseleznev.wordpress.com/2018/05/16/ryandexdirect-3-0-0-обновлённый-r-клиент-для-работы-с-api/",
+  "img": "https://ericlevelsdotcom.files.wordpress.com/2015/05/greatnews.png",
+  "desc": "Пакет для работы с API Яндекс Директ на языке R, ryandexdirect был значительно доработан: Был улучшен процесс авторизации в API Приведёны в порядок имена аргументов функций Во все функции был добавлен ряд новых аргументов Эта…",
+  "via": "",
+  "topics": [
+   "r",
+   "ppc"
+  ]
+ },
+ {
+  "i": 61,
+  "title": "Microsoft Power BI в интернет-маркетинге — дайджест полезных публикаций",
+  "src": "Netpeak Journal",
+  "y": 2018,
+  "m": 4,
+  "url": "https://netpeak.net/ru/blog/microsoft-power-bi-v-internet-marketinge-daydzhest-poleznykh-publikatsiy/",
+  "img": "https://netpeak.net/blog/card_facebook_microsoft-power-bi-v-internet-marketinge-daydzhest-poleznykh-publikatsiy.png?v=1522844913",
+  "desc": "Как связать данные, полученные из множества различных источников, и визуализировать их в виде удобных интерактивных отчетов",
+  "via": "",
+  "topics": [
+   "pbi"
+  ]
+ },
+ {
+  "i": 62,
+  "title": "Что такое язык R и как работать с API рекламных систем Google AdWords и Яндекс.Директ с его помощью",
+  "src": "Блог Алексея Селезнёва",
+  "y": 2018,
+  "m": 4,
+  "url": "https://alexeyseleznev.wordpress.com/2018/04/11/что-такое-язык-r-и-как-работать-с-api-реклам/",
+  "img": "https://i.owox.com/pages/3/3167.jpg",
+  "desc": "Если вы ведете несколько небольших рекламных кампаний в одном рекламном аккаунте, то для анализа их эффективности вам достаточно посмотреть нужные данные в Google AdWords / Яндекс.Директ и Google Analytics / Яндекс.Метрике. Но…",
+  "via": "blog",
+  "topics": [
+   "r",
+   "ppc"
+  ]
+ },
+ {
+  "i": 63,
+  "title": "Сколько стоил клик Google Ads и Facebook в Украине в первом квартале 2018 года",
+  "src": "Netpeak Journal",
+  "y": 2018,
+  "m": 4,
+  "url": "https://netpeak.net/ru/blog/skol-ko-stoil-klik-google-adwords-i-facebook-v-ukraine-v-pervom-kvartale-2018-goda/",
+  "img": "https://netpeak.net/blog/card_facebook_skol-ko-stoil-klik-google-adwords-i-facebook-v-ukraine-v-pervom-kvartale-2018-goda.png?v=1523353796",
+  "desc": "Данные по кликам в 26 тематиках и 394 городах",
+  "via": "",
+  "topics": [
+   "research"
+  ]
+ },
+ {
+  "i": 60,
+  "title": "Порция зимних обновлений пакетов ryandexdirect, rfacebookstat, rvkstat",
+  "src": "Блог Алексея Селезнёва",
+  "y": 2018,
+  "m": 3,
+  "url": "https://alexeyseleznev.wordpress.com/2018/03/01/порция-зимних-обновлений-пакетов-ryandexdirect-rfacebo/",
+  "img": "https://i0.wp.com/vnimatelnostdetyam.com/wp-content/uploads/2016/12/8-910x480.jpg",
+  "desc": "Статья – дайджест зимних обновлений R клиентов для работы с API Яндекс Директ, Facebook и Вконтакте. Честно говоря за зиму было не так много обновлений, но тем не менее возможности некоторых пакетов было довольно значительно…",
+  "via": "",
+  "topics": [
+   "r",
+   "ppc"
+  ]
+ },
+ {
+  "i": 56,
+  "title": "Сколько стоил клик Google Ads и Facebook в Украине в четвертом квартале 2017 года",
+  "src": "Блог Алексея Селезнёва",
+  "y": 2018,
+  "m": 1,
+  "url": "https://alexeyseleznev.wordpress.com/2018/01/15/сколько-стоил-клик-google-adwords-и-facebook-в-украине-в-че/",
+  "img": "https://i0.wp.com/www.stimul-realty.ru/wp-content/uploads/2016/12/Rynochnaya-stoimost-nedvizhimosti.jpg",
+  "desc": "Здравствуйте! Я подготовил для специалистов по контекстной рекламе итоговое исследование по стоимости клика за 2017 год на основании выборки проектов агентства Netpeak.",
+  "via": "blog",
+  "topics": [
+   "research"
+  ]
+ },
+ {
+  "i": 58,
+  "title": "Партиционирование таблиц в Google BigQuery — понятная инструкция",
+  "src": "Netpeak Journal",
+  "y": 2018,
+  "m": 1,
+  "url": "https://netpeak.net/ru/blog/partitsirovaniye-tablits-v-google-bigquery/",
+  "img": "https://netpeak.net/blog/facebook_0d6e5e5efbb2ed58cb604f629cf15d797961e359.png?v=1642431588",
+  "desc": "Как упростить работу с данными и сэкономить на оплате сервиса",
+  "via": "",
+  "topics": [
+   "bq"
+  ]
+ },
+ {
+  "i": 52,
+  "title": "Все обновления пакетов ryandexdirect, rfacebookstat и rvkstat за осень 2017",
+  "src": "Блог Алексея Селезнёва",
+  "y": 2017,
+  "m": 12,
+  "url": "https://alexeyseleznev.wordpress.com/2017/12/01/все-обновления-пакетов-ryandexdirect-rfacebookstat-и-rvkstat-за-осе/",
+  "img": "https://cdn.lynda.com/course/378455/378455-636356279678627188-16x9.jpg",
+  "desc": "В этой статье я собрал все доработки R клиентов ryandexdirect, rfacebookstat и rvkstat за осень 2017 года.",
+  "via": "",
+  "topics": [
+   "r",
+   "ppc"
+  ]
+ },
+ {
+  "i": 53,
+  "title": "Как мы сделали аналитический инструмент для блога Netpeak",
+  "src": "Netpeak Journal",
+  "y": 2017,
+  "m": 12,
+  "url": "https://netpeak.net/ru/blog/kak-my-sdelali-analiticheskiy-instrument-dlya-bloga-netpeak/",
+  "img": "https://netpeak.net/blog/card_facebook_kak-my-sdelali-analiticheskiy-instrument-dlya-bloga-netpeak.png?v=1513347785",
+  "desc": "Как узнать, хорошую ли статью вы опубликовали в блоге",
+  "via": "",
+  "topics": [
+   "bi"
+  ]
+ },
+ {
+  "i": 54,
+  "title": "Как работать с закладками в Power BI — подробное руководство",
+  "src": "Блог Алексея Селезнёва",
+  "y": 2017,
+  "m": 12,
+  "url": "https://alexeyseleznev.wordpress.com/2017/12/28/как-работать-с-закладками-bookmarks-в-power-bi-подр/",
+  "img": "https://images.netpeak.net/blog/fajl-opcii-i-nastrojki-opcii.png",
+  "desc": "Недавно вышла очередная, ежемесячная порция обновлений Power BI Desktop. Разработчики добавили множество новых функций и значительно доработали «Закладки» (Bookmarks), с помощью которых можно сделать дашборды более компактными и…",
+  "via": "blog",
+  "topics": [
+   "pbi"
+  ]
+ },
+ {
+  "i": 55,
+  "title": "rfacebookstat 1.5.0 — Как правильно использовать аргумент request_speed в функции fbGetMarketingStat",
+  "src": "Блог Алексея Селезнёва",
+  "y": 2017,
+  "m": 12,
+  "url": "https://alexeyseleznev.wordpress.com/2017/12/26/rfacebookstat-1-5-0-как-правильно-использовать-аргум/",
+  "img": "https://i0.wp.com/img.netpeak.ua/alsey/151428260475_kiss_14kb.png",
+  "desc": "rfacebookstat – R клиент для работы с API рекламного кабинета Facebook. В версии 1.5.0 была значительно улучшена основная функция пакета fbGetMarketingStat, в неё был добавлен аргумент request_speed, к тому же функция теперь…",
+  "via": "",
+  "topics": [
+   "r",
+   "ppc"
+  ]
+ },
+ {
+  "i": 51,
+  "title": "Google BigQuery — зачем нужна облачная база данных",
+  "src": "Netpeak Journal",
+  "y": 2017,
+  "m": 11,
+  "url": "https://netpeak.net/ru/blog/google-bigquery-podrobnyy-obzor-funktsii/",
+  "img": "https://netpeak.net/blog/facebook_e9a12ac468621cbeb27bd64d89ce9c74bd6ef006.png?v=1697104360",
+  "desc": "Как пользоваться преимуществами, особенностями и дополнительными инструментами сервиса",
+  "via": "",
+  "topics": [
+   "bq"
+  ]
+ },
+ {
+  "i": 47,
+  "title": "Сколько стоил клик в Google Ads и Facebook в Украине в третьем квартале 2017",
+  "src": "Netpeak Journal",
+  "y": 2017,
+  "m": 10,
+  "url": "https://netpeak.net/ru/blog/skol-ko-stoil-klik-v-google-adwords-i-facebook-v-ukraine-v-tret-yem-kvartale-2017/",
+  "img": "https://netpeak.net/blog/card_facebook_skol-ko-stoil-klik-v-google-adwords-i-facebook-v-ukraine-v-tret-yem-kvartale-2017.png?v=1507810900",
+  "desc": "Данные по более 26 млн кликов в 23 тематиках и 402 городах Украины",
+  "via": "",
+  "topics": [
+   "research"
+  ]
+ },
+ {
+  "i": 48,
+  "title": "Cколько стоил клик в Google Ads и Яндекс.Директ в Казахстане в третьем квартале 2017",
+  "src": "Блог Алексея Селезнёва",
+  "y": 2017,
+  "m": 10,
+  "url": "https://alexeyseleznev.wordpress.com/2017/10/18/cколько-стоил-клик-в-google-adwords-яндекс-директ-и-fa/",
+  "img": "https://i0.wp.com/comandir.com/upkeep/uploads/2017/09/%D0%A8%D0%BD%D0%BE%D0%B1%D0%B5%D0%BB%D0%B5%D0%B2%D1%81%D0%BA%D0%B0%D1%8F-%D0%BF%D1%80%D0%B5%D0%BC%D0%B8%D1%8F-%D0%BC%D0%B8%D1%80%D0%B0-2017...-700x450.jpg",
+  "desc": "Я подготовил ежеквартальное исследование о стоимости клика, опираясь на выборку проектов агентства Netpeak. Данные отчета будут полезны PPC-специалистам для планирования новых рекламных кампаний, а также для оптимизации…",
+  "via": "blog",
+  "topics": [
+   "ppc"
+  ]
+ },
+ {
+  "i": 50,
+  "title": "Как развернуть phpPgAdmin и phpMyAdmin на Windows",
+  "src": "Хабр",
+  "y": 2017,
+  "m": 10,
+  "url": "https://habr.com/ru/sandbox/111674/",
+  "img": "https://habr.com/share/publication/111674/8b8007fb77006afe3eefe0ece67b4144/",
+  "desc": "Ни одно приложение и BI система на данный момент не может существовать без базы данных, наиболее популярными по крайней мере из бесплатных СУБД являются MySQL и PostgreSQL. Конечно любой СУБД вполне...",
+  "via": "",
+  "topics": [
+   "bi"
+  ]
+ },
+ {
+  "i": 46,
+  "title": "Как перенести данные из ВКонтакте в Power BI",
+  "src": "Блог Алексея Селезнёва",
+  "y": 2017,
+  "m": 9,
+  "url": "https://alexeyseleznev.wordpress.com/2017/09/22/как-перенести-данные-из-вконтакте-в-power-bi/",
+  "img": "https://b1.filmpro.ru/c/463912.700xp.jpg",
+  "desc": "Несмотря на недавнюю блокировку соцсети в Индии, ВКонтакте продолжает оставаться огромным источником полезной информации и статистики. В этой статье я расскажу, как с помощью написанного мной программного пакета rvkstat и…",
+  "via": "blog",
+  "topics": [
+   "pbi",
+   "ppc"
+  ]
+ },
+ {
+  "i": 43,
+  "title": "Сколько стоил клик по рекламе Ads, Директ и Facebook в Украине во втором квартале 2017",
+  "src": "Блог Алексея Селезнёва",
+  "y": 2017,
+  "m": 7,
+  "url": "https://alexeyseleznev.wordpress.com/2017/07/14/сколько-стоил-клик-по-рекламе-adwords-директ/",
+  "img": "https://i0.wp.com/constructorus.ru/wp-content/uploads/2014/04/%D0%A4%D1%8C%D1%8E%D0%B6%D0%BD-%D0%BC%D0%B0%D1%80%D0%BA%D0%B5%D1%82%D0%B8%D0%BD%D0%B3.jpg",
+  "desc": "Уже традиционно начинаем квартал с исследования стоимости клика. На этот раз я исследовал 23 миллиона кликов из Украины в Google AdWords, Facebook, Директ и структурировал данные по 19 тематикам. Хотите узнать, где выгоднее всего…",
+  "via": "blog",
+  "topics": [
+   "research"
+  ]
+ },
+ {
+  "i": 44,
+  "title": "Сколько стоил клик по рекламе Ads и Директ в Казахстане во втором квартале 2017",
+  "src": "Блог Алексея Селезнёва",
+  "y": 2017,
+  "m": 7,
+  "url": "https://alexeyseleznev.wordpress.com/2017/07/21/сколько-стоил-клик-по-рекламе-adwords-и-дирек/",
+  "img": "https://images.netpeak.net/blog/osnovnaa-velicina-otobrazaetsa-na-osi-y-v-nasem-slucae-cena-za-klik-cpc.png",
+  "desc": "Хотите узнать, сколько стоит клик в вашей тематике? Как эффективно распределить рекламный бюджет? В этом исследовании я изучил, сколько стоил клик в Google AdWords и Яндекс.Директ в Казахстане во втором квартале 2017 года.",
+  "via": "blog",
+  "topics": [
+   "research"
+  ]
+ },
+ {
+  "i": 45,
+  "title": "Сколько стоил клик по рекламе Ads и Директ в России во втором квартале 2017",
+  "src": "Блог Алексея Селезнёва",
+  "y": 2017,
+  "m": 7,
+  "url": "https://alexeyseleznev.wordpress.com/2017/07/31/сколько-стоил-клик-по-рекламе-adwords-и-дире-2/",
+  "img": "https://3dnews.ru/assets/external/illustrations/2010/09/24/599065/kidatcomptuer-sg.jpg",
+  "desc": "Я продолжаю публиковать серию исследований по стоимости кликов в разных регионах, чтобы вы могли эффективно распределить рекламный бюджет.",
+  "via": "blog",
+  "topics": [
+   "research"
+  ]
+ },
+ {
+  "i": 42,
+  "title": "Как получить данные из Google Analytics в R и загрузить в Power BI",
+  "src": "Netpeak Journal",
+  "y": 2017,
+  "m": 6,
+  "url": "https://netpeak.net/ru/blog/kak-poluchit-dannye-iz-google-analytics-v-r-a-takzhe-nestandartnaya-zagruzka-dannykh-iz-api-google-analytics-v-power-bi/",
+  "img": "https://netpeak.net/blog/card_facebook_kak-poluchit-dannye-iz-google-analytics-v-r-a-takzhe-nestandartnaya-zagruzka-dannykh-iz-api-google-analytics-v-power-bi.png?v=1504009287",
+  "desc": "Самый полезный инструментарий пакета RGA",
+  "via": "",
+  "topics": [
+   "r",
+   "pbi",
+   "ga"
+  ]
+ },
+ {
+  "i": 38,
+  "title": "Как настроить отправку писем с помощью языка R",
+  "src": "Netpeak Journal",
+  "y": 2017,
+  "m": 4,
+  "url": "https://netpeak.net/ru/blog/kak-nastroit-otpravku-pisem-s-pomoshch-yu-yazyka-r/",
+  "img": "https://netpeak.net/blog/card_facebook_kak-nastroit-otpravku-pisem-s-pomoshch-yu-yazyka-r.png?v=1504009265",
+  "desc": "Как настроить отправку писем с помощью языка R и на какие подводные камни вы можете наткнуться в ходе реализации?",
+  "via": "",
+  "topics": [
+   "r"
+  ]
+ },
+ {
+  "i": 39,
+  "title": "Как сэкономить время специалиста при работе с крупным проектом — на примере OLX",
+  "src": "Блог Алексея Селезнёва",
+  "y": 2017,
+  "m": 4,
+  "url": "https://alexeyseleznev.wordpress.com/2017/04/11/как-сэкономить-время-специалиста-при/",
+  "img": "https://i0.wp.com/json.tv/images/general/2016/04/12/20160412234604-1890.jpg",
+  "desc": "«Что мы делаем со временем? В ответе на этот вопрос состоит смысл жизни», — считает герой фильма «Молодость без молодости». Что делают большую часть времени специалисты по контекстной рекламе в крупных проектах — отлично…",
+  "via": "blog",
+  "topics": [
+   "bi"
+  ]
+ },
+ {
+  "i": 40,
+  "title": "Сколько стоил клик в Google Ads в первом квартале 2017",
+  "src": "Блог Алексея Селезнёва",
+  "y": 2017,
+  "m": 4,
+  "url": "https://alexeyseleznev.wordpress.com/2017/04/27/исследование-сколько-стоил-клик-в-google-adwords/",
+  "img": "https://i0.wp.com/richfreelance.ru/wp-content/uploads/2016/03/CPC.jpg",
+  "desc": "Хотите узнать, где выгоднее всего рекламировать продукты или планируете рекламный бюджет? Я провел анализ стоимости клика в 25 тематиках и 852 городах Украины, России, Казахстана, Болгарии и готов поделиться результатами.",
+  "via": "blog",
+  "topics": [
+   "research"
+  ]
+ },
+ {
+  "i": 41,
+  "title": "Язык R в интернет-маркетинге — дайджест полезных публикаций",
+  "src": "Блог Алексея Селезнёва",
+  "y": 2017,
+  "m": 4,
+  "url": "https://alexeyseleznev.wordpress.com/2017/04/28/язык-r-в-интернет-маркетинге-дайджес/",
+  "img": "https://pp.userapi.com/c637325/v637325995/4c5fd/YUlf3sQ6AtE.jpg",
+  "desc": "Недавно прошла конференция Analyze — и в этом году в каждом докладе прямо или косвенно упоминался язык R. Сегодня R стал универсальным средством автоматизации множества маркетинговых задач, R Studio установлена даже у тех…",
+  "via": "blog",
+  "topics": [
+   "r"
+  ]
+ },
+ {
+  "i": 37,
+  "title": "Как cделать красивую визуализацию в Google Data Studio — подробное руководство",
+  "src": "Netpeak Journal",
+  "y": 2017,
+  "m": 3,
+  "url": "https://netpeak.net/ru/blog/kak-cdelat-krasivuyu-vizualizatsiyu-v-google-data-studio-podrobnoe-rukovodstvo/",
+  "img": "https://netpeak.net/blog/facebook_cc1317229c932a9ad819a280a85de842acef2331.png?v=1697104238",
+  "desc": "Google Data Studio: подробная инструкция и обзор возможностей",
+  "via": "",
+  "topics": [
+   "ga"
+  ]
+ },
+ {
+  "i": 34,
+  "title": "Как получить и обработать сырые данные из Яндекс.Метрики",
+  "src": "Блог Алексея Селезнёва",
+  "y": 2017,
+  "m": 2,
+  "url": "https://alexeyseleznev.wordpress.com/2017/02/09/как-получить-и-обработать-сырые-данны/",
+  "img": "https://images.netpeak.net/blog/kak-polucit-i-obrabotat-syrye-dannye-iz-andeksmetriki.jpg",
+  "desc": "Хотите качественно анализировать статистику из Яндекс.Метрики? Отследить сложные воронки продаж, объединить данные из разных систем аналитики, контролировать расхождения в статистике, — «сырые» данные помогут вам эффективно…",
+  "via": "blog",
+  "topics": [
+   "ga"
+  ]
+ },
+ {
+  "i": 35,
+  "title": "Как разработать графический интерфейс для скриптов R?",
+  "src": "Netpeak Journal",
+  "y": 2017,
+  "m": 2,
+  "url": "https://netpeak.net/ru/blog/kak-razrabotat-graficheskii-interfyeis-dlya-skriptov-r/",
+  "img": "https://netpeak.net/blog/card_facebook_kak-razrabotat-graficheskii-interfeis-dlya-skriptov-na-yazyke-r.png?v=1504009247",
+  "desc": "Как упростить работу со скриптами на языке R? Разработайте удобный интерфейс с помощью пакета «gWidgets».",
+  "via": "",
+  "topics": [
+   "r"
+  ]
+ },
+ {
+  "i": 36,
+  "title": "Как связать Яндекс.Директ с Microsoft Power BI",
+  "src": "Блог Алексея Селезнёва",
+  "y": 2017,
+  "m": 2,
+  "url": "https://alexeyseleznev.wordpress.com/2017/02/27/как-связать-яндекс-директ-с-microsoft-power-bi/",
+  "img": "https://i0.wp.com/kingofwallpapers.com/connect/connect-002.jpg",
+  "desc": "Яндекс.Директ собирает много данных, но, к сожалению, в веб-интерфейсе доступно очень мало информации для анализа. В этой статье я подробно опишу, как получить статистику о рекламных кампаниях c помощью языка R для визуализации в…",
+  "via": "blog",
+  "topics": [
+   "pbi",
+   "ppc"
+  ]
+ },
+ {
+  "i": 32,
+  "title": "Сколько стоил клик в Google Ads в четвертом квартале 2016 — исследование Netpeak",
+  "src": "Блог Алексея Селезнёва",
+  "y": 2017,
+  "m": 1,
+  "url": "https://alexeyseleznev.wordpress.com/2017/01/23/сколько-стоил-клик-в-google-adwords-в-четвертом-кв/",
+  "img": "https://habrastorage.org/files/eb0/fba/96c/eb0fba96cb98472691ea0483a56ac072.jpg",
+  "desc": "Сколько платят рекламодатели за клик по объявлениям в разных странах и тематиках? Я провел очередное исследование стоимости клика в Google AdWords и в этой статье поделюсь результатами за четвертый квартал 2016 года.",
+  "via": "blog",
+  "topics": [
+   "research"
+  ]
+ },
+ {
+  "i": 33,
+  "title": "Сколько стоил клик в Google Ads в 2016 году — данные по Болгарии, Казахстану, России, Украине",
+  "src": "Блог Алексея Селезнёва",
+  "y": 2017,
+  "m": 1,
+  "url": "https://alexeyseleznev.wordpress.com/2017/01/23/сколько-стоил-клик-в-adwords-в-2016-году-данные/",
+  "img": "https://images.netpeak.net/blog/rectangle_skol-ko-stoil-klik-v-google-adwords-v-2016-godu-issledovanie-netpeak.png",
+  "desc": "Хотите планировать рекламный бюджет больше, чем на месяц или два? Вам необходимо знать стоимость клика и спрогнозировать, как будет меняться цена. В течение 2016 года я собирал данные о стоимости клика в Google AdWords в разрезе…",
+  "via": "blog",
+  "topics": [
+   "research"
+  ]
+ },
+ {
+  "i": 30,
+  "title": "Как загрузить статистику рекламных кампаний из API Facebook с помощью языка R",
+  "src": "Netpeak Journal",
+  "y": 2016,
+  "m": 12,
+  "url": "https://netpeak.net/ru/blog/kak-zagruzit-statistiku-reklamnykh-kampanii-iz-api-facebook-s-pomoshch-yu-yazyka-r/",
+  "img": "https://netpeak.net/blog/card_facebook_kak-zagruzit-dannye-o-reklamnykh-kampaniyakh-iz-facebook-v-r.png?v=1504009232",
+  "desc": "Хотите качественно анализировать рекламные кампании в Facebook? Как подключиться к API Facebook и загрузить статистику в R — рассказывает Алексей Селезнев.",
+  "via": "",
+  "topics": [
+   "r",
+   "ppc"
+  ]
+ },
+ {
+  "i": 31,
+  "title": "Как мы внедрили BI-аналитику в отделе контекстной рекламы",
+  "src": "Блог Алексея Селезнёва",
+  "y": 2016,
+  "m": 12,
+  "url": "https://alexeyseleznev.wordpress.com/2016/12/22/как-мы-внедрили-bi-аналитику-в-отделе-ко/",
+  "img": "https://images.netpeak.net/blog/bi-resenie-dla-biznesa2.jpg",
+  "desc": "Хотите, я скажу, что делают ваши сотрудники прямо сейчас? Собирают вручную отчеты в электронных таблицах. Сколько времени они тратят зря, игнорируя автоматизацию? Увидеть реальную картину просто: посчитайте количество затраченных…",
+  "via": "blog",
+  "topics": [
+   "ppc"
+  ]
+ },
+ {
+  "i": 29,
+  "title": "Как настроить запуск R-скрипта по расписанию?",
+  "src": "Netpeak Journal",
+  "y": 2016,
+  "m": 11,
+  "url": "https://netpeak.net/ru/blog/kak-nastroit-zapusk-r-skripta-po-raspisaniyu/",
+  "img": "https://netpeak.net/blog/card_facebook_kak-nastroit-zapusk-r-skripta-po-raspisaniyu.png?v=1504009223",
+  "desc": "Работаете со скриптами R регулярно? Потратьте десять минут на настройку автозапуска и избавитесь от необходимости активировать R-скрипты вручную.",
+  "via": "",
+  "topics": [
+   "r"
+  ]
+ },
+ {
+  "i": 26,
+  "title": "Как связать Microsoft Power BI и Google BigQuery",
+  "src": "Netpeak Journal",
+  "y": 2016,
+  "m": 10,
+  "url": "https://netpeak.net/ru/blog/kak-svyazat-microsoft-power-bi-i-google-bigquery/",
+  "img": "https://netpeak.net/blog/card_facebook_kak-svyazat-microsoft-power-bi-i-google-bigquery.png?v=1504009210",
+  "desc": "Как визуализировать данные с Google BigQuery в Power BI? Пошаговая инструкция по загрузке данных",
+  "via": "",
+  "topics": [
+   "bq",
+   "pbi"
+  ]
+ },
+ {
+  "i": 27,
+  "title": "Сколько стоил клик в Google Ads в третьем квартале 2016 — исследование Netpeak",
+  "src": "Блог Алексея Селезнёва",
+  "y": 2016,
+  "m": 10,
+  "url": "https://alexeyseleznev.wordpress.com/2016/10/18/сколько-стоил-клик-в-google-adwords-в-третьем-квар/",
+  "img": "https://images.netpeak.net/blog/skolko-stoil-klik-v-google-adwords.jpg",
+  "desc": "Хотите узнать, сколько стоит клик в вашей тематике? Как эффективно распределить рекламный бюджет? В этом исследовании я изучил, сколько стоил клик в Google AdWords в третьем квартале 2016 года.",
+  "via": "blog",
+  "topics": [
+   "research"
+  ]
+ },
+ {
+  "i": 28,
+  "title": "Продвижение интернет-магазина с помощью Google Рекламы: первые шаги",
+  "src": "Netpeak Journal",
+  "y": 2016,
+  "m": 10,
+  "url": "https://netpeak.net/ru/blog/prodvizhenie-internet-magazina-s-pomoshch-yu-google-adwords-pervye-shagi/",
+  "img": "https://netpeak.net/blog/card_facebook_prodvizhenie-internet-magazina-s-pomoshch-yu-google-adwords-s-chego-nachat.png?v=1504009216",
+  "desc": "Какие типы кампаний и ключевых слов стоит первыми запускать в Google AdWords? Советы новичкам",
+  "via": "",
+  "topics": [
+   "bi"
+  ]
+ },
+ {
+  "i": 25,
+  "title": "Что дешевле в Украине: Google Ads или Директ — исследование Netpeak",
+  "src": "Блог Алексея Селезнёва",
+  "y": 2016,
+  "m": 8,
+  "url": "https://alexeyseleznev.wordpress.com/2016/08/01/что-дешевле-в-украине-adwords-или-директ-ис/",
+  "img": "https://webnet.by/wp-content/uploads/reklama.jpg",
+  "desc": "Для многих специалистов этого вопроса вроде как и не существует. Google в Украине популярнее, значит конкуренция выше и клик дороже — о чем еще говорить? Но насколько популярнее Google в 2016 и во всех ли тематиках актуальна…",
+  "via": "blog",
+  "topics": [
+   "research"
+  ]
+ },
+ {
+  "i": 23,
+  "title": "Как визуализировать показатель качества ключевых слов — рецепт скрипта на языке R",
+  "src": "Netpeak Journal",
+  "y": 2016,
+  "m": 7,
+  "url": "https://netpeak.net/ru/blog/kak-vizualizirovat-pokazatel-kachestva-klyuchevyh-slov-retsept-skripta-na-yazyke-r/",
+  "img": "https://netpeak.net/blog/facebook_cbe36f6826ed4433b905ffd03d3b5ad8f64ccb96.png?v=1630917536",
+  "desc": "Как узнать слабые места ваших рекламных кампаний с помощью бесплатного скрипта.",
+  "via": "",
+  "topics": [
+   "r"
+  ]
+ },
+ {
+  "i": 24,
+  "title": "Сколько стоил клик в Google Ads во втором квартале 2016 — исследование Netpeak",
+  "src": "Блог Алексея Селезнёва",
+  "y": 2016,
+  "m": 7,
+  "url": "https://alexeyseleznev.wordpress.com/2016/07/19/сколько-стоил-клик-в-google-adwords-во-втором-квар/",
+  "img": "https://i0.wp.com/gdetraffic.com/img/news_889/google-adwords.jpg",
+  "desc": "Хотите узнать, где выгоднее всего рекламировать ваш товар или планируете рекламный бюджет? Я проанализировал более 7 миллионов кликов и посчитал, во сколько обходятся рекламодателям клики по объявлениям в разных странах и…",
+  "via": "blog",
+  "topics": [
+   "research"
+  ]
+ },
+ {
+  "i": 21,
+  "title": "Кейс: как провести анализ конкурентов с помощью SimilarWeb",
+  "src": "Блог Алексея Селезнёва",
+  "y": 2016,
+  "m": 6,
+  "url": "https://alexeyseleznev.wordpress.com/2016/06/08/кейс-как-провести-анализ-конкурентов/",
+  "img": "https://i0.wp.com/livesurf.ru/news_images/56-9c51fc7966185d667cd7e94897aca372.jpg",
+  "desc": "Какие каналы используют конкуренты для привлечения посетителей? В каких регионах наибольшая и наименьшая конкуренция? Перед запуском проекта нужно знать предельно четкие ответы на эти вопросы. Сегодня я расскажу, как быстро…",
+  "via": "blog",
+  "topics": [
+   "bi"
+  ]
+ },
+ {
+  "i": 22,
+  "title": "Как оценить потерянный доход в Google Ads с помощью языка R",
+  "src": "Netpeak Journal",
+  "y": 2016,
+  "m": 6,
+  "url": "https://netpeak.net/ru/blog/kak-otsenit-poteryannyi-dokhod-v-google-adwords-s-pomoshch-yu-yazyka-r/",
+  "img": "https://netpeak.net/blog/facebook_9de2db30c9f2fabaf89cd5c4083bbbde6279dc9e.jpg?v=1631524176",
+  "desc": "Новый алгоритм — специально для проектов ecommerce.",
+  "via": "",
+  "topics": [
+   "r",
+   "ppc"
+  ]
+ },
+ {
+  "i": 19,
+  "title": "Сколько стоил клик в Google Ads в первом квартале 2016 — исследование Netpeak",
+  "src": "Блог Алексея Селезнёва",
+  "y": 2016,
+  "m": 5,
+  "url": "https://alexeyseleznev.wordpress.com/2016/05/12/сколько-стоил-клик-в-google-adwords-в-первом-кварт/",
+  "img": "https://i0.wp.com/www.moneyball.info/uploads/posts/2011-11/1320682715-main-3b828722f0b511c368719c80d457a92b.jpg",
+  "desc": "Сколько средств нужно вложить в рекламу для привлечения клиента? Спрогнозировать это просто, если знаете коэффициент конверсии и среднюю стоимость клика в вашей тематике и регионе. Чтобы понять, как дорого обходятся…",
+  "via": "blog",
+  "topics": [
+   "research"
+  ]
+ },
+ {
+  "i": 20,
+  "title": "Как работать с Microsoft Power BI — подробное руководство",
+  "src": "Netpeak Journal",
+  "y": 2016,
+  "m": 5,
+  "url": "https://netpeak.net/ru/blog/kak-rabotat-s-microsoft-power-bi-podrobnoe-rukovodstvo/",
+  "img": "https://netpeak.net/blog/facebook_9a9b9ef77000eeeaf38dcd41eab306fc95dc0132.jpg?v=1668004961",
+  "desc": "Мануал по Microsoft Power BI — мощному инструменту для бизнес-аналитики. Освоив эту платформу, вы сможете с легкостью создавать понятные отчеты и обновлять их в режиме реального времени.",
+  "via": "",
+  "topics": [
+   "pbi"
+  ]
+ },
+ {
+  "i": 18,
+  "title": "Как начать работу с BigData — загружаем данные в Google BigQuery",
+  "src": "Netpeak Journal",
+  "y": 2016,
+  "m": 4,
+  "url": "https://netpeak.net/ru/blog/kak-nachat-rabotu-s-bigdata-zagruzhaem-dannie-v-google-bigquery/",
+  "img": "https://netpeak.net/blog/facebook_c8c5e4332829d1cd164a31d0745aa104d35546e6.jpg?v=1622204325",
+  "desc": "Первые шаги в BigData — начинаем работать с облачным сервисом Google BigQuery.",
+  "via": "",
+  "topics": [
+   "bq"
+  ]
+ },
+ {
+  "i": 15,
+  "title": "Как внедрить аналитику бизнес-процессов с минимальными тратами — антикризисный мануал",
+  "src": "Netpeak Journal",
+  "y": 2016,
+  "m": 3,
+  "url": "https://netpeak.net/ru/blog/kak-vnedrit-business-intelligence-dlya-malogo-i-srednego-biznesa/",
+  "img": "https://netpeak.net/blog/card_744649d159053b091bd32a92fdcbe1ee65576650.png?v=1587377922",
+  "desc": "Как внедрить Business Intelligence для малого и среднего бизнеса.",
+  "via": "",
+  "topics": [
+   "bi"
+  ]
+ },
+ {
+  "i": 16,
+  "title": "Как обрабатывать данные из множества таблиц в Google BigQuery",
+  "src": "Netpeak Journal",
+  "y": 2016,
+  "m": 3,
+  "url": "https://netpeak.net/ru/blog/kak-obrabatyvat-dannie-iz-mnozhestva-tablits-v-google-bigquery/",
+  "img": "https://netpeak.net/blog/card_facebook_kak-obrabatyvat-dannie-iz-mnozhestva-tablits-v-google-bigquery.jpg?v=1504009155",
+  "desc": "Альтернатива классическому SQL — обрабатываем данные из множества таблиц с помощью функций подстановки в Google BigQuery.",
+  "via": "",
+  "topics": [
+   "bq"
+  ]
+ },
+ {
+  "i": 17,
+  "title": "Как строить диаграммы в отдельных ячейках Excel и таблицах Google",
+  "src": "Netpeak Journal",
+  "y": 2016,
+  "m": 3,
+  "url": "https://netpeak.net/ru/blog/kak-stroit-diagrammy-v-otdelnyh-yacheykah-excel-i-tablitsah-google/",
+  "img": "https://netpeak.net/blog/facebook_6928c425c17bf91bbdf8d31681329ff7e644ea18.png?v=1618237672",
+  "desc": "Как сэкономить пространство на рабочем листе и время на изучение данных в Excel и таблицах Google.",
+  "via": "",
+  "topics": [
+   "excel"
+  ]
+ },
+ {
+  "i": 12,
+  "title": "Интеграция Google BigQuery c BI-платформами и электронными таблицами",
+  "src": "Netpeak Journal",
+  "y": 2016,
+  "m": 2,
+  "url": "https://netpeak.net/ru/blog/integratsiya-google-bigquery-c-bi-platformami-i-elektronnymi-tablitsami/",
+  "img": "https://netpeak.net/blog/card_facebook_integratsiya-google-bigquery-c-bi-platformami-i-elektronnymi-tablitsami.jpg?v=1504009158",
+  "desc": "Подробная инструкция по интеграции с облачной базой данных и сравнение BI-платформ.",
+  "via": "",
+  "topics": [
+   "bq"
+  ]
+ },
+ {
+  "i": 13,
+  "title": "Как работать с Excel в рекламной кампании — дайджест публикаций Алексея Селезнева",
+  "src": "Netpeak Journal",
+  "y": 2016,
+  "m": 2,
+  "url": "https://netpeak.net/ru/blog/kak-rabotat-s-excel-v-reklamnoy-kampanii-seriya-publikatsiy-alekseya-selezneva/",
+  "img": "https://netpeak.net/blog/card_facebook_kak-rabotat-s-excel-v-reklamnoy-kampanii-seriya-publikatsiy-alekseya-selezneva.jpg?v=1504009162",
+  "desc": "Дайджест-путеводитель по серии постов о работе с редакторами электронных таблиц для PPC-специалистов.",
+  "via": "",
+  "topics": [
+   "excel"
+  ]
+ },
+ {
+  "i": 14,
+  "title": "Как работать с оконными функциями в Google BigQuery — подробное руководство",
+  "src": "Netpeak Journal",
+  "y": 2016,
+  "m": 2,
+  "url": "https://netpeak.net/ru/blog/kak-rabotat-s-okonnymi-funktsiyami-v-google-bigquery-podrobnoe-rukovodstvo/",
+  "img": "https://netpeak.net/blog/facebook_1716532b4fc080b70826593e258dcf58bc7a872b.jpg?v=1659968059",
+  "desc": "Первое подробное руководство по работе с оконными функциями в Google BigQuery.",
+  "via": "",
+  "topics": [
+   "bq"
+  ]
+ },
+ {
+  "i": 10,
+  "title": "Как построить диаграмму и не облажаться",
+  "src": "Netpeak Journal",
+  "y": 2016,
+  "m": 1,
+  "url": "https://netpeak.net/ru/blog/kak-postroit-diagrammu-i-ne-oblazhatsya/",
+  "img": "https://netpeak.net/blog/card_4ed2efd4ed70c3e1842d39f1d3bd12f721ea350d.jpg?v=1587506782",
+  "desc": "Избавляемся от популярных ошибок при оформлении диаграмм.",
+  "via": "",
+  "topics": [
+   "bi"
+  ]
+ },
+ {
+  "i": 11,
+  "title": "Как выбрать инструмент для импорта данных из Google Analytics",
+  "src": "Netpeak Journal",
+  "y": 2016,
+  "m": 1,
+  "url": "https://netpeak.net/ru/blog/kak-vybrat-instrument-dlya-importa-dannyh-iz-google-analytics/",
+  "img": "https://netpeak.net/blog/card_facebook_kak-vybrat-instrument-dlya-importa-dannyh-iz-google-analytics.jpg?v=1504009162",
+  "desc": "Визуализация данных для новичков. Отвечаем на вопрос читателя.",
+  "via": "",
+  "topics": [
+   "ga"
+  ]
+ },
+ {
+  "i": 8,
+  "title": "Как построить сводные таблицы в Excel, LibreOffice, OpenOffice и таблицах Google",
+  "src": "CMS Magazine",
+  "y": 2015,
+  "m": 12,
+  "url": "https://cmsmagazine.ru/journal/items-how-to-build-summary-tables/",
+  "img": "https://cmsmagazine.ru/img_out/articles_elements/uploadmh7x6k5bm2.jpg",
+  "desc": "Подробная инструкция по преобразованию массива данных в информативный отчет.",
+  "via": "",
+  "topics": [
+   "excel"
+  ]
+ },
+ {
+  "i": 9,
+  "title": "Как мы сделали инструмент веб-аналитики для сайта Ecommerce",
+  "src": "Netpeak Journal",
+  "y": 2015,
+  "m": 12,
+  "url": "https://netpeak.net/ru/blog/kak-my-sdelali-instrument-veb-analitiki-dlya-sayta-ecommerce/",
+  "img": "https://netpeak.net/blog/card_facebook_kak-my-sdelali-instrument-veb-analitiki-dlya-sayta-ecommerce.png?v=1542116236",
+  "desc": "Зачем амбициозным онлайн-проектам индивидуальные инструменты веб-аналитики.",
+  "via": "",
+  "topics": [
+   "bi"
+  ]
+ },
+ {
+  "i": 4,
+  "title": "Импорт данных из Google Analytics в Excel с помощью Analytics Edge — подробное руководство",
+  "src": "Netpeak Journal",
+  "y": 2015,
+  "m": 11,
+  "url": "https://netpeak.net/ru/blog/import-dannyh-iz-google-analytics-v-excel-s-pomoshchyu-analytics-edge-podrobnoe-rukovodstvo/",
+  "img": "https://netpeak.net/blog/card_facebook_import-dannyh-iz-google-analytics-v-excel-s-pomoshchyu-analytics-edge-podrobnoe-rukovodstvo.jpg?v=1504009165",
+  "desc": "Импорт из Google Analytics в Excel — первое подробное руководство по Analytics Edge.",
+  "via": "",
+  "topics": [
+   "ga",
+   "excel"
+  ]
+ },
+ {
+  "i": 5,
+  "title": "Инструкция: Как и зачем использовать сводные таблицы в интерфейсе Google AdWords",
+  "src": "vc.ru",
+  "y": 2015,
+  "m": 11,
+  "url": "https://vc.ru/flood/11646-gtables-netpeak",
+  "img": "https://api.vc.ru/v2.9/cover/fb/c/11646/1792946320/cover.jpg",
+  "desc": "Встроенные в интерфейс Google AdWords отчёты конечно достаточно информативны и дают поверхностное понимание эффективности рекламных кампаний и групп объявлений, но для глубоко погружения в данные их будет недостаточно, поэтому в…",
+  "via": "",
+  "topics": [
+   "ppc",
+   "excel"
+  ]
+ },
+ {
+  "i": 6,
+  "title": "Как импортировать данные из Google Analytics в Excel с помощью Excellent Analytics — мануал для чайников",
+  "src": "Netpeak Journal",
+  "y": 2015,
+  "m": 11,
+  "url": "https://netpeak.net/ru/blog/kak-importirovat-dannie-iz-google-analytics-v-excel-s-pomoshchyu-excellent-analytics-manual-dlya-chaynikov/",
+  "img": "https://netpeak.net/blog/card_facebook_kak-importirovat-dannie-iz-google-analytics-v-excel-s-pomoshchyu-excellent-analytics-manual-dlya-chaynikov.jpg?v=1504009165",
+  "desc": "Как импортировать всю необходимую информацию из Google Analytics с помощью простого интерфейса Excellent Analytics.",
+  "via": "",
+  "topics": [
+   "ga",
+   "excel"
+  ]
+ },
+ {
+  "i": 7,
+  "title": "Прогнозируем поисковую активность в Яндексе с помощью Wordstat и Google Таблиц",
+  "src": "Блог Алексея Селезнёва",
+  "y": 2015,
+  "m": 11,
+  "url": "https://alexeyseleznev.wordpress.com/2015/11/24/прогнозируем-поисковую-активность-в/",
+  "img": "https://i0.wp.com/oblast45.ru/uploads/publications/6969/4f86b8bdb3164bfa5351df4dcd5e36ad84ea697a.jpg",
+  "desc": "Для правильного планирования бюджета на рекламную кампанию нам необходимо понимать, как в ближайшие несколько месяцев будет меняться поисковая активность пользователей. В этой статье я опишу один из самых простых алгоритмов…",
+  "via": "blog",
+  "topics": [
+   "ppc",
+   "excel"
+  ]
+ },
+ {
+  "i": 1,
+  "title": "Анализ потерянных конверсий — полное руководство",
+  "src": "Netpeak Journal",
+  "y": 2015,
+  "m": 10,
+  "url": "https://netpeak.net/ru/blog/analiz-poteryannyh-konversiy-polnoe-rukovodstvo/",
+  "img": "https://netpeak.net/blog/card_facebook_analiz-poteryannyh-konversiy-polnoe-rukovodstvo.jpg?v=1504009165",
+  "desc": "Настраиваем автоматическое получение отчетов по потерянным конверсиям для оптимизации рекламных кампаний.",
+  "via": "",
+  "topics": [
+   "bi"
+  ]
+ },
+ {
+  "i": 2,
+  "title": "Лайфхак: бесплатная автоматическая отчетность по контекстной рекламе",
+  "src": "Cossa",
+  "y": 2015,
+  "m": 10,
+  "url": "https://www.cossa.ru/152/111725/",
+  "img": "https://www.cossa.ru/upload/iblock/04b/t644.jpg",
+  "desc": "Контекстная реклама — хоть и эффективное, но недешевое удовольствие. Только за сервисы, предоставляющие автоматическую отчетность по кампаниям, придется заплатить от $30 до $100. Но автоматизировать отчетность по контексту можно…",
+  "via": "",
+  "topics": [
+   "ppc"
+  ]
+ },
+ {
+  "i": 3,
+  "title": "Дополнение Google Analytics для Google Taблиц — полное руководство",
+  "src": "Netpeak Journal",
+  "y": 2015,
+  "m": 10,
+  "url": "https://netpeak.net/ru/blog/dopolnenie-google-analytics-dlya-google-tablits-polnoe-rukovodstvo/",
+  "img": "https://netpeak.net/blog/facebook_2f8d40dc8e23e94e1e38952c3f343cb40e3efa3c.png?v=1750321149",
+  "desc": "Как настроить визуализацию данных из Google Analytics с помощью Google Spreadsheets.",
+  "via": "",
+  "topics": [
+   "ga",
+   "excel"
+  ]
+ },
+ {
+  "i": 0,
+  "title": "Когортный анализ в Google Analytics: пошаговая инструкция",
+  "src": "Netpeak Journal",
+  "y": 2015,
+  "m": 9,
+  "url": "https://netpeak.net/ru/blog/kogortniy-analiz-v-google-analytics-poshagovaya-instruktsiya/",
+  "img": "https://netpeak.net/blog/card_facebook_kogortniy-analiz-v-google-analytics-poshagovaya-instruktsiya.png?v=1504009164",
+  "desc": "Отчет по когортному анализу в GA позволяет снять любые претензии в духе «прошел уже целый месяц, где результаты».",
+  "via": "",
+  "topics": [
+   "ga"
+  ]
+ }
+]

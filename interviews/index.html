@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Alexey Seleznev">
+    <meta name="theme-color" content="#030712">
+    <link rel="canonical" href="https://alexey-seleznev.pro/interviews/">
+
+    <title>Интервью | Алексей Селезнёв</title>
+    <meta name="title" content="Интервью | Алексей Селезнёв">
+    <meta name="description" content="Интервью, экспертные опросы и комментарии Алексея Селезнёва для vc.ru, SEOnews, AIN.UA, Лидзавода и других изданий — о языке R, веб-аналитике и рынке интернет-рекламы.">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alexey-seleznev.pro/interviews/">
+    <meta property="og:site_name" content="ALEXEY-SELEZNEV.pro">
+    <meta property="og:title" content="Интервью | Алексей Селезнёв">
+    <meta property="og:description" content="Интервью, экспертные опросы и комментарии Алексея Селезнёва для vc.ru, SEOnews, AIN.UA, Лидзавода и других изданий — о языке R, веб-аналитике и рынке интернет-рекламы.">
+    <meta property="og:image" content="https://alexey-seleznev.pro/photo.jpg">
+    <meta property="og:image:alt" content="Алексей Селезнёв">
+    <meta property="og:locale" content="ru_RU">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="https://alexey-seleznev.pro/interviews/">
+    <meta name="twitter:title" content="Интервью | Алексей Селезнёв">
+    <meta name="twitter:description" content="Интервью, экспертные опросы и комментарии Алексея Селезнёва для vc.ru, SEOnews, AIN.UA, Лидзавода и других изданий — о языке R, веб-аналитике и рынке интернет-рекламы.">
+    <meta name="twitter:image" content="https://alexey-seleznev.pro/photo.jpg">
+
+    <link rel="icon" type="image/jpeg" href="../logo.jpg">
+    <link rel="apple-touch-icon" href="../logo.jpg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body class="relative lang-en">
+
+    <!-- Interactive Background -->
+    <div id="vanta-bg"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full z-50 top-0 left-0 border-b border-white/5 bg-slate-950/60 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 h-16 flex items-center justify-between">
+            <a href="../" class="flex items-center gap-2 sm:gap-2.5 md:gap-3 group shrink min-w-0">
+                <img src="../logo.jpg" alt="Alexey Seleznev" class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 rounded-lg sm:rounded-xl object-cover shadow-md border border-white/10 group-hover:border-purple-500/50 group-hover:scale-105 transition-all shrink-0">
+                <span class="text-xs min-[400px]:text-sm sm:text-base md:text-xl font-black tracking-tight uppercase outfit-font whitespace-nowrap text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+            </a>
+            <div class="hidden xl:flex gap-6 text-sm font-semibold text-slate-400">
+                <a href="../" class="nav-link hover:text-white transition-colors"><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a>
+                <a href="../courses/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a>
+                <a href="../videos/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a>
+                <a href="../talks/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a>
+                <a href="../articles/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a>
+                <a href="../interviews/" class="nav-link hover:text-white transition-colors active"><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a>
+            </div>
+
+            <div class="flex items-center gap-1.5 sm:gap-2 md:gap-4 shrink-0">
+                <div class="lang-switcher flex gap-1 sm:gap-1.5 md:gap-2 text-[11px] sm:text-xs md:text-sm font-bold border-r border-white/10 pr-1.5 sm:pr-3 md:pr-4 mr-0.5 sm:mr-1 md:mr-2 outfit-font">
+                    <button onclick="changeLang('en')" id="btn-en" class="active hover:text-white transition-colors">EN</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ru')" id="btn-ru" class="text-slate-500 hover:text-white transition-colors">RU</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ua')" id="btn-ua" class="text-slate-500 hover:text-white transition-colors">UA</button>
+                </div>
+
+                <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="text-slate-400 hover:text-blue-400 transition-colors hidden sm:block" aria-label="Telegram"><i class="fa-brands fa-telegram text-lg md:text-xl"></i></a>
+                <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="text-slate-400 hover:text-white transition-colors hidden sm:block" aria-label="GitHub"><i class="fa-brands fa-github text-lg md:text-xl"></i></a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="xl:hidden w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-purple-500/20 hover:border-purple-500/40 transition-all focus:outline-none" aria-label="Toggle Navigation Menu">
+                    <i class="fa-solid fa-bars text-sm sm:text-lg" id="mobile-menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div id="mobile-menu" class="hidden xl:hidden border-t border-white/10 bg-slate-950/95 backdrop-blur-2xl shadow-2xl overflow-y-auto max-h-[calc(100vh-4rem)] transition-all">
+            <div class="max-w-7xl mx-auto px-6 py-6 space-y-1">
+                <a href="../" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-house text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span>
+                </a>
+                <a href="../courses/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-graduation-cap text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span>
+                </a>
+                <a href="../videos/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-circle-play text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span>
+                </a>
+                <a href="../talks/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-microphone-lines text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span>
+                </a>
+                <a href="../articles/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-pen-nib text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span>
+                </a>
+                <a href="../interviews/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-white bg-white/5 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-regular fa-newspaper text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span>
+                </a>
+
+                <div class="pt-4 mt-3 border-t border-white/10 flex items-center justify-around text-slate-400">
+                    <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-blue-400 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-telegram text-xl"></i> Telegram
+                    </a>
+                    <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="p-2 hover:text-white transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-github text-xl"></i> GitHub
+                    </a>
+                    <a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-red-500 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-youtube text-xl"></i> YouTube
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="pt-32 pb-12 px-6 max-w-7xl mx-auto relative z-10">
+        <a href="../" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-400 hover:text-white transition-colors mb-8 group" data-aos="fade-right">
+            <i class="fa-solid fa-arrow-left text-xs group-hover:-translate-x-1 transition-transform"></i>
+            <span class="ru-text">На главную</span><span class="ua-text">На головну</span><span class="en-text">Back to home</span>
+        </a>
+        <div data-aos="fade-up">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-bold tracking-widest uppercase mb-5 outfit-font">
+                <i class="fa-regular fa-newspaper"></i> <span class="ru-text">В медиа</span><span class="ua-text">У медіа</span><span class="en-text">In the media</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-black tracking-tight leading-tight uppercase mb-8"><span class="ru-text">Интервью и <span class="text-gradient">комментарии</span></span><span class="ua-text">Інтерв'ю та <span class="text-gradient">коментарі</span></span><span class="en-text">Interviews & <span class="text-gradient">Comments</span></span></h1>
+        </div>
+        <div class="bento-glass no-lift p-6 md:p-10 border-l-4 border-purple-500/50 mb-8" data-aos="fade-up" data-aos-delay="100">
+            <p class="text-lg md:text-xl text-slate-300 leading-relaxed font-light relative z-10"><span class="ru-text">Интервью, экспертные опросы и комментарии для профильных изданий: о языке R в маркетинге, профессии аналитика, сквозной аналитике, трендах веб-аналитики и изменениях на рекламном рынке Украины.</span><span class="ua-text">Інтерв'ю, експертні опитування та коментарі для профільних видань: про мову R у маркетингу, професію аналітика, наскрізну аналітику, тренди веб-аналітики та зміни на рекламному ринку України.</span><span class="en-text">Interviews, expert surveys and comments for industry media: on R in marketing, the analyst profession, end-to-end analytics, web analytics trends and changes in Ukraine's advertising market.</span></p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 bento-glass no-lift p-6 rounded-3xl" data-aos="fade-up" data-aos-delay="150">
+                <div class="bento-content">
+                    <div class="text-3xl md:text-4xl font-extrabold text-white outfit-font">9</div>
+                    <div class="text-xs text-slate-400 uppercase font-bold mt-1"><span class="ru-text">Публикаций</span><span class="ua-text">Публікацій</span><span class="en-text">Publications</span></div>
+                </div>
+                <div class="bento-content">
+                    <div class="text-3xl md:text-4xl font-extrabold text-white outfit-font">6</div>
+                    <div class="text-xs text-slate-400 uppercase font-bold mt-1"><span class="ru-text">Изданий</span><span class="ua-text">Видань</span><span class="en-text">Outlets</span></div>
+                </div>
+                <div class="bento-content">
+                    <div class="text-3xl md:text-4xl font-extrabold text-white outfit-font">2</div>
+                    <div class="text-xs text-slate-400 uppercase font-bold mt-1"><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></div>
+                </div>
+                <div class="bento-content">
+                    <div class="text-3xl md:text-4xl font-extrabold text-white outfit-font">2017–2019</div>
+                    <div class="text-xs text-slate-400 uppercase font-bold mt-1"><span class="ru-text">Годы</span><span class="ua-text">Роки</span><span class="en-text">Years</span></div>
+                </div>
+        </div>
+    </header>
+
+    <!-- CATALOG -->
+    <section class="px-6 max-w-7xl mx-auto pb-16 relative z-10">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10" data-aos="fade-up">
+            <div class="flex flex-wrap gap-2"><button type="button" data-filter-group="kind" data-filter-value="all" class="filter-btn active px-4 py-2 rounded-xl text-sm font-semibold flex items-center gap-2"><i class="fa-solid fa-layer-group text-xs text-purple-400"></i><span class="ru-text">Все</span><span class="ua-text">Усі</span><span class="en-text">All</span><span class="text-xs opacity-80 bg-white/10 px-2 py-0.5 rounded-full font-mono">9</span></button><button type="button" data-filter-group="kind" data-filter-value="interview" class="filter-btn px-4 py-2 rounded-xl text-sm font-semibold flex items-center gap-2"><i class="fa-solid fa-comments text-xs text-purple-400"></i><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interview</span><span class="text-xs opacity-80 bg-white/10 px-2 py-0.5 rounded-full font-mono">2</span></button><button type="button" data-filter-group="kind" data-filter-value="survey" class="filter-btn px-4 py-2 rounded-xl text-sm font-semibold flex items-center gap-2"><i class="fa-solid fa-users text-xs text-purple-400"></i><span class="ru-text">Экспертный опрос</span><span class="ua-text">Експертне опитування</span><span class="en-text">Expert survey</span><span class="text-xs opacity-80 bg-white/10 px-2 py-0.5 rounded-full font-mono">5</span></button><button type="button" data-filter-group="kind" data-filter-value="comment" class="filter-btn px-4 py-2 rounded-xl text-sm font-semibold flex items-center gap-2"><i class="fa-solid fa-quote-left text-xs text-purple-400"></i><span class="ru-text">Комментарий эксперта</span><span class="ua-text">Коментар експерта</span><span class="en-text">Expert comment</span><span class="text-xs opacity-80 bg-white/10 px-2 py-0.5 rounded-full font-mono">2</span></button></div>
+            <div class="relative w-full md:w-80"><i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-sm"></i><input type="search" data-filter-search class="search-input w-full rounded-xl pl-11 pr-4 py-2.5 text-sm text-white placeholder-slate-500" placeholder="Search…" data-ph-ru="Поиск…" data-ph-ua="Пошук…" data-ph-en="Search…"></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <a href="https://vc.ru/marketing/88194-skvoznaya-analitika-vse-li-ponimayut-etot-termin-odinakovo-chast-1-analitiki" target="_blank" rel="noopener" class="bento-glass group flex flex-col p-3 rounded-[2rem]" data-filter-item data-kind="survey" data-search="сквозная аналитика. все ли понимают этот термин одинаково? часть 1. аналитики наскрізна аналітика. чи всі розуміють цей термін однаково? частина 1. аналітики end-to-end analytics: does everyone mean the same thing? part 1. analysts vc.ru опрос k50 среди аналитиков: что такое сквозная аналитика, какие задачи она решает и с чего начинать её внедрение." data-aos="fade-up" data-aos-delay="0">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-52 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-regular fa-newspaper text-5xl"></i></div>
+                        <img src="https://api.vc.ru/v2.9/cover/fb/c/88194/1792946334/cover.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-4 left-4 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">окт. 2019</span><span class="ua-text">жовт. 2019</span><span class="en-text">Oct 2019</span></div>
+                        <div class="absolute bottom-4 left-4 flex items-center gap-2 text-sm font-bold text-white outfit-font"><span class="w-2 h-2 rounded-full bg-purple-400"></span><span class="ru-text">vc.ru</span><span class="ua-text">vc.ru</span><span class="en-text">vc.ru</span></div>
+                    </div>
+                    <div class="px-3 pt-5 pb-3 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2 flex items-center gap-2"><i class="fa-solid fa-users"></i><span class="ru-text">Экспертный опрос</span><span class="ua-text">Експертне опитування</span><span class="en-text">Expert survey</span></div>
+                        <h3 class="font-bold text-xl leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font mb-3"><span class="ru-text">Сквозная аналитика. Все ли понимают этот термин одинаково? Часть 1. Аналитики</span><span class="ua-text">Наскрізна аналітика. Чи всі розуміють цей термін однаково? Частина 1. Аналітики</span><span class="en-text">End-to-end analytics: does everyone mean the same thing? Part 1. Analysts</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed"><span class="ru-text">Опрос K50 среди аналитиков: что такое сквозная аналитика, какие задачи она решает и с чего начинать её внедрение.</span><span class="ua-text">Опитування K50 серед аналітиків: що таке наскрізна аналітика, які задачі вона вирішує і з чого починати її впровадження.</span><span class="en-text">A K50 survey of analysts: what end-to-end analytics is, what problems it solves and where to start.</span></p>
+                        <blockquote class="relative mt-5 pl-5 border-l-2 border-purple-500/50 text-sm italic text-slate-300 leading-relaxed">
+                            <i class="fa-solid fa-quote-left absolute -left-3 -top-2 text-purple-500/40 bg-[#0b1120] px-1"></i>
+                            <span class="ru-text">Сквозная аналитика позволяет увидеть всю картину целиком: рекламные системы, CRM, веб-аналитика и внутренние базы — это шестерёнки, которые нужно соединить в единый механизм.</span><span class="ua-text">Наскрізна аналітика дозволяє побачити всю картину цілком: рекламні системи, CRM, веб-аналітика та внутрішні бази — це шестерні, які треба з&#x27;єднати в єдиний механізм.</span><span class="en-text">End-to-end analytics shows you the whole picture: ad platforms, CRM, web analytics and internal databases are gears that need to be joined into a single mechanism.</span>
+                        </blockquote>
+                        <div class="mt-auto pt-5">
+                            <div class="pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                                <span class="font-semibold"><span class="ru-text">Читать полностью</span><span class="ua-text">Читати повністю</span><span class="en-text">Read in full</span></span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.seonews.ru/analytics/trendy-veb-analitiki-2019-uskorennye-testirovaniya-borba-s-divergentnostyu-i-uvazhenie-k-lyudyam/" target="_blank" rel="noopener" class="bento-glass group flex flex-col p-3 rounded-[2rem]" data-filter-item data-kind="survey" data-search="тренды веб-аналитики 2019: ускоренные тестирования, борьба с дивергентностью и уважение к людям тренди веб-аналітики 2019: прискорені тестування, боротьба з дивергентністю та повага до людей web analytics trends 2019: faster testing, fighting data divergence and respect for people seonews спикеры goanalytics — симо ахава, василий сабиров, евгений вербов и другие — о том, куда движется веб-аналитика." data-aos="fade-up" data-aos-delay="80">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-52 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-regular fa-newspaper text-5xl"></i></div>
+                        <img src="https://www.seonews.ru/upload/iblock/c52/c52a1086aa4e9cace1f635d82d15a572.png" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-4 left-4 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">апр. 2019</span><span class="ua-text">квіт. 2019</span><span class="en-text">Apr 2019</span></div>
+                        <div class="absolute bottom-4 left-4 flex items-center gap-2 text-sm font-bold text-white outfit-font"><span class="w-2 h-2 rounded-full bg-purple-400"></span><span class="ru-text">SEOnews</span><span class="ua-text">SEOnews</span><span class="en-text">SEOnews</span></div>
+                    </div>
+                    <div class="px-3 pt-5 pb-3 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2 flex items-center gap-2"><i class="fa-solid fa-users"></i><span class="ru-text">Экспертный опрос</span><span class="ua-text">Експертне опитування</span><span class="en-text">Expert survey</span></div>
+                        <h3 class="font-bold text-xl leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font mb-3"><span class="ru-text">Тренды веб-аналитики 2019: ускоренные тестирования, борьба с дивергентностью и уважение к людям</span><span class="ua-text">Тренди веб-аналітики 2019: прискорені тестування, боротьба з дивергентністю та повага до людей</span><span class="en-text">Web analytics trends 2019: faster testing, fighting data divergence and respect for people</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed"><span class="ru-text">Спикеры GoAnalytics — Симо Ахава, Василий Сабиров, Евгений Вербов и другие — о том, куда движется веб-аналитика.</span><span class="ua-text">Спікери GoAnalytics — Сімо Ахава, Василь Сабіров, Євген Вербов та інші — про те, куди рухається веб-аналітика.</span><span class="en-text">GoAnalytics speakers — Simo Ahava, Vasily Sabirov, Evgeny Verbov and others — on where web analytics is heading.</span></p>
+                        <blockquote class="relative mt-5 pl-5 border-l-2 border-purple-500/50 text-sm italic text-slate-300 leading-relaxed">
+                            <i class="fa-solid fa-quote-left absolute -left-3 -top-2 text-purple-500/40 bg-[#0b1120] px-1"></i>
+                            <span class="ru-text">Анализировать только онлайн уже недостаточно: нужны аналитические системы, которые оценивают влияние онлайна на офлайн и наоборот.</span><span class="ua-text">Аналізувати лише онлайн уже недостатньо: потрібні аналітичні системи, які оцінюють вплив онлайну на офлайн і навпаки.</span><span class="en-text">Analyzing online alone is no longer enough: you need analytics systems that measure how online affects offline and vice versa.</span>
+                        </blockquote>
+                        <div class="mt-auto pt-5">
+                            <div class="pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                                <span class="font-semibold"><span class="ru-text">Читать полностью</span><span class="ua-text">Читати повністю</span><span class="en-text">Read in full</span></span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.uiscom.ru/blog/r-python-javascript-ili-excel-chto-uchit-internet-marketologu-dlya-professionalnogo-rosta/" target="_blank" rel="noopener" class="bento-glass group flex flex-col p-3 rounded-[2rem]" data-filter-item data-kind="survey" data-search="r, python, javascript или… excel? что учить интернет-маркетологу для профессионального роста r, python, javascript чи… excel? що вчити інтернет-маркетологу для професійного зростання r, python, javascript or… excel? what should a marketer learn to grow comagic эксперты comagic (сейчас uis) сравнивают языки программирования и инструменты, которые стоит освоить маркетологу." data-aos="fade-up" data-aos-delay="0">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-52 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-regular fa-newspaper text-5xl"></i></div>
+                        <img src="https://uiscom.ru/upload/uf/559/i3r59ju902oygfqjtrgko6zgmij0lxf8.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-4 left-4 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">апр. 2019</span><span class="ua-text">квіт. 2019</span><span class="en-text">Apr 2019</span></div>
+                        <div class="absolute bottom-4 left-4 flex items-center gap-2 text-sm font-bold text-white outfit-font"><span class="w-2 h-2 rounded-full bg-purple-400"></span><span class="ru-text">CoMagic</span><span class="ua-text">CoMagic</span><span class="en-text">CoMagic</span></div>
+                    </div>
+                    <div class="px-3 pt-5 pb-3 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2 flex items-center gap-2"><i class="fa-solid fa-users"></i><span class="ru-text">Экспертный опрос</span><span class="ua-text">Експертне опитування</span><span class="en-text">Expert survey</span></div>
+                        <h3 class="font-bold text-xl leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font mb-3"><span class="ru-text">R, Python, JavaScript или… Excel? Что учить интернет-маркетологу для профессионального роста</span><span class="ua-text">R, Python, JavaScript чи… Excel? Що вчити інтернет-маркетологу для професійного зростання</span><span class="en-text">R, Python, JavaScript or… Excel? What should a marketer learn to grow</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed"><span class="ru-text">Эксперты CoMagic (сейчас UIS) сравнивают языки программирования и инструменты, которые стоит освоить маркетологу.</span><span class="ua-text">Експерти CoMagic (зараз UIS) порівнюють мови програмування та інструменти, які варто опанувати маркетологу.</span><span class="en-text">Experts at CoMagic (now UIS) compare the languages and tools a marketer should learn.</span></p>
+                        
+                        <div class="mt-auto pt-5">
+                            <div class="pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                                <span class="font-semibold"><span class="ru-text">Читать полностью</span><span class="ua-text">Читати повністю</span><span class="en-text">Read in full</span></span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://alexeyseleznev.wordpress.com/2019/02/21/%D0%BE%D0%BF%D1%80%D0%BE%D1%81-r-%D0%B8-python-%D0%B4%D0%BB%D1%8F-%D0%B3%D1%83%D0%BC%D0%B0%D0%BD%D0%B8%D1%82%D0%B0%D1%80%D0%B8%D0%B5%D0%B2-%D0%B8-%D0%BD%D0%B5%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0/" target="_blank" rel="noopener" class="bento-glass group flex flex-col p-3 rounded-[2rem]" data-filter-item data-kind="survey" data-search="r и python для гуманитариев и непрограммистов r та python для гуманітаріїв і непрограмістів r and python for humanities scholars and non-programmers цифровой дискурс опрос портала о цифровых исследованиях: какой язык выбрать тем, кто не планирует становиться программистом." data-aos="fade-up" data-aos-delay="80">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-52 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-regular fa-newspaper text-5xl"></i></div>
+                        <img src="https://www.digitalvidya.com/wp-content/uploads/2018/03/r-vs-python-1170x630.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-4 left-4 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">февр. 2019</span><span class="ua-text">лют. 2019</span><span class="en-text">Feb 2019</span></div><div class="absolute top-4 right-4 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-purple-500/20 text-purple-200 border border-purple-500/30"><span class="ru-text">копия в блоге</span><span class="ua-text">копія в блозі</span><span class="en-text">blog copy</span></div>
+                        <div class="absolute bottom-4 left-4 flex items-center gap-2 text-sm font-bold text-white outfit-font"><span class="w-2 h-2 rounded-full bg-purple-400"></span><span class="ru-text">Цифровой дискурс</span><span class="ua-text">Цифровой дискурс</span><span class="en-text">Digital Discourse</span></div>
+                    </div>
+                    <div class="px-3 pt-5 pb-3 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2 flex items-center gap-2"><i class="fa-solid fa-users"></i><span class="ru-text">Экспертный опрос</span><span class="ua-text">Експертне опитування</span><span class="en-text">Expert survey</span></div>
+                        <h3 class="font-bold text-xl leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font mb-3"><span class="ru-text">R и Python для гуманитариев и непрограммистов</span><span class="ua-text">R та Python для гуманітаріїв і непрограмістів</span><span class="en-text">R and Python for humanities scholars and non-programmers</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed"><span class="ru-text">Опрос портала о цифровых исследованиях: какой язык выбрать тем, кто не планирует становиться программистом.</span><span class="ua-text">Опитування порталу про цифрові дослідження: яку мову обрати тим, хто не планує ставати програмістом.</span><span class="en-text">A digital-humanities portal survey: which language to choose if you don&#x27;t plan to become a programmer.</span></p>
+                        <blockquote class="relative mt-5 pl-5 border-l-2 border-purple-500/50 text-sm italic text-slate-300 leading-relaxed">
+                            <i class="fa-solid fa-quote-left absolute -left-3 -top-2 text-purple-500/40 bg-[#0b1120] px-1"></i>
+                            <span class="ru-text">Практически любую задачу по сбору, очистке и визуализации данных одинаково эффективно решают и R, и Python. R удобнее для манипуляции данными и визуализации, Python — если планируете веб-программирование.</span><span class="ua-text">Практично будь-яку задачу зі збору, очищення та візуалізації даних однаково ефективно вирішують і R, і Python. R зручніший для маніпуляції даними та візуалізації, Python — якщо плануєте веб-програмування.</span><span class="en-text">R and Python handle almost any data collection, cleaning or visualization task equally well. R is more convenient for data manipulation and dataviz; Python, if you also plan to do web development.</span>
+                        </blockquote>
+                        <div class="mt-auto pt-5">
+                            <div class="pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                                <span class="font-semibold"><span class="ru-text">Читать полностью</span><span class="ua-text">Читати повністю</span><span class="en-text">Read in full</span></span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://leadzavod.com/jazyk-r-v-veb-analitike-i-internet-marketinge/" target="_blank" rel="noopener" class="bento-glass group flex flex-col p-3 rounded-[2rem]" data-filter-item data-kind="interview" data-search="язык r в веб-аналитике и интернет-маркетинге мова r у веб-аналітиці та інтернет-маркетингу r in web analytics and digital marketing лидзавод зачем маркетологам и аналитикам программирование на r, какую пользу оно даёт в повседневной работе и с чего начать." data-aos="fade-up" data-aos-delay="0">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-52 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-regular fa-newspaper text-5xl"></i></div>
+                        <img src="https://leadzavod.com/wp-content/uploads/2018/10/jazyk-r-v-veb-analitike-i-internet-marketinge.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-4 left-4 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">окт. 2018</span><span class="ua-text">жовт. 2018</span><span class="en-text">Oct 2018</span></div>
+                        <div class="absolute bottom-4 left-4 flex items-center gap-2 text-sm font-bold text-white outfit-font"><span class="w-2 h-2 rounded-full bg-purple-400"></span><span class="ru-text">Лидзавод</span><span class="ua-text">Лидзавод</span><span class="en-text">Leadzavod</span></div>
+                    </div>
+                    <div class="px-3 pt-5 pb-3 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2 flex items-center gap-2"><i class="fa-solid fa-comments"></i><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interview</span></div>
+                        <h3 class="font-bold text-xl leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font mb-3"><span class="ru-text">Язык R в веб-аналитике и интернет-маркетинге</span><span class="ua-text">Мова R у веб-аналітиці та інтернет-маркетингу</span><span class="en-text">R in web analytics and digital marketing</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed"><span class="ru-text">Зачем маркетологам и аналитикам программирование на R, какую пользу оно даёт в повседневной работе и с чего начать.</span><span class="ua-text">Навіщо маркетологам і аналітикам програмування на R, яку користь воно дає в повсякденній роботі і з чого почати.</span><span class="en-text">Why marketers and analysts need R, how it helps day to day, and where to start.</span></p>
+                        <blockquote class="relative mt-5 pl-5 border-l-2 border-purple-500/50 text-sm italic text-slate-300 leading-relaxed">
+                            <i class="fa-solid fa-quote-left absolute -left-3 -top-2 text-purple-500/40 bg-[#0b1120] px-1"></i>
+                            <span class="ru-text">Преимущество R — в огромном количестве пакетов: они автоматизируют работу с рекламными и аналитическими платформами, то есть 80% работы за вас уже выполнили.</span><span class="ua-text">Перевага R — у величезній кількості пакетів: вони автоматизують роботу з рекламними та аналітичними платформами, тобто 80% роботи за вас уже виконали.</span><span class="en-text">R&#x27;s strength is its huge number of packages: they automate work with ad and analytics platforms, so 80% of the job is already done for you.</span>
+                        </blockquote>
+                        <div class="mt-auto pt-5">
+                            <div class="pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                                <span class="font-semibold"><span class="ru-text">Читать полностью</span><span class="ua-text">Читати повністю</span><span class="en-text">Read in full</span></span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://alexeyseleznev.wordpress.com/2018/04/02/%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D0%B2%D1%8C%D1%8E-%D0%B4%D0%BB%D1%8F-%D0%BF%D0%BE%D1%80%D1%82%D0%B0%D0%BB%D0%B0-%D1%86%D0%B8%D1%84%D1%80%D0%BE%D0%B2%D0%BE%D0%B9-%D0%B4%D0%B8%D1%81%D0%BA%D1%83%D1%80/" target="_blank" rel="noopener" class="bento-glass group flex flex-col p-3 rounded-[2rem]" data-filter-item data-kind="interview" data-search="кто такие интернет-аналитики и какими инструментами они пользуются хто такі інтернет-аналітики та якими інструментами вони користуються who web analysts are and which tools they use цифровой дискурс какие навыки нужны интернет-аналитику, как устроена работа отдела аналитики и при чём здесь язык r." data-aos="fade-up" data-aos-delay="80">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-52 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-regular fa-newspaper text-5xl"></i></div>
+                        
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-4 left-4 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">апр. 2018</span><span class="ua-text">квіт. 2018</span><span class="en-text">Apr 2018</span></div><div class="absolute top-4 right-4 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-purple-500/20 text-purple-200 border border-purple-500/30"><span class="ru-text">копия в блоге</span><span class="ua-text">копія в блозі</span><span class="en-text">blog copy</span></div>
+                        <div class="absolute bottom-4 left-4 flex items-center gap-2 text-sm font-bold text-white outfit-font"><span class="w-2 h-2 rounded-full bg-purple-400"></span><span class="ru-text">Цифровой дискурс</span><span class="ua-text">Цифровой дискурс</span><span class="en-text">Digital Discourse</span></div>
+                    </div>
+                    <div class="px-3 pt-5 pb-3 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2 flex items-center gap-2"><i class="fa-solid fa-comments"></i><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interview</span></div>
+                        <h3 class="font-bold text-xl leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font mb-3"><span class="ru-text">Кто такие интернет-аналитики и какими инструментами они пользуются</span><span class="ua-text">Хто такі інтернет-аналітики та якими інструментами вони користуються</span><span class="en-text">Who web analysts are and which tools they use</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed"><span class="ru-text">Какие навыки нужны интернет-аналитику, как устроена работа отдела аналитики и при чём здесь язык R.</span><span class="ua-text">Які навички потрібні інтернет-аналітику, як влаштована робота відділу аналітики і до чого тут мова R.</span><span class="en-text">The skills a web analyst needs, how an analytics department works, and where R fits in.</span></p>
+                        <blockquote class="relative mt-5 pl-5 border-l-2 border-purple-500/50 text-sm italic text-slate-300 leading-relaxed">
+                            <i class="fa-solid fa-quote-left absolute -left-3 -top-2 text-purple-500/40 bg-[#0b1120] px-1"></i>
+                            <span class="ru-text">Аналитический склад ума говорит о том, что человек умеет размышлять логично и последовательно.</span><span class="ua-text">Аналітичний склад розуму говорить про те, що людина вміє міркувати логічно й послідовно.</span><span class="en-text">An analytical mind means a person can reason logically and consistently.</span>
+                        </blockquote>
+                        <div class="mt-auto pt-5">
+                            <div class="pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                                <span class="font-semibold"><span class="ru-text">Читать полностью</span><span class="ua-text">Читати повністю</span><span class="en-text">Read in full</span></span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://ain.ua/ru/2017/12/27/itogi-2017-blokirovki/" target="_blank" rel="noopener" class="bento-glass group flex flex-col p-3 rounded-[2rem]" data-filter-item data-kind="comment" data-search="итоги-2017: как бан российских сайтов повлиял на украинский рекламный рынок підсумки-2017: як бан російських сайтів вплинув на український рекламний ринок 2017 in review: how the ban on russian websites changed ukraine&#x27;s ad market ain.ua как изменились интересы пользователей и рейтинги сайтов и куда перетекли рекламные бюджеты по итогам года." data-aos="fade-up" data-aos-delay="0">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-52 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-regular fa-newspaper text-5xl"></i></div>
+                        <img src="https://cdn.ain.ua/ua/og-images/LKjntMTzot8qGOwy75zIrfjn6IrL6ESTUffxanSk.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-4 left-4 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">дек. 2017</span><span class="ua-text">груд. 2017</span><span class="en-text">Dec 2017</span></div>
+                        <div class="absolute bottom-4 left-4 flex items-center gap-2 text-sm font-bold text-white outfit-font"><span class="w-2 h-2 rounded-full bg-purple-400"></span><span class="ru-text">AIN.UA</span><span class="ua-text">AIN.UA</span><span class="en-text">AIN.UA</span></div>
+                    </div>
+                    <div class="px-3 pt-5 pb-3 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2 flex items-center gap-2"><i class="fa-solid fa-quote-left"></i><span class="ru-text">Комментарий эксперта</span><span class="ua-text">Коментар експерта</span><span class="en-text">Expert comment</span></div>
+                        <h3 class="font-bold text-xl leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font mb-3"><span class="ru-text">Итоги-2017: как бан российских сайтов повлиял на украинский рекламный рынок</span><span class="ua-text">Підсумки-2017: як бан російських сайтів вплинув на український рекламний ринок</span><span class="en-text">2017 in review: how the ban on Russian websites changed Ukraine&#x27;s ad market</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed"><span class="ru-text">Как изменились интересы пользователей и рейтинги сайтов и куда перетекли рекламные бюджеты по итогам года.</span><span class="ua-text">Як змінилися інтереси користувачів і рейтинги сайтів та куди перетекли рекламні бюджети за підсумками року.</span><span class="en-text">How user interests and site rankings shifted, and where ad budgets moved by year-end.</span></p>
+                        
+                        <div class="mt-auto pt-5">
+                            <div class="pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                                <span class="font-semibold"><span class="ru-text">Читать полностью</span><span class="ua-text">Читати повністю</span><span class="en-text">Read in full</span></span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://ain.ua/ru/2017/08/21/ban-rossijskix-sajtov-tri-mesyaca-spustya/" target="_blank" rel="noopener" class="bento-glass group flex flex-col p-3 rounded-[2rem]" data-filter-item data-kind="comment" data-search="результаты бана российских сайтов: падение охватов и передел бюджетов результати бану російських сайтів: падіння охоплень і переділ бюджетів the russian website ban three months on: falling reach and reshuffled budgets ain.ua три месяца после блокировок: что произошло с популярностью сайтов и как рекламодатели перераспределили бюджеты." data-aos="fade-up" data-aos-delay="80">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-52 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-regular fa-newspaper text-5xl"></i></div>
+                        <img src="https://cdn.ain.ua/ua/og-images/o2ZugCnymrvFJaqvtJjZyaUEy2Mt317kKgQR57ak.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-4 left-4 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">авг. 2017</span><span class="ua-text">серп. 2017</span><span class="en-text">Aug 2017</span></div>
+                        <div class="absolute bottom-4 left-4 flex items-center gap-2 text-sm font-bold text-white outfit-font"><span class="w-2 h-2 rounded-full bg-purple-400"></span><span class="ru-text">AIN.UA</span><span class="ua-text">AIN.UA</span><span class="en-text">AIN.UA</span></div>
+                    </div>
+                    <div class="px-3 pt-5 pb-3 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2 flex items-center gap-2"><i class="fa-solid fa-quote-left"></i><span class="ru-text">Комментарий эксперта</span><span class="ua-text">Коментар експерта</span><span class="en-text">Expert comment</span></div>
+                        <h3 class="font-bold text-xl leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font mb-3"><span class="ru-text">Результаты бана российских сайтов: падение охватов и передел бюджетов</span><span class="ua-text">Результати бану російських сайтів: падіння охоплень і переділ бюджетів</span><span class="en-text">The Russian website ban three months on: falling reach and reshuffled budgets</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed"><span class="ru-text">Три месяца после блокировок: что произошло с популярностью сайтов и как рекламодатели перераспределили бюджеты.</span><span class="ua-text">Три місяці після блокувань: що сталося з популярністю сайтів і як рекламодавці перерозподілили бюджети.</span><span class="en-text">Three months after the blocks: what happened to site popularity and how advertisers reallocated budgets.</span></p>
+                        
+                        <div class="mt-auto pt-5">
+                            <div class="pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                                <span class="font-semibold"><span class="ru-text">Читать полностью</span><span class="ua-text">Читати повністю</span><span class="en-text">Read in full</span></span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://ain.ua/ru/2017/08/18/kak-pomenyalis-ceny-na-reklamu/" target="_blank" rel="noopener" class="bento-glass group flex flex-col p-3 rounded-[2rem]" data-filter-item data-kind="survey" data-search="как поменялись цены на рекламу после бана российских сайтов: блиц-опрос як змінилися ціни на рекламу після бану російських сайтів: бліц-опитування how ad prices changed after the russian website ban: a quick survey ain.ua эксперты рынка — о ценах на рекламу в google, росте его доли и перераспределении рекламных бюджетов." data-aos="fade-up" data-aos-delay="0">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-52 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-regular fa-newspaper text-5xl"></i></div>
+                        <img src="https://cdn.ain.ua/ua/og-images/pQFi0CRIP3BOpDj8AHKlpM8PIxi49wFoY5D99kIL.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-4 left-4 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">авг. 2017</span><span class="ua-text">серп. 2017</span><span class="en-text">Aug 2017</span></div>
+                        <div class="absolute bottom-4 left-4 flex items-center gap-2 text-sm font-bold text-white outfit-font"><span class="w-2 h-2 rounded-full bg-purple-400"></span><span class="ru-text">AIN.UA</span><span class="ua-text">AIN.UA</span><span class="en-text">AIN.UA</span></div>
+                    </div>
+                    <div class="px-3 pt-5 pb-3 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2 flex items-center gap-2"><i class="fa-solid fa-users"></i><span class="ru-text">Экспертный опрос</span><span class="ua-text">Експертне опитування</span><span class="en-text">Expert survey</span></div>
+                        <h3 class="font-bold text-xl leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font mb-3"><span class="ru-text">Как поменялись цены на рекламу после бана российских сайтов: блиц-опрос</span><span class="ua-text">Як змінилися ціни на рекламу після бану російських сайтів: бліц-опитування</span><span class="en-text">How ad prices changed after the Russian website ban: a quick survey</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed"><span class="ru-text">Эксперты рынка — о ценах на рекламу в Google, росте его доли и перераспределении рекламных бюджетов.</span><span class="ua-text">Експерти ринку — про ціни на рекламу в Google, зростання його частки та перерозподіл рекламних бюджетів.</span><span class="en-text">Market experts on Google ad prices, its growing share and how budgets were redistributed.</span></p>
+                        
+                        <div class="mt-auto pt-5">
+                            <div class="pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                                <span class="font-semibold"><span class="ru-text">Читать полностью</span><span class="ua-text">Читати повністю</span><span class="en-text">Read in full</span></span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div data-filter-empty class="hidden bento-glass no-lift p-10 text-center text-slate-400 rounded-3xl">
+            <i class="fa-solid fa-magnifying-glass text-3xl text-purple-400/60 mb-4"></i>
+            <p><span class="ru-text">Ничего не найдено — попробуйте изменить фильтр или запрос.</span><span class="ua-text">Нічого не знайдено — спробуйте змінити фільтр або запит.</span><span class="en-text">Nothing found — try another filter or query.</span></p>
+        </div>
+    </section>
+
+    <section class="px-6 max-w-7xl mx-auto pb-24 relative z-10">
+        <div class="grid md:grid-cols-2 gap-6" data-aos="fade-up">
+            <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(59, 130, 246, 0.1));">
+                <div class="bento-content w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center text-blue-400 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-telegram"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">Telegram-канал R4marketing</span><span class="ua-text">Telegram-канал R4marketing</span><span class="en-text">R4marketing on Telegram</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Новые статьи, видео и заметки по R — первыми.</span><span class="ua-text">Нові статті, відео та нотатки з R — першими.</span><span class="en-text">New articles, videos and R notes — first.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-blue-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+            <a href="https://www.youtube.com/R4marketing/?sub_confirmation=1" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(239, 68, 68, 0.1));">
+                <div class="bento-content w-16 h-16 bg-red-500/20 rounded-2xl flex items-center justify-center text-red-500 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-youtube"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">YouTube-канал R4marketing</span><span class="ua-text">YouTube-канал R4marketing</span><span class="en-text">R4marketing on YouTube</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Видеоуроки по R, аналитике и AI-инструментам.</span><span class="ua-text">Відеоуроки з R, аналітики та AI-інструментів.</span><span class="en-text">Video lessons on R, analytics and AI tools.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-red-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/5 bg-slate-950/80 backdrop-blur-md pt-20 pb-10 text-center relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-3xl font-extrabold mb-10 outfit-font"><span class="ru-text">Следите за обновлениями в R4marketing</span><span class="ua-text">Стежте за оновленнями в R4marketing</span><span class="en-text">Follow R4marketing updates</span></h2>
+            <div class="flex justify-center gap-8 mb-16">
+                <a href="https://t.me/R4marketing" class="w-16 h-16 rounded-3xl bg-blue-500/10 flex items-center justify-center text-blue-400 text-3xl hover:bg-blue-500 hover:text-white transition-all transform hover:scale-110 hover:-translate-y-2 border border-blue-500/20 shadow-lg" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                <a href="https://www.youtube.com/R4marketing" class="w-16 h-16 rounded-3xl bg-red-500/10 flex items-center justify-center text-red-500 text-3xl hover:bg-red-500 hover:text-white transition-all transform hover:scale-110 hover:-translate-y-2 border border-red-500/20 shadow-lg" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                <a href="https://habr.com/ru/users/selesnow/" class="w-16 h-16 rounded-3xl bg-slate-700/30 flex items-center justify-center text-white text-3xl hover:bg-slate-600 transition-all transform hover:scale-110 hover:-translate-y-2 border border-slate-600/50 shadow-lg" aria-label="Habr"><i class="fa-solid fa-h"></i></a>
+            </div>
+            <div class="mb-6"><a href="../" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-400 hover:text-white transition-colors outfit-font"><i class="fa-solid fa-house text-purple-400/80 text-xs"></i> ALEXEY-SELEZNEV<span class="text-purple-500 -ml-2">.pro</span></a></div>
+            <nav class="flex flex-wrap justify-center gap-x-8 gap-y-3 mb-12 text-sm font-semibold text-slate-400 outfit-font" aria-label="Site pages">
+                <a href="../courses/" class="flex items-center gap-2 hover:text-white transition-colors"><i class="fa-solid fa-graduation-cap text-purple-400/80 text-xs"></i> <span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a>
+                <a href="../videos/" class="flex items-center gap-2 hover:text-white transition-colors"><i class="fa-solid fa-circle-play text-purple-400/80 text-xs"></i> <span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a>
+                <a href="../talks/" class="flex items-center gap-2 hover:text-white transition-colors"><i class="fa-solid fa-microphone-lines text-purple-400/80 text-xs"></i> <span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a>
+                <a href="../articles/" class="flex items-center gap-2 hover:text-white transition-colors"><i class="fa-solid fa-pen-nib text-purple-400/80 text-xs"></i> <span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a>
+                <a href="../interviews/" class="flex items-center gap-2 hover:text-white transition-colors"><i class="fa-regular fa-newspaper text-purple-400/80 text-xs"></i> <span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a>
+            </nav>
+            <p class="text-slate-500 text-sm font-mono tracking-widest uppercase">© 2026 Alexey Seleznev. Modernized Vision.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script src="../assets/site.js"></script>
+</body>
+</html>

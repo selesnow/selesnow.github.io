@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Alexey Seleznev">
+    <meta name="theme-color" content="#030712">
+    <link rel="canonical" href="https://alexey-seleznev.pro/talks/">
+
+    <title>Доклады и вебинары | Алексей Селезнёв</title>
+    <meta name="title" content="Доклады и вебинары | Алексей Селезнёв">
+    <meta name="description" content="22 докладов, воркшопов и вебинаров Алексея Селезнёва с конференций 8P, Матемаркетинг, GoAnalytics, Analyze! и других: язык R, API рекламных систем, BI и аналитика.">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alexey-seleznev.pro/talks/">
+    <meta property="og:site_name" content="ALEXEY-SELEZNEV.pro">
+    <meta property="og:title" content="Доклады и вебинары | Алексей Селезнёв">
+    <meta property="og:description" content="22 докладов, воркшопов и вебинаров Алексея Селезнёва с конференций 8P, Матемаркетинг, GoAnalytics, Analyze! и других: язык R, API рекламных систем, BI и аналитика.">
+    <meta property="og:image" content="https://alexey-seleznev.pro/photo.jpg">
+    <meta property="og:image:alt" content="Алексей Селезнёв">
+    <meta property="og:locale" content="ru_RU">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="https://alexey-seleznev.pro/talks/">
+    <meta name="twitter:title" content="Доклады и вебинары | Алексей Селезнёв">
+    <meta name="twitter:description" content="22 докладов, воркшопов и вебинаров Алексея Селезнёва с конференций 8P, Матемаркетинг, GoAnalytics, Analyze! и других: язык R, API рекламных систем, BI и аналитика.">
+    <meta name="twitter:image" content="https://alexey-seleznev.pro/photo.jpg">
+
+    <link rel="icon" type="image/jpeg" href="../logo.jpg">
+    <link rel="apple-touch-icon" href="../logo.jpg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body class="relative lang-en">
+
+    <!-- Interactive Background -->
+    <div id="vanta-bg"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full z-50 top-0 left-0 border-b border-white/5 bg-slate-950/60 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 h-16 flex items-center justify-between">
+            <a href="../" class="flex items-center gap-2 sm:gap-2.5 md:gap-3 group shrink min-w-0">
+                <img src="../logo.jpg" alt="Alexey Seleznev" class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 rounded-lg sm:rounded-xl object-cover shadow-md border border-white/10 group-hover:border-purple-500/50 group-hover:scale-105 transition-all shrink-0">
+                <span class="text-xs min-[400px]:text-sm sm:text-base md:text-xl font-black tracking-tight uppercase outfit-font whitespace-nowrap text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+            </a>
+            <div class="hidden xl:flex gap-6 text-sm font-semibold text-slate-400">
+                <a href="../" class="nav-link hover:text-white transition-colors"><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a>
+                <a href="../courses/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a>
+                <a href="../videos/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a>
+                <a href="../talks/" class="nav-link hover:text-white transition-colors active"><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a>
+                <a href="../articles/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a>
+                <a href="../interviews/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a>
+            </div>
+
+            <div class="flex items-center gap-1.5 sm:gap-2 md:gap-4 shrink-0">
+                <div class="lang-switcher flex gap-1 sm:gap-1.5 md:gap-2 text-[11px] sm:text-xs md:text-sm font-bold border-r border-white/10 pr-1.5 sm:pr-3 md:pr-4 mr-0.5 sm:mr-1 md:mr-2 outfit-font">
+                    <button onclick="changeLang('en')" id="btn-en" class="active hover:text-white transition-colors">EN</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ru')" id="btn-ru" class="text-slate-500 hover:text-white transition-colors">RU</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ua')" id="btn-ua" class="text-slate-500 hover:text-white transition-colors">UA</button>
+                </div>
+
+                <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="text-slate-400 hover:text-blue-400 transition-colors hidden sm:block" aria-label="Telegram"><i class="fa-brands fa-telegram text-lg md:text-xl"></i></a>
+                <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="text-slate-400 hover:text-white transition-colors hidden sm:block" aria-label="GitHub"><i class="fa-brands fa-github text-lg md:text-xl"></i></a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="xl:hidden w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-purple-500/20 hover:border-purple-500/40 transition-all focus:outline-none" aria-label="Toggle Navigation Menu">
+                    <i class="fa-solid fa-bars text-sm sm:text-lg" id="mobile-menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div id="mobile-menu" class="hidden xl:hidden border-t border-white/10 bg-slate-950/95 backdrop-blur-2xl shadow-2xl overflow-y-auto max-h-[calc(100vh-4rem)] transition-all">
+            <div class="max-w-7xl mx-auto px-6 py-6 space-y-1">
+                <a href="../" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-house text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span>
+                </a>
+                <a href="../courses/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-graduation-cap text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span>
+                </a>
+                <a href="../videos/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-circle-play text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span>
+                </a>
+                <a href="../talks/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-white bg-white/5 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-microphone-lines text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span>
+                </a>
+                <a href="../articles/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-pen-nib text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span>
+                </a>
+                <a href="../interviews/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-regular fa-newspaper text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span>
+                </a>
+
+                <div class="pt-4 mt-3 border-t border-white/10 flex items-center justify-around text-slate-400">
+                    <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-blue-400 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-telegram text-xl"></i> Telegram
+                    </a>
+                    <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="p-2 hover:text-white transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-github text-xl"></i> GitHub
+                    </a>
+                    <a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-red-500 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-youtube text-xl"></i> YouTube
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="pt-32 pb-12 px-6 max-w-7xl mx-auto relative z-10">
+        <a href="../" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-400 hover:text-white transition-colors mb-8 group" data-aos="fade-right">
+            <i class="fa-solid fa-arrow-left text-xs group-hover:-translate-x-1 transition-transform"></i>
+            <span class="ru-text">На главную</span><span class="ua-text">На головну</span><span class="en-text">Back to home</span>
+        </a>
+        <div data-aos="fade-up">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-bold tracking-widest uppercase mb-5 outfit-font">
+                <i class="fa-solid fa-microphone-lines"></i> <span class="ru-text">Спикер</span><span class="ua-text">Спікер</span><span class="en-text">Speaker</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-black tracking-tight leading-tight uppercase mb-8"><span class="ru-text">Доклады и <span class="text-gradient">вебинары</span></span><span class="ua-text">Доповіді та <span class="text-gradient">вебінари</span></span><span class="en-text">Talks & <span class="text-gradient">Webinars</span></span></h1>
+        </div>
+        <div class="bento-glass no-lift p-6 md:p-10 border-l-4 border-purple-500/50 mb-8" data-aos="fade-up" data-aos-delay="100">
+            <p class="text-lg md:text-xl text-slate-300 leading-relaxed font-light relative z-10"><span class="ru-text">Регулярно выступаю на крупнейших отраслевых конференциях по аналитике и интернет-маркетингу — 8P, Матемаркетинг, GoAnalytics, Analyze! — и провожу вебинары и воркшопы для образовательных платформ. Делюсь практическим опытом автоматизации, работы с API рекламных систем и построения BI-решений. Нажмите на карточку, чтобы посмотреть запись прямо здесь.</span><span class="ua-text">Регулярно виступаю на найбільших галузевих конференціях з аналітики та інтернет-маркетингу — 8P, Матемаркетинг, GoAnalytics, Analyze! — і проводжу вебінари та воркшопи для освітніх платформ. Ділюся практичним досвідом автоматизації, роботи з API рекламних систем і побудови BI-рішень. Натисніть на картку, щоб переглянути запис просто тут.</span><span class="en-text">I speak regularly at major analytics and digital marketing conferences — 8P, Matemarketing, GoAnalytics, Analyze! — and run webinars and workshops for education platforms, sharing hands-on experience in automation, ad-platform APIs and BI. Click any card to watch the recording right here.</span></p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 bento-glass no-lift p-6 rounded-3xl" data-aos="fade-up" data-aos-delay="150">
+                <div class="bento-content">
+                    <div class="text-3xl md:text-4xl font-extrabold text-white outfit-font">22</div>
+                    <div class="text-xs text-slate-400 uppercase font-bold mt-1"><span class="ru-text">Выступлений</span><span class="ua-text">Виступів</span><span class="en-text">Talks</span></div>
+                </div>
+                <div class="bento-content">
+                    <div class="text-3xl md:text-4xl font-extrabold text-white outfit-font">15</div>
+                    <div class="text-xs text-slate-400 uppercase font-bold mt-1"><span class="ru-text">Конференции</span><span class="ua-text">Конференції</span><span class="en-text">Conferences</span></div>
+                </div>
+                <div class="bento-content">
+                    <div class="text-3xl md:text-4xl font-extrabold text-white outfit-font">7</div>
+                    <div class="text-xs text-slate-400 uppercase font-bold mt-1"><span class="ru-text">Вебинары</span><span class="ua-text">Вебінари</span><span class="en-text">Webinars</span></div>
+                </div>
+                <div class="bento-content">
+                    <div class="text-3xl md:text-4xl font-extrabold text-white outfit-font">2017–2023</div>
+                    <div class="text-xs text-slate-400 uppercase font-bold mt-1"><span class="ru-text">Годы</span><span class="ua-text">Роки</span><span class="en-text">Years</span></div>
+                </div>
+        </div>
+    </header>
+
+    <!-- FEATURED -->
+    <section class="px-6 max-w-7xl mx-auto pb-16 relative z-10">
+        <a href="https://www.youtube.com/watch?v=EnImByySQEE" target="_blank" rel="noopener" data-video="EnImByySQEE" class="bento-glass group block p-5 sm:p-7 lg:p-8 rounded-3xl border border-purple-500/30 shadow-[0_0_35px_rgba(168,85,247,0.15)]" data-aos="fade-up">
+            <div class="bento-content grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+                <div class="lg:col-span-7">
+                    <div class="relative w-full pb-[56.25%] rounded-2xl overflow-hidden bg-slate-950 shadow-2xl border border-white/10">
+                        <img src="https://img.youtube.com/vi/EnImByySQEE/hqdefault.jpg" alt="" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-black/30"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-red-600/95 text-white flex items-center justify-center shadow-[0_0_30px_rgba(239,68,68,0.6)] backdrop-blur-md group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300"><i class="fa-solid fa-play ml-1.5 text-xl sm:text-2xl"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-5">
+                    <span class="inline-flex px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-purple-500/20 text-purple-300 border border-purple-500/40 items-center gap-1.5 mb-4"><i class="fa-solid fa-star text-[10px] text-yellow-400"></i><span class="ru-text">Последнее выступление</span><span class="ua-text">Останній виступ</span><span class="en-text">Latest talk</span></span>
+                    <div class="text-xs font-mono font-bold text-purple-400 uppercase tracking-widest mb-2"><span class="ru-text">сент. 2023</span><span class="ua-text">верес. 2023</span><span class="en-text">Sep 2023</span> • Kazakhstan Sociology Lab</div>
+                    <h2 class="text-2xl lg:text-3xl font-extrabold text-white leading-snug outfit-font mb-4" data-video-title><span class="ru-text">Анализ показателя качества ключевых слов в Google Ads с помощью пакета rgoogleads</span><span class="ua-text">Аналіз показника якості ключових слів у Google Ads за допомогою пакета rgoogleads</span><span class="en-text">Analyzing Google Ads keyword Quality Score with the rgoogleads package</span></h2>
+                    <p class="text-sm text-slate-300 leading-relaxed font-light mb-6"><span class="ru-text">С нуля проходим авторизацию в Google Ads API, запрашиваем отчёты и анализируем показатель качества ключевых слов рекламного аккаунта с помощью R.</span><span class="ua-text">З нуля проходимо авторизацію в Google Ads API, запитуємо звіти та аналізуємо показник якості ключових слів рекламного акаунта за допомогою R.</span><span class="en-text">From scratch: authorizing in the Google Ads API, requesting reports and analyzing the account&#x27;s keyword Quality Score with R.</span></p>
+                    <span class="inline-flex px-5 py-3 rounded-xl bg-purple-600 group-hover:bg-purple-500 text-white font-bold text-sm transition-all items-center gap-2 shadow-[0_0_20px_rgba(168,85,247,0.4)]"><i class="fa-solid fa-play text-xs"></i><span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Play video</span></span>
+                </div>
+            </div>
+        </a>
+    </section>
+
+    <!-- CATALOG -->
+    <section class="px-6 max-w-7xl mx-auto pb-16 relative z-10">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8" data-aos="fade-up">
+            <div>
+                <h2 class="text-3xl font-extrabold outfit-font mb-2"><span class="ru-text">Все записи</span><span class="ua-text">Усі записи</span><span class="en-text">All recordings</span></h2>
+                <p class="text-slate-400 text-sm"><span class="ru-text">Показано</span><span class="ua-text">Показано</span><span class="en-text">Showing</span>: <span data-filter-count class="font-mono text-white">22</span></p>
+            </div>
+            <div class="relative w-full md:w-80"><i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-sm"></i><input type="search" data-filter-search class="search-input w-full rounded-xl pl-11 pr-4 py-2.5 text-sm text-white placeholder-slate-500" placeholder="Search talks…" data-ph-ru="Поиск по докладам…" data-ph-ua="Пошук за доповідями…" data-ph-en="Search talks…"></div>
+        </div>
+        <div class="flex flex-wrap items-center gap-3 mb-8" data-aos="fade-up">
+            <button type="button" data-filter-group="cat" data-filter-value="all" class="filter-btn active px-4 py-2 rounded-xl text-sm font-semibold flex items-center gap-2"><i class="fa-solid fa-layer-group text-xs text-purple-400"></i><span class="ru-text">Все</span><span class="ua-text">Усі</span><span class="en-text">All</span><span class="text-xs opacity-80 bg-white/10 px-2 py-0.5 rounded-full font-mono">22</span></button>
+            <button type="button" data-filter-group="cat" data-filter-value="conference" class="filter-btn px-4 py-2 rounded-xl text-sm font-semibold flex items-center gap-2"><i class="fa-solid fa-microphone text-xs text-purple-400"></i><span class="ru-text">Конференции</span><span class="ua-text">Конференції</span><span class="en-text">Conferences</span><span class="text-xs opacity-80 bg-white/10 px-2 py-0.5 rounded-full font-mono">15</span></button>
+            <button type="button" data-filter-group="cat" data-filter-value="webinar" class="filter-btn px-4 py-2 rounded-xl text-sm font-semibold flex items-center gap-2"><i class="fa-solid fa-video text-xs text-purple-400"></i><span class="ru-text">Вебинары и воркшопы</span><span class="ua-text">Вебінари та воркшопи</span><span class="en-text">Webinars & workshops</span><span class="text-xs opacity-80 bg-white/10 px-2 py-0.5 rounded-full font-mono">7</span></button>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <a href="https://www.youtube.com/watch?v=EnImByySQEE" target="_blank" rel="noopener" data-video="EnImByySQEE" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-cat="conference" data-search="анализ показателя качества ключевых слов в google ads с помощью пакета rgoogleads аналіз показника якості ключових слів у google ads за допомогою пакета rgoogleads analyzing google ads keyword quality score with the rgoogleads package kazakhstan sociology lab с нуля проходим авторизацию в google ads api, запрашиваем отчёты и анализируем показатель качества ключевых слов рекламного аккаунта с помощью r." data-aos="fade-up" data-aos-delay="0">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 sm:h-52 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-users-gear text-5xl"></i></div>
+                        <img src="https://img.youtube.com/vi/EnImByySQEE/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">сент. 2023</span><span class="ua-text">верес. 2023</span><span class="en-text">Sep 2023</span> • Kazakhstan Sociology Lab</div>
+                        <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md border bg-purple-500/20 text-purple-300 border-purple-500/30">CONF</div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2"><span class="ru-text">Воркшоп</span><span class="ua-text">Воркшоп</span><span class="en-text">Workshop</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">Анализ показателя качества ключевых слов в Google Ads с помощью пакета rgoogleads</span><span class="ua-text">Аналіз показника якості ключових слів у Google Ads за допомогою пакета rgoogleads</span><span class="en-text">Analyzing Google Ads keyword Quality Score with the rgoogleads package</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">С нуля проходим авторизацию в Google Ads API, запрашиваем отчёты и анализируем показатель качества ключевых слов рекламного аккаунта с помощью R.</span><span class="ua-text">З нуля проходимо авторизацію в Google Ads API, запитуємо звіти та аналізуємо показник якості ключових слів рекламного акаунта за допомогою R.</span><span class="en-text">From scratch: authorizing in the Google Ads API, requesting reports and analyzing the account&#x27;s keyword Quality Score with R.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i> <span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=wtXVwOBo518" target="_blank" rel="noopener" data-video="wtXVwOBo518" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-cat="conference" data-search="зачем интернет-маркетологу понимать, что такое api. разбираем устройство api google ads навіщо інтернет-маркетологу розуміти, що таке api. розбираємо устрій api google ads why marketers should understand apis: inside the google ads api 8p как навыки программирования облегчают работу маркетолога, как устроен google ads api, переход с adwords api и возможности нового пакета rgoogleads." data-aos="fade-up" data-aos-delay="60">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 sm:h-52 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-users-gear text-5xl"></i></div>
+                        <img src="https://img.youtube.com/vi/wtXVwOBo518/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">июль 2021</span><span class="ua-text">лип. 2021</span><span class="en-text">Jul 2021</span> • 8P</div>
+                        <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md border bg-purple-500/20 text-purple-300 border-purple-500/30">CONF</div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2"><span class="ru-text">Доклад</span><span class="ua-text">Доповідь</span><span class="en-text">Talk</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">Зачем интернет-маркетологу понимать, что такое API. Разбираем устройство API Google Ads</span><span class="ua-text">Навіщо інтернет-маркетологу розуміти, що таке API. Розбираємо устрій API Google Ads</span><span class="en-text">Why marketers should understand APIs: inside the Google Ads API</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">Как навыки программирования облегчают работу маркетолога, как устроен Google Ads API, переход с AdWords API и возможности нового пакета rgoogleads.</span><span class="ua-text">Як навички програмування полегшують роботу маркетолога, як влаштований Google Ads API, перехід з AdWords API та можливості нового пакета rgoogleads.</span><span class="en-text">How coding skills make a marketer&#x27;s life easier, how the Google Ads API works, migrating from the AdWords API, and the new rgoogleads package.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i> <span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=uAF3YmjRTqU" target="_blank" rel="noopener" data-video="uAF3YmjRTqU" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-cat="conference" data-search="как через r-коннектор получить данные из вконтакте в power bi як через r-конектор отримати дані з вконтакте в power bi loading vk data into power bi via the r connector excel &amp; power bi conf все способы применения r внутри power bi: r-коннектор для загрузки данных из api, r-скрипты в power query и визуальный элемент r." data-aos="fade-up" data-aos-delay="120">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 sm:h-52 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-users-gear text-5xl"></i></div>
+                        <img src="https://img.youtube.com/vi/uAF3YmjRTqU/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">дек. 2020</span><span class="ua-text">груд. 2020</span><span class="en-text">Dec 2020</span> • Excel &amp; Power BI Conf</div>
+                        <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md border bg-purple-500/20 text-purple-300 border-purple-500/30">CONF</div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2"><span class="ru-text">Доклад</span><span class="ua-text">Доповідь</span><span class="en-text">Talk</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">Как через R-коннектор получить данные из ВКонтакте в Power BI</span><span class="ua-text">Як через R-конектор отримати дані з ВКонтакте в Power BI</span><span class="en-text">Loading VK data into Power BI via the R connector</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">Все способы применения R внутри Power BI: R-коннектор для загрузки данных из API, R-скрипты в Power Query и визуальный элемент R.</span><span class="ua-text">Усі способи застосування R всередині Power BI: R-конектор для завантаження даних з API, R-скрипти в Power Query та візуальний елемент R.</span><span class="en-text">Every way to use R inside Power BI: the R connector for API data, R scripts in Power Query and the R visual.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i> <span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=bbYC-uq250A" target="_blank" rel="noopener" data-video="bbYC-uq250A" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-cat="conference" data-search="учим язык r на примере sql-запросов вивчаємо мову r на прикладі sql-запитів learning r through sql queries product star conference быстрый вход в r для тех, кто уже знает sql: основные операции манипуляции данными в dplyr через аналогии с привычными sql-запросами." data-aos="fade-up" data-aos-delay="0">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 sm:h-52 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-users-gear text-5xl"></i></div>
+                        <img src="https://img.youtube.com/vi/bbYC-uq250A/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">нояб. 2020</span><span class="ua-text">листоп. 2020</span><span class="en-text">Nov 2020</span> • Product Star Conference</div>
+                        <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md border bg-purple-500/20 text-purple-300 border-purple-500/30">CONF</div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2"><span class="ru-text">Доклад</span><span class="ua-text">Доповідь</span><span class="en-text">Talk</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">Учим язык R на примере SQL-запросов</span><span class="ua-text">Вивчаємо мову R на прикладі SQL-запитів</span><span class="en-text">Learning R through SQL queries</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">Быстрый вход в R для тех, кто уже знает SQL: основные операции манипуляции данными в dplyr через аналогии с привычными SQL-запросами.</span><span class="ua-text">Швидкий вхід у R для тих, хто вже знає SQL: основні операції маніпуляції даними в dplyr через аналогії зі звичними SQL-запитами.</span><span class="en-text">A fast start in R for SQL users: core dplyr data-manipulation verbs explained through familiar SQL queries.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i> <span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=QrTCa4wLWjI" target="_blank" rel="noopener" data-video="QrTCa4wLWjI" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-cat="conference" data-search="разработка telegram-бота для получения данных из яндекс.метрики розробка telegram-бота для отримання даних з яндекс.метрики building a telegram bot that reports yandex.metrica data zm conf создаём бота, запрашиваем данные из метрики, строим график, отправляем сообщение из r в telegram и ставим бота на расписание." data-aos="fade-up" data-aos-delay="60">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 sm:h-52 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-users-gear text-5xl"></i></div>
+                        <img src="https://img.youtube.com/vi/QrTCa4wLWjI/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">авг. 2020</span><span class="ua-text">серп. 2020</span><span class="en-text">Aug 2020</span> • ZM CONF</div>
+                        <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md border bg-purple-500/20 text-purple-300 border-purple-500/30">CONF</div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2"><span class="ru-text">Доклад</span><span class="ua-text">Доповідь</span><span class="en-text">Talk</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">Разработка Telegram-бота для получения данных из Яндекс.Метрики</span><span class="ua-text">Розробка Telegram-бота для отримання даних з Яндекс.Метрики</span><span class="en-text">Building a Telegram bot that reports Yandex.Metrica data</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">Создаём бота, запрашиваем данные из Метрики, строим график, отправляем сообщение из R в Telegram и ставим бота на расписание.</span><span class="ua-text">Створюємо бота, запитуємо дані з Метрики, будуємо графік, надсилаємо повідомлення з R у Telegram і ставимо бота на розклад.</span><span class="en-text">Create a bot, query Metrica, build a chart, send messages from R to Telegram and run the bot on a schedule.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i> <span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=p2D_iLZ1f-8" target="_blank" rel="noopener" data-video="p2D_iLZ1f-8" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-cat="conference" data-search="как работать с api google analytics на языке r (googleanalyticsr) як працювати з api google analytics мовою r (googleanalyticsr) working with the google analytics api in r (googleanalyticsr) 8p online edition почему аналитики уходят от интерфейса ga к api и как с помощью пакета googleanalyticsr получать и обрабатывать данные google analytics." data-aos="fade-up" data-aos-delay="120">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 sm:h-52 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-users-gear text-5xl"></i></div>
+                        <img src="https://img.youtube.com/vi/p2D_iLZ1f-8/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">июль 2020</span><span class="ua-text">лип. 2020</span><span class="en-text">Jul 2020</span> • 8P Online Edition</div>
+                        <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md border bg-purple-500/20 text-purple-300 border-purple-500/30">CONF</div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2"><span class="ru-text">Воркшоп</span><span class="ua-text">Воркшоп</span><span class="en-text">Workshop</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">Как работать с API Google Analytics на языке R (googleAnalyticsR)</span><span class="ua-text">Як працювати з API Google Analytics мовою R (googleAnalyticsR)</span><span class="en-text">Working with the Google Analytics API in R (googleAnalyticsR)</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">Почему аналитики уходят от интерфейса GA к API и как с помощью пакета googleAnalyticsR получать и обрабатывать данные Google Analytics.</span><span class="ua-text">Чому аналітики переходять від інтерфейсу GA до API та як за допомогою пакета googleAnalyticsR отримувати й обробляти дані Google Analytics.</span><span class="en-text">Why analysts move from the GA interface to its API, and how to pull and process Google Analytics data with googleAnalyticsR.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i> <span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=de1QW80FsiA" target="_blank" rel="noopener" data-video="de1QW80FsiA" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-cat="conference" data-search="как работать с facebook marketing api на языке r як працювати з facebook marketing api мовою r working with the facebook marketing api in r analyze! lviv пакет rfacebookstat: авторизация, загрузка объектов и статистики рекламного кабинета, передача расходов в google analytics и запись данных в субд." data-aos="fade-up" data-aos-delay="0">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 sm:h-52 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-users-gear text-5xl"></i></div>
+                        <img src="https://img.youtube.com/vi/de1QW80FsiA/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">сент. 2019</span><span class="ua-text">верес. 2019</span><span class="en-text">Sep 2019</span> • Analyze! Lviv</div>
+                        <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md border bg-purple-500/20 text-purple-300 border-purple-500/30">CONF</div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2"><span class="ru-text">Доклад</span><span class="ua-text">Доповідь</span><span class="en-text">Talk</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">Как работать с Facebook Marketing API на языке R</span><span class="ua-text">Як працювати з Facebook Marketing API мовою R</span><span class="en-text">Working with the Facebook Marketing API in R</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">Пакет rfacebookstat: авторизация, загрузка объектов и статистики рекламного кабинета, передача расходов в Google Analytics и запись данных в СУБД.</span><span class="ua-text">Пакет rfacebookstat: авторизація, завантаження об&#x27;єктів і статистики рекламного кабінету, передача витрат у Google Analytics і запис даних у СУБД.</span><span class="en-text">The rfacebookstat package: authorization, loading ad-account objects and stats, sending costs to Google Analytics and storing data in a database.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i> <span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=fLP0gbsYF1k" target="_blank" rel="noopener" data-video="fLP0gbsYF1k" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-cat="conference" data-search="как информационные дайджесты помогают контролировать работу десятков маркетологов по сотням проектов як інформаційні дайджести допомагають контролювати роботу десятків маркетологів на сотнях проєктів how information digests help oversee dozens of marketers across hundreds of projects goanalytics почему дайджесты, а не power bi: дайджест аномалий трафика, показателя качества google ads и временных затрат по проектам — и инструменты для их разработки." data-aos="fade-up" data-aos-delay="60">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 sm:h-52 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-users-gear text-5xl"></i></div>
+                        <img src="https://img.youtube.com/vi/fLP0gbsYF1k/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">апр. 2019</span><span class="ua-text">квіт. 2019</span><span class="en-text">Apr 2019</span> • GoAnalytics</div>
+                        <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md border bg-purple-500/20 text-purple-300 border-purple-500/30">CONF</div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2"><span class="ru-text">Доклад</span><span class="ua-text">Доповідь</span><span class="en-text">Talk</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">Как информационные дайджесты помогают контролировать работу десятков маркетологов по сотням проектов</span><span class="ua-text">Як інформаційні дайджести допомагають контролювати роботу десятків маркетологів на сотнях проєктів</span><span class="en-text">How information digests help oversee dozens of marketers across hundreds of projects</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">Почему дайджесты, а не Power BI: дайджест аномалий трафика, показателя качества Google Ads и временных затрат по проектам — и инструменты для их разработки.</span><span class="ua-text">Чому дайджести, а не Power BI: дайджест аномалій трафіку, показника якості Google Ads і часових витрат за проєктами — та інструменти для їх розробки.</span><span class="en-text">Why digests instead of Power BI: traffic-anomaly, Google Ads Quality Score and time-tracking digests, plus the tools used to build them.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i> <span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=Ju98kWnec14" target="_blank" rel="noopener" data-video="Ju98kWnec14" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-cat="conference" data-search="три шага для построения отдела аналитики в компании три кроки для побудови відділу аналітики в компанії three steps to building an analytics department lviv icamp зачем нужен отдел аналитики, что такое bi, основные этапы внедрения bi-решений и три практических кейса netpeak." data-aos="fade-up" data-aos-delay="120">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 sm:h-52 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-users-gear text-5xl"></i></div>
+                        <img src="https://img.youtube.com/vi/Ju98kWnec14/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">дек. 2018</span><span class="ua-text">груд. 2018</span><span class="en-text">Dec 2018</span> • Lviv iCamp</div>
+                        <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md border bg-purple-500/20 text-purple-300 border-purple-500/30">CONF</div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2"><span class="ru-text">Доклад</span><span class="ua-text">Доповідь</span><span class="en-text">Talk</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">Три шага для построения отдела аналитики в компании</span><span class="ua-text">Три кроки для побудови відділу аналітики в компанії</span><span class="en-text">Three steps to building an analytics department</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">Зачем нужен отдел аналитики, что такое BI, основные этапы внедрения BI-решений и три практических кейса Netpeak.</span><span class="ua-text">Навіщо потрібен відділ аналітики, що таке BI, основні етапи впровадження BI-рішень і три практичні кейси Netpeak.</span><span class="en-text">Why a company needs an analytics team, what BI is, the main stages of a BI rollout, and three Netpeak case studies.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i> <span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=G_JWto5eFpI" target="_blank" rel="noopener" data-video="G_JWto5eFpI" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-cat="conference" data-search="как маркетологу избавиться от рутины с помощью языка r и наконец-то заняться маркетингом як маркетологу позбутися рутини за допомогою мови r і нарешті зайнятися маркетингом how marketers can escape routine with r and finally do marketing matemarketing на что уходит время маркетолога, как устроены api и http-запросы, и как r автоматизирует работу с api яндекс.директа и других рекламных систем." data-aos="fade-up" data-aos-delay="0">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 sm:h-52 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-users-gear text-5xl"></i></div>
+                        <img src="https://img.youtube.com/vi/G_JWto5eFpI/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">нояб. 2018</span><span class="ua-text">листоп. 2018</span><span class="en-text">Nov 2018</span> • Matemarketing</div>
+                        <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md border bg-purple-500/20 text-purple-300 border-purple-500/30">CONF</div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2"><span class="ru-text">Доклад</span><span class="ua-text">Доповідь</span><span class="en-text">Talk</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">Как маркетологу избавиться от рутины с помощью языка R и наконец-то заняться маркетингом</span><span class="ua-text">Як маркетологу позбутися рутини за допомогою мови R і нарешті зайнятися маркетингом</span><span class="en-text">How marketers can escape routine with R and finally do marketing</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">На что уходит время маркетолога, как устроены API и HTTP-запросы, и как R автоматизирует работу с API Яндекс.Директа и других рекламных систем.</span><span class="ua-text">На що йде час маркетолога, як влаштовані API та HTTP-запити, і як R автоматизує роботу з API Яндекс.Директу та інших рекламних систем.</span><span class="en-text">Where a marketer&#x27;s time goes, how APIs and HTTP requests work, and how R automates work with Yandex.Direct and other ad platforms.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i> <span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=1X1EKt6tDHU" target="_blank" rel="noopener" data-video="1X1EKt6tDHU" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-cat="conference" data-search="как маркетологу избавиться от рутины с помощью r — мастер-класс як маркетологу позбутися рутини за допомогою r — майстер-клас escaping marketing routine with r — master class matemarketing практика в rstudio: установка пакетов, работа с api яндекс.директа (ryandexdirect), google ads и яндекс.метрики (rym)." data-aos="fade-up" data-aos-delay="60">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 sm:h-52 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-users-gear text-5xl"></i></div>
+                        <img src="https://img.youtube.com/vi/1X1EKt6tDHU/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">нояб. 2018</span><span class="ua-text">листоп. 2018</span><span class="en-text">Nov 2018</span> • Matemarketing</div>
+                        <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md border bg-purple-500/20 text-purple-300 border-purple-500/30">CONF</div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2"><span class="ru-text">Мастер-класс</span><span class="ua-text">Майстер-клас</span><span class="en-text">Master class</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">Как маркетологу избавиться от рутины с помощью R — мастер-класс</span><span class="ua-text">Як маркетологу позбутися рутини за допомогою R — майстер-клас</span><span class="en-text">Escaping marketing routine with R — master class</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">Практика в RStudio: установка пакетов, работа с API Яндекс.Директа (ryandexdirect), Google Ads и Яндекс.Метрики (rym).</span><span class="ua-text">Практика в RStudio: встановлення пакетів, робота з API Яндекс.Директу (ryandexdirect), Google Ads та Яндекс.Метрики (rym).</span><span class="en-text">Hands-on in RStudio: installing packages, working with the Yandex.Direct (ryandexdirect), Google Ads and Yandex.Metrica (rym) APIs.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i> <span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://netpeak.ua/conference/390/" target="_blank" rel="noopener"  class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-cat="conference" data-search="как построить отдел аналитики в крупной компании. команда, задачи и kpi як побудувати відділ аналітики у великій компанії. команда, задачі та kpi building an analytics department in a large company: team, tasks and kpis kyiv data spring опыт netpeak: из кого состоит команда аналитики, какие задачи она решает и как оценивать её эффективность. видеозаписи нет — материалы на странице конференции." data-aos="fade-up" data-aos-delay="120">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 sm:h-52 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-users-gear text-5xl"></i></div>
+                        
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">май 2018</span><span class="ua-text">трав. 2018</span><span class="en-text">May 2018</span> • Kyiv Data Spring</div>
+                        <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md border bg-purple-500/20 text-purple-300 border-purple-500/30">CONF</div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-purple-600/80 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-purple-500 transition-all duration-300"><i class="fa-solid fa-arrow-up-right-from-square text-base"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2"><span class="ru-text">Доклад</span><span class="ua-text">Доповідь</span><span class="en-text">Talk</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">Как построить отдел аналитики в крупной компании. Команда, задачи и KPI</span><span class="ua-text">Як побудувати відділ аналітики у великій компанії. Команда, задачі та KPI</span><span class="en-text">Building an analytics department in a large company: team, tasks and KPIs</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">Опыт Netpeak: из кого состоит команда аналитики, какие задачи она решает и как оценивать её эффективность. Видеозаписи нет — материалы на странице конференции.</span><span class="ua-text">Досвід Netpeak: з кого складається команда аналітики, які задачі вона вирішує та як оцінювати її ефективність. Відеозапису немає — матеріали на сторінці конференції.</span><span class="en-text">Netpeak&#x27;s experience: who makes up an analytics team, what it does and how to measure it. No recording — materials are on the conference page.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-solid fa-file-lines text-purple-400 text-sm"></i> <span class="ru-text">Материалы конференции</span><span class="ua-text">Матеріали конференції</span><span class="en-text">Conference page</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=wRlRd_b-qAs" target="_blank" rel="noopener" data-video="wRlRd_b-qAs" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-cat="conference" data-search="язык r в маркетинге и бизнесе мова r у маркетингу та бізнесі r in marketing and business analyze! что такое r, какие задачи бизнеса он решает — от статистики и ml до парсинга и визуализации, полезные пакеты, слабые стороны языка и как выучить его бесплатно." data-aos="fade-up" data-aos-delay="0">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 sm:h-52 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-users-gear text-5xl"></i></div>
+                        <img src="https://img.youtube.com/vi/wRlRd_b-qAs/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">апр. 2018</span><span class="ua-text">квіт. 2018</span><span class="en-text">Apr 2018</span> • Analyze!</div>
+                        <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md border bg-purple-500/20 text-purple-300 border-purple-500/30">CONF</div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2"><span class="ru-text">Доклад</span><span class="ua-text">Доповідь</span><span class="en-text">Talk</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">Язык R в маркетинге и бизнесе</span><span class="ua-text">Мова R у маркетингу та бізнесі</span><span class="en-text">R in marketing and business</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">Что такое R, какие задачи бизнеса он решает — от статистики и ML до парсинга и визуализации, полезные пакеты, слабые стороны языка и как выучить его бесплатно.</span><span class="ua-text">Що таке R, які задачі бізнесу він вирішує — від статистики та ML до парсингу й візуалізації, корисні пакети, слабкі сторони мови та як вивчити її безкоштовно.</span><span class="en-text">What R is and which business tasks it solves — from statistics and ML to scraping and dataviz, useful packages, weak spots, and how to learn it for free.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i> <span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=L1ApUOea7Qc" target="_blank" rel="noopener" data-video="L1ApUOea7Qc" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-cat="conference" data-search="как разобраться со своими данными, если ты не аналитик як розібратися зі своїми даними, якщо ти не аналітик making sense of your data when you&#x27;re not an analyst ecommerce 2017 для владельцев бизнеса: из чего состоит аналитическая задача и как решать её связкой недорогих инструментов — база данных, r и power bi. кейсы olx и блога netpeak." data-aos="fade-up" data-aos-delay="60">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 sm:h-52 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-users-gear text-5xl"></i></div>
+                        <img src="https://img.youtube.com/vi/L1ApUOea7Qc/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">нояб. 2017</span><span class="ua-text">листоп. 2017</span><span class="en-text">Nov 2017</span> • eCommerce 2017</div>
+                        <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md border bg-purple-500/20 text-purple-300 border-purple-500/30">CONF</div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2"><span class="ru-text">Доклад</span><span class="ua-text">Доповідь</span><span class="en-text">Talk</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">Как разобраться со своими данными, если ты не аналитик</span><span class="ua-text">Як розібратися зі своїми даними, якщо ти не аналітик</span><span class="en-text">Making sense of your data when you&#x27;re not an analyst</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">Для владельцев бизнеса: из чего состоит аналитическая задача и как решать её связкой недорогих инструментов — база данных, R и Power BI. Кейсы OLX и блога Netpeak.</span><span class="ua-text">Для власників бізнесу: з чого складається аналітична задача і як вирішувати її зв&#x27;язкою недорогих інструментів — база даних, R і Power BI. Кейси OLX та блогу Netpeak.</span><span class="en-text">For business owners: what an analytics task consists of and how to solve it with an inexpensive stack — a database, R and Power BI. OLX and Netpeak blog cases.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i> <span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=pM8DQ0lLM6k" target="_blank" rel="noopener" data-video="pM8DQ0lLM6k" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-cat="conference" data-search="bi-решение для отдела контекстной рекламы bi-рішення для відділу контекстної реклами a bi solution for a ppc department analyze! как netpeak автоматизировал отчётность отдела контекстной рекламы: сбор данных из рекламных систем, хранение и визуализация в bi." data-aos="fade-up" data-aos-delay="120">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 sm:h-52 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-users-gear text-5xl"></i></div>
+                        <img src="https://img.youtube.com/vi/pM8DQ0lLM6k/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">апр. 2017</span><span class="ua-text">квіт. 2017</span><span class="en-text">Apr 2017</span> • Analyze!</div>
+                        <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md border bg-purple-500/20 text-purple-300 border-purple-500/30">CONF</div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2"><span class="ru-text">Доклад</span><span class="ua-text">Доповідь</span><span class="en-text">Talk</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">BI-решение для отдела контекстной рекламы</span><span class="ua-text">BI-рішення для відділу контекстної реклами</span><span class="en-text">A BI solution for a PPC department</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">Как Netpeak автоматизировал отчётность отдела контекстной рекламы: сбор данных из рекламных систем, хранение и визуализация в BI.</span><span class="ua-text">Як Netpeak автоматизував звітність відділу контекстної реклами: збір даних з рекламних систем, зберігання та візуалізація в BI.</span><span class="en-text">How Netpeak automated PPC reporting: collecting ad-platform data, storing it and visualizing it in BI.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i> <span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=zJyDxd4JGg0" target="_blank" rel="noopener" data-video="zJyDxd4JGg0" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-cat="webinar" data-search="как работать с api google analytics 4 на языке r — воркшоп для новичков як працювати з api google analytics 4 мовою r — воркшоп для новачків working with the google analytics 4 api in r — beginner workshop yagla пошагово: авторизация в google analytics data api и запрос отчётов ga4 с помощью пакета googleanalyticsr." data-aos="fade-up" data-aos-delay="0">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 sm:h-52 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-users-gear text-5xl"></i></div>
+                        <img src="https://img.youtube.com/vi/zJyDxd4JGg0/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">сент. 2021</span><span class="ua-text">верес. 2021</span><span class="en-text">Sep 2021</span> • Yagla</div>
+                        <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md border bg-blue-500/20 text-blue-300 border-blue-500/30">WEBINAR</div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2"><span class="ru-text">Воркшоп</span><span class="ua-text">Воркшоп</span><span class="en-text">Workshop</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">Как работать с API Google Analytics 4 на языке R — воркшоп для новичков</span><span class="ua-text">Як працювати з API Google Analytics 4 мовою R — воркшоп для новачків</span><span class="en-text">Working with the Google Analytics 4 API in R — beginner workshop</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">Пошагово: авторизация в Google Analytics Data API и запрос отчётов GA4 с помощью пакета googleAnalyticsR.</span><span class="ua-text">Покроково: авторизація в Google Analytics Data API та запит звітів GA4 за допомогою пакета googleAnalyticsR.</span><span class="en-text">Step by step: authorizing in the Google Analytics Data API and querying GA4 reports with googleAnalyticsR.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i> <span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=I2KjERuZ3XY&amp;t=3789" target="_blank" rel="noopener" data-video="I2KjERuZ3XY?start=3789" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-cat="webinar" data-search="основы python. работа с библиотекой pandas основи python. робота з бібліотекою pandas python basics: working with pandas productstar установка anaconda, структуры данных pandas, загрузка данных и основные преобразования, эквивалентные сводным таблицам excel." data-aos="fade-up" data-aos-delay="60">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 sm:h-52 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-users-gear text-5xl"></i></div>
+                        <img src="https://img.youtube.com/vi/I2KjERuZ3XY/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">июль 2020</span><span class="ua-text">лип. 2020</span><span class="en-text">Jul 2020</span> • ProductStar</div>
+                        <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md border bg-blue-500/20 text-blue-300 border-blue-500/30">WEBINAR</div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2"><span class="ru-text">Вебинар</span><span class="ua-text">Вебінар</span><span class="en-text">Webinar</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">Основы Python. Работа с библиотекой Pandas</span><span class="ua-text">Основи Python. Робота з бібліотекою Pandas</span><span class="en-text">Python basics: working with Pandas</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">Установка Anaconda, структуры данных Pandas, загрузка данных и основные преобразования, эквивалентные сводным таблицам Excel.</span><span class="ua-text">Встановлення Anaconda, структури даних Pandas, завантаження даних і основні перетворення, еквівалентні зведеним таблицям Excel.</span><span class="en-text">Installing Anaconda, Pandas data structures, loading data and core transformations equivalent to Excel pivot tables.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i> <span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=zWGocRhDumk" target="_blank" rel="noopener" data-video="zWGocRhDumk" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-cat="webinar" data-search="r meetup: чем нас порадует dplyr 1.0.0 r meetup: чим нас порадує dplyr 1.0.0 r meetup: what&#x27;s new in dplyr 1.0.0 eusp r meetup митап европейского университета в санкт-петербурге: обзор статей хедли викхема о нововведениях dplyr 1.0.0." data-aos="fade-up" data-aos-delay="120">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 sm:h-52 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-users-gear text-5xl"></i></div>
+                        <img src="https://img.youtube.com/vi/zWGocRhDumk/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">апр. 2020</span><span class="ua-text">квіт. 2020</span><span class="en-text">Apr 2020</span> • EUSP R meetup</div>
+                        <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md border bg-blue-500/20 text-blue-300 border-blue-500/30">WEBINAR</div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2"><span class="ru-text">Митап</span><span class="ua-text">Мітап</span><span class="en-text">Meetup</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">R meetup: чем нас порадует dplyr 1.0.0</span><span class="ua-text">R meetup: чим нас порадує dplyr 1.0.0</span><span class="en-text">R meetup: what&#x27;s new in dplyr 1.0.0</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">Митап Европейского университета в Санкт-Петербурге: обзор статей Хедли Викхема о нововведениях dplyr 1.0.0.</span><span class="ua-text">Мітап Європейського університету в Санкт-Петербурзі: огляд статей Гедлі Вікхема про нововведення dplyr 1.0.0.</span><span class="en-text">A European University at St. Petersburg meetup reviewing Hadley Wickham&#x27;s posts on what&#x27;s new in dplyr 1.0.0.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i> <span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=ESl3NR01IXI" target="_blank" rel="noopener" data-video="ESl3NR01IXI" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-cat="webinar" data-search="сколько денег приносит ваш контент. разбираемся с помощью business intelligence скільки грошей приносить ваш контент. розбираємося за допомогою business intelligence how much money does your content make? answering with business intelligence netology как оценить «продающесть» корпоративного блога: источники данных, метрики и bi-система, построенная для блога netpeak." data-aos="fade-up" data-aos-delay="0">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 sm:h-52 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-users-gear text-5xl"></i></div>
+                        <img src="https://img.youtube.com/vi/ESl3NR01IXI/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">февр. 2019</span><span class="ua-text">лют. 2019</span><span class="en-text">Feb 2019</span> • Netology</div>
+                        <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md border bg-blue-500/20 text-blue-300 border-blue-500/30">WEBINAR</div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2"><span class="ru-text">Вебинар</span><span class="ua-text">Вебінар</span><span class="en-text">Webinar</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">Сколько денег приносит ваш контент. Разбираемся с помощью Business Intelligence</span><span class="ua-text">Скільки грошей приносить ваш контент. Розбираємося за допомогою Business Intelligence</span><span class="en-text">How much money does your content make? Answering with Business Intelligence</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">Как оценить «продающесть» корпоративного блога: источники данных, метрики и BI-система, построенная для блога Netpeak.</span><span class="ua-text">Як оцінити «продажність» корпоративного блогу: джерела даних, метрики та BI-система, побудована для блогу Netpeak.</span><span class="en-text">Measuring how well a corporate blog sells: data sources, metrics and the BI system built for the Netpeak blog.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i> <span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=mUn2Uwsvy0U" target="_blank" rel="noopener" data-video="mUn2Uwsvy0U" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-cat="webinar" data-search="как маркетологу избавиться от рутины с помощью языка r як маркетологу позбутися рутини за допомогою мови r escaping marketing routine with r automationday онлайн-конференция об автоматизации: что такое r и как работать с api яндекс.директа, google ads и google analytics." data-aos="fade-up" data-aos-delay="60">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 sm:h-52 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-users-gear text-5xl"></i></div>
+                        <img src="https://img.youtube.com/vi/mUn2Uwsvy0U/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">нояб. 2018</span><span class="ua-text">листоп. 2018</span><span class="en-text">Nov 2018</span> • AutomationDay</div>
+                        <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md border bg-blue-500/20 text-blue-300 border-blue-500/30">WEBINAR</div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2"><span class="ru-text">Онлайн-доклад</span><span class="ua-text">Онлайн-доповідь</span><span class="en-text">Online talk</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">Как маркетологу избавиться от рутины с помощью языка R</span><span class="ua-text">Як маркетологу позбутися рутини за допомогою мови R</span><span class="en-text">Escaping marketing routine with R</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">Онлайн-конференция об автоматизации: что такое R и как работать с API Яндекс.Директа, Google Ads и Google Analytics.</span><span class="ua-text">Онлайн-конференція про автоматизацію: що таке R і як працювати з API Яндекс.Директу, Google Ads та Google Analytics.</span><span class="en-text">An online automation conference: what R is and how to work with the Yandex.Direct, Google Ads and Google Analytics APIs.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i> <span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=sCp2D6068es" target="_blank" rel="noopener" data-video="sCp2D6068es" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-cat="webinar" data-search="как автоматизировать работу с данными яндекс.метрики с помощью r и пакета rym як автоматизувати роботу з даними яндекс.метрики за допомогою r і пакета rym automating yandex.metrica data with r and the rym package cybermarketing какие api есть у яндекс.метрики, как работать с ними через пакет rym и как связать метрику с power bi для визуализации." data-aos="fade-up" data-aos-delay="120">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 sm:h-52 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-users-gear text-5xl"></i></div>
+                        <img src="https://img.youtube.com/vi/sCp2D6068es/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">нояб. 2018</span><span class="ua-text">листоп. 2018</span><span class="en-text">Nov 2018</span> • CyberMarketing</div>
+                        <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md border bg-blue-500/20 text-blue-300 border-blue-500/30">WEBINAR</div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2"><span class="ru-text">Вебинар</span><span class="ua-text">Вебінар</span><span class="en-text">Webinar</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">Как автоматизировать работу с данными Яндекс.Метрики с помощью R и пакета rym</span><span class="ua-text">Як автоматизувати роботу з даними Яндекс.Метрики за допомогою R і пакета rym</span><span class="en-text">Automating Yandex.Metrica data with R and the rym package</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">Какие API есть у Яндекс.Метрики, как работать с ними через пакет rym и как связать Метрику с Power BI для визуализации.</span><span class="ua-text">Які API є в Яндекс.Метрики, як працювати з ними через пакет rym і як зв&#x27;язати Метрику з Power BI для візуалізації.</span><span class="en-text">Yandex.Metrica&#x27;s APIs, using them through the rym package, and connecting Metrica to Power BI for visualization.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i> <span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=Kh-wyU-VXRU" target="_blank" rel="noopener" data-video="Kh-wyU-VXRU" class="bento-glass group flex flex-col p-3 rounded-3xl cursor-pointer" data-filter-item data-cat="webinar" data-search="как маркетологу избавиться от рутины с помощью языка r и наконец-то заняться маркетингом як маркетологу позбутися рутини за допомогою мови r і нарешті зайнятися маркетингом how marketers can escape routine with r and finally do marketing webpromoexperts для маркетологов и руководителей: что такое r, api и пакеты, и как автоматизировать работу с яндекс.директом, google ads и google analytics." data-aos="fade-up" data-aos-delay="0">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-48 sm:h-52 rounded-2xl">
+                        <div class="cover-fallback"><i class="fa-solid fa-users-gear text-5xl"></i></div>
+                        <img src="https://img.youtube.com/vi/Kh-wyU-VXRU/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div>
+                        <div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">нояб. 2018</span><span class="ua-text">листоп. 2018</span><span class="en-text">Nov 2018</span> • WebPromoExperts</div>
+                        <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md border bg-blue-500/20 text-blue-300 border-blue-500/30">WEBINAR</div>
+                        <div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>
+                    </div>
+                    <div class="px-2 pt-4 pb-1 flex flex-col flex-1">
+                        <div class="text-xs font-semibold text-purple-400 mb-2"><span class="ru-text">Вебинар</span><span class="ua-text">Вебінар</span><span class="en-text">Webinar</span></div>
+                        <h3 class="font-bold text-lg leading-snug text-slate-100 group-hover:text-white transition-colors outfit-font mb-3" data-video-title><span class="ru-text">Как маркетологу избавиться от рутины с помощью языка R и наконец-то заняться маркетингом</span><span class="ua-text">Як маркетологу позбутися рутини за допомогою мови R і нарешті зайнятися маркетингом</span><span class="en-text">How marketers can escape routine with R and finally do marketing</span></h3>
+                        <p class="text-sm text-slate-400 leading-relaxed flex-1"><span class="ru-text">Для маркетологов и руководителей: что такое R, API и пакеты, и как автоматизировать работу с Яндекс.Директом, Google Ads и Google Analytics.</span><span class="ua-text">Для маркетологів і керівників: що таке R, API та пакети, і як автоматизувати роботу з Яндекс.Директом, Google Ads та Google Analytics.</span><span class="en-text">For marketers and managers: what R, APIs and packages are, and how to automate work with Yandex.Direct, Google Ads and Google Analytics.</span></p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
+                            <span class="flex items-center gap-1.5 font-semibold"><i class="fa-brands fa-youtube text-red-500 text-sm"></i> <span class="ru-text">Смотреть</span><span class="ua-text">Дивитися</span><span class="en-text">Watch</span></span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div data-filter-empty class="hidden bento-glass no-lift p-10 text-center text-slate-400 rounded-3xl">
+            <i class="fa-solid fa-magnifying-glass text-3xl text-purple-400/60 mb-4"></i>
+            <p><span class="ru-text">Ничего не найдено — попробуйте изменить фильтр или запрос.</span><span class="ua-text">Нічого не знайдено — спробуйте змінити фільтр або запит.</span><span class="en-text">Nothing found — try another filter or query.</span></p>
+        </div>
+    </section>
+
+    <!-- EVENTS -->
+    <section class="px-6 max-w-7xl mx-auto pb-16 relative z-10">
+        <div class="bento-glass no-lift p-6 md:p-8 rounded-3xl" data-aos="fade-up">
+            <div class="bento-content">
+                <div class="text-xs font-mono font-bold uppercase tracking-widest text-slate-500 mb-4"><span class="ru-text">Площадки и организаторы</span><span class="ua-text">Майданчики та організатори</span><span class="en-text">Events & organizers</span></div>
+                <div class="flex flex-wrap gap-2"><span class="px-3 py-1 rounded-full bg-slate-900/60 border border-white/10 text-xs font-semibold text-slate-300">8P</span> <span class="px-3 py-1 rounded-full bg-slate-900/60 border border-white/10 text-xs font-semibold text-slate-300">8P Online Edition</span> <span class="px-3 py-1 rounded-full bg-slate-900/60 border border-white/10 text-xs font-semibold text-slate-300">Analyze!</span> <span class="px-3 py-1 rounded-full bg-slate-900/60 border border-white/10 text-xs font-semibold text-slate-300">Analyze! Lviv</span> <span class="px-3 py-1 rounded-full bg-slate-900/60 border border-white/10 text-xs font-semibold text-slate-300">AutomationDay</span> <span class="px-3 py-1 rounded-full bg-slate-900/60 border border-white/10 text-xs font-semibold text-slate-300">CyberMarketing</span> <span class="px-3 py-1 rounded-full bg-slate-900/60 border border-white/10 text-xs font-semibold text-slate-300">EUSP R meetup</span> <span class="px-3 py-1 rounded-full bg-slate-900/60 border border-white/10 text-xs font-semibold text-slate-300">Excel &amp; Power BI Conf</span> <span class="px-3 py-1 rounded-full bg-slate-900/60 border border-white/10 text-xs font-semibold text-slate-300">GoAnalytics</span> <span class="px-3 py-1 rounded-full bg-slate-900/60 border border-white/10 text-xs font-semibold text-slate-300">Kazakhstan Sociology Lab</span> <span class="px-3 py-1 rounded-full bg-slate-900/60 border border-white/10 text-xs font-semibold text-slate-300">Kyiv Data Spring</span> <span class="px-3 py-1 rounded-full bg-slate-900/60 border border-white/10 text-xs font-semibold text-slate-300">Lviv iCamp</span> <span class="px-3 py-1 rounded-full bg-slate-900/60 border border-white/10 text-xs font-semibold text-slate-300">Matemarketing</span> <span class="px-3 py-1 rounded-full bg-slate-900/60 border border-white/10 text-xs font-semibold text-slate-300">Netology</span> <span class="px-3 py-1 rounded-full bg-slate-900/60 border border-white/10 text-xs font-semibold text-slate-300">Product Star Conference</span> <span class="px-3 py-1 rounded-full bg-slate-900/60 border border-white/10 text-xs font-semibold text-slate-300">ProductStar</span> <span class="px-3 py-1 rounded-full bg-slate-900/60 border border-white/10 text-xs font-semibold text-slate-300">WebPromoExperts</span> <span class="px-3 py-1 rounded-full bg-slate-900/60 border border-white/10 text-xs font-semibold text-slate-300">Yagla</span> <span class="px-3 py-1 rounded-full bg-slate-900/60 border border-white/10 text-xs font-semibold text-slate-300">ZM CONF</span> <span class="px-3 py-1 rounded-full bg-slate-900/60 border border-white/10 text-xs font-semibold text-slate-300">eCommerce 2017</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="px-6 max-w-7xl mx-auto pb-24 relative z-10">
+        <div class="grid md:grid-cols-2 gap-6" data-aos="fade-up">
+            <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(59, 130, 246, 0.1));">
+                <div class="bento-content w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center text-blue-400 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-telegram"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">Telegram-канал R4marketing</span><span class="ua-text">Telegram-канал R4marketing</span><span class="en-text">R4marketing on Telegram</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Новые статьи, видео и заметки по R — первыми.</span><span class="ua-text">Нові статті, відео та нотатки з R — першими.</span><span class="en-text">New articles, videos and R notes — first.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-blue-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+            <a href="https://www.youtube.com/R4marketing/?sub_confirmation=1" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(239, 68, 68, 0.1));">
+                <div class="bento-content w-16 h-16 bg-red-500/20 rounded-2xl flex items-center justify-center text-red-500 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-youtube"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">YouTube-канал R4marketing</span><span class="ua-text">YouTube-канал R4marketing</span><span class="en-text">R4marketing on YouTube</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Видеоуроки по R, аналитике и AI-инструментам.</span><span class="ua-text">Відеоуроки з R, аналітики та AI-інструментів.</span><span class="en-text">Video lessons on R, analytics and AI tools.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-red-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/5 bg-slate-950/80 backdrop-blur-md pt-20 pb-10 text-center relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-3xl font-extrabold mb-10 outfit-font"><span class="ru-text">Следите за обновлениями в R4marketing</span><span class="ua-text">Стежте за оновленнями в R4marketing</span><span class="en-text">Follow R4marketing updates</span></h2>
+            <div class="flex justify-center gap-8 mb-16">
+                <a href="https://t.me/R4marketing" class="w-16 h-16 rounded-3xl bg-blue-500/10 flex items-center justify-center text-blue-400 text-3xl hover:bg-blue-500 hover:text-white transition-all transform hover:scale-110 hover:-translate-y-2 border border-blue-500/20 shadow-lg" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                <a href="https://www.youtube.com/R4marketing" class="w-16 h-16 rounded-3xl bg-red-500/10 flex items-center justify-center text-red-500 text-3xl hover:bg-red-500 hover:text-white transition-all transform hover:scale-110 hover:-translate-y-2 border border-red-500/20 shadow-lg" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                <a href="https://habr.com/ru/users/selesnow/" class="w-16 h-16 rounded-3xl bg-slate-700/30 flex items-center justify-center text-white text-3xl hover:bg-slate-600 transition-all transform hover:scale-110 hover:-translate-y-2 border border-slate-600/50 shadow-lg" aria-label="Habr"><i class="fa-solid fa-h"></i></a>
+            </div>
+            <div class="mb-6"><a href="../" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-400 hover:text-white transition-colors outfit-font"><i class="fa-solid fa-house text-purple-400/80 text-xs"></i> ALEXEY-SELEZNEV<span class="text-purple-500 -ml-2">.pro</span></a></div>
+            <nav class="flex flex-wrap justify-center gap-x-8 gap-y-3 mb-12 text-sm font-semibold text-slate-400 outfit-font" aria-label="Site pages">
+                <a href="../courses/" class="flex items-center gap-2 hover:text-white transition-colors"><i class="fa-solid fa-graduation-cap text-purple-400/80 text-xs"></i> <span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a>
+                <a href="../videos/" class="flex items-center gap-2 hover:text-white transition-colors"><i class="fa-solid fa-circle-play text-purple-400/80 text-xs"></i> <span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a>
+                <a href="../talks/" class="flex items-center gap-2 hover:text-white transition-colors"><i class="fa-solid fa-microphone-lines text-purple-400/80 text-xs"></i> <span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a>
+                <a href="../articles/" class="flex items-center gap-2 hover:text-white transition-colors"><i class="fa-solid fa-pen-nib text-purple-400/80 text-xs"></i> <span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a>
+                <a href="../interviews/" class="flex items-center gap-2 hover:text-white transition-colors"><i class="fa-regular fa-newspaper text-purple-400/80 text-xs"></i> <span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a>
+            </nav>
+            <p class="text-slate-500 text-sm font-mono tracking-widest uppercase">© 2026 Alexey Seleznev. Modernized Vision.</p>
+        </div>
+    </footer>
+
+    <!-- VIDEO MODAL (CINEMA LIGHTBOX) -->
+    <div id="videoModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-3 sm:p-6 md:p-10 bg-slate-950/90 backdrop-blur-xl transition-opacity duration-300 opacity-0" onclick="if (event.target.id === 'videoModal') closeVideoModal()">
+        <div class="relative w-full max-w-5xl bg-slate-900 rounded-2xl md:rounded-3xl border border-white/10 overflow-hidden shadow-2xl flex flex-col transform transition-transform duration-300 scale-95" id="videoModalContent">
+            <div class="flex items-center justify-between p-4 md:px-6 md:py-4 border-b border-white/10 bg-slate-950/80">
+                <div id="videoModalTitle" class="text-sm md:text-base font-bold text-white truncate max-w-[85%] outfit-font"></div>
+                <button onclick="closeVideoModal()" aria-label="Close video" class="w-10 h-10 rounded-full bg-white/5 hover:bg-white/15 text-slate-300 hover:text-white flex items-center justify-center transition-colors">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div class="relative w-full pb-[56.25%] bg-black">
+                <iframe id="videoModalIframe" class="absolute inset-0 w-full h-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script src="../assets/site.js"></script>
+</body>
+</html>

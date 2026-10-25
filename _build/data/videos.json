@@ -1,0 +1,668 @@
+{
+ "series": [
+  {
+   "id": "rytstat",
+   "pkg": "rytstat",
+   "icon": "fa-brands fa-youtube",
+   "period": "2022",
+   "playlist": "https://www.youtube.com/playlist?list=PLD2LDq8edf4o7kZuTh3ufEOIPF8qmxIhe",
+   "title": {
+    "ru": "rytstat: работа с YouTube API на языке R",
+    "ua": "rytstat: робота з YouTube API мовою R",
+    "en": "rytstat: working with the YouTube API in R"
+   },
+   "desc": {
+    "ru": "Авторизация и три интерфейса YouTube API: Data API для поиска и данных о каналах, Analytics API для статистики и Reporting API для массовых отчётов.",
+    "ua": "Авторизація та три інтерфейси YouTube API: Data API для пошуку й даних про канали, Analytics API для статистики та Reporting API для масових звітів.",
+    "en": "Authorization and the three YouTube APIs: Data API for search and channel data, Analytics API for stats and Reporting API for bulk reports."
+   },
+   "episodes": [
+    {
+     "yt": "JgvlZm7GxBo",
+     "title": {
+      "ru": "Авторизация в YouTube API на языке R",
+      "ua": "Авторизація в YouTube API мовою R",
+      "en": "Authorizing in the YouTube API with R"
+     }
+    },
+    {
+     "yt": "mPoK0VRoxVM",
+     "title": {
+      "ru": "YouTube Data API: поиск, данные о каналах, плейлистах и видео",
+      "ua": "YouTube Data API: пошук, дані про канали, плейлисти та відео",
+      "en": "YouTube Data API: search, channel, playlist and video data"
+     }
+    },
+    {
+     "yt": "-0kWIvWNA0A",
+     "title": {
+      "ru": "YouTube Analytics API: статистика по видео, плейлистам и рекламе",
+      "ua": "YouTube Analytics API: статистика за відео, плейлистами та рекламою",
+      "en": "YouTube Analytics API: video, playlist and ad statistics"
+     }
+    },
+    {
+     "yt": "FJwEPr8qHq8",
+     "title": {
+      "ru": "Работа с YouTube Reporting API",
+      "ua": "Робота з YouTube Reporting API",
+      "en": "Working with the YouTube Reporting API"
+     }
+    }
+   ]
+  },
+  {
+   "id": "rgoogleads",
+   "pkg": "rgoogleads",
+   "icon": "fa-brands fa-google",
+   "period": "2022",
+   "playlist": "https://www.youtube.com/playlist?list=PLD2LDq8edf4qprTxRcflDwV9IvStiChHi",
+   "title": {
+    "ru": "rgoogleads: работа с Google Ads API",
+    "ua": "rgoogleads: робота з Google Ads API",
+    "en": "rgoogleads: working with the Google Ads API"
+   },
+   "desc": {
+    "ru": "Как пройти авторизацию в Google Ads API, получить иерархию аккаунтов и запрашивать отчёты с помощью пакета rgoogleads.",
+    "ua": "Як пройти авторизацію в Google Ads API, отримати ієрархію акаунтів і запитувати звіти за допомогою пакета rgoogleads.",
+    "en": "Authorizing in the Google Ads API, getting the account hierarchy and requesting reports with rgoogleads."
+   },
+   "episodes": [
+    {
+     "yt": "nYak5sVj07k",
+     "title": {
+      "ru": "Авторизация в Google Ads API и запрос иерархии аккаунтов",
+      "ua": "Авторизація в Google Ads API та запит ієрархії акаунтів",
+      "en": "Google Ads API authorization and account hierarchy"
+     }
+    },
+    {
+     "yt": "np67MNj2-JU",
+     "title": {
+      "ru": "Запрос отчётов из Google Ads API в R",
+      "ua": "Запит звітів з Google Ads API в R",
+      "en": "Requesting Google Ads API reports in R"
+     }
+    }
+   ]
+  },
+  {
+   "id": "rvkstat",
+   "pkg": "rvkstat",
+   "icon": "fa-brands fa-vk",
+   "period": "2021",
+   "playlist": "https://www.youtube.com/playlist?list=PLD2LDq8edf4pQcy0zMmkTlk-o_Z6nRm5N",
+   "title": {
+    "ru": "rvkstat: работа с API ВКонтакте",
+    "ua": "rvkstat: робота з API ВКонтакте",
+    "en": "rvkstat: working with the VK API"
+   },
+   "desc": {
+    "ru": "Авторизация в API ВКонтакте, статистика сообществ и рекламного кабинета с помощью пакета rvkstat.",
+    "ua": "Авторизація в API ВКонтакте, статистика спільнот і рекламного кабінету за допомогою пакета rvkstat.",
+    "en": "Authorizing in the VK API and getting community and ad-account statistics with rvkstat."
+   },
+   "episodes": [
+    {
+     "yt": "49-HTLOPSnU",
+     "title": {
+      "ru": "Авторизация в API ВКонтакте на языке R",
+      "ua": "Авторизація в API ВКонтакте мовою R",
+      "en": "Authorizing in the VK API with R"
+     }
+    },
+    {
+     "yt": "yTg0gknsiBU",
+     "title": {
+      "ru": "Как получить статистику сообщества ВКонтакте",
+      "ua": "Як отримати статистику спільноти ВКонтакте",
+      "en": "Getting VK community statistics"
+     }
+    },
+    {
+     "yt": "xVbd2JXlkmc",
+     "title": {
+      "ru": "Как получить статистику рекламного кабинета ВКонтакте",
+      "ua": "Як отримати статистику рекламного кабінету ВКонтакте",
+      "en": "Getting VK ad-account statistics"
+     }
+    }
+   ]
+  },
+  {
+   "id": "ryandexdirect",
+   "pkg": "ryandexdirect",
+   "icon": "fa-brands fa-yandex",
+   "period": "2020",
+   "playlist": "https://www.youtube.com/playlist?list=PLD2LDq8edf4oUo0L9Kw77ZXf0KcV1hu67",
+   "title": {
+    "ru": "ryandexdirect: работа с API Яндекс.Директа",
+    "ua": "ryandexdirect: робота з API Яндекс.Директу",
+    "en": "ryandexdirect: working with the Yandex.Direct API"
+   },
+   "desc": {
+    "ru": "От авторизации и опций пакета до прогноза бюджета, отчётов WordStat, загрузки статистики, передачи расходов в Google Analytics и уведомлений о балансе.",
+    "ua": "Від авторизації та опцій пакета до прогнозу бюджету, звітів WordStat, завантаження статистики, передачі витрат у Google Analytics і сповіщень про баланс.",
+    "en": "From authorization and package options to budget forecasts, WordStat reports, statistics, sending costs to Google Analytics and low-balance alerts."
+   },
+   "episodes": [
+    {
+     "yt": "hbUXttDFKNE",
+     "title": {
+      "ru": "Авторизация в API Яндекс.Директа, опции пакета и переменные среды",
+      "ua": "Авторизація в API Яндекс.Директу, опції пакета та змінні середовища",
+      "en": "Yandex.Direct API authorization, package options and env variables"
+     }
+    },
+    {
+     "yt": "g9lwjsgAhyY",
+     "title": {
+      "ru": "Прогноз кликов, показов и трат, отчёты WordStat",
+      "ua": "Прогноз кліків, показів і витрат, звіти WordStat",
+      "en": "Forecasting clicks, impressions and spend; WordStat reports"
+     }
+    },
+    {
+     "yt": "T9y0Iuh5EWk",
+     "title": {
+      "ru": "Как загрузить расходы из Яндекс.Директа в Google Analytics",
+      "ua": "Як завантажити витрати з Яндекс.Директу в Google Analytics",
+      "en": "Loading Yandex.Direct costs into Google Analytics"
+     }
+    },
+    {
+     "yt": "2QPI0pAJUPE",
+     "title": {
+      "ru": "Как загрузить статистику из Яндекс.Директа",
+      "ua": "Як завантажити статистику з Яндекс.Директу",
+      "en": "Loading Yandex.Direct statistics"
+     }
+    },
+    {
+     "yt": "XCOQD7KW7JA",
+     "title": {
+      "ru": "Уведомления о том, что на балансе Директа осталось мало средств",
+      "ua": "Сповіщення про те, що на балансі Директу залишилося мало коштів",
+      "en": "Alerts when the Yandex.Direct balance runs low"
+     }
+    }
+   ]
+  },
+  {
+   "id": "rfacebookstat",
+   "pkg": "rfacebookstat",
+   "icon": "fa-brands fa-facebook",
+   "period": "2019–2020",
+   "playlist": "https://www.youtube.com/playlist?list=PLD2LDq8edf4pItOb-vZTG5AXZK2niJ8_R",
+   "title": {
+    "ru": "rfacebookstat: работа с Facebook Marketing API",
+    "ua": "rfacebookstat: робота з Facebook Marketing API",
+    "en": "rfacebookstat: working with the Facebook Marketing API"
+   },
+   "desc": {
+    "ru": "Самая подробная серия: все способы авторизации, загрузка объектов, статистики и конверсий, выгрузка данных в Power BI, Google Analytics и Яндекс.Метрику, работа с бизнес-менеджером.",
+    "ua": "Найдокладніша серія: усі способи авторизації, завантаження об'єктів, статистики та конверсій, вивантаження даних у Power BI, Google Analytics і Яндекс.Метрику, робота з бізнес-менеджером.",
+    "en": "The most detailed series: every authorization method, loading objects, stats and conversions, exporting data to Power BI, Google Analytics and Yandex.Metrica, and Business Manager."
+   },
+   "episodes": [
+    {
+     "yt": "SgcxDqZ-5Qg",
+     "title": {
+      "ru": "Простая авторизация в Facebook Marketing API",
+      "ua": "Проста авторизація в Facebook Marketing API",
+      "en": "Simple Facebook Marketing API authorization"
+     }
+    },
+    {
+     "yt": "VLhsQDAyx5E",
+     "title": {
+      "ru": "Авторизация через собственное приложение",
+      "ua": "Авторизація через власний застосунок",
+      "en": "Authorization via your own app"
+     }
+    },
+    {
+     "yt": "oZhV1U5fMZ0",
+     "title": {
+      "ru": "Автоматическая авторизация, файл .Renviron",
+      "ua": "Автоматична авторизація, файл .Renviron",
+      "en": "Automatic authorization with .Renviron"
+     }
+    },
+    {
+     "yt": "zoNvu2T6IFc",
+     "title": {
+      "ru": "Автоматическая авторизация и переменные среды в Windows",
+      "ua": "Автоматична авторизація та змінні середовища у Windows",
+      "en": "Automatic authorization and env variables on Windows"
+     }
+    },
+    {
+     "yt": "ZaOvO5k6Ses",
+     "title": {
+      "ru": "Опции пакета и загрузка объектов рекламных кабинетов",
+      "ua": "Опції пакета та завантаження об'єктів рекламних кабінетів",
+      "en": "Package options and loading ad-account objects"
+     }
+    },
+    {
+     "yt": "hc_hknCWZc4",
+     "title": {
+      "ru": "Статистика, конверсии и окна атрибуции",
+      "ua": "Статистика, конверсії та вікна атрибуції",
+      "en": "Statistics, conversions and attribution windows"
+     }
+    },
+    {
+     "yt": "WuOw33JjvGM",
+     "title": {
+      "ru": "Статистика рекламных аккаунтов Facebook в Power BI",
+      "ua": "Статистика рекламних акаунтів Facebook у Power BI",
+      "en": "Facebook ad-account stats in Power BI"
+     }
+    },
+    {
+     "yt": "j61dikcATQI",
+     "title": {
+      "ru": "Расходы из Facebook в Google Analytics",
+      "ua": "Витрати з Facebook у Google Analytics",
+      "en": "Facebook costs into Google Analytics"
+     }
+    },
+    {
+     "yt": "yAxMQfrVzEc",
+     "title": {
+      "ru": "Расходы и клики из Facebook в Яндекс.Метрику",
+      "ua": "Витрати та кліки з Facebook у Яндекс.Метрику",
+      "en": "Facebook costs and clicks into Yandex.Metrica"
+     }
+    },
+    {
+     "yt": "O2BhRNO_ul4",
+     "title": {
+      "ru": "Данные из бизнес-менеджера Facebook",
+      "ua": "Дані з бізнес-менеджера Facebook",
+      "en": "Data from Facebook Business Manager"
+     }
+    },
+    {
+     "yt": "ZN9-aYqq2tQ",
+     "title": {
+      "ru": "Разбиваем большой запрос на подзапросы по периодам (fetch_by)",
+      "ua": "Розбиваємо великий запит на підзапити за періодами (fetch_by)",
+      "en": "Splitting a large request by period (fetch_by)"
+     }
+    }
+   ]
+  },
+  {
+   "id": "timeperiodsR",
+   "pkg": "timeperiodsR",
+   "icon": "fa-solid fa-calendar-days",
+   "period": "2019–2020",
+   "playlist": "https://www.youtube.com/playlist?list=PLD2LDq8edf4qed2KVKfXmKdh0OQcdj9gw",
+   "title": {
+    "ru": "timeperiodsR: простое определение временных периодов",
+    "ua": "timeperiodsR: просте визначення часових періодів",
+    "en": "timeperiodsR: working with time periods made easy"
+   },
+   "desc": {
+    "ru": "Как одной функцией получить границы прошлого месяца, будни и выходные, официальные праздники стран СНГ и проверить полноту данных в базе за период.",
+    "ua": "Як однією функцією отримати межі минулого місяця, будні та вихідні, офіційні свята країн СНД і перевірити повноту даних у базі за період.",
+    "en": "Get last month's boundaries, workdays and weekends, official holidays and check data completeness for a period — each with a single function."
+   },
+   "episodes": [
+    {
+     "yt": "NgfWELbM6Fk",
+     "title": {
+      "ru": "Начальная и конечная дата прошлого месяца",
+      "ua": "Початкова та кінцева дата минулого місяця",
+      "en": "First and last day of last month"
+     }
+    },
+    {
+     "yt": "jwJA-fgQwoQ",
+     "title": {
+      "ru": "Вектор будних и выходных дней",
+      "ua": "Вектор будніх і вихідних днів",
+      "en": "Vectors of workdays and weekends"
+     }
+    },
+    {
+     "yt": "meYb5LRV3k8",
+     "title": {
+      "ru": "Официальные выходные и рабочие дни в странах СНГ",
+      "ua": "Офіційні вихідні та робочі дні в країнах СНД",
+      "en": "Official holidays and workdays by country"
+     }
+    },
+    {
+     "yt": "W-rUYf3AHqA",
+     "title": {
+      "ru": "Расширение класса tpr с помощью переменных среды",
+      "ua": "Розширення класу tpr за допомогою змінних середовища",
+      "en": "Extending the tpr class with env variables"
+     }
+    },
+    {
+     "yt": "c_WQmN6yBl0",
+     "title": {
+      "ru": "Пользовательский список выходных дней",
+      "ua": "Користувацький список вихідних днів",
+      "en": "A custom list of days off"
+     }
+    },
+    {
+     "yt": "UMQ_S5w-T9c",
+     "title": {
+      "ru": "Проверка наличия данных в БД за период",
+      "ua": "Перевірка наявності даних у БД за період",
+      "en": "Checking database data for a period"
+     }
+    }
+   ]
+  }
+ ],
+ "lessons": [
+  {
+   "yt": "puIbAG2Ms4c",
+   "date": "2026-04",
+   "topic": "ai",
+   "title": {
+    "ru": "Автоматизация разработки в RStudio с помощью Gemini CLI",
+    "ua": "Автоматизація розробки в RStudio за допомогою Gemini CLI",
+    "en": "Automating development in RStudio with Gemini CLI"
+   },
+   "desc": {
+    "ru": "Как подключить консольного AI-агента Gemini CLI к работе в RStudio и делегировать ему рутинные задачи разработки.",
+    "ua": "Як підключити консольного AI-агента Gemini CLI до роботи в RStudio та делегувати йому рутинні задачі розробки.",
+    "en": "Connecting the Gemini CLI agent to your RStudio workflow and delegating routine development tasks to it."
+   }
+  },
+  {
+   "yt": "TJRxWS0W7UY",
+   "date": "2024-08",
+   "topic": "deploy",
+   "title": {
+    "ru": "Разворачиваем Telegram-бота на платформе Heroku",
+    "ua": "Розгортаємо Telegram-бота на платформі Heroku",
+    "en": "Deploying a Telegram bot to Heroku"
+   },
+   "desc": {
+    "ru": "Пошаговый деплой написанного на R Telegram-бота в облачную платформу Heroku.",
+    "ua": "Покроковий деплой написаного на R Telegram-бота в хмарну платформу Heroku.",
+    "en": "Step-by-step deployment of an R Telegram bot to the Heroku cloud platform."
+   }
+  },
+  {
+   "yt": "YCXTjodFmqo",
+   "date": "2024-08",
+   "topic": "deploy",
+   "title": {
+    "ru": "Разворачиваем Telegram-бота в Google Cloud Run",
+    "ua": "Розгортаємо Telegram-бота в Google Cloud Run",
+    "en": "Deploying a Telegram bot to Google Cloud Run"
+   },
+   "desc": {
+    "ru": "Упаковываем бота в Docker-контейнер и запускаем его в Google Cloud Run.",
+    "ua": "Пакуємо бота в Docker-контейнер і запускаємо його в Google Cloud Run.",
+    "en": "Packaging the bot into a Docker container and running it on Google Cloud Run."
+   }
+  },
+  {
+   "yt": "zdqRR-3ZFkM",
+   "date": "2024-08",
+   "topic": "deploy",
+   "title": {
+    "ru": "Запуск R-скриптов по расписанию с помощью Google Cloud Run Jobs",
+    "ua": "Запуск R-скриптів за розкладом за допомогою Google Cloud Run Jobs",
+    "en": "Scheduling R scripts with Google Cloud Run Jobs"
+   },
+   "desc": {
+    "ru": "Как перенести регулярные R-скрипты в облако: контейнер, Cloud Run Job и расписание запуска.",
+    "ua": "Як перенести регулярні R-скрипти в хмару: контейнер, Cloud Run Job і розклад запуску.",
+    "en": "Moving recurring R scripts to the cloud: a container, a Cloud Run Job and a schedule."
+   }
+  },
+  {
+   "yt": "SR69O1bkzmI",
+   "date": "2024-07",
+   "topic": "deploy",
+   "title": {
+    "ru": "Запуск R-скриптов по расписанию с помощью GitHub Actions",
+    "ua": "Запуск R-скриптів за розкладом за допомогою GitHub Actions",
+    "en": "Scheduling R scripts with GitHub Actions"
+   },
+   "desc": {
+    "ru": "Бесплатный способ запускать R-скрипты по расписанию прямо из репозитория на GitHub.",
+    "ua": "Безкоштовний спосіб запускати R-скрипти за розкладом прямо з репозиторію на GitHub.",
+    "en": "A free way to run R scripts on a schedule straight from a GitHub repository."
+   }
+  },
+  {
+   "yt": "P93BqWhT_Ck",
+   "date": "2024-07",
+   "topic": "ai",
+   "title": {
+    "ru": "ChatGPT для аналитика данных: успешные и неуспешные кейсы",
+    "ua": "ChatGPT для аналітика даних: успішні та неуспішні кейси",
+    "en": "ChatGPT for data analysts: what worked and what didn't"
+   },
+   "desc": {
+    "ru": "Реальные примеры из работы аналитика: где ChatGPT экономит время, а где ошибается и требует проверки.",
+    "ua": "Реальні приклади з роботи аналітика: де ChatGPT економить час, а де помиляється й потребує перевірки.",
+    "en": "Real examples from analytics work: where ChatGPT saves time and where it gets things wrong."
+   }
+  },
+  {
+   "yt": "7PPP8q0lE_o",
+   "date": "2023-01",
+   "topic": "basics",
+   "title": {
+    "ru": "Как правильно хранить секретные данные и работать с ними в R",
+    "ua": "Як правильно зберігати секретні дані та працювати з ними в R",
+    "en": "Storing and using secrets safely in R"
+   },
+   "desc": {
+    "ru": "Токены, пароли и ключи API: почему их нельзя хранить в коде и какие есть безопасные способы.",
+    "ua": "Токени, паролі та ключі API: чому їх не можна зберігати в коді та які є безпечні способи.",
+    "en": "Tokens, passwords and API keys: why they don't belong in code and safer ways to handle them."
+   }
+  },
+  {
+   "yt": "W-hwi9zbxlM",
+   "date": "2022-08",
+   "topic": "data",
+   "title": {
+    "ru": "Как загрузить данные из Google BigQuery в Google Таблицу встроенным коннектором",
+    "ua": "Як завантажити дані з Google BigQuery у Google Таблицю вбудованим конектором",
+    "en": "Loading Google BigQuery data into Google Sheets with the built-in connector"
+   },
+   "desc": {
+    "ru": "Подключаем таблицы BigQuery к Google Таблицам без кода с помощью Connected Sheets.",
+    "ua": "Підключаємо таблиці BigQuery до Google Таблиць без коду за допомогою Connected Sheets.",
+    "en": "Connecting BigQuery tables to Google Sheets without code using Connected Sheets."
+   }
+  },
+  {
+   "yt": "QZCCRbGCms8",
+   "date": "2022-07",
+   "topic": "api",
+   "title": {
+    "ru": "rtgstat: аналитика Telegram-каналов с помощью TGStat API",
+    "ua": "rtgstat: аналітика Telegram-каналів за допомогою TGStat API",
+    "en": "rtgstat: Telegram channel analytics with the TGStat API"
+   },
+   "desc": {
+    "ru": "Как с помощью пакета rtgstat получать статистику Telegram-каналов и публикаций из TGStat API.",
+    "ua": "Як за допомогою пакета rtgstat отримувати статистику Telegram-каналів і публікацій з TGStat API.",
+    "en": "Getting Telegram channel and post statistics from the TGStat API with rtgstat."
+   }
+  },
+  {
+   "yt": "Af5ZIAPMjJs",
+   "date": "2022-05",
+   "topic": "data",
+   "title": {
+    "ru": "Ускоряем dplyr: бекенды dtplyr, dbplyr и multidplyr",
+    "ua": "Прискорюємо dplyr: бекенди dtplyr, dbplyr і multidplyr",
+    "en": "Speeding up dplyr: the dtplyr, dbplyr and multidplyr backends"
+   },
+   "desc": {
+    "ru": "Тот же синтаксис dplyr, но с data.table, SQL-базами и многопоточностью под капотом.",
+    "ua": "Той самий синтаксис dplyr, але з data.table, SQL-базами та багатопотоковістю під капотом.",
+    "en": "The same dplyr syntax, powered by data.table, SQL databases and parallelism under the hood."
+   }
+  },
+  {
+   "yt": "PrxyYMH7GB4",
+   "date": "2021-06",
+   "topic": "data",
+   "title": {
+    "ru": "Работа со срезами в dplyr: функции семейства slice()",
+    "ua": "Робота зі зрізами в dplyr: функції сімейства slice()",
+    "en": "Slicing data in dplyr: the slice() family"
+   },
+   "desc": {
+    "ru": "slice_head(), slice_max(), slice_sample() и другие способы выбрать нужные строки таблицы.",
+    "ua": "slice_head(), slice_max(), slice_sample() та інші способи вибрати потрібні рядки таблиці.",
+    "en": "slice_head(), slice_max(), slice_sample() and other ways to pick the rows you need."
+   }
+  },
+  {
+   "yt": "FWE028d6RPI",
+   "date": "2021-05",
+   "topic": "deploy",
+   "title": {
+    "ru": "Как настроить запуск R-скриптов по расписанию в Windows",
+    "ua": "Як налаштувати запуск R-скриптів за розкладом у Windows",
+    "en": "Scheduling R scripts on Windows"
+   },
+   "desc": {
+    "ru": "Настраиваем Планировщик заданий Windows, чтобы R-скрипты запускались автоматически, без участия человека.",
+    "ua": "Налаштовуємо Планувальник завдань Windows, щоб R-скрипти запускалися автоматично, без участі людини.",
+    "en": "Setting up Windows Task Scheduler so your R scripts run automatically, hands-free."
+   }
+  },
+  {
+   "yt": "XC-6y-sQ8js",
+   "date": "2021-04",
+   "topic": "data",
+   "title": {
+    "ru": "Работа с датой и временем на языке R: пакет clock",
+    "ua": "Робота з датою та часом мовою R: пакет clock",
+    "en": "Dates and times in R: the clock package"
+   },
+   "desc": {
+    "ru": "Современный пакет для арифметики дат, часовых поясов и форматирования времени.",
+    "ua": "Сучасний пакет для арифметики дат, часових поясів і форматування часу.",
+    "en": "A modern package for date arithmetic, time zones and formatting."
+   }
+  },
+  {
+   "yt": "9Wn8n2A6x2w",
+   "date": "2021-03",
+   "topic": "api",
+   "title": {
+    "ru": "rappsflyer: как получить данные из Pull API AppsFlyer",
+    "ua": "rappsflyer: як отримати дані з Pull API AppsFlyer",
+    "en": "rappsflyer: getting data from the AppsFlyer Pull API"
+   },
+   "desc": {
+    "ru": "Загрузка данных мобильной атрибуции из AppsFlyer в R с помощью пакета rappsflyer.",
+    "ua": "Завантаження даних мобільної атрибуції з AppsFlyer в R за допомогою пакета rappsflyer.",
+    "en": "Loading mobile attribution data from AppsFlyer into R with rappsflyer."
+   }
+  },
+  {
+   "yt": "xA8YGxQH1Ws",
+   "date": "2021-01",
+   "topic": "deploy",
+   "title": {
+    "ru": "Логирование выполнения R-скриптов: пакеты lgr и lgrExtra",
+    "ua": "Логування виконання R-скриптів: пакети lgr і lgrExtra",
+    "en": "Logging R script execution with lgr and lgrExtra"
+   },
+   "desc": {
+    "ru": "Зачем скриптам, работающим по расписанию, логи и как настроить их запись с помощью lgr и lgrExtra.",
+    "ua": "Навіщо скриптам, що працюють за розкладом, логи та як налаштувати їх запис за допомогою lgr і lgrExtra.",
+    "en": "Why scheduled scripts need logs and how to set up logging with lgr and lgrExtra."
+   }
+  },
+  {
+   "yt": "1UvrWoZugic",
+   "date": "2020-07",
+   "topic": "basics",
+   "title": {
+    "ru": "Как установить пакет R из CRAN, GitHub или локальных файлов",
+    "ua": "Як встановити пакет R з CRAN, GitHub або локальних файлів",
+    "en": "Installing R packages from CRAN, GitHub or local files"
+   },
+   "desc": {
+    "ru": "Все способы установки пакетов и типичные ошибки, с которыми сталкиваются новички.",
+    "ua": "Усі способи встановлення пакетів і типові помилки, з якими стикаються новачки.",
+    "en": "Every way to install packages and the typical errors beginners run into."
+   }
+  },
+  {
+   "yt": "e6bqFeJgaa0",
+   "date": "2020-06",
+   "topic": "data",
+   "title": {
+    "ru": "tidyr 1.1.0: обзор релиза",
+    "ua": "tidyr 1.1.0: огляд релізу",
+    "en": "tidyr 1.1.0: release overview"
+   },
+   "desc": {
+    "ru": "Что нового в пакете tidyr версии 1.1.0 из ядра tidyverse.",
+    "ua": "Що нового в пакеті tidyr версії 1.1.0 з ядра tidyverse.",
+    "en": "What's new in tidyr 1.1.0, part of the core tidyverse."
+   }
+  },
+  {
+   "yt": "no75MyT87l0",
+   "date": "2020-02",
+   "topic": "api",
+   "title": {
+    "ru": "Как работать с API Google Таблиц на языке R: пакет googlesheets4",
+    "ua": "Як працювати з API Google Таблиць мовою R: пакет googlesheets4",
+    "en": "Working with the Google Sheets API in R: googlesheets4"
+   },
+   "desc": {
+    "ru": "Чтение, запись и управление Google Таблицами из R с помощью googlesheets4.",
+    "ua": "Читання, запис і керування Google Таблицями з R за допомогою googlesheets4.",
+    "en": "Reading, writing and managing Google Sheets from R with googlesheets4."
+   }
+  },
+  {
+   "yt": "H2CgzIIH0Ps",
+   "date": "2019-12",
+   "topic": "basics",
+   "title": {
+    "ru": "Как обновить R до актуальной версии: пакет installr",
+    "ua": "Як оновити R до актуальної версії: пакет installr",
+    "en": "Updating R to the latest version with installr"
+   },
+   "desc": {
+    "ru": "Самый простой способ обновить R в Windows и перенести установленные пакеты.",
+    "ua": "Найпростіший спосіб оновити R у Windows і перенести встановлені пакети.",
+    "en": "The easiest way to update R on Windows and carry over your installed packages."
+   }
+  },
+  {
+   "yt": "gZKw_laVxC4",
+   "date": "2019-03",
+   "topic": "api",
+   "title": {
+    "ru": "Пример работы с пакетом getProxy",
+    "ua": "Приклад роботи з пакетом getProxy",
+    "en": "Using the getProxy package"
+   },
+   "desc": {
+    "ru": "Как подключать бесплатные прокси-серверы в R-сессии с помощью пакета getProxy.",
+    "ua": "Як підключати безкоштовні проксі-сервери в R-сесії за допомогою пакета getProxy.",
+    "en": "Using free proxy servers in an R session with the getProxy package."
+   }
+  }
+ ]
+}

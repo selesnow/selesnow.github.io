@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Alexey Seleznev">
+    <meta name="theme-color" content="#030712">
+    <link rel="canonical" href="https://alexey-seleznev.pro/courses/">
+
+    <title>Курсы по языку R | Алексей Селезнёв</title>
+    <meta name="title" content="Курсы по языку R | Алексей Селезнёв">
+    <meta name="description" content="Бесплатные авторские курсы Алексея Селезнёва по языку R: от R для пользователей Excel до разработки пакетов, Telegram-ботов и AI-инструментов.">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alexey-seleznev.pro/courses/">
+    <meta property="og:site_name" content="ALEXEY-SELEZNEV.pro">
+    <meta property="og:title" content="Курсы по языку R | Алексей Селезнёв">
+    <meta property="og:description" content="Бесплатные авторские курсы Алексея Селезнёва по языку R: от R для пользователей Excel до разработки пакетов, Telegram-ботов и AI-инструментов.">
+    <meta property="og:image" content="https://alexey-seleznev.pro/photo.jpg">
+    <meta property="og:image:alt" content="Алексей Селезнёв">
+    <meta property="og:locale" content="ru_RU">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="https://alexey-seleznev.pro/courses/">
+    <meta name="twitter:title" content="Курсы по языку R | Алексей Селезнёв">
+    <meta name="twitter:description" content="Бесплатные авторские курсы Алексея Селезнёва по языку R: от R для пользователей Excel до разработки пакетов, Telegram-ботов и AI-инструментов.">
+    <meta name="twitter:image" content="https://alexey-seleznev.pro/photo.jpg">
+
+    <link rel="icon" type="image/jpeg" href="../logo.jpg">
+    <link rel="apple-touch-icon" href="../logo.jpg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body class="relative lang-en">
+
+    <!-- Interactive Background -->
+    <div id="vanta-bg"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full z-50 top-0 left-0 border-b border-white/5 bg-slate-950/60 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 h-16 flex items-center justify-between">
+            <a href="../" class="flex items-center gap-2 sm:gap-2.5 md:gap-3 group shrink min-w-0">
+                <img src="../logo.jpg" alt="Alexey Seleznev" class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 rounded-lg sm:rounded-xl object-cover shadow-md border border-white/10 group-hover:border-purple-500/50 group-hover:scale-105 transition-all shrink-0">
+                <span class="text-xs min-[400px]:text-sm sm:text-base md:text-xl font-black tracking-tight uppercase outfit-font whitespace-nowrap text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+            </a>
+            <div class="hidden xl:flex gap-6 text-sm font-semibold text-slate-400">
+                <a href="../" class="nav-link hover:text-white transition-colors"><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a>
+                <a href="../courses/" class="nav-link hover:text-white transition-colors active"><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a>
+                <a href="../videos/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a>
+                <a href="../talks/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a>
+                <a href="../articles/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a>
+                <a href="../interviews/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a>
+            </div>
+
+            <div class="flex items-center gap-1.5 sm:gap-2 md:gap-4 shrink-0">
+                <div class="lang-switcher flex gap-1 sm:gap-1.5 md:gap-2 text-[11px] sm:text-xs md:text-sm font-bold border-r border-white/10 pr-1.5 sm:pr-3 md:pr-4 mr-0.5 sm:mr-1 md:mr-2 outfit-font">
+                    <button onclick="changeLang('en')" id="btn-en" class="active hover:text-white transition-colors">EN</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ru')" id="btn-ru" class="text-slate-500 hover:text-white transition-colors">RU</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ua')" id="btn-ua" class="text-slate-500 hover:text-white transition-colors">UA</button>
+                </div>
+
+                <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="text-slate-400 hover:text-blue-400 transition-colors hidden sm:block" aria-label="Telegram"><i class="fa-brands fa-telegram text-lg md:text-xl"></i></a>
+                <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="text-slate-400 hover:text-white transition-colors hidden sm:block" aria-label="GitHub"><i class="fa-brands fa-github text-lg md:text-xl"></i></a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="xl:hidden w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-purple-500/20 hover:border-purple-500/40 transition-all focus:outline-none" aria-label="Toggle Navigation Menu">
+                    <i class="fa-solid fa-bars text-sm sm:text-lg" id="mobile-menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div id="mobile-menu" class="hidden xl:hidden border-t border-white/10 bg-slate-950/95 backdrop-blur-2xl shadow-2xl overflow-y-auto max-h-[calc(100vh-4rem)] transition-all">
+            <div class="max-w-7xl mx-auto px-6 py-6 space-y-1">
+                <a href="../" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-house text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span>
+                </a>
+                <a href="../courses/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-white bg-white/5 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-graduation-cap text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span>
+                </a>
+                <a href="../videos/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-circle-play text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span>
+                </a>
+                <a href="../talks/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-microphone-lines text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span>
+                </a>
+                <a href="../articles/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-pen-nib text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span>
+                </a>
+                <a href="../interviews/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-regular fa-newspaper text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span>
+                </a>
+
+                <div class="pt-4 mt-3 border-t border-white/10 flex items-center justify-around text-slate-400">
+                    <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-blue-400 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-telegram text-xl"></i> Telegram
+                    </a>
+                    <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="p-2 hover:text-white transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-github text-xl"></i> GitHub
+                    </a>
+                    <a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-red-500 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-youtube text-xl"></i> YouTube
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="pt-32 pb-12 px-6 max-w-7xl mx-auto relative z-10">
+        <a href="../" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-400 hover:text-white transition-colors mb-8 group" data-aos="fade-right">
+            <i class="fa-solid fa-arrow-left text-xs group-hover:-translate-x-1 transition-transform"></i>
+            <span class="ru-text">На главную</span><span class="ua-text">На головну</span><span class="en-text">Back to home</span>
+        </a>
+        <div data-aos="fade-up">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-bold tracking-widest uppercase mb-5 outfit-font">
+                <i class="fa-solid fa-graduation-cap"></i> <span class="ru-text">Обучение</span><span class="ua-text">Навчання</span><span class="en-text">Learning</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-black tracking-tight leading-tight uppercase mb-8"><span class="ru-text">Авторские <span class="text-gradient">курсы</span></span><span class="ua-text">Авторські <span class="text-gradient">курси</span></span><span class="en-text">Original <span class="text-gradient">Courses</span></span></h1>
+        </div>
+        <div class="bento-glass no-lift p-6 md:p-10 border-l-4 border-purple-500/50 mb-8" data-aos="fade-up" data-aos-delay="100">
+            <p class="text-lg md:text-xl text-slate-300 leading-relaxed font-light relative z-10"><span class="ru-text">Курсы появились как внутренняя программа обучения аналитиков отдела Netpeak — от уровня Junior до Senior. Позже все программы были опубликованы в открытом доступе и стали востребованы среди тысяч специалистов. Все курсы бесплатные: видеолекции, конспекты, код, тесты и задания.</span><span class="ua-text">Курси з'явилися як внутрішня програма навчання аналітиків відділу Netpeak — від рівня Junior до Senior. Пізніше всі програми були опубліковані у відкритому доступі та стали затребуваними серед тисяч фахівців. Усі курси безкоштовні: відеолекції, конспекти, код, тести та завдання.</span><span class="en-text">These courses began as an internal training program for Netpeak's analytics team — from Junior to Senior. Later every program was published openly and is now used by thousands of specialists. All courses are free: video lectures, notes, code, quizzes and assignments.</span></p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 bento-glass no-lift p-6 rounded-3xl" data-aos="fade-up" data-aos-delay="150">
+                <div class="bento-content">
+                    <div class="text-3xl md:text-4xl font-extrabold text-white outfit-font">7</div>
+                    <div class="text-xs text-slate-400 uppercase font-bold mt-1"><span class="ru-text">Курсов</span><span class="ua-text">Курсів</span><span class="en-text">Courses</span></div>
+                </div>
+                <div class="bento-content">
+                    <div class="text-3xl md:text-4xl font-extrabold text-white outfit-font">0 $</div>
+                    <div class="text-xs text-slate-400 uppercase font-bold mt-1"><span class="ru-text">Стоимость</span><span class="ua-text">Вартість</span><span class="en-text">Price</span></div>
+                </div>
+                <div class="bento-content">
+                    <div class="text-3xl md:text-4xl font-extrabold text-white outfit-font">2018</div>
+                    <div class="text-xs text-slate-400 uppercase font-bold mt-1"><span class="ru-text">Первый курс</span><span class="ua-text">Перший курс</span><span class="en-text">First course</span></div>
+                </div>
+                <div class="bento-content">
+                    <div class="text-3xl md:text-4xl font-extrabold text-white outfit-font">3</div>
+                    <div class="text-xs text-slate-400 uppercase font-bold mt-1"><span class="ru-text">Уровня сложности</span><span class="ua-text">Рівні складності</span><span class="en-text">Skill levels</span></div>
+                </div>
+        </div>
+    </header>
+
+    <!-- LEARNING PATH -->
+    <section class="px-6 max-w-7xl mx-auto pb-16 relative z-10">
+        <h2 class="text-3xl font-extrabold mb-8 flex items-center gap-4 outfit-font" data-aos="fade-up">
+            <div class="w-12 h-12 bg-purple-500/20 flex items-center justify-center rounded-2xl border border-purple-500/30"><i class="fa-solid fa-route text-purple-500 text-xl"></i></div>
+            <span class="ru-text">С чего начать</span><span class="ua-text">З чого почати</span><span class="en-text">Where to start</span>
+        </h2>
+        <div class="grid md:grid-cols-3 gap-6">
+                <div class="bento-glass no-lift p-6 rounded-3xl" data-aos="fade-up" data-aos-delay="80">
+                    <div class="bento-content">
+                        <div class="flex items-center gap-3 mb-5">
+                            <div class="w-11 h-11 rounded-2xl border bg-green-500/10 border-green-500/30 flex items-center justify-center text-green-400"><i class="fa-solid fa-seedling"></i></div>
+                            <div>
+                                <div class="text-[11px] font-mono font-bold uppercase tracking-widest text-slate-500"><span class="ru-text">Шаг</span><span class="ua-text">Крок</span><span class="en-text">Step</span> 1</div>
+                                <div class="font-bold text-white outfit-font text-lg"><span class="ru-text">Старт</span><span class="ua-text">Старт</span><span class="en-text">Start</span></div>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                        <a href="#r4excel" class="flex items-center justify-between gap-3 px-4 py-3 rounded-xl bg-slate-900/50 border border-white/5 hover:border-purple-500/40 hover:bg-white/5 transition-all text-sm font-semibold text-slate-200 group/link">
+                            <span><span class="ru-text">Язык R для пользователей Excel</span><span class="ua-text">Мова R для користувачів Excel</span><span class="en-text">R for Excel Users</span></span>
+                            <i class="fa-solid fa-arrow-down text-xs text-slate-500 group-hover/link:text-purple-400 transition-colors"></i>
+                        </a>
+                        <a href="#r4marketing" class="flex items-center justify-between gap-3 px-4 py-3 rounded-xl bg-slate-900/50 border border-white/5 hover:border-purple-500/40 hover:bg-white/5 transition-all text-sm font-semibold text-slate-200 group/link">
+                            <span><span class="ru-text">Язык R для интернет-маркетинга</span><span class="ua-text">Мова R для інтернет-маркетингу</span><span class="en-text">R for Digital Marketing</span></span>
+                            <i class="fa-solid fa-arrow-down text-xs text-slate-500 group-hover/link:text-purple-400 transition-colors"></i>
+                        </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="bento-glass no-lift p-6 rounded-3xl" data-aos="fade-up" data-aos-delay="160">
+                    <div class="bento-content">
+                        <div class="flex items-center gap-3 mb-5">
+                            <div class="w-11 h-11 rounded-2xl border bg-blue-500/10 border-blue-500/30 flex items-center justify-center text-blue-400"><i class="fa-solid fa-layer-group"></i></div>
+                            <div>
+                                <div class="text-[11px] font-mono font-bold uppercase tracking-widest text-slate-500"><span class="ru-text">Шаг</span><span class="ua-text">Крок</span><span class="en-text">Step</span> 2</div>
+                                <div class="font-bold text-white outfit-font text-lg"><span class="ru-text">Углубление</span><span class="ua-text">Поглиблення</span><span class="en-text">Level up</span></div>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                        <a href="#dplyr" class="flex items-center justify-between gap-3 px-4 py-3 rounded-xl bg-slate-900/50 border border-white/5 hover:border-purple-500/40 hover:bg-white/5 transition-all text-sm font-semibold text-slate-200 group/link">
+                            <span><span class="ru-text">Введение в dplyr 1.0.0</span><span class="ua-text">Вступ до dplyr 1.0.0</span><span class="en-text">Introduction to dplyr 1.0.0</span></span>
+                            <i class="fa-solid fa-arrow-down text-xs text-slate-500 group-hover/link:text-purple-400 transition-colors"></i>
+                        </a>
+                        <a href="#iterations" class="flex items-center justify-between gap-3 px-4 py-3 rounded-xl bg-slate-900/50 border border-white/5 hover:border-purple-500/40 hover:bg-white/5 transition-all text-sm font-semibold text-slate-200 group/link">
+                            <span><span class="ru-text">Циклы и функционалы в языке R</span><span class="ua-text">Цикли та функціонали в мові R</span><span class="en-text">Loops and Functionals in R</span></span>
+                            <i class="fa-solid fa-arrow-down text-xs text-slate-500 group-hover/link:text-purple-400 transition-colors"></i>
+                        </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="bento-glass no-lift p-6 rounded-3xl" data-aos="fade-up" data-aos-delay="240">
+                    <div class="bento-content">
+                        <div class="flex items-center gap-3 mb-5">
+                            <div class="w-11 h-11 rounded-2xl border bg-orange-500/10 border-orange-500/30 flex items-center justify-center text-orange-400"><i class="fa-solid fa-rocket"></i></div>
+                            <div>
+                                <div class="text-[11px] font-mono font-bold uppercase tracking-widest text-slate-500"><span class="ru-text">Шаг</span><span class="ua-text">Крок</span><span class="en-text">Step</span> 3</div>
+                                <div class="font-bold text-white outfit-font text-lg"><span class="ru-text">Продвинутый уровень</span><span class="ua-text">Просунутий рівень</span><span class="en-text">Advanced</span></div>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                        <a href="#tgbot" class="flex items-center justify-between gap-3 px-4 py-3 rounded-xl bg-slate-900/50 border border-white/5 hover:border-purple-500/40 hover:bg-white/5 transition-all text-sm font-semibold text-slate-200 group/link">
+                            <span><span class="ru-text">Разработка Telegram-ботов на языке R</span><span class="ua-text">Розробка Telegram-ботів мовою R</span><span class="en-text">Building Telegram Bots in R</span></span>
+                            <i class="fa-solid fa-arrow-down text-xs text-slate-500 group-hover/link:text-purple-400 transition-colors"></i>
+                        </a>
+                        <a href="#packages" class="flex items-center justify-between gap-3 px-4 py-3 rounded-xl bg-slate-900/50 border border-white/5 hover:border-purple-500/40 hover:bg-white/5 transition-all text-sm font-semibold text-slate-200 group/link">
+                            <span><span class="ru-text">Разработка пакетов на языке R</span><span class="ua-text">Розробка пакетів мовою R</span><span class="en-text">R Package Development</span></span>
+                            <i class="fa-solid fa-arrow-down text-xs text-slate-500 group-hover/link:text-purple-400 transition-colors"></i>
+                        </a>
+                        <a href="#ai" class="flex items-center justify-between gap-3 px-4 py-3 rounded-xl bg-slate-900/50 border border-white/5 hover:border-purple-500/40 hover:bg-white/5 transition-all text-sm font-semibold text-slate-200 group/link">
+                            <span><span class="ru-text">Язык R для разработки AI-инструментов</span><span class="ua-text">Мова R для розробки AI-інструментів</span><span class="en-text">Building AI Tools with R</span></span>
+                            <i class="fa-solid fa-arrow-down text-xs text-slate-500 group-hover/link:text-purple-400 transition-colors"></i>
+                        </a>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </section>
+
+    <!-- COURSES -->
+    <section class="px-6 max-w-7xl mx-auto pb-16 relative z-10 space-y-10">
+
+        <article id="r4excel" class="bento-glass no-lift rounded-[2rem] p-3 md:p-4 scroll-mt-24" data-aos="fade-up">
+            <div class="bento-content flex flex-col lg:flex-row gap-6 lg:gap-10">
+                <div class="lg:w-[42%] shrink-0">
+                    <div class="cover h-60 md:h-80 lg:h-full lg:min-h-[420px] rounded-[1.5rem]">
+                        <div class="cover-fallback"><i class="fa-brands fa-r-project text-6xl"></i></div>
+                        <img src="https://selesnow.github.io/r4excel_users/cover.png" alt="Язык R для пользователей Excel" loading="lazy" style="object-position: top" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent"></div>
+                        <div class="absolute top-4 left-4 bg-green-500/20 border border-green-500/50 text-green-400 text-[10px] uppercase font-bold px-3 py-1 rounded-full backdrop-blur-lg">BEGINNER</div>
+                        <div class="absolute bottom-4 left-4 text-xs font-mono font-bold text-slate-300 bg-slate-950/70 border border-white/10 px-2.5 py-1 rounded-lg backdrop-blur-md">2020</div>
+                    </div>
+                </div>
+                <div class="flex-1 py-2 lg:py-6 pr-1 lg:pr-6 flex flex-col">
+                    <div class="flex flex-wrap items-center gap-3 mb-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-purple-400"><span class="ru-text">Для начинающих</span><span class="ua-text">Для початківців</span><span class="en-text">Beginner</span></span>
+                        
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-white outfit-font mb-3 leading-tight"><span class="ru-text">Язык R для пользователей Excel</span><span class="ua-text">Мова R для користувачів Excel</span><span class="en-text">R for Excel Users</span></h2>
+                    <p class="text-lg text-slate-300 font-medium mb-5"><span class="ru-text">Самый простой вход в R — через задачи, которые вы сегодня решаете в Excel.</span><span class="ua-text">Найпростіший вхід у R — через задачі, які ви сьогодні вирішуєте в Excel.</span><span class="en-text">The easiest way into R — through the tasks you solve in Excel today.</span></p>
+                    <p class="text-slate-400 leading-relaxed font-light mb-6"><span class="ru-text">Курс построен вокруг tidyverse — readr, vroom, dplyr, tidyr и ggplot2 — и проводит через весь цикл анализа данных: от загрузки до визуализации готового результата. Синтаксис tidyverse легко читается даже без опыта программирования, а функциональный стиль R пользователям Excel освоить проще, чем классическое ООП. К каждому уроку есть тест с теоретическими вопросами и задачами на программирование, а также разобранные решения.</span><span class="ua-text">Курс побудований навколо tidyverse — readr, vroom, dplyr, tidyr та ggplot2 — і проводить через увесь цикл аналізу даних: від завантаження до візуалізації готового результату. Синтаксис tidyverse легко читається навіть без досвіду програмування, а функціональний стиль R користувачам Excel опанувати простіше, ніж класичне ООП. До кожного уроку є тест із теоретичними питаннями та задачами на програмування, а також розібрані рішення.</span><span class="en-text">Built around the tidyverse — readr, vroom, dplyr, tidyr and ggplot2 — the course walks you through the full analysis cycle, from loading data to visualizing the result. tidyverse syntax reads easily even with no coding background, and R&#x27;s functional style is easier for Excel users than classic OOP. Every lesson comes with a quiz mixing theory and coding tasks, plus worked solutions.</span></p>
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <div class="text-xs font-mono font-bold uppercase tracking-widest text-slate-500 mb-3"><span class="ru-text">Программа</span><span class="ua-text">Програма</span><span class="en-text">Curriculum</span></div>
+                            <ul class="space-y-2">
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">Установка R и RStudio, структуры данных</span><span class="ua-text">Встановлення R і RStudio, структури даних</span><span class="en-text">Installing R &amp; RStudio, data structures</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">Чтение CSV, Excel и Google Таблиц</span><span class="ua-text">Читання CSV, Excel і Google Таблиць</span><span class="en-text">Reading CSV, Excel and Google Sheets</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">Фильтрация, выбор столбцов, пайплайны</span><span class="ua-text">Фільтрація, вибір стовпців, пайплайни</span><span class="en-text">Filtering, selecting columns, pipelines</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">Группировка, агрегация и объединение таблиц</span><span class="ua-text">Групування, агрегація та об&#x27;єднання таблиць</span><span class="en-text">Grouping, aggregation and joins</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">Оконные функции и аналог сводных таблиц</span><span class="ua-text">Віконні функції та аналог зведених таблиць</span><span class="en-text">Window functions and pivot-table equivalents</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">Визуализация с ggplot2</span><span class="ua-text">Візуалізація з ggplot2</span><span class="en-text">Visualization with ggplot2</span></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="text-xs font-mono font-bold uppercase tracking-widest text-slate-500 mb-3"><span class="ru-text">Для кого</span><span class="ua-text">Для кого</span><span class="en-text">Who it is for</span></div>
+                            <p class="text-sm text-slate-300 mb-5"><span class="ru-text">Тем, кто открывает Excel хотя бы раз в неделю. Навыки программирования не нужны.</span><span class="ua-text">Тим, хто відкриває Excel хоча б раз на тиждень. Навички програмування не потрібні.</span><span class="en-text">Anyone who opens Excel at least once a week. No programming skills required.</span></p>
+                            <div class="flex flex-wrap gap-2">
+<span class="px-3 py-1.5 rounded-lg bg-slate-900/60 border border-white/5 text-xs font-semibold text-slate-300"><span class="ru-text">13 уроков</span><span class="ua-text">13 уроків</span><span class="en-text">13 lessons</span></span>
+<span class="px-3 py-1.5 rounded-lg bg-slate-900/60 border border-white/5 text-xs font-semibold text-slate-300"><span class="ru-text">Тесты и задачи</span><span class="ua-text">Тести та задачі</span><span class="en-text">Quizzes &amp; tasks</span></span>
+<span class="px-3 py-1.5 rounded-lg bg-slate-900/60 border border-white/5 text-xs font-semibold text-slate-300"><span class="ru-text">Бесплатно</span><span class="ua-text">Безкоштовно</span><span class="en-text">Free</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-auto pt-5 border-t border-white/5">
+                        <div class="flex flex-wrap gap-3">
+                            <a href="https://selesnow.github.io/r4excel_users/" target="_blank" rel="noopener" class="bg-purple-600 hover:bg-purple-500 text-white px-6 py-3 rounded-xl font-bold text-sm transition-all shadow-[0_0_20px_rgba(168,85,247,0.35)] hover:shadow-[0_0_30px_rgba(168,85,247,0.55)] flex items-center gap-2"><span class="ru-text">Перейти к курсу</span><span class="ua-text">Перейти до курсу</span><span class="en-text">Go to course</span> <i class="fa-solid fa-arrow-right text-xs"></i></a><a href="https://www.youtube.com/playlist?list=PLD2LDq8edf4pgGg16wYMobvIYy_0MI0kF" target="_blank" rel="noopener" class="px-5 py-3 rounded-xl border border-white/10 hover:border-white/20 bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white font-semibold text-sm transition-all flex items-center gap-2"><i class="fa-brands fa-youtube text-red-500"></i> <span class="ru-text">Плейлист</span><span class="ua-text">Плейлист</span><span class="en-text">Playlist</span></a><a href="https://habr.com/ru/articles/495438/" target="_blank" rel="noopener" class="px-5 py-3 rounded-xl border border-white/10 hover:border-white/20 bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white font-semibold text-sm transition-all flex items-center gap-2"><i class="fa-solid fa-h text-teal-400"></i> <span class="ru-text">Статья о курсе</span><span class="ua-text">Стаття про курс</span><span class="en-text">About the course</span></a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </article>
+        <article id="r4marketing" class="bento-glass no-lift rounded-[2rem] p-3 md:p-4 scroll-mt-24" data-aos="fade-up">
+            <div class="bento-content flex flex-col lg:flex-row-reverse gap-6 lg:gap-10">
+                <div class="lg:w-[42%] shrink-0">
+                    <div class="cover h-60 md:h-80 lg:h-full lg:min-h-[420px] rounded-[1.5rem]">
+                        <div class="cover-fallback"><i class="fa-brands fa-r-project text-6xl"></i></div>
+                        <img src="https://selesnow.github.io/r_for_marketing/cover.png" alt="Язык R для интернет-маркетинга" loading="lazy" style="object-position: top" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent"></div>
+                        <div class="absolute top-4 left-4 bg-green-500/20 border border-green-500/50 text-green-400 text-[10px] uppercase font-bold px-3 py-1 rounded-full backdrop-blur-lg">BEGINNER</div>
+                        <div class="absolute bottom-4 left-4 text-xs font-mono font-bold text-slate-300 bg-slate-950/70 border border-white/10 px-2.5 py-1 rounded-lg backdrop-blur-md">2018</div>
+                    </div>
+                </div>
+                <div class="flex-1 py-2 lg:py-6 pr-1 lg:pr-6 flex flex-col">
+                    <div class="flex flex-wrap items-center gap-3 mb-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-purple-400"><span class="ru-text">Для начинающих</span><span class="ua-text">Для початківців</span><span class="en-text">Beginner</span></span>
+                        
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-white outfit-font mb-3 leading-tight"><span class="ru-text">Язык R для интернет-маркетинга</span><span class="ua-text">Мова R для інтернет-маркетингу</span><span class="en-text">R for Digital Marketing</span></h2>
+                    <p class="text-lg text-slate-300 font-medium mb-5"><span class="ru-text">Автоматизация рутины маркетолога и веб-аналитика: от основ синтаксиса до Telegram-ботов.</span><span class="ua-text">Автоматизація рутини маркетолога та веб-аналітика: від основ синтаксису до Telegram-ботів.</span><span class="en-text">Automating marketing and web-analytics routine: from syntax basics to Telegram bots.</span></p>
+                    <p class="text-slate-400 leading-relaxed font-light mb-6"><span class="ru-text">Первый и самый объёмный курс, созданный в 2018 году вместе с NeedForData и Netpeak и с тех пор неоднократно дополненный. Три модуля: основы языка и работа с табличными данными; сбор данных из API рекламных и аналитических систем — Google Ads, Яндекс.Директ, Facebook, ВКонтакте, MyTarget, Google Analytics, Яндекс.Метрика, Search Console, YouTube — и парсинг сайтов; использование собранных данных — Google Таблицы, ggplot2, базы данных, рассылка писем, запуск скриптов по расписанию и Telegram-боты.</span><span class="ua-text">Перший і найоб&#x27;ємніший курс, створений у 2018 році разом із NeedForData та Netpeak і відтоді неодноразово доповнений. Три модулі: основи мови та робота з табличними даними; збір даних з API рекламних і аналітичних систем — Google Ads, Яндекс.Директ, Facebook, ВКонтакте, MyTarget, Google Analytics, Яндекс.Метрика, Search Console, YouTube — і парсинг сайтів; використання зібраних даних — Google Таблиці, ggplot2, бази даних, розсилка листів, запуск скриптів за розкладом і Telegram-боти.</span><span class="en-text">The first and most extensive course, created in 2018 with NeedForData and Netpeak and expanded many times since. Three modules: language basics and tabular data; collecting data from ad and analytics APIs — Google Ads, Yandex.Direct, Facebook, VK, MyTarget, Google Analytics, Yandex.Metrica, Search Console, YouTube — plus web scraping; and putting the data to work — Google Sheets, ggplot2, databases, email, scheduled scripts and Telegram bots.</span></p>
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <div class="text-xs font-mono font-bold uppercase tracking-widest text-slate-500 mb-3"><span class="ru-text">Программа</span><span class="ua-text">Програма</span><span class="en-text">Curriculum</span></div>
+                            <ul class="space-y-2">
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">Основы синтаксиса, строки, даты, циклы и функции</span><span class="ua-text">Основи синтаксису, рядки, дати, цикли та функції</span><span class="en-text">Syntax basics, strings, dates, loops and functions</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">R-скрипты внутри Power BI</span><span class="ua-text">R-скрипти всередині Power BI</span><span class="en-text">R scripts inside Power BI</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">API рекламных систем и веб-аналитики</span><span class="ua-text">API рекламних систем і веб-аналітики</span><span class="en-text">Ad-platform and web-analytics APIs</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">Парсинг сайтов и HTTP-запросы</span><span class="ua-text">Парсинг сайтів і HTTP-запити</span><span class="en-text">Web scraping and HTTP requests</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">Базы данных, Google Таблицы, ggplot2</span><span class="ua-text">Бази даних, Google Таблиці, ggplot2</span><span class="en-text">Databases, Google Sheets, ggplot2</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">Расписание скриптов и Telegram-боты</span><span class="ua-text">Розклад скриптів і Telegram-боти</span><span class="en-text">Scheduled scripts and Telegram bots</span></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="text-xs font-mono font-bold uppercase tracking-widest text-slate-500 mb-3"><span class="ru-text">Для кого</span><span class="ua-text">Для кого</span><span class="en-text">Who it is for</span></div>
+                            <p class="text-sm text-slate-300 mb-5"><span class="ru-text">Интернет-маркетологам и веб-аналитикам без опыта программирования.</span><span class="ua-text">Інтернет-маркетологам і веб-аналітикам без досвіду програмування.</span><span class="en-text">Digital marketers and web analysts with no coding experience.</span></p>
+                            <div class="flex flex-wrap gap-2">
+<span class="px-3 py-1.5 rounded-lg bg-slate-900/60 border border-white/5 text-xs font-semibold text-slate-300"><span class="ru-text">3 модуля</span><span class="ua-text">3 модулі</span><span class="en-text">3 modules</span></span>
+<span class="px-3 py-1.5 rounded-lg bg-slate-900/60 border border-white/5 text-xs font-semibold text-slate-300"><span class="ru-text">Видео + методичка</span><span class="ua-text">Відео + методичка</span><span class="en-text">Videos + handbook</span></span>
+<span class="px-3 py-1.5 rounded-lg bg-slate-900/60 border border-white/5 text-xs font-semibold text-slate-300"><span class="ru-text">Бесплатно</span><span class="ua-text">Безкоштовно</span><span class="en-text">Free</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-auto pt-5 border-t border-white/5">
+                        <div class="flex flex-wrap gap-3">
+                            <a href="https://r-for-marketing.netpeak.net/" target="_blank" rel="noopener" class="bg-purple-600 hover:bg-purple-500 text-white px-6 py-3 rounded-xl font-bold text-sm transition-all shadow-[0_0_20px_rgba(168,85,247,0.35)] hover:shadow-[0_0_30px_rgba(168,85,247,0.55)] flex items-center gap-2"><span class="ru-text">Перейти к курсу</span><span class="ua-text">Перейти до курсу</span><span class="en-text">Go to course</span> <i class="fa-solid fa-arrow-right text-xs"></i></a><a href="https://www.youtube.com/playlist?list=PLD2LDq8edf4o6dSZ4BIr7J08gT97nimH_" target="_blank" rel="noopener" class="px-5 py-3 rounded-xl border border-white/10 hover:border-white/20 bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white font-semibold text-sm transition-all flex items-center gap-2"><i class="fa-brands fa-youtube text-red-500"></i> <span class="ru-text">Плейлист</span><span class="ua-text">Плейлист</span><span class="en-text">Playlist</span></a><a href="https://habr.com/ru/articles/669104/" target="_blank" rel="noopener" class="px-5 py-3 rounded-xl border border-white/10 hover:border-white/20 bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white font-semibold text-sm transition-all flex items-center gap-2"><i class="fa-solid fa-h text-teal-400"></i> <span class="ru-text">Статья о курсе</span><span class="ua-text">Стаття про курс</span><span class="en-text">About the course</span></a><a href="https://github.com/selesnow/r_for_marketing" target="_blank" rel="noopener" class="px-5 py-3 rounded-xl border border-white/10 hover:border-white/20 bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white font-semibold text-sm transition-all flex items-center gap-2"><i class="fa-brands fa-github"></i> <span class="ru-text">Материалы</span><span class="ua-text">Матеріали</span><span class="en-text">Materials</span></a>
+                        </div>
+                        <p class="text-xs text-slate-500 mt-3 flex items-center gap-2"><i class="fa-solid fa-circle-info"></i><span class="ru-text">Полная версия с методичкой требует бесплатной регистрации</span><span class="ua-text">Повна версія з методичкою потребує безкоштовної реєстрації</span><span class="en-text">The full version with the handbook requires free registration</span></p>
+                    </div>
+                </div>
+            </div>
+        </article>
+        <article id="dplyr" class="bento-glass no-lift rounded-[2rem] p-3 md:p-4 scroll-mt-24" data-aos="fade-up">
+            <div class="bento-content flex flex-col lg:flex-row gap-6 lg:gap-10">
+                <div class="lg:w-[42%] shrink-0">
+                    <div class="cover h-60 md:h-80 lg:h-full lg:min-h-[420px] rounded-[1.5rem]">
+                        <div class="cover-fallback"><i class="fa-brands fa-r-project text-6xl"></i></div>
+                        <img src="https://selesnow.github.io/dplyr_1_0_0_course/img/cover.png" alt="Введение в dplyr 1.0.0" loading="lazy" style="object-position: top" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent"></div>
+                        <div class="absolute top-4 left-4 bg-blue-500/20 border border-blue-500/50 text-blue-400 text-[10px] uppercase font-bold px-3 py-1 rounded-full backdrop-blur-lg">MIDDLE</div>
+                        <div class="absolute bottom-4 left-4 text-xs font-mono font-bold text-slate-300 bg-slate-950/70 border border-white/10 px-2.5 py-1 rounded-lg backdrop-blur-md">2020</div>
+                    </div>
+                </div>
+                <div class="flex-1 py-2 lg:py-6 pr-1 lg:pr-6 flex flex-col">
+                    <div class="flex flex-wrap items-center gap-3 mb-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-purple-400"><span class="ru-text">Средний уровень</span><span class="ua-text">Середній рівень</span><span class="en-text">Intermediate</span></span>
+                        
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-white outfit-font mb-3 leading-tight"><span class="ru-text">Введение в dplyr 1.0.0</span><span class="ua-text">Вступ до dplyr 1.0.0</span><span class="en-text">Introduction to dplyr 1.0.0</span></h2>
+                    <p class="text-lg text-slate-300 font-medium mb-5"><span class="ru-text">Всё, что изменилось в главном пакете для манипуляции данными, — от 1.0.0 до 1.2.0.</span><span class="ua-text">Усе, що змінилося в головному пакеті для маніпуляції даними, — від 1.0.0 до 1.2.0.</span><span class="en-text">Everything that changed in R&#x27;s core data-manipulation package — from 1.0.0 to 1.2.0.</span></p>
+                    <p class="text-slate-400 leading-relaxed font-light mb-6"><span class="ru-text">dplyr реализует грамматику манипуляции данными в R, а версия 1.0.0 весной 2020 года закрепила его устоявшийся синтаксис. Мини-курс вырос из серии видео по статьям Хедли Викхема о нововведениях и с тех пор дополнен обзорами релизов 1.1.0 и 1.2.0. К каждому уроку прилагается код из видео и короткие упражнения на 5–10 минут с решениями.</span><span class="ua-text">dplyr реалізує граматику маніпуляції даними в R, а версія 1.0.0 навесні 2020 року закріпила його усталений синтаксис. Міні-курс виріс із серії відео за статтями Гедлі Вікхема про нововведення і відтоді доповнений оглядами релізів 1.1.0 та 1.2.0. До кожного уроку додається код із відео та короткі вправи на 5–10 хвилин із рішеннями.</span><span class="en-text">dplyr implements a grammar of data manipulation in R, and version 1.0.0 in spring 2020 settled its syntax. The mini-course grew out of videos based on Hadley Wickham&#x27;s posts about the new features and has since added reviews of releases 1.1.0 and 1.2.0. Every lesson includes the code from the video and short 5–10 minute exercises with solutions.</span></p>
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <div class="text-xs font-mono font-bold uppercase tracking-widest text-slate-500 mb-3"><span class="ru-text">Программа</span><span class="ua-text">Програма</span><span class="en-text">Curriculum</span></div>
+                            <ul class="space-y-2">
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">select(), rename_with() и relocate()</span><span class="ua-text">select(), rename_with() і relocate()</span><span class="en-text">select(), rename_with() and relocate()</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">across() — операции над столбцами</span><span class="ua-text">across() — операції над стовпцями</span><span class="en-text">across() — working across columns</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">rowwise() — перебор строк</span><span class="ua-text">rowwise() — перебір рядків</span><span class="en-text">rowwise() — working within rows</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">Обновлённая summarise()</span><span class="ua-text">Оновлена summarise()</span><span class="en-text">The new summarise()</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">rows_*() — изменение строк</span><span class="ua-text">rows_*() — зміна рядків</span><span class="en-text">rows_*() — modifying rows</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">dplyr 1.1.0 и 1.2.0: .by, join_by(), reframe(), filter_out()</span><span class="ua-text">dplyr 1.1.0 і 1.2.0: .by, join_by(), reframe(), filter_out()</span><span class="en-text">dplyr 1.1.0 &amp; 1.2.0: .by, join_by(), reframe(), filter_out()</span></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="text-xs font-mono font-bold uppercase tracking-widest text-slate-500 mb-3"><span class="ru-text">Для кого</span><span class="ua-text">Для кого</span><span class="en-text">Who it is for</span></div>
+                            <p class="text-sm text-slate-300 mb-5"><span class="ru-text">Тем, у кого уже есть базовые навыки работы с tidyverse.</span><span class="ua-text">Тим, хто вже має базові навички роботи з tidyverse.</span><span class="en-text">Those who already have basic tidyverse skills.</span></p>
+                            <div class="flex flex-wrap gap-2">
+<span class="px-3 py-1.5 rounded-lg bg-slate-900/60 border border-white/5 text-xs font-semibold text-slate-300"><span class="ru-text">7 уроков</span><span class="ua-text">7 уроків</span><span class="en-text">7 lessons</span></span>
+<span class="px-3 py-1.5 rounded-lg bg-slate-900/60 border border-white/5 text-xs font-semibold text-slate-300"><span class="ru-text">Упражнения</span><span class="ua-text">Вправи</span><span class="en-text">Exercises</span></span>
+<span class="px-3 py-1.5 rounded-lg bg-slate-900/60 border border-white/5 text-xs font-semibold text-slate-300"><span class="ru-text">Бесплатно</span><span class="ua-text">Безкоштовно</span><span class="en-text">Free</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-auto pt-5 border-t border-white/5">
+                        <div class="flex flex-wrap gap-3">
+                            <a href="https://selesnow.github.io/dplyr_1_0_0_course/" target="_blank" rel="noopener" class="bg-purple-600 hover:bg-purple-500 text-white px-6 py-3 rounded-xl font-bold text-sm transition-all shadow-[0_0_20px_rgba(168,85,247,0.35)] hover:shadow-[0_0_30px_rgba(168,85,247,0.55)] flex items-center gap-2"><span class="ru-text">Перейти к курсу</span><span class="ua-text">Перейти до курсу</span><span class="en-text">Go to course</span> <i class="fa-solid fa-arrow-right text-xs"></i></a><a href="https://www.youtube.com/playlist?list=PLD2LDq8edf4qETNK0JPCjtsoQ7lq9BBV1" target="_blank" rel="noopener" class="px-5 py-3 rounded-xl border border-white/10 hover:border-white/20 bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white font-semibold text-sm transition-all flex items-center gap-2"><i class="fa-brands fa-youtube text-red-500"></i> <span class="ru-text">Плейлист</span><span class="ua-text">Плейлист</span><span class="en-text">Playlist</span></a><a href="https://habr.com/ru/articles/501028/" target="_blank" rel="noopener" class="px-5 py-3 rounded-xl border border-white/10 hover:border-white/20 bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white font-semibold text-sm transition-all flex items-center gap-2"><i class="fa-solid fa-h text-teal-400"></i> <span class="ru-text">Статья о курсе</span><span class="ua-text">Стаття про курс</span><span class="en-text">About the course</span></a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </article>
+        <article id="iterations" class="bento-glass no-lift rounded-[2rem] p-3 md:p-4 scroll-mt-24" data-aos="fade-up">
+            <div class="bento-content flex flex-col lg:flex-row-reverse gap-6 lg:gap-10">
+                <div class="lg:w-[42%] shrink-0">
+                    <div class="cover h-60 md:h-80 lg:h-full lg:min-h-[420px] rounded-[1.5rem]">
+                        <div class="cover-fallback"><i class="fa-brands fa-r-project text-6xl"></i></div>
+                        <img src="https://selesnow.github.io/iterations_in_r/img/cover.png" alt="Циклы и функционалы в языке R" loading="lazy" style="object-position: top" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent"></div>
+                        <div class="absolute top-4 left-4 bg-blue-500/20 border border-blue-500/50 text-blue-400 text-[10px] uppercase font-bold px-3 py-1 rounded-full backdrop-blur-lg">MIDDLE</div>
+                        <div class="absolute bottom-4 left-4 text-xs font-mono font-bold text-slate-300 bg-slate-950/70 border border-white/10 px-2.5 py-1 rounded-lg backdrop-blur-md">2022</div>
+                    </div>
+                </div>
+                <div class="flex-1 py-2 lg:py-6 pr-1 lg:pr-6 flex flex-col">
+                    <div class="flex flex-wrap items-center gap-3 mb-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-purple-400"><span class="ru-text">Средний уровень</span><span class="ua-text">Середній рівень</span><span class="en-text">Intermediate</span></span>
+                        
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-white outfit-font mb-3 leading-tight"><span class="ru-text">Циклы и функционалы в языке R</span><span class="ua-text">Цикли та функціонали в мові R</span><span class="en-text">Loops and Functionals in R</span></h2>
+                    <p class="text-lg text-slate-300 font-medium mb-5"><span class="ru-text">Эффективные итерации, функциональный стиль и многопоточность.</span><span class="ua-text">Ефективні ітерації, функціональний стиль і багатопотоковість.</span><span class="en-text">Efficient iteration, functional style and parallel computing.</span></p>
+                    <p class="text-slate-400 leading-relaxed font-light mb-6"><span class="ru-text">«В R не принято использовать циклы» — курс объясняет, почему так говорят и как писать итерации правильно. Путь от базовых for, while и repeat через обработку ошибок к функциональному стилю: семейство apply() и пакет purrr. Завершают курс параллельные вычисления — foreach, pbapply, furrr и низкоуровневый интерфейс пакета future. После каждой лекции — тест, а по сумме баллов — итоговая оценка за курс.</span><span class="ua-text">«У R не прийнято використовувати цикли» — курс пояснює, чому так кажуть і як правильно писати ітерації. Шлях від базових for, while і repeat через обробку помилок до функціонального стилю: сімейство apply() і пакет purrr. Завершують курс паралельні обчислення — foreach, pbapply, furrr і низькорівневий інтерфейс пакета future. Після кожної лекції — тест, а за сумою балів — підсумкова оцінка за курс.</span><span class="en-text">&quot;You don&#x27;t use loops in R&quot; — the course explains why people say that and how to iterate properly. It goes from basic for, while and repeat loops, through error handling, to functional style with the apply() family and purrr. It finishes with parallel computing — foreach, pbapply, furrr and the low-level future package. Each lecture ends with a quiz, and your total score becomes your final course grade.</span></p>
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <div class="text-xs font-mono font-bold uppercase tracking-widest text-slate-500 mb-3"><span class="ru-text">Программа</span><span class="ua-text">Програма</span><span class="en-text">Curriculum</span></div>
+                            <ul class="space-y-2">
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">Циклы for, while и repeat</span><span class="ua-text">Цикли for, while і repeat</span><span class="en-text">for, while and repeat loops</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">Обработка ошибок в циклах</span><span class="ua-text">Обробка помилок у циклах</span><span class="en-text">Error handling in loops</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">Функционалы семейства apply()</span><span class="ua-text">Функціонали сімейства apply()</span><span class="en-text">The apply() family</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">Пакет purrr</span><span class="ua-text">Пакет purrr</span><span class="en-text">The purrr package</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">Ошибки в функционалах</span><span class="ua-text">Помилки у функціоналах</span><span class="en-text">Errors in functionals</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">Многопоточность: foreach, pbapply, furrr, future</span><span class="ua-text">Багатопотоковість: foreach, pbapply, furrr, future</span><span class="en-text">Parallelism: foreach, pbapply, furrr, future</span></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="text-xs font-mono font-bold uppercase tracking-widest text-slate-500 mb-3"><span class="ru-text">Для кого</span><span class="ua-text">Для кого</span><span class="en-text">Who it is for</span></div>
+                            <p class="text-sm text-slate-300 mb-5"><span class="ru-text">Тем, кто уже освоил основы R (например, после курса для пользователей Excel).</span><span class="ua-text">Тим, хто вже опанував основи R (наприклад, після курсу для користувачів Excel).</span><span class="en-text">Those who know R basics (e.g. after the R for Excel Users course).</span></p>
+                            <div class="flex flex-wrap gap-2">
+<span class="px-3 py-1.5 rounded-lg bg-slate-900/60 border border-white/5 text-xs font-semibold text-slate-300"><span class="ru-text">7 лекций</span><span class="ua-text">7 лекцій</span><span class="en-text">7 lectures</span></span>
+<span class="px-3 py-1.5 rounded-lg bg-slate-900/60 border border-white/5 text-xs font-semibold text-slate-300"><span class="ru-text">2 ч 55 мин</span><span class="ua-text">2 год 55 хв</span><span class="en-text">2 h 55 min</span></span>
+<span class="px-3 py-1.5 rounded-lg bg-slate-900/60 border border-white/5 text-xs font-semibold text-slate-300"><span class="ru-text">30 вопросов</span><span class="ua-text">30 питань</span><span class="en-text">30 questions</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-auto pt-5 border-t border-white/5">
+                        <div class="flex flex-wrap gap-3">
+                            <a href="https://selesnow.github.io/iterations_in_r/" target="_blank" rel="noopener" class="bg-purple-600 hover:bg-purple-500 text-white px-6 py-3 rounded-xl font-bold text-sm transition-all shadow-[0_0_20px_rgba(168,85,247,0.35)] hover:shadow-[0_0_30px_rgba(168,85,247,0.55)] flex items-center gap-2"><span class="ru-text">Перейти к курсу</span><span class="ua-text">Перейти до курсу</span><span class="en-text">Go to course</span> <i class="fa-solid fa-arrow-right text-xs"></i></a><a href="https://habr.com/ru/articles/651979/" target="_blank" rel="noopener" class="px-5 py-3 rounded-xl border border-white/10 hover:border-white/20 bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white font-semibold text-sm transition-all flex items-center gap-2"><i class="fa-solid fa-h text-teal-400"></i> <span class="ru-text">Статья о курсе</span><span class="ua-text">Стаття про курс</span><span class="en-text">About the course</span></a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </article>
+        <article id="tgbot" class="bento-glass no-lift rounded-[2rem] p-3 md:p-4 scroll-mt-24" data-aos="fade-up">
+            <div class="bento-content flex flex-col lg:flex-row gap-6 lg:gap-10">
+                <div class="lg:w-[42%] shrink-0">
+                    <div class="cover h-60 md:h-80 lg:h-full lg:min-h-[420px] rounded-[1.5rem]">
+                        <div class="cover-fallback"><i class="fa-brands fa-r-project text-6xl"></i></div>
+                        <img src="https://selesnow.github.io/build_telegram_bot_using_r/cover.png" alt="Разработка Telegram-ботов на языке R" loading="lazy" style="object-position: top" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent"></div>
+                        <div class="absolute top-4 left-4 bg-orange-500/20 border border-orange-500/50 text-orange-400 text-[10px] uppercase font-bold px-3 py-1 rounded-full backdrop-blur-lg">ADVANCED</div>
+                        <div class="absolute bottom-4 left-4 text-xs font-mono font-bold text-slate-300 bg-slate-950/70 border border-white/10 px-2.5 py-1 rounded-lg backdrop-blur-md">2020</div>
+                    </div>
+                </div>
+                <div class="flex-1 py-2 lg:py-6 pr-1 lg:pr-6 flex flex-col">
+                    <div class="flex flex-wrap items-center gap-3 mb-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-purple-400"><span class="ru-text">Продвинутый</span><span class="ua-text">Просунутий</span><span class="en-text">Advanced</span></span>
+                        <span class="text-[11px] font-mono font-bold uppercase tracking-widest text-slate-500"><span class="ru-text">Онлайн-учебник</span><span class="ua-text">Онлайн-підручник</span><span class="en-text">Online book</span></span>
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-white outfit-font mb-3 leading-tight"><span class="ru-text">Разработка Telegram-ботов на языке R</span><span class="ua-text">Розробка Telegram-ботів мовою R</span><span class="en-text">Building Telegram Bots in R</span></h2>
+                    <p class="text-lg text-slate-300 font-medium mb-5"><span class="ru-text">Веб-учебник: от первого сообщения до AI-бота в облаке.</span><span class="ua-text">Веб-підручник: від першого повідомлення до AI-бота в хмарі.</span><span class="en-text">A web book: from your first message to an AI bot in the cloud.</span></p>
+                    <p class="text-slate-400 leading-relaxed font-light mb-6"><span class="ru-text">Последовательный учебник на базе пакета telegram.bot. В первой главе вы отправите сообщение из R в Telegram, к четвёртой — создадите бота, который ведёт логический диалог с пользователем. Дальше — команды, фильтры, клавиатуры и коллбэки, подключение внешних API, Google Sheets и баз данных, интеграция LLM (OpenAI, Gemini, Claude), асинхронная обработка задач, Docker и деплой в Heroku и Google Cloud Run. Каждая глава заканчивается заданием и тестом.</span><span class="ua-text">Послідовний підручник на базі пакета telegram.bot. У першому розділі ви надішлете повідомлення з R у Telegram, до четвертого — створите бота, який веде логічний діалог із користувачем. Далі — команди, фільтри, клавіатури та колбеки, підключення зовнішніх API, Google Sheets і баз даних, інтеграція LLM (OpenAI, Gemini, Claude), асинхронна обробка задач, Docker і деплой у Heroku та Google Cloud Run. Кожен розділ завершується завданням і тестом.</span><span class="en-text">A step-by-step book built on the telegram.bot package. In chapter one you send a message from R to Telegram; by chapter four you build a bot that holds a logical dialogue. Then come commands, filters, keyboards and callbacks, external APIs, Google Sheets and databases, LLM integration (OpenAI, Gemini, Claude), async tasks, Docker and deployment to Heroku and Google Cloud Run. Every chapter ends with an assignment and a quiz.</span></p>
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <div class="text-xs font-mono font-bold uppercase tracking-widest text-slate-500 mb-3"><span class="ru-text">Программа</span><span class="ua-text">Програма</span><span class="en-text">Curriculum</span></div>
+                            <ul class="space-y-2">
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">Отправка сообщений из R в Telegram</span><span class="ua-text">Надсилання повідомлень з R у Telegram</span><span class="en-text">Sending messages from R to Telegram</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">Команды и фильтры сообщений</span><span class="ua-text">Команди та фільтри повідомлень</span><span class="en-text">Commands and message filters</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">Клавиатуры и логический диалог</span><span class="ua-text">Клавіатури та логічний діалог</span><span class="en-text">Keyboards and logical dialogues</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">Права пользователей бота</span><span class="ua-text">Права користувачів бота</span><span class="en-text">Bot user permissions</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">Интеграция LLM и внешних API</span><span class="ua-text">Інтеграція LLM і зовнішніх API</span><span class="en-text">LLM and external API integration</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">Docker и деплой в облако</span><span class="ua-text">Docker і деплой у хмару</span><span class="en-text">Docker and cloud deployment</span></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="text-xs font-mono font-bold uppercase tracking-widest text-slate-500 mb-3"><span class="ru-text">Для кого</span><span class="ua-text">Для кого</span><span class="en-text">Who it is for</span></div>
+                            <p class="text-sm text-slate-300 mb-5"><span class="ru-text">Тем, кто уверенно владеет циклами, функциями, строками и dplyr.</span><span class="ua-text">Тим, хто впевнено володіє циклами, функціями, рядками та dplyr.</span><span class="en-text">Those comfortable with loops, functions, strings and dplyr.</span></p>
+                            <div class="flex flex-wrap gap-2">
+<span class="px-3 py-1.5 rounded-lg bg-slate-900/60 border border-white/5 text-xs font-semibold text-slate-300"><span class="ru-text">Веб-книга</span><span class="ua-text">Веб-книга</span><span class="en-text">Web book</span></span>
+<span class="px-3 py-1.5 rounded-lg bg-slate-900/60 border border-white/5 text-xs font-semibold text-slate-300"><span class="ru-text">Задания и тесты</span><span class="ua-text">Завдання та тести</span><span class="en-text">Tasks &amp; quizzes</span></span>
+<span class="px-3 py-1.5 rounded-lg bg-slate-900/60 border border-white/5 text-xs font-semibold text-slate-300"><span class="ru-text">Бесплатно</span><span class="ua-text">Безкоштовно</span><span class="en-text">Free</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-auto pt-5 border-t border-white/5">
+                        <div class="flex flex-wrap gap-3">
+                            <a href="https://selesnow.github.io/build_telegram_bot_using_r/" target="_blank" rel="noopener" class="bg-purple-600 hover:bg-purple-500 text-white px-6 py-3 rounded-xl font-bold text-sm transition-all shadow-[0_0_20px_rgba(168,85,247,0.35)] hover:shadow-[0_0_30px_rgba(168,85,247,0.55)] flex items-center gap-2"><span class="ru-text">Читать учебник</span><span class="ua-text">Читати підручник</span><span class="en-text">Read the book</span> <i class="fa-solid fa-arrow-right text-xs"></i></a><a href="https://habr.com/ru/articles/511222/" target="_blank" rel="noopener" class="px-5 py-3 rounded-xl border border-white/10 hover:border-white/20 bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white font-semibold text-sm transition-all flex items-center gap-2"><i class="fa-solid fa-h text-teal-400"></i> <span class="ru-text">Статья о курсе</span><span class="ua-text">Стаття про курс</span><span class="en-text">About the course</span></a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </article>
+        <article id="packages" class="bento-glass no-lift rounded-[2rem] p-3 md:p-4 scroll-mt-24" data-aos="fade-up">
+            <div class="bento-content flex flex-col lg:flex-row-reverse gap-6 lg:gap-10">
+                <div class="lg:w-[42%] shrink-0">
+                    <div class="cover h-60 md:h-80 lg:h-full lg:min-h-[420px] rounded-[1.5rem]">
+                        <div class="cover-fallback"><i class="fa-brands fa-r-project text-6xl"></i></div>
+                        <img src="https://selesnow.github.io/r_package_course/img/cover.png" alt="Разработка пакетов на языке R" loading="lazy" style="object-position: top" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent"></div>
+                        <div class="absolute top-4 left-4 bg-orange-500/20 border border-orange-500/50 text-orange-400 text-[10px] uppercase font-bold px-3 py-1 rounded-full backdrop-blur-lg">ADVANCED</div>
+                        <div class="absolute bottom-4 left-4 text-xs font-mono font-bold text-slate-300 bg-slate-950/70 border border-white/10 px-2.5 py-1 rounded-lg backdrop-blur-md">2023</div>
+                    </div>
+                </div>
+                <div class="flex-1 py-2 lg:py-6 pr-1 lg:pr-6 flex flex-col">
+                    <div class="flex flex-wrap items-center gap-3 mb-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-purple-400"><span class="ru-text">Продвинутый</span><span class="ua-text">Просунутий</span><span class="en-text">Advanced</span></span>
+                        
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-white outfit-font mb-3 leading-tight"><span class="ru-text">Разработка пакетов на языке R</span><span class="ua-text">Розробка пакетів мовою R</span><span class="en-text">R Package Development</span></h2>
+                    <p class="text-lg text-slate-300 font-medium mb-5"><span class="ru-text">От первого пакета до публикации на CRAN — опыт автора 15 пакетов на CRAN.</span><span class="ua-text">Від першого пакета до публікації на CRAN — досвід автора 15 пакетів на CRAN.</span><span class="en-text">From your first package to CRAN — from the author of 15 CRAN packages.</span></p>
+                    <p class="text-slate-400 leading-relaxed font-light mb-6"><span class="ru-text">Курс основан на книге Хедли Викхема и Дженни Брайан «R Packages (2e)» и дополнен семилетним практическим опытом автора. Самые теоретические главы опущены, зато добавлены темы, которых нет в книге: разработка обёрток над API, в том числе Google API, и мета-пакетов. Свой первый пакет вы напишете уже на первом уроке. К каждому уроку — конспект с тайм-кодами и тест.</span><span class="ua-text">Курс базується на книзі Гедлі Вікхема та Дженні Браян «R Packages (2e)» і доповнений семирічним практичним досвідом автора. Найбільш теоретичні розділи опущено, натомість додано теми, яких немає в книзі: розробка обгорток над API, зокрема Google API, і мета-пакетів. Свій перший пакет ви напишете вже на першому уроці. До кожного уроку — конспект із тайм-кодами та тест.</span><span class="en-text">Based on Hadley Wickham and Jennifer Bryan&#x27;s &quot;R Packages (2e)&quot; and extended with the author&#x27;s seven years of hands-on experience. The most theoretical chapters are skipped, while topics missing from the book are added: API wrapper packages, including Google APIs, and meta-packages. You write your first package in lesson one. Every lesson includes notes with timestamps and a quiz.</span></p>
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <div class="text-xs font-mono font-bold uppercase tracking-widest text-slate-500 mb-3"><span class="ru-text">Программа</span><span class="ua-text">Програма</span><span class="en-text">Curriculum</span></div>
+                            <ul class="space-y-2">
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">Рабочий процесс и интеграция с GitHub</span><span class="ua-text">Робочий процес та інтеграція з GitHub</span><span class="en-text">Workflow and GitHub integration</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">Организация кода, данные, DESCRIPTION</span><span class="ua-text">Організація коду, дані, DESCRIPTION</span><span class="en-text">Code organization, data, DESCRIPTION</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">Зависимости и NAMESPACE</span><span class="ua-text">Залежності та NAMESPACE</span><span class="en-text">Dependencies and NAMESPACE</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">Юнит-тесты и документация</span><span class="ua-text">Юніт-тести та документація</span><span class="en-text">Unit tests and documentation</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">Сайт пакета и публикация на CRAN</span><span class="ua-text">Сайт пакета та публікація на CRAN</span><span class="en-text">Package website and CRAN release</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">Обёртки над API и мета-пакеты</span><span class="ua-text">Обгортки над API та мета-пакети</span><span class="en-text">API wrappers and meta-packages</span></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="text-xs font-mono font-bold uppercase tracking-widest text-slate-500 mb-3"><span class="ru-text">Для кого</span><span class="ua-text">Для кого</span><span class="en-text">Who it is for</span></div>
+                            <p class="text-sm text-slate-300 mb-5"><span class="ru-text">Тем, у кого уже есть опыт написания кода на R.</span><span class="ua-text">Тим, хто вже має досвід написання коду на R.</span><span class="en-text">Those who already write R code.</span></p>
+                            <div class="flex flex-wrap gap-2">
+<span class="px-3 py-1.5 rounded-lg bg-slate-900/60 border border-white/5 text-xs font-semibold text-slate-300"><span class="ru-text">14 лекций</span><span class="ua-text">14 лекцій</span><span class="en-text">14 lectures</span></span>
+<span class="px-3 py-1.5 rounded-lg bg-slate-900/60 border border-white/5 text-xs font-semibold text-slate-300"><span class="ru-text">6+ часов</span><span class="ua-text">6+ годин</span><span class="en-text">6+ hours</span></span>
+<span class="px-3 py-1.5 rounded-lg bg-slate-900/60 border border-white/5 text-xs font-semibold text-slate-300"><span class="ru-text">Конспекты и тесты</span><span class="ua-text">Конспекти та тести</span><span class="en-text">Notes &amp; quizzes</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-auto pt-5 border-t border-white/5">
+                        <div class="flex flex-wrap gap-3">
+                            <a href="https://selesnow.github.io/r_package_course/" target="_blank" rel="noopener" class="bg-purple-600 hover:bg-purple-500 text-white px-6 py-3 rounded-xl font-bold text-sm transition-all shadow-[0_0_20px_rgba(168,85,247,0.35)] hover:shadow-[0_0_30px_rgba(168,85,247,0.55)] flex items-center gap-2"><span class="ru-text">Перейти к курсу</span><span class="ua-text">Перейти до курсу</span><span class="en-text">Go to course</span> <i class="fa-solid fa-arrow-right text-xs"></i></a><a href="https://www.youtube.com/playlist?list=PLD2LDq8edf4oImDbA4N9rOTzRtRFbzuud" target="_blank" rel="noopener" class="px-5 py-3 rounded-xl border border-white/10 hover:border-white/20 bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white font-semibold text-sm transition-all flex items-center gap-2"><i class="fa-brands fa-youtube text-red-500"></i> <span class="ru-text">Плейлист</span><span class="ua-text">Плейлист</span><span class="en-text">Playlist</span></a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </article>
+        <article id="ai" class="bento-glass no-lift rounded-[2rem] p-3 md:p-4 scroll-mt-24 border-purple-500/40 shadow-[0_0_35px_rgba(168,85,247,0.15)]" data-aos="fade-up">
+            <div class="bento-content flex flex-col lg:flex-row gap-6 lg:gap-10">
+                <div class="lg:w-[42%] shrink-0">
+                    <div class="cover h-60 md:h-80 lg:h-full lg:min-h-[420px] rounded-[1.5rem]">
+                        <div class="cover-fallback"><i class="fa-brands fa-r-project text-6xl"></i></div>
+                        <img src="https://selesnow.github.io/build_ai_tools_using_r/img/cover.png" alt="Язык R для разработки AI-инструментов" loading="lazy" style="object-position: top" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent"></div>
+                        <div class="absolute top-4 left-4 bg-purple-500 border border-purple-400/50 text-white shadow-[0_0_15px_rgba(168,85,247,0.6)] text-[10px] uppercase font-bold px-3 py-1 rounded-full backdrop-blur-lg">NEW</div>
+                        <div class="absolute bottom-4 left-4 text-xs font-mono font-bold text-slate-300 bg-slate-950/70 border border-white/10 px-2.5 py-1 rounded-lg backdrop-blur-md">2026</div>
+                    </div>
+                </div>
+                <div class="flex-1 py-2 lg:py-6 pr-1 lg:pr-6 flex flex-col">
+                    <div class="flex flex-wrap items-center gap-3 mb-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-purple-400"><span class="ru-text">Новый курс</span><span class="ua-text">Новий курс</span><span class="en-text">New course</span></span>
+                        
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-white outfit-font mb-3 leading-tight"><span class="ru-text">Язык R для разработки AI-инструментов</span><span class="ua-text">Мова R для розробки AI-інструментів</span><span class="en-text">Building AI Tools with R</span></h2>
+                    <p class="text-lg text-slate-300 font-medium mb-5"><span class="ru-text">Не просто пользоваться LLM, а строить на R собственных AI-ассистентов.</span><span class="ua-text">Не просто користуватися LLM, а будувати на R власних AI-асистентів.</span><span class="en-text">Go beyond chatting with LLMs — build your own AI assistants in R.</span></p>
+                    <p class="text-slate-400 leading-relaxed font-light mb-6"><span class="ru-text">Курс о системной разработке AI-решений на R — без игрушечных демо. Начинаем с API разных LLM-провайдеров (ChatGPT, Claude, Gemini) и управления контекстом, затем строим веб-интерфейс AI-чата на Shiny, учим ассистента пользоваться инструментами и выполнять действия, подключаем собственную базу знаний через RAG. В итоге из ellmer, mcptools, ragnar, shinychat, querychat и mini007 собирается цельное приложение, которым можно пользоваться в реальной работе.</span><span class="ua-text">Курс про системну розробку AI-рішень на R — без іграшкових демо. Починаємо з API різних LLM-провайдерів (ChatGPT, Claude, Gemini) та керування контекстом, потім будуємо веб-інтерфейс AI-чату на Shiny, вчимо асистента користуватися інструментами та виконувати дії, підключаємо власну базу знань через RAG. У результаті з ellmer, mcptools, ragnar, shinychat, querychat і mini007 збирається цілісний застосунок, яким можна користуватися в реальній роботі.</span><span class="en-text">A systematic approach to building AI solutions in R — no toy demos. You start with the APIs of different LLM providers (ChatGPT, Claude, Gemini) and context management, then build a Shiny chat interface, teach the assistant to use tools and take actions, and connect your own knowledge base via RAG. ellmer, mcptools, ragnar, shinychat, querychat and mini007 come together into a complete app you can use in real work.</span></p>
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <div class="text-xs font-mono font-bold uppercase tracking-widest text-slate-500 mb-3"><span class="ru-text">Программа</span><span class="ua-text">Програма</span><span class="en-text">Curriculum</span></div>
+                            <ul class="space-y-2">
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">Работа с LLM API через ellmer</span><span class="ua-text">Робота з LLM API через ellmer</span><span class="en-text">LLM APIs with ellmer</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">AI-чат на Shiny и shinychat</span><span class="ua-text">AI-чат на Shiny і shinychat</span><span class="en-text">AI chat with Shiny and shinychat</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">Инструменты (tool calling) и MCP</span><span class="ua-text">Інструменти (tool calling) і MCP</span><span class="en-text">Tool calling and MCP</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">RAG и собственная база знаний (ragnar)</span><span class="ua-text">RAG і власна база знань (ragnar)</span><span class="en-text">RAG and your own knowledge base (ragnar)</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">Запросы к данным на естественном языке (querychat)</span><span class="ua-text">Запити до даних природною мовою (querychat)</span><span class="en-text">Natural-language data queries (querychat)</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i><span class="ru-text">Мультиагентные системы (mini007)</span><span class="ua-text">Мультиагентні системи (mini007)</span><span class="en-text">Multi-agent systems (mini007)</span></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="text-xs font-mono font-bold uppercase tracking-widest text-slate-500 mb-3"><span class="ru-text">Для кого</span><span class="ua-text">Для кого</span><span class="en-text">Who it is for</span></div>
+                            <p class="text-sm text-slate-300 mb-5"><span class="ru-text">Тем, у кого уже есть опыт программирования на R.</span><span class="ua-text">Тим, хто вже має досвід програмування на R.</span><span class="en-text">Those with R programming experience.</span></p>
+                            <div class="flex flex-wrap gap-2">
+<span class="px-3 py-1.5 rounded-lg bg-slate-900/60 border border-white/5 text-xs font-semibold text-slate-300"><span class="ru-text">4 лекции</span><span class="ua-text">4 лекції</span><span class="en-text">4 lectures</span></span>
+<span class="px-3 py-1.5 rounded-lg bg-slate-900/60 border border-white/5 text-xs font-semibold text-slate-300"><span class="ru-text">2+ часа</span><span class="ua-text">2+ години</span><span class="en-text">2+ hours</span></span>
+<span class="px-3 py-1.5 rounded-lg bg-slate-900/60 border border-white/5 text-xs font-semibold text-slate-300"><span class="ru-text">Конспекты</span><span class="ua-text">Конспекти</span><span class="en-text">Lecture notes</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-auto pt-5 border-t border-white/5">
+                        <div class="flex flex-wrap gap-3">
+                            <a href="https://selesnow.github.io/build_ai_tools_using_r/" target="_blank" rel="noopener" class="bg-purple-600 hover:bg-purple-500 text-white px-6 py-3 rounded-xl font-bold text-sm transition-all shadow-[0_0_20px_rgba(168,85,247,0.35)] hover:shadow-[0_0_30px_rgba(168,85,247,0.55)] flex items-center gap-2"><span class="ru-text">Перейти к курсу</span><span class="ua-text">Перейти до курсу</span><span class="en-text">Go to course</span> <i class="fa-solid fa-arrow-right text-xs"></i></a><a href="https://www.youtube.com/playlist?list=PLD2LDq8edf4rMEIeUfGVnZlgrYLuDDiuf" target="_blank" rel="noopener" class="px-5 py-3 rounded-xl border border-white/10 hover:border-white/20 bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white font-semibold text-sm transition-all flex items-center gap-2"><i class="fa-brands fa-youtube text-red-500"></i> <span class="ru-text">Плейлист</span><span class="ua-text">Плейлист</span><span class="en-text">Playlist</span></a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <!-- COMMERCIAL TEACHING -->
+    <section class="px-6 max-w-7xl mx-auto pb-16 relative z-10">
+        <h2 class="text-3xl font-extrabold mb-8 flex items-center gap-4 outfit-font" data-aos="fade-up">
+            <div class="w-12 h-12 bg-blue-500/20 flex items-center justify-center rounded-2xl border border-blue-500/30"><i class="fa-solid fa-chalkboard-user text-blue-400 text-xl"></i></div>
+            <span class="ru-text">Преподавание на образовательных платформах</span><span class="ua-text">Викладання на освітніх платформах</span><span class="en-text">Teaching for education platforms</span>
+        </h2>
+        <div class="grid md:grid-cols-2 gap-6" data-aos="fade-up">
+            <a href="https://r-for-marketing.netpeak.net/" target="_blank" rel="noopener" class="bento-glass p-8 rounded-3xl group block">
+                <div class="bento-content">
+                    <div class="text-xs font-mono font-bold uppercase tracking-widest text-blue-400 mb-3">NeedForData · Netpeak · 2018</div>
+                    <h3 class="text-2xl font-bold text-white outfit-font mb-3 group-hover:text-purple-300 transition-colors"><span class="ru-text">«Язык R для интернет-маркетинга»</span><span class="ua-text">«Мова R для інтернет-маркетингу»</span><span class="en-text">“R for Digital Marketing”</span></h3>
+                    <p class="text-slate-400 text-sm leading-relaxed"><span class="ru-text">Автор и лектор онлайн-курса для платформы NeedForData: методичка, видеолекции и практические задания по автоматизации маркетинговой аналитики на R.</span><span class="ua-text">Автор і лектор онлайн-курсу для платформи NeedForData: методичка, відеолекції та практичні завдання з автоматизації маркетингової аналітики на R.</span><span class="en-text">Author and lecturer of the online course for NeedForData: a handbook, video lectures and hands-on tasks on automating marketing analytics with R.</span></p>
+                </div>
+            </a>
+            <div class="bento-glass p-8 rounded-3xl">
+                <div class="bento-content">
+                    <div class="text-xs font-mono font-bold uppercase tracking-widest text-blue-400 mb-3">WebPromoExperts</div>
+                    <h3 class="text-2xl font-bold text-white outfit-font mb-3"><span class="ru-text">«Веб-аналитика PRO»</span><span class="ua-text">«Веб-аналітика PRO»</span><span class="en-text">“Web Analytics PRO”</span></h3>
+                    <p class="text-slate-400 text-sm leading-relaxed"><span class="ru-text">Соавтор программы и лектор продвинутого курса по веб-аналитике в академии WebPromoExperts.</span><span class="ua-text">Співавтор програми та лектор просунутого курсу з веб-аналітики в академії WebPromoExperts.</span><span class="en-text">Co-author and lecturer of the advanced web analytics course at the WebPromoExperts Academy.</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="px-6 max-w-7xl mx-auto pb-24 relative z-10">
+        <div class="grid md:grid-cols-2 gap-6" data-aos="fade-up">
+            <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(59, 130, 246, 0.1));">
+                <div class="bento-content w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center text-blue-400 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-telegram"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">Telegram-канал R4marketing</span><span class="ua-text">Telegram-канал R4marketing</span><span class="en-text">R4marketing on Telegram</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Новые статьи, видео и заметки по R — первыми.</span><span class="ua-text">Нові статті, відео та нотатки з R — першими.</span><span class="en-text">New articles, videos and R notes — first.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-blue-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+            <a href="https://www.youtube.com/R4marketing/?sub_confirmation=1" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(239, 68, 68, 0.1));">
+                <div class="bento-content w-16 h-16 bg-red-500/20 rounded-2xl flex items-center justify-center text-red-500 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-youtube"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">YouTube-канал R4marketing</span><span class="ua-text">YouTube-канал R4marketing</span><span class="en-text">R4marketing on YouTube</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Видеоуроки по R, аналитике и AI-инструментам.</span><span class="ua-text">Відеоуроки з R, аналітики та AI-інструментів.</span><span class="en-text">Video lessons on R, analytics and AI tools.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-red-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/5 bg-slate-950/80 backdrop-blur-md pt-20 pb-10 text-center relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-3xl font-extrabold mb-10 outfit-font"><span class="ru-text">Следите за обновлениями в R4marketing</span><span class="ua-text">Стежте за оновленнями в R4marketing</span><span class="en-text">Follow R4marketing updates</span></h2>
+            <div class="flex justify-center gap-8 mb-16">
+                <a href="https://t.me/R4marketing" class="w-16 h-16 rounded-3xl bg-blue-500/10 flex items-center justify-center text-blue-400 text-3xl hover:bg-blue-500 hover:text-white transition-all transform hover:scale-110 hover:-translate-y-2 border border-blue-500/20 shadow-lg" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                <a href="https://www.youtube.com/R4marketing" class="w-16 h-16 rounded-3xl bg-red-500/10 flex items-center justify-center text-red-500 text-3xl hover:bg-red-500 hover:text-white transition-all transform hover:scale-110 hover:-translate-y-2 border border-red-500/20 shadow-lg" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                <a href="https://habr.com/ru/users/selesnow/" class="w-16 h-16 rounded-3xl bg-slate-700/30 flex items-center justify-center text-white text-3xl hover:bg-slate-600 transition-all transform hover:scale-110 hover:-translate-y-2 border border-slate-600/50 shadow-lg" aria-label="Habr"><i class="fa-solid fa-h"></i></a>
+            </div>
+            <div class="mb-6"><a href="../" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-400 hover:text-white transition-colors outfit-font"><i class="fa-solid fa-house text-purple-400/80 text-xs"></i> ALEXEY-SELEZNEV<span class="text-purple-500 -ml-2">.pro</span></a></div>
+            <nav class="flex flex-wrap justify-center gap-x-8 gap-y-3 mb-12 text-sm font-semibold text-slate-400 outfit-font" aria-label="Site pages">
+                <a href="../courses/" class="flex items-center gap-2 hover:text-white transition-colors"><i class="fa-solid fa-graduation-cap text-purple-400/80 text-xs"></i> <span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a>
+                <a href="../videos/" class="flex items-center gap-2 hover:text-white transition-colors"><i class="fa-solid fa-circle-play text-purple-400/80 text-xs"></i> <span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a>
+                <a href="../talks/" class="flex items-center gap-2 hover:text-white transition-colors"><i class="fa-solid fa-microphone-lines text-purple-400/80 text-xs"></i> <span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a>
+                <a href="../articles/" class="flex items-center gap-2 hover:text-white transition-colors"><i class="fa-solid fa-pen-nib text-purple-400/80 text-xs"></i> <span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a>
+                <a href="../interviews/" class="flex items-center gap-2 hover:text-white transition-colors"><i class="fa-regular fa-newspaper text-purple-400/80 text-xs"></i> <span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a>
+            </nav>
+            <p class="text-slate-500 text-sm font-mono tracking-widest uppercase">© 2026 Alexey Seleznev. Modernized Vision.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script src="../assets/site.js"></script>
+</body>
+</html>
