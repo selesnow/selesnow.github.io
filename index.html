@@ -148,7 +148,58 @@
                 </div>
 
                 <a href="https://t.me/R4marketing" target="_blank" class="text-slate-400 hover:text-blue-400 transition-colors hidden sm:block"><i class="fa-brands fa-telegram text-lg md:text-xl"></i></a>
-                <a href="https://github.com/selesnow" target="_blank" class="text-slate-400 hover:text-white transition-colors"><i class="fa-brands fa-github text-lg md:text-xl"></i></a>
+                <a href="https://github.com/selesnow" target="_blank" class="text-slate-400 hover:text-white transition-colors hidden sm:block"><i class="fa-brands fa-github text-lg md:text-xl"></i></a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="xl:hidden w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-purple-500/20 hover:border-purple-500/40 transition-all focus:outline-none ml-1" aria-label="Toggle Navigation Menu">
+                    <i class="fa-solid fa-bars text-lg" id="mobile-menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div id="mobile-menu" class="hidden xl:hidden border-t border-white/10 bg-slate-950/95 backdrop-blur-2xl shadow-2xl overflow-y-auto max-h-[calc(100vh-4rem)] transition-all">
+            <div class="max-w-7xl mx-auto px-6 py-6 space-y-1">
+                <a href="#about" class="mobile-nav-link flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-regular fa-user text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Обо мне</span><span class="ua-text">Про мене</span><span class="en-text">About</span>
+                </a>
+                <a href="#career" class="mobile-nav-link flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-briefcase text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Карьера</span><span class="ua-text">Кар'єра</span><span class="en-text">Career</span>
+                </a>
+                <a href="#opensource" class="mobile-nav-link flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-code-branch text-purple-400 w-5 text-center"></i>
+                    <span>Open Source</span>
+                </a>
+                <a href="#courses" class="mobile-nav-link flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-graduation-cap text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span>
+                </a>
+                <a href="#content" class="mobile-nav-link flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-users-viewfinder text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Медиа</span><span class="ua-text">Медіа</span><span class="en-text">Media</span>
+                </a>
+                <a href="#speaking" class="mobile-nav-link flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-microphone-lines text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Выступления</span><span class="ua-text">Виступи</span><span class="en-text">Speaking</span>
+                </a>
+                <a href="#contacts" class="mobile-nav-link flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-address-book text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Контакты</span><span class="ua-text">Контакти</span><span class="en-text">Contacts</span>
+                </a>
+
+                <div class="pt-4 mt-3 border-t border-white/10 flex items-center justify-around text-slate-400">
+                    <a href="https://t.me/R4marketing" target="_blank" class="p-2 hover:text-blue-400 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-telegram text-xl"></i> Telegram
+                    </a>
+                    <a href="https://github.com/selesnow" target="_blank" class="p-2 hover:text-white transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-github text-xl"></i> GitHub
+                    </a>
+                    <a href="https://www.youtube.com/R4marketing" target="_blank" class="p-2 hover:text-red-500 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-youtube text-xl"></i> YouTube
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
@@ -1375,6 +1426,63 @@
             changeLang(savedLang);
         });
 
+        // Mobile Navigation Menu Logic
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuIcon = document.getElementById('mobile-menu-icon');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        function toggleMobileMenu(open) {
+            const isOpen = open !== undefined ? open : mobileMenu.classList.contains('hidden');
+            if (isOpen) {
+                mobileMenu.classList.remove('hidden');
+                mobileMenuIcon.classList.remove('fa-bars');
+                mobileMenuIcon.classList.add('fa-xmark');
+                mobileMenuBtn.classList.add('bg-purple-500/20', 'border-purple-500/40', 'text-white');
+                document.body.classList.add('overflow-hidden');
+            } else {
+                mobileMenu.classList.add('hidden');
+                mobileMenuIcon.classList.add('fa-bars');
+                mobileMenuIcon.classList.remove('fa-xmark');
+                mobileMenuBtn.classList.remove('bg-purple-500/20', 'border-purple-500/40', 'text-white');
+                document.body.classList.remove('overflow-hidden');
+            }
+        }
+
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleMobileMenu();
+            });
+
+            // Close on link click
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    toggleMobileMenu(false);
+                });
+            });
+
+            // Close on click outside
+            document.addEventListener('click', (e) => {
+                if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                    toggleMobileMenu(false);
+                }
+            });
+
+            // Close on Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    toggleMobileMenu(false);
+                }
+            });
+
+            // Auto close if window resized to desktop
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 1280) {
+                    toggleMobileMenu(false);
+                }
+            });
+        }
     </script>
     
     <!-- Vanta.js Interactive Background -->
