@@ -14,7 +14,7 @@
 
 
 ## Контакты
-* email: selesnow@gmail.com
+* email: me@alexey-seleznev.pro
 * facebook: [facebook.com/selesnow](https://www.facebook.com/selesnow)
 * linkedin: [linkedin.com/in/selesnow](https://www.linkedin.com/in/selesnow)
 
