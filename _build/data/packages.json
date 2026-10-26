@@ -1,0 +1,819 @@
+[
+ {
+  "name": "rfacebookstat",
+  "cat": "ads",
+  "icon": "fa-brands fa-facebook",
+  "since": 2016,
+  "cran": true,
+  "docs": "https://alexey-seleznev.pro/rfacebookstat/",
+  "video": {
+   "url": "https://www.youtube.com/playlist?list=PLD2LDq8edf4pItOb-vZTG5AXZK2niJ8_R",
+   "kind": "playlist",
+   "count": 11
+  },
+  "award": {
+   "ru": "Топ-40 новых пакетов CRAN, август 2018",
+   "ua": "Топ-40 нових пакетів CRAN, серпень 2018",
+   "en": "Top 40 new CRAN packages, Aug 2018"
+  },
+  "tagline": {
+   "ru": "Facebook Marketing API",
+   "ua": "Facebook Marketing API",
+   "en": "Facebook Marketing API"
+  },
+  "desc": {
+   "ru": "Загрузка данных из Facebook Marketing API в R: структура рекламных аккаунтов, статистика и конверсии с любыми разбивками. Кроме того, пакет умеет управлять доступами пользователей к рекламным аккаунтам. Один из первых и самых скачиваемых пакетов — в августе 2018 года попал в топ-40 новых пакетов CRAN по версии RStudio.",
+   "ua": "Завантаження даних з Facebook Marketing API в R: структура рекламних акаунтів, статистика та конверсії з будь-якими розбивками. Крім того, пакет уміє керувати доступами користувачів до рекламних акаунтів. Один із перших і найбільш завантажуваних пакетів — у серпні 2018 року потрапив до топ-40 нових пакетів CRAN за версією RStudio.",
+   "en": "Loads Facebook Marketing API data into R: ad-account structure, statistics and conversions with any breakdowns. It can also manage user access to ad accounts. One of my first and most downloaded packages — it made RStudio's list of the top 40 new CRAN packages in August 2018."
+  },
+  "features": {
+   "ru": [
+    "Кампании, группы объявлений, объявления и креативы",
+    "Статистика с разбивками и окнами атрибуции",
+    "Данные бизнес-менеджера и управление доступами"
+   ],
+   "ua": [
+    "Кампанії, групи оголошень, оголошення та креативи",
+    "Статистика з розбивками та вікнами атрибуції",
+    "Дані бізнес-менеджера та керування доступами"
+   ],
+   "en": [
+    "Campaigns, ad sets, ads and creatives",
+    "Insights with breakdowns and attribution windows",
+    "Business Manager data and access management"
+   ]
+  }
+ },
+ {
+  "name": "timeperiodsR",
+  "cat": "utils",
+  "icon": "fa-solid fa-calendar-days",
+  "since": 2019,
+  "cran": true,
+  "docs": "https://alexey-seleznev.pro/timeperiodsR/",
+  "video": {
+   "url": "https://www.youtube.com/playlist?list=PLD2LDq8edf4qed2KVKfXmKdh0OQcdj9gw",
+   "kind": "playlist",
+   "count": 6
+  },
+  "tagline": {
+   "ru": "Простое определение временных периодов",
+   "ua": "Просте визначення часових періодів",
+   "en": "Simple definition of time intervals"
+  },
+  "desc": {
+   "ru": "Скриптам, которые работают по расписанию, почти всегда нужен период: прошлая неделя, прошлый месяц или N последних дней. timeperiodsR вычисляет такие периоды относительно любой базовой даты и даёт удобный доступ к их элементам. 24 функции с понятными названиями: префикс last / previous / this / next плюс единица времени day / week / month / quarter / year.",
+   "ua": "Скриптам, які працюють за розкладом, майже завжди потрібен період: минулий тиждень, минулий місяць або N останніх днів. timeperiodsR обчислює такі періоди відносно будь-якої базової дати та дає зручний доступ до їх елементів. 24 функції з зрозумілими назвами: префікс last / previous / this / next плюс одиниця часу day / week / month / quarter / year.",
+   "en": "Scheduled scripts almost always need a period: last week, last month or the last N days. timeperiodsR computes such periods relative to any base date and gives easy access to their parts. 24 self-explanatory functions: a last / previous / this / next prefix plus a day / week / month / quarter / year unit."
+  },
+  "features": {
+   "ru": [
+    "Первая и последняя дата, вектор дат периода",
+    "Будни, выходные и пользовательские выходные",
+    "Официальные праздники Украины, Казахстана и др."
+   ],
+   "ua": [
+    "Перша та остання дата, вектор дат періоду",
+    "Будні, вихідні та користувацькі вихідні",
+    "Офіційні свята України, Казахстану та ін."
+   ],
+   "en": [
+    "First/last date and the full date sequence",
+    "Workdays, weekends and custom days off",
+    "Official holidays for Ukraine, Kazakhstan and more"
+   ]
+  }
+ },
+ {
+  "name": "rgoogleads",
+  "cat": "ads",
+  "icon": "fa-brands fa-google",
+  "since": 2021,
+  "cran": true,
+  "docs": "https://alexey-seleznev.pro/rgoogleads/docs/",
+  "video": {
+   "url": "https://www.youtube.com/playlist?list=PLD2LDq8edf4qprTxRcflDwV9IvStiChHi",
+   "kind": "playlist",
+   "count": 2
+  },
+  "tagline": {
+   "ru": "Google Ads API",
+   "ua": "Google Ads API",
+   "en": "Google Ads API"
+  },
+  "desc": {
+   "ru": "R-клиент для Google Ads API. Главная задача — загружать отчёты из клиентских аккаунтов Google Ads в R для анализа и визуализации. Авторизация построена на пакете gargle: учётные данные хранятся только на вашем компьютере, поддерживаются собственные OAuth-клиент и токен разработчика. Пришёл на смену устаревшим решениям для AdWords API.",
+   "ua": "R-клієнт для Google Ads API. Головне завдання — завантажувати звіти з клієнтських акаунтів Google Ads в R для аналізу та візуалізації. Авторизація побудована на пакеті gargle: облікові дані зберігаються лише на вашому комп'ютері, підтримуються власні OAuth-клієнт і токен розробника. Прийшов на зміну застарілим рішенням для AdWords API.",
+   "en": "An R client for the Google Ads API. Its main job is loading report data from Google Ads client accounts into R for analysis and visualization. Authorization is built on gargle: credentials stay on your machine, and your own OAuth client and developer token are supported. It replaced the outdated AdWords API tools."
+  },
+  "features": {
+   "ru": [
+    "Иерархия аккаунтов из управляющих (MCC)",
+    "Объекты аккаунта и отчёты на языке GAQL",
+    "Прогноз и исторические метрики Keyword Planner"
+   ],
+   "ua": [
+    "Ієрархія акаунтів з керівних (MCC)",
+    "Об'єкти акаунта та звіти мовою GAQL",
+    "Прогноз та історичні метрики Keyword Planner"
+   ],
+   "en": [
+    "Full account hierarchy from manager (MCC) accounts",
+    "Account objects and GAQL reports",
+    "Keyword Planner forecasts and historical metrics"
+   ]
+  }
+ },
+ {
+  "name": "getProxy",
+  "cat": "utils",
+  "icon": "fa-solid fa-shield-halved",
+  "since": 2017,
+  "cran": true,
+  "docs": "https://alexey-seleznev.pro/getProxy/",
+  "video": {
+   "url": "https://www.youtube.com/watch?v=gZKw_laVxC4",
+   "kind": "video"
+  },
+  "tagline": {
+   "ru": "Бесплатные прокси-серверы в R-сессии",
+   "ua": "Безкоштовні проксі-сервери в R-сесії",
+   "en": "Free proxy servers for your R session"
+  },
+  "desc": {
+   "ru": "Одной строкой кода получает IP-адрес и порт бесплатного публичного прокси-сервера через сервисы gimmeproxy.com и getproxylist.com и сразу перенаправляет через него интернет-соединение R-сессии. Появился в 2017 году, когда в Украине заблокировали ряд сервисов, и помогал продолжать работу с их API.",
+   "ua": "Одним рядком коду отримує IP-адресу та порт безкоштовного публічного проксі-сервера через сервіси gimmeproxy.com і getproxylist.com і одразу перенаправляє через нього інтернет-з'єднання R-сесії. З'явився у 2017 році, коли в Україні заблокували низку сервісів, і допомагав продовжувати роботу з їхніми API.",
+   "en": "Fetches the IP and port of a free public proxy from gimmeproxy.com or getproxylist.com in one line of code and routes the R session's traffic through it. Created in 2017, when several services were blocked in Ukraine, to keep their APIs reachable."
+  },
+  "features": {
+   "ru": [
+    "Фильтры по стране, порту и поддержке HTTPS",
+    "Протоколы http, socks4 и socks5",
+    "Подключение и отключение прокси одной командой"
+   ],
+   "ua": [
+    "Фільтри за країною, портом і підтримкою HTTPS",
+    "Протоколи http, socks4 і socks5",
+    "Підключення та відключення проксі однією командою"
+   ],
+   "en": [
+    "Filter by country, port and HTTPS support",
+    "http, socks4 and socks5 protocols",
+    "Start or stop the proxy with one call"
+   ]
+  }
+ },
+ {
+  "name": "rtgstat",
+  "cat": "analytics",
+  "icon": "fa-brands fa-telegram",
+  "since": 2021,
+  "cran": true,
+  "docs": "https://alexey-seleznev.pro/rtgstat/",
+  "video": {
+   "url": "https://www.youtube.com/watch?v=QZCCRbGCms8",
+   "kind": "video"
+  },
+  "tagline": {
+   "ru": "Аналитика Telegram-каналов через TGStat API",
+   "ua": "Аналітика Telegram-каналів через TGStat API",
+   "en": "Telegram channel analytics via the TGStat API"
+  },
+  "desc": {
+   "ru": "Обёртка над всеми методами TGStat Stat API и Search API. Позволяет искать Telegram-каналы и публикации, получать статистику каналов и постов и отслеживать их динамику — удобно для анализа конкурентов и подбора площадок для рекламы.",
+   "ua": "Обгортка над усіма методами TGStat Stat API та Search API. Дозволяє шукати Telegram-канали й публікації, отримувати статистику каналів і постів та відстежувати їх динаміку — зручно для аналізу конкурентів і підбору майданчиків для реклами.",
+   "en": "A wrapper around every method of the TGStat Stat and Search APIs. Search Telegram channels and posts, get channel and post statistics and track their dynamics — handy for competitor research and picking ad placements."
+  },
+  "features": {
+   "ru": [
+    "Информация, статистика и публикации каналов",
+    "Упоминания и репосты",
+    "Динамика подписчиков, просмотров, охвата и ERR"
+   ],
+   "ua": [
+    "Інформація, статистика та публікації каналів",
+    "Згадки та репости",
+    "Динаміка підписників, переглядів, охоплення та ERR"
+   ],
+   "en": [
+    "Channel info, statistics and posts",
+    "Mentions and forwards",
+    "Subscriber, view, reach and ERR dynamics"
+   ]
+  }
+ },
+ {
+  "name": "ringostat",
+  "cat": "crm",
+  "icon": "fa-solid fa-phone",
+  "since": 2021,
+  "cran": true,
+  "article": "https://blog.ringostat.com/ru/kak-rabotat-s-ringostat-api-na-yazyke-r/",
+  "tagline": {
+   "ru": "Коллтрекинг Ringostat API",
+   "ua": "Колтрекінг Ringostat API",
+   "en": "Ringostat call-tracking API"
+  },
+  "desc": {
+   "ru": "Компактный пакет для загрузки данных о звонках из коллтрекинга Ringostat — например, чтобы объединить звонки с рекламными расходами в сквозной аналитике. API-ключ можно задать функцией или сохранить в переменной среды.",
+   "ua": "Компактний пакет для завантаження даних про дзвінки з колтрекінгу Ringostat — наприклад, щоб об'єднати дзвінки з рекламними витратами в наскрізній аналітиці. API-ключ можна задати функцією або зберегти в змінній середовища.",
+   "en": "A compact package for loading call data from the Ringostat call-tracking service — for example, to join calls with ad costs in end-to-end analytics. The API key can be set with a function or stored in an environment variable."
+  },
+  "features": {
+   "ru": [
+    "Детальные данные о звонках за период",
+    "Скачивание аудиозаписей звонков",
+    "Авторизация через переменную RS_API_KEY"
+   ],
+   "ua": [
+    "Детальні дані про дзвінки за період",
+    "Завантаження аудіозаписів дзвінків",
+    "Авторизація через змінну RS_API_KEY"
+   ],
+   "en": [
+    "Detailed call data for any period",
+    "Download call recordings",
+    "Auth via the RS_API_KEY variable"
+   ]
+  }
+ },
+ {
+  "name": "rappsflyer",
+  "cat": "analytics",
+  "icon": "fa-solid fa-mobile-screen",
+  "since": 2021,
+  "cran": true,
+  "video": {
+   "url": "https://www.youtube.com/watch?v=9Wn8n2A6x2w",
+   "kind": "video"
+  },
+  "tagline": {
+   "ru": "Мобильная атрибуция AppsFlyer",
+   "ua": "Мобільна атрибуція AppsFlyer",
+   "en": "AppsFlyer mobile attribution"
+  },
+  "desc": {
+   "ru": "Загрузка агрегированных и сырых данных из Pull API и Master API AppsFlyer. С версии 0.3.0 пакет работает с актуальной версией API V2 и Bearer-авторизацией: старые токены V1 AppsFlyer полностью отключил в 2023 году.",
+   "ua": "Завантаження агрегованих і сирих даних з Pull API та Master API AppsFlyer. З версії 0.3.0 пакет працює з актуальною версією API V2 та Bearer-авторизацією: старі токени V1 AppsFlyer повністю вимкнув у 2023 році.",
+   "en": "Loads aggregated and raw data from the AppsFlyer Pull API and Master API. Since version 0.3.0 it uses the current API V2 with Bearer auth, after AppsFlyer switched off V1 tokens in 2023."
+  },
+  "features": {
+   "ru": [
+    "Агрегированные и сырые данные об установках и событиях",
+    "Отчёты о доходе с рекламы",
+    "Master API и правила валидации таргетинга"
+   ],
+   "ua": [
+    "Агреговані та сирі дані про встановлення й події",
+    "Звіти про дохід від реклами",
+    "Master API та правила валідації таргетингу"
+   ],
+   "en": [
+    "Aggregated and raw install and event data",
+    "Ad revenue reports",
+    "Master API and targeting validation rules"
+   ]
+  }
+ },
+ {
+  "name": "ractivecampaign",
+  "cat": "crm",
+  "icon": "fa-solid fa-envelope-open-text",
+  "since": 2021,
+  "cran": true,
+  "tagline": {
+   "ru": "CRM и email-маркетинг ActiveCampaign",
+   "ua": "CRM та email-маркетинг ActiveCampaign",
+   "en": "ActiveCampaign CRM & email marketing"
+  },
+  "desc": {
+   "ru": "Упрощает выгрузку данных из ActiveCampaign API v3 в R: больше 20 функций для сделок, контактов, аккаунтов, кампаний и сообщений. Подходит для отчётов по воронке продаж и эффективности email-рассылок.",
+   "ua": "Спрощує вивантаження даних з ActiveCampaign API v3 в R: понад 20 функцій для угод, контактів, акаунтів, кампаній і повідомлень. Підходить для звітів за воронкою продажів та ефективністю email-розсилок.",
+   "en": "Makes it easy to pull ActiveCampaign API v3 data into R: 20+ functions for deals, contacts, accounts, campaigns and messages. Great for sales-funnel and email-performance reporting."
+  },
+  "features": {
+   "ru": [
+    "Сделки, воронки, этапы, заметки и активности",
+    "Контакты, аккаунты, теги и пользовательские поля",
+    "Кампании, доход по ним, сообщения и задачи"
+   ],
+   "ua": [
+    "Угоди, воронки, етапи, нотатки та активності",
+    "Контакти, акаунти, теги та користувацькі поля",
+    "Кампанії, дохід за ними, повідомлення та задачі"
+   ],
+   "en": [
+    "Deals, pipelines, stages, notes and activities",
+    "Contacts, accounts, tags and custom fields",
+    "Campaigns, revenue, messages and tasks"
+   ]
+  }
+ },
+ {
+  "name": "rytstat",
+  "cat": "analytics",
+  "icon": "fa-brands fa-youtube",
+  "since": 2021,
+  "cran": true,
+  "docs": "https://alexey-seleznev.pro/rytstat/docs/",
+  "video": {
+   "url": "https://www.youtube.com/playlist?list=PLD2LDq8edf4o7kZuTh3ufEOIPF8qmxIhe",
+   "kind": "playlist",
+   "count": 4
+  },
+  "tagline": {
+   "ru": "YouTube Data, Analytics и Reporting API",
+   "ua": "YouTube Data, Analytics та Reporting API",
+   "en": "YouTube Data, Analytics & Reporting APIs"
+  },
+  "desc": {
+   "ru": "R-интерфейс сразу к трём API YouTube: позволяет получить любые данные, доступные в Творческой студии YouTube, для дальнейшего анализа и визуализации. Авторизация через gargle, учётные данные кешируются только локально.",
+   "ua": "R-інтерфейс одразу до трьох API YouTube: дозволяє отримати будь-які дані, доступні в Творчій студії YouTube, для подальшого аналізу та візуалізації. Авторизація через gargle, облікові дані кешуються лише локально.",
+   "en": "An R interface to three YouTube APIs at once: get any data available in YouTube Studio for further analysis and visualization. Auth via gargle, with credentials cached locally only."
+  },
+  "features": {
+   "ru": [
+    "Data API: поиск, каналы, плейлисты и видео",
+    "Analytics API: статистика видео, плейлистов и рекламы",
+    "Reporting API: массовые отчёты"
+   ],
+   "ua": [
+    "Data API: пошук, канали, плейлисти та відео",
+    "Analytics API: статистика відео, плейлистів і реклами",
+    "Reporting API: масові звіти"
+   ],
+   "en": [
+    "Data API: search, channels, playlists, videos",
+    "Analytics API: video, playlist and ad stats",
+    "Reporting API: bulk reports"
+   ]
+  }
+ },
+ {
+  "name": "racademyocean",
+  "cat": "crm",
+  "icon": "fa-solid fa-graduation-cap",
+  "since": 2021,
+  "cran": true,
+  "tagline": {
+   "ru": "Платформа обучения AcademyOcean",
+   "ua": "Платформа навчання AcademyOcean",
+   "en": "AcademyOcean learning platform"
+  },
+  "desc": {
+   "ru": "Клиент для API AcademyOcean — платформы для онлайн-академий и обучения клиентов и сотрудников. Выгружает данные об академиях, учениках и их прогрессе, чтобы анализировать эффективность обучения.",
+   "ua": "Клієнт для API AcademyOcean — платформи для онлайн-академій і навчання клієнтів та співробітників. Вивантажує дані про академії, учнів та їхній прогрес, щоб аналізувати ефективність навчання.",
+   "en": "A client for the AcademyOcean API — a platform for online academies and customer or employee training. It exports academy, learner and progress data to measure training effectiveness."
+  },
+  "features": {
+   "ru": [
+    "Академии, ученики, команды и сертификаты",
+    "Прогресс по курсам и статистика тестов",
+    "Отток на этапах контента и пассивные ученики"
+   ],
+   "ua": [
+    "Академії, учні, команди та сертифікати",
+    "Прогрес за курсами та статистика тестів",
+    "Відтік на етапах контенту та пасивні учні"
+   ],
+   "en": [
+    "Academies, learners, teams and certificates",
+    "Course progress and quiz statistics",
+    "Content churn and passive learners"
+   ]
+  }
+ },
+ {
+  "name": "rlinkedinads",
+  "cat": "ads",
+  "icon": "fa-brands fa-linkedin",
+  "since": 2023,
+  "cran": true,
+  "tagline": {
+   "ru": "LinkedIn Advertising API",
+   "ua": "LinkedIn Advertising API",
+   "en": "LinkedIn Advertising API"
+  },
+  "desc": {
+   "ru": "Загрузка структуры рекламного аккаунта и статистики из LinkedIn Advertising API. Авторизация через собственное OAuth-приложение; токены кешируются на диске, поэтому вход вручную нужен только один раз.",
+   "ua": "Завантаження структури рекламного акаунта та статистики з LinkedIn Advertising API. Авторизація через власний OAuth-застосунок; токени кешуються на диску, тож вхід вручну потрібен лише один раз.",
+   "en": "Loads ad-account structure and statistics from the LinkedIn Advertising API. Authorization uses your own OAuth app; tokens are cached on disk, so you only log in manually once."
+  },
+  "features": {
+   "ru": [
+    "Аккаунты и пользователи",
+    "Группы кампаний, кампании и креативы",
+    "Статистика рекламы (Ad Analytics)"
+   ],
+   "ua": [
+    "Акаунти та користувачі",
+    "Групи кампаній, кампанії та креативи",
+    "Статистика реклами (Ad Analytics)"
+   ],
+   "en": [
+    "Accounts and users",
+    "Campaign groups, campaigns and creatives",
+    "Ad Analytics statistics"
+   ]
+  }
+ },
+ {
+  "name": "rtiktokads",
+  "cat": "ads",
+  "icon": "fa-brands fa-tiktok",
+  "since": 2021,
+  "cran": true,
+  "tagline": {
+   "ru": "TikTok Marketing API",
+   "ua": "TikTok Marketing API",
+   "en": "TikTok Marketing API"
+  },
+  "desc": {
+   "ru": "Пакет для TikTok Marketing API (TikTok Business API): авторизация, структура бизнес-центров и рекламных аккаунтов и отчёты по рекламе — чтобы TikTok встал в общую отчётность рядом с другими рекламными каналами.",
+   "ua": "Пакет для TikTok Marketing API (TikTok Business API): авторизація, структура бізнес-центрів і рекламних акаунтів та звіти з реклами — щоб TikTok став у загальну звітність поряд з іншими рекламними каналами.",
+   "en": "A package for the TikTok Marketing (Business) API: authorization, business-center and ad-account structure, and ad reports — so TikTok fits into reporting alongside your other ad channels."
+  },
+  "features": {
+   "ru": [
+    "Бизнес-центры и рекламные аккаунты",
+    "Баланс и информация об аккаунтах",
+    "Кампании, группы объявлений, объявления и отчёты"
+   ],
+   "ua": [
+    "Бізнес-центри та рекламні акаунти",
+    "Баланс та інформація про акаунти",
+    "Кампанії, групи оголошень, оголошення та звіти"
+   ],
+   "en": [
+    "Business centers and ad accounts",
+    "Account info and balances",
+    "Campaigns, ad groups, ads and reports"
+   ]
+  }
+ },
+ {
+  "name": "rappleads",
+  "cat": "ads",
+  "icon": "fa-brands fa-apple",
+  "since": 2025,
+  "cran": true,
+  "tagline": {
+   "ru": "Apple Ads Campaign Management API",
+   "ua": "Apple Ads Campaign Management API",
+   "en": "Apple Ads Campaign Management API"
+  },
+  "desc": {
+   "ru": "Самый новый пакет — для работы с рекламными аккаунтами Apple Ads (бывший Search Ads). Авторизация в этом API устроена сложно, через пару ключей; пакет берёт на себя генерацию client secret и токена доступа и кеширует учётные данные.",
+   "ua": "Найновіший пакет — для роботи з рекламними акаунтами Apple Ads (колишній Search Ads). Авторизація в цьому API влаштована складно, через пару ключів; пакет бере на себе генерацію client secret і токена доступу та кешує облікові дані.",
+   "en": "My newest package, for Apple Ads (formerly Search Ads) accounts. Authorization in this API is complex and key-pair based; the package generates the client secret and access token for you and caches the credentials."
+  },
+  "features": {
+   "ru": [
+    "Автоматический client secret и токен доступа",
+    "Загрузка данных рекламных кампаний",
+    "Учётные данные через переменные среды"
+   ],
+   "ua": [
+    "Автоматичний client secret і токен доступу",
+    "Завантаження даних рекламних кампаній",
+    "Облікові дані через змінні середовища"
+   ],
+   "en": [
+    "Automatic client secret and access token",
+    "Campaign data loading",
+    "Credentials via environment variables"
+   ]
+  }
+ },
+ {
+  "name": "galigor",
+  "cat": "utils",
+  "icon": "fa-solid fa-toolbox",
+  "since": 2019,
+  "cran": true,
+  "cranRemoved": true,
+  "docs": "https://alexey-seleznev.pro/galigor/",
+  "tagline": {
+   "ru": "Коллекция пакетов для интернет-маркетинга",
+   "ua": "Колекція пакетів для інтернет-маркетингу",
+   "en": "A collection of internet-marketing packages"
+  },
+  "desc": {
+   "ru": "Мета-пакет в духе tidyverse: одной командой устанавливает и подключает ядро из восьми моих пакетов для работы с рекламными и аналитическими платформами. Удалён из CRAN, но доступен для установки с GitHub.",
+   "ua": "Мета-пакет у дусі tidyverse: однією командою встановлює та підключає ядро з восьми моїх пакетів для роботи з рекламними й аналітичними платформами. Видалений з CRAN, але доступний для встановлення з GitHub.",
+   "en": "A tidyverse-style meta-package: one command installs and attaches a core of eight of my packages for ad and analytics platforms. Removed from CRAN, but still installable from GitHub."
+  },
+  "features": {
+   "ru": [
+    "rgoogleads, rfacebookstat, rappsflyer, getProxy",
+    "ryandexdirect, rym, rvkstat, rmytarget",
+    "Единая точка входа и документация"
+   ],
+   "ua": [
+    "rgoogleads, rfacebookstat, rappsflyer, getProxy",
+    "ryandexdirect, rym, rvkstat, rmytarget",
+    "Єдина точка входу та документація"
+   ],
+   "en": [
+    "rgoogleads, rfacebookstat, rappsflyer, getProxy",
+    "ryandexdirect, rym, rvkstat, rmytarget",
+    "A single entry point and docs"
+   ]
+  }
+ },
+ {
+  "name": "rzohobooks",
+  "cat": "crm",
+  "icon": "fa-solid fa-file-invoice-dollar",
+  "since": 2025,
+  "cran": false,
+  "tagline": {
+   "ru": "Бухгалтерия Zoho Books",
+   "ua": "Бухгалтерія Zoho Books",
+   "en": "Zoho Books accounting"
+  },
+  "desc": {
+   "ru": "Загрузка финансовых данных из Zoho Books API в R: справочники, документы и платежи — основа для финансовой отчётности и юнит-экономики. Access-токен Zoho живёт час, поэтому пакет кеширует учётные данные; режим global позволяет использовать общий кеш на сервере.",
+   "ua": "Завантаження фінансових даних з Zoho Books API в R: довідники, документи та платежі — основа для фінансової звітності та юніт-економіки. Access-токен Zoho живе годину, тому пакет кешує облікові дані; режим global дозволяє використовувати спільний кеш на сервері.",
+   "en": "Loads financial data from the Zoho Books API into R: reference lists, documents and payments — the basis for financial reporting and unit economics. Zoho access tokens last an hour, so the package caches credentials; global mode enables a shared cache on servers."
+  },
+  "features": {
+   "ru": [
+    "36 функций: инвойсы, счета, расходы, журналы",
+    "Клиентские и вендорские платежи, банковские транзакции",
+    "Организации, контакты, валюты, налоги, проекты"
+   ],
+   "ua": [
+    "36 функцій: інвойси, рахунки, витрати, журнали",
+    "Клієнтські та вендорські платежі, банківські транзакції",
+    "Організації, контакти, валюти, податки, проєкти"
+   ],
+   "en": [
+    "36 functions: invoices, bills, expenses, journals",
+    "Customer and vendor payments, bank transactions",
+    "Organizations, contacts, currencies, taxes, projects"
+   ]
+  }
+ },
+ {
+  "name": "rwayforpay",
+  "cat": "crm",
+  "icon": "fa-solid fa-credit-card",
+  "since": 2022,
+  "cran": false,
+  "tagline": {
+   "ru": "Платёжная система WayForPay",
+   "ua": "Платіжна система WayForPay",
+   "en": "WayForPay payments"
+  },
+  "desc": {
+   "ru": "Пакет для украинской платёжной системы WayForPay: выгружает список транзакций мерчанта и курсы валют через API. Удобно для сверки оплат и аналитики онлайн-продаж.",
+   "ua": "Пакет для української платіжної системи WayForPay: вивантажує список транзакцій мерчанта та курси валют через API. Зручно для звірки оплат та аналітики онлайн-продажів.",
+   "en": "A package for the Ukrainian payment system WayForPay: exports a merchant's transaction list and currency rates via the API. Handy for payment reconciliation and online-sales analytics."
+  },
+  "features": {
+   "ru": [
+    "Список транзакций мерчанта за период",
+    "Курсы валют по дням",
+    "Логин мерчанта и секретный ключ через переменные среды"
+   ],
+   "ua": [
+    "Список транзакцій мерчанта за період",
+    "Курси валют за днями",
+    "Логін мерчанта та секретний ключ через змінні середовища"
+   ],
+   "en": [
+    "Merchant transaction list for any period",
+    "Daily currency rates",
+    "Merchant login and secret key via env variables"
+   ]
+  }
+ },
+ {
+  "name": "rmixpanel",
+  "cat": "analytics",
+  "icon": "fa-solid fa-chart-pie",
+  "since": 2017,
+  "cran": false,
+  "tagline": {
+   "ru": "Продуктовая аналитика Mixpanel",
+   "ua": "Продуктова аналітика Mixpanel",
+   "en": "Mixpanel product analytics"
+  },
+  "desc": {
+   "ru": "R-клиент для API платформы продуктовой аналитики Mixpanel. Позволяет выгружать события, их свойства, когортный анализ и сырые данные, чтобы анализировать поведение пользователей вне интерфейса Mixpanel. Доступен на GitHub.",
+   "ua": "R-клієнт для API платформи продуктової аналітики Mixpanel. Дозволяє вивантажувати події, їх властивості, когортний аналіз і сирі дані, щоб аналізувати поведінку користувачів поза інтерфейсом Mixpanel. Доступний на GitHub.",
+   "en": "An R client for the Mixpanel product-analytics API. Export events, event properties, cohort retention and raw data to analyze user behaviour outside the Mixpanel UI. Available on GitHub."
+  },
+  "features": {
+   "ru": [
+    "Количество событий по дням",
+    "События в разрезе свойств",
+    "Когортный анализ и сырые данные"
+   ],
+   "ua": [
+    "Кількість подій за днями",
+    "Події в розрізі властивостей",
+    "Когортний аналіз і сирі дані"
+   ],
+   "en": [
+    "Event counts by day",
+    "Events by property",
+    "Retention cohorts and raw data"
+   ]
+  }
+ },
+ {
+  "name": "rGitHub",
+  "cat": "utils",
+  "icon": "fa-brands fa-github",
+  "since": 2016,
+  "cran": false,
+  "tagline": {
+   "ru": "Статистика репозиториев GitHub",
+   "ua": "Статистика репозиторіїв GitHub",
+   "en": "GitHub repository statistics"
+  },
+  "desc": {
+   "ru": "Получение статистики по вашим репозиториям через GitHub API v3: список репозиториев и данные о трафике — сколько раз и откуда смотрели проект. Пригодится, чтобы следить за популярностью своих open source проектов.",
+   "ua": "Отримання статистики за вашими репозиторіями через GitHub API v3: список репозиторіїв і дані про трафік — скільки разів і звідки переглядали проєкт. Знадобиться, щоб стежити за популярністю своїх open source проєктів.",
+   "en": "Pulls statistics for your repositories via GitHub API v3: the repository list and traffic data — how often and from where a project was viewed. Useful for tracking the popularity of your open source work."
+  },
+  "features": {
+   "ru": [
+    "Список репозиториев с основными параметрами",
+    "Просмотры и уникальные посетители по дням",
+    "Источники трафика и популярные страницы"
+   ],
+   "ua": [
+    "Список репозиторіїв з основними параметрами",
+    "Перегляди та унікальні відвідувачі за днями",
+    "Джерела трафіку та популярні сторінки"
+   ],
+   "en": [
+    "Repository list with key attributes",
+    "Views and unique visitors by day",
+    "Referrers and popular pages"
+   ]
+  }
+ },
+ {
+  "name": "ryandexdirect",
+  "cat": "ads",
+  "icon": "fa-brands fa-yandex",
+  "since": 2016,
+  "cran": true,
+  "archived": true,
+  "docs": "https://alexey-seleznev.pro/ryandexdirect/",
+  "video": {
+   "url": "https://www.youtube.com/playlist?list=PLD2LDq8edf4oUo0L9Kw77ZXf0KcV1hu67",
+   "kind": "playlist",
+   "count": 5
+  },
+  "tagline": {
+   "ru": "API Яндекс.Директа",
+   "ua": "API Яндекс.Директу",
+   "en": "Yandex.Direct API"
+  },
+  "desc": {
+   "ru": "Самый популярный из моих пакетов на GitHub. Работает с API Директа версий 4, Live 4 и 5 и сервисом Reports, не требуя погружения в документацию API.",
+   "ua": "Найпопулярніший з моїх пакетів на GitHub. Працює з API Директу версій 4, Live 4 і 5 та сервісом Reports, не вимагаючи занурення в документацію API.",
+   "en": "My most-starred package on GitHub. Works with Direct API v4, Live 4 and v5 plus the Reports service, no deep dive into the API docs required."
+  },
+  "features": {
+   "ru": [
+    "Кампании, группы, объявления, ключевые слова",
+    "Статистика через сервис Reports",
+    "Управление показами и ставками"
+   ],
+   "ua": [
+    "Кампанії, групи, оголошення, ключові слова",
+    "Статистика через сервіс Reports",
+    "Керування показами та ставками"
+   ],
+   "en": [
+    "Campaigns, ad groups, ads, keywords",
+    "Statistics via the Reports service",
+    "Ad delivery and bid management"
+   ]
+  }
+ },
+ {
+  "name": "rym",
+  "cat": "analytics",
+  "icon": "fa-solid fa-chart-column",
+  "since": 2018,
+  "cran": true,
+  "archived": true,
+  "docs": "https://alexey-seleznev.pro/rym/",
+  "video": {
+   "url": "https://www.youtube.com/watch?v=sCp2D6068es",
+   "kind": "webinar"
+  },
+  "tagline": {
+   "ru": "API Яндекс.Метрики",
+   "ua": "API Яндекс.Метрики",
+   "en": "Yandex.Metrica API"
+  },
+  "desc": {
+   "ru": "R-интерфейс ко всем четырём API Яндекс.Метрики, с подробной документацией и пятью виньетками.",
+   "ua": "R-інтерфейс до всіх чотирьох API Яндекс.Метрики, з докладною документацією та п'ятьма віньєтками.",
+   "en": "An R interface to all four Yandex.Metrica APIs, with detailed docs and five vignettes."
+  },
+  "features": {
+   "ru": [
+    "API управления: счётчики, цели, сегменты",
+    "API отчётов и совместимый с GA Core API",
+    "Logs API: сырые данные о визитах"
+   ],
+   "ua": [
+    "API керування: лічильники, цілі, сегменти",
+    "API звітів і сумісний з GA Core API",
+    "Logs API: сирі дані про візити"
+   ],
+   "en": [
+    "Management API: counters, goals, segments",
+    "Reporting API and the GA-compatible API",
+    "Logs API: raw visit data"
+   ]
+  }
+ },
+ {
+  "name": "rvkstat",
+  "cat": "ads",
+  "icon": "fa-brands fa-vk",
+  "since": 2016,
+  "cran": true,
+  "archived": true,
+  "docs": "https://alexey-seleznev.pro/rvkstat/",
+  "video": {
+   "url": "https://www.youtube.com/playlist?list=PLD2LDq8edf4pQcy0zMmkTlk-o_Z6nRm5N",
+   "kind": "playlist",
+   "count": 3
+  },
+  "tagline": {
+   "ru": "API ВКонтакте",
+   "ua": "API ВКонтакте",
+   "en": "VK API"
+  },
+  "desc": {
+   "ru": "Мой самый первый R-пакет (2016): клиент для API ВКонтакте — статистика рекламного кабинета и посещаемости сообществ.",
+   "ua": "Мій найперший R-пакет (2016): клієнт для API ВКонтакте — статистика рекламного кабінету та відвідуваності спільнот.",
+   "en": "My very first R package (2016): a VK API client for ad-account statistics and community traffic."
+  },
+  "features": {
+   "ru": [
+    "Статистика рекламного кабинета",
+    "Посетители сообществ по полу, возрасту и гео",
+    "Справочники и данные пользователей"
+   ],
+   "ua": [
+    "Статистика рекламного кабінету",
+    "Відвідувачі спільнот за статтю, віком і гео",
+    "Довідники та дані користувачів"
+   ],
+   "en": [
+    "Ad-account statistics",
+    "Community visitors by gender, age and geo",
+    "Reference data and user info"
+   ]
+  }
+ },
+ {
+  "name": "rmytarget",
+  "cat": "ads",
+  "icon": "fa-solid fa-bullseye",
+  "since": 2016,
+  "cran": true,
+  "cranRemoved": true,
+  "archived": true,
+  "docs": "https://alexey-seleznev.pro/rmytarget/",
+  "tagline": {
+   "ru": "MyTarget API v2 и v3",
+   "ua": "MyTarget API v2 і v3",
+   "en": "MyTarget API v2 & v3"
+  },
+  "desc": {
+   "ru": "Загрузка данных из рекламной платформы MyTarget через Statistics API v2 и v3.",
+   "ua": "Завантаження даних з рекламної платформи MyTarget через Statistics API v2 і v3.",
+   "en": "Loads data from the MyTarget ad platform via Statistics API v2 and v3."
+  },
+  "features": {
+   "ru": [
+    "Кампании и объявления",
+    "Клиенты агентского аккаунта",
+    "Статистика по объявлениям, кампаниям и клиентам"
+   ],
+   "ua": [
+    "Кампанії та оголошення",
+    "Клієнти агентського акаунта",
+    "Статистика за оголошеннями, кампаніями та клієнтами"
+   ],
+   "en": [
+    "Campaigns and ads",
+    "Agency account clients",
+    "Stats by ad, campaign or client"
+   ]
+  }
+ }
+]

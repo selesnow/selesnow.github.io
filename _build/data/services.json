@@ -1,0 +1,100 @@
+[
+ {
+  "name": "Server Manager",
+  "repo": "server_manager_shiny_app",
+  "icon": "fa-solid fa-server",
+  "img": "../assets/services/server-manager.png",
+  "stack": [
+   "R",
+   "Shiny",
+   "bslib",
+   "shinychat",
+   "ellmer",
+   "SQLite",
+   "GitLab CI"
+  ],
+  "tagline": {
+   "ru": "Веб-панель управления аналитическим сервером",
+   "ua": "Веб-панель керування аналітичним сервером",
+   "en": "A web control panel for an analytics server"
+  },
+  "desc": {
+   "ru": "Shiny-приложение, через которое отдел аналитики работает с сервером, не подключаясь к нему по RDP. В одном окне собраны сотни задач планировщика Windows, службы, процессы, логи скриптов и статистика, а встроенный AI-ассистент помогает разобрать упавшую задачу: читает лог и код, объясняет ошибку и предлагает план исправления.",
+   "ua": "Shiny-застосунок, через який відділ аналітики працює з сервером, не підключаючись до нього по RDP. В одному вікні зібрані сотні задач планувальника Windows, служби, процеси, логи скриптів і статистика, а вбудований AI-асистент допомагає розібрати задачу, що впала: читає лог і код, пояснює помилку та пропонує план виправлення.",
+   "en": "A Shiny app the analytics team uses to work with the server without RDP. Hundreds of Windows Task Scheduler jobs, services, processes, script logs and statistics live in one window, and a built-in AI assistant helps debug failed jobs: it reads the log and code, explains the error and proposes a fix."
+  },
+  "features": {
+   "ru": [
+    "Задачи планировщика: статусы, логи, код, запуск и отключение",
+    "AI-анализ логов и кода, ассистент с доступом к задачам и Планфиксу",
+    "Службы, процессы, поиск по всем скриптам сервера",
+    "Роли и права доступа, журнал действий, статистика сбоев"
+   ],
+   "ua": [
+    "Задачі планувальника: статуси, логи, код, запуск і вимкнення",
+    "AI-аналіз логів і коду, асистент з доступом до задач і Планфіксу",
+    "Служби, процеси, пошук по всіх скриптах сервера",
+    "Ролі та права доступу, журнал дій, статистика збоїв"
+   ],
+   "en": [
+    "Scheduler jobs: status, logs, code, run and disable",
+    "AI log and code analysis; an assistant with access to jobs and Planfix",
+    "Services, processes and search across all server scripts",
+    "Roles and permissions, audit log, failure statistics"
+   ]
+  }
+ },
+ {
+  "name": "Server Telegram Bot",
+  "repo": "server_telegram_bot",
+  "icon": "fa-brands fa-telegram",
+  "commands": [
+   "/tasks",
+   "/running_tasks",
+   "/run_menu",
+   "/task_info",
+   "/task_search",
+   "/forget",
+   "/add_priv"
+  ],
+  "stack": [
+   "R",
+   "telegram.bot",
+   "taskscheduleR",
+   "promises",
+   "future",
+   "SQLite",
+   "lgr"
+  ],
+  "tagline": {
+   "ru": "Мониторинг и управление сервером из Telegram",
+   "ua": "Моніторинг і керування сервером з Telegram",
+   "en": "Server monitoring and control from Telegram"
+  },
+  "desc": {
+   "ru": "Telegram-бот на R — вторая часть системы мониторинга сервера. Им пользуются несколько отделов: аналитики следят за задачами на сервере и перезапускают их без подключения к серверу, PPC-отдел контролирует еженедельный сбор данных в Google BigQuery, финансовый отдел запускает загрузку данных в отчёты. Работает в личных и групповых чатах, команды обрабатываются асинхронно.",
+   "ua": "Telegram-бот на R — друга частина системи моніторингу сервера. Ним користуються кілька відділів: аналітики стежать за задачами на сервері та перезапускають їх без підключення до сервера, PPC-відділ контролює щотижневий збір даних у Google BigQuery, фінансовий відділ запускає завантаження даних у звіти. Працює в особистих і групових чатах, команди обробляються асинхронно.",
+   "en": "A Telegram bot written in R — the second half of the server monitoring system. Several teams rely on it: analysts track and restart server jobs without logging in, the PPC team monitors weekly data collection into Google BigQuery, and finance triggers data loads into its reports. It works in private and group chats and handles commands asynchronously."
+  },
+  "features": {
+   "ru": [
+    "Список задач, запущенные и упавшие задачи",
+    "Запуск задач через инлайн-меню, поиск и карточка задачи",
+    "Права пользователей на каждую команду",
+    "Временное отключение задач от мониторинга, логирование действий"
+   ],
+   "ua": [
+    "Список задач, запущені та невдалі задачі",
+    "Запуск задач через інлайн-меню, пошук і картка задачі",
+    "Права користувачів на кожну команду",
+    "Тимчасове вимкнення задач з моніторингу, логування дій"
+   ],
+   "en": [
+    "Job list, running and failed jobs",
+    "Run jobs from an inline menu; job search and details",
+    "Per-command user permissions",
+    "Temporarily exclude jobs from monitoring; action logging"
+   ]
+  }
+ }
+]

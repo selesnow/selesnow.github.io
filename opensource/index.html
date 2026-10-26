@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Alexey Seleznev">
+    <meta name="theme-color" content="#030712">
+    <link rel="canonical" href="https://alexey-seleznev.pro/opensource/">
+
+    <title>Open Source R-пакеты | Алексей Селезнёв</title>
+    <meta name="title" content="Open Source R-пакеты | Алексей Селезнёв">
+    <meta name="description" content="22 open source R-пакетов Алексея Селезнёва для работы с API Google Ads, Facebook, TikTok, LinkedIn, Apple Ads, YouTube, TGStat, AppsFlyer и других сервисов. Более 416k скачиваний с CRAN.">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alexey-seleznev.pro/opensource/">
+    <meta property="og:site_name" content="ALEXEY-SELEZNEV.pro">
+    <meta property="og:title" content="Open Source R-пакеты | Алексей Селезнёв">
+    <meta property="og:description" content="22 open source R-пакетов Алексея Селезнёва для работы с API Google Ads, Facebook, TikTok, LinkedIn, Apple Ads, YouTube, TGStat, AppsFlyer и других сервисов. Более 416k скачиваний с CRAN.">
+    <meta property="og:image" content="https://alexey-seleznev.pro/photo.jpg">
+    <meta property="og:image:alt" content="Алексей Селезнёв">
+    <meta property="og:locale" content="ru_RU">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="https://alexey-seleznev.pro/opensource/">
+    <meta name="twitter:title" content="Open Source R-пакеты | Алексей Селезнёв">
+    <meta name="twitter:description" content="22 open source R-пакетов Алексея Селезнёва для работы с API Google Ads, Facebook, TikTok, LinkedIn, Apple Ads, YouTube, TGStat, AppsFlyer и других сервисов. Более 416k скачиваний с CRAN.">
+    <meta name="twitter:image" content="https://alexey-seleznev.pro/photo.jpg">
+
+    <link rel="icon" type="image/jpeg" href="../logo.jpg">
+    <link rel="apple-touch-icon" href="../logo.jpg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body class="relative lang-en">
+
+    <!-- Interactive Background -->
+    <div id="vanta-bg"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full z-50 top-0 left-0 border-b border-white/5 bg-slate-950/60 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 h-16 flex items-center justify-between">
+            <a href="../" class="flex items-center gap-2 sm:gap-2.5 md:gap-3 group shrink min-w-0">
+                <img src="../logo.jpg" alt="Alexey Seleznev" class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 rounded-lg sm:rounded-xl object-cover shadow-md border border-white/10 group-hover:border-purple-500/50 group-hover:scale-105 transition-all shrink-0">
+                <span class="text-xs min-[400px]:text-sm sm:text-base md:text-xl font-black tracking-tight uppercase outfit-font whitespace-nowrap text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+            </a>
+            <div class="hidden xl:flex gap-6 text-sm font-semibold text-slate-400">
+                <a href="../" class="nav-link hover:text-white transition-colors"><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a>
+                <a href="../opensource/" class="nav-link hover:text-white transition-colors active"><span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span></a>
+                <a href="../courses/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a>
+                <a href="../videos/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a>
+                <a href="../talks/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a>
+                <a href="../articles/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a>
+                <a href="../interviews/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a>
+            </div>
+
+            <div class="flex items-center gap-1.5 sm:gap-2 md:gap-4 shrink-0">
+                <div class="lang-switcher flex gap-1 sm:gap-1.5 md:gap-2 text-[11px] sm:text-xs md:text-sm font-bold border-r border-white/10 pr-1.5 sm:pr-3 md:pr-4 mr-0.5 sm:mr-1 md:mr-2 outfit-font">
+                    <button onclick="changeLang('en')" id="btn-en" class="active hover:text-white transition-colors">EN</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ru')" id="btn-ru" class="text-slate-500 hover:text-white transition-colors">RU</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ua')" id="btn-ua" class="text-slate-500 hover:text-white transition-colors">UA</button>
+                </div>
+
+                <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="text-slate-400 hover:text-blue-400 transition-colors hidden sm:block" aria-label="Telegram"><i class="fa-brands fa-telegram text-lg md:text-xl"></i></a>
+                <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="text-slate-400 hover:text-white transition-colors hidden sm:block" aria-label="GitHub"><i class="fa-brands fa-github text-lg md:text-xl"></i></a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="xl:hidden w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-purple-500/20 hover:border-purple-500/40 transition-all focus:outline-none" aria-label="Toggle Navigation Menu">
+                    <i class="fa-solid fa-bars text-sm sm:text-lg" id="mobile-menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div id="mobile-menu" class="hidden xl:hidden border-t border-white/10 bg-slate-950/95 backdrop-blur-2xl shadow-2xl overflow-y-auto max-h-[calc(100vh-4rem)] transition-all">
+            <div class="max-w-7xl mx-auto px-6 py-6 space-y-1">
+                <a href="../" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-house text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span>
+                </a>
+                <a href="../opensource/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-white bg-white/5 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-code-branch text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span>
+                </a>
+                <a href="../courses/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-graduation-cap text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span>
+                </a>
+                <a href="../videos/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-circle-play text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span>
+                </a>
+                <a href="../talks/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-microphone-lines text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span>
+                </a>
+                <a href="../articles/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-pen-nib text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span>
+                </a>
+                <a href="../interviews/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-regular fa-newspaper text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span>
+                </a>
+
+                <div class="pt-4 mt-3 border-t border-white/10 flex items-center justify-around text-slate-400">
+                    <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-blue-400 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-telegram text-xl"></i> Telegram
+                    </a>
+                    <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="p-2 hover:text-white transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-github text-xl"></i> GitHub
+                    </a>
+                    <a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-red-500 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-youtube text-xl"></i> YouTube
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="pt-32 pb-12 px-6 max-w-7xl mx-auto relative z-10">
+        <a href="../" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-400 hover:text-white transition-colors mb-8 group" data-aos="fade-right">
+            <i class="fa-solid fa-arrow-left text-xs group-hover:-translate-x-1 transition-transform"></i>
+            <span class="ru-text">На главную</span><span class="ua-text">На головну</span><span class="en-text">Back to home</span>
+        </a>
+        <div data-aos="fade-up">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-bold tracking-widest uppercase mb-5 outfit-font">
+                <i class="fa-solid fa-code-branch"></i> Open Source
+            </div>
+            <h1 class="text-5xl md:text-7xl font-black tracking-tight leading-tight uppercase mb-8"><span class="ru-text">R-<span class="text-gradient">пакеты</span></span><span class="ua-text">R-<span class="text-gradient">пакети</span></span><span class="en-text">R <span class="text-gradient">Packages</span></span></h1>
+        </div>
+        <div class="bento-glass no-lift p-6 md:p-10 border-l-4 border-purple-500/50 mb-8" data-aos="fade-up" data-aos-delay="100">
+            <p class="text-lg md:text-xl text-slate-300 leading-relaxed font-light relative z-10"><span class="ru-text">С 2016 года разрабатываю пакеты на языке R, которые упрощают сбор данных из рекламных, аналитических и CRM-платформ. С ними специалисты без глубоких навыков программирования автоматизируют отчётность и строят маркетинговую аналитику. Большинство пакетов опубликованы на CRAN, у многих есть документация и видеоуроки.</span><span class="ua-text">З 2016 року розробляю пакети мовою R, які спрощують збір даних з рекламних, аналітичних і CRM-платформ. З ними фахівці без глибоких навичок програмування автоматизують звітність і будують маркетингову аналітику. Більшість пакетів опубліковані на CRAN, у багатьох є документація та відеоуроки.</span><span class="en-text">Since 2016 I have been building R packages that simplify collecting data from ad, analytics and CRM platforms, so specialists without deep coding skills can automate reporting and build marketing analytics. Most are published on CRAN, and many come with docs and video lessons.</span></p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 bento-glass no-lift p-6 rounded-3xl" data-aos="fade-up" data-aos-delay="150">
+                <div class="bento-content">
+                    <div class="text-3xl md:text-4xl font-extrabold text-white outfit-font">22</div>
+                    <div class="text-xs text-slate-400 uppercase font-bold mt-1"><span class="ru-text">R-пакет</span><span class="ua-text">R-пакет</span><span class="en-text">R packages</span></div>
+                </div>
+                <div class="bento-content">
+                    <div class="text-3xl md:text-4xl font-extrabold text-white outfit-font">18</div>
+                    <div class="text-xs text-slate-400 uppercase font-bold mt-1"><span class="ru-text">Опубликованы на CRAN</span><span class="ua-text">Опубліковані на CRAN</span><span class="en-text">Published on CRAN</span></div>
+                </div>
+                <div class="bento-content">
+                    <div class="text-3xl md:text-4xl font-extrabold text-white outfit-font"><span id="total-downloads">416k+</span></div>
+                    <div class="text-xs text-slate-400 uppercase font-bold mt-1"><span class="ru-text">Скачиваний с CRAN</span><span class="ua-text">Завантажень з CRAN</span><span class="en-text">CRAN downloads</span></div>
+                </div>
+                <div class="bento-content">
+                    <div class="text-3xl md:text-4xl font-extrabold text-white outfit-font">2016</div>
+                    <div class="text-xs text-slate-400 uppercase font-bold mt-1"><span class="ru-text">Первый пакет</span><span class="ua-text">Перший пакет</span><span class="en-text">First package</span></div>
+                </div>
+        </div>
+    </header>
+
+    <!-- PACKAGES -->
+    <section class="px-6 max-w-7xl mx-auto pb-10 relative z-10">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4" data-aos="fade-up">
+            <div class="flex flex-wrap gap-2"><button type="button" data-filter-group="cat" data-filter-value="all" class="filter-btn active px-4 py-2 rounded-xl text-sm font-semibold flex items-center gap-2"><i class="fa-solid fa-layer-group text-xs text-purple-400"></i><span class="ru-text">Все</span><span class="ua-text">Усі</span><span class="en-text">All</span><span class="text-xs opacity-80 bg-white/10 px-2 py-0.5 rounded-full font-mono">22</span></button><button type="button" data-filter-group="cat" data-filter-value="ads" class="filter-btn px-4 py-2 rounded-xl text-sm font-semibold flex items-center gap-2"><i class="fa-solid fa-bullhorn text-xs text-purple-400"></i><span class="ru-text">Рекламные платформы</span><span class="ua-text">Рекламні платформи</span><span class="en-text">Ad platforms</span><span class="text-xs opacity-80 bg-white/10 px-2 py-0.5 rounded-full font-mono">8</span></button><button type="button" data-filter-group="cat" data-filter-value="analytics" class="filter-btn px-4 py-2 rounded-xl text-sm font-semibold flex items-center gap-2"><i class="fa-solid fa-chart-line text-xs text-purple-400"></i><span class="ru-text">Аналитика</span><span class="ua-text">Аналітика</span><span class="en-text">Analytics</span><span class="text-xs opacity-80 bg-white/10 px-2 py-0.5 rounded-full font-mono">5</span></button><button type="button" data-filter-group="cat" data-filter-value="crm" class="filter-btn px-4 py-2 rounded-xl text-sm font-semibold flex items-center gap-2"><i class="fa-solid fa-address-card text-xs text-purple-400"></i><span class="ru-text">CRM и сервисы</span><span class="ua-text">CRM та сервіси</span><span class="en-text">CRM & services</span><span class="text-xs opacity-80 bg-white/10 px-2 py-0.5 rounded-full font-mono">5</span></button><button type="button" data-filter-group="cat" data-filter-value="utils" class="filter-btn px-4 py-2 rounded-xl text-sm font-semibold flex items-center gap-2"><i class="fa-solid fa-screwdriver-wrench text-xs text-purple-400"></i><span class="ru-text">Утилиты</span><span class="ua-text">Утиліти</span><span class="en-text">Utilities</span><span class="text-xs opacity-80 bg-white/10 px-2 py-0.5 rounded-full font-mono">4</span></button></div>
+            <div class="relative w-full md:w-80"><i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-sm"></i><input type="search" data-filter-search class="search-input w-full rounded-xl pl-11 pr-4 py-2.5 text-sm text-white placeholder-slate-500" placeholder="Search packages…" data-ph-ru="Поиск по пакетам…" data-ph-ua="Пошук за пакетами…" data-ph-en="Search packages…"></div>
+        </div>
+        <p class="text-xs text-slate-500 mb-10 flex items-center gap-2" data-aos="fade-up"><i class="fa-solid fa-circle-info"></i><span class="ru-text">Счётчики скачиваний с CRAN (cranlogs) и звёзды GitHub обновляются автоматически; сохранённый снимок — 26.10.2026.</span><span class="ua-text">Лічильники завантажень з CRAN (cranlogs) і зірки GitHub оновлюються автоматично; збережений знімок — 26.10.2026.</span><span class="en-text">CRAN download counts (cranlogs) and GitHub stars update automatically; saved snapshot from 26.10.2026.</span></p>
+
+        <div data-year-group class="mb-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <article class="bento-glass group flex flex-col p-6 rounded-3xl" data-filter-item data-cat="ads" data-search="rfacebookstat facebook marketing api facebook marketing api загрузка данных из facebook marketing api в r: структура рекламных аккаунтов, статистика и конверсии с любыми разбивками. кроме того, пакет умеет управлять доступами пользователей к рекламным аккаунтам. один из первых и самых скачиваемых пакетов — в августе 2018 года попал в топ-40 новых пакетов cran по версии rstudio. loads facebook marketing api data into r: ad-account structure, statistics and conversions with any breakdowns. it can also manage user access to ad accounts. one of my first and most downloaded packages — it made rstudio&#x27;s list of the top 40 new cran packages in august 2018." data-pkg="rfacebookstat" data-cran="1" data-aos="fade-up" data-aos-delay="0">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="flex items-start gap-5 mb-5">
+                        <div class="relative shrink-0"><img src="../assets/logos/rfacebookstat.png" alt="rfacebookstat logo" loading="lazy" class="w-[72px] h-[84px] object-contain drop-shadow-[0_8px_20px_rgba(0,0,0,0.45)] group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500"></div>
+                        <div class="min-w-0 flex-1 pt-1">
+                            <div class="flex flex-wrap items-center gap-1.5 mb-2"><span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-blue-500/15 text-blue-300 border border-blue-500/30">CRAN</span></div>
+                            <h3 class="text-2xl font-extrabold text-white outfit-font group-hover:text-purple-300 transition-colors break-words">rfacebookstat</h3>
+                            <p class="text-sm text-slate-400 font-medium"><span class="ru-text">Facebook Marketing API</span><span class="ua-text">Facebook Marketing API</span><span class="en-text">Facebook Marketing API</span></p>
+                        </div>
+                    </div>
+                    <div class="mb-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-yellow-500/10 border border-yellow-500/25 text-yellow-300 text-xs font-semibold"><i class="fa-solid fa-trophy"></i><span class="ru-text">Топ-40 новых пакетов CRAN, август 2018</span><span class="ua-text">Топ-40 нових пакетів CRAN, серпень 2018</span><span class="en-text">Top 40 new CRAN packages, Aug 2018</span></div>
+                    <p class="text-sm text-slate-300 leading-relaxed font-light mb-4"><span class="ru-text">Загрузка данных из Facebook Marketing API в R: структура рекламных аккаунтов, статистика и конверсии с любыми разбивками. Кроме того, пакет умеет управлять доступами пользователей к рекламным аккаунтам. Один из первых и самых скачиваемых пакетов — в августе 2018 года попал в топ-40 новых пакетов CRAN по версии RStudio.</span><span class="ua-text">Завантаження даних з Facebook Marketing API в R: структура рекламних акаунтів, статистика та конверсії з будь-якими розбивками. Крім того, пакет уміє керувати доступами користувачів до рекламних акаунтів. Один із перших і найбільш завантажуваних пакетів — у серпні 2018 року потрапив до топ-40 нових пакетів CRAN за версією RStudio.</span><span class="en-text">Loads Facebook Marketing API data into R: ad-account structure, statistics and conversions with any breakdowns. It can also manage user access to ad accounts. One of my first and most downloaded packages — it made RStudio&#x27;s list of the top 40 new CRAN packages in August 2018.</span></p>
+                    <ul class="space-y-1.5 mb-5">
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Кампании, группы объявлений, объявления и креативы</span><span class="ua-text">Кампанії, групи оголошень, оголошення та креативи</span><span class="en-text">Campaigns, ad sets, ads and creatives</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Статистика с разбивками и окнами атрибуции</span><span class="ua-text">Статистика з розбивками та вікнами атрибуції</span><span class="en-text">Insights with breakdowns and attribution windows</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Данные бизнес-менеджера и управление доступами</span><span class="ua-text">Дані бізнес-менеджера та керування доступами</span><span class="en-text">Business Manager data and access management</span></li>
+                    </ul>
+                    <div class="mt-auto">
+                        <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5 mb-4">
+                            <div title="GitHub stars" class="flex items-center gap-2"><i class="fa-solid fa-star text-yellow-500"></i><span class="js-stars font-bold text-white">30</span></div>
+                            <div title="CRAN" class="flex items-center gap-2"><i class="fa-solid fa-download text-blue-400"></i><span class="js-dl-total font-bold text-white">52.6k</span></div>
+                            <div title="last 30 days" class="flex items-center gap-1.5 text-slate-500"><span class="js-dl-month font-semibold text-slate-300">547</span>/<span class="ru-text">мес</span><span class="ua-text">міс</span><span class="en-text">mo</span></div>
+                            <div class="flex items-center gap-1.5 text-slate-500 ml-auto"><i class="fa-regular fa-calendar"></i>2016</div>
+                        </div>
+                        <div class="flex flex-wrap gap-2"><a href="https://github.com/selesnow/rfacebookstat" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-purple-500/15 border-purple-500/40 text-purple-200 hover:bg-purple-500 hover:text-white"><i class="fa-brands fa-github"></i>GitHub</a><a href="https://cran.r-project.org/package=rfacebookstat" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-brands fa-r-project"></i>CRAN</a><a href="https://alexey-seleznev.pro/rfacebookstat/" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-solid fa-book"></i><span class="ru-text">Документация</span><span class="ua-text">Документація</span><span class="en-text">Docs</span></a><a href="https://www.youtube.com/playlist?list=PLD2LDq8edf4pItOb-vZTG5AXZK2niJ8_R" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-brands fa-youtube text-red-500"></i><span class="ru-text">Плейлист · 11</span><span class="ua-text">Плейлист · 11</span><span class="en-text">Playlist · 11</span></a></div>
+                    </div>
+                </div>
+            </article>
+            <article class="bento-glass group flex flex-col p-6 rounded-3xl" data-filter-item data-cat="utils" data-search="timeperiodsr простое определение временных периодов simple definition of time intervals скриптам, которые работают по расписанию, почти всегда нужен период: прошлая неделя, прошлый месяц или n последних дней. timeperiodsr вычисляет такие периоды относительно любой базовой даты и даёт удобный доступ к их элементам. 24 функции с понятными названиями: префикс last / previous / this / next плюс единица времени day / week / month / quarter / year. scheduled scripts almost always need a period: last week, last month or the last n days. timeperiodsr computes such periods relative to any base date and gives easy access to their parts. 24 self-explanatory functions: a last / previous / this / next prefix plus a day / week / month / quarter / year unit." data-pkg="timeperiodsR" data-cran="1" data-aos="fade-up" data-aos-delay="60">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="flex items-start gap-5 mb-5">
+                        <div class="relative shrink-0"><img src="../assets/logos/timeperiodsR.png" alt="timeperiodsR logo" loading="lazy" class="w-[72px] h-[84px] object-contain drop-shadow-[0_8px_20px_rgba(0,0,0,0.45)] group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500"></div>
+                        <div class="min-w-0 flex-1 pt-1">
+                            <div class="flex flex-wrap items-center gap-1.5 mb-2"><span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-blue-500/15 text-blue-300 border border-blue-500/30">CRAN</span></div>
+                            <h3 class="text-2xl font-extrabold text-white outfit-font group-hover:text-purple-300 transition-colors break-words">timeperiodsR</h3>
+                            <p class="text-sm text-slate-400 font-medium"><span class="ru-text">Простое определение временных периодов</span><span class="ua-text">Просте визначення часових періодів</span><span class="en-text">Simple definition of time intervals</span></p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-sm text-slate-300 leading-relaxed font-light mb-4"><span class="ru-text">Скриптам, которые работают по расписанию, почти всегда нужен период: прошлая неделя, прошлый месяц или N последних дней. timeperiodsR вычисляет такие периоды относительно любой базовой даты и даёт удобный доступ к их элементам. 24 функции с понятными названиями: префикс last / previous / this / next плюс единица времени day / week / month / quarter / year.</span><span class="ua-text">Скриптам, які працюють за розкладом, майже завжди потрібен період: минулий тиждень, минулий місяць або N останніх днів. timeperiodsR обчислює такі періоди відносно будь-якої базової дати та дає зручний доступ до їх елементів. 24 функції з зрозумілими назвами: префікс last / previous / this / next плюс одиниця часу day / week / month / quarter / year.</span><span class="en-text">Scheduled scripts almost always need a period: last week, last month or the last N days. timeperiodsR computes such periods relative to any base date and gives easy access to their parts. 24 self-explanatory functions: a last / previous / this / next prefix plus a day / week / month / quarter / year unit.</span></p>
+                    <ul class="space-y-1.5 mb-5">
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Первая и последняя дата, вектор дат периода</span><span class="ua-text">Перша та остання дата, вектор дат періоду</span><span class="en-text">First/last date and the full date sequence</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Будни, выходные и пользовательские выходные</span><span class="ua-text">Будні, вихідні та користувацькі вихідні</span><span class="en-text">Workdays, weekends and custom days off</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Официальные праздники Украины, Казахстана и др.</span><span class="ua-text">Офіційні свята України, Казахстану та ін.</span><span class="en-text">Official holidays for Ukraine, Kazakhstan and more</span></li>
+                    </ul>
+                    <div class="mt-auto">
+                        <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5 mb-4">
+                            <div title="GitHub stars" class="flex items-center gap-2"><i class="fa-solid fa-star text-yellow-500"></i><span class="js-stars font-bold text-white">7</span></div>
+                            <div title="CRAN" class="flex items-center gap-2"><i class="fa-solid fa-download text-blue-400"></i><span class="js-dl-total font-bold text-white">44.3k</span></div>
+                            <div title="last 30 days" class="flex items-center gap-1.5 text-slate-500"><span class="js-dl-month font-semibold text-slate-300">469</span>/<span class="ru-text">мес</span><span class="ua-text">міс</span><span class="en-text">mo</span></div>
+                            <div class="flex items-center gap-1.5 text-slate-500 ml-auto"><i class="fa-regular fa-calendar"></i>2019</div>
+                        </div>
+                        <div class="flex flex-wrap gap-2"><a href="https://github.com/selesnow/timeperiodsR" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-purple-500/15 border-purple-500/40 text-purple-200 hover:bg-purple-500 hover:text-white"><i class="fa-brands fa-github"></i>GitHub</a><a href="https://cran.r-project.org/package=timeperiodsR" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-brands fa-r-project"></i>CRAN</a><a href="https://alexey-seleznev.pro/timeperiodsR/" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-solid fa-book"></i><span class="ru-text">Документация</span><span class="ua-text">Документація</span><span class="en-text">Docs</span></a><a href="https://www.youtube.com/playlist?list=PLD2LDq8edf4qed2KVKfXmKdh0OQcdj9gw" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-brands fa-youtube text-red-500"></i><span class="ru-text">Плейлист · 6</span><span class="ua-text">Плейлист · 6</span><span class="en-text">Playlist · 6</span></a></div>
+                    </div>
+                </div>
+            </article>
+            <article class="bento-glass group flex flex-col p-6 rounded-3xl" data-filter-item data-cat="ads" data-search="rgoogleads google ads api google ads api r-клиент для google ads api. главная задача — загружать отчёты из клиентских аккаунтов google ads в r для анализа и визуализации. авторизация построена на пакете gargle: учётные данные хранятся только на вашем компьютере, поддерживаются собственные oauth-клиент и токен разработчика. пришёл на смену устаревшим решениям для adwords api. an r client for the google ads api. its main job is loading report data from google ads client accounts into r for analysis and visualization. authorization is built on gargle: credentials stay on your machine, and your own oauth client and developer token are supported. it replaced the outdated adwords api tools." data-pkg="rgoogleads" data-cran="1" data-aos="fade-up" data-aos-delay="120">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="flex items-start gap-5 mb-5">
+                        <div class="relative shrink-0"><img src="../assets/logos/rgoogleads.png" alt="rgoogleads logo" loading="lazy" class="w-[72px] h-[84px] object-contain drop-shadow-[0_8px_20px_rgba(0,0,0,0.45)] group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500"></div>
+                        <div class="min-w-0 flex-1 pt-1">
+                            <div class="flex flex-wrap items-center gap-1.5 mb-2"><span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-blue-500/15 text-blue-300 border border-blue-500/30">CRAN</span></div>
+                            <h3 class="text-2xl font-extrabold text-white outfit-font group-hover:text-purple-300 transition-colors break-words">rgoogleads</h3>
+                            <p class="text-sm text-slate-400 font-medium"><span class="ru-text">Google Ads API</span><span class="ua-text">Google Ads API</span><span class="en-text">Google Ads API</span></p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-sm text-slate-300 leading-relaxed font-light mb-4"><span class="ru-text">R-клиент для Google Ads API. Главная задача — загружать отчёты из клиентских аккаунтов Google Ads в R для анализа и визуализации. Авторизация построена на пакете gargle: учётные данные хранятся только на вашем компьютере, поддерживаются собственные OAuth-клиент и токен разработчика. Пришёл на смену устаревшим решениям для AdWords API.</span><span class="ua-text">R-клієнт для Google Ads API. Головне завдання — завантажувати звіти з клієнтських акаунтів Google Ads в R для аналізу та візуалізації. Авторизація побудована на пакеті gargle: облікові дані зберігаються лише на вашому комп&#x27;ютері, підтримуються власні OAuth-клієнт і токен розробника. Прийшов на зміну застарілим рішенням для AdWords API.</span><span class="en-text">An R client for the Google Ads API. Its main job is loading report data from Google Ads client accounts into R for analysis and visualization. Authorization is built on gargle: credentials stay on your machine, and your own OAuth client and developer token are supported. It replaced the outdated AdWords API tools.</span></p>
+                    <ul class="space-y-1.5 mb-5">
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Иерархия аккаунтов из управляющих (MCC)</span><span class="ua-text">Ієрархія акаунтів з керівних (MCC)</span><span class="en-text">Full account hierarchy from manager (MCC) accounts</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Объекты аккаунта и отчёты на языке GAQL</span><span class="ua-text">Об&#x27;єкти акаунта та звіти мовою GAQL</span><span class="en-text">Account objects and GAQL reports</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Прогноз и исторические метрики Keyword Planner</span><span class="ua-text">Прогноз та історичні метрики Keyword Planner</span><span class="en-text">Keyword Planner forecasts and historical metrics</span></li>
+                    </ul>
+                    <div class="mt-auto">
+                        <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5 mb-4">
+                            <div title="GitHub stars" class="flex items-center gap-2"><i class="fa-solid fa-star text-yellow-500"></i><span class="js-stars font-bold text-white">14</span></div>
+                            <div title="CRAN" class="flex items-center gap-2"><i class="fa-solid fa-download text-blue-400"></i><span class="js-dl-total font-bold text-white">37.6k</span></div>
+                            <div title="last 30 days" class="flex items-center gap-1.5 text-slate-500"><span class="js-dl-month font-semibold text-slate-300">855</span>/<span class="ru-text">мес</span><span class="ua-text">міс</span><span class="en-text">mo</span></div>
+                            <div class="flex items-center gap-1.5 text-slate-500 ml-auto"><i class="fa-regular fa-calendar"></i>2021</div>
+                        </div>
+                        <div class="flex flex-wrap gap-2"><a href="https://github.com/selesnow/rgoogleads" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-purple-500/15 border-purple-500/40 text-purple-200 hover:bg-purple-500 hover:text-white"><i class="fa-brands fa-github"></i>GitHub</a><a href="https://cran.r-project.org/package=rgoogleads" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-brands fa-r-project"></i>CRAN</a><a href="https://alexey-seleznev.pro/rgoogleads/docs/" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-solid fa-book"></i><span class="ru-text">Документация</span><span class="ua-text">Документація</span><span class="en-text">Docs</span></a><a href="https://www.youtube.com/playlist?list=PLD2LDq8edf4qprTxRcflDwV9IvStiChHi" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-brands fa-youtube text-red-500"></i><span class="ru-text">Плейлист · 2</span><span class="ua-text">Плейлист · 2</span><span class="en-text">Playlist · 2</span></a></div>
+                    </div>
+                </div>
+            </article>
+            <article class="bento-glass group flex flex-col p-6 rounded-3xl" data-filter-item data-cat="utils" data-search="getproxy бесплатные прокси-серверы в r-сессии free proxy servers for your r session одной строкой кода получает ip-адрес и порт бесплатного публичного прокси-сервера через сервисы gimmeproxy.com и getproxylist.com и сразу перенаправляет через него интернет-соединение r-сессии. появился в 2017 году, когда в украине заблокировали ряд сервисов, и помогал продолжать работу с их api. fetches the ip and port of a free public proxy from gimmeproxy.com or getproxylist.com in one line of code and routes the r session&#x27;s traffic through it. created in 2017, when several services were blocked in ukraine, to keep their apis reachable." data-pkg="getProxy" data-cran="1" data-aos="fade-up" data-aos-delay="0">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="flex items-start gap-5 mb-5">
+                        <div class="relative shrink-0"><img src="../assets/logos/getProxy.png" alt="getProxy logo" loading="lazy" class="w-[72px] h-[84px] object-contain drop-shadow-[0_8px_20px_rgba(0,0,0,0.45)] group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500"></div>
+                        <div class="min-w-0 flex-1 pt-1">
+                            <div class="flex flex-wrap items-center gap-1.5 mb-2"><span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-blue-500/15 text-blue-300 border border-blue-500/30">CRAN</span></div>
+                            <h3 class="text-2xl font-extrabold text-white outfit-font group-hover:text-purple-300 transition-colors break-words">getProxy</h3>
+                            <p class="text-sm text-slate-400 font-medium"><span class="ru-text">Бесплатные прокси-серверы в R-сессии</span><span class="ua-text">Безкоштовні проксі-сервери в R-сесії</span><span class="en-text">Free proxy servers for your R session</span></p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-sm text-slate-300 leading-relaxed font-light mb-4"><span class="ru-text">Одной строкой кода получает IP-адрес и порт бесплатного публичного прокси-сервера через сервисы gimmeproxy.com и getproxylist.com и сразу перенаправляет через него интернет-соединение R-сессии. Появился в 2017 году, когда в Украине заблокировали ряд сервисов, и помогал продолжать работу с их API.</span><span class="ua-text">Одним рядком коду отримує IP-адресу та порт безкоштовного публічного проксі-сервера через сервіси gimmeproxy.com і getproxylist.com і одразу перенаправляє через нього інтернет-з&#x27;єднання R-сесії. З&#x27;явився у 2017 році, коли в Україні заблокували низку сервісів, і допомагав продовжувати роботу з їхніми API.</span><span class="en-text">Fetches the IP and port of a free public proxy from gimmeproxy.com or getproxylist.com in one line of code and routes the R session&#x27;s traffic through it. Created in 2017, when several services were blocked in Ukraine, to keep their APIs reachable.</span></p>
+                    <ul class="space-y-1.5 mb-5">
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Фильтры по стране, порту и поддержке HTTPS</span><span class="ua-text">Фільтри за країною, портом і підтримкою HTTPS</span><span class="en-text">Filter by country, port and HTTPS support</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Протоколы http, socks4 и socks5</span><span class="ua-text">Протоколи http, socks4 і socks5</span><span class="en-text">http, socks4 and socks5 protocols</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Подключение и отключение прокси одной командой</span><span class="ua-text">Підключення та відключення проксі однією командою</span><span class="en-text">Start or stop the proxy with one call</span></li>
+                    </ul>
+                    <div class="mt-auto">
+                        <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5 mb-4">
+                            <div title="GitHub stars" class="flex items-center gap-2"><i class="fa-solid fa-star text-yellow-500"></i><span class="js-stars font-bold text-white">8</span></div>
+                            <div title="CRAN" class="flex items-center gap-2"><i class="fa-solid fa-download text-blue-400"></i><span class="js-dl-total font-bold text-white">28.9k</span></div>
+                            <div title="last 30 days" class="flex items-center gap-1.5 text-slate-500"><span class="js-dl-month font-semibold text-slate-300">232</span>/<span class="ru-text">мес</span><span class="ua-text">міс</span><span class="en-text">mo</span></div>
+                            <div class="flex items-center gap-1.5 text-slate-500 ml-auto"><i class="fa-regular fa-calendar"></i>2017</div>
+                        </div>
+                        <div class="flex flex-wrap gap-2"><a href="https://github.com/selesnow/getProxy" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-purple-500/15 border-purple-500/40 text-purple-200 hover:bg-purple-500 hover:text-white"><i class="fa-brands fa-github"></i>GitHub</a><a href="https://cran.r-project.org/package=getProxy" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-brands fa-r-project"></i>CRAN</a><a href="https://alexey-seleznev.pro/getProxy/" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-solid fa-book"></i><span class="ru-text">Документация</span><span class="ua-text">Документація</span><span class="en-text">Docs</span></a><a href="https://www.youtube.com/watch?v=gZKw_laVxC4" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-brands fa-youtube text-red-500"></i><span class="ru-text">Видеоурок</span><span class="ua-text">Відеоурок</span><span class="en-text">Video lesson</span></a></div>
+                    </div>
+                </div>
+            </article>
+            <article class="bento-glass group flex flex-col p-6 rounded-3xl" data-filter-item data-cat="analytics" data-search="rtgstat аналитика telegram-каналов через tgstat api telegram channel analytics via the tgstat api обёртка над всеми методами tgstat stat api и search api. позволяет искать telegram-каналы и публикации, получать статистику каналов и постов и отслеживать их динамику — удобно для анализа конкурентов и подбора площадок для рекламы. a wrapper around every method of the tgstat stat and search apis. search telegram channels and posts, get channel and post statistics and track their dynamics — handy for competitor research and picking ad placements." data-pkg="rtgstat" data-cran="1" data-aos="fade-up" data-aos-delay="60">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="flex items-start gap-5 mb-5">
+                        <div class="relative shrink-0"><img src="../assets/logos/rtgstat.png" alt="rtgstat logo" loading="lazy" class="w-[72px] h-[84px] object-contain drop-shadow-[0_8px_20px_rgba(0,0,0,0.45)] group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500"></div>
+                        <div class="min-w-0 flex-1 pt-1">
+                            <div class="flex flex-wrap items-center gap-1.5 mb-2"><span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-blue-500/15 text-blue-300 border border-blue-500/30">CRAN</span></div>
+                            <h3 class="text-2xl font-extrabold text-white outfit-font group-hover:text-purple-300 transition-colors break-words">rtgstat</h3>
+                            <p class="text-sm text-slate-400 font-medium"><span class="ru-text">Аналитика Telegram-каналов через TGStat API</span><span class="ua-text">Аналітика Telegram-каналів через TGStat API</span><span class="en-text">Telegram channel analytics via the TGStat API</span></p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-sm text-slate-300 leading-relaxed font-light mb-4"><span class="ru-text">Обёртка над всеми методами TGStat Stat API и Search API. Позволяет искать Telegram-каналы и публикации, получать статистику каналов и постов и отслеживать их динамику — удобно для анализа конкурентов и подбора площадок для рекламы.</span><span class="ua-text">Обгортка над усіма методами TGStat Stat API та Search API. Дозволяє шукати Telegram-канали й публікації, отримувати статистику каналів і постів та відстежувати їх динаміку — зручно для аналізу конкурентів і підбору майданчиків для реклами.</span><span class="en-text">A wrapper around every method of the TGStat Stat and Search APIs. Search Telegram channels and posts, get channel and post statistics and track their dynamics — handy for competitor research and picking ad placements.</span></p>
+                    <ul class="space-y-1.5 mb-5">
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Информация, статистика и публикации каналов</span><span class="ua-text">Інформація, статистика та публікації каналів</span><span class="en-text">Channel info, statistics and posts</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Упоминания и репосты</span><span class="ua-text">Згадки та репости</span><span class="en-text">Mentions and forwards</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Динамика подписчиков, просмотров, охвата и ERR</span><span class="ua-text">Динаміка підписників, переглядів, охоплення та ERR</span><span class="en-text">Subscriber, view, reach and ERR dynamics</span></li>
+                    </ul>
+                    <div class="mt-auto">
+                        <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5 mb-4">
+                            <div title="GitHub stars" class="flex items-center gap-2"><i class="fa-solid fa-star text-yellow-500"></i><span class="js-stars font-bold text-white">11</span></div>
+                            <div title="CRAN" class="flex items-center gap-2"><i class="fa-solid fa-download text-blue-400"></i><span class="js-dl-total font-bold text-white">22.7k</span></div>
+                            <div title="last 30 days" class="flex items-center gap-1.5 text-slate-500"><span class="js-dl-month font-semibold text-slate-300">390</span>/<span class="ru-text">мес</span><span class="ua-text">міс</span><span class="en-text">mo</span></div>
+                            <div class="flex items-center gap-1.5 text-slate-500 ml-auto"><i class="fa-regular fa-calendar"></i>2021</div>
+                        </div>
+                        <div class="flex flex-wrap gap-2"><a href="https://github.com/selesnow/rtgstat" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-purple-500/15 border-purple-500/40 text-purple-200 hover:bg-purple-500 hover:text-white"><i class="fa-brands fa-github"></i>GitHub</a><a href="https://cran.r-project.org/package=rtgstat" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-brands fa-r-project"></i>CRAN</a><a href="https://alexey-seleznev.pro/rtgstat/" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-solid fa-book"></i><span class="ru-text">Документация</span><span class="ua-text">Документація</span><span class="en-text">Docs</span></a><a href="https://www.youtube.com/watch?v=QZCCRbGCms8" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-brands fa-youtube text-red-500"></i><span class="ru-text">Видеоурок</span><span class="ua-text">Відеоурок</span><span class="en-text">Video lesson</span></a></div>
+                    </div>
+                </div>
+            </article>
+            <article class="bento-glass group flex flex-col p-6 rounded-3xl" data-filter-item data-cat="crm" data-search="ringostat коллтрекинг ringostat api ringostat call-tracking api компактный пакет для загрузки данных о звонках из коллтрекинга ringostat — например, чтобы объединить звонки с рекламными расходами в сквозной аналитике. api-ключ можно задать функцией или сохранить в переменной среды. a compact package for loading call data from the ringostat call-tracking service — for example, to join calls with ad costs in end-to-end analytics. the api key can be set with a function or stored in an environment variable." data-pkg="ringostat" data-cran="1" data-aos="fade-up" data-aos-delay="120">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="flex items-start gap-5 mb-5">
+                        <div class="relative shrink-0"><img src="../assets/logos/ringostat.png" alt="ringostat logo" loading="lazy" class="w-[72px] h-[84px] object-contain drop-shadow-[0_8px_20px_rgba(0,0,0,0.45)] group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500"></div>
+                        <div class="min-w-0 flex-1 pt-1">
+                            <div class="flex flex-wrap items-center gap-1.5 mb-2"><span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-blue-500/15 text-blue-300 border border-blue-500/30">CRAN</span></div>
+                            <h3 class="text-2xl font-extrabold text-white outfit-font group-hover:text-purple-300 transition-colors break-words">ringostat</h3>
+                            <p class="text-sm text-slate-400 font-medium"><span class="ru-text">Коллтрекинг Ringostat API</span><span class="ua-text">Колтрекінг Ringostat API</span><span class="en-text">Ringostat call-tracking API</span></p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-sm text-slate-300 leading-relaxed font-light mb-4"><span class="ru-text">Компактный пакет для загрузки данных о звонках из коллтрекинга Ringostat — например, чтобы объединить звонки с рекламными расходами в сквозной аналитике. API-ключ можно задать функцией или сохранить в переменной среды.</span><span class="ua-text">Компактний пакет для завантаження даних про дзвінки з колтрекінгу Ringostat — наприклад, щоб об&#x27;єднати дзвінки з рекламними витратами в наскрізній аналітиці. API-ключ можна задати функцією або зберегти в змінній середовища.</span><span class="en-text">A compact package for loading call data from the Ringostat call-tracking service — for example, to join calls with ad costs in end-to-end analytics. The API key can be set with a function or stored in an environment variable.</span></p>
+                    <ul class="space-y-1.5 mb-5">
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Детальные данные о звонках за период</span><span class="ua-text">Детальні дані про дзвінки за період</span><span class="en-text">Detailed call data for any period</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Скачивание аудиозаписей звонков</span><span class="ua-text">Завантаження аудіозаписів дзвінків</span><span class="en-text">Download call recordings</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Авторизация через переменную RS_API_KEY</span><span class="ua-text">Авторизація через змінну RS_API_KEY</span><span class="en-text">Auth via the RS_API_KEY variable</span></li>
+                    </ul>
+                    <div class="mt-auto">
+                        <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5 mb-4">
+                            <div title="GitHub stars" class="flex items-center gap-2"><i class="fa-solid fa-star text-yellow-500"></i><span class="js-stars font-bold text-white">0</span></div>
+                            <div title="CRAN" class="flex items-center gap-2"><i class="fa-solid fa-download text-blue-400"></i><span class="js-dl-total font-bold text-white">13.9k</span></div>
+                            <div title="last 30 days" class="flex items-center gap-1.5 text-slate-500"><span class="js-dl-month font-semibold text-slate-300">221</span>/<span class="ru-text">мес</span><span class="ua-text">міс</span><span class="en-text">mo</span></div>
+                            <div class="flex items-center gap-1.5 text-slate-500 ml-auto"><i class="fa-regular fa-calendar"></i>2021</div>
+                        </div>
+                        <div class="flex flex-wrap gap-2"><a href="https://github.com/selesnow/ringostat" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-purple-500/15 border-purple-500/40 text-purple-200 hover:bg-purple-500 hover:text-white"><i class="fa-brands fa-github"></i>GitHub</a><a href="https://cran.r-project.org/package=ringostat" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-brands fa-r-project"></i>CRAN</a><a href="https://blog.ringostat.com/ru/kak-rabotat-s-ringostat-api-na-yazyke-r/" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-solid fa-newspaper"></i><span class="ru-text">Статья</span><span class="ua-text">Стаття</span><span class="en-text">Article</span></a></div>
+                    </div>
+                </div>
+            </article>
+            <article class="bento-glass group flex flex-col p-6 rounded-3xl" data-filter-item data-cat="analytics" data-search="rappsflyer мобильная атрибуция appsflyer appsflyer mobile attribution загрузка агрегированных и сырых данных из pull api и master api appsflyer. с версии 0.3.0 пакет работает с актуальной версией api v2 и bearer-авторизацией: старые токены v1 appsflyer полностью отключил в 2023 году. loads aggregated and raw data from the appsflyer pull api and master api. since version 0.3.0 it uses the current api v2 with bearer auth, after appsflyer switched off v1 tokens in 2023." data-pkg="rappsflyer" data-cran="1" data-aos="fade-up" data-aos-delay="0">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="flex items-start gap-5 mb-5">
+                        <div class="relative shrink-0"><img src="../assets/logos/rappsflyer.png" alt="rappsflyer logo" loading="lazy" class="w-[72px] h-[84px] object-contain drop-shadow-[0_8px_20px_rgba(0,0,0,0.45)] group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500"></div>
+                        <div class="min-w-0 flex-1 pt-1">
+                            <div class="flex flex-wrap items-center gap-1.5 mb-2"><span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-blue-500/15 text-blue-300 border border-blue-500/30">CRAN</span></div>
+                            <h3 class="text-2xl font-extrabold text-white outfit-font group-hover:text-purple-300 transition-colors break-words">rappsflyer</h3>
+                            <p class="text-sm text-slate-400 font-medium"><span class="ru-text">Мобильная атрибуция AppsFlyer</span><span class="ua-text">Мобільна атрибуція AppsFlyer</span><span class="en-text">AppsFlyer mobile attribution</span></p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-sm text-slate-300 leading-relaxed font-light mb-4"><span class="ru-text">Загрузка агрегированных и сырых данных из Pull API и Master API AppsFlyer. С версии 0.3.0 пакет работает с актуальной версией API V2 и Bearer-авторизацией: старые токены V1 AppsFlyer полностью отключил в 2023 году.</span><span class="ua-text">Завантаження агрегованих і сирих даних з Pull API та Master API AppsFlyer. З версії 0.3.0 пакет працює з актуальною версією API V2 та Bearer-авторизацією: старі токени V1 AppsFlyer повністю вимкнув у 2023 році.</span><span class="en-text">Loads aggregated and raw data from the AppsFlyer Pull API and Master API. Since version 0.3.0 it uses the current API V2 with Bearer auth, after AppsFlyer switched off V1 tokens in 2023.</span></p>
+                    <ul class="space-y-1.5 mb-5">
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Агрегированные и сырые данные об установках и событиях</span><span class="ua-text">Агреговані та сирі дані про встановлення й події</span><span class="en-text">Aggregated and raw install and event data</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Отчёты о доходе с рекламы</span><span class="ua-text">Звіти про дохід від реклами</span><span class="en-text">Ad revenue reports</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Master API и правила валидации таргетинга</span><span class="ua-text">Master API та правила валідації таргетингу</span><span class="en-text">Master API and targeting validation rules</span></li>
+                    </ul>
+                    <div class="mt-auto">
+                        <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5 mb-4">
+                            <div title="GitHub stars" class="flex items-center gap-2"><i class="fa-solid fa-star text-yellow-500"></i><span class="js-stars font-bold text-white">1</span></div>
+                            <div title="CRAN" class="flex items-center gap-2"><i class="fa-solid fa-download text-blue-400"></i><span class="js-dl-total font-bold text-white">13.8k</span></div>
+                            <div title="last 30 days" class="flex items-center gap-1.5 text-slate-500"><span class="js-dl-month font-semibold text-slate-300">300</span>/<span class="ru-text">мес</span><span class="ua-text">міс</span><span class="en-text">mo</span></div>
+                            <div class="flex items-center gap-1.5 text-slate-500 ml-auto"><i class="fa-regular fa-calendar"></i>2021</div>
+                        </div>
+                        <div class="flex flex-wrap gap-2"><a href="https://github.com/selesnow/rappsflyer" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-purple-500/15 border-purple-500/40 text-purple-200 hover:bg-purple-500 hover:text-white"><i class="fa-brands fa-github"></i>GitHub</a><a href="https://cran.r-project.org/package=rappsflyer" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-brands fa-r-project"></i>CRAN</a><a href="https://www.youtube.com/watch?v=9Wn8n2A6x2w" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-brands fa-youtube text-red-500"></i><span class="ru-text">Видеоурок</span><span class="ua-text">Відеоурок</span><span class="en-text">Video lesson</span></a></div>
+                    </div>
+                </div>
+            </article>
+            <article class="bento-glass group flex flex-col p-6 rounded-3xl" data-filter-item data-cat="crm" data-search="ractivecampaign crm и email-маркетинг activecampaign activecampaign crm &amp; email marketing упрощает выгрузку данных из activecampaign api v3 в r: больше 20 функций для сделок, контактов, аккаунтов, кампаний и сообщений. подходит для отчётов по воронке продаж и эффективности email-рассылок. makes it easy to pull activecampaign api v3 data into r: 20+ functions for deals, contacts, accounts, campaigns and messages. great for sales-funnel and email-performance reporting." data-pkg="ractivecampaign" data-cran="1" data-aos="fade-up" data-aos-delay="60">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="flex items-start gap-5 mb-5">
+                        <div class="relative shrink-0"><img src="../assets/logos/ractivecampaign.png" alt="ractivecampaign logo" loading="lazy" class="w-[72px] h-[84px] object-contain drop-shadow-[0_8px_20px_rgba(0,0,0,0.45)] group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500"></div>
+                        <div class="min-w-0 flex-1 pt-1">
+                            <div class="flex flex-wrap items-center gap-1.5 mb-2"><span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-blue-500/15 text-blue-300 border border-blue-500/30">CRAN</span></div>
+                            <h3 class="text-2xl font-extrabold text-white outfit-font group-hover:text-purple-300 transition-colors break-words">ractivecampaign</h3>
+                            <p class="text-sm text-slate-400 font-medium"><span class="ru-text">CRM и email-маркетинг ActiveCampaign</span><span class="ua-text">CRM та email-маркетинг ActiveCampaign</span><span class="en-text">ActiveCampaign CRM &amp; email marketing</span></p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-sm text-slate-300 leading-relaxed font-light mb-4"><span class="ru-text">Упрощает выгрузку данных из ActiveCampaign API v3 в R: больше 20 функций для сделок, контактов, аккаунтов, кампаний и сообщений. Подходит для отчётов по воронке продаж и эффективности email-рассылок.</span><span class="ua-text">Спрощує вивантаження даних з ActiveCampaign API v3 в R: понад 20 функцій для угод, контактів, акаунтів, кампаній і повідомлень. Підходить для звітів за воронкою продажів та ефективністю email-розсилок.</span><span class="en-text">Makes it easy to pull ActiveCampaign API v3 data into R: 20+ functions for deals, contacts, accounts, campaigns and messages. Great for sales-funnel and email-performance reporting.</span></p>
+                    <ul class="space-y-1.5 mb-5">
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Сделки, воронки, этапы, заметки и активности</span><span class="ua-text">Угоди, воронки, етапи, нотатки та активності</span><span class="en-text">Deals, pipelines, stages, notes and activities</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Контакты, аккаунты, теги и пользовательские поля</span><span class="ua-text">Контакти, акаунти, теги та користувацькі поля</span><span class="en-text">Contacts, accounts, tags and custom fields</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Кампании, доход по ним, сообщения и задачи</span><span class="ua-text">Кампанії, дохід за ними, повідомлення та задачі</span><span class="en-text">Campaigns, revenue, messages and tasks</span></li>
+                    </ul>
+                    <div class="mt-auto">
+                        <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5 mb-4">
+                            <div title="GitHub stars" class="flex items-center gap-2"><i class="fa-solid fa-star text-yellow-500"></i><span class="js-stars font-bold text-white">0</span></div>
+                            <div title="CRAN" class="flex items-center gap-2"><i class="fa-solid fa-download text-blue-400"></i><span class="js-dl-total font-bold text-white">13.1k</span></div>
+                            <div title="last 30 days" class="flex items-center gap-1.5 text-slate-500"><span class="js-dl-month font-semibold text-slate-300">248</span>/<span class="ru-text">мес</span><span class="ua-text">міс</span><span class="en-text">mo</span></div>
+                            <div class="flex items-center gap-1.5 text-slate-500 ml-auto"><i class="fa-regular fa-calendar"></i>2021</div>
+                        </div>
+                        <div class="flex flex-wrap gap-2"><a href="https://github.com/selesnow/ractivecampaign" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-purple-500/15 border-purple-500/40 text-purple-200 hover:bg-purple-500 hover:text-white"><i class="fa-brands fa-github"></i>GitHub</a><a href="https://cran.r-project.org/package=ractivecampaign" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-brands fa-r-project"></i>CRAN</a></div>
+                    </div>
+                </div>
+            </article>
+            <article class="bento-glass group flex flex-col p-6 rounded-3xl" data-filter-item data-cat="utils" data-search="galigor коллекция пакетов для интернет-маркетинга a collection of internet-marketing packages мета-пакет в духе tidyverse: одной командой устанавливает и подключает ядро из восьми моих пакетов для работы с рекламными и аналитическими платформами. удалён из cran, но доступен для установки с github. a tidyverse-style meta-package: one command installs and attaches a core of eight of my packages for ad and analytics platforms. removed from cran, but still installable from github." data-pkg="galigor" data-cran="1" data-aos="fade-up" data-aos-delay="120">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="flex items-start gap-5 mb-5">
+                        <div class="relative shrink-0"><img src="../assets/logos/galigor.png" alt="galigor logo" loading="lazy" class="w-[72px] h-[84px] object-contain drop-shadow-[0_8px_20px_rgba(0,0,0,0.45)] group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500"></div>
+                        <div class="min-w-0 flex-1 pt-1">
+                            <div class="flex flex-wrap items-center gap-1.5 mb-2"><span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-slate-500/15 text-slate-400 border border-slate-500/30"><span class="ru-text">Удалён с CRAN</span><span class="ua-text">Видалений з CRAN</span><span class="en-text">Removed from CRAN</span></span></div>
+                            <h3 class="text-2xl font-extrabold text-white outfit-font group-hover:text-purple-300 transition-colors break-words">galigor</h3>
+                            <p class="text-sm text-slate-400 font-medium"><span class="ru-text">Коллекция пакетов для интернет-маркетинга</span><span class="ua-text">Колекція пакетів для інтернет-маркетингу</span><span class="en-text">A collection of internet-marketing packages</span></p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-sm text-slate-300 leading-relaxed font-light mb-4"><span class="ru-text">Мета-пакет в духе tidyverse: одной командой устанавливает и подключает ядро из восьми моих пакетов для работы с рекламными и аналитическими платформами. Удалён из CRAN, но доступен для установки с GitHub.</span><span class="ua-text">Мета-пакет у дусі tidyverse: однією командою встановлює та підключає ядро з восьми моїх пакетів для роботи з рекламними й аналітичними платформами. Видалений з CRAN, але доступний для встановлення з GitHub.</span><span class="en-text">A tidyverse-style meta-package: one command installs and attaches a core of eight of my packages for ad and analytics platforms. Removed from CRAN, but still installable from GitHub.</span></p>
+                    <ul class="space-y-1.5 mb-5">
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">rgoogleads, rfacebookstat, rappsflyer, getProxy</span><span class="ua-text">rgoogleads, rfacebookstat, rappsflyer, getProxy</span><span class="en-text">rgoogleads, rfacebookstat, rappsflyer, getProxy</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">ryandexdirect, rym, rvkstat, rmytarget</span><span class="ua-text">ryandexdirect, rym, rvkstat, rmytarget</span><span class="en-text">ryandexdirect, rym, rvkstat, rmytarget</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Единая точка входа и документация</span><span class="ua-text">Єдина точка входу та документація</span><span class="en-text">A single entry point and docs</span></li>
+                    </ul>
+                    <div class="mt-auto">
+                        <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5 mb-4">
+                            <div title="GitHub stars" class="flex items-center gap-2"><i class="fa-solid fa-star text-yellow-500"></i><span class="js-stars font-bold text-white">1</span></div>
+                            <div title="CRAN" class="flex items-center gap-2"><i class="fa-solid fa-download text-blue-400"></i><span class="js-dl-total font-bold text-white">13k</span></div>
+                            <div title="last 30 days" class="flex items-center gap-1.5 text-slate-500"><span class="js-dl-month font-semibold text-slate-300">64</span>/<span class="ru-text">мес</span><span class="ua-text">міс</span><span class="en-text">mo</span></div>
+                            <div class="flex items-center gap-1.5 text-slate-500 ml-auto"><i class="fa-regular fa-calendar"></i>2019</div>
+                        </div>
+                        <div class="flex flex-wrap gap-2"><a href="https://github.com/selesnow/galigor" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-purple-500/15 border-purple-500/40 text-purple-200 hover:bg-purple-500 hover:text-white"><i class="fa-brands fa-github"></i>GitHub</a><a href="https://cran.r-project.org/package=galigor" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-brands fa-r-project"></i>CRAN</a><a href="https://alexey-seleznev.pro/galigor/" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-solid fa-book"></i><span class="ru-text">Документация</span><span class="ua-text">Документація</span><span class="en-text">Docs</span></a></div>
+                    </div>
+                </div>
+            </article>
+            <article class="bento-glass group flex flex-col p-6 rounded-3xl" data-filter-item data-cat="analytics" data-search="rytstat youtube data, analytics и reporting api youtube data, analytics &amp; reporting apis r-интерфейс сразу к трём api youtube: позволяет получить любые данные, доступные в творческой студии youtube, для дальнейшего анализа и визуализации. авторизация через gargle, учётные данные кешируются только локально. an r interface to three youtube apis at once: get any data available in youtube studio for further analysis and visualization. auth via gargle, with credentials cached locally only." data-pkg="rytstat" data-cran="1" data-aos="fade-up" data-aos-delay="0">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="flex items-start gap-5 mb-5">
+                        <div class="relative shrink-0"><img src="../assets/logos/rytstat.png" alt="rytstat logo" loading="lazy" class="w-[72px] h-[84px] object-contain drop-shadow-[0_8px_20px_rgba(0,0,0,0.45)] group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500"></div>
+                        <div class="min-w-0 flex-1 pt-1">
+                            <div class="flex flex-wrap items-center gap-1.5 mb-2"><span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-blue-500/15 text-blue-300 border border-blue-500/30">CRAN</span></div>
+                            <h3 class="text-2xl font-extrabold text-white outfit-font group-hover:text-purple-300 transition-colors break-words">rytstat</h3>
+                            <p class="text-sm text-slate-400 font-medium"><span class="ru-text">YouTube Data, Analytics и Reporting API</span><span class="ua-text">YouTube Data, Analytics та Reporting API</span><span class="en-text">YouTube Data, Analytics &amp; Reporting APIs</span></p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-sm text-slate-300 leading-relaxed font-light mb-4"><span class="ru-text">R-интерфейс сразу к трём API YouTube: позволяет получить любые данные, доступные в Творческой студии YouTube, для дальнейшего анализа и визуализации. Авторизация через gargle, учётные данные кешируются только локально.</span><span class="ua-text">R-інтерфейс одразу до трьох API YouTube: дозволяє отримати будь-які дані, доступні в Творчій студії YouTube, для подальшого аналізу та візуалізації. Авторизація через gargle, облікові дані кешуються лише локально.</span><span class="en-text">An R interface to three YouTube APIs at once: get any data available in YouTube Studio for further analysis and visualization. Auth via gargle, with credentials cached locally only.</span></p>
+                    <ul class="space-y-1.5 mb-5">
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Data API: поиск, каналы, плейлисты и видео</span><span class="ua-text">Data API: пошук, канали, плейлисти та відео</span><span class="en-text">Data API: search, channels, playlists, videos</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Analytics API: статистика видео, плейлистов и рекламы</span><span class="ua-text">Analytics API: статистика відео, плейлистів і реклами</span><span class="en-text">Analytics API: video, playlist and ad stats</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Reporting API: массовые отчёты</span><span class="ua-text">Reporting API: масові звіти</span><span class="en-text">Reporting API: bulk reports</span></li>
+                    </ul>
+                    <div class="mt-auto">
+                        <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5 mb-4">
+                            <div title="GitHub stars" class="flex items-center gap-2"><i class="fa-solid fa-star text-yellow-500"></i><span class="js-stars font-bold text-white">2</span></div>
+                            <div title="CRAN" class="flex items-center gap-2"><i class="fa-solid fa-download text-blue-400"></i><span class="js-dl-total font-bold text-white">12.4k</span></div>
+                            <div title="last 30 days" class="flex items-center gap-1.5 text-slate-500"><span class="js-dl-month font-semibold text-slate-300">272</span>/<span class="ru-text">мес</span><span class="ua-text">міс</span><span class="en-text">mo</span></div>
+                            <div class="flex items-center gap-1.5 text-slate-500 ml-auto"><i class="fa-regular fa-calendar"></i>2021</div>
+                        </div>
+                        <div class="flex flex-wrap gap-2"><a href="https://github.com/selesnow/rytstat" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-purple-500/15 border-purple-500/40 text-purple-200 hover:bg-purple-500 hover:text-white"><i class="fa-brands fa-github"></i>GitHub</a><a href="https://cran.r-project.org/package=rytstat" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-brands fa-r-project"></i>CRAN</a><a href="https://alexey-seleznev.pro/rytstat/docs/" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-solid fa-book"></i><span class="ru-text">Документация</span><span class="ua-text">Документація</span><span class="en-text">Docs</span></a><a href="https://www.youtube.com/playlist?list=PLD2LDq8edf4o7kZuTh3ufEOIPF8qmxIhe" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-brands fa-youtube text-red-500"></i><span class="ru-text">Плейлист · 4</span><span class="ua-text">Плейлист · 4</span><span class="en-text">Playlist · 4</span></a></div>
+                    </div>
+                </div>
+            </article>
+            <article class="bento-glass group flex flex-col p-6 rounded-3xl" data-filter-item data-cat="crm" data-search="racademyocean платформа обучения academyocean academyocean learning platform клиент для api academyocean — платформы для онлайн-академий и обучения клиентов и сотрудников. выгружает данные об академиях, учениках и их прогрессе, чтобы анализировать эффективность обучения. a client for the academyocean api — a platform for online academies and customer or employee training. it exports academy, learner and progress data to measure training effectiveness." data-pkg="racademyocean" data-cran="1" data-aos="fade-up" data-aos-delay="60">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="flex items-start gap-5 mb-5">
+                        <div class="relative shrink-0"><img src="../assets/logos/racademyocean.png" alt="racademyocean logo" loading="lazy" class="w-[72px] h-[84px] object-contain drop-shadow-[0_8px_20px_rgba(0,0,0,0.45)] group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500"></div>
+                        <div class="min-w-0 flex-1 pt-1">
+                            <div class="flex flex-wrap items-center gap-1.5 mb-2"><span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-blue-500/15 text-blue-300 border border-blue-500/30">CRAN</span></div>
+                            <h3 class="text-2xl font-extrabold text-white outfit-font group-hover:text-purple-300 transition-colors break-words">racademyocean</h3>
+                            <p class="text-sm text-slate-400 font-medium"><span class="ru-text">Платформа обучения AcademyOcean</span><span class="ua-text">Платформа навчання AcademyOcean</span><span class="en-text">AcademyOcean learning platform</span></p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-sm text-slate-300 leading-relaxed font-light mb-4"><span class="ru-text">Клиент для API AcademyOcean — платформы для онлайн-академий и обучения клиентов и сотрудников. Выгружает данные об академиях, учениках и их прогрессе, чтобы анализировать эффективность обучения.</span><span class="ua-text">Клієнт для API AcademyOcean — платформи для онлайн-академій і навчання клієнтів та співробітників. Вивантажує дані про академії, учнів та їхній прогрес, щоб аналізувати ефективність навчання.</span><span class="en-text">A client for the AcademyOcean API — a platform for online academies and customer or employee training. It exports academy, learner and progress data to measure training effectiveness.</span></p>
+                    <ul class="space-y-1.5 mb-5">
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Академии, ученики, команды и сертификаты</span><span class="ua-text">Академії, учні, команди та сертифікати</span><span class="en-text">Academies, learners, teams and certificates</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Прогресс по курсам и статистика тестов</span><span class="ua-text">Прогрес за курсами та статистика тестів</span><span class="en-text">Course progress and quiz statistics</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Отток на этапах контента и пассивные ученики</span><span class="ua-text">Відтік на етапах контенту та пасивні учні</span><span class="en-text">Content churn and passive learners</span></li>
+                    </ul>
+                    <div class="mt-auto">
+                        <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5 mb-4">
+                            <div title="GitHub stars" class="flex items-center gap-2"><i class="fa-solid fa-star text-yellow-500"></i><span class="js-stars font-bold text-white">0</span></div>
+                            <div title="CRAN" class="flex items-center gap-2"><i class="fa-solid fa-download text-blue-400"></i><span class="js-dl-total font-bold text-white">12.3k</span></div>
+                            <div title="last 30 days" class="flex items-center gap-1.5 text-slate-500"><span class="js-dl-month font-semibold text-slate-300">232</span>/<span class="ru-text">мес</span><span class="ua-text">міс</span><span class="en-text">mo</span></div>
+                            <div class="flex items-center gap-1.5 text-slate-500 ml-auto"><i class="fa-regular fa-calendar"></i>2021</div>
+                        </div>
+                        <div class="flex flex-wrap gap-2"><a href="https://github.com/selesnow/racademyocean" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-purple-500/15 border-purple-500/40 text-purple-200 hover:bg-purple-500 hover:text-white"><i class="fa-brands fa-github"></i>GitHub</a><a href="https://cran.r-project.org/package=racademyocean" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-brands fa-r-project"></i>CRAN</a></div>
+                    </div>
+                </div>
+            </article>
+            <article class="bento-glass group flex flex-col p-6 rounded-3xl" data-filter-item data-cat="ads" data-search="rlinkedinads linkedin advertising api linkedin advertising api загрузка структуры рекламного аккаунта и статистики из linkedin advertising api. авторизация через собственное oauth-приложение; токены кешируются на диске, поэтому вход вручную нужен только один раз. loads ad-account structure and statistics from the linkedin advertising api. authorization uses your own oauth app; tokens are cached on disk, so you only log in manually once." data-pkg="rlinkedinads" data-cran="1" data-aos="fade-up" data-aos-delay="120">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="flex items-start gap-5 mb-5">
+                        <div class="relative shrink-0"><div class="hex relative w-[72px] h-[84px] bg-gradient-to-br from-purple-500/40 via-slate-800 to-blue-500/30 flex flex-col items-center justify-center group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500">
+                                <div class="hex absolute inset-[3px] bg-slate-900/95"></div>
+                                <i class="fa-brands fa-linkedin text-2xl text-purple-200 relative"></i>
+                                <span class="text-[9px] font-bold text-slate-300 relative mt-1 outfit-font">rlinkedinads</span>
+                            </div></div>
+                        <div class="min-w-0 flex-1 pt-1">
+                            <div class="flex flex-wrap items-center gap-1.5 mb-2"><span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-blue-500/15 text-blue-300 border border-blue-500/30">CRAN</span></div>
+                            <h3 class="text-2xl font-extrabold text-white outfit-font group-hover:text-purple-300 transition-colors break-words">rlinkedinads</h3>
+                            <p class="text-sm text-slate-400 font-medium"><span class="ru-text">LinkedIn Advertising API</span><span class="ua-text">LinkedIn Advertising API</span><span class="en-text">LinkedIn Advertising API</span></p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-sm text-slate-300 leading-relaxed font-light mb-4"><span class="ru-text">Загрузка структуры рекламного аккаунта и статистики из LinkedIn Advertising API. Авторизация через собственное OAuth-приложение; токены кешируются на диске, поэтому вход вручную нужен только один раз.</span><span class="ua-text">Завантаження структури рекламного акаунта та статистики з LinkedIn Advertising API. Авторизація через власний OAuth-застосунок; токени кешуються на диску, тож вхід вручну потрібен лише один раз.</span><span class="en-text">Loads ad-account structure and statistics from the LinkedIn Advertising API. Authorization uses your own OAuth app; tokens are cached on disk, so you only log in manually once.</span></p>
+                    <ul class="space-y-1.5 mb-5">
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Аккаунты и пользователи</span><span class="ua-text">Акаунти та користувачі</span><span class="en-text">Accounts and users</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Группы кампаний, кампании и креативы</span><span class="ua-text">Групи кампаній, кампанії та креативи</span><span class="en-text">Campaign groups, campaigns and creatives</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Статистика рекламы (Ad Analytics)</span><span class="ua-text">Статистика реклами (Ad Analytics)</span><span class="en-text">Ad Analytics statistics</span></li>
+                    </ul>
+                    <div class="mt-auto">
+                        <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5 mb-4">
+                            <div title="GitHub stars" class="flex items-center gap-2"><i class="fa-solid fa-star text-yellow-500"></i><span class="js-stars font-bold text-white">0</span></div>
+                            <div title="CRAN" class="flex items-center gap-2"><i class="fa-solid fa-download text-blue-400"></i><span class="js-dl-total font-bold text-white">6.5k</span></div>
+                            <div title="last 30 days" class="flex items-center gap-1.5 text-slate-500"><span class="js-dl-month font-semibold text-slate-300">232</span>/<span class="ru-text">мес</span><span class="ua-text">міс</span><span class="en-text">mo</span></div>
+                            <div class="flex items-center gap-1.5 text-slate-500 ml-auto"><i class="fa-regular fa-calendar"></i>2023</div>
+                        </div>
+                        <div class="flex flex-wrap gap-2"><a href="https://github.com/selesnow/rlinkedinads" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-purple-500/15 border-purple-500/40 text-purple-200 hover:bg-purple-500 hover:text-white"><i class="fa-brands fa-github"></i>GitHub</a><a href="https://cran.r-project.org/package=rlinkedinads" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-brands fa-r-project"></i>CRAN</a></div>
+                    </div>
+                </div>
+            </article>
+            <article class="bento-glass group flex flex-col p-6 rounded-3xl" data-filter-item data-cat="ads" data-search="rtiktokads tiktok marketing api tiktok marketing api пакет для tiktok marketing api (tiktok business api): авторизация, структура бизнес-центров и рекламных аккаунтов и отчёты по рекламе — чтобы tiktok встал в общую отчётность рядом с другими рекламными каналами. a package for the tiktok marketing (business) api: authorization, business-center and ad-account structure, and ad reports — so tiktok fits into reporting alongside your other ad channels." data-pkg="rtiktokads" data-cran="1" data-aos="fade-up" data-aos-delay="0">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="flex items-start gap-5 mb-5">
+                        <div class="relative shrink-0"><div class="hex relative w-[72px] h-[84px] bg-gradient-to-br from-purple-500/40 via-slate-800 to-blue-500/30 flex flex-col items-center justify-center group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500">
+                                <div class="hex absolute inset-[3px] bg-slate-900/95"></div>
+                                <i class="fa-brands fa-tiktok text-2xl text-purple-200 relative"></i>
+                                <span class="text-[9px] font-bold text-slate-300 relative mt-1 outfit-font">rtiktokads</span>
+                            </div></div>
+                        <div class="min-w-0 flex-1 pt-1">
+                            <div class="flex flex-wrap items-center gap-1.5 mb-2"><span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-blue-500/15 text-blue-300 border border-blue-500/30">CRAN</span></div>
+                            <h3 class="text-2xl font-extrabold text-white outfit-font group-hover:text-purple-300 transition-colors break-words">rtiktokads</h3>
+                            <p class="text-sm text-slate-400 font-medium"><span class="ru-text">TikTok Marketing API</span><span class="ua-text">TikTok Marketing API</span><span class="en-text">TikTok Marketing API</span></p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-sm text-slate-300 leading-relaxed font-light mb-4"><span class="ru-text">Пакет для TikTok Marketing API (TikTok Business API): авторизация, структура бизнес-центров и рекламных аккаунтов и отчёты по рекламе — чтобы TikTok встал в общую отчётность рядом с другими рекламными каналами.</span><span class="ua-text">Пакет для TikTok Marketing API (TikTok Business API): авторизація, структура бізнес-центрів і рекламних акаунтів та звіти з реклами — щоб TikTok став у загальну звітність поряд з іншими рекламними каналами.</span><span class="en-text">A package for the TikTok Marketing (Business) API: authorization, business-center and ad-account structure, and ad reports — so TikTok fits into reporting alongside your other ad channels.</span></p>
+                    <ul class="space-y-1.5 mb-5">
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Бизнес-центры и рекламные аккаунты</span><span class="ua-text">Бізнес-центри та рекламні акаунти</span><span class="en-text">Business centers and ad accounts</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Баланс и информация об аккаунтах</span><span class="ua-text">Баланс та інформація про акаунти</span><span class="en-text">Account info and balances</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Кампании, группы объявлений, объявления и отчёты</span><span class="ua-text">Кампанії, групи оголошень, оголошення та звіти</span><span class="en-text">Campaigns, ad groups, ads and reports</span></li>
+                    </ul>
+                    <div class="mt-auto">
+                        <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5 mb-4">
+                            <div title="GitHub stars" class="flex items-center gap-2"><i class="fa-solid fa-star text-yellow-500"></i><span class="js-stars font-bold text-white">1</span></div>
+                            <div title="CRAN" class="flex items-center gap-2"><i class="fa-solid fa-download text-blue-400"></i><span class="js-dl-total font-bold text-white">2.5k</span></div>
+                            <div title="last 30 days" class="flex items-center gap-1.5 text-slate-500"><span class="js-dl-month font-semibold text-slate-300">188</span>/<span class="ru-text">мес</span><span class="ua-text">міс</span><span class="en-text">mo</span></div>
+                            <div class="flex items-center gap-1.5 text-slate-500 ml-auto"><i class="fa-regular fa-calendar"></i>2021</div>
+                        </div>
+                        <div class="flex flex-wrap gap-2"><a href="https://github.com/selesnow/rtiktokads" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-purple-500/15 border-purple-500/40 text-purple-200 hover:bg-purple-500 hover:text-white"><i class="fa-brands fa-github"></i>GitHub</a><a href="https://cran.r-project.org/package=rtiktokads" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-brands fa-r-project"></i>CRAN</a></div>
+                    </div>
+                </div>
+            </article>
+            <article class="bento-glass group flex flex-col p-6 rounded-3xl" data-filter-item data-cat="ads" data-search="rappleads apple ads campaign management api apple ads campaign management api самый новый пакет — для работы с рекламными аккаунтами apple ads (бывший search ads). авторизация в этом api устроена сложно, через пару ключей; пакет берёт на себя генерацию client secret и токена доступа и кеширует учётные данные. my newest package, for apple ads (formerly search ads) accounts. authorization in this api is complex and key-pair based; the package generates the client secret and access token for you and caches the credentials." data-pkg="rappleads" data-cran="1" data-aos="fade-up" data-aos-delay="60">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="flex items-start gap-5 mb-5">
+                        <div class="relative shrink-0"><div class="hex relative w-[72px] h-[84px] bg-gradient-to-br from-purple-500/40 via-slate-800 to-blue-500/30 flex flex-col items-center justify-center group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500">
+                                <div class="hex absolute inset-[3px] bg-slate-900/95"></div>
+                                <i class="fa-brands fa-apple text-2xl text-purple-200 relative"></i>
+                                <span class="text-[9px] font-bold text-slate-300 relative mt-1 outfit-font">rappleads</span>
+                            </div></div>
+                        <div class="min-w-0 flex-1 pt-1">
+                            <div class="flex flex-wrap items-center gap-1.5 mb-2"><span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-blue-500/15 text-blue-300 border border-blue-500/30">CRAN</span></div>
+                            <h3 class="text-2xl font-extrabold text-white outfit-font group-hover:text-purple-300 transition-colors break-words">rappleads</h3>
+                            <p class="text-sm text-slate-400 font-medium"><span class="ru-text">Apple Ads Campaign Management API</span><span class="ua-text">Apple Ads Campaign Management API</span><span class="en-text">Apple Ads Campaign Management API</span></p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-sm text-slate-300 leading-relaxed font-light mb-4"><span class="ru-text">Самый новый пакет — для работы с рекламными аккаунтами Apple Ads (бывший Search Ads). Авторизация в этом API устроена сложно, через пару ключей; пакет берёт на себя генерацию client secret и токена доступа и кеширует учётные данные.</span><span class="ua-text">Найновіший пакет — для роботи з рекламними акаунтами Apple Ads (колишній Search Ads). Авторизація в цьому API влаштована складно, через пару ключів; пакет бере на себе генерацію client secret і токена доступу та кешує облікові дані.</span><span class="en-text">My newest package, for Apple Ads (formerly Search Ads) accounts. Authorization in this API is complex and key-pair based; the package generates the client secret and access token for you and caches the credentials.</span></p>
+                    <ul class="space-y-1.5 mb-5">
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Автоматический client secret и токен доступа</span><span class="ua-text">Автоматичний client secret і токен доступу</span><span class="en-text">Automatic client secret and access token</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Загрузка данных рекламных кампаний</span><span class="ua-text">Завантаження даних рекламних кампаній</span><span class="en-text">Campaign data loading</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Учётные данные через переменные среды</span><span class="ua-text">Облікові дані через змінні середовища</span><span class="en-text">Credentials via environment variables</span></li>
+                    </ul>
+                    <div class="mt-auto">
+                        <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5 mb-4">
+                            <div title="GitHub stars" class="flex items-center gap-2"><i class="fa-solid fa-star text-yellow-500"></i><span class="js-stars font-bold text-white">0</span></div>
+                            <div title="CRAN" class="flex items-center gap-2"><i class="fa-solid fa-download text-blue-400"></i><span class="js-dl-total font-bold text-white">2.2k</span></div>
+                            <div title="last 30 days" class="flex items-center gap-1.5 text-slate-500"><span class="js-dl-month font-semibold text-slate-300">160</span>/<span class="ru-text">мес</span><span class="ua-text">міс</span><span class="en-text">mo</span></div>
+                            <div class="flex items-center gap-1.5 text-slate-500 ml-auto"><i class="fa-regular fa-calendar"></i>2025</div>
+                        </div>
+                        <div class="flex flex-wrap gap-2"><a href="https://github.com/selesnow/rappleads" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-purple-500/15 border-purple-500/40 text-purple-200 hover:bg-purple-500 hover:text-white"><i class="fa-brands fa-github"></i>GitHub</a><a href="https://cran.r-project.org/package=rappleads" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-brands fa-r-project"></i>CRAN</a></div>
+                    </div>
+                </div>
+            </article>
+            <article class="bento-glass group flex flex-col p-6 rounded-3xl" data-filter-item data-cat="crm" data-search="rzohobooks бухгалтерия zoho books zoho books accounting загрузка финансовых данных из zoho books api в r: справочники, документы и платежи — основа для финансовой отчётности и юнит-экономики. access-токен zoho живёт час, поэтому пакет кеширует учётные данные; режим global позволяет использовать общий кеш на сервере. loads financial data from the zoho books api into r: reference lists, documents and payments — the basis for financial reporting and unit economics. zoho access tokens last an hour, so the package caches credentials; global mode enables a shared cache on servers." data-pkg="rzohobooks" data-cran="0" data-aos="fade-up" data-aos-delay="120">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="flex items-start gap-5 mb-5">
+                        <div class="relative shrink-0"><div class="hex relative w-[72px] h-[84px] bg-gradient-to-br from-purple-500/40 via-slate-800 to-blue-500/30 flex flex-col items-center justify-center group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500">
+                                <div class="hex absolute inset-[3px] bg-slate-900/95"></div>
+                                <i class="fa-solid fa-file-invoice-dollar text-2xl text-purple-200 relative"></i>
+                                <span class="text-[9px] font-bold text-slate-300 relative mt-1 outfit-font">rzohobooks</span>
+                            </div></div>
+                        <div class="min-w-0 flex-1 pt-1">
+                            <div class="flex flex-wrap items-center gap-1.5 mb-2"><span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-slate-500/15 text-slate-300 border border-white/10">GitHub</span></div>
+                            <h3 class="text-2xl font-extrabold text-white outfit-font group-hover:text-purple-300 transition-colors break-words">rzohobooks</h3>
+                            <p class="text-sm text-slate-400 font-medium"><span class="ru-text">Бухгалтерия Zoho Books</span><span class="ua-text">Бухгалтерія Zoho Books</span><span class="en-text">Zoho Books accounting</span></p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-sm text-slate-300 leading-relaxed font-light mb-4"><span class="ru-text">Загрузка финансовых данных из Zoho Books API в R: справочники, документы и платежи — основа для финансовой отчётности и юнит-экономики. Access-токен Zoho живёт час, поэтому пакет кеширует учётные данные; режим global позволяет использовать общий кеш на сервере.</span><span class="ua-text">Завантаження фінансових даних з Zoho Books API в R: довідники, документи та платежі — основа для фінансової звітності та юніт-економіки. Access-токен Zoho живе годину, тому пакет кешує облікові дані; режим global дозволяє використовувати спільний кеш на сервері.</span><span class="en-text">Loads financial data from the Zoho Books API into R: reference lists, documents and payments — the basis for financial reporting and unit economics. Zoho access tokens last an hour, so the package caches credentials; global mode enables a shared cache on servers.</span></p>
+                    <ul class="space-y-1.5 mb-5">
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">36 функций: инвойсы, счета, расходы, журналы</span><span class="ua-text">36 функцій: інвойси, рахунки, витрати, журнали</span><span class="en-text">36 functions: invoices, bills, expenses, journals</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Клиентские и вендорские платежи, банковские транзакции</span><span class="ua-text">Клієнтські та вендорські платежі, банківські транзакції</span><span class="en-text">Customer and vendor payments, bank transactions</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Организации, контакты, валюты, налоги, проекты</span><span class="ua-text">Організації, контакти, валюти, податки, проєкти</span><span class="en-text">Organizations, contacts, currencies, taxes, projects</span></li>
+                    </ul>
+                    <div class="mt-auto">
+                        <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5 mb-4">
+                            <div title="GitHub stars" class="flex items-center gap-2"><i class="fa-solid fa-star text-yellow-500"></i><span class="js-stars font-bold text-white">0</span></div>
+                            <div class="flex items-center gap-2 text-slate-500"><i class="fa-brands fa-github"></i><span class="ru-text">только GitHub</span><span class="ua-text">лише GitHub</span><span class="en-text">GitHub only</span></div>
+                            <div class="flex items-center gap-1.5 text-slate-500 ml-auto"><i class="fa-regular fa-calendar"></i>2025</div>
+                        </div>
+                        <div class="flex flex-wrap gap-2"><a href="https://github.com/selesnow/rzohobooks" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-purple-500/15 border-purple-500/40 text-purple-200 hover:bg-purple-500 hover:text-white"><i class="fa-brands fa-github"></i>GitHub</a></div>
+                    </div>
+                </div>
+            </article>
+            <article class="bento-glass group flex flex-col p-6 rounded-3xl" data-filter-item data-cat="crm" data-search="rwayforpay платёжная система wayforpay wayforpay payments пакет для украинской платёжной системы wayforpay: выгружает список транзакций мерчанта и курсы валют через api. удобно для сверки оплат и аналитики онлайн-продаж. a package for the ukrainian payment system wayforpay: exports a merchant&#x27;s transaction list and currency rates via the api. handy for payment reconciliation and online-sales analytics." data-pkg="rwayforpay" data-cran="0" data-aos="fade-up" data-aos-delay="0">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="flex items-start gap-5 mb-5">
+                        <div class="relative shrink-0"><div class="hex relative w-[72px] h-[84px] bg-gradient-to-br from-purple-500/40 via-slate-800 to-blue-500/30 flex flex-col items-center justify-center group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500">
+                                <div class="hex absolute inset-[3px] bg-slate-900/95"></div>
+                                <i class="fa-solid fa-credit-card text-2xl text-purple-200 relative"></i>
+                                <span class="text-[9px] font-bold text-slate-300 relative mt-1 outfit-font">rwayforpay</span>
+                            </div></div>
+                        <div class="min-w-0 flex-1 pt-1">
+                            <div class="flex flex-wrap items-center gap-1.5 mb-2"><span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-slate-500/15 text-slate-300 border border-white/10">GitHub</span></div>
+                            <h3 class="text-2xl font-extrabold text-white outfit-font group-hover:text-purple-300 transition-colors break-words">rwayforpay</h3>
+                            <p class="text-sm text-slate-400 font-medium"><span class="ru-text">Платёжная система WayForPay</span><span class="ua-text">Платіжна система WayForPay</span><span class="en-text">WayForPay payments</span></p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-sm text-slate-300 leading-relaxed font-light mb-4"><span class="ru-text">Пакет для украинской платёжной системы WayForPay: выгружает список транзакций мерчанта и курсы валют через API. Удобно для сверки оплат и аналитики онлайн-продаж.</span><span class="ua-text">Пакет для української платіжної системи WayForPay: вивантажує список транзакцій мерчанта та курси валют через API. Зручно для звірки оплат та аналітики онлайн-продажів.</span><span class="en-text">A package for the Ukrainian payment system WayForPay: exports a merchant&#x27;s transaction list and currency rates via the API. Handy for payment reconciliation and online-sales analytics.</span></p>
+                    <ul class="space-y-1.5 mb-5">
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Список транзакций мерчанта за период</span><span class="ua-text">Список транзакцій мерчанта за період</span><span class="en-text">Merchant transaction list for any period</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Курсы валют по дням</span><span class="ua-text">Курси валют за днями</span><span class="en-text">Daily currency rates</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Логин мерчанта и секретный ключ через переменные среды</span><span class="ua-text">Логін мерчанта та секретний ключ через змінні середовища</span><span class="en-text">Merchant login and secret key via env variables</span></li>
+                    </ul>
+                    <div class="mt-auto">
+                        <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5 mb-4">
+                            <div title="GitHub stars" class="flex items-center gap-2"><i class="fa-solid fa-star text-yellow-500"></i><span class="js-stars font-bold text-white">0</span></div>
+                            <div class="flex items-center gap-2 text-slate-500"><i class="fa-brands fa-github"></i><span class="ru-text">только GitHub</span><span class="ua-text">лише GitHub</span><span class="en-text">GitHub only</span></div>
+                            <div class="flex items-center gap-1.5 text-slate-500 ml-auto"><i class="fa-regular fa-calendar"></i>2022</div>
+                        </div>
+                        <div class="flex flex-wrap gap-2"><a href="https://github.com/selesnow/rwayforpay" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-purple-500/15 border-purple-500/40 text-purple-200 hover:bg-purple-500 hover:text-white"><i class="fa-brands fa-github"></i>GitHub</a></div>
+                    </div>
+                </div>
+            </article>
+            <article class="bento-glass group flex flex-col p-6 rounded-3xl" data-filter-item data-cat="analytics" data-search="rmixpanel продуктовая аналитика mixpanel mixpanel product analytics r-клиент для api платформы продуктовой аналитики mixpanel. позволяет выгружать события, их свойства, когортный анализ и сырые данные, чтобы анализировать поведение пользователей вне интерфейса mixpanel. доступен на github. an r client for the mixpanel product-analytics api. export events, event properties, cohort retention and raw data to analyze user behaviour outside the mixpanel ui. available on github." data-pkg="rmixpanel" data-cran="0" data-aos="fade-up" data-aos-delay="60">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="flex items-start gap-5 mb-5">
+                        <div class="relative shrink-0"><div class="hex relative w-[72px] h-[84px] bg-gradient-to-br from-purple-500/40 via-slate-800 to-blue-500/30 flex flex-col items-center justify-center group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500">
+                                <div class="hex absolute inset-[3px] bg-slate-900/95"></div>
+                                <i class="fa-solid fa-chart-pie text-2xl text-purple-200 relative"></i>
+                                <span class="text-[9px] font-bold text-slate-300 relative mt-1 outfit-font">rmixpanel</span>
+                            </div></div>
+                        <div class="min-w-0 flex-1 pt-1">
+                            <div class="flex flex-wrap items-center gap-1.5 mb-2"><span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-slate-500/15 text-slate-300 border border-white/10">GitHub</span></div>
+                            <h3 class="text-2xl font-extrabold text-white outfit-font group-hover:text-purple-300 transition-colors break-words">rmixpanel</h3>
+                            <p class="text-sm text-slate-400 font-medium"><span class="ru-text">Продуктовая аналитика Mixpanel</span><span class="ua-text">Продуктова аналітика Mixpanel</span><span class="en-text">Mixpanel product analytics</span></p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-sm text-slate-300 leading-relaxed font-light mb-4"><span class="ru-text">R-клиент для API платформы продуктовой аналитики Mixpanel. Позволяет выгружать события, их свойства, когортный анализ и сырые данные, чтобы анализировать поведение пользователей вне интерфейса Mixpanel. Доступен на GitHub.</span><span class="ua-text">R-клієнт для API платформи продуктової аналітики Mixpanel. Дозволяє вивантажувати події, їх властивості, когортний аналіз і сирі дані, щоб аналізувати поведінку користувачів поза інтерфейсом Mixpanel. Доступний на GitHub.</span><span class="en-text">An R client for the Mixpanel product-analytics API. Export events, event properties, cohort retention and raw data to analyze user behaviour outside the Mixpanel UI. Available on GitHub.</span></p>
+                    <ul class="space-y-1.5 mb-5">
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Количество событий по дням</span><span class="ua-text">Кількість подій за днями</span><span class="en-text">Event counts by day</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">События в разрезе свойств</span><span class="ua-text">Події в розрізі властивостей</span><span class="en-text">Events by property</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Когортный анализ и сырые данные</span><span class="ua-text">Когортний аналіз і сирі дані</span><span class="en-text">Retention cohorts and raw data</span></li>
+                    </ul>
+                    <div class="mt-auto">
+                        <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5 mb-4">
+                            <div title="GitHub stars" class="flex items-center gap-2"><i class="fa-solid fa-star text-yellow-500"></i><span class="js-stars font-bold text-white">0</span></div>
+                            <div class="flex items-center gap-2 text-slate-500"><i class="fa-brands fa-github"></i><span class="ru-text">только GitHub</span><span class="ua-text">лише GitHub</span><span class="en-text">GitHub only</span></div>
+                            <div class="flex items-center gap-1.5 text-slate-500 ml-auto"><i class="fa-regular fa-calendar"></i>2017</div>
+                        </div>
+                        <div class="flex flex-wrap gap-2"><a href="https://github.com/selesnow/rmixpanel" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-purple-500/15 border-purple-500/40 text-purple-200 hover:bg-purple-500 hover:text-white"><i class="fa-brands fa-github"></i>GitHub</a></div>
+                    </div>
+                </div>
+            </article>
+            <article class="bento-glass group flex flex-col p-6 rounded-3xl" data-filter-item data-cat="utils" data-search="rgithub статистика репозиториев github github repository statistics получение статистики по вашим репозиториям через github api v3: список репозиториев и данные о трафике — сколько раз и откуда смотрели проект. пригодится, чтобы следить за популярностью своих open source проектов. pulls statistics for your repositories via github api v3: the repository list and traffic data — how often and from where a project was viewed. useful for tracking the popularity of your open source work." data-pkg="rGitHub" data-cran="0" data-aos="fade-up" data-aos-delay="120">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="flex items-start gap-5 mb-5">
+                        <div class="relative shrink-0"><div class="hex relative w-[72px] h-[84px] bg-gradient-to-br from-purple-500/40 via-slate-800 to-blue-500/30 flex flex-col items-center justify-center group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500">
+                                <div class="hex absolute inset-[3px] bg-slate-900/95"></div>
+                                <i class="fa-brands fa-github text-2xl text-purple-200 relative"></i>
+                                <span class="text-[9px] font-bold text-slate-300 relative mt-1 outfit-font">rGitHub</span>
+                            </div></div>
+                        <div class="min-w-0 flex-1 pt-1">
+                            <div class="flex flex-wrap items-center gap-1.5 mb-2"><span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-slate-500/15 text-slate-300 border border-white/10">GitHub</span></div>
+                            <h3 class="text-2xl font-extrabold text-white outfit-font group-hover:text-purple-300 transition-colors break-words">rGitHub</h3>
+                            <p class="text-sm text-slate-400 font-medium"><span class="ru-text">Статистика репозиториев GitHub</span><span class="ua-text">Статистика репозиторіїв GitHub</span><span class="en-text">GitHub repository statistics</span></p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-sm text-slate-300 leading-relaxed font-light mb-4"><span class="ru-text">Получение статистики по вашим репозиториям через GitHub API v3: список репозиториев и данные о трафике — сколько раз и откуда смотрели проект. Пригодится, чтобы следить за популярностью своих open source проектов.</span><span class="ua-text">Отримання статистики за вашими репозиторіями через GitHub API v3: список репозиторіїв і дані про трафік — скільки разів і звідки переглядали проєкт. Знадобиться, щоб стежити за популярністю своїх open source проєктів.</span><span class="en-text">Pulls statistics for your repositories via GitHub API v3: the repository list and traffic data — how often and from where a project was viewed. Useful for tracking the popularity of your open source work.</span></p>
+                    <ul class="space-y-1.5 mb-5">
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Список репозиториев с основными параметрами</span><span class="ua-text">Список репозиторіїв з основними параметрами</span><span class="en-text">Repository list with key attributes</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Просмотры и уникальные посетители по дням</span><span class="ua-text">Перегляди та унікальні відвідувачі за днями</span><span class="en-text">Views and unique visitors by day</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Источники трафика и популярные страницы</span><span class="ua-text">Джерела трафіку та популярні сторінки</span><span class="en-text">Referrers and popular pages</span></li>
+                    </ul>
+                    <div class="mt-auto">
+                        <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5 mb-4">
+                            <div title="GitHub stars" class="flex items-center gap-2"><i class="fa-solid fa-star text-yellow-500"></i><span class="js-stars font-bold text-white">0</span></div>
+                            <div class="flex items-center gap-2 text-slate-500"><i class="fa-brands fa-github"></i><span class="ru-text">только GitHub</span><span class="ua-text">лише GitHub</span><span class="en-text">GitHub only</span></div>
+                            <div class="flex items-center gap-1.5 text-slate-500 ml-auto"><i class="fa-regular fa-calendar"></i>2016</div>
+                        </div>
+                        <div class="flex flex-wrap gap-2"><a href="https://github.com/selesnow/rGitHub" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-purple-500/15 border-purple-500/40 text-purple-200 hover:bg-purple-500 hover:text-white"><i class="fa-brands fa-github"></i>GitHub</a></div>
+                    </div>
+                </div>
+            </article>
+            </div>
+        </div>
+
+
+        <div class="mb-16">
+            <div class="flex items-center gap-4 mb-3" data-aos="fade-right">
+                <h2 class="text-3xl font-extrabold outfit-font flex items-center gap-3"><i class="fa-solid fa-cubes text-purple-400 text-2xl"></i><span class="ru-text">Сервисы и приложения</span><span class="ua-text">Сервіси та застосунки</span><span class="en-text">Services & apps</span></h2>
+                <div class="h-px flex-1 bg-gradient-to-r from-purple-500/30 to-transparent"></div>
+            </div>
+            <p class="text-slate-400 mb-8 max-w-3xl" data-aos="fade-up"><span class="ru-text">Внутренние инструменты отдела аналитики, написанные на R: система мониторинга и управления сервером, на котором работают сотни скриптов.</span><span class="ua-text">Внутрішні інструменти відділу аналітики, написані на R: система моніторингу та керування сервером, на якому працюють сотні скриптів.</span><span class="en-text">Internal analytics-team tools written in R: a monitoring and control system for a server that runs hundreds of scripts.</span></p>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <article class="bento-glass no-lift rounded-[2rem] p-4 flex flex-col" data-aos="fade-up" data-aos-delay="0">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-56 md:h-64 rounded-2xl border border-white/10">
+                        <div class="cover-fallback"><i class="fa-solid fa-server text-5xl"></i></div>
+                        <img src="../assets/services/server-manager.png" alt="Server Manager" loading="lazy" style="object-position: top left" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent"></div>
+                    </div>
+                    <div class="px-2 pt-5 flex flex-col flex-1">
+                        <div class="flex items-center gap-2 text-xs font-semibold text-purple-400 mb-2"><i class="fa-solid fa-server"></i><span class="ru-text">Веб-панель управления аналитическим сервером</span><span class="ua-text">Веб-панель керування аналітичним сервером</span><span class="en-text">A web control panel for an analytics server</span></div>
+                        <h3 class="text-2xl font-extrabold text-white outfit-font mb-3">Server Manager</h3>
+                        <p class="text-sm text-slate-300 leading-relaxed font-light mb-4"><span class="ru-text">Shiny-приложение, через которое отдел аналитики работает с сервером, не подключаясь к нему по RDP. В одном окне собраны сотни задач планировщика Windows, службы, процессы, логи скриптов и статистика, а встроенный AI-ассистент помогает разобрать упавшую задачу: читает лог и код, объясняет ошибку и предлагает план исправления.</span><span class="ua-text">Shiny-застосунок, через який відділ аналітики працює з сервером, не підключаючись до нього по RDP. В одному вікні зібрані сотні задач планувальника Windows, служби, процеси, логи скриптів і статистика, а вбудований AI-асистент допомагає розібрати задачу, що впала: читає лог і код, пояснює помилку та пропонує план виправлення.</span><span class="en-text">A Shiny app the analytics team uses to work with the server without RDP. Hundreds of Windows Task Scheduler jobs, services, processes, script logs and statistics live in one window, and a built-in AI assistant helps debug failed jobs: it reads the log and code, explains the error and proposes a fix.</span></p>
+                        <ul class="space-y-1.5 mb-5">
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Задачи планировщика: статусы, логи, код, запуск и отключение</span><span class="ua-text">Задачі планувальника: статуси, логи, код, запуск і вимкнення</span><span class="en-text">Scheduler jobs: status, logs, code, run and disable</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">AI-анализ логов и кода, ассистент с доступом к задачам и Планфиксу</span><span class="ua-text">AI-аналіз логів і коду, асистент з доступом до задач і Планфіксу</span><span class="en-text">AI log and code analysis; an assistant with access to jobs and Planfix</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Службы, процессы, поиск по всем скриптам сервера</span><span class="ua-text">Служби, процеси, пошук по всіх скриптах сервера</span><span class="en-text">Services, processes and search across all server scripts</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Роли и права доступа, журнал действий, статистика сбоев</span><span class="ua-text">Ролі та права доступу, журнал дій, статистика збоїв</span><span class="en-text">Roles and permissions, audit log, failure statistics</span></li>
+                        </ul>
+                        <div class="mt-auto pt-4 border-t border-white/5 flex flex-wrap items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-[11px] text-slate-400 font-mono">R</span><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-[11px] text-slate-400 font-mono">Shiny</span><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-[11px] text-slate-400 font-mono">bslib</span><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-[11px] text-slate-400 font-mono">shinychat</span><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-[11px] text-slate-400 font-mono">ellmer</span><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-[11px] text-slate-400 font-mono">SQLite</span><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-[11px] text-slate-400 font-mono">GitLab CI</span></div>
+                            <a href="https://github.com/selesnow/server_manager_shiny_app" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-purple-500/15 border-purple-500/40 text-purple-200 hover:bg-purple-500 hover:text-white"><i class="fa-brands fa-github"></i>GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article class="bento-glass no-lift rounded-[2rem] p-4 flex flex-col" data-aos="fade-up" data-aos-delay="80">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="h-56 md:h-64 rounded-2xl border border-white/10 relative overflow-hidden flex flex-col justify-end p-5" style="background: radial-gradient(circle at 80% 20%, rgba(59,130,246,0.35), transparent 55%), radial-gradient(circle at 10% 90%, rgba(168,85,247,0.25), transparent 50%), #0b1120;">
+                        <i class="fa-brands fa-telegram absolute -right-6 -top-6 text-[180px] text-blue-400/10"></i>
+                        <div class="relative flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 rounded-2xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-300 text-2xl"><i class="fa-brands fa-telegram"></i></div>
+                            <div class="text-sm text-slate-300 font-semibold"><span class="ru-text">Команды бота</span><span class="ua-text">Команди бота</span><span class="en-text">Bot commands</span></div>
+                        </div>
+                        <div class="relative flex flex-wrap gap-2"><span class="px-2.5 py-1 rounded-lg bg-blue-500/10 border border-blue-500/25 text-blue-200 text-xs font-mono">/tasks</span><span class="px-2.5 py-1 rounded-lg bg-blue-500/10 border border-blue-500/25 text-blue-200 text-xs font-mono">/running_tasks</span><span class="px-2.5 py-1 rounded-lg bg-blue-500/10 border border-blue-500/25 text-blue-200 text-xs font-mono">/run_menu</span><span class="px-2.5 py-1 rounded-lg bg-blue-500/10 border border-blue-500/25 text-blue-200 text-xs font-mono">/task_info</span><span class="px-2.5 py-1 rounded-lg bg-blue-500/10 border border-blue-500/25 text-blue-200 text-xs font-mono">/task_search</span><span class="px-2.5 py-1 rounded-lg bg-blue-500/10 border border-blue-500/25 text-blue-200 text-xs font-mono">/forget</span><span class="px-2.5 py-1 rounded-lg bg-blue-500/10 border border-blue-500/25 text-blue-200 text-xs font-mono">/add_priv</span></div>
+                    </div>
+                    <div class="px-2 pt-5 flex flex-col flex-1">
+                        <div class="flex items-center gap-2 text-xs font-semibold text-purple-400 mb-2"><i class="fa-brands fa-telegram"></i><span class="ru-text">Мониторинг и управление сервером из Telegram</span><span class="ua-text">Моніторинг і керування сервером з Telegram</span><span class="en-text">Server monitoring and control from Telegram</span></div>
+                        <h3 class="text-2xl font-extrabold text-white outfit-font mb-3">Server Telegram Bot</h3>
+                        <p class="text-sm text-slate-300 leading-relaxed font-light mb-4"><span class="ru-text">Telegram-бот на R — вторая часть системы мониторинга сервера. Им пользуются несколько отделов: аналитики следят за задачами на сервере и перезапускают их без подключения к серверу, PPC-отдел контролирует еженедельный сбор данных в Google BigQuery, финансовый отдел запускает загрузку данных в отчёты. Работает в личных и групповых чатах, команды обрабатываются асинхронно.</span><span class="ua-text">Telegram-бот на R — друга частина системи моніторингу сервера. Ним користуються кілька відділів: аналітики стежать за задачами на сервері та перезапускають їх без підключення до сервера, PPC-відділ контролює щотижневий збір даних у Google BigQuery, фінансовий відділ запускає завантаження даних у звіти. Працює в особистих і групових чатах, команди обробляються асинхронно.</span><span class="en-text">A Telegram bot written in R — the second half of the server monitoring system. Several teams rely on it: analysts track and restart server jobs without logging in, the PPC team monitors weekly data collection into Google BigQuery, and finance triggers data loads into its reports. It works in private and group chats and handles commands asynchronously.</span></p>
+                        <ul class="space-y-1.5 mb-5">
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Список задач, запущенные и упавшие задачи</span><span class="ua-text">Список задач, запущені та невдалі задачі</span><span class="en-text">Job list, running and failed jobs</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Запуск задач через инлайн-меню, поиск и карточка задачи</span><span class="ua-text">Запуск задач через інлайн-меню, пошук і картка задачі</span><span class="en-text">Run jobs from an inline menu; job search and details</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Права пользователей на каждую команду</span><span class="ua-text">Права користувачів на кожну команду</span><span class="en-text">Per-command user permissions</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Временное отключение задач от мониторинга, логирование действий</span><span class="ua-text">Тимчасове вимкнення задач з моніторингу, логування дій</span><span class="en-text">Temporarily exclude jobs from monitoring; action logging</span></li>
+                        </ul>
+                        <div class="mt-auto pt-4 border-t border-white/5 flex flex-wrap items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-[11px] text-slate-400 font-mono">R</span><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-[11px] text-slate-400 font-mono">telegram.bot</span><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-[11px] text-slate-400 font-mono">taskscheduleR</span><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-[11px] text-slate-400 font-mono">promises</span><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-[11px] text-slate-400 font-mono">future</span><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-[11px] text-slate-400 font-mono">SQLite</span><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-[11px] text-slate-400 font-mono">lgr</span></div>
+                            <a href="https://github.com/selesnow/server_telegram_bot" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-purple-500/15 border-purple-500/40 text-purple-200 hover:bg-purple-500 hover:text-white"><i class="fa-brands fa-github"></i>GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            </div>
+        </div>
+        <div data-year-group class="mb-10">
+            <div class="flex items-center gap-4 mb-6" data-aos="fade-right">
+                <h2 class="text-3xl font-extrabold outfit-font flex items-center gap-3"><i class="fa-solid fa-box-archive text-amber-400/80 text-2xl"></i><span class="ru-text">Архивные пакеты</span><span class="ua-text">Архівні пакети</span><span class="en-text">Archived packages</span></h2>
+                <div class="h-px flex-1 bg-gradient-to-r from-amber-500/30 to-transparent"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <article class="bento-glass group flex flex-col p-6 rounded-3xl opacity-90" data-filter-item data-cat="ads" data-search="ryandexdirect api яндекс.директа yandex.direct api самый популярный из моих пакетов на github. работает с api директа версий 4, live 4 и 5 и сервисом reports, не требуя погружения в документацию api. my most-starred package on github. works with direct api v4, live 4 and v5 plus the reports service, no deep dive into the api docs required." data-pkg="ryandexdirect" data-cran="1" data-aos="fade-up" data-aos-delay="0">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="flex items-start gap-5 mb-5">
+                        <div class="relative shrink-0"><img src="../assets/logos/ryandexdirect.png" alt="ryandexdirect logo" loading="lazy" class="w-[72px] h-[84px] object-contain drop-shadow-[0_8px_20px_rgba(0,0,0,0.45)] group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500 grayscale-[35%]"></div>
+                        <div class="min-w-0 flex-1 pt-1">
+                            <div class="flex flex-wrap items-center gap-1.5 mb-2"><span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-amber-500/15 text-amber-300 border border-amber-500/30 flex items-center gap-1"><i class="fa-solid fa-box-archive"></i><span class="ru-text">Архив</span><span class="ua-text">Архів</span><span class="en-text">Archived</span></span><span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-blue-500/15 text-blue-300 border border-blue-500/30">CRAN</span></div>
+                            <h3 class="text-2xl font-extrabold text-white outfit-font group-hover:text-purple-300 transition-colors break-words">ryandexdirect</h3>
+                            <p class="text-sm text-slate-400 font-medium"><span class="ru-text">API Яндекс.Директа</span><span class="ua-text">API Яндекс.Директу</span><span class="en-text">Yandex.Direct API</span></p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-sm text-slate-300 leading-relaxed font-light mb-4"><span class="ru-text">Самый популярный из моих пакетов на GitHub. Работает с API Директа версий 4, Live 4 и 5 и сервисом Reports, не требуя погружения в документацию API.</span><span class="ua-text">Найпопулярніший з моїх пакетів на GitHub. Працює з API Директу версій 4, Live 4 і 5 та сервісом Reports, не вимагаючи занурення в документацію API.</span><span class="en-text">My most-starred package on GitHub. Works with Direct API v4, Live 4 and v5 plus the Reports service, no deep dive into the API docs required.</span></p>
+                    <ul class="space-y-1.5 mb-5">
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Кампании, группы, объявления, ключевые слова</span><span class="ua-text">Кампанії, групи, оголошення, ключові слова</span><span class="en-text">Campaigns, ad groups, ads, keywords</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Статистика через сервис Reports</span><span class="ua-text">Статистика через сервіс Reports</span><span class="en-text">Statistics via the Reports service</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Управление показами и ставками</span><span class="ua-text">Керування показами та ставками</span><span class="en-text">Ad delivery and bid management</span></li>
+                    </ul>
+                    <div class="mt-auto">
+                        <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5 mb-4">
+                            <div title="GitHub stars" class="flex items-center gap-2"><i class="fa-solid fa-star text-yellow-500"></i><span class="js-stars font-bold text-white">53</span></div>
+                            <div title="CRAN" class="flex items-center gap-2"><i class="fa-solid fa-download text-blue-400"></i><span class="js-dl-total font-bold text-white">40.6k</span></div>
+                            <div title="last 30 days" class="flex items-center gap-1.5 text-slate-500"><span class="js-dl-month font-semibold text-slate-300">364</span>/<span class="ru-text">мес</span><span class="ua-text">міс</span><span class="en-text">mo</span></div>
+                            <div class="flex items-center gap-1.5 text-slate-500 ml-auto"><i class="fa-regular fa-calendar"></i>2016</div>
+                        </div>
+                        <div class="flex flex-wrap gap-2"><a href="https://github.com/selesnow/ryandexdirect" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-purple-500/15 border-purple-500/40 text-purple-200 hover:bg-purple-500 hover:text-white"><i class="fa-brands fa-github"></i>GitHub</a><a href="https://cran.r-project.org/package=ryandexdirect" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-brands fa-r-project"></i>CRAN</a><a href="https://alexey-seleznev.pro/ryandexdirect/" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-solid fa-book"></i><span class="ru-text">Документация</span><span class="ua-text">Документація</span><span class="en-text">Docs</span></a><a href="https://www.youtube.com/playlist?list=PLD2LDq8edf4oUo0L9Kw77ZXf0KcV1hu67" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-brands fa-youtube text-red-500"></i><span class="ru-text">Плейлист · 5</span><span class="ua-text">Плейлист · 5</span><span class="en-text">Playlist · 5</span></a></div>
+                    </div>
+                </div>
+            </article>
+            <article class="bento-glass group flex flex-col p-6 rounded-3xl opacity-90" data-filter-item data-cat="analytics" data-search="rym api яндекс.метрики yandex.metrica api r-интерфейс ко всем четырём api яндекс.метрики, с подробной документацией и пятью виньетками. an r interface to all four yandex.metrica apis, with detailed docs and five vignettes." data-pkg="rym" data-cran="1" data-aos="fade-up" data-aos-delay="60">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="flex items-start gap-5 mb-5">
+                        <div class="relative shrink-0"><img src="../assets/logos/rym.png" alt="rym logo" loading="lazy" class="w-[72px] h-[84px] object-contain drop-shadow-[0_8px_20px_rgba(0,0,0,0.45)] group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500 grayscale-[35%]"></div>
+                        <div class="min-w-0 flex-1 pt-1">
+                            <div class="flex flex-wrap items-center gap-1.5 mb-2"><span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-amber-500/15 text-amber-300 border border-amber-500/30 flex items-center gap-1"><i class="fa-solid fa-box-archive"></i><span class="ru-text">Архив</span><span class="ua-text">Архів</span><span class="en-text">Archived</span></span><span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-blue-500/15 text-blue-300 border border-blue-500/30">CRAN</span></div>
+                            <h3 class="text-2xl font-extrabold text-white outfit-font group-hover:text-purple-300 transition-colors break-words">rym</h3>
+                            <p class="text-sm text-slate-400 font-medium"><span class="ru-text">API Яндекс.Метрики</span><span class="ua-text">API Яндекс.Метрики</span><span class="en-text">Yandex.Metrica API</span></p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-sm text-slate-300 leading-relaxed font-light mb-4"><span class="ru-text">R-интерфейс ко всем четырём API Яндекс.Метрики, с подробной документацией и пятью виньетками.</span><span class="ua-text">R-інтерфейс до всіх чотирьох API Яндекс.Метрики, з докладною документацією та п&#x27;ятьма віньєтками.</span><span class="en-text">An R interface to all four Yandex.Metrica APIs, with detailed docs and five vignettes.</span></p>
+                    <ul class="space-y-1.5 mb-5">
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">API управления: счётчики, цели, сегменты</span><span class="ua-text">API керування: лічильники, цілі, сегменти</span><span class="en-text">Management API: counters, goals, segments</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">API отчётов и совместимый с GA Core API</span><span class="ua-text">API звітів і сумісний з GA Core API</span><span class="en-text">Reporting API and the GA-compatible API</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Logs API: сырые данные о визитах</span><span class="ua-text">Logs API: сирі дані про візити</span><span class="en-text">Logs API: raw visit data</span></li>
+                    </ul>
+                    <div class="mt-auto">
+                        <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5 mb-4">
+                            <div title="GitHub stars" class="flex items-center gap-2"><i class="fa-solid fa-star text-yellow-500"></i><span class="js-stars font-bold text-white">13</span></div>
+                            <div title="CRAN" class="flex items-center gap-2"><i class="fa-solid fa-download text-blue-400"></i><span class="js-dl-total font-bold text-white">37.3k</span></div>
+                            <div title="last 30 days" class="flex items-center gap-1.5 text-slate-500"><span class="js-dl-month font-semibold text-slate-300">368</span>/<span class="ru-text">мес</span><span class="ua-text">міс</span><span class="en-text">mo</span></div>
+                            <div class="flex items-center gap-1.5 text-slate-500 ml-auto"><i class="fa-regular fa-calendar"></i>2018</div>
+                        </div>
+                        <div class="flex flex-wrap gap-2"><a href="https://github.com/selesnow/rym" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-purple-500/15 border-purple-500/40 text-purple-200 hover:bg-purple-500 hover:text-white"><i class="fa-brands fa-github"></i>GitHub</a><a href="https://cran.r-project.org/package=rym" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-brands fa-r-project"></i>CRAN</a><a href="https://alexey-seleznev.pro/rym/" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-solid fa-book"></i><span class="ru-text">Документация</span><span class="ua-text">Документація</span><span class="en-text">Docs</span></a><a href="https://www.youtube.com/watch?v=sCp2D6068es" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-brands fa-youtube text-red-500"></i><span class="ru-text">Вебинар</span><span class="ua-text">Вебінар</span><span class="en-text">Webinar</span></a></div>
+                    </div>
+                </div>
+            </article>
+            <article class="bento-glass group flex flex-col p-6 rounded-3xl opacity-90" data-filter-item data-cat="ads" data-search="rmytarget mytarget api v2 и v3 mytarget api v2 &amp; v3 загрузка данных из рекламной платформы mytarget через statistics api v2 и v3. loads data from the mytarget ad platform via statistics api v2 and v3." data-pkg="rmytarget" data-cran="1" data-aos="fade-up" data-aos-delay="0">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="flex items-start gap-5 mb-5">
+                        <div class="relative shrink-0"><img src="../assets/logos/rmytarget.png" alt="rmytarget logo" loading="lazy" class="w-[72px] h-[84px] object-contain drop-shadow-[0_8px_20px_rgba(0,0,0,0.45)] group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500 grayscale-[35%]"></div>
+                        <div class="min-w-0 flex-1 pt-1">
+                            <div class="flex flex-wrap items-center gap-1.5 mb-2"><span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-amber-500/15 text-amber-300 border border-amber-500/30 flex items-center gap-1"><i class="fa-solid fa-box-archive"></i><span class="ru-text">Архив</span><span class="ua-text">Архів</span><span class="en-text">Archived</span></span><span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-slate-500/15 text-slate-400 border border-slate-500/30"><span class="ru-text">Удалён с CRAN</span><span class="ua-text">Видалений з CRAN</span><span class="en-text">Removed from CRAN</span></span></div>
+                            <h3 class="text-2xl font-extrabold text-white outfit-font group-hover:text-purple-300 transition-colors break-words">rmytarget</h3>
+                            <p class="text-sm text-slate-400 font-medium"><span class="ru-text">MyTarget API v2 и v3</span><span class="ua-text">MyTarget API v2 і v3</span><span class="en-text">MyTarget API v2 &amp; v3</span></p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-sm text-slate-300 leading-relaxed font-light mb-4"><span class="ru-text">Загрузка данных из рекламной платформы MyTarget через Statistics API v2 и v3.</span><span class="ua-text">Завантаження даних з рекламної платформи MyTarget через Statistics API v2 і v3.</span><span class="en-text">Loads data from the MyTarget ad platform via Statistics API v2 and v3.</span></p>
+                    <ul class="space-y-1.5 mb-5">
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Кампании и объявления</span><span class="ua-text">Кампанії та оголошення</span><span class="en-text">Campaigns and ads</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Клиенты агентского аккаунта</span><span class="ua-text">Клієнти агентського акаунта</span><span class="en-text">Agency account clients</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Статистика по объявлениям, кампаниям и клиентам</span><span class="ua-text">Статистика за оголошеннями, кампаніями та клієнтами</span><span class="en-text">Stats by ad, campaign or client</span></li>
+                    </ul>
+                    <div class="mt-auto">
+                        <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5 mb-4">
+                            <div title="GitHub stars" class="flex items-center gap-2"><i class="fa-solid fa-star text-yellow-500"></i><span class="js-stars font-bold text-white">5</span></div>
+                            <div title="CRAN" class="flex items-center gap-2"><i class="fa-solid fa-download text-blue-400"></i><span class="js-dl-total font-bold text-white">34k</span></div>
+                            <div title="last 30 days" class="flex items-center gap-1.5 text-slate-500"><span class="js-dl-month font-semibold text-slate-300">131</span>/<span class="ru-text">мес</span><span class="ua-text">міс</span><span class="en-text">mo</span></div>
+                            <div class="flex items-center gap-1.5 text-slate-500 ml-auto"><i class="fa-regular fa-calendar"></i>2016</div>
+                        </div>
+                        <div class="flex flex-wrap gap-2"><a href="https://github.com/selesnow/rmytarget" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-purple-500/15 border-purple-500/40 text-purple-200 hover:bg-purple-500 hover:text-white"><i class="fa-brands fa-github"></i>GitHub</a><a href="https://cran.r-project.org/package=rmytarget" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-brands fa-r-project"></i>CRAN</a><a href="https://alexey-seleznev.pro/rmytarget/" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-solid fa-book"></i><span class="ru-text">Документация</span><span class="ua-text">Документація</span><span class="en-text">Docs</span></a></div>
+                    </div>
+                </div>
+            </article>
+            <article class="bento-glass group flex flex-col p-6 rounded-3xl opacity-90" data-filter-item data-cat="ads" data-search="rvkstat api вконтакте vk api мой самый первый r-пакет (2016): клиент для api вконтакте — статистика рекламного кабинета и посещаемости сообществ. my very first r package (2016): a vk api client for ad-account statistics and community traffic." data-pkg="rvkstat" data-cran="1" data-aos="fade-up" data-aos-delay="60">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="flex items-start gap-5 mb-5">
+                        <div class="relative shrink-0"><img src="../assets/logos/rvkstat.png" alt="rvkstat logo" loading="lazy" class="w-[72px] h-[84px] object-contain drop-shadow-[0_8px_20px_rgba(0,0,0,0.45)] group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500 grayscale-[35%]"></div>
+                        <div class="min-w-0 flex-1 pt-1">
+                            <div class="flex flex-wrap items-center gap-1.5 mb-2"><span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-amber-500/15 text-amber-300 border border-amber-500/30 flex items-center gap-1"><i class="fa-solid fa-box-archive"></i><span class="ru-text">Архив</span><span class="ua-text">Архів</span><span class="en-text">Archived</span></span><span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-blue-500/15 text-blue-300 border border-blue-500/30">CRAN</span></div>
+                            <h3 class="text-2xl font-extrabold text-white outfit-font group-hover:text-purple-300 transition-colors break-words">rvkstat</h3>
+                            <p class="text-sm text-slate-400 font-medium"><span class="ru-text">API ВКонтакте</span><span class="ua-text">API ВКонтакте</span><span class="en-text">VK API</span></p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-sm text-slate-300 leading-relaxed font-light mb-4"><span class="ru-text">Мой самый первый R-пакет (2016): клиент для API ВКонтакте — статистика рекламного кабинета и посещаемости сообществ.</span><span class="ua-text">Мій найперший R-пакет (2016): клієнт для API ВКонтакте — статистика рекламного кабінету та відвідуваності спільнот.</span><span class="en-text">My very first R package (2016): a VK API client for ad-account statistics and community traffic.</span></p>
+                    <ul class="space-y-1.5 mb-5">
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Статистика рекламного кабинета</span><span class="ua-text">Статистика рекламного кабінету</span><span class="en-text">Ad-account statistics</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Посетители сообществ по полу, возрасту и гео</span><span class="ua-text">Відвідувачі спільнот за статтю, віком і гео</span><span class="en-text">Community visitors by gender, age and geo</span></li>
+<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i><span class="ru-text">Справочники и данные пользователей</span><span class="ua-text">Довідники та дані користувачів</span><span class="en-text">Reference data and user info</span></li>
+                    </ul>
+                    <div class="mt-auto">
+                        <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5 mb-4">
+                            <div title="GitHub stars" class="flex items-center gap-2"><i class="fa-solid fa-star text-yellow-500"></i><span class="js-stars font-bold text-white">15</span></div>
+                            <div title="CRAN" class="flex items-center gap-2"><i class="fa-solid fa-download text-blue-400"></i><span class="js-dl-total font-bold text-white">29.1k</span></div>
+                            <div title="last 30 days" class="flex items-center gap-1.5 text-slate-500"><span class="js-dl-month font-semibold text-slate-300">326</span>/<span class="ru-text">мес</span><span class="ua-text">міс</span><span class="en-text">mo</span></div>
+                            <div class="flex items-center gap-1.5 text-slate-500 ml-auto"><i class="fa-regular fa-calendar"></i>2016</div>
+                        </div>
+                        <div class="flex flex-wrap gap-2"><a href="https://github.com/selesnow/rvkstat" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-purple-500/15 border-purple-500/40 text-purple-200 hover:bg-purple-500 hover:text-white"><i class="fa-brands fa-github"></i>GitHub</a><a href="https://cran.r-project.org/package=rvkstat" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-brands fa-r-project"></i>CRAN</a><a href="https://alexey-seleznev.pro/rvkstat/" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-solid fa-book"></i><span class="ru-text">Документация</span><span class="ua-text">Документація</span><span class="en-text">Docs</span></a><a href="https://www.youtube.com/playlist?list=PLD2LDq8edf4pQcy0zMmkTlk-o_Z6nRm5N" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800"><i class="fa-brands fa-youtube text-red-500"></i><span class="ru-text">Плейлист · 3</span><span class="ua-text">Плейлист · 3</span><span class="en-text">Playlist · 3</span></a></div>
+                    </div>
+                </div>
+            </article>
+            </div>
+        </div>
+        <div data-filter-empty class="hidden bento-glass no-lift p-10 text-center text-slate-400 rounded-3xl">
+            <i class="fa-solid fa-magnifying-glass text-3xl text-purple-400/60 mb-4"></i>
+            <p><span class="ru-text">Ничего не найдено — попробуйте изменить фильтр или запрос.</span><span class="ua-text">Нічого не знайдено — спробуйте змінити фільтр або запит.</span><span class="en-text">Nothing found — try another filter or query.</span></p>
+        </div>
+    </section>
+
+    <section class="px-6 max-w-7xl mx-auto pb-24 relative z-10">
+        <div class="grid md:grid-cols-2 gap-6" data-aos="fade-up">
+            <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(59, 130, 246, 0.1));">
+                <div class="bento-content w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center text-blue-400 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-telegram"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">Telegram-канал R4marketing</span><span class="ua-text">Telegram-канал R4marketing</span><span class="en-text">R4marketing on Telegram</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Новые статьи, видео и заметки по R — первыми.</span><span class="ua-text">Нові статті, відео та нотатки з R — першими.</span><span class="en-text">New articles, videos and R notes — first.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-blue-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+            <a href="https://www.youtube.com/R4marketing/?sub_confirmation=1" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(239, 68, 68, 0.1));">
+                <div class="bento-content w-16 h-16 bg-red-500/20 rounded-2xl flex items-center justify-center text-red-500 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-youtube"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">YouTube-канал R4marketing</span><span class="ua-text">YouTube-канал R4marketing</span><span class="en-text">R4marketing on YouTube</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Видеоуроки по R, аналитике и AI-инструментам.</span><span class="ua-text">Відеоуроки з R, аналітики та AI-інструментів.</span><span class="en-text">Video lessons on R, analytics and AI tools.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-red-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/5 bg-slate-950/80 backdrop-blur-md pt-20 pb-10 text-center relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-3xl font-extrabold mb-10 outfit-font"><span class="ru-text">Следите за обновлениями в R4marketing</span><span class="ua-text">Стежте за оновленнями в R4marketing</span><span class="en-text">Follow R4marketing updates</span></h2>
+            <div class="flex justify-center gap-8 mb-16">
+                <a href="https://t.me/R4marketing" class="w-16 h-16 rounded-3xl bg-blue-500/10 flex items-center justify-center text-blue-400 text-3xl hover:bg-blue-500 hover:text-white transition-all transform hover:scale-110 hover:-translate-y-2 border border-blue-500/20 shadow-lg" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                <a href="https://www.youtube.com/R4marketing" class="w-16 h-16 rounded-3xl bg-red-500/10 flex items-center justify-center text-red-500 text-3xl hover:bg-red-500 hover:text-white transition-all transform hover:scale-110 hover:-translate-y-2 border border-red-500/20 shadow-lg" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                <a href="https://habr.com/ru/users/selesnow/" class="w-16 h-16 rounded-3xl bg-slate-700/30 flex items-center justify-center text-white text-3xl hover:bg-slate-600 transition-all transform hover:scale-110 hover:-translate-y-2 border border-slate-600/50 shadow-lg" aria-label="Habr"><i class="fa-solid fa-h"></i></a>
+            </div>
+            <div class="mb-6"><a href="../" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-400 hover:text-white transition-colors outfit-font"><i class="fa-solid fa-house text-purple-400/80 text-xs"></i> ALEXEY-SELEZNEV<span class="text-purple-500 -ml-2">.pro</span></a></div>
+            <nav class="flex flex-wrap justify-center gap-x-8 gap-y-3 mb-12 text-sm font-semibold text-slate-400 outfit-font" aria-label="Site pages">
+                <a href="../opensource/" class="flex items-center gap-2 hover:text-white transition-colors"><i class="fa-solid fa-code-branch text-purple-400/80 text-xs"></i> <span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span></a>
+                <a href="../courses/" class="flex items-center gap-2 hover:text-white transition-colors"><i class="fa-solid fa-graduation-cap text-purple-400/80 text-xs"></i> <span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a>
+                <a href="../videos/" class="flex items-center gap-2 hover:text-white transition-colors"><i class="fa-solid fa-circle-play text-purple-400/80 text-xs"></i> <span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a>
+                <a href="../talks/" class="flex items-center gap-2 hover:text-white transition-colors"><i class="fa-solid fa-microphone-lines text-purple-400/80 text-xs"></i> <span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a>
+                <a href="../articles/" class="flex items-center gap-2 hover:text-white transition-colors"><i class="fa-solid fa-pen-nib text-purple-400/80 text-xs"></i> <span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a>
+                <a href="../interviews/" class="flex items-center gap-2 hover:text-white transition-colors"><i class="fa-regular fa-newspaper text-purple-400/80 text-xs"></i> <span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a>
+            </nav>
+            <p class="text-slate-500 text-sm font-mono tracking-widest uppercase">© 2026 Alexey Seleznev. Modernized Vision.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script src="../assets/site.js"></script>
+    <script>
+    // Счётчики пакетов. Основной источник: assets/stats.json на этом же домене,
+    // его раз в сутки обновляет GitHub Actions (cranlogs + GitHub API).
+    // Если файл недоступен, идём в cranlogs через CORS-прокси; если не вышло и это, остаются значения из сборки.
+    (function () {
+        function fmt(n) {
+            if (n >= 1000000) return (n / 1000000).toFixed(1).replace('.0', '') + 'M';
+            if (n >= 1000) return (n / 1000).toFixed(1).replace('.0', '') + 'k';
+            return String(n);
+        }
+        const cards = Array.from(document.querySelectorAll('[data-pkg]'));
+        const set = (name, cls, value) => document.querySelectorAll(`[data-pkg="${name}"] ${cls}`).forEach(el => { el.textContent = fmt(value); });
+        const setTotal = sum => { const t = document.getElementById('total-downloads'); if (t && sum > 0) t.textContent = Math.floor(sum / 1000) + 'k+'; };
+
+        function fromStatsFile(d) {
+            Object.entries(d.packages || {}).forEach(([name, s]) => {
+                if (s.downloads != null) set(name, '.js-dl-total', s.downloads);
+                if (s.month != null) set(name, '.js-dl-month', s.month);
+                if (s.stars != null) set(name, '.js-stars', s.stars);
+            });
+            setTotal(d.total_downloads);
+        }
+
+        function fromCranlogs() {
+            const proxied = url => fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent(url)).then(r => { if (!r.ok) throw r; return r.json(); });
+            const names = cards.filter(c => c.dataset.cran === '1').map(c => c.dataset.pkg).join(',');
+            Promise.all([
+                proxied(`https://cranlogs.r-pkg.org/downloads/total/2015-01-01:last-day/${names}`),
+                proxied(`https://cranlogs.r-pkg.org/downloads/total/last-month/${names}`)
+            ]).then(([total, month]) => {
+                let sum = 0;
+                total.forEach(x => { sum += x.downloads; set(x.package, '.js-dl-total', x.downloads); });
+                month.forEach(x => set(x.package, '.js-dl-month', x.downloads));
+                setTotal(sum);
+            }).catch(() => {});
+        }
+
+        fetch('../assets/stats.json', { cache: 'no-cache' })
+            .then(r => { if (!r.ok) throw r; return r.json(); })
+            .then(fromStatsFile)
+            .catch(fromCranlogs);
+    })();
+    </script>
+
+</body>
+</html>

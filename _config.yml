@@ -1,4 +1,5 @@
 theme: jekyll-theme-midnight
+exclude: [CLAUDE.md, GEMINI.md]
 ---
 title: "Alexey Seleznev R Packages"
 output: 

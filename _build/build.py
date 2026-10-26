@@ -59,6 +59,7 @@ def ym(s):
 # ---------------------------------------------------------------- навигация
 
 PAGES = [
+    ('opensource', 'fa-solid fa-code-branch', ('Open Source', 'Open Source', 'Open Source')),
     ('courses', 'fa-solid fa-graduation-cap', ('Курсы', 'Курси', 'Courses')),
     ('videos', 'fa-solid fa-circle-play', ('Видеоуроки', 'Відеоуроки', 'Video Lessons')),
     ('talks', 'fa-solid fa-microphone-lines', ('Доклады и вебинары', 'Доповіді та вебінари', 'Talks & Webinars')),
@@ -958,7 +959,323 @@ def build_videos():
     write('videos', page)
 
 
+# ---------------------------------------------------------------- open source
+
+PKG_CATS = {
+    'ads': ('fa-solid fa-bullhorn', ('Рекламные платформы', 'Рекламні платформи', 'Ad platforms')),
+    'analytics': ('fa-solid fa-chart-line', ('Аналитика', 'Аналітика', 'Analytics')),
+    'crm': ('fa-solid fa-address-card', ('CRM и сервисы', 'CRM та сервіси', 'CRM & services')),
+    'utils': ('fa-solid fa-screwdriver-wrench', ('Утилиты', 'Утиліти', 'Utilities')),
+}
+
+
+def fmt_num(n):
+    if n >= 1000:
+        return f'{n / 1000:.1f}'.replace('.0', '') + 'k'
+    return str(n)
+
+
+def update_package_stats(pkgs):
+    """Обновляет снимок скачиваний с CRAN и звёзд GitHub. Без сети остаются прежние значения."""
+    import datetime
+    import urllib.request
+    path = DATA / 'package_stats.json'
+    stats = json.loads(path.read_text(encoding='utf-8')) if path.exists() else {'packages': {}}
+
+    # Токен GitHub (переменная GITHUB_TOKEN или gh CLI) снимает лимит 60 анонимных запросов в час
+    import os
+    import subprocess
+    token = os.environ.get('GITHUB_TOKEN', '')
+    if not token:
+        try:
+            token = subprocess.run(['gh', 'auth', 'token'], capture_output=True, text=True, timeout=10).stdout.strip()
+        except Exception:
+            token = ''
+
+    def get(u):
+        headers = {'User-Agent': 'alexey-seleznev.pro build'}
+        if token and 'api.github.com' in u:
+            headers['Authorization'] = f'Bearer {token}'
+        req = urllib.request.Request(u, headers=headers)
+        return json.loads(urllib.request.urlopen(req, timeout=30).read().decode('utf-8'))
+
+    cran = ','.join(p['name'] for p in pkgs if p['cran'])
+    try:
+        total = {x['package']: x['downloads'] for x in get(f'https://cranlogs.r-pkg.org/downloads/total/2015-01-01:last-day/{cran}')}
+        month = {x['package']: x['downloads'] for x in get(f'https://cranlogs.r-pkg.org/downloads/total/last-month/{cran}')}
+        for name in total:
+            s = stats['packages'].setdefault(name, {})
+            s['downloads'], s['month'] = total[name], month.get(name, 0)
+        stats['date'] = datetime.date.today().isoformat()
+    except Exception as e:
+        print('  cranlogs недоступен, оставляю сохранённые значения:', e)
+    for p in pkgs:
+        try:
+            stats['packages'].setdefault(p['name'], {})['stars'] = get(f'https://api.github.com/repos/selesnow/{p["name"]}')['stargazers_count']
+        except Exception as e:
+            print(f'  GitHub: не удалось обновить звёзды {p["name"]}:', e)
+    names = {p['name'] for p in pkgs}
+    stats['packages'] = {k: v for k, v in stats['packages'].items() if k in names}
+    path.write_text(json.dumps(stats, ensure_ascii=False, indent=1), encoding='utf-8')
+
+    # Публичная копия для страниц сайта: лендинг и /opensource/ читают её со своего домена
+    public = {
+        'updated': stats.get('date', ''),
+        'total_downloads': sum(v.get('downloads', 0) for v in stats['packages'].values()),
+        'packages': stats['packages'],
+    }
+    (ROOT / 'assets' / 'stats.json').write_text(json.dumps(public, ensure_ascii=False, indent=1), encoding='utf-8')
+    return stats
+
+
+OPENSOURCE_JS = '''
+    <script>
+    // Счётчики пакетов. Основной источник: assets/stats.json на этом же домене,
+    // его раз в сутки обновляет GitHub Actions (cranlogs + GitHub API).
+    // Если файл недоступен, идём в cranlogs через CORS-прокси; если не вышло и это, остаются значения из сборки.
+    (function () {
+        function fmt(n) {
+            if (n >= 1000000) return (n / 1000000).toFixed(1).replace('.0', '') + 'M';
+            if (n >= 1000) return (n / 1000).toFixed(1).replace('.0', '') + 'k';
+            return String(n);
+        }
+        const cards = Array.from(document.querySelectorAll('[data-pkg]'));
+        const set = (name, cls, value) => document.querySelectorAll(`[data-pkg="${name}"] ${cls}`).forEach(el => { el.textContent = fmt(value); });
+        const setTotal = sum => { const t = document.getElementById('total-downloads'); if (t && sum > 0) t.textContent = Math.floor(sum / 1000) + 'k+'; };
+
+        function fromStatsFile(d) {
+            Object.entries(d.packages || {}).forEach(([name, s]) => {
+                if (s.downloads != null) set(name, '.js-dl-total', s.downloads);
+                if (s.month != null) set(name, '.js-dl-month', s.month);
+                if (s.stars != null) set(name, '.js-stars', s.stars);
+            });
+            setTotal(d.total_downloads);
+        }
+
+        function fromCranlogs() {
+            const proxied = url => fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent(url)).then(r => { if (!r.ok) throw r; return r.json(); });
+            const names = cards.filter(c => c.dataset.cran === '1').map(c => c.dataset.pkg).join(',');
+            Promise.all([
+                proxied(`https://cranlogs.r-pkg.org/downloads/total/2015-01-01:last-day/${names}`),
+                proxied(`https://cranlogs.r-pkg.org/downloads/total/last-month/${names}`)
+            ]).then(([total, month]) => {
+                let sum = 0;
+                total.forEach(x => { sum += x.downloads; set(x.package, '.js-dl-total', x.downloads); });
+                month.forEach(x => set(x.package, '.js-dl-month', x.downloads));
+                setTotal(sum);
+            }).catch(() => {});
+        }
+
+        fetch('../assets/stats.json', { cache: 'no-cache' })
+            .then(r => { if (!r.ok) throw r; return r.json(); })
+            .then(fromStatsFile)
+            .catch(fromCranlogs);
+    })();
+    </script>
+'''
+
+
+def build_opensource():
+    pkgs = load('packages')
+    stats = update_package_stats(pkgs)['packages']
+    for p in pkgs:
+        s = stats.get(p['name'], {})
+        p['dl'], p['month'], p['stars'] = s.get('downloads', 0), s.get('month', 0), s.get('stars', 0)
+    total_dl = sum(p['dl'] for p in pkgs)
+    on_cran = sum(1 for p in pkgs if p['cran'])
+    active = sorted([p for p in pkgs if not p.get('archived')], key=lambda p: (-p['cran'], -p['dl']))
+    archived = sorted([p for p in pkgs if p.get('archived')], key=lambda p: -p['dl'])
+    cat_counts = Counter(p['cat'] for p in pkgs)
+
+    def link_btn(href, icon, label, accent=False):
+        cls = ('bg-purple-500/15 border-purple-500/40 text-purple-200 hover:bg-purple-500 hover:text-white'
+               if accent else 'bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800')
+        return f'<a href="{esc(href)}" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 {cls}"><i class="{icon}"></i>{label}</a>'
+
+    def card(p, delay):
+        name = p['name']
+        is_arch = p.get('archived')
+        logo_path = ROOT / 'assets' / 'logos' / f'{name}.png'
+        if logo_path.exists():
+            logo = f'<img src="../assets/logos/{name}.png" alt="{name} logo" loading="lazy" class="w-[72px] h-[84px] object-contain drop-shadow-[0_8px_20px_rgba(0,0,0,0.45)] group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500{" grayscale-[35%]" if is_arch else ""}">'
+        else:
+            logo = f'''<div class="hex relative w-[72px] h-[84px] bg-gradient-to-br from-purple-500/40 via-slate-800 to-blue-500/30 flex flex-col items-center justify-center group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500">
+                                <div class="hex absolute inset-[3px] bg-slate-900/95"></div>
+                                <i class="{p['icon']} text-2xl text-purple-200 relative"></i>
+                                <span class="text-[9px] font-bold text-slate-300 relative mt-1 outfit-font">{esc(name)}</span>
+                            </div>'''
+        badges = []
+        if is_arch:
+            badges.append(f'<span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-amber-500/15 text-amber-300 border border-amber-500/30 flex items-center gap-1"><i class="fa-solid fa-box-archive"></i>{T("Архив", "Архів", "Archived")}</span>')
+        if p['cran'] and not p.get('cranRemoved'):
+            badges.append('<span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-blue-500/15 text-blue-300 border border-blue-500/30">CRAN</span>')
+        elif p.get('cranRemoved'):
+            badges.append(f'<span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-slate-500/15 text-slate-400 border border-slate-500/30">{T("Удалён с CRAN", "Видалений з CRAN", "Removed from CRAN")}</span>')
+        else:
+            badges.append('<span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-slate-500/15 text-slate-300 border border-white/10">GitHub</span>')
+        award = ''
+        if p.get('award'):
+            award = f'<div class="mb-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-yellow-500/10 border border-yellow-500/25 text-yellow-300 text-xs font-semibold"><i class="fa-solid fa-trophy"></i>{tr(p["award"])}</div>'
+        features = '\n'.join(f'<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i>{T(esc(p["features"]["ru"][i]), esc(p["features"]["ua"][i]), esc(p["features"]["en"][i]))}</li>'
+                             for i in range(len(p['features']['ru'])))
+        if p['cran']:
+            dl = f'''<div title="CRAN" class="flex items-center gap-2"><i class="fa-solid fa-download text-blue-400"></i><span class="js-dl-total font-bold text-white">{fmt_num(p['dl'])}</span></div>
+                            <div title="{esc('last 30 days')}" class="flex items-center gap-1.5 text-slate-500"><span class="js-dl-month font-semibold text-slate-300">{fmt_num(p['month'])}</span>/{T('мес', 'міс', 'mo')}</div>'''
+        else:
+            dl = f'<div class="flex items-center gap-2 text-slate-500"><i class="fa-brands fa-github"></i>{T("только GitHub", "лише GitHub", "GitHub only")}</div>'
+        links = [link_btn(f'https://github.com/selesnow/{name}', 'fa-brands fa-github', 'GitHub', accent=True)]
+        if p['cran']:
+            links.append(link_btn(f'https://cran.r-project.org/package={name}', 'fa-brands fa-r-project', 'CRAN'))
+        if p.get('docs'):
+            links.append(link_btn(p['docs'], 'fa-solid fa-book', T('Документация', 'Документація', 'Docs')))
+        if p.get('video'):
+            v = p['video']
+            label = {'playlist': T(f'Плейлист · {v.get("count", "")}', f'Плейлист · {v.get("count", "")}', f'Playlist · {v.get("count", "")}'),
+                     'video': T('Видеоурок', 'Відеоурок', 'Video lesson'),
+                     'webinar': T('Вебинар', 'Вебінар', 'Webinar')}[v['kind']]
+            links.append(link_btn(v['url'], 'fa-brands fa-youtube text-red-500', label))
+        if p.get('article'):
+            links.append(link_btn(p['article'], 'fa-solid fa-newspaper', T('Статья', 'Стаття', 'Article')))
+        search = ' '.join([name, p['tagline']['ru'], p['tagline']['en'], p['desc']['ru'], p['desc']['en']]).lower()
+        return f'''
+            <article class="bento-glass group flex flex-col p-6 rounded-3xl{' opacity-90' if is_arch else ''}" data-filter-item data-cat="{p['cat']}" data-search="{esc(search)}" data-pkg="{name}" data-cran="{1 if p['cran'] else 0}" data-aos="fade-up" data-aos-delay="{delay}">
+                <div class="bento-content flex flex-col h-full">
+                    <div class="flex items-start gap-5 mb-5">
+                        <div class="relative shrink-0">{logo}</div>
+                        <div class="min-w-0 flex-1 pt-1">
+                            <div class="flex flex-wrap items-center gap-1.5 mb-2">{''.join(badges)}</div>
+                            <h3 class="text-2xl font-extrabold text-white outfit-font group-hover:text-purple-300 transition-colors break-words">{esc(name)}</h3>
+                            <p class="text-sm text-slate-400 font-medium">{tr(p['tagline'])}</p>
+                        </div>
+                    </div>
+                    {award}
+                    <p class="text-sm text-slate-300 leading-relaxed font-light mb-4">{tr(p['desc'])}</p>
+                    <ul class="space-y-1.5 mb-5">
+{features}
+                    </ul>
+                    <div class="mt-auto">
+                        <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5 mb-4">
+                            <div title="GitHub stars" class="flex items-center gap-2"><i class="fa-solid fa-star text-yellow-500"></i><span class="js-stars font-bold text-white">{p['stars']}</span></div>
+                            {dl}
+                            <div class="flex items-center gap-1.5 text-slate-500 ml-auto"><i class="fa-regular fa-calendar"></i>{p['since']}</div>
+                        </div>
+                        <div class="flex flex-wrap gap-2">{''.join(links)}</div>
+                    </div>
+                </div>
+            </article>'''
+
+    active_grid = ''.join(card(p, (i % 3) * 60) for i, p in enumerate(active))
+    arch_grid = ''.join(card(p, (i % 2) * 60) for i, p in enumerate(archived))
+    btns = [filter_btn('cat', 'all', T('Все', 'Усі', 'All'), len(pkgs), 'fa-solid fa-layer-group', True)]
+    for key, (icon, label) in PKG_CATS.items():
+        btns.append(filter_btn('cat', key, T(*label), cat_counts[key], icon))
+    stamp = ''
+    if stats:
+        import datetime
+        d = json.loads((DATA / 'package_stats.json').read_text(encoding='utf-8')).get('date', '')
+        if d:
+            y, m, dd = map(int, d.split('-'))
+            stamp = T(f'Счётчики скачиваний с CRAN (cranlogs) и звёзды GitHub обновляются автоматически; сохранённый снимок — {dd}.{m:02d}.{y}.',
+                      f'Лічильники завантажень з CRAN (cranlogs) і зірки GitHub оновлюються автоматично; збережений знімок — {dd}.{m:02d}.{y}.',
+                      f'CRAN download counts (cranlogs) and GitHub stars update automatically; saved snapshot from {dd}.{m:02d}.{y}.')
+
+    services = load('services')
+    svc_cards = []
+    for i, sv in enumerate(services):
+        if sv.get('img'):
+            visual = f'''<div class="cover h-56 md:h-64 rounded-2xl border border-white/10">
+                        <div class="cover-fallback"><i class="{sv['icon']} text-5xl"></i></div>
+                        <img src="{sv['img']}" alt="{esc(sv['name'])}" loading="lazy" style="object-position: top left" onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent"></div>
+                    </div>'''
+        else:
+            cmds = ''.join(f'<span class="px-2.5 py-1 rounded-lg bg-blue-500/10 border border-blue-500/25 text-blue-200 text-xs font-mono">{esc(c)}</span>' for c in sv.get('commands', []))
+            visual = f'''<div class="h-56 md:h-64 rounded-2xl border border-white/10 relative overflow-hidden flex flex-col justify-end p-5" style="background: radial-gradient(circle at 80% 20%, rgba(59,130,246,0.35), transparent 55%), radial-gradient(circle at 10% 90%, rgba(168,85,247,0.25), transparent 50%), #0b1120;">
+                        <i class="{sv['icon']} absolute -right-6 -top-6 text-[180px] text-blue-400/10"></i>
+                        <div class="relative flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 rounded-2xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-300 text-2xl"><i class="{sv['icon']}"></i></div>
+                            <div class="text-sm text-slate-300 font-semibold">{T('Команды бота', 'Команди бота', 'Bot commands')}</div>
+                        </div>
+                        <div class="relative flex flex-wrap gap-2">{cmds}</div>
+                    </div>'''
+        feats = '\n'.join(f'<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-[10px] mt-1.5"></i>{T(esc(sv["features"]["ru"][k]), esc(sv["features"]["ua"][k]), esc(sv["features"]["en"][k]))}</li>' for k in range(len(sv['features']['ru'])))
+        stack = ''.join(f'<span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-[11px] text-slate-400 font-mono">{esc(t)}</span>' for t in sv['stack'])
+        svc_cards.append(f'''
+            <article class="bento-glass no-lift rounded-[2rem] p-4 flex flex-col" data-aos="fade-up" data-aos-delay="{i * 80}">
+                <div class="bento-content flex flex-col h-full">
+                    {visual}
+                    <div class="px-2 pt-5 flex flex-col flex-1">
+                        <div class="flex items-center gap-2 text-xs font-semibold text-purple-400 mb-2"><i class="{sv['icon']}"></i>{tr(sv['tagline'])}</div>
+                        <h3 class="text-2xl font-extrabold text-white outfit-font mb-3">{esc(sv['name'])}</h3>
+                        <p class="text-sm text-slate-300 leading-relaxed font-light mb-4">{tr(sv['desc'])}</p>
+                        <ul class="space-y-1.5 mb-5">
+{feats}
+                        </ul>
+                        <div class="mt-auto pt-4 border-t border-white/5 flex flex-wrap items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5">{stack}</div>
+                            {link_btn(f"https://github.com/selesnow/{sv['repo']}", 'fa-brands fa-github', 'GitHub', accent=True)}
+                        </div>
+                    </div>
+                </div>
+            </article>''')
+    services_html = f'''
+        <div class="mb-16">
+            <div class="flex items-center gap-4 mb-3" data-aos="fade-right">
+                <h2 class="text-3xl font-extrabold outfit-font flex items-center gap-3"><i class="fa-solid fa-cubes text-purple-400 text-2xl"></i>{T('Сервисы и приложения', 'Сервіси та застосунки', 'Services & apps')}</h2>
+                <div class="h-px flex-1 bg-gradient-to-r from-purple-500/30 to-transparent"></div>
+            </div>
+            <p class="text-slate-400 mb-8 max-w-3xl" data-aos="fade-up">{T('Внутренние инструменты отдела аналитики, написанные на R: система мониторинга и управления сервером, на котором работают сотни скриптов.', 'Внутрішні інструменти відділу аналітики, написані на R: система моніторингу та керування сервером, на якому працюють сотні скриптів.', 'Internal analytics-team tools written in R: a monitoring and control system for a server that runs hundreds of scripts.')}</p>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">{''.join(svc_cards)}
+            </div>
+        </div>'''
+
+    page = head('opensource', 'Open Source R-пакеты | Алексей Селезнёв',
+                f'{len(pkgs)} open source R-пакетов Алексея Селезнёва для работы с API Google Ads, Facebook, TikTok, LinkedIn, Apple Ads, YouTube, TGStat, AppsFlyer и других сервисов. Более {total_dl // 1000}k скачиваний с CRAN.')
+    page += nav('opensource')
+    page += hero('fa-solid fa-code-branch', 'Open Source',
+                 T('R-<span class="text-gradient">пакеты</span>', 'R-<span class="text-gradient">пакети</span>', 'R <span class="text-gradient">Packages</span>'),
+                 T('С 2016 года разрабатываю пакеты на языке R, которые упрощают сбор данных из рекламных, аналитических и CRM-платформ. С ними специалисты без глубоких навыков программирования автоматизируют отчётность и строят маркетинговую аналитику. Большинство пакетов опубликованы на CRAN, у многих есть документация и видеоуроки.',
+                   'З 2016 року розробляю пакети мовою R, які спрощують збір даних з рекламних, аналітичних і CRM-платформ. З ними фахівці без глибоких навичок програмування автоматизують звітність і будують маркетингову аналітику. Більшість пакетів опубліковані на CRAN, у багатьох є документація та відеоуроки.',
+                   'Since 2016 I have been building R packages that simplify collecting data from ad, analytics and CRM platforms, so specialists without deep coding skills can automate reporting and build marketing analytics. Most are published on CRAN, and many come with docs and video lessons.'),
+                 [(str(len(pkgs)), T('R-пакет', 'R-пакет', 'R packages')), (str(on_cran), T('Опубликованы на CRAN', 'Опубліковані на CRAN', 'Published on CRAN')),
+                  (f'<span id="total-downloads">{total_dl // 1000}k+</span>', T('Скачиваний с CRAN', 'Завантажень з CRAN', 'CRAN downloads')),
+                  ('2016', T('Первый пакет', 'Перший пакет', 'First package'))])
+    page += f'''
+    <!-- PACKAGES -->
+    <section class="px-6 max-w-7xl mx-auto pb-10 relative z-10">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4" data-aos="fade-up">
+            <div class="flex flex-wrap gap-2">{''.join(btns)}</div>
+            {search_box('Поиск по пакетам…', 'Пошук за пакетами…', 'Search packages…')}
+        </div>
+        <p class="text-xs text-slate-500 mb-10 flex items-center gap-2" data-aos="fade-up"><i class="fa-solid fa-circle-info"></i>{stamp}</p>
+
+        <div data-year-group class="mb-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">{active_grid}
+            </div>
+        </div>
+
+{services_html}
+        <div data-year-group class="mb-10">
+            <div class="flex items-center gap-4 mb-6" data-aos="fade-right">
+                <h2 class="text-3xl font-extrabold outfit-font flex items-center gap-3"><i class="fa-solid fa-box-archive text-amber-400/80 text-2xl"></i>{T('Архивные пакеты', 'Архівні пакети', 'Archived packages')}</h2>
+                <div class="h-px flex-1 bg-gradient-to-r from-amber-500/30 to-transparent"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">{arch_grid}
+            </div>
+        </div>
+        {empty_state()}
+    </section>
+'''
+    page += cta_block() + footer() + tail().replace('    <script src="../assets/site.js"></script>', '    <script src="../assets/site.js"></script>' + OPENSOURCE_JS)
+    write('opensource', page)
+
+
 if __name__ == '__main__':
+    import sys
+    if '--stats-only' in sys.argv:
+        update_package_stats(load('packages'))
+        sys.exit()
+    build_opensource()
     build_courses()
     build_videos()
     build_talks()

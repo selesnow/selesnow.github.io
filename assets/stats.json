@@ -1,0 +1,108 @@
+{
+ "updated": "2026-10-26",
+ "total_downloads": 416935,
+ "packages": {
+  "rfacebookstat": {
+   "downloads": 52613,
+   "month": 547,
+   "stars": 30
+  },
+  "timeperiodsR": {
+   "downloads": 44282,
+   "month": 469,
+   "stars": 7
+  },
+  "rgoogleads": {
+   "downloads": 37597,
+   "month": 855,
+   "stars": 14
+  },
+  "getProxy": {
+   "downloads": 28947,
+   "month": 232,
+   "stars": 8
+  },
+  "rtgstat": {
+   "downloads": 22692,
+   "month": 390,
+   "stars": 11
+  },
+  "ringostat": {
+   "downloads": 13912,
+   "month": 221,
+   "stars": 0
+  },
+  "rappsflyer": {
+   "downloads": 13812,
+   "month": 300,
+   "stars": 1
+  },
+  "ractivecampaign": {
+   "downloads": 13121,
+   "month": 248,
+   "stars": 0
+  },
+  "rytstat": {
+   "downloads": 12449,
+   "month": 272,
+   "stars": 2
+  },
+  "racademyocean": {
+   "downloads": 12296,
+   "month": 232,
+   "stars": 0
+  },
+  "rlinkedinads": {
+   "downloads": 6515,
+   "month": 232,
+   "stars": 0
+  },
+  "rtiktokads": {
+   "downloads": 2472,
+   "month": 188,
+   "stars": 1
+  },
+  "rappleads": {
+   "downloads": 2230,
+   "month": 160,
+   "stars": 0
+  },
+  "galigor": {
+   "downloads": 13012,
+   "month": 64,
+   "stars": 1
+  },
+  "ryandexdirect": {
+   "downloads": 40570,
+   "month": 364,
+   "stars": 53
+  },
+  "rym": {
+   "downloads": 37254,
+   "month": 368,
+   "stars": 13
+  },
+  "rvkstat": {
+   "downloads": 29112,
+   "month": 326,
+   "stars": 15
+  },
+  "rmytarget": {
+   "downloads": 34049,
+   "month": 131,
+   "stars": 5
+  },
+  "rmixpanel": {
+   "stars": 0
+  },
+  "rGitHub": {
+   "stars": 0
+  },
+  "rzohobooks": {
+   "stars": 0
+  },
+  "rwayforpay": {
+   "stars": 0
+  }
+ }
+}

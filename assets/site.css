@@ -182,3 +182,6 @@ h1, h2, h3, h4, h5, h6, .outfit-font {
 .line-clamp-4 { -webkit-line-clamp: 4; }
 
 [data-filter-item].is-hidden, [data-year-group].is-hidden { display: none !important; }
+
+/* Шестиугольник для пакетов без собственного логотипа */
+.hex { clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); }
