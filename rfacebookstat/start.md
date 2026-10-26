@@ -996,7 +996,7 @@ CampStat <-     fbGetMarketingStat(accounts_id = "act_0000000000",
       </td>
       <td>
         <b>Контакты</b>
-        <br>email: selesnow@gmail.com
+        <br>email: me@alexey-seleznev.pro
         <br>skype: selesnow
         <br>telegram: @AlexeySeleznev
       </td>

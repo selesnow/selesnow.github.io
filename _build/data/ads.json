@@ -1,0 +1,634 @@
+{
+  "updated": "2022-07",
+  "price": "30 USD",
+  "channel": "https://t.me/R4marketing",
+  "contact": "https://t.me/AlexeySeleznev",
+  "steps": [
+    {
+      "ru": "Согласуем тематику",
+      "ua": "Погоджуємо тематику",
+      "en": "Agree on the topic"
+    },
+    {
+      "ru": "Согласуем дату и время публикации",
+      "ua": "Погоджуємо дату й час публікації",
+      "en": "Agree on the date and time"
+    },
+    {
+      "ru": "Согласуем рекламный материал",
+      "ua": "Погоджуємо рекламний матеріал",
+      "en": "Approve the ad copy"
+    },
+    {
+      "ru": "Оплата — не позднее чем за день до публикации",
+      "ua": "Оплата — не пізніше ніж за день до публікації",
+      "en": "Payment — at least one day before publication"
+    },
+    {
+      "ru": "Пост выходит в канале в оговорённые дату и время",
+      "ua": "Пост виходить у каналі в погоджені дату й час",
+      "en": "The post goes live at the agreed date and time"
+    }
+  ],
+  "accepted": {
+    "ru": "Товары и услуги, близкие к тематике канала: курсы, вебинары, конференции, вакансии по аналитике и т.д.",
+    "ua": "Товари та послуги, близькі до тематики каналу: курси, вебінари, конференції, вакансії з аналітики тощо.",
+    "en": "Products and services close to the channel's topic: courses, webinars, conferences, analytics job openings, etc."
+  },
+  "rejected": [
+    {
+      "ru": "Азартные игры и букмекерские компании",
+      "ua": "Азартні ігри та букмекерські компанії",
+      "en": "Gambling and bookmakers"
+    },
+    {
+      "ru": "Контент 18+ и любой запрещённый законом контент",
+      "ua": "Контент 18+ та будь-який заборонений законом контент",
+      "en": "18+ content and anything prohibited by law"
+    },
+    {
+      "ru": "Реклама российских компаний — в связи с войной в Украине",
+      "ua": "Реклама російських компаній — у зв'язку з війною в Україні",
+      "en": "Ads from Russian companies — due to the war in Ukraine"
+    }
+  ],
+  "materials": {
+    "ru": "Рекламные материалы принимаются только сообщениями в Telegram — архивы и файлы по ссылке не принимаются.",
+    "ua": "Рекламні матеріали приймаються лише повідомленнями в Telegram — архіви та файли за посиланням не приймаються.",
+    "en": "Ad materials are accepted only as Telegram messages — no archives or download links."
+  },
+  "payment": [
+    {
+      "icon": "fa-solid fa-credit-card",
+      "title": {
+        "ru": "Украинская карта",
+        "ua": "Українська картка",
+        "en": "Ukrainian bank card"
+      },
+      "text": {
+        "ru": "Перевод на карту украинского банка. Номер карты пришлю в личных сообщениях в Telegram.",
+        "ua": "Переказ на картку українського банку. Номер картки надішлю в особистих повідомленнях у Telegram.",
+        "en": "Transfer to a Ukrainian bank card. I'll send the card number via Telegram direct message."
+      }
+    },
+    {
+      "icon": "fa-regular fa-credit-card",
+      "title": {
+        "ru": "Грузинская карта",
+        "ua": "Грузинська картка",
+        "en": "Georgian bank card"
+      },
+      "text": {
+        "ru": "Перевод на карту грузинского банка. Номер карты пришлю в личных сообщениях в Telegram.",
+        "ua": "Переказ на картку грузинського банку. Номер картки надішлю в особистих повідомленнях у Telegram.",
+        "en": "Transfer to a Georgian bank card. I'll send the card number via Telegram direct message."
+      }
+    },
+    {
+      "icon": "fa-solid fa-coins",
+      "title": {
+        "ru": "USDT",
+        "ua": "USDT",
+        "en": "USDT"
+      },
+      "text": {
+        "ru": "Оплата в криптовалюте USDT. Адрес кошелька пришлю в личных сообщениях в Telegram.",
+        "ua": "Оплата в криптовалюті USDT. Адресу гаманця надішлю в особистих повідомленнях у Telegram.",
+        "en": "Pay in USDT. I'll send the wallet address via Telegram direct message."
+      }
+    }
+  ],
+  "stats_links": [
+    {
+      "name": "TGStat",
+      "url": "https://uk.tgstat.com/channel/@R4marketing"
+    },
+    {
+      "name": "Telemetr",
+      "url": "https://telemetr.me/analytics/?name=https://tmtr.me/r4marketing"
+    }
+  ],
+  "audience": [
+    {
+      "id": "geo",
+      "date": "2022-01-22",
+      "poll": "https://t.me/R4marketing/942",
+      "title": {
+        "ru": "География по странам",
+        "ua": "Географія за країнами",
+        "en": "Countries"
+      },
+      "rows": [
+        [
+          {
+            "ru": "Россия",
+            "ua": "Росія",
+            "en": "Russia"
+          },
+          66
+        ],
+        [
+          {
+            "ru": "Украина",
+            "ua": "Україна",
+            "en": "Ukraine"
+          },
+          20
+        ],
+        [
+          {
+            "ru": "Беларусь",
+            "ua": "Білорусь",
+            "en": "Belarus"
+          },
+          4
+        ],
+        [
+          {
+            "ru": "Казахстан",
+            "ua": "Казахстан",
+            "en": "Kazakhstan"
+          },
+          3
+        ],
+        [
+          {
+            "ru": "Другие страны",
+            "ua": "Інші країни",
+            "en": "Other"
+          },
+          7
+        ]
+      ]
+    },
+    {
+      "id": "cities",
+      "date": "2022-01-22",
+      "poll": "https://t.me/R4marketing/942",
+      "title": {
+        "ru": "Крупнейшие города",
+        "ua": "Найбільші міста",
+        "en": "Top cities"
+      },
+      "rows": [
+        [
+          {
+            "ru": "Москва",
+            "ua": "Москва",
+            "en": "Moscow"
+          },
+          29
+        ],
+        [
+          {
+            "ru": "Санкт-Петербург",
+            "ua": "Санкт-Петербург",
+            "en": "Saint Petersburg"
+          },
+          13
+        ],
+        [
+          {
+            "ru": "Киев",
+            "ua": "Київ",
+            "en": "Kyiv"
+          },
+          10
+        ]
+      ]
+    },
+    {
+      "id": "age",
+      "date": "2021-04-10",
+      "poll": "https://t.me/R4marketing/692",
+      "title": {
+        "ru": "Возраст",
+        "ua": "Вік",
+        "en": "Age"
+      },
+      "rows": [
+        [
+          {
+            "ru": "до 18",
+            "ua": "до 18",
+            "en": "under 18"
+          },
+          2
+        ],
+        [
+          {
+            "ru": "19–25",
+            "ua": "19–25",
+            "en": "19–25"
+          },
+          16
+        ],
+        [
+          {
+            "ru": "26–35",
+            "ua": "26–35",
+            "en": "26–35"
+          },
+          48
+        ],
+        [
+          {
+            "ru": "36–45",
+            "ua": "36–45",
+            "en": "36–45"
+          },
+          27
+        ],
+        [
+          {
+            "ru": "46–55",
+            "ua": "46–55",
+            "en": "46–55"
+          },
+          6
+        ],
+        [
+          {
+            "ru": "56+",
+            "ua": "56+",
+            "en": "56+"
+          },
+          1
+        ]
+      ]
+    },
+    {
+      "id": "gender",
+      "date": "",
+      "source": {
+        "ru": "по данным Telemetr и crosser_bot",
+        "ua": "за даними Telemetr і crosser_bot",
+        "en": "per Telemetr and crosser_bot"
+      },
+      "title": {
+        "ru": "Пол",
+        "ua": "Стать",
+        "en": "Gender"
+      },
+      "rows": [
+        [
+          {
+            "ru": "Мужчины",
+            "ua": "Чоловіки",
+            "en": "Men"
+          },
+          71
+        ],
+        [
+          {
+            "ru": "Женщины",
+            "ua": "Жінки",
+            "en": "Women"
+          },
+          29
+        ]
+      ]
+    },
+    {
+      "id": "income",
+      "date": "2022-01-22",
+      "poll": "https://t.me/R4marketing/948",
+      "title": {
+        "ru": "Доход в месяц",
+        "ua": "Дохід на місяць",
+        "en": "Monthly income"
+      },
+      "rows": [
+        [
+          {
+            "ru": "Нет дохода",
+            "ua": "Немає доходу",
+            "en": "No income"
+          },
+          6
+        ],
+        [
+          {
+            "ru": "до $500",
+            "ua": "до $500",
+            "en": "under $500"
+          },
+          7
+        ],
+        [
+          {
+            "ru": "$501–1000",
+            "ua": "$501–1000",
+            "en": "$501–1000"
+          },
+          22
+        ],
+        [
+          {
+            "ru": "$1001–1500",
+            "ua": "$1001–1500",
+            "en": "$1001–1500"
+          },
+          18
+        ],
+        [
+          {
+            "ru": "$1501–2000",
+            "ua": "$1501–2000",
+            "en": "$1501–2000"
+          },
+          15
+        ],
+        [
+          {
+            "ru": "$2001–2500",
+            "ua": "$2001–2500",
+            "en": "$2001–2500"
+          },
+          12
+        ],
+        [
+          {
+            "ru": "$2501–3000",
+            "ua": "$2501–3000",
+            "en": "$2501–3000"
+          },
+          2
+        ],
+        [
+          {
+            "ru": "$3001–4000",
+            "ua": "$3001–4000",
+            "en": "$3001–4000"
+          },
+          8
+        ],
+        [
+          {
+            "ru": "более $4000",
+            "ua": "понад $4000",
+            "en": "over $4000"
+          },
+          10
+        ]
+      ]
+    },
+    {
+      "id": "education",
+      "date": "2021-11-27",
+      "poll": "https://t.me/R4marketing/897",
+      "title": {
+        "ru": "Образование",
+        "ua": "Освіта",
+        "en": "Education"
+      },
+      "rows": [
+        [
+          {
+            "ru": "Среднее",
+            "ua": "Середня",
+            "en": "Secondary"
+          },
+          3
+        ],
+        [
+          {
+            "ru": "Среднее специальное",
+            "ua": "Середня спеціальна",
+            "en": "Vocational"
+          },
+          3
+        ],
+        [
+          {
+            "ru": "Высшее",
+            "ua": "Вища",
+            "en": "Higher"
+          },
+          72
+        ],
+        [
+          {
+            "ru": "Аспирантура",
+            "ua": "Аспірантура",
+            "en": "Postgraduate"
+          },
+          9
+        ],
+        [
+          {
+            "ru": "Кандидат наук",
+            "ua": "Кандидат наук",
+            "en": "PhD"
+          },
+          12
+        ],
+        [
+          {
+            "ru": "Доктор наук",
+            "ua": "Доктор наук",
+            "en": "Doctor of Science"
+          },
+          1
+        ]
+      ]
+    },
+    {
+      "id": "field",
+      "date": "2021-01-23",
+      "poll": "https://t.me/R4marketing/599",
+      "title": {
+        "ru": "Сфера деятельности",
+        "ua": "Сфера діяльності",
+        "en": "Field of work"
+      },
+      "rows": [
+        [
+          {
+            "ru": "Интернет-маркетинг / веб-аналитика",
+            "ua": "Інтернет-маркетинг / веб-аналітика",
+            "en": "Digital marketing / web analytics"
+          },
+          31
+        ],
+        [
+          {
+            "ru": "Data Science / ML / AI / статистика",
+            "ua": "Data Science / ML / AI / статистика",
+            "en": "Data science / ML / AI / statistics"
+          },
+          29
+        ],
+        [
+          {
+            "ru": "BI-аналитика",
+            "ua": "BI-аналітика",
+            "en": "BI analytics"
+          },
+          16
+        ],
+        [
+          {
+            "ru": "Анализ продаж / ритейл",
+            "ua": "Аналіз продажів / ритейл",
+            "en": "Sales analysis / retail"
+          },
+          8
+        ],
+        [
+          {
+            "ru": "Программирование",
+            "ua": "Програмування",
+            "en": "Programming"
+          },
+          7
+        ],
+        [
+          {
+            "ru": "HR-аналитика",
+            "ua": "HR-аналітика",
+            "en": "HR analytics"
+          },
+          2
+        ],
+        [
+          {
+            "ru": "Другое",
+            "ua": "Інше",
+            "en": "Other"
+          },
+          7
+        ]
+      ]
+    },
+    {
+      "id": "tools",
+      "date": "2021-01-30",
+      "poll": "https://t.me/R4marketing/606",
+      "multi": true,
+      "title": {
+        "ru": "Инструменты в работе",
+        "ua": "Інструменти в роботі",
+        "en": "Tools used at work"
+      },
+      "rows": [
+        [
+          {
+            "ru": "Excel / Google Sheets",
+            "ua": "Excel / Google Sheets",
+            "en": "Excel / Google Sheets"
+          },
+          65
+        ],
+        [
+          {
+            "ru": "R",
+            "ua": "R",
+            "en": "R"
+          },
+          55
+        ],
+        [
+          {
+            "ru": "SQL",
+            "ua": "SQL",
+            "en": "SQL"
+          },
+          46
+        ],
+        [
+          {
+            "ru": "Python",
+            "ua": "Python",
+            "en": "Python"
+          },
+          36
+        ],
+        [
+          {
+            "ru": "Power BI",
+            "ua": "Power BI",
+            "en": "Power BI"
+          },
+          26
+        ],
+        [
+          {
+            "ru": "Google Data Studio",
+            "ua": "Google Data Studio",
+            "en": "Google Data Studio"
+          },
+          17
+        ],
+        [
+          {
+            "ru": "Tableau",
+            "ua": "Tableau",
+            "en": "Tableau"
+          },
+          11
+        ],
+        [
+          {
+            "ru": "Qlik View / Qlik Sense",
+            "ua": "Qlik View / Qlik Sense",
+            "en": "Qlik View / Qlik Sense"
+          },
+          4
+        ]
+      ]
+    },
+    {
+      "id": "experience",
+      "date": "2021-11-13",
+      "poll": "https://t.me/R4marketing/885",
+      "title": {
+        "ru": "Опыт в анализе данных",
+        "ua": "Досвід в аналізі даних",
+        "en": "Data analysis experience"
+      },
+      "rows": [
+        [
+          {
+            "ru": "менее года",
+            "ua": "менше року",
+            "en": "under 1 year"
+          },
+          31
+        ],
+        [
+          {
+            "ru": "1–2 года",
+            "ua": "1–2 роки",
+            "en": "1–2 years"
+          },
+          27
+        ],
+        [
+          {
+            "ru": "3–5 лет",
+            "ua": "3–5 років",
+            "en": "3–5 years"
+          },
+          24
+        ],
+        [
+          {
+            "ru": "6–10 лет",
+            "ua": "6–10 років",
+            "en": "6–10 years"
+          },
+          10
+        ],
+        [
+          {
+            "ru": "более 10 лет",
+            "ua": "понад 10 років",
+            "en": "over 10 years"
+          },
+          8
+        ]
+      ]
+    }
+  ]
+}

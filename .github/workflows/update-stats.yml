@@ -42,7 +42,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/stats.json _build/data/package_stats.json opensource courses videos talks articles interviews 404.html assets/tailwind.css
+          git add assets/stats.json _build/data/package_stats.json opensource courses videos talks articles interviews ads 404.html assets/tailwind.css
           if git diff --cached --quiet; then
             echo "Счётчики не изменились"
             echo "changed=false" >> "$GITHUB_OUTPUT"

@@ -23,6 +23,8 @@ GitHub Actions (`.github/workflows/update-stats.yml`) каждый день в 0
   Не правь их HTML руками — изменения пропадут при следующей сборке (в том числе ночной).
   Меняй данные в `_build/data/*.json` или шаблоны в `_build/build.py`, затем запускай
   `python _build/build.py`.
+- `ads/index.html` — страница о рекламе в Telegram-канале R4marketing (`build_ads()`, данные в `_build/data/ads.json`).
+  **Ссылок на неё с сайта нет и в sitemap её не добавлять** — она открывается только по прямой ссылке.
 - `404.html` в корне тоже генерируется (`build_404()`). GitHub Pages отдаёт её по любому несуществующему
   адресу, в том числе вложенному, поэтому все пути на ней абсолютные (`/assets/...`, `/courses/`).
 - `_build/` не публикуется: Jekyll игнорирует каталоги, начинающиеся с `_`.
@@ -31,7 +33,7 @@ GitHub Actions (`.github/workflows/update-stats.yml`) каждый день в 0
 - `assets/stats.json` — публичный снимок счётчиков (cranlogs + GitHub API), его читают лендинг
   и `/opensource/`. Обновляется ночным workflow или командой `python _build/build.py --stats-only`.
 - `assets/logos/` — логотипы пакетов, `assets/services/` — обложки сервисов.
-- Остальные каталоги в корне (`r4excel_users/`, `library/`, `news/` и др.) — старые проекты, не трогать.
+- Остальные каталоги в корне (`r4excel_users/`, `rfacebookstat/` и др.) — старые проекты, не трогать.
 
 ## Правила контента
 
@@ -67,7 +69,7 @@ GitHub Actions (`.github/workflows/update-stats.yml`) каждый день в 0
 - **Язык:** явный выбор кнопкой EN/RU/UA хранится в `localStorage.preferredLang`; без него язык берётся
   из настроек браузера (uk → UA, ru → RU), иначе EN. Автоопределение не сохраняется.
 - `sitemap.xml` правится вручную: страницы сайта, сайты курсов на этом домене (отдельные репозитории),
-  `publications/`, `library/`, `news/`. Проверяй, что все адреса отдают 200.
+  `publications/`. Проверяй, что все адреса отдают 200.
 
 ## Проверка
 

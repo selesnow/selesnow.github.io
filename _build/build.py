@@ -1537,6 +1537,168 @@ def build_404():
     print(f'404.html: {len(page):,} bytes')
 
 
+# ---------------------------------------------------------------- реклама в канале (страница без ссылок с сайта)
+
+def fmt_date_ru(d):
+    y, m, dd = map(int, d.split('-'))
+    return f'{dd:02d}.{m:02d}.{y}'
+
+
+def bar_chart(rows):
+    """Горизонтальные полосы одной серии: подпись, полоса, значение. Ширина — относительно максимума."""
+    top = max(v for _, v in rows)
+    out = []
+    for label, v in rows:
+        tip = f'{label["en"]}: {v}%'
+        out.append(f'''
+                        <div class="grid grid-cols-[minmax(0,11rem)_1fr_3rem] items-center gap-3 py-1 group/bar" title="{esc(tip)}">
+                            <div class="text-sm text-slate-300 leading-snug">{tr(label)}</div>
+                            <div class="h-2.5 rounded-full bg-white/5 overflow-hidden">
+                                <div class="h-full rounded-full bg-purple-500 group-hover/bar:bg-purple-400 transition-colors" style="width: {v / top * 100:.1f}%"></div>
+                            </div>
+                            <div class="text-sm font-semibold text-slate-200 text-right tabular-nums">{v}%</div>
+                        </div>''')
+    return ''.join(out)
+
+
+def build_ads():
+    d = load('ads')
+    poll_word = T('опрос', 'опитування', 'poll')
+
+    steps = ''.join(f'''
+                <div class="bento-glass no-lift p-5 rounded-2xl flex gap-4 items-start" data-aos="fade-up" data-aos-delay="{i * 60}">
+                    <div class="bento-content w-9 h-9 rounded-xl bg-purple-500/15 border border-purple-500/30 text-purple-300 font-black outfit-font flex items-center justify-center shrink-0">{i + 1}</div>
+                    <div class="bento-content text-sm text-slate-200 pt-1.5">{tr(s)}</div>
+                </div>''' for i, s in enumerate(d['steps']))
+
+    rejected = ''.join(f'<li class="flex items-start gap-2.5 text-sm text-slate-300"><i class="fa-solid fa-xmark text-red-400 mt-1"></i>{tr(r)}</li>' for r in d['rejected'])
+
+    payment = []
+    for p in d['payment']:
+        link = (f'<a href="{esc(p["url"])}" target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-purple-300 hover:text-white transition-colors">'
+                f'{T("Условия на бирже", "Умови на біржі", "Exchange terms")} <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i></a>') if p.get('url') else ''
+        payment.append(f'''
+                <div class="bento-glass no-lift p-6 rounded-3xl flex flex-col" data-aos="fade-up">
+                    <div class="bento-content w-12 h-12 rounded-2xl bg-blue-500/15 border border-blue-500/30 text-blue-300 flex items-center justify-center text-xl mb-4"><i class="{p['icon']}"></i></div>
+                    <h3 class="bento-content text-lg font-bold text-white outfit-font mb-2">{tr(p['title'])}</h3>
+                    <p class="bento-content text-sm text-slate-400 leading-relaxed">{tr(p['text'])}</p>
+                    <div class="bento-content mt-auto">{link}</div>
+                </div>''')
+
+    stats_links = ''.join(f'''
+                <a href="{esc(s['url'])}" target="_blank" rel="noopener" class="bento-glass p-6 rounded-3xl flex items-center gap-5 group">
+                    <div class="bento-content w-12 h-12 rounded-2xl bg-purple-500/15 text-purple-300 flex items-center justify-center text-xl group-hover:bg-purple-500 group-hover:text-white transition-all"><i class="fa-solid fa-chart-line"></i></div>
+                    <div class="bento-content flex-1">
+                        <div class="font-bold text-white outfit-font text-lg">{esc(s['name'])}</div>
+                        <div class="text-sm text-slate-400">{T('Подписчики, охваты и динамика канала', 'Підписники, охоплення та динаміка каналу', 'Subscribers, reach and channel dynamics')}</div>
+                    </div>
+                    <i class="bento-content fa-solid fa-arrow-up-right-from-square text-slate-500 group-hover:text-white transition-colors"></i>
+                </a>''' for s in d['stats_links'])
+
+    charts = []
+    for a in d['audience']:
+        if a.get('date'):
+            meta = f'{T("Опрос", "Опитування", "Poll")} {fmt_date_ru(a["date"])} · <a href="{esc(a["poll"])}" target="_blank" rel="noopener" class="underline underline-offset-2 hover:text-white">{T("ссылка на опрос", "посилання на опитування", "poll link")}</a>'
+        else:
+            meta = tr(a['source'])
+        multi = f'<div class="text-xs text-slate-500 mt-3">{T("Можно было выбрать несколько вариантов.", "Можна було обрати кілька варіантів.", "Multiple answers were allowed.")}</div>' if a.get('multi') else ''
+        charts.append(f'''
+                <div class="bento-glass no-lift p-6 rounded-3xl" data-aos="fade-up">
+                    <div class="bento-content">
+                        <h3 class="text-lg font-bold text-white outfit-font">{tr(a['title'])}</h3>
+                        <div class="text-xs text-slate-500 mb-4">{meta}</div>
+                        {bar_chart(a['rows'])}
+                        {multi}
+                    </div>
+                </div>''')
+
+    y, m = ym(d['updated'])
+    contact_btn = f'''<a href="{d['contact']}" target="_blank" rel="noopener" class="bg-purple-600 hover:bg-purple-500 text-white px-8 py-4 rounded-full font-bold transition-all shadow-[0_0_20px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)] flex items-center gap-2"><i class="fa-brands fa-telegram"></i>{T('Написать в Telegram', 'Написати в Telegram', 'Message me on Telegram')}</a>'''
+
+    desc = 'Реклама в Telegram-канале R4marketing о языке R и аналитике данных: стоимость публикации, условия размещения, способы оплаты и аудитория канала.'
+    page = head('ads', 'Реклама в Telegram-канале R4marketing | Алексей Селезнёв', desc)
+    page += nav('')
+    page += hero('fa-brands fa-telegram', 'R4marketing',
+                 T('Реклама в <span class="text-gradient">R4marketing</span>', 'Реклама в <span class="text-gradient">R4marketing</span>', 'Advertise in <span class="text-gradient">R4marketing</span>'),
+                 T('R4marketing — авторский Telegram-канал о языке R, аналитике данных и автоматизации маркетинга. Его читают аналитики, маркетологи и специалисты по данным. На этой странице — стоимость и условия размещения рекламы, способы оплаты и данные об аудитории.',
+                   'R4marketing — авторський Telegram-канал про мову R, аналітику даних і автоматизацію маркетингу. Його читають аналітики, маркетологи та фахівці з даних. На цій сторінці — вартість і умови розміщення реклами, способи оплати та дані про аудиторію.',
+                   'R4marketing is my Telegram channel about R, data analytics and marketing automation, read by analysts, marketers and data specialists. This page covers ad pricing and terms, payment options and audience data.'),
+                 [(esc(d['price']), T('Одна публикация', 'Одна публікація', 'Per post')),
+                  ('4 ' + T('ч', 'год', 'h'), T('Пост в топе канала', 'Пост у топі каналу', 'Pinned at the top')),
+                  ('∞', T('Пост остаётся в ленте', 'Пост залишається у стрічці', 'Stays in the feed')),
+                  ('3+', T('Пакет — цена индивидуально', 'Пакет — ціна індивідуально', 'Bundle — custom price'))])
+    page += f'''
+    <section class="px-6 max-w-7xl mx-auto pb-16 relative z-10">
+        <div class="flex flex-wrap items-center gap-4 mb-16" data-aos="fade-up">
+            {contact_btn}
+            <a href="{d['channel']}" target="_blank" rel="noopener" class="bento-glass px-8 py-4 rounded-full font-bold hover:bg-white/10 transition-all text-blue-400 flex items-center gap-2"><i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>{T('Открыть канал', 'Відкрити канал', 'Open the channel')}</a>
+            <span class="text-xs text-slate-500">{T('Данные обновлены', 'Дані оновлено', 'Updated')}: {month_label(y, m)}</span>
+        </div>
+
+        <h2 class="text-3xl font-extrabold mb-8 flex items-center gap-4 outfit-font" data-aos="fade-up">
+            <div class="w-12 h-12 bg-purple-500/20 flex items-center justify-center rounded-2xl border border-purple-500/30"><i class="fa-solid fa-list-check text-purple-400 text-xl"></i></div>
+            {T('Как проходит размещение', 'Як відбувається розміщення', 'How it works')}
+        </h2>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">{steps}
+        </div>
+        <p class="text-sm text-slate-400 mb-10" data-aos="fade-up"><i class="fa-solid fa-thumbtack text-purple-400 mr-2"></i>{T('Пост выходит в оговорённые дату и время, <strong class="text-white">висит в топе не менее 4 часов и остаётся в ленте навсегда</strong>.', 'Пост виходить у погоджені дату й час, <strong class="text-white">висить у топі щонайменше 4 години й залишається у стрічці назавжди</strong>.', 'The post goes live at the agreed time, <strong class="text-white">stays pinned for at least 4 hours and remains in the feed permanently</strong>.')}</p>
+
+        <div class="grid md:grid-cols-2 gap-6 mb-6" data-aos="fade-up">
+            <div class="bento-glass no-lift p-6 rounded-3xl border-l-4 border-green-500/50">
+                <div class="bento-content">
+                    <h3 class="text-lg font-bold text-white outfit-font mb-3 flex items-center gap-2"><i class="fa-solid fa-check text-green-400"></i>{T('Что берём', 'Що беремо', 'What we accept')}</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed">{tr(d['accepted'])}</p>
+                </div>
+            </div>
+            <div class="bento-glass no-lift p-6 rounded-3xl border-l-4 border-red-500/50">
+                <div class="bento-content">
+                    <h3 class="text-lg font-bold text-white outfit-font mb-3 flex items-center gap-2"><i class="fa-solid fa-ban text-red-400"></i>{T('Что не берём', 'Що не беремо', 'What we decline')}</h3>
+                    <ul class="space-y-2">{rejected}</ul>
+                </div>
+            </div>
+        </div>
+        <p class="text-sm text-slate-400 mb-20" data-aos="fade-up"><i class="fa-solid fa-circle-info text-purple-400 mr-2"></i>{tr(d['materials'])}</p>
+
+        <h2 class="text-3xl font-extrabold mb-3 flex items-center gap-4 outfit-font" data-aos="fade-up">
+            <div class="w-12 h-12 bg-blue-500/20 flex items-center justify-center rounded-2xl border border-blue-500/30"><i class="fa-solid fa-wallet text-blue-400 text-xl"></i></div>
+            {T('Оплата', 'Оплата', 'Payment')}
+        </h2>
+        <p class="text-slate-400 mb-8" data-aos="fade-up">{T('Сначала согласуем пост, дату и время, затем я пришлю реквизиты удобного вам способа. Оплата — не позднее чем за день до публикации: если пост выходит 15 октября, оплатить нужно до 14 октября включительно.', 'Спершу погоджуємо пост, дату й час, потім я надішлю реквізити зручного для вас способу. Оплата — не пізніше ніж за день до публікації: якщо пост виходить 15 жовтня, оплатити треба до 14 жовтня включно.', 'First we agree on the post, date and time, then I send payment details for the method you prefer. Pay at least one day before publication: for a post on October 15, pay by October 14 inclusive.')}</p>
+        <div class="grid {'md:grid-cols-3' if len(payment) > 1 else ''} gap-6 mb-20">{''.join(payment)}
+        </div>
+
+        <h2 class="text-3xl font-extrabold mb-8 flex items-center gap-4 outfit-font" data-aos="fade-up">
+            <div class="w-12 h-12 bg-purple-500/20 flex items-center justify-center rounded-2xl border border-purple-500/30"><i class="fa-solid fa-chart-simple text-purple-400 text-xl"></i></div>
+            {T('Статистика канала', 'Статистика каналу', 'Channel statistics')}
+        </h2>
+        <div class="grid md:grid-cols-2 gap-6 mb-6" data-aos="fade-up">{stats_links}
+        </div>
+        <a href="https://uk.tgstat.com/channel/@R4marketing" target="_blank" rel="noopener" class="block mb-20 rounded-3xl overflow-hidden border border-white/10 hover:border-purple-500/40 transition-colors" data-aos="fade-up">
+            <!-- Живой виджет TGStat: картинка обновляется на стороне сервиса -->
+            <img src="https://uk.tgstat.com/channel/@R4marketing/stat-widget.png" alt="{esc('Статистика канала R4marketing по данным TGStat')}" loading="lazy" referrerpolicy="no-referrer" class="w-full h-auto block bg-white">
+        </a>
+
+        <h2 class="text-3xl font-extrabold mb-3 flex items-center gap-4 outfit-font" data-aos="fade-up">
+            <div class="w-12 h-12 bg-purple-500/20 flex items-center justify-center rounded-2xl border border-purple-500/30"><i class="fa-solid fa-users text-purple-400 text-xl"></i></div>
+            {T('Аудитория канала', 'Аудиторія каналу', 'Channel audience')}
+        </h2>
+        <p class="text-slate-400 mb-8" data-aos="fade-up">{T('По результатам опросов подписчиков канала в 2021–2022 годах.', 'За результатами опитувань підписників каналу у 2021–2022 роках.', 'Based on channel subscriber polls in 2021–2022.')}</p>
+        <div class="grid md:grid-cols-2 gap-6 mb-20">{''.join(charts)}
+        </div>
+
+        <div class="bento-glass no-lift p-8 md:p-10 rounded-[2rem] flex flex-col md:flex-row items-center justify-between gap-6 border border-purple-500/30" data-aos="fade-up" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.5), rgba(168, 85, 247, 0.12));">
+            <div class="bento-content text-center md:text-left">
+                <h2 class="text-2xl md:text-3xl font-extrabold text-white outfit-font mb-2">{T('Обсудим размещение?', 'Обговоримо розміщення?', 'Ready to discuss?')}</h2>
+                <p class="text-slate-400">{T('Все вопросы по рекламе — в личные сообщения в Telegram.', 'Усі питання щодо реклами — в особисті повідомлення в Telegram.', 'All ad inquiries — via Telegram direct messages.')}</p>
+            </div>
+            <div class="bento-content">{contact_btn}</div>
+        </div>
+    </section>
+'''
+    page += footer() + tail()
+    write('ads', page)
+
+
 # ---------------------------------------------------------------- Tailwind CSS
 
 TAILWIND_VERSION = '3.4.17'  # та же версия, что отдавал cdn.tailwindcss.com
@@ -1573,4 +1735,5 @@ if __name__ == '__main__':
     build_articles()
     build_interviews()
     build_404()
+    build_ads()
     build_css()

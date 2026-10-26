@@ -10,6 +10,7 @@ module.exports = {
     './talks/index.html',
     './articles/index.html',
     './interviews/index.html',
+    './ads/index.html',
     './assets/site.js',
     './_build/build.py',
   ],
