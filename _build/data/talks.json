@@ -55,7 +55,7 @@
     "desc": {"ru": "Практика в RStudio: установка пакетов, работа с API Яндекс.Директа (ryandexdirect), Google Ads и Яндекс.Метрики (rym).", "ua": "Практика в RStudio: встановлення пакетів, робота з API Яндекс.Директу (ryandexdirect), Google Ads та Яндекс.Метрики (rym).", "en": "Hands-on in RStudio: installing packages, working with the Yandex.Direct (ryandexdirect), Google Ads and Yandex.Metrica (rym) APIs."}
   },
   {
-    "url": "https://netpeak.ua/conference/390/", "date": "2018-05", "event": "Kyiv Data Spring", "cat": "conference", "kind": {"ru": "Доклад", "ua": "Доповідь", "en": "Talk"},
+    "url": "https://netpeak.ua/conference/390/", "photo": "kyiv-data-spring-2018.webp", "date": "2018-05", "event": "Kyiv Data Spring", "cat": "conference", "kind": {"ru": "Доклад", "ua": "Доповідь", "en": "Talk"},
     "title": {"ru": "Как построить отдел аналитики в крупной компании. Команда, задачи и KPI", "ua": "Як побудувати відділ аналітики у великій компанії. Команда, задачі та KPI", "en": "Building an analytics department in a large company: team, tasks and KPIs"},
     "desc": {"ru": "Опыт Netpeak: из кого состоит команда аналитики, какие задачи она решает и как оценивать её эффективность. Видеозаписи нет — материалы на странице конференции.", "ua": "Досвід Netpeak: з кого складається команда аналітики, які задачі вона вирішує та як оцінювати її ефективність. Відеозапису немає — матеріали на сторінці конференції.", "en": "Netpeak's experience: who makes up an analytics team, what it does and how to measure it. No recording — materials are on the conference page."}
   },

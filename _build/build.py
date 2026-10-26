@@ -765,8 +765,10 @@ def build_talks():
             center = '''<div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>'''
             action = f'<i class="fa-brands fa-youtube text-red-500 text-sm"></i> {T("Смотреть", "Дивитися", "Watch")}'
         else:
-            href, img, attrs = t['url'], '', ''
-            center = '''<div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-purple-600/80 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-purple-500 transition-all duration-300"><i class="fa-solid fa-arrow-up-right-from-square text-base"></i></div></div>'''
+            href, attrs = t['url'], ''
+            img = f"../assets/photos/{t['photo']}" if t.get('photo') else ''  # своё фото, если нет записи
+            # на фото значок уходит в угол, чтобы не закрывать спикера
+            center = '''<div class="absolute bottom-3 right-3 w-10 h-10 rounded-full bg-purple-600/80 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-purple-500 transition-all duration-300"><i class="fa-solid fa-arrow-up-right-from-square text-sm"></i></div>''' if img else '''<div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-purple-600/80 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-purple-500 transition-all duration-300"><i class="fa-solid fa-arrow-up-right-from-square text-base"></i></div></div>'''
             action = f'<i class="fa-solid fa-file-lines text-purple-400 text-sm"></i> {T("Материалы конференции", "Матеріали конференції", "Conference page")}'
         extra = f'''<div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300">{month_label(y, m)} • {esc(t['event'])}</div>
                         <div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md border {cat_badge[1]}">{cat_badge[0]}</div>
