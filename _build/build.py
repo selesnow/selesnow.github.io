@@ -452,19 +452,46 @@ def tail(modal=False):
 '''
 
 
-def hero(icon, badge, title_html, lead, stats, back=True):
+# Фото с конференций в шапках разделов (исходники в img/, оптимизированные копии в assets/photos/).
+# pos — object-position: какую часть кадра оставить при обрезке под рамку.
+PHOTOS = {
+    'opensource': dict(src='matemarketing-2018.webp', w=1650, h=1100, pos='35% 40%',
+                       event=('Матемаркетинг', 'Матемаркетинг', 'Matemarketing'), year='2018'),
+    'courses': dict(src='goanalytics-2019.webp', w=1649, h=1100, pos='45% 35%',
+                    event=('GoAnalytics',) * 3, year='2019'),
+    'videos': dict(src='ecommerce-2017.webp', w=960, h=640, pos='45% 40%',
+                   event=('eCommerce',) * 3, year='2017'),
+    'talks': dict(src='analyze-2018.webp', w=960, h=599, pos='58% 50%',
+                  event=('Analyze!',) * 3, year='2018'),
+    'articles': dict(src='analyze-2017.webp', w=960, h=640, pos='62% 40%',
+                     event=('Analyze!',) * 3, year='2017'),
+    'interviews': dict(src='8p-2021.webp', w=1650, h=1100, pos='45% 45%',
+                       event=('8P',) * 3, year='2021'),
+}
+
+
+def hero_photo(slug):
+    p = PHOTOS[slug]
+    return f'''
+            <figure class="hero-photo lg:col-span-5" data-aos="fade-left" data-aos-delay="100">
+                <div class="hero-photo-plate"></div>
+                <div class="hero-photo-frame">
+                    <img src="../assets/photos/{p['src']}" width="{p['w']}" height="{p['h']}" alt="Алексей Селезнёв на конференции {esc(p['event'][0])} {p['year']}" style="object-position: {p['pos']}" decoding="async">
+                    <div class="hero-photo-tint"></div>
+                    <div class="hero-photo-shade"></div>
+                </div>
+                <figcaption class="hero-photo-caption">
+                    <i class="fa-solid fa-microphone-lines"></i>{T(*p["event"])}<span class="hero-photo-year">{p["year"]}</span>
+                </figcaption>
+            </figure>'''
+
+
+def hero(icon, badge, title_html, lead, stats, back=True, photo=None):
     stats_html = '\n'.join(f'''                <div class="bento-content">
                     <div class="text-3xl md:text-4xl font-extrabold text-white outfit-font">{value}</div>
                     <div class="text-xs text-slate-400 uppercase font-bold mt-1">{label}</div>
                 </div>''' for value, label in stats)
-    return f'''
-    <!-- HERO -->
-    <header class="pt-32 pb-12 px-6 max-w-7xl mx-auto relative z-10">
-        <a href="../" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-400 hover:text-white transition-colors mb-8 group" data-aos="fade-right">
-            <i class="fa-solid fa-arrow-left text-xs group-hover:-translate-x-1 transition-transform"></i>
-            {T('На главную', 'На головну', 'Back to home')}
-        </a>
-        <div data-aos="fade-up">
+    intro = f'''<div data-aos="fade-up">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-bold tracking-widest uppercase mb-5 outfit-font">
                 <i class="{icon}"></i> {badge}
             </div>
@@ -472,7 +499,21 @@ def hero(icon, badge, title_html, lead, stats, back=True):
         </div>
         <div class="bento-glass no-lift p-6 md:p-10 border-l-4 border-purple-500/50 mb-8" data-aos="fade-up" data-aos-delay="100">
             <p class="text-lg md:text-xl text-slate-300 leading-relaxed font-light relative z-10">{lead}</p>
-        </div>
+        </div>'''
+    if photo:
+        intro = f'''<div class="grid lg:grid-cols-12 gap-8 lg:gap-12 mb-8">
+            <div class="lg:col-span-7 flex flex-col justify-end">
+        {intro.replace(' mb-8" data-aos="fade-up" data-aos-delay="100"', '" data-aos="fade-up" data-aos-delay="100"')}
+            </div>{hero_photo(photo)}
+        </div>'''
+    return f'''
+    <!-- HERO -->
+    <header class="pt-32 pb-12 px-6 max-w-7xl mx-auto relative z-10">
+        <a href="../" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-400 hover:text-white transition-colors mb-8 group" data-aos="fade-right">
+            <i class="fa-solid fa-arrow-left text-xs group-hover:-translate-x-1 transition-transform"></i>
+            {T('На главную', 'На головну', 'Back to home')}
+        </a>
+        {intro}
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6 bento-glass no-lift p-6 rounded-3xl" data-aos="fade-up" data-aos-delay="150">
 {stats_html}
         </div>
@@ -655,7 +696,7 @@ def build_courses():
                    'Курси з\'явилися як внутрішня програма навчання аналітиків відділу Netpeak — від рівня Junior до Senior. Пізніше всі програми були опубліковані у відкритому доступі та стали затребуваними серед тисяч фахівців. Усі курси безкоштовні: відеолекції, конспекти, код, тести та завдання.',
                    'These courses began as an internal training program for Netpeak\'s analytics team — from Junior to Senior. Later every program was published openly and is now used by thousands of specialists. All courses are free: video lectures, notes, code, quizzes and assignments.'),
                  [(str(free), T('Курсов', 'Курсів', 'Courses')), ('0 $', T('Стоимость', 'Вартість', 'Price')),
-                  ('2018', T('Первый курс', 'Перший курс', 'First course')), ('3', T('Уровня сложности', 'Рівні складності', 'Skill levels'))])
+                  ('2018', T('Первый курс', 'Перший курс', 'First course')), ('3', T('Уровня сложности', 'Рівні складності', 'Skill levels'))], photo='courses')
     page += f'''
     <!-- LEARNING PATH -->
     <section class="px-6 max-w-7xl mx-auto pb-16 relative z-10">
@@ -760,7 +801,7 @@ def build_talks():
                    'Регулярно виступаю на найбільших галузевих конференціях з аналітики та інтернет-маркетингу — 8P, Матемаркетинг, GoAnalytics, Analyze! — і проводжу вебінари та воркшопи для освітніх платформ. Ділюся практичним досвідом автоматизації, роботи з API рекламних систем і побудови BI-рішень. Натисніть на картку, щоб переглянути запис просто тут.',
                    'I speak regularly at major analytics and digital marketing conferences — 8P, Matemarketing, GoAnalytics, Analyze! — and run webinars and workshops for education platforms, sharing hands-on experience in automation, ad-platform APIs and BI. Click any card to watch the recording right here.'),
                  [(str(len(talks)), T('Выступлений', 'Виступів', 'Talks')), (str(cats['conference']), T('Конференции', 'Конференції', 'Conferences')),
-                  (str(cats['webinar']), T('Вебинары', 'Вебінари', 'Webinars')), (f'{years[0]}–{years[-1]}', T('Годы', 'Роки', 'Years'))])
+                  (str(cats['webinar']), T('Вебинары', 'Вебінари', 'Webinars')), (f'{years[0]}–{years[-1]}', T('Годы', 'Роки', 'Years'))], photo='talks')
     page += f'''
     <!-- FEATURED -->
     <section class="px-6 max-w-7xl mx-auto pb-16 relative z-10">
@@ -924,7 +965,7 @@ def build_articles():
                    'З 2015 року пишу про те, чим займаюся щодня: мова R та автоматизація, Google BigQuery і Power BI, веб-аналітика, API рекламних систем і щоквартальні дослідження вартості кліку. Публікації виходили на Хабрі, у Netpeak Journal та інших виданнях; якщо оригінал більше недоступний, посилання веде на копію в моєму блозі. Статті написані російською мовою.',
                    'Since 2015 I have been writing about my daily work: R and automation, Google BigQuery and Power BI, web analytics, ad-platform APIs and quarterly cost-per-click research. The articles appeared on Habr, Netpeak Journal and other outlets; if an original is gone, the link points to a copy on my blog. Articles are written in Russian.'),
                  [(str(len(arts)), T('Статей', 'Статей', 'Articles')), (str(outlets), T('Изданий', 'Видань', 'Outlets')),
-                  (str(min(years)), T('Первая статья', 'Перша стаття', 'First article')), (str(topic_counts['r']), T('Про язык R', 'Про мову R', 'About R'))])
+                  (str(min(years)), T('Первая статья', 'Перша стаття', 'First article')), (str(topic_counts['r']), T('Про язык R', 'Про мову R', 'About R'))], photo='articles')
     page += f'''
     <!-- CATALOG -->
     <section class="px-6 max-w-7xl mx-auto pb-16 relative z-10">
@@ -1020,7 +1061,7 @@ def build_interviews():
                    "Інтерв'ю, експертні опитування та коментарі для профільних видань: про мову R у маркетингу, професію аналітика, наскрізну аналітику, тренди веб-аналітики та зміни на рекламному ринку України.",
                    'Interviews, expert surveys and comments for industry media: on R in marketing, the analyst profession, end-to-end analytics, web analytics trends and changes in Ukraine\'s advertising market.'),
                  [(str(len(items)), T('Публикаций', 'Публікацій', 'Publications')), (str(outlets), T('Изданий', 'Видань', 'Outlets')),
-                  (str(kinds['interview']), T('Интервью', "Інтерв'ю", 'Interviews')), (f'{years[0]}–{years[-1]}', T('Годы', 'Роки', 'Years'))])
+                  (str(kinds['interview']), T('Интервью', "Інтерв'ю", 'Interviews')), (f'{years[0]}–{years[-1]}', T('Годы', 'Роки', 'Years'))], photo='interviews')
     page += f'''
     <!-- CATALOG -->
     <section class="px-6 max-w-7xl mx-auto pb-16 relative z-10">
@@ -1139,7 +1180,7 @@ def build_videos():
                    'Безкоштовні відеоуроки з YouTube-каналу R4marketing: серії з моїх R-пакетів для роботи з API рекламних і аналітичних систем, а також окремі уроки з роботи з даними, автоматизації, деплою та AI. Уроки, що увійшли до повноцінних курсів, зібрані на <a href="../courses/" class="text-purple-300 underline underline-offset-4 hover:text-white">сторінці курсів</a>.',
                    'Free video lessons from the R4marketing YouTube channel: series on my R packages for ad and analytics APIs, plus standalone lessons on data, automation, deployment and AI. Lessons that became full courses live on the <a href="../courses/" class="text-purple-300 underline underline-offset-4 hover:text-white">courses page</a>.'),
                  [(str(total), T('Видео', 'Відео', 'Videos')), (str(len(series)), T('Серий по пакетам', 'Серій за пакетами', 'Package series')),
-                  (str(len(lessons)), T('Отдельных уроков', 'Окремих уроків', 'Standalone lessons')), (f'{years[0]}–{years[-1]}', T('Годы', 'Роки', 'Years'))])
+                  (str(len(lessons)), T('Отдельных уроков', 'Окремих уроків', 'Standalone lessons')), (f'{years[0]}–{years[-1]}', T('Годы', 'Роки', 'Years'))], photo='videos')
     page += f'''
     <!-- SERIES -->
     <section class="px-6 max-w-7xl mx-auto pb-20 relative z-10">
@@ -1455,7 +1496,7 @@ def build_opensource():
                    'Since 2016 I have been building R packages that simplify collecting data from ad, analytics and CRM platforms, so specialists without deep coding skills can automate reporting and build marketing analytics. Most are published on CRAN, and many come with docs and video lessons.'),
                  [(str(len(pkgs)), T('R-пакет', 'R-пакет', 'R packages')), (str(on_cran), T('Опубликованы на CRAN', 'Опубліковані на CRAN', 'Published on CRAN')),
                   (f'<span id="total-downloads">{total_dl // 1000}k+</span>', T('Скачиваний с CRAN', 'Завантажень з CRAN', 'CRAN downloads')),
-                  ('2016', T('Первый пакет', 'Перший пакет', 'First package'))])
+                  ('2016', T('Первый пакет', 'Перший пакет', 'First package'))], photo='opensource')
     page += f'''
     <!-- PACKAGES -->
     <section class="px-6 max-w-7xl mx-auto pb-10 relative z-10">

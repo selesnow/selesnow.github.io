@@ -33,6 +33,8 @@ GitHub Actions (`.github/workflows/update-stats.yml`) каждый день в 0
 - `assets/stats.json` — публичный снимок счётчиков (cranlogs + GitHub API), его читают лендинг
   и `/opensource/`. Обновляется ночным workflow или командой `python _build/build.py --stats-only`.
 - `assets/logos/` — логотипы пакетов, `assets/services/` — обложки сервисов.
+- `assets/photos/` — фото с конференций для шапок разделов (WebP, сжатые копии исходников из `img/`).
+  Какое фото в каком разделе, подпись и кадрирование (`pos`) задаются в `PHOTOS` в `_build/build.py`.
 - Остальные каталоги в корне (`r4excel_users/`, `rfacebookstat/` и др.) — старые проекты, не трогать.
 
 ## Правила контента
