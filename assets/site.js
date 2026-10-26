@@ -10,7 +10,24 @@ document.querySelectorAll('.bento-glass').forEach(card => {
 });
 
 // --- ЯЗЫК (общий с лендингом через localStorage) ---
-function changeLang(lang) {
+// При первом визите язык берётся из настроек браузера (uk → UA, ru → RU), иначе английский.
+// Явный выбор кнопкой EN/RU/UA запоминается и дальше имеет приоритет.
+function detectLang() {
+    const langs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || 'en'];
+    for (const l of langs) {
+        const code = (l || '').toLowerCase().split('-')[0];
+        if (code === 'uk') return 'ua';
+        if (code === 'ru') return 'ru';
+        if (code === 'en') return 'en';
+    }
+    return 'en';
+}
+
+function currentLang() {
+    return ['ru', 'ua', 'en'].find(l => document.body.classList.contains('lang-' + l)) || 'en';
+}
+
+function changeLang(lang, remember = true) {
     document.body.classList.remove('lang-ru', 'lang-en', 'lang-ua');
     // Принудительный reflow для обнуления CSS анимаций
     void document.body.offsetWidth;
@@ -29,12 +46,13 @@ function changeLang(lang) {
         el.setAttribute('placeholder', el.getAttribute('data-ph-' + lang));
     });
 
-    localStorage.setItem('preferredLang', lang);
+    if (remember) localStorage.setItem('preferredLang', lang);
     setTimeout(() => { if (typeof AOS !== 'undefined') AOS.refresh(); }, 50);
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-    changeLang(localStorage.getItem('preferredLang') || 'en');
+    const savedLang = localStorage.getItem('preferredLang');
+    changeLang(savedLang || detectLang(), Boolean(savedLang));
 });
 
 // --- ANIMATION ON SCROLL ---
@@ -160,7 +178,7 @@ function closeVideoModal() {
 document.querySelectorAll('[data-video]').forEach(el => {
     el.addEventListener('click', e => {
         e.preventDefault();
-        const lang = localStorage.getItem('preferredLang') || 'en';
+        const lang = currentLang();
         const t = el.querySelector(`[data-video-title] .${lang}-text`);
         openVideoModal(el.dataset.video, t ? t.textContent.trim() : '');
     });

@@ -48,6 +48,27 @@ GitHub Actions (`.github/workflows/update-stats.yml`) каждый день в 0
   в `index.html` (`python -c "import sys; sys.path.insert(0,'_build'); import build; print(build.footer(''))"`).
 - Новую внутреннюю страницу добавляй в `PAGES`, в `sitemap.xml` и обновляй футер лендинга.
 
+## Стили, аналитика, SEO
+
+- **Tailwind собирается заранее**, CDN не используется. `assets/tailwind.css` строится из классов, найденных
+  в HTML-страницах, `assets/site.js` и `_build/build.py` (см. `_build/tailwind.config.js`).
+  **Если добавил новый Tailwind-класс** (в `index.html`, шаблоны или JS) — запусти `python _build/build.py`
+  (нужен Node.js/npx), иначе у класса не будет стилей. Ночной workflow тоже пересобирает CSS.
+  `tailwind.css` подключается последним в `<head>` (как это делал CDN) — порядок не менять.
+- Шрифты Inter и Outfit подключаются тегом `<link>` в `<head>` (с `preconnect`), не через `@import`.
+- **Google Analytics 4:** ресурс `G-Z56YHE916N`, идентификатор в `GA_ID` в `_build/build.py`
+  (пусто — счётчик не подключается). Сайты курсов (отдельные репозитории) подключены старым тегом
+  `UA-114798296-1`; Google связал его с этим же GA4-ресурсом, так что их данные тоже попадают в `G-Z56YHE916N`.
+  На лендинге сниппет `gtag.js` вставлен вручную в `<head>` — при смене ID поменяй в обоих местах.
+- **Структурированные данные (schema.org JSON-LD)** не отображаются на странице. Лендинг: Person + WebSite
+  (вывод `build.landing_jsonld()`), внутренние страницы: CollectionPage, для курсов — список Course,
+  для пакетов — SoftwareSourceCode. Данные о человеке — в `PERSON` в `_build/build.py`; после изменения
+  обнови блок `application/ld+json` в `index.html`.
+- **Язык:** явный выбор кнопкой EN/RU/UA хранится в `localStorage.preferredLang`; без него язык берётся
+  из настроек браузера (uk → UA, ru → RU), иначе EN. Автоопределение не сохраняется.
+- `sitemap.xml` правится вручную: страницы сайта, сайты курсов на этом домене (отдельные репозитории),
+  `publications/`, `library/`, `news/`. Проверяй, что все адреса отдают 200.
+
 ## Проверка
 
 Локальный сервер: `python -m http.server 8765` из корня репозитория (YouTube-плеер на `file://` не работает).

@@ -8,6 +8,14 @@
     <meta name="author" content="Alexey Seleznev">
     <meta name="theme-color" content="#030712">
     <link rel="canonical" href="https://alexey-seleznev.pro/">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z56YHE916N"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Z56YHE916N');
+    </script>
 
     <!-- Primary SEO -->
     <title>Алексей Селезнёв | Head of Analytics & R Developer</title>
@@ -37,13 +45,14 @@
 
     <link rel="icon" type="image/jpeg" href="logo.jpg">
     <link rel="apple-touch-icon" href="logo.jpg">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;700;800;900&display=swap">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;700;800;900&display=swap');
         
         html, body {
             overflow-x: hidden;
@@ -151,6 +160,74 @@
 
         .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
+    <!-- Tailwind собран заранее (_build/build.py) и подключается последним, как это делал CDN-скрипт -->
+    <link rel="stylesheet" href="assets/tailwind.css">
+
+    <!-- Структурированные данные schema.org (не отображаются на странице) -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://alexey-seleznev.pro/#person",
+      "name": "Alexey Seleznev",
+      "alternateName": [
+        "Алексей Селезнёв",
+        "Олексій Селезньов",
+        "selesnow"
+      ],
+      "url": "https://alexey-seleznev.pro/",
+      "image": "https://alexey-seleznev.pro/photo.jpg",
+      "email": "mailto:me@alexey-seleznev.pro",
+      "jobTitle": "Head of Analytics",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Netpeak Group"
+      },
+      "description": "Head of Analytics at Netpeak Group, author of open source R packages, free R courses and the R4marketing project.",
+      "knowsAbout": [
+        "R",
+        "Data analytics",
+        "Marketing analytics",
+        "Web analytics",
+        "Business intelligence",
+        "Google BigQuery",
+        "Power BI",
+        "API integration",
+        "LLM tools"
+      ],
+      "sameAs": [
+        "https://github.com/selesnow",
+        "https://linkedin.com/in/selesnow",
+        "https://facebook.com/selesnow",
+        "https://www.instagram.com/alexey.selesnow",
+        "https://habr.com/ru/users/selesnow/",
+        "https://alexeyseleznev.wordpress.com/",
+        "https://t.me/R4marketing",
+        "https://www.youtube.com/R4marketing"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://alexey-seleznev.pro/#website",
+      "url": "https://alexey-seleznev.pro/",
+      "name": "ALEXEY-SELEZNEV.pro",
+      "inLanguage": [
+        "en",
+        "ru",
+        "uk"
+      ],
+      "author": {
+        "@id": "https://alexey-seleznev.pro/#person"
+      },
+      "publisher": {
+        "@id": "https://alexey-seleznev.pro/#person"
+      }
+    }
+  ]
+}
+    </script>
 </head>
 <body class="relative lang-en">
 
@@ -2244,7 +2321,20 @@
             });
         }
 
-        function changeLang(lang) {
+        // Язык при первом визите: из настроек браузера (uk → UA, ru → RU), иначе английский.
+        // Явный выбор кнопкой EN/RU/UA запоминается и дальше имеет приоритет.
+        function detectLang() {
+            const langs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || 'en'];
+            for (const l of langs) {
+                const code = (l || '').toLowerCase().split('-')[0];
+                if (code === 'uk') return 'ua';
+                if (code === 'ru') return 'ru';
+                if (code === 'en') return 'en';
+            }
+            return 'en';
+        }
+
+        function changeLang(lang, remember = true) {
             document.body.classList.remove('lang-ru', 'lang-en', 'lang-ua');
             // Принудительный reflow для обнуления CSS анимаций
             void document.body.offsetWidth;
@@ -2263,7 +2353,8 @@
                 btnUa.classList.toggle('text-slate-500', lang !== 'ua');
             }
             
-            localStorage.setItem('preferredLang', lang);
+            document.documentElement.lang = lang === 'ua' ? 'uk' : lang;
+            if (remember) localStorage.setItem('preferredLang', lang);
             
             // Refund AOS after text layout shifts
             setTimeout(() => {
@@ -2272,8 +2363,8 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            const savedLang = localStorage.getItem('preferredLang') || 'en';
-            changeLang(savedLang);
+            const savedLang = localStorage.getItem('preferredLang');
+            changeLang(savedLang || detectLang(), Boolean(savedLang));
         });
 
         // Mobile Navigation Menu Logic

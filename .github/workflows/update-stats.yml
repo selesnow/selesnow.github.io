@@ -28,6 +28,10 @@ jobs:
         with:
           python-version: '3.12'
 
+      - uses: actions/setup-node@v4   # нужен для сборки Tailwind CSS (npx tailwindcss)
+        with:
+          node-version: '20'
+
       - name: Rebuild pages with fresh stats
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -38,7 +42,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/stats.json _build/data/package_stats.json opensource courses videos talks articles interviews 404.html
+          git add assets/stats.json _build/data/package_stats.json opensource courses videos talks articles interviews 404.html assets/tailwind.css
           if git diff --cached --quiet; then
             echo "Счётчики не изменились"
             echo "changed=false" >> "$GITHUB_OUTPUT"

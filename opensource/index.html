@@ -11,13 +11,13 @@
 
     <title>Open Source R-пакеты | Алексей Селезнёв</title>
     <meta name="title" content="Open Source R-пакеты | Алексей Селезнёв">
-    <meta name="description" content="22 open source R-пакетов Алексея Селезнёва для работы с API Google Ads, Facebook, TikTok, LinkedIn, Apple Ads, YouTube, TGStat, AppsFlyer и других сервисов. Более 416k скачиваний с CRAN.">
+    <meta name="description" content="22 open source R-пакета Алексея Селезнёва для работы с API Google Ads, Facebook, TikTok, LinkedIn, Apple Ads, YouTube, TGStat, AppsFlyer и других сервисов. Более 416k скачиваний с CRAN.">
 
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://alexey-seleznev.pro/opensource/">
     <meta property="og:site_name" content="ALEXEY-SELEZNEV.pro">
     <meta property="og:title" content="Open Source R-пакеты | Алексей Селезнёв">
-    <meta property="og:description" content="22 open source R-пакетов Алексея Селезнёва для работы с API Google Ads, Facebook, TikTok, LinkedIn, Apple Ads, YouTube, TGStat, AppsFlyer и других сервисов. Более 416k скачиваний с CRAN.">
+    <meta property="og:description" content="22 open source R-пакета Алексея Селезнёва для работы с API Google Ads, Facebook, TikTok, LinkedIn, Apple Ads, YouTube, TGStat, AppsFlyer и других сервисов. Более 416k скачиваний с CRAN.">
     <meta property="og:image" content="https://alexey-seleznev.pro/photo.jpg">
     <meta property="og:image:alt" content="Алексей Селезнёв">
     <meta property="og:locale" content="ru_RU">
@@ -25,16 +25,453 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:url" content="https://alexey-seleznev.pro/opensource/">
     <meta name="twitter:title" content="Open Source R-пакеты | Алексей Селезнёв">
-    <meta name="twitter:description" content="22 open source R-пакетов Алексея Селезнёва для работы с API Google Ads, Facebook, TikTok, LinkedIn, Apple Ads, YouTube, TGStat, AppsFlyer и других сервисов. Более 416k скачиваний с CRAN.">
+    <meta name="twitter:description" content="22 open source R-пакета Алексея Селезнёва для работы с API Google Ads, Facebook, TikTok, LinkedIn, Apple Ads, YouTube, TGStat, AppsFlyer и других сервисов. Более 416k скачиваний с CRAN.">
     <meta name="twitter:image" content="https://alexey-seleznev.pro/photo.jpg">
 
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z56YHE916N"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Z56YHE916N');
+    </script>
     <link rel="icon" type="image/jpeg" href="../logo.jpg">
     <link rel="apple-touch-icon" href="../logo.jpg">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;700;800;900&display=swap">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/site.css">
+    <!-- Tailwind собран заранее (_build/build.py) и подключается последним, как это делал CDN-скрипт -->
+    <link rel="stylesheet" href="../assets/tailwind.css">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": "https://alexey-seleznev.pro/opensource/",
+      "url": "https://alexey-seleznev.pro/opensource/",
+      "name": "Open Source R-пакеты",
+      "description": "22 open source R-пакета Алексея Селезнёва для работы с API Google Ads, Facebook, TikTok, LinkedIn, Apple Ads, YouTube, TGStat, AppsFlyer и других сервисов. Более 416k скачиваний с CRAN.",
+      "isPartOf": {
+        "@id": "https://alexey-seleznev.pro/#website"
+      },
+      "author": {
+        "@id": "https://alexey-seleznev.pro/#person"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Alexey Seleznev",
+            "item": "https://alexey-seleznev.pro/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Open Source R-пакеты",
+            "item": "https://alexey-seleznev.pro/opensource/"
+          }
+        ]
+      },
+      "mainEntity": {
+        "@type": "ItemList",
+        "numberOfItems": 22,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@type": "SoftwareSourceCode",
+              "name": "rfacebookstat",
+              "description": "Facebook Marketing API",
+              "codeRepository": "https://github.com/selesnow/rfacebookstat",
+              "programmingLanguage": "R",
+              "author": {
+                "@id": "https://alexey-seleznev.pro/#person"
+              },
+              "url": "https://cran.r-project.org/package=rfacebookstat"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+              "@type": "SoftwareSourceCode",
+              "name": "timeperiodsR",
+              "description": "Simple definition of time intervals",
+              "codeRepository": "https://github.com/selesnow/timeperiodsR",
+              "programmingLanguage": "R",
+              "author": {
+                "@id": "https://alexey-seleznev.pro/#person"
+              },
+              "url": "https://cran.r-project.org/package=timeperiodsR"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+              "@type": "SoftwareSourceCode",
+              "name": "rgoogleads",
+              "description": "Google Ads API",
+              "codeRepository": "https://github.com/selesnow/rgoogleads",
+              "programmingLanguage": "R",
+              "author": {
+                "@id": "https://alexey-seleznev.pro/#person"
+              },
+              "url": "https://cran.r-project.org/package=rgoogleads"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "item": {
+              "@type": "SoftwareSourceCode",
+              "name": "getProxy",
+              "description": "Free proxy servers for your R session",
+              "codeRepository": "https://github.com/selesnow/getProxy",
+              "programmingLanguage": "R",
+              "author": {
+                "@id": "https://alexey-seleznev.pro/#person"
+              },
+              "url": "https://cran.r-project.org/package=getProxy"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 5,
+            "item": {
+              "@type": "SoftwareSourceCode",
+              "name": "rtgstat",
+              "description": "Telegram channel analytics via the TGStat API",
+              "codeRepository": "https://github.com/selesnow/rtgstat",
+              "programmingLanguage": "R",
+              "author": {
+                "@id": "https://alexey-seleznev.pro/#person"
+              },
+              "url": "https://cran.r-project.org/package=rtgstat"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 6,
+            "item": {
+              "@type": "SoftwareSourceCode",
+              "name": "ringostat",
+              "description": "Ringostat call-tracking API",
+              "codeRepository": "https://github.com/selesnow/ringostat",
+              "programmingLanguage": "R",
+              "author": {
+                "@id": "https://alexey-seleznev.pro/#person"
+              },
+              "url": "https://cran.r-project.org/package=ringostat"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 7,
+            "item": {
+              "@type": "SoftwareSourceCode",
+              "name": "rappsflyer",
+              "description": "AppsFlyer mobile attribution",
+              "codeRepository": "https://github.com/selesnow/rappsflyer",
+              "programmingLanguage": "R",
+              "author": {
+                "@id": "https://alexey-seleznev.pro/#person"
+              },
+              "url": "https://cran.r-project.org/package=rappsflyer"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 8,
+            "item": {
+              "@type": "SoftwareSourceCode",
+              "name": "ractivecampaign",
+              "description": "ActiveCampaign CRM & email marketing",
+              "codeRepository": "https://github.com/selesnow/ractivecampaign",
+              "programmingLanguage": "R",
+              "author": {
+                "@id": "https://alexey-seleznev.pro/#person"
+              },
+              "url": "https://cran.r-project.org/package=ractivecampaign"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 9,
+            "item": {
+              "@type": "SoftwareSourceCode",
+              "name": "rytstat",
+              "description": "YouTube Data, Analytics & Reporting APIs",
+              "codeRepository": "https://github.com/selesnow/rytstat",
+              "programmingLanguage": "R",
+              "author": {
+                "@id": "https://alexey-seleznev.pro/#person"
+              },
+              "url": "https://cran.r-project.org/package=rytstat"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 10,
+            "item": {
+              "@type": "SoftwareSourceCode",
+              "name": "racademyocean",
+              "description": "AcademyOcean learning platform",
+              "codeRepository": "https://github.com/selesnow/racademyocean",
+              "programmingLanguage": "R",
+              "author": {
+                "@id": "https://alexey-seleznev.pro/#person"
+              },
+              "url": "https://cran.r-project.org/package=racademyocean"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 11,
+            "item": {
+              "@type": "SoftwareSourceCode",
+              "name": "rlinkedinads",
+              "description": "LinkedIn Advertising API",
+              "codeRepository": "https://github.com/selesnow/rlinkedinads",
+              "programmingLanguage": "R",
+              "author": {
+                "@id": "https://alexey-seleznev.pro/#person"
+              },
+              "url": "https://cran.r-project.org/package=rlinkedinads"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 12,
+            "item": {
+              "@type": "SoftwareSourceCode",
+              "name": "rtiktokads",
+              "description": "TikTok Marketing API",
+              "codeRepository": "https://github.com/selesnow/rtiktokads",
+              "programmingLanguage": "R",
+              "author": {
+                "@id": "https://alexey-seleznev.pro/#person"
+              },
+              "url": "https://cran.r-project.org/package=rtiktokads"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 13,
+            "item": {
+              "@type": "SoftwareSourceCode",
+              "name": "rappleads",
+              "description": "Apple Ads Campaign Management API",
+              "codeRepository": "https://github.com/selesnow/rappleads",
+              "programmingLanguage": "R",
+              "author": {
+                "@id": "https://alexey-seleznev.pro/#person"
+              },
+              "url": "https://cran.r-project.org/package=rappleads"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 14,
+            "item": {
+              "@type": "SoftwareSourceCode",
+              "name": "galigor",
+              "description": "A collection of internet-marketing packages",
+              "codeRepository": "https://github.com/selesnow/galigor",
+              "programmingLanguage": "R",
+              "author": {
+                "@id": "https://alexey-seleznev.pro/#person"
+              }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 15,
+            "item": {
+              "@type": "SoftwareSourceCode",
+              "name": "rzohobooks",
+              "description": "Zoho Books accounting",
+              "codeRepository": "https://github.com/selesnow/rzohobooks",
+              "programmingLanguage": "R",
+              "author": {
+                "@id": "https://alexey-seleznev.pro/#person"
+              }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 16,
+            "item": {
+              "@type": "SoftwareSourceCode",
+              "name": "rwayforpay",
+              "description": "WayForPay payments",
+              "codeRepository": "https://github.com/selesnow/rwayforpay",
+              "programmingLanguage": "R",
+              "author": {
+                "@id": "https://alexey-seleznev.pro/#person"
+              }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 17,
+            "item": {
+              "@type": "SoftwareSourceCode",
+              "name": "rmixpanel",
+              "description": "Mixpanel product analytics",
+              "codeRepository": "https://github.com/selesnow/rmixpanel",
+              "programmingLanguage": "R",
+              "author": {
+                "@id": "https://alexey-seleznev.pro/#person"
+              }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 18,
+            "item": {
+              "@type": "SoftwareSourceCode",
+              "name": "rGitHub",
+              "description": "GitHub repository statistics",
+              "codeRepository": "https://github.com/selesnow/rGitHub",
+              "programmingLanguage": "R",
+              "author": {
+                "@id": "https://alexey-seleznev.pro/#person"
+              }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 19,
+            "item": {
+              "@type": "SoftwareSourceCode",
+              "name": "ryandexdirect",
+              "description": "Yandex.Direct API",
+              "codeRepository": "https://github.com/selesnow/ryandexdirect",
+              "programmingLanguage": "R",
+              "author": {
+                "@id": "https://alexey-seleznev.pro/#person"
+              },
+              "url": "https://cran.r-project.org/package=ryandexdirect"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 20,
+            "item": {
+              "@type": "SoftwareSourceCode",
+              "name": "rym",
+              "description": "Yandex.Metrica API",
+              "codeRepository": "https://github.com/selesnow/rym",
+              "programmingLanguage": "R",
+              "author": {
+                "@id": "https://alexey-seleznev.pro/#person"
+              },
+              "url": "https://cran.r-project.org/package=rym"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 21,
+            "item": {
+              "@type": "SoftwareSourceCode",
+              "name": "rvkstat",
+              "description": "VK API",
+              "codeRepository": "https://github.com/selesnow/rvkstat",
+              "programmingLanguage": "R",
+              "author": {
+                "@id": "https://alexey-seleznev.pro/#person"
+              },
+              "url": "https://cran.r-project.org/package=rvkstat"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 22,
+            "item": {
+              "@type": "SoftwareSourceCode",
+              "name": "rmytarget",
+              "description": "MyTarget API v2 & v3",
+              "codeRepository": "https://github.com/selesnow/rmytarget",
+              "programmingLanguage": "R",
+              "author": {
+                "@id": "https://alexey-seleznev.pro/#person"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://alexey-seleznev.pro/#person",
+      "name": "Alexey Seleznev",
+      "alternateName": [
+        "Алексей Селезнёв",
+        "Олексій Селезньов",
+        "selesnow"
+      ],
+      "url": "https://alexey-seleznev.pro/",
+      "image": "https://alexey-seleznev.pro/photo.jpg",
+      "email": "mailto:me@alexey-seleznev.pro",
+      "jobTitle": "Head of Analytics",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Netpeak Group"
+      },
+      "description": "Head of Analytics at Netpeak Group, author of open source R packages, free R courses and the R4marketing project.",
+      "knowsAbout": [
+        "R",
+        "Data analytics",
+        "Marketing analytics",
+        "Web analytics",
+        "Business intelligence",
+        "Google BigQuery",
+        "Power BI",
+        "API integration",
+        "LLM tools"
+      ],
+      "sameAs": [
+        "https://github.com/selesnow",
+        "https://linkedin.com/in/selesnow",
+        "https://facebook.com/selesnow",
+        "https://www.instagram.com/alexey.selesnow",
+        "https://habr.com/ru/users/selesnow/",
+        "https://alexeyseleznev.wordpress.com/",
+        "https://t.me/R4marketing",
+        "https://www.youtube.com/R4marketing"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://alexey-seleznev.pro/#website",
+      "url": "https://alexey-seleznev.pro/",
+      "name": "ALEXEY-SELEZNEV.pro",
+      "inLanguage": [
+        "en",
+        "ru",
+        "uk"
+      ],
+      "author": {
+        "@id": "https://alexey-seleznev.pro/#person"
+      },
+      "publisher": {
+        "@id": "https://alexey-seleznev.pro/#person"
+      }
+    }
+  ]
+}
+    </script>
 </head>
 <body class="relative lang-en">
 

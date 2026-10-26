@@ -1,6 +1,6 @@
 /* Общие стили внутренних страниц (courses / talks / articles / interviews).
    Базовая часть повторяет стили лендинга index.html, чтобы дизайн был единым. */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;700;800;900&display=swap');
+/* Шрифты Inter и Outfit подключаются тегом <link> в <head> страниц. */
 
 html, body {
     overflow-x: hidden;

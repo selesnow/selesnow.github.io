@@ -47,6 +47,14 @@ MONTHS = {
 }
 
 
+def plural_ru(n, one, few, many):
+    """Согласование существительного с числом: 1 доклад, 2 доклада, 5 докладов."""
+    n = abs(n) % 100
+    if 11 <= n <= 14:
+        return many
+    return {1: one, 2: few, 3: few, 4: few}.get(n % 10, many)
+
+
 def month_label(y, m):
     return T(*(f'{MONTHS[l][m - 1]} {y}' for l in LANGS))
 
@@ -68,8 +76,141 @@ PAGES = [
 ]
 
 
-def head(slug, title, description, image=f'{SITE}/photo.jpg'):
+# ---------------------------------------------------------------- структурированные данные (schema.org)
+
+PERSON_ID = f'{SITE}/#person'
+WEBSITE_ID = f'{SITE}/#website'
+
+PERSON = {
+    '@type': 'Person',
+    '@id': PERSON_ID,
+    'name': 'Alexey Seleznev',
+    'alternateName': ['Алексей Селезнёв', 'Олексій Селезньов', 'selesnow'],
+    'url': f'{SITE}/',
+    'image': f'{SITE}/photo.jpg',
+    'email': 'mailto:me@alexey-seleznev.pro',
+    'jobTitle': 'Head of Analytics',
+    'worksFor': {'@type': 'Organization', 'name': 'Netpeak Group'},
+    'description': 'Head of Analytics at Netpeak Group, author of open source R packages, free R courses and the R4marketing project.',
+    'knowsAbout': ['R', 'Data analytics', 'Marketing analytics', 'Web analytics', 'Business intelligence',
+                   'Google BigQuery', 'Power BI', 'API integration', 'LLM tools'],
+    'sameAs': [
+        'https://github.com/selesnow',
+        'https://linkedin.com/in/selesnow',
+        'https://facebook.com/selesnow',
+        'https://www.instagram.com/alexey.selesnow',
+        'https://habr.com/ru/users/selesnow/',
+        'https://alexeyseleznev.wordpress.com/',
+        'https://t.me/R4marketing',
+        'https://www.youtube.com/R4marketing',
+    ],
+}
+
+WEBSITE = {
+    '@type': 'WebSite',
+    '@id': WEBSITE_ID,
+    'url': f'{SITE}/',
+    'name': 'ALEXEY-SELEZNEV.pro',
+    'inLanguage': ['en', 'ru', 'uk'],
+    'author': {'@id': PERSON_ID},
+    'publisher': {'@id': PERSON_ID},
+}
+
+
+def landing_jsonld():
+    """JSON-LD для лендинга: человек и сайт."""
+    return {'@context': 'https://schema.org', '@graph': [PERSON, WEBSITE]}
+
+
+def page_jsonld(slug, name, description, items=None):
+    """JSON-LD для внутренней страницы: раздел сайта, автор, хлебные крошки и, при наличии, список элементов."""
+    url = f'{SITE}/{slug}/'
+    page = {
+        '@type': 'CollectionPage',
+        '@id': url,
+        'url': url,
+        'name': name,
+        'description': description,
+        'isPartOf': {'@id': WEBSITE_ID},
+        'author': {'@id': PERSON_ID},
+        'breadcrumb': {
+            '@type': 'BreadcrumbList',
+            'itemListElement': [
+                {'@type': 'ListItem', 'position': 1, 'name': 'Alexey Seleznev', 'item': f'{SITE}/'},
+                {'@type': 'ListItem', 'position': 2, 'name': name, 'item': url},
+            ],
+        },
+    }
+    if items:
+        page['mainEntity'] = {
+            '@type': 'ItemList',
+            'numberOfItems': len(items),
+            'itemListElement': [{'@type': 'ListItem', 'position': i, 'item': it} for i, it in enumerate(items, 1)],
+        }
+    return {'@context': 'https://schema.org', '@graph': [page, PERSON, WEBSITE]}
+
+
+def course_items(courses):
+    return [{
+        '@type': 'Course',
+        'name': c['title']['ru'],
+        'alternateName': c['title']['en'],
+        'description': c['tagline']['ru'],
+        'url': c['url'],
+        'image': c['cover'],
+        'inLanguage': 'ru',
+        'isAccessibleForFree': True,
+        'provider': {'@id': PERSON_ID},
+        'author': {'@id': PERSON_ID},
+    } for c in courses]
+
+
+def package_items(pkgs):
+    items = []
+    for p in pkgs:
+        it = {
+            '@type': 'SoftwareSourceCode',
+            'name': p['name'],
+            'description': p['tagline']['en'],
+            'codeRepository': f'https://github.com/selesnow/{p["name"]}',
+            'programmingLanguage': 'R',
+            'author': {'@id': PERSON_ID},
+        }
+        if p['cran'] and not p.get('cranRemoved'):
+            it['url'] = f'https://cran.r-project.org/package={p["name"]}'
+        items.append(it)
+    return items
+
+
+# Идентификатор Google Analytics 4 (вида G-XXXXXXXXXX). Пустая строка — счётчик не подключается.
+GA_ID = 'G-Z56YHE916N'
+
+FONTS_URL = 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;700;800;900&display=swap'
+
+
+def ga_snippet():
+    if not GA_ID:
+        return ''
+    return f'''
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){{dataLayer.push(arguments);}}
+      gtag('js', new Date());
+      gtag('config', '{GA_ID}');
+    </script>'''
+
+
+def head(slug, title, description, image=f'{SITE}/photo.jpg', jsonld=None):
     canonical = f'{SITE}/{slug}/'
+    if jsonld is None and slug != '404':
+        jsonld = page_jsonld(slug, title.split(' | ')[0], description)
+    ld = ''
+    if jsonld:
+        ld = ('\n    <script type="application/ld+json">\n'
+              + json.dumps(jsonld, ensure_ascii=False, indent=2)
+              + '\n    </script>')
     return f'''<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
@@ -100,13 +241,18 @@ def head(slug, title, description, image=f'{SITE}/photo.jpg'):
     <meta name="twitter:description" content="{esc(description)}">
     <meta name="twitter:image" content="{image}">
 
+{ga_snippet()}
     <link rel="icon" type="image/jpeg" href="../logo.jpg">
     <link rel="apple-touch-icon" href="../logo.jpg">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="{FONTS_URL}">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/site.css">
+    <!-- Tailwind собран заранее (_build/build.py) и подключается последним, как это делал CDN-скрипт -->
+    <link rel="stylesheet" href="../assets/tailwind.css">{ld}
 </head>
 <body class="relative lang-en">
 
@@ -499,8 +645,9 @@ def build_courses():
         </article>''')
 
     free = len(courses)
-    page = head('courses', 'Курсы по языку R | Алексей Селезнёв',
-                'Бесплатные авторские курсы Алексея Селезнёва по языку R: от R для пользователей Excel до разработки пакетов, Telegram-ботов и AI-инструментов.')
+    courses_desc = 'Бесплатные авторские курсы Алексея Селезнёва по языку R: от R для пользователей Excel до разработки пакетов, Telegram-ботов и AI-инструментов.'
+    page = head('courses', 'Курсы по языку R | Алексей Селезнёв', courses_desc,
+                jsonld=page_jsonld('courses', 'Курсы по языку R', courses_desc, course_items(courses)))
     page += nav('courses')
     page += hero('fa-solid fa-graduation-cap', T('Обучение', 'Навчання', 'Learning'),
                  T('Авторские <span class="text-gradient">курсы</span>', 'Авторські <span class="text-gradient">курси</span>', 'Original <span class="text-gradient">Courses</span>'),
@@ -605,7 +752,7 @@ def build_talks():
     chips = ' '.join(f'<span class="px-3 py-1 rounded-full bg-slate-900/60 border border-white/10 text-xs font-semibold text-slate-300">{esc(e)}</span>' for e in events)
 
     page = head('talks', 'Доклады и вебинары | Алексей Селезнёв',
-                f'{len(talks)} докладов, воркшопов и вебинаров Алексея Селезнёва с конференций 8P, Матемаркетинг, GoAnalytics, Analyze! и других: язык R, API рекламных систем, BI и аналитика.')
+                f'{len(talks)} {plural_ru(len(talks), "доклад", "доклада", "докладов")}, воркшопов и вебинаров Алексея Селезнёва с конференций 8P, Матемаркетинг, GoAnalytics, Analyze! и других: язык R, API рекламных систем, BI и аналитика.')
     page += nav('talks')
     page += hero('fa-solid fa-microphone-lines', T('Спикер', 'Спікер', 'Speaker'),
                  T('Доклады и <span class="text-gradient">вебинары</span>', 'Доповіді та <span class="text-gradient">вебінари</span>', 'Talks & <span class="text-gradient">Webinars</span>'),
@@ -769,7 +916,7 @@ def build_articles():
 
     outlets = len({a['src'] for a in arts})
     page = head('articles', 'Статьи | Алексей Селезнёв',
-                f'{len(arts)} статей Алексея Селезнёва о языке R, Google BigQuery, Power BI, веб-аналитике, API рекламных систем и стоимости клика — Хабр, Netpeak Journal и другие издания.')
+                f'{len(arts)} {plural_ru(len(arts), "статья", "статьи", "статей")} Алексея Селезнёва о языке R, Google BigQuery, Power BI, веб-аналитике, API рекламных систем и стоимости клика — Хабр, Netpeak Journal и другие издания.')
     page += nav('articles')
     page += hero('fa-solid fa-pen-nib', T('Публикации', 'Публікації', 'Publications'),
                  T('Статьи и <span class="text-gradient">туториалы</span>', 'Статті та <span class="text-gradient">туторіали</span>', 'Articles & <span class="text-gradient">Tutorials</span>'),
@@ -983,7 +1130,7 @@ def build_videos():
             btns.append(filter_btn('topic', key, T(*label), topic_counts[key], icon))
 
     page = head('videos', 'Видеоуроки по R | Алексей Селезнёв',
-                f'{total} бесплатных видеоуроков Алексея Селезнёва по языку R: серии по пакетам для работы с API рекламных систем, работа с данными, автоматизация, деплой и AI.',
+                f'{total} {plural_ru(total, "бесплатный видеоурок", "бесплатных видеоурока", "бесплатных видеоуроков")} Алексея Селезнёва по языку R: серии по пакетам для работы с API рекламных систем, работа с данными, автоматизация, деплой и AI.',
                 image=thumb(series[0]['episodes'][0]['yt']))
     page += nav('videos')
     page += hero('fa-solid fa-circle-play', T('YouTube · R4marketing', 'YouTube · R4marketing', 'YouTube · R4marketing'),
@@ -1297,8 +1444,9 @@ def build_opensource():
             </div>
         </div>'''
 
-    page = head('opensource', 'Open Source R-пакеты | Алексей Селезнёв',
-                f'{len(pkgs)} open source R-пакетов Алексея Селезнёва для работы с API Google Ads, Facebook, TikTok, LinkedIn, Apple Ads, YouTube, TGStat, AppsFlyer и других сервисов. Более {total_dl // 1000}k скачиваний с CRAN.')
+    os_desc = f'{len(pkgs)} open source {plural_ru(len(pkgs), "R-пакет", "R-пакета", "R-пакетов")} Алексея Селезнёва для работы с API Google Ads, Facebook, TikTok, LinkedIn, Apple Ads, YouTube, TGStat, AppsFlyer и других сервисов. Более {total_dl // 1000}k скачиваний с CRAN.'
+    page = head('opensource', 'Open Source R-пакеты | Алексей Селезнёв', os_desc,
+                jsonld=page_jsonld('opensource', 'Open Source R-пакеты', os_desc, package_items(pkgs)))
     page += nav('opensource')
     page += hero('fa-solid fa-code-branch', 'Open Source',
                  T('R-<span class="text-gradient">пакеты</span>', 'R-<span class="text-gradient">пакети</span>', 'R <span class="text-gradient">Packages</span>'),
@@ -1389,6 +1537,30 @@ def build_404():
     print(f'404.html: {len(page):,} bytes')
 
 
+# ---------------------------------------------------------------- Tailwind CSS
+
+TAILWIND_VERSION = '3.4.17'  # та же версия, что отдавал cdn.tailwindcss.com
+
+
+def build_css():
+    """Собирает assets/tailwind.css из классов всех страниц (нужен Node.js / npx).
+    Запускается после генерации страниц, чтобы попали классы из свежего HTML."""
+    import shutil
+    import subprocess
+    npx = shutil.which('npx')
+    if not npx:
+        print('  npx не найден: assets/tailwind.css не пересобран (установите Node.js)')
+        return
+    cmd = [npx, '-y', f'tailwindcss@{TAILWIND_VERSION}',
+           '-c', '_build/tailwind.config.js', '-i', '_build/tailwind.input.css',
+           '-o', 'assets/tailwind.css', '--minify']
+    result = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
+    if result.returncode != 0:
+        print('  Ошибка сборки Tailwind:', result.stderr.strip()[-500:])
+        return
+    print(f'assets/tailwind.css: {(ROOT / "assets" / "tailwind.css").stat().st_size:,} bytes')
+
+
 if __name__ == '__main__':
     import sys
     if '--stats-only' in sys.argv:
@@ -1401,3 +1573,4 @@ if __name__ == '__main__':
     build_articles()
     build_interviews()
     build_404()
+    build_css()

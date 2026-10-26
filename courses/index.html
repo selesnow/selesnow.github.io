@@ -28,13 +28,266 @@
     <meta name="twitter:description" content="Бесплатные авторские курсы Алексея Селезнёва по языку R: от R для пользователей Excel до разработки пакетов, Telegram-ботов и AI-инструментов.">
     <meta name="twitter:image" content="https://alexey-seleznev.pro/photo.jpg">
 
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z56YHE916N"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Z56YHE916N');
+    </script>
     <link rel="icon" type="image/jpeg" href="../logo.jpg">
     <link rel="apple-touch-icon" href="../logo.jpg">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;700;800;900&display=swap">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/site.css">
+    <!-- Tailwind собран заранее (_build/build.py) и подключается последним, как это делал CDN-скрипт -->
+    <link rel="stylesheet" href="../assets/tailwind.css">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": "https://alexey-seleznev.pro/courses/",
+      "url": "https://alexey-seleznev.pro/courses/",
+      "name": "Курсы по языку R",
+      "description": "Бесплатные авторские курсы Алексея Селезнёва по языку R: от R для пользователей Excel до разработки пакетов, Telegram-ботов и AI-инструментов.",
+      "isPartOf": {
+        "@id": "https://alexey-seleznev.pro/#website"
+      },
+      "author": {
+        "@id": "https://alexey-seleznev.pro/#person"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Alexey Seleznev",
+            "item": "https://alexey-seleznev.pro/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Курсы по языку R",
+            "item": "https://alexey-seleznev.pro/courses/"
+          }
+        ]
+      },
+      "mainEntity": {
+        "@type": "ItemList",
+        "numberOfItems": 7,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@type": "Course",
+              "name": "Язык R для пользователей Excel",
+              "alternateName": "R for Excel Users",
+              "description": "Самый простой вход в R — через задачи, которые вы сегодня решаете в Excel.",
+              "url": "https://alexey-seleznev.pro/r4excel_users/",
+              "image": "https://alexey-seleznev.pro/r4excel_users/cover.png",
+              "inLanguage": "ru",
+              "isAccessibleForFree": true,
+              "provider": {
+                "@id": "https://alexey-seleznev.pro/#person"
+              },
+              "author": {
+                "@id": "https://alexey-seleznev.pro/#person"
+              }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+              "@type": "Course",
+              "name": "Язык R для интернет-маркетинга",
+              "alternateName": "R for Digital Marketing",
+              "description": "Автоматизация рутины маркетолога и веб-аналитика: от основ синтаксиса до Telegram-ботов.",
+              "url": "https://r-for-marketing.netpeak.net/",
+              "image": "https://alexey-seleznev.pro/r_for_marketing/cover.png",
+              "inLanguage": "ru",
+              "isAccessibleForFree": true,
+              "provider": {
+                "@id": "https://alexey-seleznev.pro/#person"
+              },
+              "author": {
+                "@id": "https://alexey-seleznev.pro/#person"
+              }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+              "@type": "Course",
+              "name": "Введение в dplyr 1.0.0",
+              "alternateName": "Introduction to dplyr 1.0.0",
+              "description": "Всё, что изменилось в главном пакете для манипуляции данными, — от 1.0.0 до 1.2.0.",
+              "url": "https://alexey-seleznev.pro/dplyr_1_0_0_course/",
+              "image": "https://alexey-seleznev.pro/dplyr_1_0_0_course/img/cover.png",
+              "inLanguage": "ru",
+              "isAccessibleForFree": true,
+              "provider": {
+                "@id": "https://alexey-seleznev.pro/#person"
+              },
+              "author": {
+                "@id": "https://alexey-seleznev.pro/#person"
+              }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "item": {
+              "@type": "Course",
+              "name": "Циклы и функционалы в языке R",
+              "alternateName": "Loops and Functionals in R",
+              "description": "Эффективные итерации, функциональный стиль и многопоточность.",
+              "url": "https://alexey-seleznev.pro/iterations_in_r/",
+              "image": "https://alexey-seleznev.pro/iterations_in_r/img/cover.png",
+              "inLanguage": "ru",
+              "isAccessibleForFree": true,
+              "provider": {
+                "@id": "https://alexey-seleznev.pro/#person"
+              },
+              "author": {
+                "@id": "https://alexey-seleznev.pro/#person"
+              }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 5,
+            "item": {
+              "@type": "Course",
+              "name": "Разработка Telegram-ботов на языке R",
+              "alternateName": "Building Telegram Bots in R",
+              "description": "Веб-учебник: от первого сообщения до AI-бота в облаке.",
+              "url": "https://alexey-seleznev.pro/build_telegram_bot_using_r/",
+              "image": "https://alexey-seleznev.pro/build_telegram_bot_using_r/cover.png",
+              "inLanguage": "ru",
+              "isAccessibleForFree": true,
+              "provider": {
+                "@id": "https://alexey-seleznev.pro/#person"
+              },
+              "author": {
+                "@id": "https://alexey-seleznev.pro/#person"
+              }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 6,
+            "item": {
+              "@type": "Course",
+              "name": "Разработка пакетов на языке R",
+              "alternateName": "R Package Development",
+              "description": "От первого пакета до публикации на CRAN — опыт автора 15 пакетов на CRAN.",
+              "url": "https://alexey-seleznev.pro/r_package_course/",
+              "image": "https://alexey-seleznev.pro/r_package_course/img/cover.png",
+              "inLanguage": "ru",
+              "isAccessibleForFree": true,
+              "provider": {
+                "@id": "https://alexey-seleznev.pro/#person"
+              },
+              "author": {
+                "@id": "https://alexey-seleznev.pro/#person"
+              }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 7,
+            "item": {
+              "@type": "Course",
+              "name": "Язык R для разработки AI-инструментов",
+              "alternateName": "Building AI Tools with R",
+              "description": "Не просто пользоваться LLM, а строить на R собственных AI-ассистентов.",
+              "url": "https://alexey-seleznev.pro/build_ai_tools_using_r/",
+              "image": "https://alexey-seleznev.pro/build_ai_tools_using_r/img/cover.png",
+              "inLanguage": "ru",
+              "isAccessibleForFree": true,
+              "provider": {
+                "@id": "https://alexey-seleznev.pro/#person"
+              },
+              "author": {
+                "@id": "https://alexey-seleznev.pro/#person"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://alexey-seleznev.pro/#person",
+      "name": "Alexey Seleznev",
+      "alternateName": [
+        "Алексей Селезнёв",
+        "Олексій Селезньов",
+        "selesnow"
+      ],
+      "url": "https://alexey-seleznev.pro/",
+      "image": "https://alexey-seleznev.pro/photo.jpg",
+      "email": "mailto:me@alexey-seleznev.pro",
+      "jobTitle": "Head of Analytics",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Netpeak Group"
+      },
+      "description": "Head of Analytics at Netpeak Group, author of open source R packages, free R courses and the R4marketing project.",
+      "knowsAbout": [
+        "R",
+        "Data analytics",
+        "Marketing analytics",
+        "Web analytics",
+        "Business intelligence",
+        "Google BigQuery",
+        "Power BI",
+        "API integration",
+        "LLM tools"
+      ],
+      "sameAs": [
+        "https://github.com/selesnow",
+        "https://linkedin.com/in/selesnow",
+        "https://facebook.com/selesnow",
+        "https://www.instagram.com/alexey.selesnow",
+        "https://habr.com/ru/users/selesnow/",
+        "https://alexeyseleznev.wordpress.com/",
+        "https://t.me/R4marketing",
+        "https://www.youtube.com/R4marketing"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://alexey-seleznev.pro/#website",
+      "url": "https://alexey-seleznev.pro/",
+      "name": "ALEXEY-SELEZNEV.pro",
+      "inLanguage": [
+        "en",
+        "ru",
+        "uk"
+      ],
+      "author": {
+        "@id": "https://alexey-seleznev.pro/#person"
+      },
+      "publisher": {
+        "@id": "https://alexey-seleznev.pro/#person"
+      }
+    }
+  ]
+}
+    </script>
 </head>
 <body class="relative lang-en">
 
