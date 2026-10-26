@@ -181,30 +181,98 @@ def nav(active):
 '''
 
 
-def footer_links(prefix):
-    """Строка ссылок на внутренние страницы — общая для лендинга и внутренних страниц."""
-    links = '\n'.join(
-        f'                <a href="{prefix}{slug}/" class="flex items-center gap-2 hover:text-white transition-colors"><i class="{icon} text-purple-400/80 text-xs"></i> {T(*labels)}</a>'
-        for slug, icon, labels in PAGES)
-    return f'''            <nav class="flex flex-wrap justify-center gap-x-8 gap-y-3 mb-12 text-sm font-semibold text-slate-400 outfit-font" aria-label="Site pages">
-{links}
-            </nav>'''
+FOOTER_SOCIALS = [
+    ('https://t.me/R4marketing', 'fa-brands fa-telegram', 'hover:text-blue-400 hover:border-blue-500/40', 'Telegram R4marketing'),
+    ('https://www.youtube.com/R4marketing', 'fa-brands fa-youtube', 'hover:text-red-500 hover:border-red-500/40', 'YouTube R4marketing'),
+    ('https://github.com/selesnow', 'fa-brands fa-github', 'hover:text-white hover:border-white/30', 'GitHub'),
+    ('https://linkedin.com/in/selesnow', 'fa-brands fa-linkedin', 'hover:text-blue-500 hover:border-blue-500/40', 'LinkedIn'),
+    ('https://facebook.com/selesnow', 'fa-brands fa-facebook', 'hover:text-blue-600 hover:border-blue-600/40', 'Facebook'),
+    ('https://www.instagram.com/alexey.selesnow', 'fa-brands fa-instagram', 'hover:text-pink-500 hover:border-pink-500/40', 'Instagram'),
+    ('https://habr.com/ru/users/selesnow/', 'fa-solid fa-h', 'hover:text-teal-400 hover:border-teal-400/40', 'Habr'),
+]
+
+FOOTER_RESOURCES = [
+    ('https://t.me/R4marketing', 'fa-brands fa-telegram', ('Telegram-канал R4marketing', 'Telegram-канал R4marketing', 'R4marketing Telegram')),
+    ('https://www.youtube.com/R4marketing', 'fa-brands fa-youtube', ('YouTube-канал R4marketing', 'YouTube-канал R4marketing', 'R4marketing YouTube')),
+    ('https://alexeyseleznev.wordpress.com/', 'fa-solid fa-pen-nib', ('Личный блог', 'Особистий блог', 'Personal blog')),
+    ('https://habr.com/ru/users/selesnow/', 'fa-solid fa-h', ('Профиль на Хабре', 'Профіль на Хабрі', 'Habr profile')),
+    ('https://alexey-seleznev.pro/publications/', 'fa-solid fa-layer-group', ('Архив публикаций', 'Архів публікацій', 'Publications archive')),
+    ('https://github.com/selesnow', 'fa-brands fa-github', ('GitHub', 'GitHub', 'GitHub')),
+]
 
 
-def footer():
+def footer(prefix='../'):
+    """Футер в виде карты сайта. prefix='' — для лендинга (index.html), '../' — для внутренних страниц."""
+    home = prefix or './'
+    link_cls = 'flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link'
+    icon_cls = 'w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors'
+
+    def heading(ru, ua, en):
+        return f'<h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font">{T(ru, ua, en)}</h3>'
+
+    socials = '\n'.join(
+        f'                        <a href="{u}" target="_blank" rel="noopener" aria-label="{label}" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 {hover} transition-all hover:-translate-y-0.5"><i class="{icon}"></i></a>'
+        for u, icon, hover, label in FOOTER_SOCIALS)
+    pages = [f'<li><a href="{home}" class="{link_cls}"><i class="fa-solid fa-house {icon_cls}"></i>{T("Главная", "Головна", "Home")}</a></li>']
+    pages += [f'<li><a href="{prefix}{slug}/" class="{link_cls}"><i class="{icon} {icon_cls}"></i>{T(*labels)}</a></li>' for slug, icon, labels in PAGES]
+    resources = [f'<li><a href="{u}" target="_blank" rel="noopener" class="{link_cls}"><i class="{icon} {icon_cls}"></i>{T(*labels)}</a></li>' for u, icon, labels in FOOTER_RESOURCES]
+    nl = '\n                        '
+    contacts = [
+        ('Email', 'mailto:me@alexey-seleznev.pro', 'me@alexey-seleznev.pro', 'hover:text-purple-300'),
+        ('Telegram', 'https://t.me/AlexeySeleznev', '@AlexeySeleznev', 'hover:text-blue-300'),
+        ('LinkedIn', 'https://linkedin.com/in/selesnow', 'linkedin.com/in/selesnow', 'hover:text-blue-300'),
+    ]
+    new_tab = ' target="_blank" rel="noopener"'
+    contacts_html = nl.join(
+        f'<li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">{label}</div>'
+        f'<a href="{href}"{"" if href.startswith("mailto") else new_tab} class="text-sm text-slate-300 {hover} transition-colors break-all">{text}</a></li>'
+        for label, href, text, hover in contacts)
+    tagline = T('Head of Analytics в Netpeak Group. Автор open source R-пакетов, бесплатных курсов по R и проекта R4marketing.',
+                'Head of Analytics у Netpeak Group. Автор open source R-пакетів, безкоштовних курсів з R та проєкту R4marketing.',
+                'Head of Analytics at Netpeak Group. Author of open source R packages, free R courses and the R4marketing project.')
+    to_top = "window.scrollTo({top: 0, behavior: 'smooth'}); return false;"
     return f'''
     <!-- FOOTER -->
-    <footer class="border-t border-white/5 bg-slate-950/80 backdrop-blur-md pt-20 pb-10 text-center relative z-10">
+    <footer class="border-t border-white/5 bg-slate-950/80 backdrop-blur-md pt-16 pb-8 relative z-10">
         <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-3xl font-extrabold mb-10 outfit-font">{T('Следите за обновлениями в R4marketing', 'Стежте за оновленнями в R4marketing', 'Follow R4marketing updates')}</h2>
-            <div class="flex justify-center gap-8 mb-16">
-                <a href="https://t.me/R4marketing" class="w-16 h-16 rounded-3xl bg-blue-500/10 flex items-center justify-center text-blue-400 text-3xl hover:bg-blue-500 hover:text-white transition-all transform hover:scale-110 hover:-translate-y-2 border border-blue-500/20 shadow-lg" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
-                <a href="https://www.youtube.com/R4marketing" class="w-16 h-16 rounded-3xl bg-red-500/10 flex items-center justify-center text-red-500 text-3xl hover:bg-red-500 hover:text-white transition-all transform hover:scale-110 hover:-translate-y-2 border border-red-500/20 shadow-lg" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-                <a href="https://habr.com/ru/users/selesnow/" class="w-16 h-16 rounded-3xl bg-slate-700/30 flex items-center justify-center text-white text-3xl hover:bg-slate-600 transition-all transform hover:scale-110 hover:-translate-y-2 border border-slate-600/50 shadow-lg" aria-label="Habr"><i class="fa-solid fa-h"></i></a>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
+                <div class="sm:col-span-2 lg:col-span-4">
+                    <a href="{home}" class="inline-flex items-center gap-3 group mb-5">
+                        <img src="{prefix}logo.jpg" alt="Alexey Seleznev" class="w-10 h-10 rounded-xl object-cover border border-white/10 group-hover:border-purple-500/50 transition-colors">
+                        <span class="text-lg font-black tracking-tight uppercase outfit-font text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+                    </a>
+                    <p class="text-sm text-slate-400 leading-relaxed max-w-sm mb-6">{tagline}</p>
+                    <div class="flex flex-wrap gap-2">
+{socials}
+                    </div>
+                </div>
+
+                <nav class="lg:col-span-2" aria-label="Site map">
+                    {heading('Сайт', 'Сайт', 'Site')}
+                    <ul class="space-y-3">
+                        {nl.join(pages)}
+                    </ul>
+                </nav>
+
+                <div class="lg:col-span-3">
+                    {heading('R4marketing и публикации', 'R4marketing і публікації', 'R4marketing & writing')}
+                    <ul class="space-y-3">
+                        {nl.join(resources)}
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-3">
+                    {heading('Контакты', 'Контакти', 'Contacts')}
+                    <ul class="space-y-4">
+                        {contacts_html}
+                    </ul>
+                </div>
             </div>
-            <div class="mb-6"><a href="../" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-400 hover:text-white transition-colors outfit-font"><i class="fa-solid fa-house text-purple-400/80 text-xs"></i> ALEXEY-SELEZNEV<span class="text-purple-500 -ml-2">.pro</span></a></div>
-{footer_links('../')}
-            <p class="text-slate-500 text-sm font-mono tracking-widest uppercase">© 2026 Alexey Seleznev. Modernized Vision.</p>
+
+            <div class="mt-14 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+                <p>© 2026 Alexey Seleznev. {T('Все права защищены.', 'Усі права захищені.', 'All rights reserved.')}</p>
+                <a href="#" onclick="{to_top}" class="inline-flex items-center gap-2 font-semibold hover:text-white transition-colors group">{T('Наверх', 'Нагору', 'Back to top')}<span class="w-7 h-7 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-purple-500 group-hover:border-purple-500 transition-all"><i class="fa-solid fa-arrow-up text-[10px]"></i></span></a>
+            </div>
         </div>
     </footer>
 '''

@@ -40,8 +40,11 @@ GitHub Actions (`.github/workflows/update-stats.yml`) каждый день в 0
   (карточка помечается `"via": "blog"`). Не нашёл копию — не публикуй мёртвую ссылку, сообщи пользователю.
 - Пакеты ryandexdirect, rym, rvkstat, rmytarget помечены как архивные (`"archived": true`);
   пояснений о причинах архивации на сайте быть не должно.
-- После правок в `index.html` или `sitemap.xml` новые страницы добавляй в `sitemap.xml`
-  и в строку ссылок футера лендинга.
+- Футер общий для всего сайта: шаблон `footer(prefix)` в `_build/build.py` (колонки «Сайт»,
+  «R4marketing и публикации», «Контакты»). Колонка «Сайт» строится из списка `PAGES`.
+  На лендинге стоит вывод `footer('')`: после изменения шаблона замени блок `<!-- FOOTER -->`…`</footer>`
+  в `index.html` (`python -c "import sys; sys.path.insert(0,'_build'); import build; print(build.footer(''))"`).
+- Новую внутреннюю страницу добавляй в `PAGES`, в `sitemap.xml` и обновляй футер лендинга.
 
 ## Проверка
 
