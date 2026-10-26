@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="robots" content="noindex">
+    <meta name="author" content="Alexey Seleznev">
+    <meta name="theme-color" content="#030712">
+
+    <title>Страница не найдена | Алексей Селезнёв</title>
+    <meta name="title" content="Страница не найдена | Алексей Селезнёв">
+    <meta name="description" content="Такой страницы нет на сайте alexey-seleznev.pro.">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alexey-seleznev.pro/404/">
+    <meta property="og:site_name" content="ALEXEY-SELEZNEV.pro">
+    <meta property="og:title" content="Страница не найдена | Алексей Селезнёв">
+    <meta property="og:description" content="Такой страницы нет на сайте alexey-seleznev.pro.">
+    <meta property="og:image" content="https://alexey-seleznev.pro/photo.jpg">
+    <meta property="og:image:alt" content="Алексей Селезнёв">
+    <meta property="og:locale" content="ru_RU">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="https://alexey-seleznev.pro/404/">
+    <meta name="twitter:title" content="Страница не найдена | Алексей Селезнёв">
+    <meta name="twitter:description" content="Такой страницы нет на сайте alexey-seleznev.pro.">
+    <meta name="twitter:image" content="https://alexey-seleznev.pro/photo.jpg">
+
+    <link rel="icon" type="image/jpeg" href="/logo.jpg">
+    <link rel="apple-touch-icon" href="/logo.jpg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/assets/site.css">
+</head>
+<body class="relative lang-en">
+
+    <!-- Interactive Background -->
+    <div id="vanta-bg"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full z-50 top-0 left-0 border-b border-white/5 bg-slate-950/60 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 h-16 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-2 sm:gap-2.5 md:gap-3 group shrink min-w-0">
+                <img src="/logo.jpg" alt="Alexey Seleznev" class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 rounded-lg sm:rounded-xl object-cover shadow-md border border-white/10 group-hover:border-purple-500/50 group-hover:scale-105 transition-all shrink-0">
+                <span class="text-xs min-[400px]:text-sm sm:text-base md:text-xl font-black tracking-tight uppercase outfit-font whitespace-nowrap text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+            </a>
+            <div class="hidden xl:flex gap-6 text-sm font-semibold text-slate-400">
+                <a href="/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a>
+                <a href="/opensource/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span></a>
+                <a href="/courses/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a>
+                <a href="/videos/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a>
+                <a href="/talks/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a>
+                <a href="/articles/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a>
+                <a href="/interviews/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a>
+            </div>
+
+            <div class="flex items-center gap-1.5 sm:gap-2 md:gap-4 shrink-0">
+                <div class="lang-switcher flex gap-1 sm:gap-1.5 md:gap-2 text-[11px] sm:text-xs md:text-sm font-bold border-r border-white/10 pr-1.5 sm:pr-3 md:pr-4 mr-0.5 sm:mr-1 md:mr-2 outfit-font">
+                    <button onclick="changeLang('en')" id="btn-en" class="active hover:text-white transition-colors">EN</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ru')" id="btn-ru" class="text-slate-500 hover:text-white transition-colors">RU</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ua')" id="btn-ua" class="text-slate-500 hover:text-white transition-colors">UA</button>
+                </div>
+
+                <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="text-slate-400 hover:text-blue-400 transition-colors hidden sm:block" aria-label="Telegram"><i class="fa-brands fa-telegram text-lg md:text-xl"></i></a>
+                <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="text-slate-400 hover:text-white transition-colors hidden sm:block" aria-label="GitHub"><i class="fa-brands fa-github text-lg md:text-xl"></i></a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="xl:hidden w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-purple-500/20 hover:border-purple-500/40 transition-all focus:outline-none" aria-label="Toggle Navigation Menu">
+                    <i class="fa-solid fa-bars text-sm sm:text-lg" id="mobile-menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div id="mobile-menu" class="hidden xl:hidden border-t border-white/10 bg-slate-950/95 backdrop-blur-2xl shadow-2xl overflow-y-auto max-h-[calc(100vh-4rem)] transition-all">
+            <div class="max-w-7xl mx-auto px-6 py-6 space-y-1">
+                <a href="/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-house text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span>
+                </a>
+                <a href="/opensource/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-code-branch text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span>
+                </a>
+                <a href="/courses/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-graduation-cap text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span>
+                </a>
+                <a href="/videos/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-circle-play text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span>
+                </a>
+                <a href="/talks/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-microphone-lines text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span>
+                </a>
+                <a href="/articles/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-pen-nib text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span>
+                </a>
+                <a href="/interviews/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-regular fa-newspaper text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span>
+                </a>
+
+                <div class="pt-4 mt-3 border-t border-white/10 flex items-center justify-around text-slate-400">
+                    <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-blue-400 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-telegram text-xl"></i> Telegram
+                    </a>
+                    <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="p-2 hover:text-white transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-github text-xl"></i> GitHub
+                    </a>
+                    <a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-red-500 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-youtube text-xl"></i> YouTube
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-32 pb-20 px-6 max-w-5xl mx-auto relative z-10 min-h-[80vh] flex flex-col justify-center">
+        <div class="text-center mb-14" data-aos="fade-up">
+            <div class="text-[120px] md:text-[180px] leading-none font-black outfit-font text-gradient select-none">404</div>
+            <h1 class="text-3xl md:text-5xl font-extrabold uppercase tracking-tight mt-2 mb-5"><span class="ru-text">Страница не найдена</span><span class="ua-text">Сторінку не знайдено</span><span class="en-text">Page not found</span></h1>
+            <p class="text-slate-400 text-lg max-w-2xl mx-auto mb-8"><span class="ru-text">Возможно, ссылка устарела или в адресе опечатка. Вернитесь на главную или выберите нужный раздел ниже.</span><span class="ua-text">Можливо, посилання застаріло або в адресі помилка. Поверніться на головну або оберіть потрібний розділ нижче.</span><span class="en-text">The link may be outdated or the address mistyped. Head back home or pick a section below.</span></p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="/" class="bg-purple-600 hover:bg-purple-500 text-white px-8 py-4 rounded-full font-bold transition-all shadow-[0_0_20px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)] flex items-center gap-2"><i class="fa-solid fa-house text-sm"></i><span class="ru-text">На главную</span><span class="ua-text">На головну</span><span class="en-text">Back to home</span></a>
+                <a href="https://t.me/AlexeySeleznev" target="_blank" rel="noopener" class="bento-glass px-8 py-4 rounded-full font-bold hover:bg-white/10 transition-all text-blue-400 flex items-center gap-2"><i class="fa-brands fa-telegram"></i><span class="ru-text">Сообщить о битой ссылке</span><span class="ua-text">Повідомити про бите посилання</span><span class="en-text">Report a broken link</span></a>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" data-aos="fade-up" data-aos-delay="100">
+                <a href="/opensource/" class="bento-glass group p-5 rounded-2xl flex items-start gap-4">
+                    <div class="bento-content w-11 h-11 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 group-hover:bg-purple-500 group-hover:text-white transition-all shrink-0"><i class="fa-solid fa-code-branch"></i></div>
+                    <div class="bento-content min-w-0">
+                        <div class="font-bold text-white outfit-font group-hover:text-purple-300 transition-colors"><span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span></div>
+                        <div class="text-xs text-slate-400 mt-1 leading-relaxed"><span class="ru-text">Open source R-пакеты для API рекламных, аналитических и CRM-платформ</span><span class="ua-text">Open source R-пакети для API рекламних, аналітичних і CRM-платформ</span><span class="en-text">Open source R packages for ad, analytics and CRM APIs</span></div>
+                    </div>
+                </a>
+                <a href="/courses/" class="bento-glass group p-5 rounded-2xl flex items-start gap-4">
+                    <div class="bento-content w-11 h-11 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 group-hover:bg-purple-500 group-hover:text-white transition-all shrink-0"><i class="fa-solid fa-graduation-cap"></i></div>
+                    <div class="bento-content min-w-0">
+                        <div class="font-bold text-white outfit-font group-hover:text-purple-300 transition-colors"><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></div>
+                        <div class="text-xs text-slate-400 mt-1 leading-relaxed"><span class="ru-text">Бесплатные курсы по R: от новичка до AI-инструментов</span><span class="ua-text">Безкоштовні курси з R: від новачка до AI-інструментів</span><span class="en-text">Free R courses, from beginner to AI tools</span></div>
+                    </div>
+                </a>
+                <a href="/videos/" class="bento-glass group p-5 rounded-2xl flex items-start gap-4">
+                    <div class="bento-content w-11 h-11 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 group-hover:bg-purple-500 group-hover:text-white transition-all shrink-0"><i class="fa-solid fa-circle-play"></i></div>
+                    <div class="bento-content min-w-0">
+                        <div class="font-bold text-white outfit-font group-hover:text-purple-300 transition-colors"><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></div>
+                        <div class="text-xs text-slate-400 mt-1 leading-relaxed"><span class="ru-text">Серии уроков по пакетам и отдельные видеоуроки</span><span class="ua-text">Серії уроків за пакетами та окремі відеоуроки</span><span class="en-text">Package series and standalone video lessons</span></div>
+                    </div>
+                </a>
+                <a href="/talks/" class="bento-glass group p-5 rounded-2xl flex items-start gap-4">
+                    <div class="bento-content w-11 h-11 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 group-hover:bg-purple-500 group-hover:text-white transition-all shrink-0"><i class="fa-solid fa-microphone-lines"></i></div>
+                    <div class="bento-content min-w-0">
+                        <div class="font-bold text-white outfit-font group-hover:text-purple-300 transition-colors"><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></div>
+                        <div class="text-xs text-slate-400 mt-1 leading-relaxed"><span class="ru-text">Доклады с конференций, вебинары и воркшопы</span><span class="ua-text">Доповіді з конференцій, вебінари та воркшопи</span><span class="en-text">Conference talks, webinars and workshops</span></div>
+                    </div>
+                </a>
+                <a href="/articles/" class="bento-glass group p-5 rounded-2xl flex items-start gap-4">
+                    <div class="bento-content w-11 h-11 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 group-hover:bg-purple-500 group-hover:text-white transition-all shrink-0"><i class="fa-solid fa-pen-nib"></i></div>
+                    <div class="bento-content min-w-0">
+                        <div class="font-bold text-white outfit-font group-hover:text-purple-300 transition-colors"><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></div>
+                        <div class="text-xs text-slate-400 mt-1 leading-relaxed"><span class="ru-text">Статьи и туториалы с 2015 года</span><span class="ua-text">Статті та туторіали з 2015 року</span><span class="en-text">Articles and tutorials since 2015</span></div>
+                    </div>
+                </a>
+                <a href="/interviews/" class="bento-glass group p-5 rounded-2xl flex items-start gap-4">
+                    <div class="bento-content w-11 h-11 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 group-hover:bg-purple-500 group-hover:text-white transition-all shrink-0"><i class="fa-regular fa-newspaper"></i></div>
+                    <div class="bento-content min-w-0">
+                        <div class="font-bold text-white outfit-font group-hover:text-purple-300 transition-colors"><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></div>
+                        <div class="text-xs text-slate-400 mt-1 leading-relaxed"><span class="ru-text">Интервью, экспертные опросы и комментарии</span><span class="ua-text">Інтерв'ю, експертні опитування та коментарі</span><span class="en-text">Interviews, expert surveys and comments</span></div>
+                    </div>
+                </a>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/5 bg-slate-950/80 backdrop-blur-md pt-16 pb-8 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
+                <div class="sm:col-span-2 lg:col-span-4">
+                    <a href="/" class="inline-flex items-center gap-3 group mb-5">
+                        <img src="/logo.jpg" alt="Alexey Seleznev" class="w-10 h-10 rounded-xl object-cover border border-white/10 group-hover:border-purple-500/50 transition-colors">
+                        <span class="text-lg font-black tracking-tight uppercase outfit-font text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+                    </a>
+                    <p class="text-sm text-slate-400 leading-relaxed max-w-sm mb-6"><span class="ru-text">Head of Analytics в Netpeak Group. Автор open source R-пакетов, бесплатных курсов по R и проекта R4marketing.</span><span class="ua-text">Head of Analytics у Netpeak Group. Автор open source R-пакетів, безкоштовних курсів з R та проєкту R4marketing.</span><span class="en-text">Head of Analytics at Netpeak Group. Author of open source R packages, free R courses and the R4marketing project.</span></p>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="https://t.me/R4marketing" target="_blank" rel="noopener" aria-label="Telegram R4marketing" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-400 hover:border-blue-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-telegram"></i></a>
+                        <a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" aria-label="YouTube R4marketing" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-red-500 hover:border-red-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="https://github.com/selesnow" target="_blank" rel="noopener" aria-label="GitHub" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-white hover:border-white/30 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://linkedin.com/in/selesnow" target="_blank" rel="noopener" aria-label="LinkedIn" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-500 hover:border-blue-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://facebook.com/selesnow" target="_blank" rel="noopener" aria-label="Facebook" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-600/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/alexey.selesnow" target="_blank" rel="noopener" aria-label="Instagram" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-pink-500 hover:border-pink-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://habr.com/ru/users/selesnow/" target="_blank" rel="noopener" aria-label="Habr" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-teal-400 hover:border-teal-400/40 transition-all hover:-translate-y-0.5"><i class="fa-solid fa-h"></i></a>
+                    </div>
+                </div>
+
+                <nav class="lg:col-span-2" aria-label="Site map">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">Сайт</span><span class="ua-text">Сайт</span><span class="en-text">Site</span></h3>
+                    <ul class="space-y-3">
+                        <li><a href="/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-house w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a></li>
+                        <li><a href="/opensource/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-code-branch w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span></a></li>
+                        <li><a href="/courses/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-graduation-cap w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a></li>
+                        <li><a href="/videos/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-circle-play w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a></li>
+                        <li><a href="/talks/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-microphone-lines w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a></li>
+                        <li><a href="/articles/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-pen-nib w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a></li>
+                        <li><a href="/interviews/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-regular fa-newspaper w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a></li>
+                    </ul>
+                </nav>
+
+                <div class="lg:col-span-3">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">R4marketing и публикации</span><span class="ua-text">R4marketing і публікації</span><span class="en-text">R4marketing & writing</span></h3>
+                    <ul class="space-y-3">
+                        <li><a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-telegram w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Telegram-канал R4marketing</span><span class="ua-text">Telegram-канал R4marketing</span><span class="en-text">R4marketing Telegram</span></a></li>
+                        <li><a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-youtube w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">YouTube-канал R4marketing</span><span class="ua-text">YouTube-канал R4marketing</span><span class="en-text">R4marketing YouTube</span></a></li>
+                        <li><a href="https://alexeyseleznev.wordpress.com/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-pen-nib w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Личный блог</span><span class="ua-text">Особистий блог</span><span class="en-text">Personal blog</span></a></li>
+                        <li><a href="https://habr.com/ru/users/selesnow/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-h w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Профиль на Хабре</span><span class="ua-text">Профіль на Хабрі</span><span class="en-text">Habr profile</span></a></li>
+                        <li><a href="https://alexey-seleznev.pro/publications/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-layer-group w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Архив публикаций</span><span class="ua-text">Архів публікацій</span><span class="en-text">Publications archive</span></a></li>
+                        <li><a href="https://github.com/selesnow" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-github w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">GitHub</span><span class="ua-text">GitHub</span><span class="en-text">GitHub</span></a></li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-3">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">Контакты</span><span class="ua-text">Контакти</span><span class="en-text">Contacts</span></h3>
+                    <ul class="space-y-4">
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">Email</div><a href="mailto:me@alexey-seleznev.pro" class="text-sm text-slate-300 hover:text-purple-300 transition-colors break-all">me@alexey-seleznev.pro</a></li>
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">Telegram</div><a href="https://t.me/AlexeySeleznev" target="_blank" rel="noopener" class="text-sm text-slate-300 hover:text-blue-300 transition-colors break-all">@AlexeySeleznev</a></li>
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">LinkedIn</div><a href="https://linkedin.com/in/selesnow" target="_blank" rel="noopener" class="text-sm text-slate-300 hover:text-blue-300 transition-colors break-all">linkedin.com/in/selesnow</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-14 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+                <p>© 2026 Alexey Seleznev. <span class="ru-text">Все права защищены.</span><span class="ua-text">Усі права захищені.</span><span class="en-text">All rights reserved.</span></p>
+                <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="inline-flex items-center gap-2 font-semibold hover:text-white transition-colors group"><span class="ru-text">Наверх</span><span class="ua-text">Нагору</span><span class="en-text">Back to top</span><span class="w-7 h-7 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-purple-500 group-hover:border-purple-500 transition-all"><i class="fa-solid fa-arrow-up text-[10px]"></i></span></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script src="/assets/site.js"></script>
+</body>
+</html>

@@ -1338,6 +1338,57 @@ def build_opensource():
     write('opensource', page)
 
 
+# ---------------------------------------------------------------- 404
+
+PAGE_BLURBS = {
+    'opensource': ('Open source R-пакеты для API рекламных, аналитических и CRM-платформ', 'Open source R-пакети для API рекламних, аналітичних і CRM-платформ', 'Open source R packages for ad, analytics and CRM APIs'),
+    'courses': ('Бесплатные курсы по R: от новичка до AI-инструментов', 'Безкоштовні курси з R: від новачка до AI-інструментів', 'Free R courses, from beginner to AI tools'),
+    'videos': ('Серии уроков по пакетам и отдельные видеоуроки', 'Серії уроків за пакетами та окремі відеоуроки', 'Package series and standalone video lessons'),
+    'talks': ('Доклады с конференций, вебинары и воркшопы', 'Доповіді з конференцій, вебінари та воркшопи', 'Conference talks, webinars and workshops'),
+    'articles': ('Статьи и туториалы с 2015 года', 'Статті та туторіали з 2015 року', 'Articles and tutorials since 2015'),
+    'interviews': ('Интервью, экспертные опросы и комментарии', "Інтерв'ю, експертні опитування та коментарі", 'Interviews, expert surveys and comments'),
+}
+
+
+def build_404():
+    """404.html в корне сайта. GitHub Pages отдаёт её по любому несуществующему адресу,
+    поэтому все пути на странице абсолютные."""
+    cards = ''.join(f'''
+                <a href="/{slug}/" class="bento-glass group p-5 rounded-2xl flex items-start gap-4">
+                    <div class="bento-content w-11 h-11 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 group-hover:bg-purple-500 group-hover:text-white transition-all shrink-0"><i class="{icon}"></i></div>
+                    <div class="bento-content min-w-0">
+                        <div class="font-bold text-white outfit-font group-hover:text-purple-300 transition-colors">{T(*labels)}</div>
+                        <div class="text-xs text-slate-400 mt-1 leading-relaxed">{T(*PAGE_BLURBS[slug])}</div>
+                    </div>
+                </a>''' for slug, icon, labels in PAGES)
+
+    page = head('404', 'Страница не найдена | Алексей Селезнёв', 'Такой страницы нет на сайте alexey-seleznev.pro.')
+    page = page.replace('<meta name="robots" content="index, follow">', '<meta name="robots" content="noindex">')
+    page = page.replace(f'    <link rel="canonical" href="{SITE}/404/">\n', '')
+    page += nav('')
+    page += f'''
+    <main class="pt-32 pb-20 px-6 max-w-5xl mx-auto relative z-10 min-h-[80vh] flex flex-col justify-center">
+        <div class="text-center mb-14" data-aos="fade-up">
+            <div class="text-[120px] md:text-[180px] leading-none font-black outfit-font text-gradient select-none">404</div>
+            <h1 class="text-3xl md:text-5xl font-extrabold uppercase tracking-tight mt-2 mb-5">{T('Страница не найдена', 'Сторінку не знайдено', 'Page not found')}</h1>
+            <p class="text-slate-400 text-lg max-w-2xl mx-auto mb-8">{T('Возможно, ссылка устарела или в адресе опечатка. Вернитесь на главную или выберите нужный раздел ниже.', 'Можливо, посилання застаріло або в адресі помилка. Поверніться на головну або оберіть потрібний розділ нижче.', 'The link may be outdated or the address mistyped. Head back home or pick a section below.')}</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="/" class="bg-purple-600 hover:bg-purple-500 text-white px-8 py-4 rounded-full font-bold transition-all shadow-[0_0_20px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)] flex items-center gap-2"><i class="fa-solid fa-house text-sm"></i>{T('На главную', 'На головну', 'Back to home')}</a>
+                <a href="https://t.me/AlexeySeleznev" target="_blank" rel="noopener" class="bento-glass px-8 py-4 rounded-full font-bold hover:bg-white/10 transition-all text-blue-400 flex items-center gap-2"><i class="fa-brands fa-telegram"></i>{T('Сообщить о битой ссылке', 'Повідомити про бите посилання', 'Report a broken link')}</a>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" data-aos="fade-up" data-aos-delay="100">{cards}
+        </div>
+    </main>
+'''
+    page += footer('/') + tail()
+    # Относительные пути шаблона (../) превращаем в абсолютные
+    page = page.replace('"../', '"/')
+    out = ROOT / '404.html'
+    out.write_text(page, encoding='utf-8', newline='\n')
+    print(f'404.html: {len(page):,} bytes')
+
+
 if __name__ == '__main__':
     import sys
     if '--stats-only' in sys.argv:
@@ -1349,3 +1400,4 @@ if __name__ == '__main__':
     build_talks()
     build_articles()
     build_interviews()
+    build_404()
