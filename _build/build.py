@@ -631,13 +631,16 @@ def build_courses():
         stats = '\n'.join(f'<span class="px-3 py-1.5 rounded-lg bg-slate-900/60 border border-white/5 text-xs font-semibold text-slate-300">{tr(s)}</span>' for s in c['stats'])
         program = '\n'.join(f'''                            <li class="flex items-start gap-3 text-sm text-slate-300"><i class="fa-solid fa-check text-purple-400 text-xs mt-1.5"></i>{T(esc(c['program']['ru'][i]), esc(c['program']['ua'][i]), esc(c['program']['en'][i]))}</li>'''
                             for i in range(len(c['program']['ru'])))
-        buttons = [f'''<a href="{esc(url(c['url']))}" target="_blank" rel="noopener" class="bg-purple-600 hover:bg-purple-500 text-white px-6 py-3 rounded-xl font-bold text-sm transition-all shadow-[0_0_20px_rgba(168,85,247,0.35)] hover:shadow-[0_0_30px_rgba(168,85,247,0.55)] flex items-center gap-2">{T('Перейти к курсу', 'Перейти до курсу', 'Go to course') if 'kindLabel' not in c else T('Читать учебник', 'Читати підручник', 'Read the book')} <i class="fa-solid fa-arrow-right text-xs"></i></a>''']
+        is_book = 'kindLabel' in c
+        target_type = 'book' if is_book else 'site'
+        btn_text = T('Читать учебник', 'Читати підручник', 'Read the book') if is_book else T('Перейти к курсу', 'Перейти до курсу', 'Go to course')
+        buttons = [f'''<a href="{esc(url(c['url']))}" target="_blank" rel="noopener" data-ga-event="course_click" data-ga-course-id="{c['id']}" data-ga-course-name="{esc(c['title']['ru'])}" data-ga-course-level="{c['level']}" data-ga-target-type="{target_type}" data-ga-placement="courses_page" class="bg-purple-600 hover:bg-purple-500 text-white px-6 py-3 rounded-xl font-bold text-sm transition-all shadow-[0_0_20px_rgba(168,85,247,0.35)] hover:shadow-[0_0_30px_rgba(168,85,247,0.55)] flex items-center gap-2">{btn_text} <i class="fa-solid fa-arrow-right text-xs"></i></a>''']
         if c.get('playlist'):
-            buttons.append(f'''<a href="{esc(c['playlist'])}" target="_blank" rel="noopener" class="px-5 py-3 rounded-xl border border-white/10 hover:border-white/20 bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white font-semibold text-sm transition-all flex items-center gap-2"><i class="fa-brands fa-youtube text-red-500"></i> {T('Плейлист', 'Плейлист', 'Playlist')}</a>''')
+            buttons.append(f'''<a href="{esc(c['playlist'])}" target="_blank" rel="noopener" data-ga-event="course_resource_click" data-ga-course-id="{c['id']}" data-ga-resource-type="playlist" class="px-5 py-3 rounded-xl border border-white/10 hover:border-white/20 bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white font-semibold text-sm transition-all flex items-center gap-2"><i class="fa-brands fa-youtube text-red-500"></i> {T('Плейлист', 'Плейлист', 'Playlist')}</a>''')
         if c.get('article'):
-            buttons.append(f'''<a href="{esc(c['article'])}" target="_blank" rel="noopener" class="px-5 py-3 rounded-xl border border-white/10 hover:border-white/20 bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white font-semibold text-sm transition-all flex items-center gap-2"><i class="fa-solid fa-h text-teal-400"></i> {T('Статья о курсе', 'Стаття про курс', 'About the course')}</a>''')
+            buttons.append(f'''<a href="{esc(c['article'])}" target="_blank" rel="noopener" data-ga-event="course_resource_click" data-ga-course-id="{c['id']}" data-ga-resource-type="article" class="px-5 py-3 rounded-xl border border-white/10 hover:border-white/20 bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white font-semibold text-sm transition-all flex items-center gap-2"><i class="fa-solid fa-h text-teal-400"></i> {T('Статья о курсе', 'Стаття про курс', 'About the course')}</a>''')
         if c.get('materials'):
-            buttons.append(f'''<a href="{esc(c['materials'])}" target="_blank" rel="noopener" class="px-5 py-3 rounded-xl border border-white/10 hover:border-white/20 bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white font-semibold text-sm transition-all flex items-center gap-2"><i class="fa-brands fa-github"></i> {T('Материалы', 'Матеріали', 'Materials')}</a>''')
+            buttons.append(f'''<a href="{esc(c['materials'])}" target="_blank" rel="noopener" data-ga-event="course_resource_click" data-ga-course-id="{c['id']}" data-ga-resource-type="materials" class="px-5 py-3 rounded-xl border border-white/10 hover:border-white/20 bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white font-semibold text-sm transition-all flex items-center gap-2"><i class="fa-brands fa-github"></i> {T('Материалы', 'Матеріали', 'Materials')}</a>''')
         note = f'<p class="text-xs text-slate-500 mt-3 flex items-center gap-2"><i class="fa-solid fa-circle-info"></i>{tr(c["note"])}</p>' if c.get('note') else ''
         kind = f'<span class="text-[11px] font-mono font-bold uppercase tracking-widest text-slate-500">{tr(c["kindLabel"])}</span>' if c.get('kindLabel') else ''
         cards.append(f'''
@@ -765,7 +768,7 @@ def build_talks():
             center = '''<div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.7)]"><i class="fa-solid fa-play ml-1 text-lg"></i></div></div>'''
             action = f'<i class="fa-brands fa-youtube text-red-500 text-sm"></i> {T("Смотреть", "Дивитися", "Watch")}'
         else:
-            href, attrs = t['url'], ''
+            href, attrs = t['url'], f'data-ga-event="content_outbound_click" data-ga-content-type="conference_materials" data-ga-content-title="{esc(t["title"]["ru"])}" data-ga-platform="{esc(t["event"])}" data-ga-link-url="{esc(t["url"])}"'
             img = f"../assets/photos/{t['photo']}" if t.get('photo') else ''  # своё фото, если нет записи
             # на фото значок уходит в угол, чтобы не закрывать спикера
             center = '''<div class="absolute bottom-3 right-3 w-10 h-10 rounded-full bg-purple-600/80 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-purple-500 transition-all duration-300"><i class="fa-solid fa-arrow-up-right-from-square text-sm"></i></div>''' if img else '''<div class="absolute inset-0 flex items-center justify-center"><div class="w-14 h-14 rounded-full bg-purple-600/80 text-white flex items-center justify-center shadow-2xl backdrop-blur-sm group-hover:scale-110 group-hover:bg-purple-500 transition-all duration-300"><i class="fa-solid fa-arrow-up-right-from-square text-base"></i></div></div>'''
@@ -807,7 +810,7 @@ def build_talks():
     page += f'''
     <!-- FEATURED -->
     <section class="px-6 max-w-7xl mx-auto pb-16 relative z-10">
-        <a href="https://www.youtube.com/watch?v={fvid}" target="_blank" rel="noopener" data-video="{esc(featured['yt'])}" class="bento-glass group block p-5 sm:p-7 lg:p-8 rounded-3xl border border-purple-500/30 shadow-[0_0_35px_rgba(168,85,247,0.15)]" data-aos="fade-up">
+        <a href="https://www.youtube.com/watch?v={fvid}" target="_blank" rel="noopener" data-video="{esc(featured['yt'])}" data-ga-event="spotlight_video_play" data-ga-video-id="{fvid}" data-ga-video-title="{esc(featured['title']['ru'])}" data-ga-section="talks_spotlight" class="bento-glass group block p-5 sm:p-7 lg:p-8 rounded-3xl border border-purple-500/30 shadow-[0_0_35px_rgba(168,85,247,0.15)]" data-aos="fade-up">
             <div class="bento-content grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
                 <div class="lg:col-span-7">
                     <div class="relative w-full pb-[56.25%] rounded-2xl overflow-hidden bg-slate-950 shadow-2xl border border-white/10">
@@ -920,7 +923,7 @@ def build_articles():
         tags = ' '.join(f'<span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">{T(*TOPICS[t][1])}</span>' for t in a['topics'])
         search = f"{a['title']} {a['desc']} {a['src']}".lower()
         return f'''
-                <a href="{esc(url(a['url']))}" target="_blank" rel="noopener" class="bento-glass group flex flex-col p-2 rounded-3xl" data-filter-item data-topic="{' '.join(a['topics'])}" data-source="{a['skey']}" data-search="{esc(search)}" data-aos="fade-up" data-aos-delay="{delay}">
+                <a href="{esc(url(a['url']))}" target="_blank" rel="noopener" data-ga-event="content_outbound_click" data-ga-content-type="article" data-ga-content-title="{esc(a['title'])}" data-ga-platform="{a['skey']}" data-ga-link-url="{esc(url(a['url']))}" class="bento-glass group flex flex-col p-2 rounded-3xl" data-filter-item data-topic="{' '.join(a['topics'])}" data-source="{a['skey']}" data-search="{esc(search)}" data-aos="fade-up" data-aos-delay="{delay}">
                     <div class="bento-content flex flex-col h-full">
                     {cover(a['img'], main_icon, 'h-44', extra)}
                     <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
@@ -1029,7 +1032,7 @@ def build_interviews():
                         </blockquote>'''
         search = ' '.join([it['title'][l] for l in LANGS] + [it['outlet'], it['desc']['ru']]).lower()
         return f'''
-            <a href="{esc(url(it['url']))}" target="_blank" rel="noopener" class="bento-glass group flex flex-col p-3 rounded-[2rem]" data-filter-item data-kind="{it['kind']}" data-search="{esc(search)}" data-aos="fade-up" data-aos-delay="{delay}">
+            <a href="{esc(url(it['url']))}" target="_blank" rel="noopener" data-ga-event="content_outbound_click" data-ga-content-type="interview" data-ga-content-title="{esc(it['title']['ru'])}" data-ga-platform="{esc(it['outlet'])}" data-ga-link-url="{esc(url(it['url']))}" class="bento-glass group flex flex-col p-3 rounded-[2rem]" data-filter-item data-kind="{it['kind']}" data-search="{esc(search)}" data-aos="fade-up" data-aos-delay="{delay}">
                 <div class="bento-content flex flex-col h-full">
                     {cover(it['img'], 'fa-regular fa-newspaper', 'h-52', extra)}
                     <div class="px-3 pt-5 pb-3 flex flex-col flex-1">
@@ -1138,7 +1141,7 @@ def build_videos():
 {eps}
                         </div>
                         <div class="mt-auto pt-4 pb-2 border-t border-white/5">
-                            <a href="{esc(s['playlist'])}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-300 hover:text-white transition-colors"><i class="fa-brands fa-youtube text-red-500"></i>{T('Весь плейлист на YouTube', 'Увесь плейлист на YouTube', 'Full playlist on YouTube')} <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-60"></i></a>
+                            <a href="{esc(s['playlist'])}" target="_blank" rel="noopener" data-ga-event="content_outbound_click" data-ga-content-type="playlist" data-ga-platform="youtube" data-ga-content-title="{esc(s['title']['ru'])}" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-300 hover:text-white transition-colors"><i class="fa-brands fa-youtube text-red-500"></i>{T('Весь плейлист на YouTube', 'Увесь плейлист на YouTube', 'Full playlist on YouTube')} <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-60"></i></a>
                         </div>
                     </div>
                 </div>
@@ -1345,14 +1348,16 @@ def build_opensource():
     archived = sorted([p for p in pkgs if p.get('archived')], key=lambda p: -p['dl'])
     cat_counts = Counter(p['cat'] for p in pkgs)
 
-    def link_btn(href, icon, label, accent=False):
+    def link_btn(href, icon, label, accent=False, pkg_name='', action_type=''):
         cls = ('bg-purple-500/15 border-purple-500/40 text-purple-200 hover:bg-purple-500 hover:text-white'
                if accent else 'bg-slate-900/70 border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800')
-        return f'<a href="{esc(href)}" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 {cls}"><i class="{icon}"></i>{label}</a>'
+        ga = f' data-ga-event="package_action" data-ga-package-name="{pkg_name}" data-ga-action-type="{action_type}" data-ga-placement="opensource_page"' if action_type else ''
+        return f'<a href="{esc(href)}" target="_blank" rel="noopener"{ga} class="px-3 py-2 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 {cls}"><i class="{icon}"></i>{label}</a>'
 
     def card(p, delay):
         name = p['name']
         is_arch = p.get('archived')
+
         logo_path = ROOT / 'assets' / 'logos' / f'{name}.png'
         if logo_path.exists():
             logo = f'<img src="../assets/logos/{name}.png" alt="{name} logo" loading="lazy" class="w-[72px] h-[84px] object-contain drop-shadow-[0_8px_20px_rgba(0,0,0,0.45)] group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500{" grayscale-[35%]" if is_arch else ""}">'
@@ -1381,19 +1386,19 @@ def build_opensource():
                             <div title="{esc('last 30 days')}" class="flex items-center gap-1.5 text-slate-500"><span class="js-dl-month font-semibold text-slate-300">{fmt_num(p['month'])}</span>/{T('мес', 'міс', 'mo')}</div>'''
         else:
             dl = f'<div class="flex items-center gap-2 text-slate-500"><i class="fa-brands fa-github"></i>{T("только GitHub", "лише GitHub", "GitHub only")}</div>'
-        links = [link_btn(f'https://github.com/selesnow/{name}', 'fa-brands fa-github', 'GitHub', accent=True)]
+        links = [link_btn(f'https://github.com/selesnow/{name}', 'fa-brands fa-github', 'GitHub', accent=True, pkg_name=name, action_type='github')]
         if p['cran']:
-            links.append(link_btn(f'https://cran.r-project.org/package={name}', 'fa-brands fa-r-project', 'CRAN'))
+            links.append(link_btn(f'https://cran.r-project.org/package={name}', 'fa-brands fa-r-project', 'CRAN', pkg_name=name, action_type='cran'))
         if p.get('docs'):
-            links.append(link_btn(p['docs'], 'fa-solid fa-book', T('Документация', 'Документація', 'Docs')))
+            links.append(link_btn(p['docs'], 'fa-solid fa-book', T('Документация', 'Документація', 'Docs'), pkg_name=name, action_type='docs'))
         if p.get('video'):
             v = p['video']
             label = {'playlist': T(f'Плейлист · {v.get("count", "")}', f'Плейлист · {v.get("count", "")}', f'Playlist · {v.get("count", "")}'),
                      'video': T('Видеоурок', 'Відеоурок', 'Video lesson'),
                      'webinar': T('Вебинар', 'Вебінар', 'Webinar')}[v['kind']]
-            links.append(link_btn(v['url'], 'fa-brands fa-youtube text-red-500', label))
+            links.append(link_btn(v['url'], 'fa-brands fa-youtube text-red-500', label, pkg_name=name, action_type='video'))
         if p.get('article'):
-            links.append(link_btn(p['article'], 'fa-solid fa-newspaper', T('Статья', 'Стаття', 'Article')))
+            links.append(link_btn(p['article'], 'fa-solid fa-newspaper', T('Статья', 'Стаття', 'Article'), pkg_name=name, action_type='article'))
         search = ' '.join([name, p['tagline']['ru'], p['tagline']['en'], p['desc']['ru'], p['desc']['en']]).lower()
         return f'''
             <article class="bento-glass group flex flex-col p-6 rounded-3xl{' opacity-90' if is_arch else ''}" data-filter-item data-cat="{p['cat']}" data-search="{esc(search)}" data-pkg="{name}" data-cran="{1 if p['cran'] else 0}" data-aos="fade-up" data-aos-delay="{delay}">
@@ -1471,7 +1476,7 @@ def build_opensource():
                         </ul>
                         <div class="mt-auto pt-4 border-t border-white/5 flex flex-wrap items-center justify-between gap-3">
                             <div class="flex flex-wrap gap-1.5">{stack}</div>
-                            {link_btn(f"https://github.com/selesnow/{sv['repo']}", 'fa-brands fa-github', 'GitHub', accent=True)}
+                            {link_btn(f"https://github.com/selesnow/{sv['repo']}", 'fa-brands fa-github', 'GitHub', accent=True, pkg_name=sv['repo'], action_type='github')}
                         </div>
                     </div>
                 </div>
@@ -1618,7 +1623,7 @@ def build_ads():
 
     payment = []
     for p in d['payment']:
-        link = (f'<a href="{esc(p["url"])}" target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-purple-300 hover:text-white transition-colors">'
+        link = (f'<a href="{esc(p["url"])}" target="_blank" rel="noopener" data-ga-event="ad_exchange_click" data-ga-exchange-name="{esc(p["title"]["ru"])}" class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-purple-300 hover:text-white transition-colors">'
                 f'{T("Условия на бирже", "Умови на біржі", "Exchange terms")} <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i></a>') if p.get('url') else ''
         payment.append(f'''
                 <div class="bento-glass no-lift p-6 rounded-3xl flex flex-col" data-aos="fade-up">
@@ -1629,7 +1634,7 @@ def build_ads():
                 </div>''')
 
     stats_links = ''.join(f'''
-                <a href="{esc(s['url'])}" target="_blank" rel="noopener" class="bento-glass p-6 rounded-3xl flex items-center gap-5 group">
+                <a href="{esc(s['url'])}" target="_blank" rel="noopener" data-ga-event="ad_stat_service_click" data-ga-service-name="{esc(s['name'])}" class="bento-glass p-6 rounded-3xl flex items-center gap-5 group">
                     <div class="bento-content w-12 h-12 rounded-2xl bg-purple-500/15 text-purple-300 flex items-center justify-center text-xl group-hover:bg-purple-500 group-hover:text-white transition-all"><i class="fa-solid fa-chart-line"></i></div>
                     <div class="bento-content flex-1">
                         <div class="font-bold text-white outfit-font text-lg">{esc(s['name'])}</div>
@@ -1641,7 +1646,7 @@ def build_ads():
     charts = []
     for a in d['audience']:
         if a.get('date'):
-            meta = f'{T("Опрос", "Опитування", "Poll")} {fmt_date_ru(a["date"])} · <a href="{esc(a["poll"])}" target="_blank" rel="noopener" class="underline underline-offset-2 hover:text-white">{T("ссылка на опрос", "посилання на опитування", "poll link")}</a>'
+            meta = f'{T("Опрос", "Опитування", "Poll")} {fmt_date_ru(a["date"])} · <a href="{esc(a["poll"])}" target="_blank" rel="noopener" data-ga-event="ad_poll_click" data-ga-poll-id="{a["id"]}" class="underline underline-offset-2 hover:text-white">{T("ссылка на опрос", "посилання на опитування", "poll link")}</a>'
         else:
             meta = tr(a['source'])
         multi = f'<div class="text-xs text-slate-500 mt-3">{T("Можно было выбрать несколько вариантов.", "Можна було обрати кілька варіантів.", "Multiple answers were allowed.")}</div>' if a.get('multi') else ''
@@ -1656,7 +1661,7 @@ def build_ads():
                 </div>''')
 
     y, m = ym(d['updated'])
-    contact_btn = f'''<a href="{d['contact']}" target="_blank" rel="noopener" class="bg-purple-600 hover:bg-purple-500 text-white px-8 py-4 rounded-full font-bold transition-all shadow-[0_0_20px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)] flex items-center gap-2"><i class="fa-brands fa-telegram"></i>{T('Написать в Telegram', 'Написати в Telegram', 'Message me on Telegram')}</a>'''
+    contact_btn = f'''<a href="{d['contact']}" target="_blank" rel="noopener" data-ga-event="generate_lead" data-ga-contact-type="telegram" data-ga-source-page="ads" data-ga-lead-topic="advertising" class="bg-purple-600 hover:bg-purple-500 text-white px-8 py-4 rounded-full font-bold transition-all shadow-[0_0_20px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)] flex items-center gap-2"><i class="fa-brands fa-telegram"></i>{T('Написать в Telegram', 'Написати в Telegram', 'Message me on Telegram')}</a>'''
 
     desc = 'Реклама в Telegram-канале R4marketing о языке R и аналитике данных: стоимость публикации, условия размещения, способы оплаты и аудитория канала.'
     page = head('ads', 'Реклама в Telegram-канале R4marketing | Алексей Селезнёв', desc)
@@ -1674,7 +1679,7 @@ def build_ads():
     <section class="px-6 max-w-7xl mx-auto pb-16 relative z-10">
         <div class="flex flex-wrap items-center gap-4 mb-16" data-aos="fade-up">
             {contact_btn}
-            <a href="{d['channel']}" target="_blank" rel="noopener" class="bento-glass px-8 py-4 rounded-full font-bold hover:bg-white/10 transition-all text-blue-400 flex items-center gap-2"><i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>{T('Открыть канал', 'Відкрити канал', 'Open the channel')}</a>
+            <a href="{d['channel']}" target="_blank" rel="noopener" data-ga-event="community_join" data-ga-platform="telegram" data-ga-channel-name="R4marketing" data-ga-placement="ads_page" class="bento-glass px-8 py-4 rounded-full font-bold hover:bg-white/10 transition-all text-blue-400 flex items-center gap-2"><i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>{T('Открыть канал', 'Відкрити канал', 'Open the channel')}</a>
             <span class="text-xs text-slate-500">{T('Данные обновлены', 'Дані оновлено', 'Updated')}: {month_label(y, m)}</span>
         </div>
 
@@ -1716,7 +1721,7 @@ def build_ads():
         </h2>
         <div class="grid md:grid-cols-2 gap-6 mb-6" data-aos="fade-up">{stats_links}
         </div>
-        <a href="https://uk.tgstat.com/channel/@R4marketing" target="_blank" rel="noopener" class="block mb-20 rounded-3xl overflow-hidden border border-white/10 hover:border-purple-500/40 transition-colors" data-aos="fade-up">
+        <a href="https://uk.tgstat.com/channel/@R4marketing" target="_blank" rel="noopener" data-ga-event="ad_stat_service_click" data-ga-service-name="TGStat" class="block mb-20 rounded-3xl overflow-hidden border border-white/10 hover:border-purple-500/40 transition-colors" data-aos="fade-up">
             <!-- Живой виджет TGStat: картинка обновляется на стороне сервиса -->
             <img src="https://uk.tgstat.com/channel/@R4marketing/stat-widget.png" alt="{esc('Статистика канала R4marketing по данным TGStat')}" loading="lazy" referrerpolicy="no-referrer" class="w-full h-auto block bg-white">
         </a>

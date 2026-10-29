@@ -1,4 +1,44 @@
-// Общий скрипт внутренних страниц: язык, меню, свечение карточек, фильтры, видео-плеер, фон.
+// Общий скрипт внутренних страниц: язык, меню, свечение карточек, фильтры, видео-плеер, фон, аналитика GA4.
+
+// --- GOOGLE ANALYTICS 4 HELPERS ---
+function sendGAEvent(name, params = {}) {
+    if (typeof window.gtag === 'function') {
+        window.gtag('event', name, params);
+    }
+}
+
+function getPageSlug() {
+    const p = window.location.pathname.replace(/^\/|\/$/g, '');
+    return p || 'home';
+}
+
+function getLinkPlacement(el) {
+    if (el.closest('#mobile-menu')) return 'mobile_menu';
+    if (el.closest('header, nav')) return 'nav';
+    if (el.closest('#contacts')) return 'contacts_section';
+    if (el.closest('#hero, #about')) return 'hero';
+    if (el.closest('#content')) return 'content_section';
+    if (el.closest('footer')) return 'footer';
+    if (window.location.pathname.includes('/ads/')) return 'ads_page';
+    return 'page_body';
+}
+
+function datasetKeyToSnakeCase(key) {
+    const withoutGa = key.slice(2);
+    return withoutGa.replace(/([A-Z])/g, (match, letter, offset) => {
+        return (offset > 0 ? '_' : '') + letter.toLowerCase();
+    });
+}
+
+function extractGaParams(el) {
+    const params = {};
+    for (const [key, val] of Object.entries(el.dataset)) {
+        if (key.startsWith('ga') && key !== 'gaEvent') {
+            params[datasetKeyToSnakeCase(key)] = val;
+        }
+    }
+    return params;
+}
 
 // --- ДИНАМИЧЕСКИЙ ЭФФЕКТ СВЕЧЕНИЯ ДЛЯ BENTO CARDS ---
 document.querySelectorAll('.bento-glass').forEach(card => {
@@ -28,6 +68,13 @@ function currentLang() {
 }
 
 function changeLang(lang, remember = true) {
+    const prevLang = currentLang();
+    if (remember && prevLang !== lang) {
+        sendGAEvent('language_select', {
+            selected_language: lang,
+            previous_language: prevLang
+        });
+    }
     document.body.classList.remove('lang-ru', 'lang-en', 'lang-ua');
     // Принудительный reflow для обнуления CSS анимаций
     void document.body.offsetWidth;
@@ -126,10 +173,32 @@ if (typeof AOS !== 'undefined') {
             btn.classList.add('active');
             state[group] = btn.dataset.filterValue;
             apply();
+            sendGAEvent('filter_click', {
+                filter_group: group,
+                filter_value: btn.dataset.filterValue,
+                section: getPageSlug()
+            });
         });
     });
 
-    if (search) search.addEventListener('input', apply);
+    let searchDebounceTimer = null;
+    if (search) {
+        search.addEventListener('input', () => {
+            apply();
+            clearTimeout(searchDebounceTimer);
+            searchDebounceTimer = setTimeout(() => {
+                const q = search.value.trim();
+                if (q.length >= 2) {
+                    const visibleCount = items.filter(it => !it.classList.contains('is-hidden')).length;
+                    sendGAEvent('search', {
+                        search_term: q,
+                        search_section: getPageSlug(),
+                        results_count: visibleCount
+                    });
+                }
+            }, 750);
+        });
+    }
     apply();
 })();
 
@@ -140,6 +209,12 @@ function openVideoModal(videoId, title) {
     const iframe = document.getElementById('videoModalIframe');
     const titleEl = document.getElementById('videoModalTitle');
     if (!modal || !iframe) return;
+
+    sendGAEvent('video_open', {
+        video_id: (videoId || '').split('?')[0],
+        video_title: title || '',
+        section: getPageSlug()
+    });
 
     if (window.location.protocol === 'file:') {
         window.open('https://www.youtube.com/watch?v=' + videoId.split('?')[0], '_blank');
@@ -205,4 +280,116 @@ window.addEventListener('DOMContentLoaded', () => {
         spacing: 18.00,
         showDots: true
     });
+});
+
+// --- АВТОМАТИЧЕСКИЙ ТРЕКИНГ КЛИКОВ И DATA-GA-EVENT ---
+document.addEventListener('click', e => {
+    // 1. Явный data-ga-event на элементе или ближайшем предке
+    const gaEl = e.target.closest('[data-ga-event]');
+    if (gaEl) {
+        const eventName = gaEl.dataset.gaEvent;
+        const params = extractGaParams(gaEl);
+        sendGAEvent(eventName, params);
+        return;
+    }
+
+    // 2. Автоматическое определение целевых ссылок <a>
+    const link = e.target.closest('a');
+    if (!link || !link.href) return;
+
+    const href = link.href;
+    const placement = getLinkPlacement(link);
+
+    // Email
+    if (href.startsWith('mailto:')) {
+        sendGAEvent('contact_click', {
+            contact_type: 'email',
+            contact_value: href.replace(/^mailto:/, '').split('?')[0],
+            placement: placement
+        });
+        return;
+    }
+
+    // Telegram Alexey
+    if (href.includes('t.me/AlexeySeleznev')) {
+        if (window.location.pathname.includes('/ads/')) {
+            sendGAEvent('generate_lead', {
+                contact_type: 'telegram',
+                source_page: 'ads',
+                lead_topic: 'advertising'
+            });
+        } else {
+            sendGAEvent('contact_click', {
+                contact_type: 'telegram',
+                contact_value: '@AlexeySeleznev',
+                placement: placement
+            });
+        }
+        return;
+    }
+
+    // Telegram R4marketing
+    if (href.includes('t.me/R4marketing')) {
+        sendGAEvent('community_join', {
+            platform: 'telegram',
+            channel_name: 'R4marketing',
+            placement: placement
+        });
+        return;
+    }
+
+    // YouTube R4marketing
+    if (href.includes('youtube.com/R4marketing')) {
+        sendGAEvent('community_join', {
+            platform: 'youtube',
+            channel_name: 'R4marketing',
+            placement: placement
+        });
+        return;
+    }
+
+    // LinkedIn
+    if (href.includes('linkedin.com/in/selesnow')) {
+        sendGAEvent('social_click', {
+            network: 'linkedin',
+            placement: placement
+        });
+        return;
+    }
+
+    // Facebook
+    if (href.includes('facebook.com/selesnow')) {
+        sendGAEvent('social_click', {
+            network: 'facebook',
+            placement: placement
+        });
+        return;
+    }
+
+    // Instagram
+    if (href.includes('instagram.com/alexey.selesnow')) {
+        sendGAEvent('social_click', {
+            network: 'instagram',
+            placement: placement
+        });
+        return;
+    }
+
+    // Habr profile
+    if (href.includes('habr.com/users/selesnow') || href.includes('habr.com/ru/users/selesnow')) {
+        sendGAEvent('social_click', {
+            network: 'habr',
+            placement: placement
+        });
+        return;
+    }
+
+    // GitHub авторский профиль (не отдельный репозиторий)
+    if (href.replace(/\/$/, '').endsWith('github.com/selesnow')) {
+        sendGAEvent('social_click', {
+            network: 'github',
+            placement: placement
+        });
+        return;
+    }
 });
