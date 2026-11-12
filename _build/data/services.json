@@ -1,100 +1,148 @@
 [
- {
-  "name": "Server Manager",
-  "repo": "server_manager_shiny_app",
-  "icon": "fa-solid fa-server",
-  "img": "../assets/services/server-manager.png",
-  "stack": [
-   "R",
-   "Shiny",
-   "bslib",
-   "shinychat",
-   "ellmer",
-   "SQLite",
-   "GitLab CI"
-  ],
-  "tagline": {
-   "ru": "Веб-панель управления аналитическим сервером",
-   "ua": "Веб-панель керування аналітичним сервером",
-   "en": "A web control panel for an analytics server"
+  {
+    "name": "AcpGram",
+    "repo": "acpgram",
+    "icon": "fa-brands fa-telegram",
+    "commands": [
+      "/new",
+      "/project",
+      "/engine",
+      "/model"
+    ],
+    "stack": [
+      "Node.js",
+      "Telegram Bot API",
+      "Agent Client Protocol",
+      "SQLite"
+    ],
+    "tagline": {
+      "ru": "AI coding-агенты в Telegram",
+      "ua": "AI coding-агенти в Telegram",
+      "en": "AI coding agents in Telegram"
+    },
+    "desc": {
+      "ru": "Telegram-шлюз к AI-агентам для разработки: Gemini CLI, Claude Code, Antigravity CLI и OpenAI Codex. Бот запускает выбранного агента на вашем компьютере или сервере и общается с ним по Agent Client Protocol: можно отправлять задачи, следить за ходом работы и подтверждать действия прямо в чате.",
+      "ua": "Telegram-шлюз до AI-агентів для розробки: Gemini CLI, Claude Code, Antigravity CLI та OpenAI Codex. Бот запускає вибраного агента на вашому комп’ютері або сервері й спілкується з ним через Agent Client Protocol: можна надсилати завдання, стежити за роботою та підтверджувати дії прямо в чаті.",
+      "en": "A Telegram gateway to AI coding agents: Gemini CLI, Claude Code, Antigravity CLI and OpenAI Codex. The bot runs the selected agent on your computer or server and communicates over the Agent Client Protocol, so you can send tasks, follow its progress and approve actions right in the chat."
+    },
+    "features": {
+      "ru": [
+        "Четыре AI-движка с переключением из Telegram",
+        "Потоковый вывод, журнал действий и подтверждение операций",
+        "Выбор проектов и управление сессиями",
+        "Приглашения пользователей и настройка прав доступа"
+      ],
+      "ua": [
+        "Чотири AI-рушії з перемиканням у Telegram",
+        "Потокова відповідь, журнал дій і підтвердження операцій",
+        "Вибір проєктів і керування сесіями",
+        "Запрошення користувачів і налаштування прав доступу"
+      ],
+      "en": [
+        "Four AI engines, switchable from Telegram",
+        "Streaming replies, an action log and approval controls",
+        "Project selection and session management",
+        "User invitations and access controls"
+      ]
+    },
+    "img": "../assets/services/acpgram-logo.svg"
   },
-  "desc": {
-   "ru": "Shiny-приложение, через которое отдел аналитики работает с сервером, не подключаясь к нему по RDP. В одном окне собраны сотни задач планировщика Windows, службы, процессы, логи скриптов и статистика, а встроенный AI-ассистент помогает разобрать упавшую задачу: читает лог и код, объясняет ошибку и предлагает план исправления.",
-   "ua": "Shiny-застосунок, через який відділ аналітики працює з сервером, не підключаючись до нього по RDP. В одному вікні зібрані сотні задач планувальника Windows, служби, процеси, логи скриптів і статистика, а вбудований AI-асистент допомагає розібрати задачу, що впала: читає лог і код, пояснює помилку та пропонує план виправлення.",
-   "en": "A Shiny app the analytics team uses to work with the server without RDP. Hundreds of Windows Task Scheduler jobs, services, processes, script logs and statistics live in one window, and a built-in AI assistant helps debug failed jobs: it reads the log and code, explains the error and proposes a fix."
+  {
+    "name": "Server Manager",
+    "repo": "server_manager_shiny_app",
+    "icon": "fa-solid fa-server",
+    "img": "../assets/services/server-manager.png",
+    "stack": [
+      "R",
+      "Shiny",
+      "bslib",
+      "shinychat",
+      "ellmer",
+      "SQLite",
+      "GitLab CI"
+    ],
+    "tagline": {
+      "ru": "Веб-панель управления аналитическим сервером",
+      "ua": "Веб-панель керування аналітичним сервером",
+      "en": "A web control panel for an analytics server"
+    },
+    "desc": {
+      "ru": "Shiny-приложение, через которое отдел аналитики работает с сервером, не подключаясь к нему по RDP. В одном окне собраны сотни задач планировщика Windows, службы, процессы, логи скриптов и статистика, а встроенный AI-ассистент помогает разобрать упавшую задачу: читает лог и код, объясняет ошибку и предлагает план исправления.",
+      "ua": "Shiny-застосунок, через який відділ аналітики працює з сервером, не підключаючись до нього по RDP. В одному вікні зібрані сотні задач планувальника Windows, служби, процеси, логи скриптів і статистика, а вбудований AI-асистент допомагає розібрати задачу, що впала: читає лог і код, пояснює помилку та пропонує план виправлення.",
+      "en": "A Shiny app the analytics team uses to work with the server without RDP. Hundreds of Windows Task Scheduler jobs, services, processes, script logs and statistics live in one window, and a built-in AI assistant helps debug failed jobs: it reads the log and code, explains the error and proposes a fix."
+    },
+    "features": {
+      "ru": [
+        "Задачи планировщика: статусы, логи, код, запуск и отключение",
+        "AI-анализ логов и кода, ассистент с доступом к задачам и Планфиксу",
+        "Службы, процессы, поиск по всем скриптам сервера",
+        "Роли и права доступа, журнал действий, статистика сбоев"
+      ],
+      "ua": [
+        "Задачі планувальника: статуси, логи, код, запуск і вимкнення",
+        "AI-аналіз логів і коду, асистент з доступом до задач і Планфіксу",
+        "Служби, процеси, пошук по всіх скриптах сервера",
+        "Ролі та права доступу, журнал дій, статистика збоїв"
+      ],
+      "en": [
+        "Scheduler jobs: status, logs, code, run and disable",
+        "AI log and code analysis; an assistant with access to jobs and Planfix",
+        "Services, processes and search across all server scripts",
+        "Roles and permissions, audit log, failure statistics"
+      ]
+    }
   },
-  "features": {
-   "ru": [
-    "Задачи планировщика: статусы, логи, код, запуск и отключение",
-    "AI-анализ логов и кода, ассистент с доступом к задачам и Планфиксу",
-    "Службы, процессы, поиск по всем скриптам сервера",
-    "Роли и права доступа, журнал действий, статистика сбоев"
-   ],
-   "ua": [
-    "Задачі планувальника: статуси, логи, код, запуск і вимкнення",
-    "AI-аналіз логів і коду, асистент з доступом до задач і Планфіксу",
-    "Служби, процеси, пошук по всіх скриптах сервера",
-    "Ролі та права доступу, журнал дій, статистика збоїв"
-   ],
-   "en": [
-    "Scheduler jobs: status, logs, code, run and disable",
-    "AI log and code analysis; an assistant with access to jobs and Planfix",
-    "Services, processes and search across all server scripts",
-    "Roles and permissions, audit log, failure statistics"
-   ]
+  {
+    "name": "Server Telegram Bot",
+    "repo": "server_telegram_bot",
+    "icon": "fa-brands fa-telegram",
+    "commands": [
+      "/tasks",
+      "/running_tasks",
+      "/run_menu",
+      "/task_info",
+      "/task_search",
+      "/forget",
+      "/add_priv"
+    ],
+    "stack": [
+      "R",
+      "telegram.bot",
+      "taskscheduleR",
+      "promises",
+      "future",
+      "SQLite",
+      "lgr"
+    ],
+    "tagline": {
+      "ru": "Мониторинг и управление сервером из Telegram",
+      "ua": "Моніторинг і керування сервером з Telegram",
+      "en": "Server monitoring and control from Telegram"
+    },
+    "desc": {
+      "ru": "Telegram-бот на R — вторая часть системы мониторинга сервера. Им пользуются несколько отделов: аналитики следят за задачами на сервере и перезапускают их без подключения к серверу, PPC-отдел контролирует еженедельный сбор данных в Google BigQuery, финансовый отдел запускает загрузку данных в отчёты. Работает в личных и групповых чатах, команды обрабатываются асинхронно.",
+      "ua": "Telegram-бот на R — друга частина системи моніторингу сервера. Ним користуються кілька відділів: аналітики стежать за задачами на сервері та перезапускають їх без підключення до сервера, PPC-відділ контролює щотижневий збір даних у Google BigQuery, фінансовий відділ запускає завантаження даних у звіти. Працює в особистих і групових чатах, команди обробляються асинхронно.",
+      "en": "A Telegram bot written in R — the second half of the server monitoring system. Several teams rely on it: analysts track and restart server jobs without logging in, the PPC team monitors weekly data collection into Google BigQuery, and finance triggers data loads into its reports. It works in private and group chats and handles commands asynchronously."
+    },
+    "features": {
+      "ru": [
+        "Список задач, запущенные и упавшие задачи",
+        "Запуск задач через инлайн-меню, поиск и карточка задачи",
+        "Права пользователей на каждую команду",
+        "Временное отключение задач от мониторинга, логирование действий"
+      ],
+      "ua": [
+        "Список задач, запущені та невдалі задачі",
+        "Запуск задач через інлайн-меню, пошук і картка задачі",
+        "Права користувачів на кожну команду",
+        "Тимчасове вимкнення задач з моніторингу, логування дій"
+      ],
+      "en": [
+        "Job list, running and failed jobs",
+        "Run jobs from an inline menu; job search and details",
+        "Per-command user permissions",
+        "Temporarily exclude jobs from monitoring; action logging"
+      ]
+    }
   }
- },
- {
-  "name": "Server Telegram Bot",
-  "repo": "server_telegram_bot",
-  "icon": "fa-brands fa-telegram",
-  "commands": [
-   "/tasks",
-   "/running_tasks",
-   "/run_menu",
-   "/task_info",
-   "/task_search",
-   "/forget",
-   "/add_priv"
-  ],
-  "stack": [
-   "R",
-   "telegram.bot",
-   "taskscheduleR",
-   "promises",
-   "future",
-   "SQLite",
-   "lgr"
-  ],
-  "tagline": {
-   "ru": "Мониторинг и управление сервером из Telegram",
-   "ua": "Моніторинг і керування сервером з Telegram",
-   "en": "Server monitoring and control from Telegram"
-  },
-  "desc": {
-   "ru": "Telegram-бот на R — вторая часть системы мониторинга сервера. Им пользуются несколько отделов: аналитики следят за задачами на сервере и перезапускают их без подключения к серверу, PPC-отдел контролирует еженедельный сбор данных в Google BigQuery, финансовый отдел запускает загрузку данных в отчёты. Работает в личных и групповых чатах, команды обрабатываются асинхронно.",
-   "ua": "Telegram-бот на R — друга частина системи моніторингу сервера. Ним користуються кілька відділів: аналітики стежать за задачами на сервері та перезапускають їх без підключення до сервера, PPC-відділ контролює щотижневий збір даних у Google BigQuery, фінансовий відділ запускає завантаження даних у звіти. Працює в особистих і групових чатах, команди обробляються асинхронно.",
-   "en": "A Telegram bot written in R — the second half of the server monitoring system. Several teams rely on it: analysts track and restart server jobs without logging in, the PPC team monitors weekly data collection into Google BigQuery, and finance triggers data loads into its reports. It works in private and group chats and handles commands asynchronously."
-  },
-  "features": {
-   "ru": [
-    "Список задач, запущенные и упавшие задачи",
-    "Запуск задач через инлайн-меню, поиск и карточка задачи",
-    "Права пользователей на каждую команду",
-    "Временное отключение задач от мониторинга, логирование действий"
-   ],
-   "ua": [
-    "Список задач, запущені та невдалі задачі",
-    "Запуск задач через інлайн-меню, пошук і картка задачі",
-    "Права користувачів на кожну команду",
-    "Тимчасове вимкнення задач з моніторингу, логування дій"
-   ],
-   "en": [
-    "Job list, running and failed jobs",
-    "Run jobs from an inline menu; job search and details",
-    "Per-command user permissions",
-    "Temporarily exclude jobs from monitoring; action logging"
-   ]
-  }
- }
 ]
