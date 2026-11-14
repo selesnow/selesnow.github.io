@@ -50,6 +50,11 @@ def update_acpgram_stats():
                 if attempt == 2 or not (exc.code == 429 or exc.code >= 500):
                     raise
                 time.sleep(min(30, int(exc.headers.get('Retry-After', 2 ** (attempt + 1)))))
+            except (urllib.error.URLError, TimeoutError):
+                # Transient network failure (DNS, connection reset, timeout): retry with backoff.
+                if attempt == 2:
+                    raise
+                time.sleep(2 ** (attempt + 1))
 
     def collect(label, action):
         nonlocal changed
@@ -82,6 +87,21 @@ def update_acpgram_stats():
         # Only assign after all chunks succeeded.
         data['npm'].update(version=meta['dist-tags']['latest'], total=total)
 
+    def releases():
+        # The one-line installers download acpgram-<tag>.tar.gz (Linux/macOS) or .zip (Windows)
+        # from GitHub Releases; SHA256SUMS is fetched alongside, so it is excluded to avoid double counting.
+        total, count, page = 0, 0, 1
+        while True:
+            chunk = get(f'https://api.github.com/repos/selesnow/acpgram/releases?per_page=100&page={page}')
+            if not chunk:
+                break
+            for rel in chunk:
+                count += 1
+                total += sum(a['download_count'] for a in rel.get('assets', [])
+                             if a['name'].endswith(('.tar.gz', '.zip')))
+            page += 1
+        data['github']['releases'] = {'downloads': total, 'count': count}
+
     def clones():
         result = get('https://api.github.com/repos/selesnow/acpgram/traffic/clones')
         data['github']['clones'] = merge_clones(data['github']['clones'], result)
@@ -89,7 +109,12 @@ def update_acpgram_stats():
     collect('github', github)
     collect('npmMonth', npm_month)
     collect('npmTotal', npm_total)
+    collect('releases', releases)
     collect('clones', clones)
+    npm_total_value = data.get('npm', {}).get('total')
+    release_value = data.get('github', {}).get('releases', {}).get('downloads')
+    if npm_total_value is not None and release_value is not None:
+        data['downloadsTotal'] = npm_total_value + release_value
     if changed:
         data['updated'] = dt.datetime.now(dt.timezone.utc).isoformat(timespec='seconds')
         data.setdefault('sourcesUpdated', {}).update(fetched)

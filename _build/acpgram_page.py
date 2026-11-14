@@ -362,12 +362,12 @@ def build_acpgram():
     security += '<div class="bento-glass ap-note">' + p('Совет: агент работает с правами пользователя, под которым запущен бот, — папка проекта не изолирует остальные файлы. Запускайте бота под отдельной учётной записью и выдавайте полный доступ (без подтверждений) только тем, кому доверяете.', 'Порада: агент працює з правами користувача, під яким запущено бота, — папка проєкту не ізолює решту файлів. Запускайте бота під окремим обліковим записом і надавайте повний доступ (без підтверджень) лише тим, кому довіряєте.', 'Tip: the agent runs with the rights of the account the bot runs under — the project folder does not isolate other files. Run the bot under a dedicated account and grant full access (no approvals) only to people you trust.') + '</div>'
     page += section('security', ('Безопасность', 'Безпека', 'Security'), security)
 
-    metrics = [('github.stars', ('звёзд на GitHub', 'зірок на GitHub', 'GitHub stars')),
+    metrics = [('downloadsTotal', ('загрузок всего: npm + GitHub', 'завантажень загалом: npm + GitHub', 'downloads in total: npm + GitHub')),
                ('npm.last30d', ('скачиваний npm за месяц', 'завантажень npm за місяць', 'npm downloads this month')),
-               ('npm.total', ('скачиваний npm всего', 'завантажень npm загалом', 'npm downloads in total')),
-               ('npm.version', ('текущая версия', 'поточна версія', 'current version'))]
+               ('github.releases.downloads', ('скачиваний установщика с GitHub', 'завантажень інсталятора з GitHub', 'installer downloads from GitHub')),
+               ('github.stars', ('звёзд на GitHub', 'зірок на GitHub', 'GitHub stars'))]
     content = '<div class="ap-grid ap-four">' + ''.join(f'<div class="bento-glass ap-stat ap-reveal">{metric(path)}<span>{text(*label)}</span></div>' for path, label in metrics) + '</div>'
-    content += '<p class="ap-stat-dates"><span id="ap-updated">' + text('Обновлено: ', 'Оновлено: ', 'Updated: ') + esc(stats.get('updated') or '—') + '</span> · ' + text('Скачивания включают CI и зеркала.', 'Завантаження включають CI та дзеркала.', 'Downloads include CI and mirrors.') + '</p>'
+    content += '<p class="ap-stat-dates"><span id="ap-updated">' + text('Обновлено: ', 'Оновлено: ', 'Updated: ') + esc(stats.get('updated') or '—') + '</span> · ' + text('Загрузки включают обновления, CI и автоматические скачивания, поэтому это не число пользователей.', 'Завантаження включають оновлення, CI та автоматичні завантаження, тому це не кількість користувачів.', 'Downloads include updates, CI and automated fetches, so they are not a user count.') + '</p>'
     page += section('stats', ('Проект в цифрах', 'Проєкт у цифрах', 'By the numbers'), content)
 
     content = '<div class="ap-faq">' + ''.join(f'<details class="bento-glass"><summary>{text(*q)}<span aria-hidden="true">+</span></summary>{p(*a)}</details>' for q, a in FAQ) + f'</div><a class="ap-text-link" href="{REPO}/issues">GitHub Issues ↗</a>'
