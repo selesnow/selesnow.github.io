@@ -1773,9 +1773,12 @@ def build_css():
 
 if __name__ == '__main__':
     import sys
+    from acpgram_stats import update_acpgram_stats
     if '--stats-only' in sys.argv:
         update_package_stats(load('packages'))
+        update_acpgram_stats()
         sys.exit()
+    update_acpgram_stats()
     build_opensource()
     build_courses()
     build_videos()
@@ -1784,4 +1787,6 @@ if __name__ == '__main__':
     build_interviews()
     build_404()
     build_ads()
+    from acpgram_page import build_acpgram
+    build_acpgram()
     build_css()

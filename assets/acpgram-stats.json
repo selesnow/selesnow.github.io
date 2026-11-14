@@ -1,0 +1,101 @@
+{
+  "updated": "2026-11-14T11:54:42+00:00",
+  "github": {
+    "stars": 10,
+    "forks": 0,
+    "clones": {
+      "last14d": 419,
+      "uniques14d": 111,
+      "total": 419,
+      "history": [
+        {
+          "date": "2026-10-30",
+          "count": 0,
+          "uniques": 0
+        },
+        {
+          "date": "2026-10-31",
+          "count": 0,
+          "uniques": 0
+        },
+        {
+          "date": "2026-11-01",
+          "count": 0,
+          "uniques": 0
+        },
+        {
+          "date": "2026-11-02",
+          "count": 0,
+          "uniques": 0
+        },
+        {
+          "date": "2026-11-03",
+          "count": 0,
+          "uniques": 0
+        },
+        {
+          "date": "2026-11-04",
+          "count": 0,
+          "uniques": 0
+        },
+        {
+          "date": "2026-11-05",
+          "count": 0,
+          "uniques": 0
+        },
+        {
+          "date": "2026-11-06",
+          "count": 0,
+          "uniques": 0
+        },
+        {
+          "date": "2026-11-07",
+          "count": 0,
+          "uniques": 0
+        },
+        {
+          "date": "2026-11-08",
+          "count": 0,
+          "uniques": 0
+        },
+        {
+          "date": "2026-11-09",
+          "count": 0,
+          "uniques": 0
+        },
+        {
+          "date": "2026-11-10",
+          "count": 0,
+          "uniques": 0
+        },
+        {
+          "date": "2026-11-11",
+          "count": 153,
+          "uniques": 42
+        },
+        {
+          "date": "2026-11-12",
+          "count": 160,
+          "uniques": 45
+        },
+        {
+          "date": "2026-11-13",
+          "count": 106,
+          "uniques": 33
+        }
+      ],
+      "since": "2026-10-30"
+    }
+  },
+  "npm": {
+    "version": "1.19.2",
+    "last30d": 1470,
+    "total": 1470
+  },
+  "sourcesUpdated": {
+    "github": "2026-11-14T11:54:40+00:00",
+    "npmMonth": "2026-11-14T11:54:40+00:00",
+    "npmTotal": "2026-11-14T11:54:41+00:00",
+    "clones": "2026-11-14T11:54:42+00:00"
+  }
+}

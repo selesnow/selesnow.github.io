@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="150 117 353 285" width="706" height="570" fill="none">
+  <title>AcpGram</title>
+  <defs>
+    <linearGradient id="acpgram-g-light" x1="330" y1="270" x2="493" y2="392" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#9EA3B8"/>
+      <stop offset="1" stop-color="#FFFFFF"/>
+    </linearGradient>
+  </defs>
+  <path fill="#FFFFFF" d="M312 127 L160 392 C262 392 342 330 342 222 C342 190 330 155 312 127 Z" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round"/>
+  <path fill="url(#acpgram-g-light)" d="M407 245 L493 392 L323 392 C323 330 360 275 407 245 Z" stroke="url(#acpgram-g-light)" stroke-width="2" stroke-linejoin="round"/>
+</svg>

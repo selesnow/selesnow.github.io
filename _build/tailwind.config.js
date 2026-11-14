@@ -11,6 +11,8 @@ module.exports = {
     './articles/index.html',
     './interviews/index.html',
     './ads/index.html',
+    './acpgram/index.html',
+    './acpgram/acpgram.js',
     './assets/site.js',
     './_build/build.py',
   ],

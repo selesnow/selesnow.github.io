@@ -1,0 +1,77 @@
+{
+  "browserChecks": [
+    {
+      "width": 360,
+      "scrollWidth": 360,
+      "h1": 1,
+      "brokenImages": [],
+      "iframes": 0
+    },
+    {
+      "width": 768,
+      "scrollWidth": 768,
+      "h1": 1,
+      "brokenImages": [],
+      "iframes": 0
+    },
+    {
+      "width": 1280,
+      "scrollWidth": 1280,
+      "h1": 1,
+      "brokenImages": [],
+      "iframes": 0
+    },
+    {
+      "width": 1920,
+      "scrollWidth": 1920,
+      "h1": 1,
+      "brokenImages": [],
+      "iframes": 0
+    },
+    {
+      "lang": "en",
+      "h1": "Control your coding agents from Telegram",
+      "hiddenText": 1
+    },
+    {
+      "lang": "uk",
+      "h1": "Керуйте кодинг-агентами з Telegram",
+      "hiddenText": 1
+    },
+    {
+      "lang": "ru",
+      "h1": "Управляйте кодинг-агентами из Telegram",
+      "hiddenText": 1
+    },
+    {
+      "statsFallback": true
+    },
+    {
+      "copy": "npm install -g acpgram",
+      "keyboardTabs": true,
+      "inlineVideo": "https://www.youtube-nocookie.com/embed/3CIc8QJZpkk?autoplay=1&rel=0"
+    },
+    {
+      "reducedMotion": true,
+      "noSlashRoute": true,
+      "noJs": true,
+      "errors": []
+    },
+    {
+      "filePreview": {
+        "background": "rgb(3, 7, 18)",
+        "brokenImages": [],
+        "scriptLoaded": true,
+        "language": "ru"
+      }
+    }
+  ],
+  "mobileLighthouse": {
+    "performance": 95,
+    "accessibility": 100,
+    "seo": 100
+  },
+  "auditEnvironment": "Headless Chrome, mobile emulation, software rendering (--disable-gpu); default GPU path Performance 86 on this Windows host",
+  "workflowDispatch": "Not run: no commit/push at owner request",
+  "dailyClonesRequirement": "Add repository Actions secret GITHUB_PAT; local gh traffic access verified"
+}
