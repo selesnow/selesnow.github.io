@@ -109,8 +109,19 @@ def agent_panels():
                 + code('agy --version')
                 + '<a class="ap-text-link" href="https://antigravity.google/docs/getting-started?tab=cli">' + text('Документация Antigravity CLI', 'Документація Antigravity CLI', 'Antigravity CLI docs') + ' ↗</a>')
 
+    opencode = p('Самый простой старт: OpenCode работает сразу на бесплатных моделях, без ключей и аккаунтов. Поставьте его одной командой — или просто запустите мастер AcpGram: если агентов нет, он предложит установить OpenCode сам.',
+                 'Найпростіший старт: OpenCode працює одразу на безкоштовних моделях, без ключів і акаунтів. Встановіть його однією командою — або просто запустіть майстер AcpGram: якщо агентів немає, він запропонує встановити OpenCode сам.',
+                 'The easiest start: OpenCode works right away on free models, with no keys or accounts. Install it with one command, or just run the AcpGram wizard: if no agent is installed, it offers to install OpenCode for you.')
+    opencode += code('npm install -g opencode-ai')
+    opencode += more(text('Модели других провайдеров', 'Моделі інших провайдерів', 'Models from other providers'),
+                     p('Каждый ключ провайдера добавляет его модели: Anthropic, OpenAI, Gemini, OpenRouter (сотни моделей по одному ключу), Groq, DeepSeek, Mistral. Мастер AcpGram спросит ключи сам, их можно добавить и позже в .env. Бесплатные модели могут использовать запросы для обучения — не отправляйте в них секреты.',
+                       'Кожен ключ провайдера додає його моделі: Anthropic, OpenAI, Gemini, OpenRouter (сотні моделей за одним ключем), Groq, DeepSeek, Mistral. Майстер AcpGram запитає ключі сам, їх можна додати й пізніше в .env. Безкоштовні моделі можуть використовувати запити для навчання — не надсилайте в них секрети.',
+                       'Each provider key adds that provider’s models: Anthropic, OpenAI, Gemini, OpenRouter (hundreds of models with one key), Groq, DeepSeek, Mistral. The AcpGram wizard asks for the keys, or add them to .env later. Free models may use requests for training — keep secrets out of them.')
+                     + node + '<a class="ap-text-link" href="https://opencode.ai/docs">' + text('Документация OpenCode', 'Документація OpenCode', 'OpenCode docs') + ' ↗</a>')
+
     return tabs('agent', 'Agent', [('claude', 'Claude Code', claude), ('codex', 'Codex', codex),
-                                   ('gemini', 'Gemini CLI', gemini), ('agy', 'Antigravity CLI', agy)])
+                                   ('gemini', 'Gemini CLI', gemini), ('agy', 'Antigravity CLI', agy),
+                                   ('opencode', 'OpenCode', opencode)])
 
 
 def os_panels():
@@ -141,7 +152,7 @@ def install_content():
          + ''.join(f'<li>{text(*item)}</li>' for item in [
              ('вставьте токен бота;', 'вставте токен бота;', 'paste the bot token;'),
              ('напишите своему боту любое сообщение — мастер запомнит вас как администратора;', 'напишіть своєму боту будь-яке повідомлення — майстер запам’ятає вас як адміністратора;', 'send your bot any message — the wizard registers you as the admin;'),
-             ('выберите агента по умолчанию и, если нужно, укажите API-ключ;', 'виберіть агента за замовчуванням і, якщо потрібно, вкажіть API-ключ;', 'choose the default agent and enter an API key if you need one;'),
+             ('выберите агента по умолчанию и, если нужно, укажите API-ключ (агентов нет — мастер предложит поставить OpenCode);', 'виберіть агента за замовчуванням і, якщо потрібно, вкажіть API-ключ (агентів немає — майстер запропонує встановити OpenCode);', 'choose the default agent and enter an API key if you need one (no agent yet? the wizard offers to install OpenCode);'),
              ('согласитесь установить сервис — бот будет запускаться вместе с системой.', 'погодьтеся встановити сервіс — бот запускатиметься разом із системою.', 'accept the service install — the bot will start with your system.'),
          ]) + '</ul>'),
         (('Напишите боту задачу', 'Напишіть боту завдання', 'Send your bot a task'),
@@ -161,18 +172,18 @@ def install_content():
     source = (p('Нужны Git и Node.js 24+. Зависимости npm самому AcpGram не нужны.', 'Потрібні Git і Node.js 24+. Залежності npm самому AcpGram не потрібні.', 'Requires Git and Node.js 24+. AcpGram itself has no npm dependencies.')
               + code('git clone https://github.com/selesnow/acpgram.git\ncd acpgram\nnpm run setup')
               + p('Если отказались от сервиса, бот запускается командой:', 'Якщо відмовилися від сервісу, бот запускається командою:', 'If you skipped the service, start the bot with:') + code('npm start'))
-    docker = (p('Нужны Git и Docker с Docker Compose. Все четыре агента и мосты уже внутри образа — на хост ничего ставить не нужно, мастер тоже не нужен.',
-                'Потрібні Git і Docker із Docker Compose. Усі чотири агенти й мости вже всередині образу — на хост нічого встановлювати не потрібно, майстер теж не потрібен.',
-                'Requires Git and Docker with Docker Compose. All four agents and bridges ship in the image — nothing to install on the host, no wizard needed.')
+    docker = (p('Нужны Git и Docker с Docker Compose. Все пять агентов и мосты уже внутри образа — на хост ничего ставить не нужно, мастер тоже не нужен.',
+                'Потрібні Git і Docker із Docker Compose. Усі п’ять агентів і мости вже всередині образу — на хост нічого встановлювати не потрібно, майстер теж не потрібен.',
+                'Requires Git and Docker with Docker Compose. All five agents and bridges ship in the image — nothing to install on the host, no wizard needed.')
               + code('git clone https://github.com/selesnow/acpgram.git\ncd acpgram\ncp .env.example .env')
               + p('Заполните в .env токен бота, свой Telegram ID, ключ агента и папку с проектами. Например, для Gemini CLI:',
                   'Заповніть у .env токен бота, свій Telegram ID, ключ агента й папку з проєктами. Наприклад, для Gemini CLI:',
                   'Fill in .env with the bot token, your Telegram ID, the agent key and the projects folder. For example, for Gemini CLI:')
               + code('TELEGRAM_BOT_TOKEN=YOUR_BOT_TOKEN\nALLOWED_USER_ID=YOUR_TELEGRAM_ID\nDEFAULT_ENGINE=gemini\nGEMINI_API_KEY=YOUR_API_KEY\nPROJECTS_DIR=./projects')
               + code('docker compose up -d --build')
-              + p('Для Claude Code — ANTHROPIC_API_KEY, для Codex — OPENAI_API_KEY. Antigravity CLI: после запуска один раз выполните docker compose exec -it bot agy acp --login. В контейнере агент видит только папку проектов. На Windows вместо cp используйте Copy-Item.',
-                  'Для Claude Code — ANTHROPIC_API_KEY, для Codex — OPENAI_API_KEY. Antigravity CLI: після запуску один раз виконайте docker compose exec -it bot agy acp --login. У контейнері агент бачить лише папку проєктів. На Windows замість cp використовуйте Copy-Item.',
-                  'Claude Code uses ANTHROPIC_API_KEY, Codex uses OPENAI_API_KEY. Antigravity CLI: after start, run docker compose exec -it bot agy acp --login once. Inside the container the agent sees only the projects folder. On Windows use Copy-Item instead of cp.', 'ap-small'))
+              + p('Для Claude Code — ANTHROPIC_API_KEY, для Codex — OPENAI_API_KEY. OpenCode (DEFAULT_ENGINE=opencode) работает и без ключа — на бесплатных моделях, а любые ключи провайдеров добавляют их модели. Antigravity CLI: после запуска один раз выполните docker compose exec -it bot agy acp --login. В контейнере агент видит только папку проектов. На Windows вместо cp используйте Copy-Item.',
+                  'Для Claude Code — ANTHROPIC_API_KEY, для Codex — OPENAI_API_KEY. OpenCode (DEFAULT_ENGINE=opencode) працює й без ключа — на безкоштовних моделях, а будь-які ключі провайдерів додають їхні моделі. Antigravity CLI: після запуску один раз виконайте docker compose exec -it bot agy acp --login. У контейнері агент бачить лише папку проєктів. На Windows замість cp використовуйте Copy-Item.',
+                  'Claude Code uses ANTHROPIC_API_KEY, Codex uses OPENAI_API_KEY. OpenCode (DEFAULT_ENGINE=opencode) works without a key on free models, and any provider key adds that provider’s models. Antigravity CLI: after start, run docker compose exec -it bot agy acp --login once. Inside the container the agent sees only the projects folder. On Windows use Copy-Item instead of cp.', 'ap-small'))
     service = (p('Обычно сервис ставит мастер. Управлять им можно так:', 'Зазвичай сервіс встановлює майстер. Керувати ним можна так:', 'The wizard normally installs the service. To manage it:')
                + code('acpgram service install\nacpgram service status\nacpgram service restart\nacpgram service uninstall')
                + p('Windows: сервис ставится через NSSM из терминала администратора и просит пароль вашей учётной записи (для аккаунта Microsoft — его пароль, не PIN). Linux: systemd --user; чтобы бот работал без входа в систему, выполните sudo loginctl enable-linger $USER. macOS: LaunchAgent.',
@@ -195,9 +206,9 @@ def install_content():
 
 FAQ = [
     (('AcpGram платный?', 'AcpGram платний?', 'Is AcpGram paid?'),
-     ('Нет, это бесплатный проект с открытым кодом (лицензия MIT). Вы платите только за самого агента — подписку или API вашего провайдера, как и при работе в терминале.',
-      'Ні, це безкоштовний проєкт із відкритим кодом (ліцензія MIT). Ви платите лише за самого агента — підписку або API вашого провайдера, як і під час роботи в терміналі.',
-      'No. It is free and open source (MIT license). You only pay for the agent itself — your provider’s subscription or API — just as in the terminal.')),
+     ('Нет, это бесплатный проект с открытым кодом (лицензия MIT). Вы платите только за самого агента — подписку или API вашего провайдера, как и при работе в терминале. А с OpenCode можно начать совсем без оплаты: у него есть бесплатные модели, которым не нужен ключ (они могут использовать запросы для обучения — не отправляйте в них секреты).',
+      'Ні, це безкоштовний проєкт із відкритим кодом (ліцензія MIT). Ви платите лише за самого агента — підписку або API вашого провайдера, як і під час роботи в терміналі. А з OpenCode можна почати зовсім без оплати: у нього є безкоштовні моделі, яким не потрібен ключ (вони можуть використовувати запити для навчання — не надсилайте в них секрети).',
+      'No. It is free and open source (MIT license). You only pay for the agent itself — your provider’s subscription or API — just as in the terminal. With OpenCode you can start without paying at all: it has free models that need no key (they may use requests for training — keep secrets out of them).')),
     (('Нужен ли сервер, публичный IP или открытые порты?', 'Чи потрібен сервер, публічна IP-адреса або відкриті порти?', 'Do I need a server, a public IP or open ports?'),
      ('Нет. Бот сам обращается к Telegram, поэтому подойдёт обычный домашний компьютер или ноутбук с интернетом. Сервер (VPS) удобен, если агент должен быть доступен круглосуточно.',
       'Ні. Бот сам звертається до Telegram, тож підійде звичайний домашній комп’ютер або ноутбук з інтернетом. Сервер (VPS) зручний, якщо агент має бути доступний цілодобово.',
@@ -207,9 +218,9 @@ FAQ = [
       'Так. Агент працює на тій машині, де встановлено AcpGram, — поки вона вимкнена або спить, бот не відповість. Після перезавантаження сервіс запустить бота сам.',
       'Yes. The agent runs on the machine where AcpGram is installed; while it is off or asleep, the bot will not reply. After a reboot the service starts the bot again.')),
     (('Можно пользоваться своим аккаунтом, а не API-ключом?', 'Можна користуватися своїм акаунтом, а не API-ключем?', 'Can I use my account login instead of an API key?'),
-     ('Да. Claude Code, Codex и Gemini CLI работают и со входом в аккаунт, и с API-ключом — как вы уже настроили агента. Antigravity CLI использует вход через Google.',
-      'Так. Claude Code, Codex і Gemini CLI працюють і з входом в акаунт, і з API-ключем — як ви вже налаштували агента. Antigravity CLI використовує вхід через Google.',
-      'Yes. Claude Code, Codex and Gemini CLI work with either an account login or an API key — whichever you already use. Antigravity CLI uses Google sign-in.')),
+     ('Да. Claude Code, Codex и Gemini CLI работают и со входом в аккаунт, и с API-ключом — как вы уже настроили агента. Antigravity CLI использует вход через Google. OpenCode берёт модели тех провайдеров, чьи ключи вы указали (или подключили командой opencode auth login), а бесплатные модели работают вообще без ключа.',
+      'Так. Claude Code, Codex і Gemini CLI працюють і з входом в акаунт, і з API-ключем — як ви вже налаштували агента. Antigravity CLI використовує вхід через Google. OpenCode бере моделі тих провайдерів, чиї ключі ви вказали (або підключили командою opencode auth login), а безкоштовні моделі працюють узагалі без ключа.',
+      'Yes. Claude Code, Codex and Gemini CLI work with either an account login or an API key — whichever you already use. Antigravity CLI uses Google sign-in. OpenCode uses models from the providers whose keys you add (or connect with opencode auth login), and its free models need no key at all.')),
     (('Кто ещё может писать моему боту?', 'Хто ще може писати моєму боту?', 'Who else can talk to my bot?'),
      ('Только вы. Других людей вы добавляете сами — по ссылке-приглашению или одобрив запрос — и задаёте им уровень доступа: только чтение, работа с подтверждениями или полный доступ.',
       'Лише ви. Інших людей ви додаєте самі — за посиланням-запрошенням або схваливши запит — і задаєте їм рівень доступу: лише читання, робота з підтвердженнями або повний доступ.',
@@ -227,9 +238,9 @@ FAQ = [
       'Українською, російською або англійською — за мовою вашого Telegram. Змінити можна командою /language.',
       'English, Ukrainian or Russian — matching your Telegram language. Change it with /language.')),
     (('Чем отличается от OpenACP и telegram-acp-bot?', 'Чим відрізняється від OpenACP і telegram-acp-bot?', 'How is it different from OpenACP and telegram-acp-bot?'),
-     ('AcpGram объединяет четыре агента в одном боте, поддерживает темы Telegram как отдельные диалоги, командный доступ и журнал действий, и работает на чистом Node.js без зависимостей. У каждого проекта свои сильные стороны — сравните README и выберите подходящий.',
-      'AcpGram об’єднує чотири агенти в одному боті, підтримує теми Telegram як окремі діалоги, командний доступ і журнал дій, і працює на чистому Node.js без залежностей. Кожен проєкт має свої сильні сторони — порівняйте README й виберіть відповідний.',
-      'AcpGram combines four agents in one bot, supports Telegram topics as separate dialogs, team access and an audit log, and runs on plain Node.js with no dependencies. Each project has its strengths — compare the READMEs and pick what suits you.')),
+     ('AcpGram объединяет пять агентов в одном боте, поддерживает темы Telegram как отдельные диалоги, командный доступ и журнал действий, и работает на чистом Node.js без зависимостей. У каждого проекта свои сильные стороны — сравните README и выберите подходящий.',
+      'AcpGram об’єднує п’ять агентів в одному боті, підтримує теми Telegram як окремі діалоги, командний доступ і журнал дій, і працює на чистому Node.js без залежностей. Кожен проєкт має свої сильні сторони — порівняйте README й виберіть відповідний.',
+      'AcpGram combines five agents in one bot, supports Telegram topics as separate dialogs, team access and an audit log, and runs on plain Node.js with no dependencies. Each project has its strengths — compare the READMEs and pick what suits you.')),
     (('Как сообщить об ошибке?', 'Як повідомити про помилку?', 'How do I report a bug?'),
      ('Создайте issue на GitHub: укажите ОС, версию AcpGram, агента и шаги воспроизведения. Токены и API-ключи не прикладывайте.',
       'Створіть issue на GitHub: вкажіть ОС, версію AcpGram, агента й кроки відтворення. Токени та API-ключі не додавайте.',
@@ -245,7 +256,7 @@ def build_acpgram():
         for key in path.split('.'):
             result = result.get(key) if isinstance(result, dict) else None
         return f'<strong data-stat="{path}">{esc(result) if result is not None else "—"}</strong>'
-    desc = 'AcpGram — бесплатный open source бот: управляйте Claude Code, Codex, Gemini CLI и Antigravity CLI на своём компьютере из Telegram. Установка за пару минут.'
+    desc = 'AcpGram — бесплатный open source бот: управляйте Claude Code, Codex, Gemini CLI, Antigravity CLI и OpenCode на своём компьютере из Telegram. Установка за пару минут.'
     ld = {'@context': 'https://schema.org', '@graph': [
         {'@type': 'SoftwareApplication', 'name': 'AcpGram', 'description': desc,
          'applicationCategory': 'DeveloperApplication', 'operatingSystem': 'Windows, Linux, macOS',
@@ -283,13 +294,14 @@ def build_acpgram():
     logo = '<picture><source srcset="/img/acpgram/acpgram-logo.webp" type="image/webp"><img class="ap-logo" src="/img/acpgram/acpgram-logo-light.svg" alt="AcpGram" width="353" height="285" fetchpriority="high"></picture>'
     page += f'''<section id="hero" class="ap-hero ap-section"><div><div class="ap-brand">{logo}<span>AcpGram<span class="ap-eyebrow">OPEN SOURCE · MIT</span></span></div>
     <h1>{text('Ваш кодинг-агент — в Telegram', 'Ваш кодинг-агент — у Telegram', 'Your coding agent, in Telegram')}</h1>
-    {p('Поставьте задачу Claude Code, Codex, Gemini CLI или Antigravity CLI с телефона и занимайтесь своими делами. Агент работает на вашем компьютере, а ход работы, запросы на подтверждение и готовый результат приходят в чат.', 'Поставте завдання Claude Code, Codex, Gemini CLI або Antigravity CLI з телефона й займайтеся своїми справами. Агент працює на вашому комп’ютері, а хід роботи, запити на підтвердження й готовий результат надходять у чат.', 'Give a task to Claude Code, Codex, Gemini CLI or Antigravity CLI from your phone and get on with your day. The agent runs on your computer; its progress, approval requests and the finished result arrive in the chat.', 'ap-lead')}
+    {p('Поставьте задачу Claude Code, Codex, Gemini CLI, Antigravity CLI или OpenCode с телефона и занимайтесь своими делами. Агент работает на вашем компьютере, а ход работы, запросы на подтверждение и готовый результат приходят в чат.', 'Поставте завдання Claude Code, Codex, Gemini CLI, Antigravity CLI або OpenCode з телефона й займайтеся своїми справами. Агент працює на вашому комп’ютері, а хід роботи, запити на підтвердження й готовий результат надходять у чат.', 'Give a task to Claude Code, Codex, Gemini CLI, Antigravity CLI or OpenCode from your phone and get on with your day. The agent runs on your computer; its progress, approval requests and the finished result arrive in the chat.', 'ap-lead')}
     <div class="ap-actions ap-hero-actions">{link('#install', text('Установить', 'Встановити', 'Install'), True, 'download')}{link('#video', text('Видео: 3 минуты', 'Відео: 3 хвилини', 'Video: 3 minutes'), icon='play')}</div>
     <ul class="ap-trust">{''.join(f'<li><i aria-hidden="true" class="fa-solid fa-check"></i>{text(*t)}</li>' for t in [
         ('Бесплатно и с открытым кодом', 'Безкоштовно й з відкритим кодом', 'Free and open source'),
         ('Windows, Linux, macOS', 'Windows, Linux, macOS', 'Windows, Linux, macOS'),
         ('Без публичного IP и открытых портов', 'Без публічної IP та відкритих портів', 'No public IP or open ports'),
-        ('Код и данные остаются у вас', 'Код і дані залишаються у вас', 'Your code and data stay with you')])}</ul>
+        ('Код и данные остаются у вас', 'Код і дані залишаються у вас', 'Your code and data stay with you'),
+        ('Можно начать бесплатно с OpenCode', 'Можна почати безкоштовно з OpenCode', 'Start free with OpenCode')])}</ul>
     <div class="ap-badges"><a href="{REPO}">★ GitHub {metric('github.stars')}</a><a href="{NPM}">npm v{metric('npm.version')}</a></div></div>
     <div class="ap-visual"><figure class="hero-photo"><div class="hero-photo-plate"></div><div class="hero-photo-frame"><picture><source srcset="/img/acpgram/acpgram-hero.webp" type="image/webp"><img src="/img/acpgram/acpgram-hero.jpg" alt="AcpGram: coding agents in Telegram" data-alt-ru="AcpGram: кодинг-агенты в Telegram" data-alt-ua="AcpGram: кодинг-агенти в Telegram" data-alt-en="AcpGram: coding agents in Telegram" width="1024" height="577" fetchpriority="high"></picture><div class="hero-photo-tint"></div></div></figure>
     </div></section>'''
@@ -323,7 +335,7 @@ def build_acpgram():
     nodes = [
         ('Telegram', ('Вы пишете задачу боту с телефона или компьютера', 'Ви пишете завдання боту з телефона чи комп’ютера', 'You message the bot from your phone or computer')),
         ('AcpGram', ('Бот, запущенный на вашем компьютере или сервере', 'Бот, запущений на вашому комп’ютері чи сервері', 'A bot running on your computer or server')),
-        (text('Ваш агент', 'Ваш агент', 'Your agent'), ('Claude Code, Codex, Gemini CLI или Antigravity CLI работает в папке проекта', 'Claude Code, Codex, Gemini CLI або Antigravity CLI працює в папці проєкту', 'Claude Code, Codex, Gemini CLI or Antigravity CLI works in the project folder')),
+        (text('Ваш агент', 'Ваш агент', 'Your agent'), ('Claude Code, Codex, Gemini CLI, Antigravity CLI или OpenCode работает в папке проекта', 'Claude Code, Codex, Gemini CLI, Antigravity CLI або OpenCode працює в папці проєкту', 'Claude Code, Codex, Gemini CLI, Antigravity CLI or OpenCode works in the project folder')),
     ]
     flow = '<ol class="ap-flow ap-flow-3 ap-reveal">' + ''.join(f'<li><span class="ap-step-num">{i+1}</span><strong>{name}</strong><span class="ap-flow-desc">{text(*desc)}</span></li>' for i, (name, desc) in enumerate(nodes)) + '</ol>'
     flow += p('AcpGram сам подключается к Telegram, поэтому не нужны ни публичный IP, ни открытые порты, ни облачный посредник. С агентом он общается по открытому протоколу Agent Client Protocol (ACP).',
@@ -335,7 +347,7 @@ def build_acpgram():
         (('Видно, что делает агент', 'Видно, що робить агент', 'See what the agent is doing'), ('Шаги агента — чтение файлов, команды, правки — появляются в чате в реальном времени. В конце — ответ и журнал всех действий.', 'Кроки агента — читання файлів, команди, правки — з’являються в чаті в реальному часі. Наприкінці — відповідь і журнал усіх дій.', 'Agent steps — reading files, running commands, editing — appear in the chat live. At the end: the answer plus a log of every action.'), 'wave-square'),
         (('Ничего важного без вашего «да»', 'Нічого важливого без вашого «так»', 'Nothing important without your “yes”'), ('Запросы приходят кнопками «Разрешить», «Разрешить на сессию», «Отклонить». Любую задачу можно остановить командой /stop.', 'Запити надходять кнопками «Дозволити», «Дозволити на сесію», «Відхилити». Будь-яке завдання можна зупинити командою /stop.', 'Requests arrive as “Allow”, “Allow for session” and “Reject” buttons. Stop any task with /stop.'), 'shield-halved'),
         (('Несколько задач параллельно', 'Кілька завдань паралельно', 'Several tasks in parallel'), ('Включите темы — и каждая тема чата станет отдельным диалогом со своим проектом, агентом и историей.', 'Увімкніть теми — і кожна тема чату стане окремим діалогом зі своїм проєктом, агентом та історією.', 'Turn on topics and every chat topic becomes its own dialog with its own project, agent and history.'), 'layer-group'),
-        (('Любой агент и модель', 'Будь-який агент і модель', 'Any agent, any model'), ('Переключайте агента и модель прямо в чате. Прошлые сессии продолжаются с того же места, даже после перезапуска.', 'Перемикайте агента й модель просто в чаті. Попередні сесії продовжуються з того ж місця, навіть після перезапуску.', 'Switch agent and model right in the chat. Past sessions resume where they left off, even after a restart.'), 'shuffle'),
+        (('Любой агент и модель', 'Будь-який агент і модель', 'Any agent, any model'), ('Переключайте агента и модель прямо в чате: сотни моделей разложены по провайдерам, нужную найдёт /model sonnet, а последние выбранные — под рукой. Прошлые сессии продолжаются с того же места, даже после перезапуска.', 'Перемикайте агента й модель просто в чаті: сотні моделей розкладено за провайдерами, потрібну знайде /model sonnet, а останні вибрані — під рукою. Попередні сесії продовжуються з того ж місця, навіть після перезапуску.', 'Switch agent and model right in the chat: hundreds of models are grouped by provider, /model sonnet finds the one you need, and your recent picks are one tap away. Past sessions resume where they left off, even after a restart.'), 'shuffle'),
         (('Файлы туда и обратно', 'Файли туди й назад', 'Files both ways'), ('Отправьте агенту скриншот ошибки, PDF, таблицу или архив. Готовые файлы он пришлёт вам в чат.', 'Надішліть агенту скриншот помилки, PDF, таблицю чи архів. Готові файли він надішле вам у чат.', 'Send the agent a screenshot of an error, a PDF, a spreadsheet or an archive. It sends finished files back to the chat.'), 'paperclip'),
         (('Доступ для команды', 'Доступ для команди', 'Team access'), ('Пригласите коллег, задайте каждому права, доступных агентов и модели. Все действия записываются в локальный журнал.', 'Запросіть колег, задайте кожному права, доступних агентів і моделі. Усі дії записуються в локальний журнал.', 'Invite teammates and set each one’s rights, agents and models. Every action is recorded in a local audit log.'), 'users'),
     ]
@@ -346,8 +358,9 @@ def build_acpgram():
         ('OpenAI Codex', ('Codex CLI + мост codex-acp', 'Codex CLI + міст codex-acp', 'Codex CLI + codex-acp bridge'), ('Вход в аккаунт или API-ключ', 'Вхід в акаунт або API-ключ', 'Account login or API key')),
         ('Gemini CLI', ('Только Gemini CLI', 'Лише Gemini CLI', 'Just Gemini CLI'), ('Вход в аккаунт или API-ключ', 'Вхід в акаунт або API-ключ', 'Account login or API key')),
         ('Antigravity CLI', ('Только Antigravity CLI 1.5+', 'Лише Antigravity CLI 1.5+', 'Just Antigravity CLI 1.5+'), ('Вход через Google', 'Вхід через Google', 'Google sign-in')),
+        ('OpenCode', ('Только OpenCode', 'Лише OpenCode', 'Just OpenCode'), ('Бесплатные модели без ключа или ключи провайдеров', 'Безкоштовні моделі без ключа або ключі провайдерів', 'Free models with no key, or provider keys')),
     ]
-    content = '<div class="ap-grid ap-four">' + ''.join(f'<article class="bento-glass ap-card ap-reveal"><div class="bento-content"><h3>{name}</h3><p><span class="ap-small">{text("Нужно:", "Потрібно:", "Needs:")}</span><br>{text(*need)}</p><p class="ap-small">{text(*auth)}</p></div></article>' for name, need, auth in engines) + '</div>'
+    content = '<div class="ap-grid ap-five">' + ''.join(f'<article class="bento-glass ap-card ap-reveal"><div class="bento-content"><h3>{name}</h3><p><span class="ap-small">{text("Нужно:", "Потрібно:", "Needs:")}</span><br>{text(*need)}</p><p class="ap-small">{text(*auth)}</p></div></article>' for name, need, auth in engines) + '</div>'
     content += p('Достаточно одного агента. Остальные можно подключить позже — AcpGram сам найдёт установленные.', 'Достатньо одного агента. Інших можна підключити пізніше — AcpGram сам знайде встановлені.', 'One agent is enough. Add others later — AcpGram finds installed ones on its own.', 'ap-small')
     page += section('agents', ('Поддерживаемые агенты', 'Підтримувані агенти', 'Supported agents'), content)
 
