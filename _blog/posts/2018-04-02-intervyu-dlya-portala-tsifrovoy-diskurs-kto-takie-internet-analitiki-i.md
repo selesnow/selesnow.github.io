@@ -173,7 +173,7 @@ cover_generated: true
 
 Изображение: логотип блога Алексея Селезнёва
 
-**Следить за развитием моих пакетов и их возможностей можно в [разделе новостей](https://selesnow.github.io/news/) на их основном портале, ВКонтакте в группе [Data Club](https://vk.com/data_club), в [рубрике языка R](https://alexeyseleznev.wordpress.com/category/programming/r/) в моём личном блоге, а также подписавшись в [Facebook](https://www.facebook.com/selesnow).**
+**Следить за развитием моих пакетов и их возможностей можно в [разделе новостей](https://selesnow.github.io/news/) на их основном портале, ВКонтакте в группе [Data Club](https://vk.com/data_club), в [рубрике языка R](/blog/?cat=r#posts) в моём личном блоге, а также подписавшись в [Facebook](https://www.facebook.com/selesnow).**
 
 *— А что насчёт Python? За ним закрепилась слава одного из простых языков программирования, верно ли это, и в каких случаях лучше отдать предпочтение ему, а не R?*
 

@@ -23,10 +23,10 @@ draft: false
 
 # Все статьи из серии “Пишем telegram бота на языке R”
 
-1. [Создаём бота, и отправляем с его помощью сообщения в telegram](https://wordpress.com/post/alexeyseleznev.wordpress.com/1458)
-2. [Добавляем боту поддержку команд и фильтры сообщений](https://wordpress.com/post/alexeyseleznev.wordpress.com/1483)
-3. [Как добавить боту поддержку клавиатуры](https://wordpress.com/post/alexeyseleznev.wordpress.com/1497)
-4. [Построение последовательного, логического диалога с ботом](https://wordpress.com/post/alexeyseleznev.wordpress.com/1483)
+1. [Создаём бота, и отправляем с его помощью сообщения в telegram](/blog/pishem-telegram-bota-na-yazyke-r-chast-1-sozdaem-bota-i-otpravlyaem-s/)
+2. [Добавляем боту поддержку команд и фильтры сообщений](/blog/pishem-telegram-bota-na-yazyke-r-chast-2-dobavlyaem-botu-podderzhku-ko/)
+3. [Как добавить боту поддержку клавиатуры](/blog/pishem-telegram-bota-na-yazyke-r-chast-3-kak-dobavit-botu-podderzhku-k/)
+4. [Построение последовательного, логического диалога с ботом](/blog/pishem-telegram-bota-na-yazyke-r-chast-2-dobavlyaem-botu-podderzhku-ko/)
 5. Управление правами пользователей бота
 
 # Содержание

@@ -120,7 +120,7 @@ Sys.info()[["machine"]]
 devtools::install_github("username/repos", INSTALL_opts = "--no-multiarch")
 ```
 
-Если у вас 32 битная версия, то необходимо изменить в переменной окружения PATH путь к утилите RTools с `C:\Rtools\mingw_64\bin` на `C:\Rtools\mingw_32\bin`. О том как это сделать можно узнать в [этой статье](https://alexeyseleznev.wordpress.com/2016/11/17/%D0%BA%D0%B0%D0%BA-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B8%D1%82%D1%8C-%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA-r-%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D0%B0-%D0%BF%D0%BE-%D1%80%D0%B0%D1%81%D0%BF%D0%B8/#how_to_create_path) .
+Если у вас 32 битная версия, то необходимо изменить в переменной окружения PATH путь к утилите RTools с `C:\Rtools\mingw_64\bin` на `C:\Rtools\mingw_32\bin`. О том как это сделать можно узнать в [этой статье](/blog/kak-nastroit-zapusk-r-skripta-po-raspisaniyu/) .
 
 Далее запускаем установку пакета только для 32 битной версии с помощью опции `"--no-multiarch"`, так же как и ранее было показано с примером для 64 разрядного R.
 

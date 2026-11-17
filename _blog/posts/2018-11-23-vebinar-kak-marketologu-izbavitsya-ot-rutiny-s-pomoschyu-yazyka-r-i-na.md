@@ -61,5 +61,5 @@ Digital-маркетологи делают сотни рутинных дейс
 
 #### Статьи по теме вебинара
 
-- [Что такое язык R и как работать с API рекламных систем Google AdWords и Яндекс. Директ с его помощью](https://alexeyseleznev.wordpress.com/2018/04/11/%d1%87%d1%82%d0%be-%d1%82%d0%b0%d0%ba%d0%be%d0%b5-%d1%8f%d0%b7%d1%8b%d0%ba-r-%d0%b8-%d0%ba%d0%b0%d0%ba-%d1%80%d0%b0%d0%b1%d0%be%d1%82%d0%b0%d1%82%d1%8c-%d1%81-api-%d1%80%d0%b5%d0%ba%d0%bb%d0%b0%d0%bc/)
-- [Как получить данные из Google Analytics в R и загрузить в Power BI](https://alexeyseleznev.wordpress.com/2017/06/29/%D0%BA%D0%B0%D0%BA-%D0%BF%D0%BE%D0%BB%D1%83%D1%87%D0%B8%D1%82%D1%8C-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5-%D0%B8%D0%B7-google-analytics-%D0%B2-r-%D0%B8-%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%B8%D1%82/)
+- [Что такое язык R и как работать с API рекламных систем Google AdWords и Яндекс. Директ с его помощью](/blog/chto-takoe-yazyk-r-i-kak-rabotat-s-api-reklamnyh-sistem-google-adwords/)
+- [Как получить данные из Google Analytics в R и загрузить в Power BI](/blog/kak-poluchit-dannye-iz-google-analytics-v-r-i-zagruzit-v-power-bi/)

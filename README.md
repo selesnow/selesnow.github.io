@@ -1,5 +1,5 @@
 <p align="center">
-<a href="https://selesnow.github.io/"><img src="https://alexeyseleznev.files.wordpress.com/2017/03/as.png" height="80"></a>
+<a href="https://alexey-seleznev.pro/"><img src="https://alexey-seleznev.pro/logo.jpg" height="80"></a>
 </p>
 
 
@@ -8,7 +8,7 @@
 
 # Обо мне
 Меня зовут Алексей Селезнёв, на данный момент я возглавляю отдел аналитики в агентстве интернет маркетинга Netpeak. 
-Более подробно обо мне можно узнать [на моём блоге](alexeyseleznev.wordpress.com).
+Более подробно обо мне можно узнать [на моём сайте](https://alexey-seleznev.pro/) и [в блоге](https://alexey-seleznev.pro/blog/).
 
 <img class=" aligncenter" src="https://scontent.fods1-1.fna.fbcdn.net/v/t1.0-9/23519298_1723847460967555_7311750647506949501_n.jpg?oh=a88c93c1a1ea6600ee3268b3f8d74bd6&amp;oe=5B4B9D0E" alt="Фото Алексея Селезнёва.">
 

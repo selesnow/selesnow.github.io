@@ -40,8 +40,9 @@ GitHub Actions (`.github/workflows/update-stats.yml`) каждый день в 0
 - Весь видимый текст трёхъязычный: `<span class="ru-text">…</span><span class="ua-text">…</span><span class="en-text">…</span>`.
   В генераторе для этого функции `T(ru, ua, en)` и `tr({...})`. Язык хранится в `localStorage.preferredLang`.
 - Ссылки на курсы и документацию пакетов — через домен `https://alexey-seleznev.pro/...`, не `selesnow.github.io`.
-- Битые внешние ссылки на статьи/интервью заменяй копией в блоге https://alexeyseleznev.wordpress.com/
-  (карточка помечается `"via": "blog"`). Не нашёл копию — не публикуй мёртвую ссылку, сообщи пользователю.
+- Битые внешние ссылки на статьи/интервью заменяй снимком оригинала в Web Archive (`https://web.archive.org/web/<дата>/<исходный URL>`,
+  карточка помечается `"via": "archive"`). Старый WordPress-блог как замену не используем: его материалы перенесены в `/blog/`.
+  Нет снимка — не публикуй мёртвую ссылку, сообщи пользователю. Подробности — в `CLAUDE.md`.
 - Пакеты ryandexdirect, rym, rvkstat, rmytarget помечены как архивные (`"archived": true`);
   пояснений о причинах архивации на сайте быть не должно.
 - Футер общий для всего сайта: шаблон `footer(prefix)` в `_build/build.py` (колонки «Сайт»,

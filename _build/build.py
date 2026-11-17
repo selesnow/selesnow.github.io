@@ -101,7 +101,6 @@ PERSON = {
         'https://facebook.com/selesnow',
         'https://www.instagram.com/alexey.selesnow',
         'https://habr.com/ru/users/selesnow/',
-        'https://alexeyseleznev.wordpress.com/',
         'https://t.me/R4marketing',
         'https://www.youtube.com/R4marketing',
     ],
@@ -341,7 +340,6 @@ FOOTER_SOCIALS = [
 FOOTER_RESOURCES = [
     ('https://t.me/R4marketing', 'fa-brands fa-telegram', ('Telegram-канал R4marketing', 'Telegram-канал R4marketing', 'R4marketing Telegram')),
     ('https://www.youtube.com/R4marketing', 'fa-brands fa-youtube', ('YouTube-канал R4marketing', 'YouTube-канал R4marketing', 'R4marketing YouTube')),
-    ('https://alexeyseleznev.wordpress.com/', 'fa-solid fa-pen-nib', ('Личный блог', 'Особистий блог', 'Personal blog')),
     ('https://habr.com/ru/users/selesnow/', 'fa-solid fa-h', ('Профиль на Хабре', 'Профіль на Хабрі', 'Habr profile')),
     ('https://alexey-seleznev.pro/publications/', 'fa-solid fa-layer-group', ('Архив публикаций', 'Архів публікацій', 'Publications archive')),
     ('https://github.com/selesnow', 'fa-brands fa-github', ('GitHub', 'GitHub', 'GitHub')),

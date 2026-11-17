@@ -19,7 +19,7 @@ wp_id: 1167
 draft: false
 ---
 
-До нового, 2019 года, остаются считанные дни, самое время подводить итоги уходящего года. Обычно я выпускал дайджесты обновления своих пакетов раз в 3 месяца, но 2018 год выдался чрезвычайно продуктивным и загруженным, времени хватило только на один, [зимний дайджест](https://alexeyseleznev.wordpress.com/2018/03/01/%D0%BF%D0%BE%D1%80%D1%86%D0%B8%D1%8F-%D0%B7%D0%B8%D0%BC%D0%BD%D0%B8%D1%85-%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%BE%D0%B2-ryandexdirect-rfacebo/).
+До нового, 2019 года, остаются считанные дни, самое время подводить итоги уходящего года. Обычно я выпускал дайджесты обновления своих пакетов раз в 3 месяца, но 2018 год выдался чрезвычайно продуктивным и загруженным, времени хватило только на один, [зимний дайджест](/blog/portsiya-zimnih-obnovleniy-paketov-ryandexdirect-rfacebookstat-rvkstat/).
 
 Поэтому все остальные обновления, которые происходили в период март – декабрь текущего года я собрал в одну большую статью. Ну что же давайте обо всём по порядку.
 
@@ -39,7 +39,7 @@ draft: false
 
 - Так же вместе с упомянутым выше проектом, в марте стартовала группа [“Data Club”](https://vk.com/data_club) Вконтакте. Группа планировалась для организации сообщества аналитиков, и быстрого информирования пользователей пакетов,   
   которые предпочитают социальную сеть Вконтакте, об их новых возможностях и доработках, . Пока в группе всего 247 участников, но их численность медленно, но уверенно растёт.
-- В апреле и мае выступил на двух конференциях, [Analyze](https://alexeyseleznev.wordpress.com/2018/11/22/%D0%B4%D0%BE%D0%BA%D0%BB%D0%B0%D0%B4-%D1%8F%D0%B7%D1%8B%D0%BA-r-%D0%B2-%D0%BC%D0%B0%D1%80%D0%BA%D0%B5%D1%82%D0%B8%D0%BD%D0%B3%D0%B5-%D0%B8-%D0%B1%D0%B8%D0%B7%D0%BD%D0%B5%D1%81%D0%B5-analyze-2018/) и Kiyv Data Spring.
+- В апреле и мае выступил на двух конференциях, [Analyze](/blog/doklad-yazyk-r-v-marketinge-i-biznese-analyze-2018/) и Kiyv Data Spring.
 - Дал 2 интервью на тему использования языка R в интернет маркетинге для редакций “[Цифровой Дискурс](https://jms.university/blog/56048-kto-takie-internet-analitiki-i-kakimi-instrumentami-oni-polzuyutsya/)” и “[Лидзавод](https://leadzavod.com/jazyk-r-v-veb-analitike-i-internet-marketinge/)“.
 - В октябре стартовали продажи моего первого, авторского онлайн курса “[Язык R для интернет – маркетинга](https://learn.needfordata.ru/r)“. На данный момент на курс поступило уже более 100 студентов. Не смотря на то, что курс платный, отдельно к нему была написана подробная методичка, доступ к которой остаётся открытым. Найти её можно перейдя по этой [ссылке](https://r-for-marketing.netpeak.net/auth/sign/in).
 - 1 ноября был запущен телеграмм канала [R4marketing](https://t.me/R4marketing), который так же был создан с целью удобного отслеживания всех доработок пакетов, а так же для публикации различных материалов о применении языка R в интернет – маркетинге. Канал довольно быстро набирает популярность, и за первый месяц собрал более 650 подписчиков.
@@ -48,7 +48,7 @@ draft: false
 
 ![](https://i0.wp.com/img.netpeak.ua/alsey/154566971866_kiss_226kb.png)
 
-- Далее, опять же в ноябре провёл два вебинара: “[Как маркетологу избавиться от рутины с помощью языка R](https://alexeyseleznev.wordpress.com/2018/11/23/%d0%b2%d0%b5%d0%b1%d0%b8%d0%bd%d0%b0%d1%80-%d0%ba%d0%b0%d0%ba-%d0%bc%d0%b0%d1%80%d0%ba%d0%b5%d1%82%d0%be%d0%bb%d0%be%d0%b3%d1%83-%d0%b8%d0%b7%d0%b1%d0%b0%d0%b2%d0%b8%d1%82%d1%8c%d1%81%d1%8f-%d0%be/)” и “[Как автоматизировать работу с данными Яндекс. Метрики с помощью языка R и пакета rym](https://alexeyseleznev.wordpress.com/2018/12/03/%d0%b2%d0%b5%d0%b1%d0%b8%d0%bd%d0%b0%d1%80-%d0%ba%d0%b0%d0%ba-%d0%b0%d0%b2%d1%82%d0%be%d0%bc%d0%b0%d1%82%d0%b8%d0%b7%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d1%82%d1%8c-%d1%80%d0%b0%d0%b1%d0%be%d1%82%d1%83/)“. И соответственно стал [лектором академии WebPromo Experts](https://webpromoexperts.com.ua/lectors/aleksej-seleznev/), и [преподователем обучения центра CyberMarketing](https://www.cybermarketing.ru/teachers/aleksej_seleznyov.html).
+- Далее, опять же в ноябре провёл два вебинара: “[Как маркетологу избавиться от рутины с помощью языка R](/blog/vebinar-kak-marketologu-izbavitsya-ot-rutiny-s-pomoschyu-yazyka-r-i-na/)” и “[Как автоматизировать работу с данными Яндекс. Метрики с помощью языка R и пакета rym](/blog/vebinar-kak-avtomatizirovat-rabotu-s-dannymi-yandeks-metriki-s-pomosch/)“. И соответственно стал [лектором академии WebPromo Experts](https://webpromoexperts.com.ua/lectors/aleksej-seleznev/), и [преподователем обучения центра CyberMarketing](https://www.cybermarketing.ru/teachers/aleksej_seleznyov.html).
 - За 2018 год опубликовал в общем счёте 23 статьи не считая этой. В том числе впервые начал публиковаться на [Хабре](https://habr.com/users/selesnow/).
 - 4 разработанных мной пакета были опубликованы в основном репозитории хранения архивов языка R – [CRAN](https://www.rdocumentation.org/collaborators/name/Alexey%20Seleznev).
 
