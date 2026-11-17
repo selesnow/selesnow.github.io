@@ -418,7 +418,10 @@ def build_acpgram():
 
     page += '<section class="ap-section bento-glass ap-final ap-reveal"><div class="bento-content"><h2>' + text('Пусть агент работает, пока вы заняты своим', 'Нехай агент працює, поки ви зайняті своїм', 'Let the agent work while you get on with your day') + '</h2>'
     page += p('Установка займёт несколько минут. Если AcpGram пригодился, поставьте проекту звезду на GitHub — это помогает его развивать.', 'Встановлення займе кілька хвилин. Якщо AcpGram став у пригоді, поставте проєкту зірку на GitHub — це допомагає його розвивати.', 'Installation takes a few minutes. If AcpGram helps you, star it on GitHub — it helps the project grow.')
-    page += '<div class="ap-actions">' + link('#install', text('Установить', 'Встановити', 'Install'), True, 'download') + link(REPO, text('★ Звезда на GitHub', '★ Зірка на GitHub', '★ Star on GitHub'), icon='star') + '</div></div></section></main>'
+    page += '<div class="ap-actions">' + link('#install', text('Установить', 'Встановити', 'Install'), True, 'download') + link(REPO, text('★ Звезда на GitHub', '★ Зірка на GitHub', '★ Star on GitHub'), icon='star') + '</div>'
+    # Peerlist: голосование за проект (виджет-картинка подгружается с peerlist.io, показывает число голосов)
+    page += '<div class="ap-peerlist">' + p('Понравился проект? Поддержите его голосом на Peerlist.', 'Сподобався проєкт? Підтримайте його голосом на Peerlist.', 'Like the project? Give it an upvote on Peerlist.', 'ap-small') + '<a href="https://peerlist.io/selesnow/project/acpgram--telegram-gateway-to-coding-agent" target="_blank" rel="noopener noreferrer"><img src="https://peerlist.io/api/v1/projects/embed/PRJHNN7K9L8R89AAO3NRDR9GA7L8PL?showUpvote=true&amp;theme=dark" alt="AcpGram — Telegram gateway to coding agent" width="296" height="72" loading="lazy" decoding="async"></a></div>'
+    page += '</div></section></main>'
     page += footer()
     page += '<div class="ap-toast" role="status" aria-live="polite" id="ap-status"></div>'
     page += '<script id="ap-stats-fallback" type="application/json">' + json.dumps(stats, ensure_ascii=False).replace('<', '\\u003c') + '</script>'
