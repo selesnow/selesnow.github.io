@@ -278,7 +278,7 @@ def nav(active):
                 <img src="../logo.jpg" alt="Alexey Seleznev" class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 rounded-lg sm:rounded-xl object-cover shadow-md border border-white/10 group-hover:border-purple-500/50 group-hover:scale-105 transition-all shrink-0">
                 <span class="text-xs min-[400px]:text-sm sm:text-base md:text-xl font-black tracking-tight uppercase outfit-font whitespace-nowrap text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
             </a>
-            <div class="hidden xl:flex gap-6 text-sm font-semibold text-slate-400">
+            <div class="hidden xl:flex gap-4 2xl:gap-6 text-sm font-semibold text-slate-400">
                 <a href="../" class="nav-link hover:text-white transition-colors">{T('Главная', 'Головна', 'Home')}</a>
 {desktop}
             </div>
@@ -882,9 +882,10 @@ TOPICS = {
 }
 
 SOURCES = [
+    'ai': ('fa-solid fa-robot', ('AI-агенты', 'AI-агенти', 'AI agents')),
     ('habr', 'bg-teal-400', ('Хабр', 'Хабр', 'Habr')),
     ('netpeak', 'bg-blue-500', ('Netpeak Journal', 'Netpeak Journal', 'Netpeak Journal')),
-    ('blog', 'bg-purple-500', ('Личный блог', 'Особистий блог', 'Personal blog')),
+# Раздел «Статьи» — только внешние публикации. Собственные заметки живут в разделе «Блог» (/blog/).
     ('other', 'bg-pink-500', ('Другие издания', 'Інші видання', 'Other media')),
 ]
 
@@ -892,13 +893,10 @@ SOURCES = [
 def source_key(a):
     if a['src'] == 'Хабр': return 'habr'
     if a['src'] == 'Netpeak Journal': return 'netpeak'
-    if a['src'] == 'Блог Алексея Селезнёва': return 'blog'
     return 'other'
 
 
 def source_label(a):
-    if a['src'] == 'Блог Алексея Селезнёва':
-        return T('Блог Алексея Селезнёва', 'Блог Олексія Селезньова', "Alexey Seleznev's blog")
     if a['src'] == 'Хабр':
         return T('Хабр', 'Хабр', 'Habr')
     return esc(a['src'])
@@ -921,6 +919,8 @@ def build_articles():
         elif a['via'] == 'youtube':
             via = f'<div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-red-500/20 text-red-200 border border-red-500/30"><i class="fa-brands fa-youtube mr-1"></i>{T("плейлист", "плейлист", "playlist")}</div>'
         extra = f'<div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300">{month_label(a["y"], a["m"])}</div>{via}'
+        elif a['via'] == 'archive':
+            via = f'<div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-blue-500/20 text-blue-200 border border-blue-500/30" title="Оригинал больше недоступен — ссылка ведёт на снимок страницы в Web Archive"><i class="fa-solid fa-box-archive mr-1"></i>{T("из архива", "з архіву", "from archive")}</div>'
         tags = ' '.join(f'<span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">{T(*TOPICS[t][1])}</span>' for t in a['topics'])
         search = f"{a['title']} {a['desc']} {a['src']}".lower()
         return f'''
@@ -966,10 +966,10 @@ def build_articles():
                 f'{len(arts)} {plural_ru(len(arts), "статья", "статьи", "статей")} Алексея Селезнёва о языке R, Google BigQuery, Power BI, веб-аналитике, API рекламных систем и стоимости клика — Хабр, Netpeak Journal и другие издания.')
     page += nav('articles')
     page += hero('fa-solid fa-pen-nib', T('Публикации', 'Публікації', 'Publications'),
-                 T('Статьи и <span class="text-gradient">туториалы</span>', 'Статті та <span class="text-gradient">туторіали</span>', 'Articles & <span class="text-gradient">Tutorials</span>'),
-                 T('С 2015 года пишу о том, чем занимаюсь каждый день: язык R и автоматизация, Google BigQuery и Power BI, веб-аналитика, API рекламных систем и ежеквартальные исследования стоимости клика. Публикации выходили на Хабре, в Netpeak Journal и других изданиях; если оригинал больше недоступен, ссылка ведёт на копию в моём блоге.',
-                   'З 2015 року пишу про те, чим займаюся щодня: мова R та автоматизація, Google BigQuery і Power BI, веб-аналітика, API рекламних систем і щоквартальні дослідження вартості кліку. Публікації виходили на Хабрі, у Netpeak Journal та інших виданнях; якщо оригінал більше недоступний, посилання веде на копію в моєму блозі. Статті написані російською мовою.',
-                   'Since 2015 I have been writing about my daily work: R and automation, Google BigQuery and Power BI, web analytics, ad-platform APIs and quarterly cost-per-click research. The articles appeared on Habr, Netpeak Journal and other outlets; if an original is gone, the link points to a copy on my blog. Articles are written in Russian.'),
+                 T('Статьи в <span class="text-gradient">изданиях</span>', 'Статті у <span class="text-gradient">виданнях</span>', 'Articles in <span class="text-gradient">publications</span>'),
+                 T('С 2015 года пишу о том, чем занимаюсь каждый день: язык R и автоматизация, Google BigQuery и Power BI, веб-аналитика, API рекламных систем, ежеквартальные исследования стоимости клика и AI-агенты. Здесь — публикации на Хабре, в Netpeak Journal и других изданиях; если оригинал уже недоступен, ссылка ведёт на его снимок в Web Archive. Заметки, уроки и разборы, которые выходят у меня, собраны в разделе «Блог».',
+                   'З 2015 року пишу про те, чим займаюся щодня: мова R та автоматизація, Google BigQuery і Power BI, веб-аналітика, API рекламних систем, щоквартальні дослідження вартості кліку та AI-агенти. Тут — публікації на Хабрі, у Netpeak Journal та інших виданнях; якщо оригінал уже недоступний, посилання веде на його знімок у Web Archive. Нотатки, уроки й розбори, які виходять у мене, зібрані в розділі «Блог». Статті написані російською мовою.',
+                   'Since 2015 I have been writing about my daily work: R and automation, Google BigQuery and Power BI, web analytics, ad-platform APIs, quarterly cost-per-click research and AI agents. This page lists my publications on Habr, Netpeak Journal and other outlets; if an original is gone, the link points to its snapshot in the Web Archive. Notes, lessons and walkthroughs I publish myself live in the Blog section. Articles are written in Russian.'),
                  [(str(len(arts)), T('Статей', 'Статей', 'Articles')), (str(outlets), T('Изданий', 'Видань', 'Outlets')),
                   (str(min(years)), T('Первая статья', 'Перша стаття', 'First article')), (str(topic_counts['r']), T('Про язык R', 'Про мову R', 'About R'))], photo='articles')
     page += f'''
@@ -986,15 +986,15 @@ def build_articles():
 {''.join(groups)}
         {empty_state()}
 
-        <a href="https://alexeyseleznev.wordpress.com/" target="_blank" rel="noopener" class="mt-4 bento-glass p-8 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-8 group hover:border-purple-500/50 transition-all text-center md:text-left" data-aos="fade-up">
+        <a href="../blog/" class="mt-4 bento-glass p-8 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-8 group hover:border-purple-500/50 transition-all text-center md:text-left" data-aos="fade-up">
             <div class="bento-content flex flex-col md:flex-row items-center gap-6">
-                <div class="w-16 h-16 bg-purple-500/20 rounded-full flex items-center justify-center text-purple-400 group-hover:bg-purple-500 group-hover:text-white transition-all text-2xl shrink-0"><i class="fa-solid fa-pen-nib"></i></div>
+                <div class="w-16 h-16 bg-purple-500/20 rounded-full flex items-center justify-center text-purple-400 group-hover:bg-purple-500 group-hover:text-white transition-all text-2xl shrink-0"><i class="fa-solid fa-feather-pointed"></i></div>
                 <div>
-                    <h3 class="text-2xl font-bold text-white outfit-font group-hover:text-purple-300 mb-1">{T('Личный блог', 'Особистий блог', 'Personal blog')}</h3>
-                    <p class="text-slate-400 text-sm">{T('Агрегатор всех моих публикаций, анонсы докладов и заметки.', 'Агрегатор усіх моїх публікацій, анонси доповідей і нотатки.', 'An aggregator of all my publications, talk announcements and notes.')}</p>
+                    <h3 class="text-2xl font-bold text-white outfit-font group-hover:text-purple-300 mb-1">{T('Блог', 'Блог', 'Blog')}</h3>
+                    <p class="text-slate-400 text-sm">{T('Мои заметки, уроки и разборы: R, аналитика, AI-инструменты. Здесь же — интервью и материалы, восстановленные из архива.', 'Мої нотатки, уроки й розбори: R, аналітика, AI-інструменти. Тут же — інтерв’ю та матеріали, відновлені з архіву.', 'My notes, lessons and walkthroughs on R, analytics and AI tools, plus interviews and posts restored from the archive.')}</p>
                 </div>
             </div>
-            <div class="bento-content px-6 py-3 bg-white/5 border border-white/10 rounded-full font-bold text-sm text-white group-hover:bg-white group-hover:text-black transition-all whitespace-nowrap">alexeyseleznev.wordpress.com <i class="fa-solid fa-arrow-right ml-2"></i></div>
+            <div class="bento-content px-6 py-3 bg-white/5 border border-white/10 rounded-full font-bold text-sm text-white group-hover:bg-white group-hover:text-black transition-all whitespace-nowrap">{T('Читать блог', 'Читати блог', 'Read the blog')} <i class="fa-solid fa-arrow-right ml-2"></i></div>
         </a>
     </section>
 '''
@@ -1797,5 +1797,7 @@ if __name__ == '__main__':
     build_404()
     build_ads()
     from acpgram_page import build_acpgram
+    from blog import build_blog   # блог: Markdown из _blog/posts → /blog/ (+ блок /blog/ в sitemap.xml)
+    build_blog(sys.modules[__name__])
     build_acpgram()
     build_css()

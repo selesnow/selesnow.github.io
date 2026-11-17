@@ -1,0 +1,5 @@
+# Зависимости сборки блога (_build/blog.py). Ставятся в ночном workflow: pip install -r _build/requirements.txt
+markdown>=3.5      # Markdown → HTML
+pyyaml>=6          # YAML-шапка статей
+pygments>=2.17     # подсветка кода
+pillow>=10         # оптимизация новых картинок (PNG/JPG → WebP) и размеры для width/height

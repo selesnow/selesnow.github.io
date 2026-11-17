@@ -15,6 +15,8 @@ module.exports = {
     './acpgram/acpgram.js',
     './assets/site.js',
     './_build/build.py',
+    './_build/blog.py',
+    './blog/index.html',
   ],
   theme: { extend: {} },
   plugins: [],

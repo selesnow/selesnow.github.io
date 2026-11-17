@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700&family=Outfit:wght@700;900&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; background: #030712; font-family: 'Inter', sans-serif; }
+  #c { position: relative; width: 1200px; height: 630px; overflow: hidden;
+       background: radial-gradient(900px 520px at 85% 8%, rgba(124,58,237,.55), transparent 60%),
+                   radial-gradient(800px 500px at 5% 105%, rgba(37,99,235,.45), transparent 60%),
+                   radial-gradient(500px 350px at 60% 110%, rgba(219,39,119,.28), transparent 65%),
+                   linear-gradient(135deg, #0b1120, #030712); }
+  #c::after { content: ''; position: absolute; inset: 14px; border: 1px solid rgba(255,255,255,.09); border-radius: 28px; pointer-events: none; }
+  svg { position: absolute; inset: 0; }
+  .icon { position: absolute; right: 64px; top: 50%; transform: translateY(-50%); font-size: 360px; line-height: 1;
+          background: linear-gradient(135deg, #a855f7, #3b82f6 55%, #ec4899); -webkit-background-clip: text; background-clip: text; color: transparent;
+          filter: drop-shadow(0 0 38px rgba(139,92,246,.55)); opacity: .95; }
+  .badge { position: absolute; left: 70px; top: 62px; display: inline-flex; gap: 12px; align-items: center; padding: 10px 20px; border-radius: 999px;
+           font: 700 22px 'Outfit', sans-serif; letter-spacing: .14em; text-transform: uppercase; color: #c4b5fd;
+           background: rgba(168,85,247,.14); border: 1px solid rgba(168,85,247,.35); }
+  .kw { position: absolute; left: 74px; top: 50%; transform: translateY(-50%); max-width: 700px; font: 900 170px/1 'Outfit', sans-serif; text-transform: uppercase; white-space: nowrap;
+        background: linear-gradient(90deg, #ffffff 0%, #c4b5fd 45%, #93c5fd 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .chips { position: absolute; left: 70px; bottom: 92px; display: flex; gap: 12px; }
+  .chip { padding: 8px 18px; border-radius: 12px; font: 500 22px 'Inter', sans-serif; color: #cbd5e1; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); }
+  .brand { position: absolute; left: 70px; bottom: 44px; font: 900 22px 'Outfit', sans-serif; letter-spacing: .02em; color: #fff; text-transform: uppercase; }
+  .brand b { color: #a855f7; text-transform: lowercase; }
+  .year { position: absolute; right: 70px; bottom: 44px; font: 700 22px 'Outfit', sans-serif; color: #94a3b8; letter-spacing: .1em; }
+</style></head>
+<body>
+<div id="c">
+  <svg id="net" width="1200" height="630"></svg>
+  <i class="icon" id="icon"></i>
+  <div class="kw" id="kw"></div>
+</div>
+<script>
+  const d = JSON.parse(decodeURIComponent(location.hash.slice(1)));
+  function rng(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  const r = rng(d.seed), NS = 'http://www.w3.org/2000/svg', svg = document.getElementById('net');
+  const pts = Array.from({ length: 22 }, () => [r() * 1200, r() * 630]);
+  pts.forEach((a, i) => pts.slice(i + 1).forEach(b => {
+    const dist = Math.hypot(a[0] - b[0], a[1] - b[1]);
+    if (dist < 230) { const l = document.createElementNS(NS, 'line'); l.setAttribute('x1', a[0]); l.setAttribute('y1', a[1]); l.setAttribute('x2', b[0]); l.setAttribute('y2', b[1]);
+      l.setAttribute('stroke', 'rgba(129,140,248,' + (0.30 - dist / 900).toFixed(2) + ')'); l.setAttribute('stroke-width', '1.5'); svg.appendChild(l); }
+  }));
+  pts.forEach(p => { const c = document.createElementNS(NS, 'circle'); c.setAttribute('cx', p[0]); c.setAttribute('cy', p[1]); c.setAttribute('r', 2.5 + r() * 3);
+    c.setAttribute('fill', 'rgba(165,180,252,.55)'); svg.appendChild(c); });
+  document.getElementById('icon').className = 'icon ' + d.icon;
+  const kw = document.getElementById('kw'); kw.textContent = d.kw;
+  let fs = 170; while (kw.scrollWidth > 700 && fs > 60) { fs -= 4; kw.style.fontSize = fs + 'px'; }
+</script>
+</body></html>

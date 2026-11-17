@@ -1,16 +1,17 @@
 [
  {
-  "i": 145,
-  "title": "Google BigQuery: Динамический UPSERT с помощью EXECUTE IMMEDIATE",
-  "src": "Блог Алексея Селезнёва",
-  "y": 2022,
-  "m": 9,
-  "url": "https://alexeyseleznev.wordpress.com/2022/09/16/google-bigquery-динамический-upsert-с-помощью-execute-immediate/",
-  "img": "",
-  "desc": "Обычный паттерн обновления данных в BigQuery — добавление новых записей, даже если это означает дублирование данных. А затем обрабатывать дубликаты при чтении с помощью группировки или оконных функций, или удаление записей, и…",
+  "i": 146,
+  "title": "Как работать с кодинг агентами (Claude Code, Codex, Gemini CLI, Antigravity CLI) через Telegram",
+  "src": "Хабр",
+  "y": 2026,
+  "m": 11,
+  "url": "https://habr.com/ru/articles/1107278/",
+  "img": "https://habr.com/share/publication/1107278/6eef132010dbda8f108aa50db54ca5b7/",
+  "desc": "Последние месяцы я всё чаще работаю с ИИ-агентами для кодинга: Gemini CLI, Claude Code, Codex и Antigravity. Они невероятно хороши в решении сложных задач, но у них есть одно фундаментальное неудобство — они привязаны к терминалу.",
   "via": "",
   "topics": [
-   "bq"
+   "ai",
+   "bot"
   ]
  },
  {
@@ -188,10 +189,10 @@
   "src": "ppc.world",
   "y": 2021,
   "m": 5,
-  "url": "https://www.youtube.com/playlist?list=PLD2LDq8edf4pQcy0zMmkTlk-o_Z6nRm5N",
+  "url": "https://web.archive.org/web/20210512081901/https://ppc.world/articles/3-videouroka-po-rabote-s-api-vkontakte-na-yazyke-r/",
   "img": "https://i.ytimg.com/vi/49-HTLOPSnU/hqdefault.jpg",
   "desc": "Серия видеоуроков по пакету rvkstat: авторизация в API ВКонтакте, статистика сообществ и рекламного кабинета с помощью языка R.",
-  "via": "youtube",
+  "via": "archive",
   "topics": [
    "r",
    "ppc"
@@ -272,13 +273,13 @@
  {
   "i": 127,
   "title": "Как загружать данные о расходах, офлайн-конверсиях и звонках в Яндекс Метрику",
-  "src": "Блог Алексея Селезнёва",
+  "src": "Netpeak Journal",
   "y": 2020,
   "m": 10,
-  "url": "https://alexeyseleznev.wordpress.com/2021/09/01/как-загружать-данные-о-расходах-офлай/",
+  "url": "https://web.archive.org/web/20201124154029/https://netpeak.net/ru/blog/kak-zagruzhat-dannyye-o-raskhodakh-oflayn-konversiyakh-i-zvonkakh-v-yandeks-metriku/",
   "img": "https://lh5.googleusercontent.com/Hyhk67ZdG9FiaArScfJ6b2Bx9HIW0lO2T2udreqSohkueMSnu7v0hfh2CyqQn8GkJ00_bWZ9Hc2rLBtIH554KKxX6ON6TnVwR4Qe69NdeqZyMA758UDCRMGPf555wdPLhORZSc2u=s0",
   "desc": "Весной 2020 года в Яндекс Метрике появился отчёт «Источники, расходы и ROI». Отчет автоматически посчитает ROI по всем рекламным источникам, при одном условии: вам необходимо передать в Метрику всю информацию для расчетов…",
-  "via": "blog",
+  "via": "archive",
   "topics": [
    "ga"
   ]
@@ -333,10 +334,10 @@
   "src": "ppc.world",
   "y": 2020,
   "m": 9,
-  "url": "https://www.youtube.com/playlist?list=PLD2LDq8edf4oUo0L9Kw77ZXf0KcV1hu67",
+  "url": "https://web.archive.org/web/20201030042305/https://ppc.world/articles/5-videourokov-po-rabote-s-api-yandeksdirekta-s-pomoschyu-yazyka-r/",
   "img": "https://i.ytimg.com/vi/hbUXttDFKNE/hqdefault.jpg",
   "desc": "Серия видеоуроков по пакету ryandexdirect: авторизация в API Яндекс.Директа, прогноз бюджета и WordStat, загрузка статистики и расходов в Google Analytics, уведомления о балансе.",
-  "via": "youtube",
+  "via": "archive",
   "topics": [
    "r",
    "ppc"
@@ -378,10 +379,10 @@
   "src": "ppc.world",
   "y": 2020,
   "m": 7,
-  "url": "https://www.youtube.com/playlist?list=PLD2LDq8edf4pItOb-vZTG5AXZK2niJ8_R",
+  "url": "https://web.archive.org/web/20200810033017/https://ppc.world/articles/9-video-urokov-po-rabote-s-facebook-marketing-api-na-yazyke-r-s-pomoschyu-paketa-rfacebookstat/",
   "img": "https://i.ytimg.com/vi/SgcxDqZ-5Qg/hqdefault.jpg",
   "desc": "Серия видеоуроков по пакету rfacebookstat: авторизация в Facebook Marketing API, загрузка объектов рекламного кабинета, статистики и конверсий, выгрузка расходов в Google Analytics и Power BI.",
-  "via": "youtube",
+  "via": "archive",
   "topics": [
    "r",
    "ppc"
@@ -516,20 +517,6 @@
   ]
  },
  {
-  "i": 110,
-  "title": "Python: Как создать оформленную HTML таблицу из pandas DataFrame",
-  "src": "Блог Алексея Селезнёва",
-  "y": 2020,
-  "m": 4,
-  "url": "https://alexeyseleznev.wordpress.com/2020/04/30/python-как-создать-оформленную-html-таблицу-из-pa/",
-  "img": "https://alexeyseleznev.wordpress.com/wp-content/uploads/2020/04/analytics_binary_code_network_digital-transformation-100777428-large1.jpg",
-  "desc": "Как преобразовать pandas DataFrame в HTML таблицу для отправки электронном письме.",
-  "via": "",
-  "topics": [
-   "python"
-  ]
- },
- {
   "i": 106,
   "title": "Какой язык выбрать для работы с данными R или Python? Оба! Мигрируем с pandas на tidyverse и data.table и обратно",
   "src": "Хабр",
@@ -586,21 +573,6 @@
   "topics": [
    "r",
    "excel"
-  ]
- },
- {
-  "i": 103,
-  "title": "rfacebookstat 2.0.0 - Обзор релиза и 6 видео уроков по работе с Facebook Marketing API на языке R",
-  "src": "Блог Алексея Селезнёва",
-  "y": 2019,
-  "m": 12,
-  "url": "https://alexeyseleznev.wordpress.com/2019/12/23/rfacebookstat-2-0-0-обзор-релиза-и-6-видео-уроков-по-раб/",
-  "img": "",
-  "desc": "Последние несколько месяцев я много работал над функционалом пакета rfacebookstat, предназначенным для работы с Facebook Marketing API на языке R. В результате чего пакет был значительно улучшен, и работать с его помощью с одним…",
-  "via": "",
-  "topics": [
-   "r",
-   "ppc"
   ]
  },
  {
@@ -718,20 +690,6 @@
   ]
  },
  {
-  "i": 85,
-  "title": "Наиболее простой способ обновить язык R (пакет installr)",
-  "src": "Блог Алексея Селезнёва",
-  "y": 2019,
-  "m": 3,
-  "url": "https://alexeyseleznev.wordpress.com/2019/03/15/наиболее-простой-способ-обновить-язы/",
-  "img": "https://i0.wp.com/img.netpeak.ua/alsey/157493452245_kiss_411kb.png",
-  "desc": "Несколько раз в год выходят обновления для языка R, примерно раз в пол года выходят достаточно важные обновления. Для того, что бы не упустить последний функционал, и оптимизацию языка я всегда рекомендую обновлять его при выходе…",
-  "via": "",
-  "topics": [
-   "r"
-  ]
- },
- {
   "i": 86,
   "title": "R пакет tidyr и его новые функции pivot_long и pivot_wide",
   "src": "Хабр",
@@ -777,45 +735,15 @@
  {
   "i": 79,
   "title": "Зачем учить язык R интернет-маркетологу, и как сделать это максимально быстро",
-  "src": "Блог Алексея Селезнёва",
+  "src": "Netpeak Journal",
   "y": 2018,
   "m": 12,
-  "url": "https://alexeyseleznev.wordpress.com/2018/12/24/зачем-учить-язык-r-интернет-маркетолог/",
+  "url": "https://web.archive.org/web/20190720084035/https://netpeak.net/ru/blog/zachem-uchit-yazyk-r-internet-marketologu-i-kak-sdelat-eto-maksimal-no-bystro/",
   "img": "https://images.netpeak.net/blog/videokurs-alsea-po-r.png",
   "desc": "Друзья, у меня для вас хорошая новость: 1 ноября стартовал первый поток моего авторского онлайн-курса «Язык R для интернет-маркетинга». В этой статье я расскажу о том, когда и зачем я начал учить R, с какими сложностями…",
-  "via": "blog",
+  "via": "archive",
   "topics": [
    "r"
-  ]
- },
- {
-  "i": 80,
-  "title": "Дайджест обновлений R пакетов для интернет маркетинга — ryandexdirect, rfacebookstat, rvkstat, rym за март — декабрь 2018 года",
-  "src": "Блог Алексея Селезнёва",
-  "y": 2018,
-  "m": 12,
-  "url": "https://alexeyseleznev.wordpress.com/2018/12/28/дайджест-обновлений-r-пакетов-для-инте/",
-  "img": "https://alexeyseleznev.wordpress.com/wp-content/uploads/2018/12/1ff9671.jpg",
-  "desc": "Дайджест обновлений R пакетов для интернет маркетинга, rfacebookstat, ryandexdirect, rym, rvkstat и других, за март – декабрь 2018 года.",
-  "via": "",
-  "topics": [
-   "r",
-   "ppc"
-  ]
- },
- {
-  "i": 77,
-  "title": "rmytarget 2.0.1 — перевод пакета на работу с MyTarget API v2",
-  "src": "Блог Алексея Селезнёва",
-  "y": 2018,
-  "m": 11,
-  "url": "https://alexeyseleznev.wordpress.com/2018/11/22/rmytarget-2-0-1-перевод-пакета-на-работу-с-mytarget-api-v2/",
-  "img": "https://i0.wp.com/hdwpro.com/wp-content/uploads/2017/01/Awesome-Nice-Wallpaper.jpg",
-  "desc": "Данное обновление связано с недавней новостью от поддержки API MyTarget, о том, что с 1 декабря 2018 года полностью прекращается поддержка API v1, а rmytarget изначально был написан именно на основе этого API.",
-  "via": "",
-  "topics": [
-   "r",
-   "ppc"
   ]
  },
  {
@@ -835,13 +763,13 @@
  {
   "i": 73,
   "title": "Как работать с API Яндекс.Метрики с помощью языка R",
-  "src": "Блог Алексея Селезнёва",
+  "src": "Netpeak Journal",
   "y": 2018,
   "m": 10,
-  "url": "https://alexeyseleznev.wordpress.com/2018/10/08/как-работать-с-api-яндекс-метрики-с-помощ/",
+  "url": "https://web.archive.org/web/20190825235103/https://netpeak.net/ru/blog/kak-rabotat-s-api-yandeks-metriki-s-pomoshch-yu-yazyka-r/",
   "img": "https://natgeo.imgix.net/factsheets/thumbnails/HEADER_NewZealandSpace.jpg?auto=compress,format&amp;w=1024&amp;h=560&amp;fit=crop",
   "desc": "Такие платформы, как Google Analytics и Яндекс.Метрика — инструменты, которые ежедневно используют в своей работе тысячи интернет-маркетологов и веб-аналитиков. Если вы продвигаете пару тройку-сайтов, думаю, достаточно…",
-  "via": "blog",
+  "via": "archive",
   "topics": [
    "r",
    "ga"
@@ -890,20 +818,6 @@
   ]
  },
  {
-  "i": 72,
-  "title": "Ошибки при установке R пакетов на Windows",
-  "src": "Блог Алексея Селезнёва",
-  "y": 2018,
-  "m": 8,
-  "url": "https://alexeyseleznev.wordpress.com/2018/08/08/ошибка-при-установке-r-пакетов-на-windows-оши/",
-  "img": "https://i2.wp.com/cdn.windowsreport.com/wp-content/uploads/2019/02/Ddkmd.sys-blue-screen-errors-in-Windows.jpg?resize=1400%2C9999&amp;ssl=1",
-  "desc": "В большинстве случаев, особенно при установке пакетов из CRAN никаких проблем не возникает, но периодически всё таки вы можете столкнуться с некоторыми ошибками. В этой статье я со временем буду добавлять материал с описанием…",
-  "via": "",
-  "topics": [
-   "r"
-  ]
- },
- {
   "i": 69,
   "title": "Сколько стоил клик Google Ads и Facebook в Украине во втором квартале 2018 года",
   "src": "Netpeak Journal",
@@ -920,30 +834,15 @@
  {
   "i": 66,
   "title": "Как обойти блокировку API запрещенных сервисов с помощью скриптов R",
-  "src": "Блог Алексея Селезнёва",
+  "src": "Netpeak Journal",
   "y": 2018,
   "m": 5,
-  "url": "https://alexeyseleznev.wordpress.com/2017/05/30/как-использовать-прокси-в-скриптах-r-об/",
+  "url": "https://web.archive.org/web/20190825020645/https://netpeak.net/ru/blog/kak-ispol-zovat-proksi-v-skriptakh-r-obkhodim-blokirovku-api-yandeksa-mail-ru-i-vkontakte/",
   "img": "https://700700.ru/images/stories/razdel/vzlom_zamok_1435653.jpg",
   "desc": "Если вы из Украины и до 16 мая использовали API Яндекса, Mail.Ru и ВКонтакте, то после этой даты, очевидно, столкнулись с определенными трудностями. В этой статье я расскажу, как обойти блокировку API запрещенных сервисов в…",
-  "via": "blog",
+  "via": "archive",
   "topics": [
    "r"
-  ]
- },
- {
-  "i": 67,
-  "title": "ryandexdirect 3.0.0 — обновлённый R клиент для работы с API Яндекс Директ",
-  "src": "Блог Алексея Селезнёва",
-  "y": 2018,
-  "m": 5,
-  "url": "https://alexeyseleznev.wordpress.com/2018/05/16/ryandexdirect-3-0-0-обновлённый-r-клиент-для-работы-с-api/",
-  "img": "https://ericlevelsdotcom.files.wordpress.com/2015/05/greatnews.png",
-  "desc": "Пакет для работы с API Яндекс Директ на языке R, ryandexdirect был значительно доработан: Был улучшен процесс авторизации в API Приведёны в порядок имена аргументов функций Во все функции был добавлен ряд новых аргументов Эта…",
-  "via": "",
-  "topics": [
-   "r",
-   "ppc"
   ]
  },
  {
@@ -963,13 +862,13 @@
  {
   "i": 62,
   "title": "Что такое язык R и как работать с API рекламных систем Google AdWords и Яндекс.Директ с его помощью",
-  "src": "Блог Алексея Селезнёва",
+  "src": "OWOX",
   "y": 2018,
   "m": 4,
-  "url": "https://alexeyseleznev.wordpress.com/2018/04/11/что-такое-язык-r-и-как-работать-с-api-реклам/",
+  "url": "https://web.archive.org/web/20190719144240/https://www.owox.ru/blog/articles/r-language-and-api-of-ad-systems/",
   "img": "https://i.owox.com/pages/3/3167.jpg",
   "desc": "Если вы ведете несколько небольших рекламных кампаний в одном рекламном аккаунте, то для анализа их эффективности вам достаточно посмотреть нужные данные в Google AdWords / Яндекс.Директ и Google Analytics / Яндекс.Метрике. Но…",
-  "via": "blog",
+  "via": "archive",
   "topics": [
    "r",
    "ppc"
@@ -990,30 +889,15 @@
   ]
  },
  {
-  "i": 60,
-  "title": "Порция зимних обновлений пакетов ryandexdirect, rfacebookstat, rvkstat",
-  "src": "Блог Алексея Селезнёва",
-  "y": 2018,
-  "m": 3,
-  "url": "https://alexeyseleznev.wordpress.com/2018/03/01/порция-зимних-обновлений-пакетов-ryandexdirect-rfacebo/",
-  "img": "https://i0.wp.com/vnimatelnostdetyam.com/wp-content/uploads/2016/12/8-910x480.jpg",
-  "desc": "Статья – дайджест зимних обновлений R клиентов для работы с API Яндекс Директ, Facebook и Вконтакте. Честно говоря за зиму было не так много обновлений, но тем не менее возможности некоторых пакетов было довольно значительно…",
-  "via": "",
-  "topics": [
-   "r",
-   "ppc"
-  ]
- },
- {
   "i": 56,
   "title": "Сколько стоил клик Google Ads и Facebook в Украине в четвертом квартале 2017 года",
-  "src": "Блог Алексея Селезнёва",
+  "src": "Netpeak Journal",
   "y": 2018,
   "m": 1,
-  "url": "https://alexeyseleznev.wordpress.com/2018/01/15/сколько-стоил-клик-google-adwords-и-facebook-в-украине-в-че/",
+  "url": "https://web.archive.org/web/20190825235004/https://netpeak.net/ru/blog/skol-ko-stoil-klik-v-google-adwords-i-facebook-v-ukraine-v-chetvertom-kvartale-2017-goda/",
   "img": "https://i0.wp.com/www.stimul-realty.ru/wp-content/uploads/2016/12/Rynochnaya-stoimost-nedvizhimosti.jpg",
   "desc": "Здравствуйте! Я подготовил для специалистов по контекстной рекламе итоговое исследование по стоимости клика за 2017 год на основании выборки проектов агентства Netpeak.",
-  "via": "blog",
+  "via": "archive",
   "topics": [
    "research"
   ]
@@ -1033,21 +917,6 @@
   ]
  },
  {
-  "i": 52,
-  "title": "Все обновления пакетов ryandexdirect, rfacebookstat и rvkstat за осень 2017",
-  "src": "Блог Алексея Селезнёва",
-  "y": 2017,
-  "m": 12,
-  "url": "https://alexeyseleznev.wordpress.com/2017/12/01/все-обновления-пакетов-ryandexdirect-rfacebookstat-и-rvkstat-за-осе/",
-  "img": "https://cdn.lynda.com/course/378455/378455-636356279678627188-16x9.jpg",
-  "desc": "В этой статье я собрал все доработки R клиентов ryandexdirect, rfacebookstat и rvkstat за осень 2017 года.",
-  "via": "",
-  "topics": [
-   "r",
-   "ppc"
-  ]
- },
- {
   "i": 53,
   "title": "Как мы сделали аналитический инструмент для блога Netpeak",
   "src": "Netpeak Journal",
@@ -1064,30 +933,15 @@
  {
   "i": 54,
   "title": "Как работать с закладками в Power BI — подробное руководство",
-  "src": "Блог Алексея Селезнёва",
+  "src": "Netpeak Journal",
   "y": 2017,
   "m": 12,
-  "url": "https://alexeyseleznev.wordpress.com/2017/12/28/как-работать-с-закладками-bookmarks-в-power-bi-подр/",
+  "url": "https://web.archive.org/web/20190824012401/https://netpeak.net/bg/blog/kak-da-rabotim-s-otmetkite-v-power-bi-podrobno-r-kovodstvo/",
   "img": "https://images.netpeak.net/blog/fajl-opcii-i-nastrojki-opcii.png",
   "desc": "Недавно вышла очередная, ежемесячная порция обновлений Power BI Desktop. Разработчики добавили множество новых функций и значительно доработали «Закладки» (Bookmarks), с помощью которых можно сделать дашборды более компактными и…",
-  "via": "blog",
+  "via": "archive",
   "topics": [
    "pbi"
-  ]
- },
- {
-  "i": 55,
-  "title": "rfacebookstat 1.5.0 — Как правильно использовать аргумент request_speed в функции fbGetMarketingStat",
-  "src": "Блог Алексея Селезнёва",
-  "y": 2017,
-  "m": 12,
-  "url": "https://alexeyseleznev.wordpress.com/2017/12/26/rfacebookstat-1-5-0-как-правильно-использовать-аргум/",
-  "img": "https://i0.wp.com/img.netpeak.ua/alsey/151428260475_kiss_14kb.png",
-  "desc": "rfacebookstat – R клиент для работы с API рекламного кабинета Facebook. В версии 1.5.0 была значительно улучшена основная функция пакета fbGetMarketingStat, в неё был добавлен аргумент request_speed, к тому же функция теперь…",
-  "via": "",
-  "topics": [
-   "r",
-   "ppc"
   ]
  },
  {
@@ -1121,13 +975,13 @@
  {
   "i": 48,
   "title": "Cколько стоил клик в Google Ads и Яндекс.Директ в Казахстане в третьем квартале 2017",
-  "src": "Блог Алексея Селезнёва",
+  "src": "Netpeak Journal",
   "y": 2017,
   "m": 10,
-  "url": "https://alexeyseleznev.wordpress.com/2017/10/18/cколько-стоил-клик-в-google-adwords-яндекс-директ-и-fa/",
+  "url": "https://web.archive.org/web/20190825234559/https://netpeak.net/ru/blog/ckol-ko-stoil-klik-v-google-adwords-yandeks-direkt-i-facebook-v-kazakhstane-v-tret-yem-kvartale-2017/",
   "img": "https://i0.wp.com/comandir.com/upkeep/uploads/2017/09/%D0%A8%D0%BD%D0%BE%D0%B1%D0%B5%D0%BB%D0%B5%D0%B2%D1%81%D0%BA%D0%B0%D1%8F-%D0%BF%D1%80%D0%B5%D0%BC%D0%B8%D1%8F-%D0%BC%D0%B8%D1%80%D0%B0-2017...-700x450.jpg",
   "desc": "Я подготовил ежеквартальное исследование о стоимости клика, опираясь на выборку проектов агентства Netpeak. Данные отчета будут полезны PPC-специалистам для планирования новых рекламных кампаний, а также для оптимизации…",
-  "via": "blog",
+  "via": "archive",
   "topics": [
    "ppc"
   ]
@@ -1149,13 +1003,13 @@
  {
   "i": 46,
   "title": "Как перенести данные из ВКонтакте в Power BI",
-  "src": "Блог Алексея Селезнёва",
+  "src": "Netpeak Journal",
   "y": 2017,
   "m": 9,
-  "url": "https://alexeyseleznev.wordpress.com/2017/09/22/как-перенести-данные-из-вконтакте-в-power-bi/",
+  "url": "https://web.archive.org/web/20190717034952/https://netpeak.net/ru/blog/kak-perenesti-dannyye-iz-vkontakte-v-power-bi/",
   "img": "https://b1.filmpro.ru/c/463912.700xp.jpg",
   "desc": "Несмотря на недавнюю блокировку соцсети в Индии, ВКонтакте продолжает оставаться огромным источником полезной информации и статистики. В этой статье я расскажу, как с помощью написанного мной программного пакета rvkstat и…",
-  "via": "blog",
+  "via": "archive",
   "topics": [
    "pbi",
    "ppc"
@@ -1164,13 +1018,13 @@
  {
   "i": 43,
   "title": "Сколько стоил клик по рекламе Ads, Директ и Facebook в Украине во втором квартале 2017",
-  "src": "Блог Алексея Селезнёва",
+  "src": "Netpeak Journal",
   "y": 2017,
   "m": 7,
-  "url": "https://alexeyseleznev.wordpress.com/2017/07/14/сколько-стоил-клик-по-рекламе-adwords-директ/",
+  "url": "https://web.archive.org/web/20190825234354/https://netpeak.net/ru/blog/skol-ko-stoil-klik-po-reklame-adwords-direkt-i-facebook-v-ukraine-vo-vtorom-kvartale-2017/",
   "img": "https://i0.wp.com/constructorus.ru/wp-content/uploads/2014/04/%D0%A4%D1%8C%D1%8E%D0%B6%D0%BD-%D0%BC%D0%B0%D1%80%D0%BA%D0%B5%D1%82%D0%B8%D0%BD%D0%B3.jpg",
   "desc": "Уже традиционно начинаем квартал с исследования стоимости клика. На этот раз я исследовал 23 миллиона кликов из Украины в Google AdWords, Facebook, Директ и структурировал данные по 19 тематикам. Хотите узнать, где выгоднее всего…",
-  "via": "blog",
+  "via": "archive",
   "topics": [
    "research"
   ]
@@ -1178,13 +1032,13 @@
  {
   "i": 44,
   "title": "Сколько стоил клик по рекламе Ads и Директ в Казахстане во втором квартале 2017",
-  "src": "Блог Алексея Селезнёва",
+  "src": "Netpeak Journal",
   "y": 2017,
   "m": 7,
-  "url": "https://alexeyseleznev.wordpress.com/2017/07/21/сколько-стоил-клик-по-рекламе-adwords-и-дирек/",
+  "url": "https://web.archive.org/web/20190825020355/https://netpeak.net/ru/blog/skol-ko-stoil-klik-po-reklame-adwords-i-direkt-v-kazakhstane-vo-vtorom-kvartale-2017/",
   "img": "https://images.netpeak.net/blog/osnovnaa-velicina-otobrazaetsa-na-osi-y-v-nasem-slucae-cena-za-klik-cpc.png",
   "desc": "Хотите узнать, сколько стоит клик в вашей тематике? Как эффективно распределить рекламный бюджет? В этом исследовании я изучил, сколько стоил клик в Google AdWords и Яндекс.Директ в Казахстане во втором квартале 2017 года.",
-  "via": "blog",
+  "via": "archive",
   "topics": [
    "research"
   ]
@@ -1192,13 +1046,13 @@
  {
   "i": 45,
   "title": "Сколько стоил клик по рекламе Ads и Директ в России во втором квартале 2017",
-  "src": "Блог Алексея Селезнёва",
+  "src": "Netpeak Journal",
   "y": 2017,
   "m": 7,
-  "url": "https://alexeyseleznev.wordpress.com/2017/07/31/сколько-стоил-клик-по-рекламе-adwords-и-дире-2/",
+  "url": "https://web.archive.org/web/20190825020743/https://netpeak.net/ru/blog/skol-ko-stoil-klik-po-reklame-adwords-i-direkt-v-rossii-vo-vtorom-kvartale-2017/",
   "img": "https://3dnews.ru/assets/external/illustrations/2010/09/24/599065/kidatcomptuer-sg.jpg",
   "desc": "Я продолжаю публиковать серию исследований по стоимости кликов в разных регионах, чтобы вы могли эффективно распределить рекламный бюджет.",
-  "via": "blog",
+  "via": "archive",
   "topics": [
    "research"
   ]
@@ -1236,13 +1090,13 @@
  {
   "i": 39,
   "title": "Как сэкономить время специалиста при работе с крупным проектом — на примере OLX",
-  "src": "Блог Алексея Селезнёва",
+  "src": "Netpeak Journal",
   "y": 2017,
   "m": 4,
-  "url": "https://alexeyseleznev.wordpress.com/2017/04/11/как-сэкономить-время-специалиста-при/",
+  "url": "https://web.archive.org/web/20190825020453/https://netpeak.net/ru/blog/kak-eekonomit-vremya-spetsialista-pri-rabote-s-krupnym-proektom-na-primere-olx/",
   "img": "https://i0.wp.com/json.tv/images/general/2016/04/12/20160412234604-1890.jpg",
   "desc": "«Что мы делаем со временем? В ответе на этот вопрос состоит смысл жизни», — считает герой фильма «Молодость без молодости». Что делают большую часть времени специалисты по контекстной рекламе в крупных проектах — отлично…",
-  "via": "blog",
+  "via": "archive",
   "topics": [
    "bi"
   ]
@@ -1250,13 +1104,13 @@
  {
   "i": 40,
   "title": "Сколько стоил клик в Google Ads в первом квартале 2017",
-  "src": "Блог Алексея Селезнёва",
+  "src": "Netpeak Journal",
   "y": 2017,
   "m": 4,
-  "url": "https://alexeyseleznev.wordpress.com/2017/04/27/исследование-сколько-стоил-клик-в-google-adwords/",
+  "url": "https://web.archive.org/web/20190825235033/https://netpeak.net/ru/blog/skol-ko-stoil-klik-v-google-adwords-v-pervom-kvartale-2017/",
   "img": "https://i0.wp.com/richfreelance.ru/wp-content/uploads/2016/03/CPC.jpg",
   "desc": "Хотите узнать, где выгоднее всего рекламировать продукты или планируете рекламный бюджет? Я провел анализ стоимости клика в 25 тематиках и 852 городах Украины, России, Казахстана, Болгарии и готов поделиться результатами.",
-  "via": "blog",
+  "via": "archive",
   "topics": [
    "research"
   ]
@@ -1264,13 +1118,13 @@
  {
   "i": 41,
   "title": "Язык R в интернет-маркетинге — дайджест полезных публикаций",
-  "src": "Блог Алексея Селезнёва",
+  "src": "Netpeak Journal",
   "y": 2017,
   "m": 4,
-  "url": "https://alexeyseleznev.wordpress.com/2017/04/28/язык-r-в-интернет-маркетинге-дайджес/",
+  "url": "https://web.archive.org/web/20190824012337/https://netpeak.net/ru/blog/yazyk-r-v-internet-marketinge-daidzhest-poleznykh-publikatsii/",
   "img": "https://pp.userapi.com/c637325/v637325995/4c5fd/YUlf3sQ6AtE.jpg",
   "desc": "Недавно прошла конференция Analyze — и в этом году в каждом докладе прямо или косвенно упоминался язык R. Сегодня R стал универсальным средством автоматизации множества маркетинговых задач, R Studio установлена даже у тех…",
-  "via": "blog",
+  "via": "archive",
   "topics": [
    "r"
   ]
@@ -1292,13 +1146,13 @@
  {
   "i": 34,
   "title": "Как получить и обработать сырые данные из Яндекс.Метрики",
-  "src": "Блог Алексея Селезнёва",
+  "src": "Netpeak Journal",
   "y": 2017,
   "m": 2,
-  "url": "https://alexeyseleznev.wordpress.com/2017/02/09/как-получить-и-обработать-сырые-данны/",
+  "url": "https://web.archive.org/web/20170212150305/https://netpeak.net:80/ru/blog/kak-poluchit-i-obrabotat-syrye-dannye-iz-yandeks-metriki/",
   "img": "https://images.netpeak.net/blog/kak-polucit-i-obrabotat-syrye-dannye-iz-andeksmetriki.jpg",
   "desc": "Хотите качественно анализировать статистику из Яндекс.Метрики? Отследить сложные воронки продаж, объединить данные из разных систем аналитики, контролировать расхождения в статистике, — «сырые» данные помогут вам эффективно…",
-  "via": "blog",
+  "via": "archive",
   "topics": [
    "ga"
   ]
@@ -1320,13 +1174,13 @@
  {
   "i": 36,
   "title": "Как связать Яндекс.Директ с Microsoft Power BI",
-  "src": "Блог Алексея Селезнёва",
+  "src": "Netpeak Journal",
   "y": 2017,
   "m": 2,
-  "url": "https://alexeyseleznev.wordpress.com/2017/02/27/как-связать-яндекс-директ-с-microsoft-power-bi/",
+  "url": "https://web.archive.org/web/20170301210916/https://netpeak.net:80/ru/blog/kak-svyazat-yandeks-direkt-s-microsoft-power-bi/",
   "img": "https://i0.wp.com/kingofwallpapers.com/connect/connect-002.jpg",
   "desc": "Яндекс.Директ собирает много данных, но, к сожалению, в веб-интерфейсе доступно очень мало информации для анализа. В этой статье я подробно опишу, как получить статистику о рекламных кампаниях c помощью языка R для визуализации в…",
-  "via": "blog",
+  "via": "archive",
   "topics": [
    "pbi",
    "ppc"
@@ -1335,13 +1189,13 @@
  {
   "i": 32,
   "title": "Сколько стоил клик в Google Ads в четвертом квартале 2016 — исследование Netpeak",
-  "src": "Блог Алексея Селезнёва",
+  "src": "Netpeak Journal",
   "y": 2017,
   "m": 1,
-  "url": "https://alexeyseleznev.wordpress.com/2017/01/23/сколько-стоил-клик-в-google-adwords-в-четвертом-кв/",
+  "url": "https://web.archive.org/web/20170126000700/https://netpeak.net:80/ru/blog/skol-ko-stoil-klik-v-google-adwords-v-chetvertom-kvartale-2016-issledovanie-netpeak/",
   "img": "https://habrastorage.org/files/eb0/fba/96c/eb0fba96cb98472691ea0483a56ac072.jpg",
   "desc": "Сколько платят рекламодатели за клик по объявлениям в разных странах и тематиках? Я провел очередное исследование стоимости клика в Google AdWords и в этой статье поделюсь результатами за четвертый квартал 2016 года.",
-  "via": "blog",
+  "via": "archive",
   "topics": [
    "research"
   ]
@@ -1349,13 +1203,13 @@
  {
   "i": 33,
   "title": "Сколько стоил клик в Google Ads в 2016 году — данные по Болгарии, Казахстану, России, Украине",
-  "src": "Блог Алексея Селезнёва",
+  "src": "Netpeak Journal",
   "y": 2017,
   "m": 1,
-  "url": "https://alexeyseleznev.wordpress.com/2017/01/23/сколько-стоил-клик-в-adwords-в-2016-году-данные/",
+  "url": "https://web.archive.org/web/20170129113651/https://netpeak.net:80/ru/blog/skol-ko-stoil-klik-v-google-adwords-v-2016-godu-issledovanie-netpeak/",
   "img": "https://images.netpeak.net/blog/rectangle_skol-ko-stoil-klik-v-google-adwords-v-2016-godu-issledovanie-netpeak.png",
   "desc": "Хотите планировать рекламный бюджет больше, чем на месяц или два? Вам необходимо знать стоимость клика и спрогнозировать, как будет меняться цена. В течение 2016 года я собирал данные о стоимости клика в Google AdWords в разрезе…",
-  "via": "blog",
+  "via": "archive",
   "topics": [
    "research"
   ]
@@ -1378,13 +1232,13 @@
  {
   "i": 31,
   "title": "Как мы внедрили BI-аналитику в отделе контекстной рекламы",
-  "src": "Блог Алексея Селезнёва",
+  "src": "Netpeak Journal",
   "y": 2016,
   "m": 12,
-  "url": "https://alexeyseleznev.wordpress.com/2016/12/22/как-мы-внедрили-bi-аналитику-в-отделе-ко/",
+  "url": "https://web.archive.org/web/20161224182604/https://netpeak.net:80/ru/blog/kak-my-vnedrili-bi-analitiku-v-otdele-kontekstnoi-reklamy/",
   "img": "https://images.netpeak.net/blog/bi-resenie-dla-biznesa2.jpg",
   "desc": "Хотите, я скажу, что делают ваши сотрудники прямо сейчас? Собирают вручную отчеты в электронных таблицах. Сколько времени они тратят зря, игнорируя автоматизацию? Увидеть реальную картину просто: посчитайте количество затраченных…",
-  "via": "blog",
+  "via": "archive",
   "topics": [
    "ppc"
   ]
@@ -1421,13 +1275,13 @@
  {
   "i": 27,
   "title": "Сколько стоил клик в Google Ads в третьем квартале 2016 — исследование Netpeak",
-  "src": "Блог Алексея Селезнёва",
+  "src": "Netpeak Journal",
   "y": 2016,
   "m": 10,
-  "url": "https://alexeyseleznev.wordpress.com/2016/10/18/сколько-стоил-клик-в-google-adwords-в-третьем-квар/",
+  "url": "https://web.archive.org/web/20161021203207/https://netpeak.net:80/ru/blog/skol-ko-stoil-klik-v-google-adwords-v-tret-em-kvartale-2016-issledovanie-netpeak/",
   "img": "https://images.netpeak.net/blog/skolko-stoil-klik-v-google-adwords.jpg",
   "desc": "Хотите узнать, сколько стоит клик в вашей тематике? Как эффективно распределить рекламный бюджет? В этом исследовании я изучил, сколько стоил клик в Google AdWords в третьем квартале 2016 года.",
-  "via": "blog",
+  "via": "archive",
   "topics": [
    "research"
   ]
@@ -1449,13 +1303,13 @@
  {
   "i": 25,
   "title": "Что дешевле в Украине: Google Ads или Директ — исследование Netpeak",
-  "src": "Блог Алексея Селезнёва",
+  "src": "Netpeak Journal",
   "y": 2016,
   "m": 8,
-  "url": "https://alexeyseleznev.wordpress.com/2016/08/01/что-дешевле-в-украине-adwords-или-директ-ис/",
+  "url": "https://web.archive.org/web/20160910062341/https://netpeak.net:80/ru/blog/chto-deshevle-v-ukraine-adwords-ili-direkt-issledovanie-netpeak/?",
   "img": "https://webnet.by/wp-content/uploads/reklama.jpg",
   "desc": "Для многих специалистов этого вопроса вроде как и не существует. Google в Украине популярнее, значит конкуренция выше и клик дороже — о чем еще говорить? Но насколько популярнее Google в 2016 и во всех ли тематиках актуальна…",
-  "via": "blog",
+  "via": "archive",
   "topics": [
    "research"
   ]
@@ -1477,13 +1331,13 @@
  {
   "i": 24,
   "title": "Сколько стоил клик в Google Ads во втором квартале 2016 — исследование Netpeak",
-  "src": "Блог Алексея Селезнёва",
+  "src": "Netpeak Journal",
   "y": 2016,
   "m": 7,
-  "url": "https://alexeyseleznev.wordpress.com/2016/07/19/сколько-стоил-клик-в-google-adwords-во-втором-квар/",
+  "url": "https://web.archive.org/web/20160901222128/https://netpeak.net:80/ru/blog/skolko-stoil-klik-v-google-adwords-vo-vtorom-kvartale-2016-issledovanie-netpeak/",
   "img": "https://i0.wp.com/gdetraffic.com/img/news_889/google-adwords.jpg",
   "desc": "Хотите узнать, где выгоднее всего рекламировать ваш товар или планируете рекламный бюджет? Я проанализировал более 7 миллионов кликов и посчитал, во сколько обходятся рекламодателям клики по объявлениям в разных странах и…",
-  "via": "blog",
+  "via": "archive",
   "topics": [
    "research"
   ]
@@ -1491,13 +1345,13 @@
  {
   "i": 21,
   "title": "Кейс: как провести анализ конкурентов с помощью SimilarWeb",
-  "src": "Блог Алексея Селезнёва",
+  "src": "Netpeak Journal",
   "y": 2016,
   "m": 6,
-  "url": "https://alexeyseleznev.wordpress.com/2016/06/08/кейс-как-провести-анализ-конкурентов/",
+  "url": "https://web.archive.org/web/20160901222024/https://netpeak.net:80/ru/blog/keys-kak-provesti-analiz-konkurentov-s-pomoshchyu-similarweb/",
   "img": "https://i0.wp.com/livesurf.ru/news_images/56-9c51fc7966185d667cd7e94897aca372.jpg",
   "desc": "Какие каналы используют конкуренты для привлечения посетителей? В каких регионах наибольшая и наименьшая конкуренция? Перед запуском проекта нужно знать предельно четкие ответы на эти вопросы. Сегодня я расскажу, как быстро…",
-  "via": "blog",
+  "via": "archive",
   "topics": [
    "bi"
   ]
@@ -1520,13 +1374,13 @@
  {
   "i": 19,
   "title": "Сколько стоил клик в Google Ads в первом квартале 2016 — исследование Netpeak",
-  "src": "Блог Алексея Селезнёва",
+  "src": "Netpeak Journal",
   "y": 2016,
   "m": 5,
-  "url": "https://alexeyseleznev.wordpress.com/2016/05/12/сколько-стоил-клик-в-google-adwords-в-первом-кварт/",
+  "url": "https://web.archive.org/web/20161004070240/https://netpeak.net:80/ru/blog/skolko-stoil-klik-v-google-adwords/",
   "img": "https://i0.wp.com/www.moneyball.info/uploads/posts/2011-11/1320682715-main-3b828722f0b511c368719c80d457a92b.jpg",
   "desc": "Сколько средств нужно вложить в рекламу для привлечения клиента? Спрогнозировать это просто, если знаете коэффициент конверсии и среднюю стоимость клика в вашей тематике и регионе. Чтобы понять, как дорого обходятся…",
-  "via": "blog",
+  "via": "archive",
   "topics": [
    "research"
   ]
@@ -1747,13 +1601,13 @@
  {
   "i": 7,
   "title": "Прогнозируем поисковую активность в Яндексе с помощью Wordstat и Google Таблиц",
-  "src": "Блог Алексея Селезнёва",
+  "src": "Netpeak Journal",
   "y": 2015,
   "m": 11,
-  "url": "https://alexeyseleznev.wordpress.com/2015/11/24/прогнозируем-поисковую-активность-в/",
+  "url": "https://web.archive.org/web/20160930101651/https://netpeak.net:80/ru/blog/prognozirovanie-poiskovoy-aktivnosti-v-yandekse-s-pomoshchyu-wordstat-i-google-tablits/",
   "img": "https://i0.wp.com/oblast45.ru/uploads/publications/6969/4f86b8bdb3164bfa5351df4dcd5e36ad84ea697a.jpg",
   "desc": "Для правильного планирования бюджета на рекламную кампанию нам необходимо понимать, как в ближайшие несколько месяцев будет меняться поисковая активность пользователей. В этой статье я опишу один из самых простых алгоритмов…",
-  "via": "blog",
+  "via": "archive",
   "topics": [
    "ppc",
    "excel"

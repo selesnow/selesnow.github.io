@@ -1,6 +1,7 @@
-# Ежедневное обновление счётчиков на сайте:
-# скачивания R-пакетов с CRAN (cranlogs) и звёзды на GitHub.
-# Пересобирает внутренние страницы (_build/build.py), обновляет assets/stats.json
+# Пересборка сайта и блога:
+#  * каждый день в 06:00 UTC — свежие счётчики скачиваний R-пакетов с CRAN (cranlogs) и звёзды на GitHub;
+#  * при пуше в _blog/** — сразу после добавления или правки статьи блога (Markdown в _blog/posts).
+# Пересобирает внутренние страницы и блог (_build/build.py), обновляет assets/stats.json
 # и коммитит изменения, после чего запрашивает пересборку GitHub Pages.
 
 name: Update package stats
@@ -9,6 +10,10 @@ on:
   schedule:
     - cron: '0 6 * * *'   # каждый день в 06:00 UTC (09:00 по Киеву)
   workflow_dispatch:       # ручной запуск со вкладки Actions
+  push:                    # новая или изменённая статья блога
+    branches: [master]
+    paths:
+      - '_blog/**'
 
 permissions:
   contents: write
@@ -28,14 +33,18 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Install blog dependencies
+        run: pip install -r _build/requirements.txt
+
       - uses: actions/setup-node@v4   # нужен для сборки Tailwind CSS (npx tailwindcss)
         with:
           node-version: '20'
 
-      - name: Rebuild pages with fresh stats
+      - name: Rebuild pages and blog with fresh stats
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_PAT: ${{ secrets.GITHUB_PAT }}
+          CHROME: google-chrome   # обложки новых статей рисуются headless Chrome (на ubuntu-latest он уже есть)
         run: python _build/build.py
 
       - name: Commit changes
@@ -43,12 +52,12 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/stats.json assets/acpgram-stats.json _build/data/package_stats.json opensource courses videos talks articles interviews ads acpgram/index.html 404.html assets/tailwind.css
+          git add assets/stats.json assets/acpgram-stats.json _build/data/package_stats.json opensource courses videos talks articles interviews ads acpgram/index.html 404.html assets/tailwind.css blog sitemap.xml
           if git diff --cached --quiet; then
-            echo "Счётчики не изменились"
+            echo "Изменений нет"
             echo "changed=false" >> "$GITHUB_OUTPUT"
           else
-            git commit -m "chore: update site and acpgram stats [skip ci]"
+            git commit -m "chore: rebuild site, blog and stats [skip ci]"
             git pull --rebase origin "${GITHUB_REF_NAME}"
             git push
             echo "changed=true" >> "$GITHUB_OUTPUT"
