@@ -635,9 +635,12 @@ def build_courses():
         is_book = 'kindLabel' in c
         target_type = 'book' if is_book else 'site'
         btn_text = T('Читать учебник', 'Читати підручник', 'Read the book') if is_book else T('Перейти к курсу', 'Перейти до курсу', 'Go to course')
-        buttons = [f'''<a href="{esc(url(c['url']))}" target="_blank" rel="noopener" data-ga-event="course_click" data-ga-course-id="{c['id']}" data-ga-course-name="{esc(c['title']['ru'])}" data-ga-course-level="{c['level']}" data-ga-target-type="{target_type}" data-ga-placement="courses_page" class="bg-purple-600 hover:bg-purple-500 text-white px-6 py-3 rounded-xl font-bold text-sm transition-all shadow-[0_0_20px_rgba(168,85,247,0.35)] hover:shadow-[0_0_30px_rgba(168,85,247,0.55)] flex items-center gap-2">{btn_text} <i class="fa-solid fa-arrow-right text-xs"></i></a>''']
+        internal = ' ' if c['url'].startswith(SITE + '/r_for_marketing_course') else ' target="_blank" rel="noopener" '
+        buttons = [f'''<a href="{esc(url(c['url']))}"{internal}data-ga-event="course_click" data-ga-course-id="{c['id']}" data-ga-course-name="{esc(c['title']['ru'])}" data-ga-course-level="{c['level']}" data-ga-target-type="{target_type}" data-ga-placement="courses_page" class="bg-purple-600 hover:bg-purple-500 text-white px-6 py-3 rounded-xl font-bold text-sm transition-all shadow-[0_0_20px_rgba(168,85,247,0.35)] hover:shadow-[0_0_30px_rgba(168,85,247,0.55)] flex items-center gap-2">{btn_text} <i class="fa-solid fa-arrow-right text-xs"></i></a>''']
         if c.get('playlist'):
             buttons.append(f'''<a href="{esc(c['playlist'])}" target="_blank" rel="noopener" data-ga-event="course_resource_click" data-ga-course-id="{c['id']}" data-ga-resource-type="playlist" class="px-5 py-3 rounded-xl border border-white/10 hover:border-white/20 bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white font-semibold text-sm transition-all flex items-center gap-2"><i class="fa-brands fa-youtube text-red-500"></i> {T('Плейлист', 'Плейлист', 'Playlist')}</a>''')
+        if c.get('handbook'):
+            buttons.append(f'''<a href="{esc(c['handbook'])}" target="_blank" rel="noopener" data-ga-event="course_resource_click" data-ga-course-id="{c['id']}" data-ga-resource-type="handbook" class="px-5 py-3 rounded-xl border border-white/10 hover:border-white/20 bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white font-semibold text-sm transition-all flex items-center gap-2"><i class="fa-solid fa-book-open text-blue-400"></i> {T('Методичка', 'Методичка', 'Handbook')}</a>''')
         if c.get('article'):
             buttons.append(f'''<a href="{esc(c['article'])}" target="_blank" rel="noopener" data-ga-event="course_resource_click" data-ga-course-id="{c['id']}" data-ga-resource-type="article" class="px-5 py-3 rounded-xl border border-white/10 hover:border-white/20 bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white font-semibold text-sm transition-all flex items-center gap-2"><i class="fa-solid fa-h text-teal-400"></i> {T('Статья о курсе', 'Стаття про курс', 'About the course')}</a>''')
         if c.get('materials'):
@@ -879,13 +882,13 @@ TOPICS = {
     'bot': ('fa-brands fa-telegram', ('Telegram-боты', 'Telegram-боти', 'Telegram bots')),
     'python': ('fa-brands fa-python', ('Python', 'Python', 'Python')),
     'bi': ('fa-solid fa-diagram-project', ('BI и кейсы', 'BI та кейси', 'BI & cases')),
+    'ai': ('fa-solid fa-robot', ('AI-агенты', 'AI-агенти', 'AI agents')),
 }
 
+# Раздел «Статьи» — только внешние публикации. Собственные заметки живут в разделе «Блог» (/blog/).
 SOURCES = [
-    'ai': ('fa-solid fa-robot', ('AI-агенты', 'AI-агенти', 'AI agents')),
     ('habr', 'bg-teal-400', ('Хабр', 'Хабр', 'Habr')),
     ('netpeak', 'bg-blue-500', ('Netpeak Journal', 'Netpeak Journal', 'Netpeak Journal')),
-# Раздел «Статьи» — только внешние публикации. Собственные заметки живут в разделе «Блог» (/blog/).
     ('other', 'bg-pink-500', ('Другие издания', 'Інші видання', 'Other media')),
 ]
 
@@ -916,11 +919,11 @@ def build_articles():
         via = ''
         if a['via'] == 'blog':
             via = f'<div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-purple-500/20 text-purple-200 border border-purple-500/30" title="Оригинал недоступен — ссылка ведёт на копию в блоге">{T("копия в блоге", "копія в блозі", "blog copy")}</div>'
+        elif a['via'] == 'archive':
+            via = f'<div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-blue-500/20 text-blue-200 border border-blue-500/30" title="Оригинал больше недоступен — ссылка ведёт на снимок страницы в Web Archive"><i class="fa-solid fa-box-archive mr-1"></i>{T("из архива", "з архіву", "from archive")}</div>'
         elif a['via'] == 'youtube':
             via = f'<div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-red-500/20 text-red-200 border border-red-500/30"><i class="fa-brands fa-youtube mr-1"></i>{T("плейлист", "плейлист", "playlist")}</div>'
         extra = f'<div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300">{month_label(a["y"], a["m"])}</div>{via}'
-        elif a['via'] == 'archive':
-            via = f'<div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-blue-500/20 text-blue-200 border border-blue-500/30" title="Оригинал больше недоступен — ссылка ведёт на снимок страницы в Web Archive"><i class="fa-solid fa-box-archive mr-1"></i>{T("из архива", "з архіву", "from archive")}</div>'
         tags = ' '.join(f'<span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">{T(*TOPICS[t][1])}</span>' for t in a['topics'])
         search = f"{a['title']} {a['desc']} {a['src']}".lower()
         return f'''
@@ -1794,10 +1797,12 @@ if __name__ == '__main__':
     build_talks()
     build_articles()
     build_interviews()
+    from blog import build_blog   # блог: Markdown из _blog/posts → /blog/ (+ блок /blog/ в sitemap.xml)
+    build_blog(sys.modules[__name__])
     build_404()
     build_ads()
     from acpgram_page import build_acpgram
-    from blog import build_blog   # блог: Markdown из _blog/posts → /blog/ (+ блок /blog/ в sitemap.xml)
-    build_blog(sys.modules[__name__])
     build_acpgram()
+    from rcourse_page import build_rcourse
+    build_rcourse()
     build_css()

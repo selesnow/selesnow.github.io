@@ -76,14 +76,15 @@
   "level": "beginner",
   "year": "2018",
   "cover": "https://alexey-seleznev.pro/r_for_marketing/cover.png",
-  "url": "https://r-for-marketing.netpeak.net/",
+  "url": "https://alexey-seleznev.pro/r_for_marketing_course/",
+  "handbook": "https://r-for-marketing.netpeak.net/",
   "playlist": "https://www.youtube.com/playlist?list=PLD2LDq8edf4o6dSZ4BIr7J08gT97nimH_",
   "article": "https://habr.com/ru/articles/669104/",
   "materials": "https://github.com/selesnow/r_for_marketing",
   "note": {
-   "ru": "Полная версия с методичкой требует бесплатной регистрации",
-   "ua": "Повна версія з методичкою потребує безкоштовної реєстрації",
-   "en": "The full version with the handbook requires free registration"
+   "ru": "Методичка на платформе NeedForData требует бесплатной регистрации",
+   "ua": "Методичка на платформі NeedForData потребує безкоштовної реєстрації",
+   "en": "The handbook on NeedForData requires free registration"
   },
   "title": {
    "ru": "Язык R для интернет-маркетинга",

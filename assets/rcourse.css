@@ -1,0 +1,172 @@
+/* Страницы курса «Язык R для интернет-маркетинга» (/r_for_marketing_course/).
+   Подключается после site.css и до tailwind.css. Классы с префиксом rc- создаёт _build/rcourse_page.py. */
+
+/* --- видеоплеер: сначала постер, iframe YouTube грузится по клику --- */
+.rc-frame {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: #000;
+}
+.rc-frame iframe,
+.rc-poster {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+.rc-poster { display: block; cursor: pointer; overflow: hidden; }
+.rc-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s;
+    filter: brightness(0.8);
+}
+.rc-poster:hover img, .rc-poster:focus-visible img { transform: scale(1.04); filter: brightness(1); }
+.rc-poster::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(3, 7, 18, 0.65), transparent 55%);
+    pointer-events: none;
+}
+.rc-play {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 1;
+    width: 76px;
+    height: 76px;
+    margin: -38px 0 0 -38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 4px;
+    font-size: 26px;
+    color: #fff;
+    background: rgba(168, 85, 247, 0.9);
+    box-shadow: 0 0 0 10px rgba(168, 85, 247, 0.2), 0 0 40px rgba(168, 85, 247, 0.55);
+    transition: transform 0.25s, box-shadow 0.25s;
+}
+.rc-poster:hover .rc-play, .rc-poster:focus-visible .rc-play {
+    transform: scale(1.08);
+    box-shadow: 0 0 0 14px rgba(168, 85, 247, 0.25), 0 0 55px rgba(168, 85, 247, 0.7);
+}
+
+/* --- номер урока / части --- */
+.rc-num {
+    flex-shrink: 0;
+    min-width: 2.75rem;
+    padding: 0.3rem 0.55rem;
+    border-radius: 0.65rem;
+    text-align: center;
+    font: 700 0.8rem/1.2 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    color: #c4b5fd;
+    background: rgba(168, 85, 247, 0.12);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+}
+.rc-num-lg { min-width: 3.5rem; padding: 0.55rem 0.7rem; font-size: 1rem; border-radius: 0.9rem; }
+.rc-num-sm { min-width: 2.4rem; font-size: 0.7rem; padding: 0.2rem 0.4rem; }
+
+/* --- строка урока на главной курса --- */
+.rc-row {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.7rem 0.9rem;
+    min-height: 48px;
+    border-radius: 0.9rem;
+    background: rgba(15, 23, 42, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: border-color 0.2s, background 0.2s, transform 0.2s;
+}
+.rc-row:hover { border-color: rgba(168, 85, 247, 0.45); background: rgba(255, 255, 255, 0.05); transform: translateX(3px); }
+
+/* --- части урока (несколько видео) --- */
+.rc-part {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    width: 100%;
+    min-height: 48px;
+    padding: 0.55rem 0.8rem;
+    border-radius: 0.8rem;
+    color: #cbd5e1;
+    font-size: 0.9rem;
+    border: 1px solid transparent;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.rc-part:hover { background: rgba(255, 255, 255, 0.05); color: #fff; }
+.rc-part.is-active { background: rgba(168, 85, 247, 0.14); border-color: rgba(168, 85, 247, 0.45); color: #fff; }
+.rc-part.is-active .rc-num { background: #a855f7; border-color: #a855f7; color: #fff; }
+
+/* --- тайм-коды --- */
+.rc-tc {
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+    width: 100%;
+    min-height: 44px;
+    padding: 0.6rem 0.8rem;
+    border-radius: 0.7rem;
+    font-size: 0.9rem;
+    color: #cbd5e1;
+    transition: background 0.2s, color 0.2s;
+}
+.rc-tc:hover { background: rgba(255, 255, 255, 0.06); color: #fff; }
+.rc-tc span:first-child { min-width: 3.2rem; }
+
+/* --- навигация по урокам модуля (боковая колонка) --- */
+.rc-side-list { max-height: 60vh; overflow-y: auto; scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, 0.15) transparent; }
+.rc-side {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    min-height: 44px;
+    padding: 0.5rem 0.65rem;
+    border-radius: 0.75rem;
+    font-size: 0.85rem;
+    color: #94a3b8;
+    transition: background 0.2s, color 0.2s;
+}
+.rc-side:hover { background: rgba(255, 255, 255, 0.05); color: #fff; }
+.rc-side.is-active { background: rgba(168, 85, 247, 0.14); color: #fff; font-weight: 600; }
+
+/* --- карточка урока на странице модуля --- */
+.rc-card { transition: transform 0.3s, border-color 0.3s; }
+
+/* --- отметка «пройдено» (хранится в localStorage браузера) --- */
+.rc-done-mark { display: none; color: #4ade80; flex-shrink: 0; }
+.is-done > .rc-done-mark,
+.is-done .rc-done-mark { display: inline-block; }
+.rc-done-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 36px;
+    padding: 0.4rem 0.9rem;
+    border-radius: 0.6rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #cbd5e1;
+    border: 1px dashed rgba(255, 255, 255, 0.25);
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+.rc-done-btn[hidden] { display: none; }
+.rc-done-btn:hover { color: #fff; border-color: rgba(168, 85, 247, 0.6); }
+.rc-done-btn[aria-pressed="true"] { color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.45); background: rgba(74, 222, 128, 0.1); }
+
+/* --- видимый фокус с клавиатуры --- */
+.rc-poster:focus-visible, .rc-part:focus-visible, .rc-tc:focus-visible, .rc-side:focus-visible,
+.rc-row:focus-visible, .rc-card:focus-visible, .rc-done-btn:focus-visible {
+    outline: 2px solid #c084fc;
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .rc-row, .rc-poster img, .rc-play, .rc-card { transition: none; }
+    .rc-row:hover { transform: none; }
+    .rc-poster:hover img, .rc-poster:hover .rc-play { transform: none; }
+}

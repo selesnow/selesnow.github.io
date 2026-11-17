@@ -1,0 +1,620 @@
+{
+ "1. Модуль 1/1.0. Введение в модуль 1": {
+  "zip": "r-for-marketing-1-0.zip",
+  "size": 1268633,
+  "files": [
+   {
+    "name": "История создания и возможности языка R.pdf",
+    "size": 1471872,
+    "repo_path": "1. Модуль 1/1.0. Введение в модуль 1/История создания и возможности языка R.pdf"
+   }
+  ]
+ },
+ "1. Модуль 1/1.11. Работа с датой и временем в базовом R и пакет lubridate": {
+  "zip": "r-for-marketing-1-11.zip",
+  "size": 1539,
+  "files": [
+   {
+    "name": "работа с датами и временем в R.R",
+    "size": 3479,
+    "repo_path": "1. Модуль 1/1.11. Работа с датой и временем в базовом R и пакет lubridate/работа с датами и временем в R.R"
+   }
+  ]
+ },
+ "1. Модуль 1/1.12. Работа с периодами, пакет timeperiodsR": {
+  "zip": "r-for-marketing-1-12.zip",
+  "size": 514,
+  "files": [
+   {
+    "name": "пакет timeperiodsR.R",
+    "size": 476,
+    "repo_path": "1. Модуль 1/1.12. Работа с периодами, пакет timeperiodsR/пакет timeperiodsR.R"
+   }
+  ]
+ },
+ "1. Модуль 1/1.13. Условные конструкции, циклы и функции в R": {
+  "zip": "r-for-marketing-1-13.zip",
+  "size": 7553,
+  "files": [
+   {
+    "name": "1.7.1. Условные конструкции, Циклы и функции в R.R",
+    "size": 4056,
+    "repo_path": "1. Модуль 1/1.13. Условные конструкции, циклы и функции в R/1.7.1. Условные конструкции, Циклы и функции в R.R"
+   },
+   {
+    "name": "data_from_CristalStudio.csv",
+    "size": 3997,
+    "repo_path": "1. Модуль 1/1.13. Условные конструкции, циклы и функции в R/data_from_CristalStudio.csv"
+   },
+   {
+    "name": "data_from_Datamarket.csv",
+    "size": 1330,
+    "repo_path": "1. Модуль 1/1.13. Условные конструкции, циклы и функции в R/data_from_Datamarket.csv"
+   },
+   {
+    "name": "data_from_Lunasoft.csv",
+    "size": 1361,
+    "repo_path": "1. Модуль 1/1.13. Условные конструкции, циклы и функции в R/data_from_Lunasoft.csv"
+   },
+   {
+    "name": "data_from_Marker LTD.csv",
+    "size": 1683,
+    "repo_path": "1. Модуль 1/1.13. Условные конструкции, циклы и функции в R/data_from_Marker LTD.csv"
+   },
+   {
+    "name": "data_from_Portweb.csv",
+    "size": 2166,
+    "repo_path": "1. Модуль 1/1.13. Условные конструкции, циклы и функции в R/data_from_Portweb.csv"
+   },
+   {
+    "name": "data_from_Pritcoder.csv",
+    "size": 2752,
+    "repo_path": "1. Модуль 1/1.13. Условные конструкции, циклы и функции в R/data_from_Pritcoder.csv"
+   },
+   {
+    "name": "data_from_TWS.csv",
+    "size": 2098,
+    "repo_path": "1. Модуль 1/1.13. Условные конструкции, циклы и функции в R/data_from_TWS.csv"
+   }
+  ]
+ },
+ "1. Модуль 1/1.14. Условные конструкции и циклы - угадай число": {
+  "zip": "r-for-marketing-1-14.zip",
+  "size": 1071,
+  "files": [
+   {
+    "name": "1.7.2 Игра угадай число, вложенные цикли и условные операторы.R",
+    "size": 1474,
+    "repo_path": "1. Модуль 1/1.14. Условные конструкции и циклы - угадай число/1.7.2 Игра угадай число, вложенные цикли и условные операторы.R"
+   }
+  ]
+ },
+ "1. Модуль 1/1.15. Рекомендации по оформлению кода и обработка ошибок": {
+  "zip": "r-for-marketing-1-15.zip",
+  "size": 890440,
+  "files": [
+   {
+    "name": "обработка ошибок.R",
+    "size": 534,
+    "repo_path": "1. Модуль 1/1.15. Рекомендации по оформлению кода и обработка ошибок/обработка ошибок.R"
+   },
+   {
+    "name": "оформление кода.pptx",
+    "size": 915454,
+    "repo_path": "1. Модуль 1/1.15. Рекомендации по оформлению кода и обработка ошибок/оформление кода.pptx"
+   }
+  ]
+ },
+ "1. Модуль 1/1.3. Область применения R криптов в Power BI": {
+  "zip": "r-for-marketing-1-3.zip",
+  "size": 43045,
+  "files": [
+   {
+    "name": "m1_l3 - demo name_values.pbix",
+    "size": 41333,
+    "repo_path": "1. Модуль 1/1.3. Область применения R криптов в Power BI/m1_l3 - demo name_values.pbix"
+   },
+   {
+    "name": "m1_l3 - Загрузка, простейшее преобразование и визуализация данных.R",
+    "size": 689,
+    "repo_path": "1. Модуль 1/1.3. Область применения R криптов в Power BI/m1_l3 - Загрузка, простейшее преобразование и визуализация данных.R"
+   },
+   {
+    "name": "name_values.csv",
+    "size": 1262,
+    "repo_path": "1. Модуль 1/1.3. Область применения R криптов в Power BI/name_values.csv"
+   },
+   {
+    "name": "name_values_2.csv",
+    "size": 821,
+    "repo_path": "1. Модуль 1/1.3. Область применения R криптов в Power BI/name_values_2.csv"
+   }
+  ]
+ },
+ "1. Модуль 1/1.6. Основные классы объектов": {
+  "zip": "r-for-marketing-1-6.zip",
+  "size": 2569,
+  "files": [
+   {
+    "name": "Классы объектов, обращение к элементоам объектов.R",
+    "size": 7553,
+    "repo_path": "1. Модуль 1/1.6. Основные классы объектов/Классы объектов, обращение к элементоам объектов.R"
+   }
+  ]
+ },
+ "1. Модуль 1/1.7. Работа со строками": {
+  "zip": "r-for-marketing-1-7.zip",
+  "size": 1938,
+  "files": [
+   {
+    "name": "Работа со строками.R",
+    "size": 4793,
+    "repo_path": "1. Модуль 1/1.7. Работа со строками/Работа со строками.R"
+   }
+  ]
+ },
+ "1. Модуль 1/1.8. - 1.10. Манипуляция данными в R": {
+  "zip": "r-for-marketing-1-8-1-10.zip",
+  "size": 53833,
+  "files": [
+   {
+    "name": "clients.csv",
+    "size": 304,
+    "repo_path": "1. Модуль 1/1.8. - 1.10. Манипуляция данными в R/clients.csv"
+   },
+   {
+    "name": "country.csv",
+    "size": 138,
+    "repo_path": "1. Модуль 1/1.8. - 1.10. Манипуляция данными в R/country.csv"
+   },
+   {
+    "name": "data.table.png",
+    "size": 31444,
+    "repo_path": "1. Модуль 1/1.8. - 1.10. Манипуляция данными в R/data.table.png"
+   },
+   {
+    "name": "dictionary.json",
+    "size": 791,
+    "repo_path": "1. Модуль 1/1.8. - 1.10. Манипуляция данными в R/dictionary.json"
+   },
+   {
+    "name": "product.csv",
+    "size": 438,
+    "repo_path": "1. Модуль 1/1.8. - 1.10. Манипуляция данными в R/product.csv"
+   },
+   {
+    "name": "sales.csv",
+    "size": 3486,
+    "repo_path": "1. Модуль 1/1.8. - 1.10. Манипуляция данными в R/sales.csv"
+   },
+   {
+    "name": "tidyr_example.xlsx",
+    "size": 12505,
+    "repo_path": "1. Модуль 1/1.8. - 1.10. Манипуляция данными в R/tidyr_example.xlsx"
+   },
+   {
+    "name": "Манипуляция с данными.R",
+    "size": 9346,
+    "repo_path": "1. Модуль 1/1.8. - 1.10. Манипуляция данными в R/Манипуляция с данными.R"
+   },
+   {
+    "name": "Схема данных.png",
+    "size": 10439,
+    "repo_path": "1. Модуль 1/1.8. - 1.10. Манипуляция данными в R/Схема данных.png"
+   },
+   {
+    "name": "Урок 7.Rproj",
+    "size": 205,
+    "repo_path": "1. Модуль 1/1.8. - 1.10. Манипуляция данными в R/Урок 7.Rproj"
+   }
+  ]
+ },
+ "2. Модуль 2/2.10. - 2.11. Search Console API и Google Trends API": {
+  "zip": "r-for-marketing-2-10-2-11.zip",
+  "size": 1098,
+  "files": [
+   {
+    "name": "searchConsole + gtrends.R",
+    "size": 2462,
+    "repo_path": "2. Модуль 2/2.10. - 2.11. Search Console API и Google Trends API/searchConsole + gtrends.R"
+   }
+  ]
+ },
+ "2. Модуль 2/2.12. YouTube API": {
+  "zip": "r-for-marketing-2-12.zip",
+  "size": 1211,
+  "files": [
+   {
+    "name": "youtube.R",
+    "size": 3775,
+    "repo_path": "2. Модуль 2/2.12. YouTube API/youtube.R"
+   }
+  ]
+ },
+ "2. Модуль 2/2.13. Парсинг сайтов": {
+  "zip": "r-for-marketing-2-13.zip",
+  "size": 3512,
+  "files": [
+   {
+    "name": "test_html_page.html",
+    "size": 904,
+    "repo_path": "2. Модуль 2/2.13. Парсинг сайтов/test_html_page.html"
+   },
+   {
+    "name": "парсинг сайтов step1.R",
+    "size": 1825,
+    "repo_path": "2. Модуль 2/2.13. Парсинг сайтов/парсинг сайтов step1.R"
+   },
+   {
+    "name": "парсинг сайтов step2.R",
+    "size": 1049,
+    "repo_path": "2. Модуль 2/2.13. Парсинг сайтов/парсинг сайтов step2.R"
+   },
+   {
+    "name": "парсинг сайтов step3.R",
+    "size": 1241,
+    "repo_path": "2. Модуль 2/2.13. Парсинг сайтов/парсинг сайтов step3.R"
+   },
+   {
+    "name": "парсинг сайтов step4 - sessions.R",
+    "size": 1336,
+    "repo_path": "2. Модуль 2/2.13. Парсинг сайтов/парсинг сайтов step4 - sessions.R"
+   }
+  ]
+ },
+ "2. Модуль 2/2.14. Отправка HTTP запросов": {
+  "zip": "r-for-marketing-2-14.zip",
+  "size": 2812,
+  "files": [
+   {
+    "name": "HTTP запросы.R",
+    "size": 1583,
+    "repo_path": "2. Модуль 2/2.14. Отправка HTTP запросов/HTTP запросы.R"
+   },
+   {
+    "name": "json_parser.R",
+    "size": 1409,
+    "repo_path": "2. Модуль 2/2.14. Отправка HTTP запросов/json_parser.R"
+   },
+   {
+    "name": "test_html_page.html",
+    "size": 908,
+    "repo_path": "2. Модуль 2/2.14. Отправка HTTP запросов/test_html_page.html"
+   },
+   {
+    "name": "xml_parser.R",
+    "size": 1495,
+    "repo_path": "2. Модуль 2/2.14. Отправка HTTP запросов/xml_parser.R"
+   }
+  ]
+ },
+ "2. Модуль 2/2.2. Работа с Google AdWords API": {
+  "zip": "r-for-marketing-2-2.zip",
+  "size": 805,
+  "files": [
+   {
+    "name": "Google AdWords.R",
+    "size": 1191,
+    "repo_path": "2. Модуль 2/2.2. Работа с Google AdWords API/Google AdWords.R"
+   }
+  ]
+ },
+ "2. Модуль 2/2.3. Работа с Яндекс Директ API": {
+  "zip": "r-for-marketing-2-3.zip",
+  "size": 511871,
+  "files": [
+   {
+    "name": "attributions_report.R",
+    "size": 678,
+    "repo_path": "2. Модуль 2/2.3. Работа с Яндекс Директ API/attributions_report.R"
+   },
+   {
+    "name": "yandex_direct_bids_management.R",
+    "size": 3944,
+    "repo_path": "2. Модуль 2/2.3. Работа с Яндекс Директ API/yandex_direct_bids_management.R"
+   },
+   {
+    "name": "yandex_direct_example.R",
+    "size": 6345,
+    "repo_path": "2. Модуль 2/2.3. Работа с Яндекс Директ API/yandex_direct_example.R"
+   },
+   {
+    "name": "сервис reports.pptx",
+    "size": 548160,
+    "repo_path": "2. Модуль 2/2.3. Работа с Яндекс Директ API/сервис reports.pptx"
+   }
+  ]
+ },
+ "2. Модуль 2/2.4. Работа с Facebook Marketing API": {
+  "zip": "r-for-marketing-2-4.zip",
+  "size": 2885,
+  "files": [
+   {
+    "name": "facebook_actions_breakdown.R",
+    "size": 2346,
+    "repo_path": "2. Модуль 2/2.4. Работа с Facebook Marketing API/facebook_actions_breakdown.R"
+   },
+   {
+    "name": "fb2pbi.R",
+    "size": 1399,
+    "repo_path": "2. Модуль 2/2.4. Работа с Facebook Marketing API/fb2pbi.R"
+   },
+   {
+    "name": "FB_example.R",
+    "size": 3258,
+    "repo_path": "2. Модуль 2/2.4. Работа с Facebook Marketing API/FB_example.R"
+   }
+  ]
+ },
+ "2. Модуль 2/2.5. Работа с API Вконтакте": {
+  "zip": "r-for-marketing-2-5.zip",
+  "size": 1650,
+  "files": [
+   {
+    "name": "vkontakte.R",
+    "size": 2773,
+    "repo_path": "2. Модуль 2/2.5. Работа с API Вконтакте/vkontakte.R"
+   },
+   {
+    "name": "vkontakte_group_stat.R",
+    "size": 2400,
+    "repo_path": "2. Модуль 2/2.5. Работа с API Вконтакте/vkontakte_group_stat.R"
+   }
+  ]
+ },
+ "2. Модуль 2/2.6. Работа с MyTarget API": {
+  "zip": "r-for-marketing-2-6.zip",
+  "size": 707,
+  "files": [
+   {
+    "name": "rmytarget.R",
+    "size": 2446,
+    "repo_path": "2. Модуль 2/2.6. Работа с MyTarget API/rmytarget.R"
+   }
+  ]
+ },
+ "2. Модуль 2/2.7. Google Analytics API (пакет RGA)": {
+  "zip": "r-for-marketing-2-7.zip",
+  "size": 2311,
+  "files": [
+   {
+    "name": "RGA_example.R",
+    "size": 2935,
+    "repo_path": "2. Модуль 2/2.7. Google Analytics API (пакет RGA)/RGA_example.R"
+   },
+   {
+    "name": "RGA_загрузка_данных_из_множества_аккаунтов.R",
+    "size": 1504,
+    "repo_path": "2. Модуль 2/2.7. Google Analytics API (пакет RGA)/RGA_загрузка_данных_из_множества_аккаунтов.R"
+   }
+  ]
+ },
+ "2. Модуль 2/2.8. Google Analytics API (пакет googleAnalyticsR)": {
+  "zip": "r-for-marketing-2-8.zip",
+  "size": 2139,
+  "files": [
+   {
+    "name": "googleAnalyticsR.R",
+    "size": 5498,
+    "repo_path": "2. Модуль 2/2.8. Google Analytics API (пакет googleAnalyticsR)/googleAnalyticsR.R"
+   }
+  ]
+ },
+ "2. Модуль 2/2.9. API Яндекс Метрики": {
+  "zip": "r-for-marketing-2-9.zip",
+  "size": 1816,
+  "files": [
+   {
+    "name": "load_expenses_to_metrika.R",
+    "size": 1078,
+    "repo_path": "2. Модуль 2/2.9. API Яндекс Метрики/load_expenses_to_metrika.R"
+   },
+   {
+    "name": "YandexMetrika.R",
+    "size": 3578,
+    "repo_path": "2. Модуль 2/2.9. API Яндекс Метрики/YandexMetrika.R"
+   }
+  ]
+ },
+ "3. Модуль 3/3.1. Googlesheets API": {
+  "zip": "r-for-marketing-3-1.zip",
+  "size": 1138,
+  "files": [
+   {
+    "name": "googlesheets4.R",
+    "size": 2721,
+    "repo_path": "3. Модуль 3/3.1. Googlesheets API/googlesheets4.R"
+   }
+  ]
+ },
+ "3. Модуль 3/3.2. Визуализация данных с помощью ggplot2": {
+  "zip": "r-for-marketing-3-2.zip",
+  "size": 57141,
+  "files": [
+   {
+    "name": "ggplot2_funnels.R",
+    "size": 6549,
+    "repo_path": "3. Модуль 3/3.2. Визуализация данных с помощью ggplot2/ggplot2_funnels.R"
+   },
+   {
+    "name": "ggplot2_step1.R",
+    "size": 2421,
+    "repo_path": "3. Модуль 3/3.2. Визуализация данных с помощью ggplot2/ggplot2_step1.R"
+   },
+   {
+    "name": "ggplot2_step2.R",
+    "size": 5155,
+    "repo_path": "3. Модуль 3/3.2. Визуализация данных с помощью ggplot2/ggplot2_step2.R"
+   },
+   {
+    "name": "ggplot2_step3.R",
+    "size": 1883,
+    "repo_path": "3. Модуль 3/3.2. Визуализация данных с помощью ggplot2/ggplot2_step3.R"
+   },
+   {
+    "name": "pict.png",
+    "size": 57345,
+    "repo_path": "3. Модуль 3/3.2. Визуализация данных с помощью ggplot2/pict.png"
+   }
+  ]
+ },
+ "3. Модуль 3/3.3. Работа с базами данных": {
+  "zip": "r-for-marketing-3-3.zip",
+  "size": 11284,
+  "files": [
+   {
+    "name": "clickhouse.R",
+    "size": 1722,
+    "repo_path": "3. Модуль 3/3.3. Работа с базами данных/clickhouse.R"
+   },
+   {
+    "name": "database_bigquery.R",
+    "size": 3317,
+    "repo_path": "3. Модуль 3/3.3. Работа с базами данных/database_bigquery.R"
+   },
+   {
+    "name": "database_mssql.R",
+    "size": 1686,
+    "repo_path": "3. Модуль 3/3.3. Работа с базами данных/database_mssql.R"
+   },
+   {
+    "name": "database_mysql.R",
+    "size": 2248,
+    "repo_path": "3. Модуль 3/3.3. Работа с базами данных/database_mysql.R"
+   },
+   {
+    "name": "database_odbc.R",
+    "size": 2580,
+    "repo_path": "3. Модуль 3/3.3. Работа с базами данных/database_odbc.R"
+   },
+   {
+    "name": "database_postgres.R",
+    "size": 2268,
+    "repo_path": "3. Модуль 3/3.3. Работа с базами данных/database_postgres.R"
+   },
+   {
+    "name": "database_RODBC.R",
+    "size": 2334,
+    "repo_path": "3. Модуль 3/3.3. Работа с базами данных/database_RODBC.R"
+   },
+   {
+    "name": "database_sqlite.R",
+    "size": 2135,
+    "repo_path": "3. Модуль 3/3.3. Работа с базами данных/database_sqlite.R"
+   },
+   {
+    "name": "r_cource_test_base.db",
+    "size": 16384,
+    "repo_path": "3. Модуль 3/3.3. Работа с базами данных/r_cource_test_base.db"
+   },
+   {
+    "name": "sqlite_db/r_cource_test_base.db",
+    "size": 20480,
+    "repo_path": "3. Модуль 3/3.3. Работа с базами данных/sqlite_db/r_cource_test_base.db"
+   }
+  ]
+ },
+ "3. Модуль 3/3.4. Отправка почты с помощью mailR": {
+  "zip": "r-for-marketing-3-4.zip",
+  "size": 27504,
+  "files": [
+   {
+    "name": "htmlTable.R",
+    "size": 2684,
+    "repo_path": "3. Модуль 3/3.4. Отправка почты с помощью mailR/htmlTable.R"
+   },
+   {
+    "name": "KableExtra.R",
+    "size": 2403,
+    "repo_path": "3. Модуль 3/3.4. Отправка почты с помощью mailR/KableExtra.R"
+   },
+   {
+    "name": "keyword_group.png",
+    "size": 29509,
+    "repo_path": "3. Модуль 3/3.4. Отправка почты с помощью mailR/keyword_group.png"
+   },
+   {
+    "name": "mailR.R",
+    "size": 4552,
+    "repo_path": "3. Модуль 3/3.4. Отправка почты с помощью mailR/mailR.R"
+   }
+  ]
+ },
+ "3. Модуль 3/3.5. Настройка запуска скриптов по расписанию": {
+  "zip": "r-for-marketing-3-5.zip",
+  "size": 38912,
+  "files": [
+   {
+    "name": "adwords_db.db",
+    "size": 20480,
+    "repo_path": "3. Модуль 3/3.5. Настройка запуска скриптов по расписанию/adwords_db.db"
+   },
+   {
+    "name": "my_script.log",
+    "size": 365,
+    "repo_path": "3. Модуль 3/3.5. Настройка запуска скриптов по расписанию/my_script.log"
+   },
+   {
+    "name": "my_script.R",
+    "size": 5444,
+    "repo_path": "3. Модуль 3/3.5. Настройка запуска скриптов по расписанию/my_script.R"
+   },
+   {
+    "name": "plot.png",
+    "size": 44262,
+    "repo_path": "3. Модуль 3/3.5. Настройка запуска скриптов по расписанию/plot.png"
+   },
+   {
+    "name": "start_r.bat",
+    "size": 110,
+    "repo_path": "3. Модуль 3/3.5. Настройка запуска скриптов по расписанию/start_r.bat"
+   },
+   {
+    "name": "taskscheduler.R",
+    "size": 723,
+    "repo_path": "3. Модуль 3/3.5. Настройка запуска скриптов по расписанию/taskscheduler.R"
+   }
+  ]
+ },
+ "3. Модуль 3/3.6. Разработка telegram ботов на языке R": {
+  "zip": "r-for-marketing-3-6.zip",
+  "size": 6523,
+  "files": [
+   {
+    "name": "rym_tg.R",
+    "size": 3015,
+    "repo_path": "3. Модуль 3/3.6. Разработка telegram ботов на языке R/rym_tg.R"
+   },
+   {
+    "name": "tg_check_task_scheduller.R",
+    "size": 778,
+    "repo_path": "3. Модуль 3/3.6. Разработка telegram ботов на языке R/tg_check_task_scheduller.R"
+   },
+   {
+    "name": "tg_facebook_stat_bot.R",
+    "size": 3102,
+    "repo_path": "3. Модуль 3/3.6. Разработка telegram ботов на языке R/tg_facebook_stat_bot.R"
+   },
+   {
+    "name": "tg_hello_world.R",
+    "size": 408,
+    "repo_path": "3. Модуль 3/3.6. Разработка telegram ботов на языке R/tg_hello_world.R"
+   },
+   {
+    "name": "tg_inline_keyboard.R",
+    "size": 2911,
+    "repo_path": "3. Модуль 3/3.6. Разработка telegram ботов на языке R/tg_inline_keyboard.R"
+   },
+   {
+    "name": "tg_inline_keyboard_urls.R",
+    "size": 914,
+    "repo_path": "3. Модуль 3/3.6. Разработка telegram ботов на языке R/tg_inline_keyboard_urls.R"
+   },
+   {
+    "name": "tg_reply_keyboard.R",
+    "size": 2204,
+    "repo_path": "3. Модуль 3/3.6. Разработка telegram ботов на языке R/tg_reply_keyboard.R"
+   }
+  ]
+ }
+}
