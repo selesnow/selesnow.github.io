@@ -372,7 +372,8 @@ def build_index(posts, norm):
                      'Уроки, розбори та досвід автоматизації маркетингу й аналітики: мова R, Google Analytics, BigQuery, Power BI, API рекламних систем. Матеріали написані російською мовою.',
                      'Lessons, walkthroughs and hands-on experience in marketing and analytics automation: R, Google Analytics, BigQuery, Power BI, ad-platform APIs. Posts are written in Russian.'),
                    [(str(len(posts)), T('Материалов', 'Матеріалів', 'Posts')), (str(len(cnt_c)), T('Рубрик', 'Рубрик', 'Categories')),
-                    (str(min(years)), T('С года', 'З року', 'Since')), (str(sum(p['minutes'] for p in posts) // 60), T('Часов чтения', 'Годин читання', 'Hours of reading'))])
+                    (str(min(years)), T('С года', 'З року', 'Since')), (str(sum(p['minutes'] for p in posts) // 60), T('Часов чтения', 'Годин читання', 'Hours of reading'))],
+                   photo='blog')
     page += f'''
     <!-- CATALOG -->
     <section class="px-6 max-w-7xl mx-auto pb-16 relative z-10" id="posts">

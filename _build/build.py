@@ -277,7 +277,7 @@ def nav(active):
                 <img src="../logo.jpg" alt="Alexey Seleznev" class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 rounded-lg sm:rounded-xl object-cover shadow-md border border-white/10 group-hover:border-purple-500/50 group-hover:scale-105 transition-all shrink-0">
                 <span class="text-xs min-[400px]:text-sm sm:text-base md:text-xl font-black tracking-tight uppercase outfit-font whitespace-nowrap text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
             </a>
-            <div class="hidden xl:flex gap-4 2xl:gap-6 text-sm font-semibold text-slate-400">
+            <div class="hidden xl:flex gap-4 text-sm font-semibold text-slate-400">
                 <a href="../" class="nav-link hover:text-white transition-colors">{T('Главная', 'Головна', 'Home')}</a>
 {desktop}
             </div>
@@ -464,6 +464,8 @@ PHOTOS = {
                   event=('Analyze!',) * 3, year='2018'),
     'articles': dict(src='analyze-2017.webp', w=960, h=640, pos='62% 40%',
                      event=('Analyze!',) * 3, year='2017'),
+    'blog': dict(src='8p-2021-blog.webp', w=1750, h=1167, pos='38% 30%', side='left',
+                 event=('8P',) * 3, year='2021'),
     'interviews': dict(src='8p-2021.webp', w=1650, h=1100, pos='45% 45%',
                        event=('8P',) * 3, year='2021'),
 }
@@ -471,8 +473,11 @@ PHOTOS = {
 
 def hero_photo(slug):
     p = PHOTOS[slug]
+    left = p.get('side') == 'left'
+    # фото слева: на мобильных остаётся под текстом, на lg+ встаёт первым
+    cls = 'hero-photo hero-photo-left lg:col-span-5 lg:order-1' if left else 'hero-photo lg:col-span-5'
     return f'''
-            <figure class="hero-photo lg:col-span-5" data-aos="fade-left" data-aos-delay="100">
+            <figure class="{cls}" data-aos="{'fade-right' if left else 'fade-left'}" data-aos-delay="100">
                 <div class="hero-photo-plate"></div>
                 <div class="hero-photo-frame">
                     <img src="../assets/photos/{p['src']}" width="{p['w']}" height="{p['h']}" alt="Алексей Селезнёв на конференции {esc(p['event'][0])} {p['year']}" style="object-position: {p['pos']}" decoding="async">
@@ -500,8 +505,9 @@ def hero(icon, badge, title_html, lead, stats, back=True, photo=None):
             <p class="text-lg md:text-xl text-slate-300 leading-relaxed font-light relative z-10">{lead}</p>
         </div>'''
     if photo:
+        text_cls = 'lg:col-span-7 lg:order-2 flex flex-col justify-end' if PHOTOS[photo].get('side') == 'left' else 'lg:col-span-7 flex flex-col justify-end'
         intro = f'''<div class="grid lg:grid-cols-12 gap-8 lg:gap-12 mb-8">
-            <div class="lg:col-span-7 flex flex-col justify-end">
+            <div class="{text_cls}">
         {intro.replace(' mb-8" data-aos="fade-up" data-aos-delay="100"', '" data-aos="fade-up" data-aos-delay="100"')}
             </div>{hero_photo(photo)}
         </div>'''
