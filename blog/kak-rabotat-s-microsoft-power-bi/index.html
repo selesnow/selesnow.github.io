@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Alexey Seleznev">
+    <meta name="theme-color" content="#030712">
+    <link rel="canonical" href="https://alexey-seleznev.pro/blog/kak-rabotat-s-microsoft-power-bi/">
+
+    <title>Как работать с Microsoft Power BI | Алексей Селезнёв</title>
+    <meta name="title" content="Как работать с Microsoft Power BI | Алексей Селезнёв">
+    <meta name="description" content="Чтобы создавать понятные отчеты и обновлять их в режиме реального времени современному бизнесу необходим мощный сервис для обработки информации. В комментариях к моим предыдущим…">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alexey-seleznev.pro/blog/kak-rabotat-s-microsoft-power-bi/">
+    <meta property="og:site_name" content="ALEXEY-SELEZNEV.pro">
+    <meta property="og:title" content="Как работать с Microsoft Power BI | Алексей Селезнёв">
+    <meta property="og:description" content="Чтобы создавать понятные отчеты и обновлять их в режиме реального времени современному бизнесу необходим мощный сервис для обработки информации. В комментариях к моим предыдущим…">
+    <meta property="og:image" content="https://alexey-seleznev.pro/photo.jpg">
+    <meta property="og:image:alt" content="Алексей Селезнёв">
+    <meta property="og:locale" content="ru_RU">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="https://alexey-seleznev.pro/blog/kak-rabotat-s-microsoft-power-bi/">
+    <meta name="twitter:title" content="Как работать с Microsoft Power BI | Алексей Селезнёв">
+    <meta name="twitter:description" content="Чтобы создавать понятные отчеты и обновлять их в режиме реального времени современному бизнесу необходим мощный сервис для обработки информации. В комментариях к моим предыдущим…">
+    <meta name="twitter:image" content="https://alexey-seleznev.pro/photo.jpg">
+
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z56YHE916N"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Z56YHE916N');
+    </script>
+    <link rel="icon" type="image/jpeg" href="../../logo.jpg">
+    <link rel="apple-touch-icon" href="../../logo.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;700;800;900&display=swap">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/site.css">
+    <!-- Tailwind собран заранее (_build/build.py) и подключается последним, как это делал CDN-скрипт -->
+    <link rel="stylesheet" href="../../assets/tailwind.css">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Как работать с Microsoft Power BI",
+  "datePublished": "2016-05-20",
+  "inLanguage": "ru",
+  "description": "Чтобы создавать понятные отчеты и обновлять их в режиме реального времени современному бизнесу необходим мощный сервис для обработки информации. В комментариях к моим предыдущим…",
+  "author": {
+    "@id": "https://alexey-seleznev.pro/#person"
+  },
+  "mainEntityOfPage": "https://alexey-seleznev.pro/blog/kak-rabotat-s-microsoft-power-bi/"
+}
+    </script>
+    <link rel="stylesheet" href="../blog.css">
+</head>
+<body class="relative lang-en">
+
+    <!-- Interactive Background -->
+    <div id="vanta-bg"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full z-50 top-0 left-0 border-b border-white/5 bg-slate-950/60 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 h-16 flex items-center justify-between">
+            <a href="../../" class="flex items-center gap-2 sm:gap-2.5 md:gap-3 group shrink min-w-0">
+                <img src="../../logo.jpg" alt="Alexey Seleznev" class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 rounded-lg sm:rounded-xl object-cover shadow-md border border-white/10 group-hover:border-purple-500/50 group-hover:scale-105 transition-all shrink-0">
+                <span class="text-xs min-[400px]:text-sm sm:text-base md:text-xl font-black tracking-tight uppercase outfit-font whitespace-nowrap text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+            </a>
+            <div class="hidden xl:flex gap-6 text-sm font-semibold text-slate-400">
+                <a href="../../" class="nav-link hover:text-white transition-colors"><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a>
+                <a href="../../opensource/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span></a>
+                <a href="../../courses/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a>
+                <a href="../../videos/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a>
+                <a href="../../talks/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a>
+                <a href="../../articles/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a>
+                <a href="../../interviews/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a>
+                <a href="../../blog/" class="nav-link hover:text-white transition-colors active"><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a>
+            </div>
+
+            <div class="flex items-center gap-1.5 sm:gap-2 md:gap-4 shrink-0">
+                <div class="lang-switcher flex gap-1 sm:gap-1.5 md:gap-2 text-[11px] sm:text-xs md:text-sm font-bold border-r border-white/10 pr-1.5 sm:pr-3 md:pr-4 mr-0.5 sm:mr-1 md:mr-2 outfit-font">
+                    <button onclick="changeLang('en')" id="btn-en" class="active hover:text-white transition-colors">EN</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ru')" id="btn-ru" class="text-slate-500 hover:text-white transition-colors">RU</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ua')" id="btn-ua" class="text-slate-500 hover:text-white transition-colors">UA</button>
+                </div>
+
+                <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="text-slate-400 hover:text-blue-400 transition-colors hidden sm:block" aria-label="Telegram"><i class="fa-brands fa-telegram text-lg md:text-xl"></i></a>
+                <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="text-slate-400 hover:text-white transition-colors hidden sm:block" aria-label="GitHub"><i class="fa-brands fa-github text-lg md:text-xl"></i></a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="xl:hidden w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-purple-500/20 hover:border-purple-500/40 transition-all focus:outline-none" aria-label="Toggle Navigation Menu">
+                    <i class="fa-solid fa-bars text-sm sm:text-lg" id="mobile-menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div id="mobile-menu" class="hidden xl:hidden border-t border-white/10 bg-slate-950/95 backdrop-blur-2xl shadow-2xl overflow-y-auto max-h-[calc(100vh-4rem)] transition-all">
+            <div class="max-w-7xl mx-auto px-6 py-6 space-y-1">
+                <a href="../../" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-house text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span>
+                </a>
+                <a href="../../opensource/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-code-branch text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span>
+                </a>
+                <a href="../../courses/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-graduation-cap text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span>
+                </a>
+                <a href="../../videos/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-circle-play text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span>
+                </a>
+                <a href="../../talks/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-microphone-lines text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span>
+                </a>
+                <a href="../../articles/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-pen-nib text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span>
+                </a>
+                <a href="../../interviews/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-regular fa-newspaper text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span>
+                </a>
+                <a href="../../blog/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-white bg-white/5 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-feather-pointed text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span>
+                </a>
+
+                <div class="pt-4 mt-3 border-t border-white/10 flex items-center justify-around text-slate-400">
+                    <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-blue-400 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-telegram text-xl"></i> Telegram
+                    </a>
+                    <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="p-2 hover:text-white transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-github text-xl"></i> GitHub
+                    </a>
+                    <a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-red-500 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-youtube text-xl"></i> YouTube
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="b-wrap relative z-10">
+        <nav class="b-crumbs" aria-label="breadcrumb">
+            <a href="../../"><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a><span>/</span><a href="../"><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a><span>/</span><a href="../?cat=bi#posts">BI</a>
+        </nav>
+        <div class="b-layout has-toc">
+            <article class="bento-glass no-lift b-article" data-aos="fade-up">
+                <div class="bento-content">
+                    <div class="b-cats"><a class="b-chip b-chip-cat" href="../?cat=bi#posts">BI</a></div>
+                    <h1 class="b-title outfit-font">Как работать с Microsoft Power BI</h1>
+                    <div class="b-meta">
+                        <span><i class="fa-regular fa-calendar" aria-hidden="true"></i><span class="ru-text">20 мая 2016</span><span class="ua-text">20 травня 2016</span><span class="en-text">20 May 2016</span></span>
+                        <span><i class="fa-regular fa-clock" aria-hidden="true"></i><span class="ru-text">24 мин чтения</span><span class="ua-text">24 хв читання</span><span class="en-text">24 min read</span></span>
+                        <span class="b-lang" title="Русский">RU</span>
+                    </div>
+                    <div class="b-note"><i class="fa-regular fa-clock" aria-hidden="true"></i><div><span class="ru-text">Материал опубликован в 2016 году — описанные инструменты и интерфейсы могли измениться.</span><span class="ua-text">Матеріал опубліковано у 2016 році — описані інструменти та інтерфейси могли змінитися.</span><span class="en-text">Published in 2016 — the tools and interfaces described may have changed since.</span></div></div>
+                    
+                    <div class="b-prose"><p>Чтобы создавать понятные отчеты и обновлять их в режиме реального времени современному бизнесу необходим мощный сервис для обработки информации. В комментариях к моим предыдущим <a target="_blank" rel="noopener" href="http://netpeak.net/ru/blog/tag/big-data/">публикациям в блоге</a> читатели неоднократно просили написать мануал по работе с Microsoft Power BI. В этой статье я рассказал, как начать работу с данной платформой.</p>
+<p><img loading="lazy" decoding="async" alt="Картинки по запросу Как работать с Microsoft Power BI — подробное руководство" width="1600" height="800" src="../images/kak-rabotat-s-microsoft-power-bi-landscape-1465411956-gettyi-308c114b.webp" /></p>
+<h2 id="microsoft-power-bi">Кратко о возможностях Microsoft Power BI</h2>
+<p>Power BI — достаточно мощная и при этом бесплатная BI платформа. Microsoft вкладывает много средств в развитие этого продукта, в связи с чем часто выходят обновления, расширяющие ее возможности. Вы можете использовать такие версии программы:</p>
+<ul>
+<li><strong>Power BI Desktop</strong> предназначен для разработки модели данных и отчетов;</li>
+<li><strong>Power BI Service</strong> — онлайн-аналог, который специализируется на мониторинге и анализе готовых отчетов, поэтому возможности конструирования и работы с данными там очень ограничены.</li>
+</ul>
+<p>Как правило, декстопная версия используется в качестве конструктора, после чего разработанный файл публикуется в <a target="_blank" rel="noopener" href="https://powerbi.microsoft.com/ru-ru/">Power BI Service</a>. Для дальнейшей работы скачайте Power BI Desktop;<a target="_blank" rel="noopener" href="https://www.microsoft.com/ru-ru/download/details.aspx?id=45331">по этой ссылке</a>.</p>
+<p>Для пользователей Microsoft Windows 10 есть отдельная версия Power BI Desktop, которую вы можете найти, перейдя <a target="_blank" rel="noopener" href="https://www.microsoft.com/ru-ru/store/apps/microsoft-power-bi/9nblgggzlxn1">по этой ссылке.</a></p>
+<h2 id="_1">Откуда можно загружать данные?</h2>
+<p>Power BI имеет множество встроенных коннекторов к различным сервисам и базам данных, с помощь которых вы в считанные минуты можете загрузить в программу нужный набор данных из различных источников, связать их между собой и построить консолидированные отчеты и диаграммы. На момент написания статьи все доступные коннекторы распределены на четыре группы:</p>
+<p><strong>1. Группа «Файл»:</strong></p>
+<ul>
+<li>Excel;</li>
+<li>CSV;</li>
+<li>XML;</li>
+<li>Текст;</li>
+<li>JSON;</li>
+<li>Папка.</li>
+</ul>
+<p><strong>2. Группа «База данных»:</strong></p>
+<ul>
+<li>SQL Server;</li>
+<li>Access;</li>
+<li>SQL Server Analysis Service;</li>
+<li>Oracle;</li>
+<li>IBM DB2;</li>
+<li>MySQL;</li>
+<li>PostgreSQL;</li>
+<li>Sybase;</li>
+<li>Teradata;</li>
+<li>SAP HANA.</li>
+</ul>
+<p><strong>3. Группа «Azure»:</strong></p>
+<ul>
+<li>База данных Microsoft Azure SQL;</li>
+<li>Microsoft Azure Marketplace;</li>
+<li>Microsoft Azure HDInsight;</li>
+<li>Хранилище BLOB-объектов;</li>
+<li>Табличное хранилище Microsoft Azure;</li>
+<li>Azure HDInsight Spark;</li>
+<li>Microsoft Azure DocumentDB;</li>
+<li>Хранилище озера данных Microsoft Azure.</li>
+</ul>
+<p><strong>4. Группа «Другое»:</strong></p>
+<ul>
+<li>Интернет;</li>
+<li>Список SharePoint;</li>
+<li>Канал OData;</li>
+<li>Файл Hadoop;</li>
+<li>Active Directory;</li>
+<li>Microsoft ExChage;</li>
+<li>Dynamics CRM online;</li>
+<li>Facebook;</li>
+<li>Google Analytics;</li>
+<li>Объекты Salesfore;</li>
+<li>Отчеты Salesforce;</li>
+<li>ODBC;</li>
+<li>R-скрипт;</li>
+<li>appFigures;</li>
+<li>GitHub;</li>
+<li>MailChimp;</li>
+<li>Marketo;</li>
+<li>QuickBook Online;</li>
+<li>Smartsheets;</li>
+<li>SQL Sentry;</li>
+<li>Stripe;</li>
+<li>SweetIQ;</li>
+<li>Twilio;</li>
+<li>Zendesk;</li>
+<li>Spark;</li>
+<li>Пустой запрос.</li>
+</ul>
+<p>Как видите, в Power BI можно импортировать данные из наиболее известных баз данных и сервисов, используя различные форматы файлов. После загрузки информации из доступных источников в Power BI, перед вами открываются большие возможности по очистке и преобразованию данных, в связи с тем, что в платформе присутствует достаточно мощный <a target="_blank" rel="noopener" href="https://ru.wikipedia.org/wiki/ETL">ETL</a> функционал. Загружаемые таблицы можно редактировать, а на основе их столбцов создавать расчетные столбцы и меры — таким образом вы можете преобразовать массивы информации в наборы данных со структурой, необходимой для построения визуализации.</p>
+<h2 id="_2">Какие визуализации можно построить?</h2>
+<p>Сформировав набор данных, загруженных из различных источников, вам станут доступны множество встроенных элементов визуализации:</p>
+<p><img loading="lazy" decoding="async" alt="Какие визуализации можно построить" width="183" height="176" src="../images/kak-rabotat-s-microsoft-power-bi-kakie-vizualizatsii-mozhno-ead15344.webp" /></p>
+<ul>
+<li>линейчатая диаграмма с накопление;</li>
+<li>гистограмма с накоплением;</li>
+<li>линейчатая диаграмма с группировкой;</li>
+<li>гистограмма с группировкой;</li>
+<li>нормированная линейчатая диаграмма;</li>
+<li>нормированная гистограмма;</li>
+<li>график;</li>
+<li>диаграмма с областями;</li>
+<li>диаграмма с областями с накоплением;</li>
+<li>линейная гистограмма и гистограмма с накоплением;</li>
+<li>линейная гистограмма и гистограмма с группировкой;</li>
+<li>каскадная диаграмма;</li>
+<li>точечная диаграмма;</li>
+<li>круговая диаграмма;</li>
+<li>диаграмма дерева;</li>
+<li>карта;</li>
+<li>таблица;</li>
+<li>матрица;</li>
+<li>заполненная карта;</li>
+<li>воронка;</li>
+<li>датчик;</li>
+<li>многострочная карточка;</li>
+<li>карточка;</li>
+<li>ключевой показатель эффективности;</li>
+<li>срез;</li>
+<li>кольцевой график;</li>
+<li>визуальный элемент r-script (на данный момент включается в параметрах программы).</li>
+</ul>
+<p>Все элементы имеют достаточно широкий спектр настроек, направленных на изменение нужных параметров: цвет, фон, название, границы и так далее. Если вам будет недостаточно стандартного набора, можно загрузить пользовательские визуальные элементы.</p>
+<h2 id="power-bi-desktop">Как загрузить данные в Power BI Desktop?</h2>
+<h3 id="1-google-analytics">1. Установите связь с Google Analytics</h3>
+<p>1.1. Приступим непосредственно к загрузке информации из представления Google Analytics. На вкладке «Главная» в группе «Внешние данные» жмем на кнопку «Получить данные»</p>
+<p>.</p>
+<p><img loading="lazy" decoding="async" alt="Загрузка информации из представления" width="768" height="235" src="../images/kak-rabotat-s-microsoft-power-bi-zagruzka-informatsii-iz-pre-fae65e29.webp" /></p>
+<p>После чего в диалоговом окне «Получить данные» в группе «Другое» выбираем сервис «Google Analytics» и жмем «Подключить».</p>
+<p><img loading="lazy" decoding="async" alt="Получить данные" width="614" height="668" src="../images/kak-rabotat-s-microsoft-power-bi-poluchit-dannie-58bab056.webp" /></p>
+<p>1.2. Далее Power BI запросит вход в аккаунт Google.</p>
+<p><img loading="lazy" decoding="async" alt="Вход в аккаунт Google" width="702" height="258" src="../images/kak-rabotat-s-microsoft-power-bi-vhod-v-akkaunt-google-c90456bd.webp" /></p>
+<p><img loading="lazy" decoding="async" alt="Выбираем аккаунт" width="456" height="391" src="../images/kak-rabotat-s-microsoft-power-bi-vybiraem-akkaunt-503793cc.webp" /></p>
+<p>1.3. Последний шаг — предоставить разрешение на просмотр данных в нужном представлении Google Analytics.</p>
+<p><img loading="lazy" decoding="async" alt="Предоставить разрешение на просмотр данных" width="460" height="480" src="../images/kak-rabotat-s-microsoft-power-bi-predostavit-razreshenie-na-9010d3d1.webp" /></p>
+<p>1.4. После клика по кнопке «Разрешить» мы автоматически возвращаемся в окно «Учетная запись Google», где будет оповещение, что вы вошли в систему. Жмем на кнопку «Подключение».</p>
+<p><img loading="lazy" decoding="async" alt="Окно «Учетная запись Google»" width="701" height="258" src="../images/kak-rabotat-s-microsoft-power-bi-okno-uchetnaya-zapis-google-b6452462.webp" /></p>
+<p>В открывшимся окне «Навигатор» вы увидите список всех доступных аккаунтов, ресурсов и представлений Google Analytics.</p>
+<p><img loading="lazy" decoding="async" alt="Список всех доступных аккаунтов, ресурсов и представлений" width="880" height="701" src="../images/kak-rabotat-s-microsoft-power-bi-spisok-vseh-dostupnyh-akkau-b1492872.webp" /></p>
+<p>В каждом представлении присутствует одинаковый набор параметров и показателей, распределенных на 28 групп:</p>
+<ul>
+<li>Ad Exchange — информация об эффективности рекламы в Ad Exchange;</li>
+<li>AdSense — информация об эффективности показов рекламы AdSense;</li>
+<li>AdWords — информация об эффективности рекламных кампаний в AdWords;</li>
+<li>App traking — информация о взаимодействии с мобильным приложением;</li>
+<li>Audience — демографическая информация о посетителях сайта;</li>
+<li>Channel grouping — группы каналов трафика;</li>
+<li>Content Experiments — информация о проводимых экспериментах;</li>
+<li>Contetn Grouping — классификация контента сайта по группам;</li>
+<li>Custom variables or colunms — пользовательские параметры и показатели;</li>
+<li>DoubleClick Campaign Manager — информация о эффективности рекламы в DoubleClick;</li>
+<li>Ecommerce — данные электронной торговли;</li>
+<li>Event tracking — информация о событиях;</li>
+<li>Exceptions — исключения;</li>
+<li>Geo network — геоданные посетителей;</li>
+<li>Goal conversion — данные о достижении целей;</li>
+<li>Internal Search — информация об использовании поиска на сайте;</li>
+<li>Page Tracking — информация о страницах, которые просмотрели пользователи;</li>
+<li>Platform or device — операционные системы и устройства пользователей;</li>
+<li>Related product — связанные сервисы;</li>
+<li>Session — информация о сеансах;</li>
+<li>Site speed — скорость загрузки страниц;</li>
+<li>Social activities — показатели активности в социальных сетях;</li>
+<li>Social interaction — показатели взаимодействия трафика из социальных сетей;</li>
+<li>System — информация о системных показателях посетителей;</li>
+<li>Time — информация о времени совершения событий;</li>
+<li>Traffic source — информация об источниках трафика;</li>
+<li>User — информация о пользователях;</li>
+<li>User timings — длительность сеанса.</li>
+</ul>
+<p>В качестве примера давайте выберем следующие параметры: Channel grouping —&gt; Default channel grouping; User —&gt; User Type; Time —&gt; Month of year. В качестве показателей возьмем: Session —&gt; Sessions; Session —&gt; Bounces; Session —&gt; Session duration. Хочу заметить, что в Power BI, как и при любом API запросе в Google Analytics, существует ограничение на максимальное количество запрашиваемых параметров (не более семи) и показателей (не более десяти). 1.5. Для того, чтобы загрузить выбранные данные в модель данных Power BI, жмем кнопку «Загрузить», которая располагается в нижнем правом углу окна «Навигатор».</p>
+<p><img loading="lazy" decoding="async" alt="Загрузить выбранные данные в модель данных" width="758" height="405" src="../images/kak-rabotat-s-microsoft-power-bi-zagruzit-vybrannie-dannie-v-c53997bb.webp" /></p>
+<p>Теперь загруженный набор данных отображается в области полей, и мы можем строить на основе этой информации любой доступный визуальный элемент.</p>
+<p><img loading="lazy" decoding="async" alt="Набор данных в области полей" width="363" height="338" src="../images/kak-rabotat-s-microsoft-power-bi-nabor-dannyh-v-oblasti-pole-1da01980.webp" /></p>
+<h3 id="2-mysql">2. Как загрузить данные из MySQL?</h3>
+<p>Чтобы показать функциональность Power BI, я сгенерировал и загрузил в MySQL данные о продажах. Следуя описанным ниже инструкциям, можно подключать любые доступные базы данных и после соединять всю загруженную информацию в одну таблицу или график. 2.1. Для загрузки данных о продажах из MySQL, как в описанном примере, необходимо воспользоваться командой «Получить данные», которая находится на вкладке «Главная».</p>
+<p><img loading="lazy" decoding="async" alt="Загрузка данных о продажах из MySQL" width="705" height="174" src="../images/kak-rabotat-s-microsoft-power-bi-zagruzka-dannyh-o-prodazhah-cac69d42.webp" /></p>
+<p>2.2. В диалоговом окне «Получить данные» в группе «База данных» выбираем пункт «База данных MySQL».</p>
+<p><img loading="lazy" decoding="async" alt="Пункт «База данных MySQL»" width="615" height="667" src="../images/kak-rabotat-s-microsoft-power-bi-punkt-baza-dannyh-mysql-3874a0b9.webp" /></p>
+<p>2.3. После клика по кнопке «Подключить» в окне «База данных MySQL» вводим IP сервера, имя базы данных и текст SQL запроса. Если вы не знакомы с SQL и хотите просто выбрать некоторые таблицы из базы данных целиком, то вводить SQL запрос не следует, на следующем шаге у вас будет возможность выбора таблицы. Поскольку я загрузил тестовые данные с локального ПК, то в поле «Сервер» вместо IP я укажу «localhost».</p>
+<p><img loading="lazy" decoding="async" alt="Поле «Сервер»" width="708" height="323" src="../images/kak-rabotat-s-microsoft-power-bi-pole-server-55373aa7.webp" /></p>
+<p>2.4. Далее вводим учетные данные для доступа в MySQL и жмем кнопку «Подключение».</p>
+<p><img loading="lazy" decoding="async" alt="Учетные данные для доступа в MySQL" width="707" height="468" src="../images/kak-rabotat-s-microsoft-power-bi-uchetnie-dannie-dlya-dostup-155864e4.webp" /></p>
+<p>2.5. На этом этапе подключение к MySQL серверу установлено. В случае, если вы ранее прописали SQL скрипт, то результат его работы будет загружен в модель данных. Поскольку мы не указывали запрос, в левой части диалогового окна «Навигатор» появится список доступных таблиц из указанной ранее базы данных. В моем случае доступна всего одна одна таблица «sales», все остальные — системные, в связи с чем ставим галочку напротив названия таблицы продаж и жмем «Загрузить».</p>
+<p><img loading="lazy" decoding="async" alt="Список доступных таблиц" width="884" height="475" src="../images/kak-rabotat-s-microsoft-power-bi-spisok-dostupnyh-tablits-fbafebda.webp" /></p>
+<p>Теперь в модель данных Power BI загружены данные из двух источников: Google Analytics и MySQL.</p>
+<p><img loading="lazy" decoding="async" alt="Загружены данные" width="380" height="439" src="../images/kak-rabotat-s-microsoft-power-bi-zagruzheny-dannie-b687a331.webp" /></p>
+<h3 id="3">3. Как упорядочить данные?</h3>
+<p>После того, как все необходимые данные загружены, необходимо привести их к нужному виду. Наиболее удобный способ редактирования данных — перейти в режим «Данные», с помощью одноименной команды, расположенной на левой панели рабочего окна Power BI.</p>
+<p><img loading="lazy" decoding="async" alt="Наиболее удобный способ редактирования данных" width="314" height="281" src="../images/kak-rabotat-s-microsoft-power-bi-naibolee-udobniy-sposob-red-693b5399.webp" /></p>
+<p>В режиме данных вы можете изменить тип данных, хранящихся в любом столбце, создавать новые столбцы и меры, используя возможности языка формул DAX, заменять значения хранящиеся в столбцах — в общем делать с данными все, что считаете нужным. В нашем случае следует изменить формат вывода поля «Sale» на денежный. В меню «Поля», которое в режиме «Данных» находится в правой части окна, выбираем нужный набор данных (в нашем случае «Данные из MySQL»), после чего кликаем на название столбца «Sales» и меняем формат данных, перейдя на вкладке «Моделирование» в группу «Форматирование».</p>
+<p><img loading="lazy" decoding="async" alt="Изменить тип данных" width="939" height="378" src="../images/kak-rabotat-s-microsoft-power-bi-izmenit-tip-dannyh-92bde6e2.webp" /></p>
+<h3 id="4">4. Как установить связи между таблицами</h3>
+<p>Для того, чтобы строить визуализацию на основе данных из двух различных источников необходимо настроить между ними связи. Power BI поддерживает три типа связей:</p>
+<ul>
+<li>многие к одному;</li>
+<li>один к одному;</li>
+<li>один ко многим.</li>
+</ul>
+<p>Единственный подходящий для загруженных таблиц тип связи — многие ко многим. Он создается через промежуточные таблицы (справочники) и средствами создания двух связей типа многие к одному и один ко многим. В нашем наборе данных существует три параметра, по которым необходимо настроить связи между таблицами «Default Channel Group», «YearMonth», «UserType». Соответственно необходимо создать три одноименных справочника, которые будут содержать список всех уникальных элементов каждой из перечисленных категорий. В качестве примера мы загрузим список уникальных элементов по каждому полю из CSV файлов.</p>
+<ul>
+<li>channelGroup;</li>
+<li>yearMonth;</li>
+<li>userType.</li>
+</ul>
+<p>4.1. Процесс загрузки CSV файлов в Power BI так же прост, как и описанные раннее подключения к Google Analytics и MySQL: жмем кнопку «Получить данные», в группе «Файл» выбираем «CSV» и по очереди загружаем в модель данных три скачанных CSV файла. 4.2. При загрузке таблиц «channelGroup» и «userType» необходимо указать, что первая строка является заголовком столбца. Для этого перейдите в режим редактирования запроса, на вкладке «Преобразование» в выпадающем меню «Таблица» используйте команду «Использовать первую строку в качестве заголовка»:</p>
+<p><img loading="lazy" decoding="async" alt="Режим редактирования запроса" width="733" height="273" src="../images/kak-rabotat-s-microsoft-power-bi-rezhim-redaktirovaniya-zapr-94645012.webp" /></p>
+<p>Если на этом этапе вы все сделали правильно, модель данных будет состоять из пяти таблиц. Чтобы в этом убедиться, можно посмотреть в область полей либо перейти в режим визуального интерфейса просмотра модели данных (для этого кликните по иконке с изображением связей между таблицами на левой панели Power BI).</p>
+<p><img loading="lazy" decoding="async" alt="Режим визуального интерфейса просмотра" width="300" height="373" src="../images/kak-rabotat-s-microsoft-power-bi-rezhim-vizualnogo-interfeys-5f6a1b4c.webp" /></p>
+<p>Power BI самостоятельно определил некоторые связи, поэтому модель данных выглядит следующим образом.</p>
+<p><img loading="lazy" decoding="async" alt="Модель данных" width="842" height="510" src="../images/kak-rabotat-s-microsoft-power-bi-model-dannyh-580fb277.webp" /></p>
+<p>4.3. Для дальнейшего создания всех связей нам необходимо изменить тип текущих связей на однонаправленные, в противном случае связи, которые мы планируем создать, будут неоднозначны и при их определении Power BI выдаст ошибку. Чтобы изменить тип связей необходимо дважды кликнуть по связи левой кнопкой мыши и в диалоговом окне «Изменение связи» поменять направление кроссфильтрации на однонаправленную.</p>
+<p><img loading="lazy" decoding="async" alt="Поменять направление кроссфильтрации" width="701" height="569" src="../images/kak-rabotat-s-microsoft-power-bi-pomenyat-napravlenie-krossf-aeb1669d.webp" /></p>
+<p>Изменив направление кроссфильтрации связей, созданных автоматически, можно переходить к процессу создания остальных связей. 4.4. В Power BI существует два способа определения связей между таблицами: в визуальном режиме и с помощью диалогового окна «Управление связями». Чтобы создать связь в режиме визуализации модели данных, нужно перетащить с помощью мыши поле из одной таблицы в ту, с которой хотим создать связь. Давайте таким образом активируем связь по полю «Default channel group» в таблице «Данные из GA» с полем «Channel» в таблице «channel».</p>
+<p><img loading="lazy" decoding="async" alt="Создать связь в режиме визуализации" width="842" height="501" src="../images/kak-rabotat-s-microsoft-power-bi-sozdat-svyaz-v-rezhime-vizu-0bdceb39.webp" /></p>
+<p>Как в предыдущих примерах, необходимо изменить направление кроссфильтрации на однонаправленную. Теперь модель данных выглядит следующим образом:</p>
+<p><img loading="lazy" decoding="async" alt="Изменить направление кроссфильтрации на однонаправленную" width="835" height="511" src="../images/kak-rabotat-s-microsoft-power-bi-izmenit-napravlenie-krossfi-fbdb227a.webp" /></p>
+<p>4.5. Оставшиеся связи мы будем создавать с помощью диалогового окна «Управление связями», для этого кликните на кнопку «Управление связями» на вкладке «Главная».</p>
+<p><img loading="lazy" decoding="async" alt="Управление связями на вкладке «Главная»" width="1189" height="121" src="../images/kak-rabotat-s-microsoft-power-bi-upravlenie-svyazyami-na-vkl-9de9779a.webp" /></p>
+<p>Диалоговое окно «Управление связями» содержит все созданные ранее связи, для создания новых связей следует нажать на кнопку «Создать».</p>
+<p><img loading="lazy" decoding="async" alt="Создание новых связей" width="747" height="536" src="../images/kak-rabotat-s-microsoft-power-bi-sozdanie-novyh-svyazey-d174b929.webp" /></p>
+<p>В окне создания связи необходимо указать таблицы и поля, по которым вы планируете настроить связь, а так же указать кратность связи и направление кроссфильтрации. 4.6. Для создания связи между таблицей «данные из GA» и «yearMonth» необходимо в окне создания связи установить следующие параметры.</p>
+<p><img loading="lazy" decoding="async" alt="Связь между таблицей «данные из GA» и «yearMonth» " width="705" height="601" src="../images/kak-rabotat-s-microsoft-power-bi-svyaz-mezhdu-tablitsey-dann-ea45f3dc.webp" /></p>
+<p>Таким же образом нам надо связать таблицу «данные из MySQL» и «yearMonth».</p>
+<p><img loading="lazy" decoding="async" alt="Связать таблицу «данные из MySQL» и «yearMonth»" width="702" height="598" src="../images/kak-rabotat-s-microsoft-power-bi-svyazat-tablitsu-dannie-iz-f112c285.webp" /></p>
+<p>Модель данных теперь выглядит следующим образом.</p>
+<p><img loading="lazy" decoding="async" alt="«Данные из GA» и «Данные из MySQL»  связаны между собой" width="816" height="485" src="../images/kak-rabotat-s-microsoft-power-bi-dannie-iz-ga-i-dannie-iz-my-880bc317.webp" /></p>
+<p>Как видите, таблицы «Данные из GA» и «Данные из MySQL» теперь связаны между собой через справочники и имеют друг к другу кратность связи многие ко многим.</p>
+<h3 id="5">5. Как построить визуализацию?</h3>
+<p>5.1. Чтобы создать визуализацию, вернемся в режим «Отчет», воспользовавшись одноименной кнопкой в меню, расположенном в левой части окна Power BI.</p>
+<p><img loading="lazy" decoding="async" alt="Создать визуализацию" width="309" height="319" src="../images/kak-rabotat-s-microsoft-power-bi-sozdat-vizualizualizatsiyu-75f3f8f7.webp" /></p>
+<p>5.2. Далее построим диаграмму, на которой совместим данные из разных источников: из Google Analytics будут отображены данные о количестве сеансов, из MySQL — о количестве продаж. 5.2.1. В качестве элемента визуализации будем использовать вид «Линейная гистограмма и гистограмма с накоплением».</p>
+<p><img loading="lazy" decoding="async" alt="Линейная гистограмма и гистограмма с накоплением" width="364" height="212" src="../images/kak-rabotat-s-microsoft-power-bi-lineynaya-gistogramma-i-gis-960e9962.webp" /></p>
+<p>5.2.2. Перетягиваем поле «month» из таблицы «yearMonth» в область «Общая ось».</p>
+<p><img loading="lazy" decoding="async" alt="Перетягиваем поле «month»" width="362" height="368" src="../images/kak-rabotat-s-microsoft-power-bi-peretyagivaem-pole-month-b2b44714.webp" /></p>
+<p>5.2.3 Перетягиваем поле «Session» из таблицы «Данные из GA» в область «Значения столбцов».</p>
+<p><img loading="lazy" decoding="async" alt="Перетягиваем поле «Session»" width="358" height="422" src="../images/kak-rabotat-s-microsoft-power-bi-peretyagivaem-pole-session-6851a85a.webp" /></p>
+<p>5.2.4. Перетягиваем поле «sales» из таблицы «Данные из MySQL» в область «Значения строк».</p>
+<p><img loading="lazy" decoding="async" alt="Перетягиваем поле «sales» " width="362" height="570" src="../images/kak-rabotat-s-microsoft-power-bi-peretyagivaem-pole-sales-3fe91b6e.webp" /></p>
+<p>В результате этих манипуляций в области отчетов будет построена диаграмма следующего вида.</p>
+<p><img loading="lazy" decoding="async" alt="Построенная диаграмма " width="913" height="392" src="../images/kak-rabotat-s-microsoft-power-bi-postroenaya-diagramma-d0da2029.webp" /></p>
+<p>Как видите, диаграмма сочетает в себе информацию о сеансах и продажах из двух разных источников. 5.3. Дополнительно можно воспользоваться опциями форматирования объектов визуализации, кликнув по иконке с кисточкой.</p>
+<p><img loading="lazy" decoding="async" alt="Опции форматирования объектов визуализации" width="361" height="578" src="../images/kak-rabotat-s-microsoft-power-bi-optsii-formatirovaniya-obek-5e809f3d.webp" /></p>
+<p>В результате чего вы можете изменять цвета, размер, шрифт, фон и прочие параметры элемента визуализации.</p>
+<h3 id="6">6. Как настроить фильтры данных?</h3>
+<p>Для более удобной работы с фильтрами данных следует добавить на рабочий лист три среза. 6.1. Перетащите с помощью мыши в пустое место области отчетов следующие поля:</p>
+<ul>
+<li>«userType» из одноименной таблицы;</li>
+</ul>
+<p><img loading="lazy" decoding="async" alt="«userType» из одноименной таблицы" width="985" height="455" src="../images/kak-rabotat-s-microsoft-power-bi-usertype-iz-odnoimennoy-tab-24bacf6a.webp" />
+- «yearMonth» из таблицы «yearMonth»;
+- «Channel» из таблицы «channel» соответственно.</p>
+<p>6.2. После чего по очереди выделите мышкой каждый из этих объектов и переключите в режим «Срез».</p>
+<p><img loading="lazy" decoding="async" alt="Режим «Срез»" width="185" height="232" src="../images/kak-rabotat-s-microsoft-power-bi-rezhim-srez-5a7ebf5f.webp" /></p>
+<p>В результате у нас получится лист с возможностью фильтрации данных по типу пользователя, источнику / каналу и месяцу года.</p>
+<p><img loading="lazy" decoding="async" alt="Лист с возможностью фильтрации данных" width="919" height="526" src="../images/kak-rabotat-s-microsoft-power-bi-list-s-vozmozhnostyu-filtra-18dbdcfa.webp" /></p>
+<p>6.3. Если вам понадобится сменить аккаунт Google, к которому привязаны определенные представления Google Analytics, воспользуйтесь меню «Файл» —&gt; «Параметры и настройки» —&gt; «Настройки источника данных».</p>
+<p><img loading="lazy" decoding="async" alt="Сменить аккаунт Google" width="605" height="571" src="../images/kak-rabotat-s-microsoft-power-bi-smenit-akkaunt-google-84da2252.webp" /></p>
+<p>Далее вы можете менять параметры или удалять любой подключенный источник данных.</p>
+<p><img loading="lazy" decoding="async" alt="Изменять параметры" width="779" height="538" src="../images/kak-rabotat-s-microsoft-power-bi-izmenyat-parametry-5e31519e.webp" /></p>
+<p>6.4. Поэкспериментируйте с элементами визуализации и выберите наиболее подходящие, (более подробно о правилах выбора диаграммы можно узнать из публикации <a target="_blank" rel="noopener" href="http://blog.netpeak.ru/kak-postroit-diagrammu-i-ne-oblazhatsya/?_ga=1.82995870.966916223.1455541885">«Как построить диаграмму и не облажаться»</a>), после чего все диаграммы и таблицы обновляйте нажатием одной кнопки.</p>
+<p><img loading="lazy" decoding="async" alt="Обновляйте нажатием одной кнопк" width="879" height="215" src="../images/kak-rabotat-s-microsoft-power-bi-obnovlyayte-nazhatiem-odnoy-073d98e8.webp" /></p>
+<p>Перейдя <a target="_blank" rel="noopener" href="https://drive.google.com/file/d/0B1rgddqnM9XJRlVjVVRYdmljMkU/view">по ссылке</a>, вы можете скачать файл, приведенный в данной статье.</p>
+<h2 id="power-bi-service">Как начать работу с Power BI Service?</h2>
+<p>Как я уже упоминал в начале статьи, помимо обычной стационарной версии, существует онлайн-сервис Power BI.;Ее функционал не такой обширный, но в целом для онлайн мониторинга основных показателей его вполне достаточно. Откройте Power BI Service перейдя <a target="_blank" rel="noopener" href="https://powerbi.microsoft.com/en-us/">по этой ссылке</a>.</p>
+<h3 id="1-power-bi-service-google-analitycs">1. Как установить связь Power BI Service с Google Analitycs?</h3>
+<p>Чтобы открыть рабочую область, нажмите на кнопку с изображением меню. С помощью кнопки «Получение данных» начинаем процесс подключения к Google Analytics.</p>
+<p><img loading="lazy" decoding="async" alt="Процесс подключения к Google Analytics" width="242" height="598" src="../images/kak-rabotat-s-microsoft-power-bi-protsess-podklyucheniya-k-g-3c5e23e5.webp" /></p>
+<p>Далее выбираем «Получить данные из веб-служб».</p>
+<p><img loading="lazy" decoding="async" alt="Получить данные из веб служб" width="1013" height="504" src="../images/kak-rabotat-s-microsoft-power-bi-poluchit-dannie-iz-veb-sluz-326c353d.webp" /></p>
+<p>В списке доступных служб находим и выбираем Google Analytics.</p>
+<p><img loading="lazy" decoding="async" alt="Выбираем Google Analytics" width="970" height="585" src="../images/kak-rabotat-s-microsoft-power-bi-vybiraem-google-analytics-f0b7857f.webp" /></p>
+<p>Жмем кнопку «Подключится».</p>
+<p><img loading="lazy" decoding="async" alt="Подключится" width="840" height="333" src="../images/kak-rabotat-s-microsoft-power-bi-podklyuchitsya-1abf27b5.webp" /></p>
+<p>Для Google Analytics на данный момент существует только один способ проверки подлинности «oAuth», поэтому в диалоговом окне проверки подлинности ничего не изменяем и жмем «Войти». 1.2. Выбираем нужный нам Google аккаунт.</p>
+<p><img loading="lazy" decoding="async" alt="Выбираем нужный нам Google аккаунт" width="443" height="576" src="../images/kak-rabotat-s-microsoft-power-bi-vybiraem-nuzhniy-nam-google-5595398e.webp" /></p>
+<p>Подтверждаем разрешение Power BI Service на просмотр данных Google Analytics.</p>
+<p><img loading="lazy" decoding="async" alt="Подтверждаем разрешение Power BI Servic" width="493" height="390" src="../images/kak-rabotat-s-microsoft-power-bi-podtverzhdaem-razreshenie-p-ea27de34.webp" /></p>
+<p>1.3. Следующий шаг — выбор аккаунта, ресурса и представления Google Analytics.</p>
+<p><img loading="lazy" decoding="async" alt="Выбор аккаунта, ресурса и представления Google Analytics" width="591" height="532" src="../images/kak-rabotat-s-microsoft-power-bi-vybor-akkaunta-resursa-i-pr-b2701171.webp" /></p>
+<p>После того, как вы нажмете «Импорт», в рабочей области автоматически будет сформирован набор данных, отчет и информационная панель.</p>
+<p><img loading="lazy" decoding="async" alt="В рабочей области автоматически будет сформирован набор данных" width="223" height="414" src="../images/kak-rabotat-s-microsoft-power-bi-v-rabochey-oblasti-avtomati-bc2af6d4.webp" /></p>
+<p><img loading="lazy" decoding="async" alt="Отчет и информационная панель." width="1293" height="590" src="../images/kak-rabotat-s-microsoft-power-bi-otchet-i-informatsionnaya-p-2b7303ff.webp" /></p>
+<h3 id="2">2. Как работать с отчетами?</h3>
+<p>Также вы можете посмотреть все сформированные автоматически отчеты, для этого кликните в основном меню в области отчетов по пункту «Google Analytics».</p>
+<p><img loading="lazy" decoding="async" alt="Кликните в основном меню в области отчетов по пункту «Google Analytics»" width="1334" height="602" src="../images/kak-rabotat-s-microsoft-power-bi-kliknite-v-osnovnom-menyu-v-cd6023fd.webp" /></p>
+<p>2.1. Отчеты сгруппированы по страницам:</p>
+<ul>
+<li>Site trafic;</li>
+<li>System usage;</li>
+<li>Total users;</li>
+<li>Page performance;</li>
+<li>Top pages.</li>
+</ul>
+<p>2.1.1. Соответственно страница Site traffic содержит информацию о сеансах и хитах, а также о поведенческих показателях пользователей. 2.1.2. Страница System usage содержит информацию о геолокации, операционной системе и типе устройства пользователей.</p>
+<p><img loading="lazy" decoding="async" alt="Страница System usage" width="1096" height="536" src="../images/kak-rabotat-s-microsoft-power-bi-stranitsa-system-usage-0567e6f3.webp" /></p>
+<p>2.1.3. На странице Total User вы найдете информацию о количестве посетителей.</p>
+<p><img loading="lazy" decoding="async" alt="Страница total user" width="1106" height="534" src="../images/kak-rabotat-s-microsoft-power-bi-stranitsa-total-user-8a5f8835.webp" /></p>
+<p>2.1.4. На странице Page Performance содержится информация о скорости загрузки страниц.</p>
+<p><img loading="lazy" decoding="async" alt="Страница Page Performance" width="1107" height="540" src="../images/kak-rabotat-s-microsoft-power-bi-stranitsa-page-performance-8479b7b0.webp" /></p>
+<p>2.1.5. Последняя страница Top Pages отображает информацию о количестве уникальных просмотров, а также о количестве входов и выходов с сайта в разрезе страниц.</p>
+<p><img loading="lazy" decoding="async" alt="Cтраница Top Pages" width="1059" height="526" src="../images/kak-rabotat-s-microsoft-power-bi-stranitsa-top-pages-7058990f.webp" /></p>
+<p>2.2 Можно изменить любой элемент отчета либо добавить новую страницу, для этого достаточно кликнуть по кнопке «Изменить отчет».</p>
+<p><img loading="lazy" decoding="async" alt="Изменить отчет" width="683" height="236" src="../images/kak-rabotat-s-microsoft-power-bi-izmenit-otchet-0dda3241.webp" /></p>
+<p>В нижней части экрана отобразится кнопка добавления новых страниц в отчет.</p>
+<p><img loading="lazy" decoding="async" alt="Кнопка добавления новых страниц в отчет" width="810" height="326" src="../images/kak-rabotat-s-microsoft-power-bi-knopka-dobavleniya-novyh-st-6603a822.webp" /></p>
+<p>2.3. Как вы могли заметить, в онлайн версии Power BI нет возможности выбора параметров и показателей при загрузке данных из Google Analytics, в связи с чем вы можете работать только со стандартным набором полей, который в свою очередь состоит из пяти таблиц: 2.3.1. <strong>Calculaions</strong>:</p>
+<ul>
+<li>Avg.daily new users — среднедневное количество новых пользователей;</li>
+<li>Avg. daily new users (weekday) — среднедневное количество пользователей в разрезе дней недели;</li>
+<li>Avg. daily users — среднедневное количество пользователей;</li>
+<li>Avg.daily users weekday — среднедневное количество пользователей в разрезе дней недели;</li>
+<li>Avg. session duration (sec) — средняя длительность сеанса в секундах;</li>
+<li>Bounces MoM — прирост количества отказов за последние 30 дней;</li>
+<li>Hits MoM — прирост количества хитов за последние 30 дней;</li>
+<li>New users MoM — прирост новых пользователей за последние 30 дней;</li>
+<li>Session MoM — прирост объема сеансов за последние 30 дней.</li>
+</ul>
+<p>2.3.2. <strong>Overwiev</strong>:</p>
+<ul>
+<li>Avg. session duration — средняя длительность сеанса;</li>
+<li>Bounces — количество отказов;</li>
+<li>Browser — браузер пользователя;</li>
+<li>Country — страна пользователя;</li>
+<li>Date — дата сеанса;</li>
+<li>DayOfMonth — день месяца, когда был совершен сеанс;</li>
+<li>DayOfWeek — день недели, когда был совершен сеанс;</li>
+<li>DaysFromToday — количество дней с сегодняшнего дня;</li>
+<li>Device category — тип устройства;</li>
+<li>Hits — количество хитов;</li>
+<li>MonthName — название месяца;</li>
+<li>MonthYear — месяц года;</li>
+<li>Operating system — операционная система пользователя;</li>
+<li>Page / sessions — среднее количество просмотренных страниц на сеанс;</li>
+<li>Pageviws — общее количество просмотренных страниц;</li>
+<li>Sessions — количество сеансов;</li>
+<li>Year — год.</li>
+</ul>
+<p>2.3.3. <strong>Page performance</strong>:</p>
+<ul>
+<li>Date — дата;</li>
+<li>DayOfMonth — день месяца;</li>
+<li>DayOfWeek — день недели;</li>
+<li>DomainLookupTime — время поиска домена;</li>
+<li>MonthName — название месяца;</li>
+<li>MonthYear — месяц года;</li>
+<li>PageLoadTime — время загрузки страницы;</li>
+<li>RedirectionTime — время редиректа;</li>
+<li>Year — год.</li>
+</ul>
+<p>2.3.4. <strong>Pages</strong>:</p>
+<ul>
+<li>Date — дата;</li>
+<li>DayOfMonth — день месяца;</li>
+<li>DayOfWeek — день недели;</li>
+<li>Entrances — количество заходов;</li>
+<li>Exits — количество выходов;</li>
+<li>MonthName — название месяца;</li>
+<li>MonthYear — месяц года;</li>
+<li>Page — url страницы;</li>
+<li>PageTitle — название страницы;</li>
+<li>Pageviews — количество просмотров страницы;</li>
+<li>TimeOnPage(sec) — общее время, проведенное на странице в секундах;</li>
+<li>Unique pageviews — количество уникальных просмотров страниц;</li>
+<li>Year — год.</li>
+</ul>
+<p>2.3.5. <strong>User</strong>:</p>
+<ul>
+<li>Date — дата;</li>
+<li>DayOfMonth — день месяца;</li>
+<li>DayOfWeek — день недели;</li>
+<li>DaysFromToday — количество дней с сегодняшнего дня;</li>
+<li>MonthName — название месяца;</li>
+<li>MonthYear — месяц года;</li>
+<li>New users — количество новых пользователей;</li>
+<li>Users — количество пользователей;</li>
+<li>Year — год.</li>
+</ul>
+<p>Эти пять таблиц, загруженные из Google Analytics, не связаны между собой, так как в онлайн версии Power BI у вас нет возможности создавать связи. Но в Power BI Service можно публиковать файлы, разработанные в Power BI Desktop файлов.</p>
+<h3 id="3-power-bi-desktop">3. Как опубликовать информацию с Power BI Desktop?</h3>
+<p>Для этого достаточно быть зарегистрированным пользователем данной службы и нажать кнопку «Опубликовать».</p>
+<p><img loading="lazy" decoding="async" alt="Как опубликовать информацию с Power BI Desktop" width="1187" height="116" src="../images/kak-rabotat-s-microsoft-power-bi-kak-opublikovat-informatsiy-ee9c4052.webp" /></p>
+<p>После чего начинается процесс публикации файла в службе Power BI.</p>
+<p><img loading="lazy" decoding="async" alt="Процесс публикации файла" width="527" height="198" src="../images/kak-rabotat-s-microsoft-power-bi-protsess-publikatsii-fayla-9bab3673.webp" /></p>
+<p>Если вы все сделали правильно, то получите сообщение, что файл был успешно опубликован, и вы можете запустить автоматический анализ данных. Power BI Service выведет на экран найденные в данных закономерности.</p>
+<p><img loading="lazy" decoding="async" alt="Файл был успешно опубликован" width="535" height="250" src="../images/kak-rabotat-s-microsoft-power-bi-fayl-byl-uspeshno-opublikov-7b8560b2.webp" /></p>
+<p>В опубликованном файле при этом будут сохранены все существующие между таблицами связи.</p>
+<h3 id="4_1">4. Как создавать информационные панели?</h3>
+<p>4.1. Вы можете создавать новые информационные панели и добавлять на них любой элемент отчета, кликнув по кнопке закрепить.</p>
+<p><img loading="lazy" decoding="async" alt="Как создавать информационные панели" width="700" height="295" src="../images/kak-rabotat-s-microsoft-power-bi-kak-sozdavat-informatsionni-21a64d9c.webp" /></p>
+<p>4.2. Далее вам надо выбрать, где вы хотите закрепить выбранный элемент на уже существующей или новой панели мониторинга.</p>
+<p><img loading="lazy" decoding="async" alt="Закрепить выбранный элемент" width="677" height="327" src="../images/kak-rabotat-s-microsoft-power-bi-zakrepit-vybranniy-element-37f59fc6.webp" /></p>
+<p>4.3. Любую созданную вами панель мониторинга можно расшарить с помощью кнопки «Поделиться», которая располагается в правом верхнем углу меню каждой созданной панели мониторинга.</p>
+<p><img loading="lazy" decoding="async" alt="Панель мониторинга можно расшарить" width="469" height="234" src="../images/kak-rabotat-s-microsoft-power-bi-panel-monitoringa-mozhno-ra-0d5619c9.webp" /></p>
+<h2 id="_3">Заключение</h2>
+<p>Сегодня я рассказал:</p>
+<ol>
+<li>Как загрузить в программу нужный набор данных (я показал как это делать на примере интеграции с Google Analytics или загрузки данных из MySQL).</li>
+<li>Как упорядочить данные, чтобы привести их к нужному для визуализации виду.</li>
+<li>Как построить отчет, где будут отображаться данные из разных источников.</li>
+<li>Как настроить фильтры данных, выбрать подходящие элементы визуализации и опубликовать результат для просмотра в онлайн-версии Power BI.</li>
+</ol>
+<p>Power BI — мощный и многофункциональный инструмент, поэтому достаточно тяжело описать весь его функционал в рамках одной статьи. Ответы на базовые вопросы по работе с Power BI можно узнать из официального мануала, который вы можете найти <a target="_blank" rel="noopener" href="https://powerbi.microsoft.com/ru-ru/support/">по этой ссылке.</a> На остальные — с радостью отвечу в комментариях.</p>
+<hr />
+<p><em><a target="_blank" rel="noopener" href="https://netpeak.net/ru/blog/kak-rabotat-s-microsoft-power-bi-podrobnoe-rukovodstvo/">Оригинал статьи на блоге Netpeak.</a></em></p>
+<p><em><a target="_blank" rel="noopener" href="http://www.marketing.spb.ru/soft/microsoft-power-bi.htm">Перебуликация статьи на marketing.spb.ru</a></em></p></div>
+                    
+                    <div class="b-tags"><a class="b-chip" href="../?tag=bi#posts">BI</a><a class="b-chip" href="../?tag=vizualizatsiya-dannyh#posts">Визуализация данных</a><a class="b-chip" href="../?tag=import-dannyh#posts">Импорт данных</a><a class="b-chip" href="../?tag=google-analytics#posts">Google Analytics</a><a class="b-chip" href="../?tag=power-bi#posts">Power BI</a></div>
+                </div>
+            </article>
+            <aside class="b-toc" aria-label="Contents"><div class="b-toc-title"><span class="ru-text">Содержание</span><span class="ua-text">Зміст</span><span class="en-text">Contents</span></div><ul><li><a href="#microsoft-power-bi">Кратко о возможностях Microsoft Power BI</a></li><li><a href="#_1">Откуда можно загружать данные?</a></li><li><a href="#_2">Какие визуализации можно построить?</a></li><li><a href="#power-bi-desktop">Как загрузить данные в Power BI Desktop?</a><ul><li><a href="#1-google-analytics">1. Установите связь с Google Analytics</a></li><li><a href="#2-mysql">2. Как загрузить данные из MySQL?</a></li><li><a href="#3">3. Как упорядочить данные?</a></li><li><a href="#4">4. Как установить связи между таблицами</a></li><li><a href="#5">5. Как построить визуализацию?</a></li><li><a href="#6">6. Как настроить фильтры данных?</a></li></ul></li><li><a href="#power-bi-service">Как начать работу с Power BI Service?</a><ul><li><a href="#1-power-bi-service-google-analitycs">1. Как установить связь Power BI Service с Google Analitycs?</a></li><li><a href="#2">2. Как работать с отчетами?</a></li><li><a href="#3-power-bi-desktop">3. Как опубликовать информацию с Power BI Desktop?</a></li><li><a href="#4_1">4. Как создавать информационные панели?</a></li></ul></li><li><a href="#_3">Заключение</a></li></ul></aside>
+        </div>
+        <section class="b-related">
+            <h2 class="outfit-font"><span class="ru-text">Читайте также</span><span class="ua-text">Читайте також</span><span class="en-text">Related posts</span></h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="../microsoft-power-bi-v-internet-marketinge-daydzhest-poleznyh-publikatsi/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="0">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/covers/1115.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">апр. 2018</span><span class="ua-text">квіт. 2018</span><span class="en-text">Apr 2018</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2018</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">6 мин чтения</span><span class="ua-text">6 хв читання</span><span class="en-text">6 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Microsoft Power BI в интернет-маркетинге — дайджест полезных публикаций</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">В предыдущих статьях я рассказывал, как автоматизировать бизнес-процессы с помощью языка R. В этой подборке я решил структурировать материал о еще одном важном инструменте каждого…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">BI</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Визуализация данных</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a>
+                <a href="../kak-rabotat-s-zakladkami-bookmarks-v-power-bi-podrobnoe-rukovodstvo/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="60">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/covers/1082.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">дек. 2017</span><span class="ua-text">груд. 2017</span><span class="en-text">Dec 2017</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2017</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">7 мин чтения</span><span class="ua-text">7 хв читання</span><span class="en-text">7 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Как работать с закладками (bookmarks) в Power BI — подробное руководство</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">Недавно вышла очередная, ежемесячная порция обновлений Power BI Desktop. Разработчики добавили множество новых функций и значительно доработали «Закладки» (Bookmarks), с помощью которых…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">BI</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Power BI</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a>
+                <a href="../kak-svyazat-yandeks-direkt-s-microsoft-power-bi/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="120">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/kak-svyazat-yandeks-direkt-s-microsoft-power-bi-ustanovite-a-3bad2fbf.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">февр. 2017</span><span class="ua-text">лют. 2017</span><span class="en-text">Feb 2017</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2017</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">4 мин чтения</span><span class="ua-text">4 хв читання</span><span class="en-text">4 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Как связать Яндекс.Директ с Microsoft Power BI.</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">Яндекс.Директ собирает много данных, но, к сожалению, в веб-интерфейсе доступно очень мало информации для анализа. В этой статье я подробно опишу, как получить статистику о рекламных…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">API</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Яндекс Директ</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a></div>
+        </section>
+        <a href="../" class="b-back"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i><span class="ru-text">Ко всем материалам</span><span class="ua-text">До всіх матеріалів</span><span class="en-text">All posts</span></a>
+    </main>
+
+    <section class="px-6 max-w-7xl mx-auto pb-24 relative z-10">
+        <div class="grid md:grid-cols-2 gap-6" data-aos="fade-up">
+            <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(59, 130, 246, 0.1));">
+                <div class="bento-content w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center text-blue-400 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-telegram"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">Telegram-канал R4marketing</span><span class="ua-text">Telegram-канал R4marketing</span><span class="en-text">R4marketing on Telegram</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Новые статьи, видео и заметки по R — первыми.</span><span class="ua-text">Нові статті, відео та нотатки з R — першими.</span><span class="en-text">New articles, videos and R notes — first.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-blue-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+            <a href="https://www.youtube.com/R4marketing/?sub_confirmation=1" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(239, 68, 68, 0.1));">
+                <div class="bento-content w-16 h-16 bg-red-500/20 rounded-2xl flex items-center justify-center text-red-500 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-youtube"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">YouTube-канал R4marketing</span><span class="ua-text">YouTube-канал R4marketing</span><span class="en-text">R4marketing on YouTube</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Видеоуроки по R, аналитике и AI-инструментам.</span><span class="ua-text">Відеоуроки з R, аналітики та AI-інструментів.</span><span class="en-text">Video lessons on R, analytics and AI tools.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-red-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/5 bg-slate-950/80 backdrop-blur-md pt-16 pb-8 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
+                <div class="sm:col-span-2 lg:col-span-4">
+                    <a href="../../" class="inline-flex items-center gap-3 group mb-5">
+                        <img src="../../logo.jpg" alt="Alexey Seleznev" class="w-10 h-10 rounded-xl object-cover border border-white/10 group-hover:border-purple-500/50 transition-colors">
+                        <span class="text-lg font-black tracking-tight uppercase outfit-font text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+                    </a>
+                    <p class="text-sm text-slate-400 leading-relaxed max-w-sm mb-6"><span class="ru-text">Head of Analytics в Netpeak Group. Автор open source R-пакетов, бесплатных курсов по R и проекта R4marketing.</span><span class="ua-text">Head of Analytics у Netpeak Group. Автор open source R-пакетів, безкоштовних курсів з R та проєкту R4marketing.</span><span class="en-text">Head of Analytics at Netpeak Group. Author of open source R packages, free R courses and the R4marketing project.</span></p>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="https://t.me/R4marketing" target="_blank" rel="noopener" aria-label="Telegram R4marketing" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-400 hover:border-blue-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-telegram"></i></a>
+                        <a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" aria-label="YouTube R4marketing" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-red-500 hover:border-red-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="https://github.com/selesnow" target="_blank" rel="noopener" aria-label="GitHub" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-white hover:border-white/30 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://linkedin.com/in/selesnow" target="_blank" rel="noopener" aria-label="LinkedIn" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-500 hover:border-blue-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://facebook.com/selesnow" target="_blank" rel="noopener" aria-label="Facebook" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-600/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/alexey.selesnow" target="_blank" rel="noopener" aria-label="Instagram" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-pink-500 hover:border-pink-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://habr.com/ru/users/selesnow/" target="_blank" rel="noopener" aria-label="Habr" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-teal-400 hover:border-teal-400/40 transition-all hover:-translate-y-0.5"><i class="fa-solid fa-h"></i></a>
+                    </div>
+                </div>
+
+                <nav class="lg:col-span-2" aria-label="Site map">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">Сайт</span><span class="ua-text">Сайт</span><span class="en-text">Site</span></h3>
+                    <ul class="space-y-3">
+                        <li><a href="../../" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-house w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a></li>
+                        <li><a href="../../opensource/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-code-branch w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span></a></li>
+                        <li><a href="../../courses/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-graduation-cap w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a></li>
+                        <li><a href="../../videos/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-circle-play w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a></li>
+                        <li><a href="../../talks/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-microphone-lines w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a></li>
+                        <li><a href="../../articles/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-pen-nib w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a></li>
+                        <li><a href="../../interviews/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-regular fa-newspaper w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a></li>
+                        <li><a href="../../blog/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-feather-pointed w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a></li>
+                    </ul>
+                </nav>
+
+                <div class="lg:col-span-3">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">R4marketing и публикации</span><span class="ua-text">R4marketing і публікації</span><span class="en-text">R4marketing & writing</span></h3>
+                    <ul class="space-y-3">
+                        <li><a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-telegram w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Telegram-канал R4marketing</span><span class="ua-text">Telegram-канал R4marketing</span><span class="en-text">R4marketing Telegram</span></a></li>
+                        <li><a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-youtube w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">YouTube-канал R4marketing</span><span class="ua-text">YouTube-канал R4marketing</span><span class="en-text">R4marketing YouTube</span></a></li>
+                        <li><a href="https://alexeyseleznev.wordpress.com/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-pen-nib w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Личный блог</span><span class="ua-text">Особистий блог</span><span class="en-text">Personal blog</span></a></li>
+                        <li><a href="https://habr.com/ru/users/selesnow/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-h w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Профиль на Хабре</span><span class="ua-text">Профіль на Хабрі</span><span class="en-text">Habr profile</span></a></li>
+                        <li><a href="https://alexey-seleznev.pro/publications/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-layer-group w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Архив публикаций</span><span class="ua-text">Архів публікацій</span><span class="en-text">Publications archive</span></a></li>
+                        <li><a href="https://github.com/selesnow" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-github w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">GitHub</span><span class="ua-text">GitHub</span><span class="en-text">GitHub</span></a></li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-3">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">Контакты</span><span class="ua-text">Контакти</span><span class="en-text">Contacts</span></h3>
+                    <ul class="space-y-4">
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">Email</div><a href="mailto:me@alexey-seleznev.pro" class="text-sm text-slate-300 hover:text-purple-300 transition-colors break-all">me@alexey-seleznev.pro</a></li>
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">Telegram</div><a href="https://t.me/AlexeySeleznev" target="_blank" rel="noopener" class="text-sm text-slate-300 hover:text-blue-300 transition-colors break-all">@AlexeySeleznev</a></li>
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">LinkedIn</div><a href="https://linkedin.com/in/selesnow" target="_blank" rel="noopener" class="text-sm text-slate-300 hover:text-blue-300 transition-colors break-all">linkedin.com/in/selesnow</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-14 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+                <p>© 2026 Alexey Seleznev. <span class="ru-text">Все права защищены.</span><span class="ua-text">Усі права захищені.</span><span class="en-text">All rights reserved.</span></p>
+                <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="inline-flex items-center gap-2 font-semibold hover:text-white transition-colors group"><span class="ru-text">Наверх</span><span class="ua-text">Нагору</span><span class="en-text">Back to top</span><span class="w-7 h-7 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-purple-500 group-hover:border-purple-500 transition-all"><i class="fa-solid fa-arrow-up text-[10px]"></i></span></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script src="../../assets/site.js"></script>
+
+    <script>
+    (function () {
+        // кнопка «Копировать» у блоков кода
+        document.querySelectorAll('.b-prose .codehilite').forEach(box => {
+            const btn = document.createElement('button');
+            btn.type = 'button'; btn.className = 'b-copy'; btn.setAttribute('aria-label', 'Copy code');
+            btn.innerHTML = '<i class="fa-regular fa-copy" aria-hidden="true"></i>';
+            btn.addEventListener('click', () => {
+                navigator.clipboard.writeText(box.querySelector('pre').innerText).then(() => {
+                    btn.innerHTML = '<i class="fa-solid fa-check" aria-hidden="true"></i>';
+                    setTimeout(() => btn.innerHTML = '<i class="fa-regular fa-copy" aria-hidden="true"></i>', 1500);
+                });
+            });
+            box.appendChild(btn);
+        });
+        // подсветка текущего раздела в оглавлении
+        const links = Array.from(document.querySelectorAll('.b-toc a'));
+        if (links.length && 'IntersectionObserver' in window) {
+            const map = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+            const io = new IntersectionObserver(es => es.forEach(e => {
+                if (e.isIntersecting) { links.forEach(l => l.classList.remove('active')); const a = map.get(e.target.id); if (a) a.classList.add('active'); }
+            }), { rootMargin: '-80px 0px -70% 0px' });
+            map.forEach((_, id) => { const el = document.getElementById(id); if (el) io.observe(el); });
+        }
+    })();
+    </script>
+</body>
+</html>

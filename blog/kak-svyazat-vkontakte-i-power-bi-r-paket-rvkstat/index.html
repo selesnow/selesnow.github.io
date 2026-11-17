@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Alexey Seleznev">
+    <meta name="theme-color" content="#030712">
+    <link rel="canonical" href="https://alexey-seleznev.pro/blog/kak-svyazat-vkontakte-i-power-bi-r-paket-rvkstat/">
+
+    <title>Как связать ВКонтакте и Power BI, R пакет rvkstat. | Алексей Селезнёв</title>
+    <meta name="title" content="Как связать ВКонтакте и Power BI, R пакет rvkstat. | Алексей Селезнёв">
+    <meta name="description" content="Несмотря на недавнюю блокировку соцсети в Индии, ВКонтакте продолжает оставаться огромным источником полезной информации и статистики. В этой статье я расскажу, как с помощью написанного…">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alexey-seleznev.pro/blog/kak-svyazat-vkontakte-i-power-bi-r-paket-rvkstat/">
+    <meta property="og:site_name" content="ALEXEY-SELEZNEV.pro">
+    <meta property="og:title" content="Как связать ВКонтакте и Power BI, R пакет rvkstat. | Алексей Селезнёв">
+    <meta property="og:description" content="Несмотря на недавнюю блокировку соцсети в Индии, ВКонтакте продолжает оставаться огромным источником полезной информации и статистики. В этой статье я расскажу, как с помощью написанного…">
+    <meta property="og:image" content="https://alexey-seleznev.pro/photo.jpg">
+    <meta property="og:image:alt" content="Алексей Селезнёв">
+    <meta property="og:locale" content="ru_RU">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="https://alexey-seleznev.pro/blog/kak-svyazat-vkontakte-i-power-bi-r-paket-rvkstat/">
+    <meta name="twitter:title" content="Как связать ВКонтакте и Power BI, R пакет rvkstat. | Алексей Селезнёв">
+    <meta name="twitter:description" content="Несмотря на недавнюю блокировку соцсети в Индии, ВКонтакте продолжает оставаться огромным источником полезной информации и статистики. В этой статье я расскажу, как с помощью написанного…">
+    <meta name="twitter:image" content="https://alexey-seleznev.pro/photo.jpg">
+
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z56YHE916N"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Z56YHE916N');
+    </script>
+    <link rel="icon" type="image/jpeg" href="../../logo.jpg">
+    <link rel="apple-touch-icon" href="../../logo.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;700;800;900&display=swap">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/site.css">
+    <!-- Tailwind собран заранее (_build/build.py) и подключается последним, как это делал CDN-скрипт -->
+    <link rel="stylesheet" href="../../assets/tailwind.css">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Как связать ВКонтакте и Power BI, R пакет rvkstat.",
+  "datePublished": "2017-09-22",
+  "inLanguage": "ru",
+  "description": "Несмотря на недавнюю блокировку соцсети в Индии, ВКонтакте продолжает оставаться огромным источником полезной информации и статистики. В этой статье я расскажу, как с помощью написанного…",
+  "author": {
+    "@id": "https://alexey-seleznev.pro/#person"
+  },
+  "mainEntityOfPage": "https://alexey-seleznev.pro/blog/kak-svyazat-vkontakte-i-power-bi-r-paket-rvkstat/"
+}
+    </script>
+    <link rel="stylesheet" href="../blog.css">
+</head>
+<body class="relative lang-en">
+
+    <!-- Interactive Background -->
+    <div id="vanta-bg"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full z-50 top-0 left-0 border-b border-white/5 bg-slate-950/60 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 h-16 flex items-center justify-between">
+            <a href="../../" class="flex items-center gap-2 sm:gap-2.5 md:gap-3 group shrink min-w-0">
+                <img src="../../logo.jpg" alt="Alexey Seleznev" class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 rounded-lg sm:rounded-xl object-cover shadow-md border border-white/10 group-hover:border-purple-500/50 group-hover:scale-105 transition-all shrink-0">
+                <span class="text-xs min-[400px]:text-sm sm:text-base md:text-xl font-black tracking-tight uppercase outfit-font whitespace-nowrap text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+            </a>
+            <div class="hidden xl:flex gap-6 text-sm font-semibold text-slate-400">
+                <a href="../../" class="nav-link hover:text-white transition-colors"><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a>
+                <a href="../../opensource/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span></a>
+                <a href="../../courses/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a>
+                <a href="../../videos/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a>
+                <a href="../../talks/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a>
+                <a href="../../articles/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a>
+                <a href="../../interviews/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a>
+                <a href="../../blog/" class="nav-link hover:text-white transition-colors active"><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a>
+            </div>
+
+            <div class="flex items-center gap-1.5 sm:gap-2 md:gap-4 shrink-0">
+                <div class="lang-switcher flex gap-1 sm:gap-1.5 md:gap-2 text-[11px] sm:text-xs md:text-sm font-bold border-r border-white/10 pr-1.5 sm:pr-3 md:pr-4 mr-0.5 sm:mr-1 md:mr-2 outfit-font">
+                    <button onclick="changeLang('en')" id="btn-en" class="active hover:text-white transition-colors">EN</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ru')" id="btn-ru" class="text-slate-500 hover:text-white transition-colors">RU</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ua')" id="btn-ua" class="text-slate-500 hover:text-white transition-colors">UA</button>
+                </div>
+
+                <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="text-slate-400 hover:text-blue-400 transition-colors hidden sm:block" aria-label="Telegram"><i class="fa-brands fa-telegram text-lg md:text-xl"></i></a>
+                <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="text-slate-400 hover:text-white transition-colors hidden sm:block" aria-label="GitHub"><i class="fa-brands fa-github text-lg md:text-xl"></i></a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="xl:hidden w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-purple-500/20 hover:border-purple-500/40 transition-all focus:outline-none" aria-label="Toggle Navigation Menu">
+                    <i class="fa-solid fa-bars text-sm sm:text-lg" id="mobile-menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div id="mobile-menu" class="hidden xl:hidden border-t border-white/10 bg-slate-950/95 backdrop-blur-2xl shadow-2xl overflow-y-auto max-h-[calc(100vh-4rem)] transition-all">
+            <div class="max-w-7xl mx-auto px-6 py-6 space-y-1">
+                <a href="../../" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-house text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span>
+                </a>
+                <a href="../../opensource/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-code-branch text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span>
+                </a>
+                <a href="../../courses/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-graduation-cap text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span>
+                </a>
+                <a href="../../videos/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-circle-play text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span>
+                </a>
+                <a href="../../talks/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-microphone-lines text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span>
+                </a>
+                <a href="../../articles/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-pen-nib text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span>
+                </a>
+                <a href="../../interviews/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-regular fa-newspaper text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span>
+                </a>
+                <a href="../../blog/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-white bg-white/5 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-feather-pointed text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span>
+                </a>
+
+                <div class="pt-4 mt-3 border-t border-white/10 flex items-center justify-around text-slate-400">
+                    <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-blue-400 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-telegram text-xl"></i> Telegram
+                    </a>
+                    <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="p-2 hover:text-white transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-github text-xl"></i> GitHub
+                    </a>
+                    <a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-red-500 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-youtube text-xl"></i> YouTube
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="b-wrap relative z-10">
+        <nav class="b-crumbs" aria-label="breadcrumb">
+            <a href="../../"><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a><span>/</span><a href="../"><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a><span>/</span><a href="../?cat=bi#posts">BI</a>
+        </nav>
+        <div class="b-layout has-toc">
+            <article class="bento-glass no-lift b-article" data-aos="fade-up">
+                <div class="bento-content">
+                    <div class="b-cats"><a class="b-chip b-chip-cat" href="../?cat=bi#posts">BI</a><a class="b-chip b-chip-cat" href="../?cat=programmirovanie#posts">Программирование</a><a class="b-chip b-chip-cat" href="../?cat=r#posts">R</a></div>
+                    <h1 class="b-title outfit-font">Как связать ВКонтакте и Power BI, R пакет rvkstat.</h1>
+                    <div class="b-meta">
+                        <span><i class="fa-regular fa-calendar" aria-hidden="true"></i><span class="ru-text">22 сентября 2017</span><span class="ua-text">22 вересня 2017</span><span class="en-text">22 Sep 2017</span></span>
+                        <span><i class="fa-regular fa-clock" aria-hidden="true"></i><span class="ru-text">18 мин чтения</span><span class="ua-text">18 хв читання</span><span class="en-text">18 min read</span></span>
+                        <span class="b-lang" title="Русский">RU</span>
+                    </div>
+                    <div class="b-note"><i class="fa-regular fa-clock" aria-hidden="true"></i><div><span class="ru-text">Материал опубликован в 2017 году — описанные инструменты и интерфейсы могли измениться.</span><span class="ua-text">Матеріал опубліковано у 2017 році — описані інструменти та інтерфейси могли змінитися.</span><span class="en-text">Published in 2017 — the tools and interfaces described may have changed since.</span></div></div>
+                    
+                    <div class="b-prose"><p>Несмотря на недавнюю блокировку соцсети в Индии, ВКонтакте продолжает оставаться огромным источником полезной информации и статистики. В этой статье я расскажу, как с помощью написанного мной программного пакета <a target="_blank" rel="noopener" href="https://selesnow.github.io/rvkstat/">rvkstat</a> и коннектора  R получить данные из API ВКонтакте в Microsoft Power BI.</p>
+<p>Как использовать прокси в скриптах R: обходим блокировку API Яндекса, Mail.ru и ВКонтакте</p>
+<p>Причем получить эти данные можно даже в странах, где сама соцсеть официально <a target="_blank" rel="noopener" href="https://netpeak.net/ru/blog/kak-ispol-zovat-proksi-v-skriptakh-r-obkhodim-blokirovku-api-yandeksa-mail-ru-i-vkontakte/">заблокирована</a>.</p>
+<h2 id="_1"></h2>
+<h2 id="_2">Установка необходимого программного обеспечения</h2>
+<p>Скачайте и установите актуальную версию <a target="_blank" rel="noopener" href="https://cran.r-project.org/bin/windows/base/">языка R</a> и <a target="_blank" rel="noopener" href="https://powerbi.microsoft.com/ru-ru/desktop/">Power BI</a>. Это, пожалуй, самая простая часть работы, как R так и Power BI при установке не требуют от вас никаких дополнительных манипуляций и настройки — просто кликайте по кнопкам Next и Ok.</p>
+<h2 id="standalone-">Как создать Standalone-приложение ВКонтакте</h2>
+<p>Для работы с API Вконтакте необходимо создать Standalone-приложение, непосредственно в интерфейсе социальной сети.</p>
+<p>Для создания приложения перейдите по этой <a target="_blank" rel="noopener" href="https://vk.com/editapp?act=create">ссылке</a> и выберите Standalone-приложение.</p>
+<p><img loading="lazy" decoding="async" alt="Для создания приложения перейдите по этой ссылке и выберите Standalone-приложение" width="737" height="314" src="../images/kak-perenesti-dannye-iz-vkontakte-v-power-bi-dla-sozdania-pr-7344a7a1.webp" /></p>
+<p>Перейдите в настройки только что созданного приложения и заполните следующие поля следующим образом:</p>
+<p><strong>Адрес сайта</strong>: <a target="_blank" rel="noopener" href="https://selesnow.github.io/rvkstat/getCode/get_code.html">https://selesnow.github.io/rvkstat/getCode/get_code.html</a><br />
+<strong>Базовый домен</strong>: selesnow.github.io<br />
+<strong>Доверенные redirect URI</strong>: <a target="_blank" rel="noopener" href="https://selesnow.github.io/rvkstat/getCode/get_code.html">https://selesnow.github.io/rvkstat/getCode/get_code.html</a><br />
+<a target="_blank" rel="noopener" href="https://selesnow.github.io/rvkstat/getCode/get_token.html">https://selesnow.github.io/rvkstat/getCode/get_token.html</a></p>
+<p>Далее для получения токена разработчика вам понадобится ID и засекреченный ключ приложения.</p>
+<p><img loading="lazy" decoding="async" alt="Доверенные редирект URL" width="977" height="793" src="../images/kak-perenesti-dannye-iz-vkontakte-v-power-bi-doverennye-redi-6ba2ae54.webp" /></p>
+<h2 id="rvkstat">Устанавливаем пакет rvkstat</h2>
+<p>Пакет rvkstat является R-клиентом для работы с API ВКонтакте. Его можно установить из <a target="_blank" rel="noopener" href="https://github.com/selesnow">моего репозитория на GitHub</a> с помощью приведенного ниже кода в R.</p>
+<div class="codehilite"><pre><span></span><code>if(!&quot;devtools&quot; %in% installed.packages()[,1]){install.packages(&quot;devtools&quot;)}
+devtools::install_github(&#39;selesnow/rvkstat&#39;)
+</code></pre></div>
+
+<p>Если на данном этапе вы всё сделали правильно, в R-консоли увидите сообщение о том, что пакет rvkstat успешно установлен:</p>
+<p><img loading="lazy" decoding="async" alt="Если на данном этапе вы всё сделали правильно, в R-консоли увидите сообщение о том, что пакет rvkstat успешно установлен" width="682" height="602" src="../images/kak-perenesti-dannye-iz-vkontakte-v-power-bi-esli-na-dannom-34db9b36.webp" /></p>
+<h2 id="_3">Получаем токен разработчика</h2>
+<p>Следующий шаг — получение токена доступа к API ВКонтакте. Для этого необходимо подключить пакет rvkstat и с помощью функции vkAuth получить токен разработчика.</p>
+<p>Для этого вставьте в R-консоль следующий код:</p>
+<div class="codehilite"><pre><span></span><code>myCredential &lt;- vkAuth(app_id = &lt;ID Вашего Приложения&gt;, app_secret = &lt;Защищённый Ключ Вашего Приложения&gt;)
+</code></pre></div>
+
+<p>После запуска функции откроется окно браузера, в котором необходимо предоставить приложению все необходимые для работы разрешения:</p>
+<p><img loading="lazy" decoding="async" alt="Нажмите «Разрешить»" width="658" height="485" src="../images/kak-perenesti-dannye-iz-vkontakte-v-power-bi-nazmite-razresi-35b0ec93.webp" /></p>
+<p>Затем откроется окно браузера, в котором будет ваш код доступа. Вам необходимо скопировать его и вставить в R-консоль в ответ на запрос «Enter code from URL:».</p>
+<p><img loading="lazy" decoding="async" alt="После чего откроется окно браузера, в котором будет ваш код доступа" width="689" height="361" src="../images/kak-perenesti-dannye-iz-vkontakte-v-power-bi-posle-cego-otkr-d945e44e.webp" /></p>
+<p><img loading="lazy" decoding="async" alt="Вам необходимо скопировать его и вставить в R-консоль в ответ на запрос" width="672" height="461" src="../images/kak-perenesti-dannye-iz-vkontakte-v-power-bi-vam-neobhodimo-45ab8147.webp" /></p>
+<p>После этого в вашем рабочем окружении будет создан объект myCredential, именно в нём теперь хранится токен доступа к API.</p>
+<p>Посмотреть его можно с помощью кода:</p>
+<div class="codehilite"><pre><span></span><code>myCredential$access_token
+</code></pre></div>
+
+<p>Для удобства скопируйте из консоли полученный токен в блокнот.</p>
+<p><img loading="lazy" decoding="async" alt="Для удобства скопируйте из консоли полученный токен в блокнот" width="670" height="458" src="../images/kak-perenesti-dannye-iz-vkontakte-v-power-bi-dla-udobstva-sk-35dd3b41.webp" /></p>
+<h2 id="power-bi">Как получить данные из рекламного кабинета ВКонтакте в Power BI</h2>
+<p>На этом шаге можно смело закрывать R-консоль и открывать Power BI. Для загрузки данных жмите на «Get Data».</p>
+<p><img loading="lazy" decoding="async" alt="На этом шаге можно смело закрывать R-консоль и открывать Power BI. Для загрузки данных жмите на «Get Data»" width="1100" height="630" src="../images/kak-perenesti-dannye-iz-vkontakte-v-power-bi-na-etom-sage-mo-6e4514b8.webp" /></p>
+<p>В открывшемся диалоговом окне переходим в группу коннекторов «Other», выбирайте «R script» и нажимайте «Connect».</p>
+<p><img loading="lazy" decoding="async" alt="В открывшемся диалоговом окне переходим в группу коннекторов «Other», выбирайте «R script» и нажимайте «Connect»" width="611" height="666" src="../images/kak-perenesti-dannye-iz-vkontakte-v-power-bi-v-otkryvsemsa-d-1db20a8f.webp" /></p>
+<p>Далее в диалоговое окно «R Script» вставьте R-код, подставив в аргументы функций свои значения.</p>
+<div class="codehilite"><pre><span></span><code>#Подключаем пакет
+library(rvkstat)
+
+##Получаем список рекламных кампаний
+camp &lt;- vkGetAdCampaigns(account_id = &lt;id вашего рекламного кабинета&gt;,
+                        access_token = &lt;токен разработчика, полученный на прошлом шаге&gt;)
+
+##Получаем статистику по рекламным кампаниям по дням
+vk_stat_by_campaign &lt;- vkGetAdStatistics(account_id = &lt;id вашего рекламного кабинета&gt;,
+                                        ids_type = &quot;campaign&quot;,
+                                        ids = camp$id ,
+                                        period = &quot;day&quot;,
+                                        date_from = &quot;2010-01-01&quot;,
+                                        date_to =Sys.Date(),
+                                        access_token = &lt;токен разработчика, полученный на прошлом шаге&gt;)
+</code></pre></div>
+
+<p><img loading="lazy" decoding="async" alt="Далее в диалоговое окно «R Script» вставьте R-код, подставив в аргументы функций свои значения" width="700" height="391" src="../images/kak-perenesti-dannye-iz-vkontakte-v-power-bi-dalee-v-dialogo-699bde91.webp" /></p>
+<p>Если вы верно указали значения для всех аргументов функций, откроется диалоговое окно «Navigator», в котором можно выбрать две таблицы:</p>
+<ul>
+<li><strong>camp</strong> — справочник рекламных кампаний;</li>
+<li><strong>vk_stat_by_camp</strong> — статистика по рекламным кампаниям.</li>
+</ul>
+<p><img loading="lazy" decoding="async" alt="Если вы верно указали значения для всех аргументов функций, откроется диалоговое окно «Navigator», в котором можно выбрать две таблицы" width="876" height="692" src="../images/kak-perenesti-dannye-iz-vkontakte-v-power-bi-esli-vy-verno-u-6085457e.webp" /></p>
+<p>После этого в Power BI будут загружены обе таблицы, и между таблицами будет установлена связь <em>camp.id = vk_stat_by_camp.id</em>.</p>
+<p>Чтобы получить статистику в разрезе рекламных объявлений, необходимо в аргументе <em>ids_type</em> указать значение «ad» и в аргумент ids передать номера объявлений.</p>
+<p>Например, можете воспользоваться следующим кодом:</p>
+<div class="codehilite"><pre><span></span><code>##Подключаем пакет
+library(rvkstat)
+## Получаем список рекламных кампаний
+ads &lt;- vkGetAds(account_id = account_id, access_token = my_tok$access_token)
+## Получаем статистику по объявлениям
+vk_stat_by_ads &lt;- vkGetAdStatistics(account_id = 1,
+                                   ids_type = &quot;ad&quot;,
+                                   ids = ads$id ,
+                                   period = &quot;month&quot;,
+                                   date_from = &quot;2010-01-01&quot;,
+                                   date_to =Sys.Date(),
+                                   access_token = &lt;токен разработчика полученный на прошлом шаге&gt;))
+</code></pre></div>
+
+<p>Для загрузки общей статистики по рекламному кабинету необходимо передать в аргумент ids_type значение «office», а в аргумент ids передать номер рекламного кабинета.</p>
+<p>По указанному выше примеру можно получить и другую статистику из рекламного кабинета и сообществ ВКонтакте.</p>
+<p>Ловите список доступных функций для загрузки статистики из рекламного кабинета:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/selesnow/rvkstat#%D0%9F%D0%BE%D0%BB%D1%83%D1%87%D0%B8%D1%82%D1%8C-%D1%81%D0%BF%D0%B8%D1%81%D0%BE%D0%BA-%D0%B2%D0%BE%D0%B7%D0%BC%D0%BE%D0%B6%D0%BD%D1%8B%D1%85-%D1%82%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D0%BA-%D1%80%D0%B5%D0%BA%D0%BB%D0%B0%D0%BC%D0%BD%D1%8B%D1%85-%D0%BE%D0%B1%D1%8A%D1%8F%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B9-%D0%B8-%D0%B8%D1%85-%D0%BF%D0%BE%D0%B4%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%D0%BE%D0%B2">vkGetAdCategories</a> — возможные тематики рекламных объявлений и их категорий;</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/selesnow/rvkstat#%D0%9F%D0%BE%D0%BB%D1%83%D1%87%D0%B8%D1%82%D1%8C-%D1%81%D0%BF%D0%B8%D1%81%D0%BE%D0%BA-%D0%B4%D0%BE%D1%81%D1%83%D0%BF%D0%BD%D1%8B%D1%85-%D1%80%D0%B5%D0%BA%D0%BB%D0%B0%D0%BC%D0%BD%D1%8B%D1%85-%D0%BA%D0%B0%D0%B1%D0%B8%D0%BD%D0%B5%D1%82%D0%BE%D0%B2-%D0%92%D0%BA%D0%BE%D0%BD%D1%82%D0%B0%D0%BA%D1%82%D0%B5">vkGetAdAccounts</a> — список доступных рекламных кабинетов;</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/selesnow/rvkstat/blob/master/README.md#%D0%9F%D0%BE%D0%BB%D1%83%D1%87%D0%B8%D1%82%D1%8C-%D1%81%D0%BF%D0%B8%D1%81%D0%BE%D0%BA-%D0%BA%D0%BB%D0%B8%D0%B5%D0%BD%D1%82%D0%BE%D0%B2-%D0%B8%D0%B7-%D0%B0%D0%B3%D0%B5%D0%BD%D1%82%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D0%B0%D0%BA%D0%BA%D0%B0%D1%83%D0%BD%D1%82%D0%B0-%D0%92%D0%BA%D0%BE%D0%BD%D1%82%D0%B0%D0%BA%D1%82%D0%B5">vkGetAdClients</a> — список клиентов из агентского аккаунта;</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/selesnow/rvkstat#%D0%9F%D0%BE%D0%BB%D1%83%D1%87%D0%B8%D1%82%D1%8C-%D1%81%D0%BF%D0%B8%D1%81%D0%BE%D0%BA-%D0%BE%D0%B1%D1%8A%D1%8F%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B9-%D0%B8%D0%B7-%D1%80%D0%B5%D0%BA%D0%BB%D0%B0%D0%BC%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BA%D0%B0%D0%B1%D0%B8%D0%BD%D0%B5%D1%82%D0%B0-%D0%B2%D0%BA%D0%BE%D0%BD%D1%82%D0%B0%D0%BA%D1%82%D0%B5">vkGetAds</a> — список объявлений;</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/selesnow/rvkstat/blob/master/README.md#%D0%9F%D0%BE%D0%BB%D1%83%D1%87%D0%B8%D1%82%D1%8C-%D1%81%D0%BF%D0%B8%D1%81%D0%BE%D0%BA-%D1%80%D0%B5%D0%BA%D0%BB%D0%B0%D0%BC%D0%BD%D1%8B%D1%85-%D0%BA%D0%B0%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D0%B9-%D0%B8%D0%B7-%D1%80%D0%B5%D0%BA%D0%BB%D0%B0%D0%BC%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BA%D0%B0%D0%B1%D0%B8%D0%BD%D0%B5%D1%82%D0%B0-%D0%B2%D0%BA%D0%BE%D0%BD%D1%82%D0%B0%D0%BA%D1%82%D0%B5">vkGetAdCampaigns</a> — список рекламных кампаний;</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/selesnow/rvkstat/blob/master/README.md#%D0%9F%D0%BE%D0%BB%D1%83%D1%87%D0%B8%D1%82%D1%8C-%D1%81%D1%82%D0%B0%D1%82%D0%B8%D1%81%D1%82%D0%B8%D0%BA%D1%83-%D0%BF%D0%BE%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D0%B5%D0%BB%D0%B5%D0%B9-%D1%8D%D1%84%D1%84%D0%B5%D0%BA%D1%82%D0%B8%D0%B2%D0%BD%D0%BE%D1%81%D1%82%D0%B8-%D0%BF%D0%BE-%D1%80%D0%B5%D0%BA%D0%BB%D0%B0%D0%BC%D0%BD%D1%8B%D0%BC-%D0%BE%D0%B1%D1%8A%D1%8F%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F%D0%BC-%D0%BA%D0%B0%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D1%8F%D0%BC-%D0%BA%D0%BB%D0%B8%D0%B5%D0%BD%D1%82%D0%B0%D0%BC-%D0%B8%D0%BB%D0%B8-%D0%B2%D1%81%D0%B5%D0%BC%D1%83-%D0%BA%D0%B0%D0%B1%D0%B8%D0%BD%D0%B5%D1%82%D1%83">vkGetAdStatistics</a> — статистика показателей эффективности по рекламным объявлениям, кампаниям, клиентам или всему кабинету;</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/selesnow/rvkstat/blob/master/README.md#%D0%9F%D0%BE%D0%BB%D1%83%D1%87%D0%B8%D1%82%D1%8C-%D1%81%D1%82%D0%B0%D1%82%D0%B8%D1%81%D1%82%D0%B8%D0%BA%D1%83-%D0%BF%D0%BE-%D0%BE%D1%85%D0%B2%D0%B0%D1%82%D1%83-%D0%B0%D1%83%D0%B4%D0%B8%D1%82%D0%BE%D1%80%D0%B8%D0%B8-%D0%BF%D0%BE-%D1%80%D0%B5%D0%BA%D0%BB%D0%B0%D0%BC%D0%BD%D1%8B%D0%BC-%D0%BA%D0%B0%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D0%BC-%D0%B8%D0%BB%D0%B8-%D0%BE%D0%B1%D1%8A%D1%8F%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B2-%D1%80%D0%B0%D0%B7%D1%80%D0%B5%D0%B7%D0%B5-%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D0%BE%D0%B2">vkGetAdCityStats</a> — статистика охвата аудитории по рекламным кампаниям или объявления в разрезе городов;</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/selesnow/rvkstat/blob/master/README.md#%D0%9F%D0%BE%D0%BB%D1%83%D1%87%D0%B8%D1%82%D1%8C-%D1%81%D1%82%D0%B0%D1%82%D0%B8%D1%81%D1%82%D0%B8%D0%BA%D1%83-%D0%BF%D0%BE-%D0%BE%D1%85%D0%B2%D0%B0%D1%82%D1%83-%D0%B0%D1%83%D0%B4%D0%B8%D1%82%D0%BE%D1%80%D0%B8%D0%B8-%D0%BF%D0%BE-%D1%80%D0%B5%D0%BA%D0%BB%D0%B0%D0%BC%D0%BD%D1%8B%D0%BC-%D0%BA%D0%B0%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D0%BC-%D0%B8%D0%BB%D0%B8-%D0%BE%D0%B1%D1%8A%D1%8F%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B2-%D1%80%D0%B0%D0%B7%D1%80%D0%B5%D0%B7%D0%B5-%D0%BF%D0%BE%D0%BB%D0%B0">vkGetAdGenderStats</a> — статистика охвата аудитории по рекламным кампаниям или объявления в разрезе пола;</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/selesnow/rvkstat/blob/master/README.md#%D0%9F%D0%BE%D0%BB%D1%83%D1%87%D0%B8%D1%82%D1%8C-%D1%81%D1%82%D0%B0%D1%82%D0%B8%D1%81%D1%82%D0%B8%D0%BA%D1%83-%D0%BF%D0%BE-%D0%BE%D1%85%D0%B2%D0%B0%D1%82%D1%83-%D0%B0%D1%83%D0%B4%D0%B8%D1%82%D0%BE%D1%80%D0%B8%D0%B8-%D0%BF%D0%BE-%D1%80%D0%B5%D0%BA%D0%BB%D0%B0%D0%BC%D0%BD%D1%8B%D0%BC-%D0%BA%D0%B0%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D0%BC-%D0%B8%D0%BB%D0%B8-%D0%BE%D0%B1%D1%8A%D1%8F%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B2-%D1%80%D0%B0%D0%B7%D1%80%D0%B5%D0%B7%D0%B5-%D0%B2%D0%BE%D0%B7%D1%80%D0%B0%D1%81%D1%82%D0%B0">vkGetAdAgeStats</a> — статистика охвата аудитории по рекламным кампаниям или объявлениям в разрезе возраста;</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/selesnow/rvkstat/blob/master/README.md#%D0%9F%D0%BE%D0%BB%D1%83%D1%87%D0%B8%D1%82%D1%8C-%D1%81%D1%82%D0%B0%D1%82%D0%B8%D1%81%D1%82%D0%B8%D0%BA%D1%83-%D0%BF%D0%BE-%D0%BE%D1%85%D0%B2%D0%B0%D1%82%D1%83-%D0%B0%D1%83%D0%B4%D0%B8%D1%82%D0%BE%D1%80%D0%B8%D0%B8-%D0%BF%D0%BE-%D1%80%D0%B5%D0%BA%D0%BB%D0%B0%D0%BC%D0%BD%D1%8B%D0%BC-%D0%BA%D0%B0%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D0%BC-%D0%B8%D0%BB%D0%B8-%D0%BE%D0%B1%D1%8A%D1%8F%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B2-%D1%80%D0%B0%D0%B7%D1%80%D0%B5%D0%B7%D0%B5-%D0%BF%D0%BE%D0%BB%D0%B0-%D0%B8-%D0%B2%D0%BE%D0%B7%D1%80%D0%B0%D1%81%D1%82%D0%B0">vkGetAdGenderAgeStats</a> — статистика охвата аудитории по рекламным кампаниям или объявлениям в разрезе пола и возраста;</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/selesnow/rvkstat/blob/master/README.md#%D0%9F%D0%BE%D0%BB%D1%83%D1%87%D0%B8%D1%82%D1%8C-%D0%BE%D1%81%D1%82%D0%B0%D1%82%D0%BE%D0%BA-%D1%81%D1%80%D0%B5%D0%B4%D1%81%D1%82%D0%B2-%D0%B8%D0%B7-%D1%80%D0%B5%D0%BA%D0%BB%D0%B0%D0%BC%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BA%D0%B0%D0%B1%D0%B8%D0%BD%D0%B5%D1%82%D0%B0">vkGetAdBudget</a> — остаток средств из рекламного кабинета;</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/selesnow/rvkstat/blob/master/README.md#%D0%9F%D0%BE%D0%BB%D1%83%D1%87%D0%B8%D1%82%D1%8C-%D0%BF%D0%BE%D0%B4%D1%80%D0%BE%D0%B1%D0%BD%D1%83%D1%8E-%D1%81%D1%82%D0%B0%D1%82%D0%B8%D1%81%D1%82%D0%B8%D0%BA%D1%83-%D0%BF%D0%BE-%D0%BE%D1%85%D0%B2%D0%B0%D1%82%D1%83-%D1%80%D0%B5%D0%BA%D0%BB%D0%B0%D0%BC%D0%BD%D1%8B%D1%85-%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B5%D0%B9-%D0%B8%D0%B7-%D0%BE%D0%B1%D1%8A%D1%8F%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B9-%D0%B8-%D0%BA%D0%B0%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D0%B9-%D0%B4%D0%BB%D1%8F-%D0%BF%D1%80%D0%BE%D0%B4%D0%B2%D0%B8%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B5%D0%B9-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D1%81%D1%82%D0%B2%D0%B0">vkGetAdPostsReach</a> — подробная статистика по охвату рекламных записей из объявлений и кампаний для продвижения записей сообщества.</li>
+</ul>
+<p>Подробную справку с примерами кода и полным описанием полей, которые будут загружены в результате работы функции в пакете rvkstat, можно получить с помощью команды help в R-консоли:</p>
+<div class="codehilite"><pre><span></span><code>help(&quot;vkGetAdStatistics&quot;)
+</code></pre></div>
+
+<p>Полный список функций можно получить с помощью команды <em>help(package  = “rvkstat”)</em>, либо перейдя в ReadMe репозитория пакета по <a target="_blank" rel="noopener" href="https://selesnow.github.io/rvkstat/">ссылке</a>.</p>
+<h2 id="power-bi_1">Как построить визуализацию в Power BI</h2>
+<p>После загрузки данных в Power BI будет создано две таблицы:</p>
+<ul>
+<li><strong>camp</strong> — справочник рекламных кампаний;</li>
+<li><strong>vk_stat_by_campaign</strong> — статистика по рекламным кампаниям.</li>
+</ul>
+<p>Между кампаниями будет автоматически создана связь по полям id.</p>
+<p><img loading="lazy" decoding="async" alt="На данном шаге данные уже загружены в Power BI, вам остаётся только построить нужные графики и таблицы" width="638" height="565" src="../images/kak-perenesti-dannye-iz-vkontakte-v-power-bi-na-dannom-sage-3d7b802b.webp" /></p>
+<p>Остаётся только построить нужные графики и таблицы.</p>
+<p><img loading="lazy" decoding="async" alt="остаётся только построить нужные графики и таблицы" width="941" height="550" src="../images/kak-perenesti-dannye-iz-vkontakte-v-power-bi-ostaetsa-tolko-0df455df.webp" /></p>
+<h2 id="_4">Выводы</h2>
+<p>ВКонтакте — одна из самых популярных социальных сетей в СНГ, а Power BI одна из самых популярных в мире BI-платформ. Связав эти инструменты, вы легко построите удобные дашборды и проанализируете свои рекламные кампании и объявления.</p>
+<p>Что для этого нужно:</p>
+<ol>
+<li>Скачать и установить актуальную версию <a target="_blank" rel="noopener" href="https://cran.r-project.org/bin/windows/base/">языка R</a>.</li>
+<li>Скачать и установить актуальную версию <a target="_blank" rel="noopener" href="https://powerbi.microsoft.com/ru-ru/desktop/">Microsoft Power BI</a>.</li>
+<li>Создать Standalone-приложение ВКонтакте.</li>
+<li>Установить пакет <a target="_blank" rel="noopener" href="https://selesnow.github.io/rvkstat/">rvkstat</a>.</li>
+<li>Получить токен для доступа к API ВКонтакте.</li>
+<li>С помощью функций доступных в пакете rvkstat написать код для загрузки данных в Power BI.</li>
+<li>Построить удобный и информативный dashboard.</li>
+</ol>
+<hr />
+<p><em><a target="_blank" rel="noopener" href="https://netpeak.net/ru/blog/kak-perenesti-dannyye-iz-vkontakte-v-power-bi/">Оригинал публикации на блоге Netpeak.</a></em></p></div>
+                    
+                    <div class="b-tags"><a class="b-chip" href="../?tag=api#posts">API</a><a class="b-chip" href="../?tag=bi#posts">BI</a><a class="b-chip" href="../?tag=r#posts">R</a><a class="b-chip" href="../?tag=vkontakte#posts">ВКонтакте</a></div>
+                </div>
+            </article>
+            <aside class="b-toc" aria-label="Contents"><div class="b-toc-title"><span class="ru-text">Содержание</span><span class="ua-text">Зміст</span><span class="en-text">Contents</span></div><ul><li><a href="#_1"></a></li><li><a href="#_2">Установка необходимого программного обеспечения</a></li><li><a href="#standalone-">Как создать Standalone-приложение ВКонтакте</a></li><li><a href="#rvkstat">Устанавливаем пакет rvkstat</a></li><li><a href="#_3">Получаем токен разработчика</a></li><li><a href="#power-bi">Как получить данные из рекламного кабинета ВКонтакте в Power BI</a></li><li><a href="#power-bi_1">Как построить визуализацию в Power BI</a></li><li><a href="#_4">Выводы</a></li></ul></aside>
+        </div>
+        <section class="b-related">
+            <h2 class="outfit-font"><span class="ru-text">Читайте также</span><span class="ua-text">Читайте також</span><span class="en-text">Related posts</span></h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="../video-urok-kak-zagruzit-statistiku-po-reklamnym-akkauntam-kampaniyam-g/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="0">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/covers/1309.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">март 2020</span><span class="ua-text">берез. 2020</span><span class="en-text">Mar 2020</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2020</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">1 мин чтения</span><span class="ua-text">1 хв читання</span><span class="en-text">1 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Видео урок: Как загрузить статистику по рекламным аккаунтам, кампаниям, группам объявлений и объявлениям из Facebook Marketing API в Power BI с помощью языка R</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">В этом видео уроке мы разберёмся с довольно частой для интернет маркетинга задачей, а именно с тем, как загрузить данные о рекламных кампаниях из Facebook в Microsoft Power BI.</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">API</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">BI</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a>
+                <a href="../obzor-r-paketov-dlya-internet-marketinga-chast-1/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="60">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/covers/1140.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">окт. 2018</span><span class="ua-text">жовт. 2018</span><span class="en-text">Oct 2018</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2018</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">9 мин чтения</span><span class="ua-text">9 хв читання</span><span class="en-text">9 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Обзор R пакетов для интернет маркетинга, часть 1</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">Всем привет, если вы занимаетесь интернет маркетингом наверняка вам ежедневно приходится сталкиваться со множеством рекламных сервисов и как минимум одной платформой веб аналитики, если…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">API</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Веб-аналитика</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a>
+                <a href="../portsiya-zimnih-obnovleniy-paketov-ryandexdirect-rfacebookstat-rvkstat/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="120">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/covers/1099.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">март 2018</span><span class="ua-text">берез. 2018</span><span class="en-text">Mar 2018</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2018</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">2 мин чтения</span><span class="ua-text">2 хв читання</span><span class="en-text">2 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Порция зимних обновлений пакетов ryandexdirect, rfacebookstat, rvkstat.</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">Статья – дайджест зимних обновлений R клиентов для работы с API Яндекс Директ, Facebook и Вконтакте. Честно говоря за зиму было не так много обновлений, но тем не менее возможности…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">API</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">R</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a></div>
+        </section>
+        <a href="../" class="b-back"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i><span class="ru-text">Ко всем материалам</span><span class="ua-text">До всіх матеріалів</span><span class="en-text">All posts</span></a>
+    </main>
+
+    <section class="px-6 max-w-7xl mx-auto pb-24 relative z-10">
+        <div class="grid md:grid-cols-2 gap-6" data-aos="fade-up">
+            <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(59, 130, 246, 0.1));">
+                <div class="bento-content w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center text-blue-400 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-telegram"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">Telegram-канал R4marketing</span><span class="ua-text">Telegram-канал R4marketing</span><span class="en-text">R4marketing on Telegram</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Новые статьи, видео и заметки по R — первыми.</span><span class="ua-text">Нові статті, відео та нотатки з R — першими.</span><span class="en-text">New articles, videos and R notes — first.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-blue-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+            <a href="https://www.youtube.com/R4marketing/?sub_confirmation=1" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(239, 68, 68, 0.1));">
+                <div class="bento-content w-16 h-16 bg-red-500/20 rounded-2xl flex items-center justify-center text-red-500 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-youtube"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">YouTube-канал R4marketing</span><span class="ua-text">YouTube-канал R4marketing</span><span class="en-text">R4marketing on YouTube</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Видеоуроки по R, аналитике и AI-инструментам.</span><span class="ua-text">Відеоуроки з R, аналітики та AI-інструментів.</span><span class="en-text">Video lessons on R, analytics and AI tools.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-red-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/5 bg-slate-950/80 backdrop-blur-md pt-16 pb-8 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
+                <div class="sm:col-span-2 lg:col-span-4">
+                    <a href="../../" class="inline-flex items-center gap-3 group mb-5">
+                        <img src="../../logo.jpg" alt="Alexey Seleznev" class="w-10 h-10 rounded-xl object-cover border border-white/10 group-hover:border-purple-500/50 transition-colors">
+                        <span class="text-lg font-black tracking-tight uppercase outfit-font text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+                    </a>
+                    <p class="text-sm text-slate-400 leading-relaxed max-w-sm mb-6"><span class="ru-text">Head of Analytics в Netpeak Group. Автор open source R-пакетов, бесплатных курсов по R и проекта R4marketing.</span><span class="ua-text">Head of Analytics у Netpeak Group. Автор open source R-пакетів, безкоштовних курсів з R та проєкту R4marketing.</span><span class="en-text">Head of Analytics at Netpeak Group. Author of open source R packages, free R courses and the R4marketing project.</span></p>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="https://t.me/R4marketing" target="_blank" rel="noopener" aria-label="Telegram R4marketing" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-400 hover:border-blue-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-telegram"></i></a>
+                        <a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" aria-label="YouTube R4marketing" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-red-500 hover:border-red-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="https://github.com/selesnow" target="_blank" rel="noopener" aria-label="GitHub" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-white hover:border-white/30 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://linkedin.com/in/selesnow" target="_blank" rel="noopener" aria-label="LinkedIn" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-500 hover:border-blue-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://facebook.com/selesnow" target="_blank" rel="noopener" aria-label="Facebook" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-600/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/alexey.selesnow" target="_blank" rel="noopener" aria-label="Instagram" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-pink-500 hover:border-pink-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://habr.com/ru/users/selesnow/" target="_blank" rel="noopener" aria-label="Habr" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-teal-400 hover:border-teal-400/40 transition-all hover:-translate-y-0.5"><i class="fa-solid fa-h"></i></a>
+                    </div>
+                </div>
+
+                <nav class="lg:col-span-2" aria-label="Site map">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">Сайт</span><span class="ua-text">Сайт</span><span class="en-text">Site</span></h3>
+                    <ul class="space-y-3">
+                        <li><a href="../../" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-house w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a></li>
+                        <li><a href="../../opensource/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-code-branch w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span></a></li>
+                        <li><a href="../../courses/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-graduation-cap w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a></li>
+                        <li><a href="../../videos/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-circle-play w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a></li>
+                        <li><a href="../../talks/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-microphone-lines w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a></li>
+                        <li><a href="../../articles/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-pen-nib w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a></li>
+                        <li><a href="../../interviews/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-regular fa-newspaper w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a></li>
+                        <li><a href="../../blog/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-feather-pointed w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a></li>
+                    </ul>
+                </nav>
+
+                <div class="lg:col-span-3">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">R4marketing и публикации</span><span class="ua-text">R4marketing і публікації</span><span class="en-text">R4marketing & writing</span></h3>
+                    <ul class="space-y-3">
+                        <li><a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-telegram w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Telegram-канал R4marketing</span><span class="ua-text">Telegram-канал R4marketing</span><span class="en-text">R4marketing Telegram</span></a></li>
+                        <li><a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-youtube w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">YouTube-канал R4marketing</span><span class="ua-text">YouTube-канал R4marketing</span><span class="en-text">R4marketing YouTube</span></a></li>
+                        <li><a href="https://alexeyseleznev.wordpress.com/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-pen-nib w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Личный блог</span><span class="ua-text">Особистий блог</span><span class="en-text">Personal blog</span></a></li>
+                        <li><a href="https://habr.com/ru/users/selesnow/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-h w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Профиль на Хабре</span><span class="ua-text">Профіль на Хабрі</span><span class="en-text">Habr profile</span></a></li>
+                        <li><a href="https://alexey-seleznev.pro/publications/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-layer-group w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Архив публикаций</span><span class="ua-text">Архів публікацій</span><span class="en-text">Publications archive</span></a></li>
+                        <li><a href="https://github.com/selesnow" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-github w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">GitHub</span><span class="ua-text">GitHub</span><span class="en-text">GitHub</span></a></li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-3">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">Контакты</span><span class="ua-text">Контакти</span><span class="en-text">Contacts</span></h3>
+                    <ul class="space-y-4">
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">Email</div><a href="mailto:me@alexey-seleznev.pro" class="text-sm text-slate-300 hover:text-purple-300 transition-colors break-all">me@alexey-seleznev.pro</a></li>
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">Telegram</div><a href="https://t.me/AlexeySeleznev" target="_blank" rel="noopener" class="text-sm text-slate-300 hover:text-blue-300 transition-colors break-all">@AlexeySeleznev</a></li>
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">LinkedIn</div><a href="https://linkedin.com/in/selesnow" target="_blank" rel="noopener" class="text-sm text-slate-300 hover:text-blue-300 transition-colors break-all">linkedin.com/in/selesnow</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-14 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+                <p>© 2026 Alexey Seleznev. <span class="ru-text">Все права защищены.</span><span class="ua-text">Усі права захищені.</span><span class="en-text">All rights reserved.</span></p>
+                <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="inline-flex items-center gap-2 font-semibold hover:text-white transition-colors group"><span class="ru-text">Наверх</span><span class="ua-text">Нагору</span><span class="en-text">Back to top</span><span class="w-7 h-7 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-purple-500 group-hover:border-purple-500 transition-all"><i class="fa-solid fa-arrow-up text-[10px]"></i></span></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script src="../../assets/site.js"></script>
+
+    <script>
+    (function () {
+        // кнопка «Копировать» у блоков кода
+        document.querySelectorAll('.b-prose .codehilite').forEach(box => {
+            const btn = document.createElement('button');
+            btn.type = 'button'; btn.className = 'b-copy'; btn.setAttribute('aria-label', 'Copy code');
+            btn.innerHTML = '<i class="fa-regular fa-copy" aria-hidden="true"></i>';
+            btn.addEventListener('click', () => {
+                navigator.clipboard.writeText(box.querySelector('pre').innerText).then(() => {
+                    btn.innerHTML = '<i class="fa-solid fa-check" aria-hidden="true"></i>';
+                    setTimeout(() => btn.innerHTML = '<i class="fa-regular fa-copy" aria-hidden="true"></i>', 1500);
+                });
+            });
+            box.appendChild(btn);
+        });
+        // подсветка текущего раздела в оглавлении
+        const links = Array.from(document.querySelectorAll('.b-toc a'));
+        if (links.length && 'IntersectionObserver' in window) {
+            const map = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+            const io = new IntersectionObserver(es => es.forEach(e => {
+                if (e.isIntersecting) { links.forEach(l => l.classList.remove('active')); const a = map.get(e.target.id); if (a) a.classList.add('active'); }
+            }), { rootMargin: '-80px 0px -70% 0px' });
+            map.forEach((_, id) => { const el = document.getElementById(id); if (el) io.observe(el); });
+        }
+    })();
+    </script>
+</body>
+</html>

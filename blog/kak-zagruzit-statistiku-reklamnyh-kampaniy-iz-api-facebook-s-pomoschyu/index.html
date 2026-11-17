@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Alexey Seleznev">
+    <meta name="theme-color" content="#030712">
+    <link rel="canonical" href="https://alexey-seleznev.pro/blog/kak-zagruzit-statistiku-reklamnyh-kampaniy-iz-api-facebook-s-pomoschyu/">
+
+    <title>Как загрузить статистику рекламных кампаний из API Facebook с помощью языка R | Алексей Селезнёв</title>
+    <meta name="title" content="Как загрузить статистику рекламных кампаний из API Facebook с помощью языка R | Алексей Селезнёв">
+    <meta name="description" content="Популярность Facebook как рекламной площадки стремительно растет, но анализировать статистику в рекламном кабинете неудобно. Один из альтернативных способов — загрузить статистику в R…">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alexey-seleznev.pro/blog/kak-zagruzit-statistiku-reklamnyh-kampaniy-iz-api-facebook-s-pomoschyu/">
+    <meta property="og:site_name" content="ALEXEY-SELEZNEV.pro">
+    <meta property="og:title" content="Как загрузить статистику рекламных кампаний из API Facebook с помощью языка R | Алексей Селезнёв">
+    <meta property="og:description" content="Популярность Facebook как рекламной площадки стремительно растет, но анализировать статистику в рекламном кабинете неудобно. Один из альтернативных способов — загрузить статистику в R…">
+    <meta property="og:image" content="https://alexey-seleznev.pro/photo.jpg">
+    <meta property="og:image:alt" content="Алексей Селезнёв">
+    <meta property="og:locale" content="ru_RU">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="https://alexey-seleznev.pro/blog/kak-zagruzit-statistiku-reklamnyh-kampaniy-iz-api-facebook-s-pomoschyu/">
+    <meta name="twitter:title" content="Как загрузить статистику рекламных кампаний из API Facebook с помощью языка R | Алексей Селезнёв">
+    <meta name="twitter:description" content="Популярность Facebook как рекламной площадки стремительно растет, но анализировать статистику в рекламном кабинете неудобно. Один из альтернативных способов — загрузить статистику в R…">
+    <meta name="twitter:image" content="https://alexey-seleznev.pro/photo.jpg">
+
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z56YHE916N"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Z56YHE916N');
+    </script>
+    <link rel="icon" type="image/jpeg" href="../../logo.jpg">
+    <link rel="apple-touch-icon" href="../../logo.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;700;800;900&display=swap">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/site.css">
+    <!-- Tailwind собран заранее (_build/build.py) и подключается последним, как это делал CDN-скрипт -->
+    <link rel="stylesheet" href="../../assets/tailwind.css">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Как загрузить статистику рекламных кампаний из API Facebook с помощью языка R",
+  "datePublished": "2016-12-12",
+  "inLanguage": "ru",
+  "description": "Популярность Facebook как рекламной площадки стремительно растет, но анализировать статистику в рекламном кабинете неудобно. Один из альтернативных способов — загрузить статистику в R…",
+  "author": {
+    "@id": "https://alexey-seleznev.pro/#person"
+  },
+  "mainEntityOfPage": "https://alexey-seleznev.pro/blog/kak-zagruzit-statistiku-reklamnyh-kampaniy-iz-api-facebook-s-pomoschyu/"
+}
+    </script>
+    <link rel="stylesheet" href="../blog.css">
+</head>
+<body class="relative lang-en">
+
+    <!-- Interactive Background -->
+    <div id="vanta-bg"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full z-50 top-0 left-0 border-b border-white/5 bg-slate-950/60 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 h-16 flex items-center justify-between">
+            <a href="../../" class="flex items-center gap-2 sm:gap-2.5 md:gap-3 group shrink min-w-0">
+                <img src="../../logo.jpg" alt="Alexey Seleznev" class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 rounded-lg sm:rounded-xl object-cover shadow-md border border-white/10 group-hover:border-purple-500/50 group-hover:scale-105 transition-all shrink-0">
+                <span class="text-xs min-[400px]:text-sm sm:text-base md:text-xl font-black tracking-tight uppercase outfit-font whitespace-nowrap text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+            </a>
+            <div class="hidden xl:flex gap-6 text-sm font-semibold text-slate-400">
+                <a href="../../" class="nav-link hover:text-white transition-colors"><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a>
+                <a href="../../opensource/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span></a>
+                <a href="../../courses/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a>
+                <a href="../../videos/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a>
+                <a href="../../talks/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a>
+                <a href="../../articles/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a>
+                <a href="../../interviews/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a>
+                <a href="../../blog/" class="nav-link hover:text-white transition-colors active"><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a>
+            </div>
+
+            <div class="flex items-center gap-1.5 sm:gap-2 md:gap-4 shrink-0">
+                <div class="lang-switcher flex gap-1 sm:gap-1.5 md:gap-2 text-[11px] sm:text-xs md:text-sm font-bold border-r border-white/10 pr-1.5 sm:pr-3 md:pr-4 mr-0.5 sm:mr-1 md:mr-2 outfit-font">
+                    <button onclick="changeLang('en')" id="btn-en" class="active hover:text-white transition-colors">EN</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ru')" id="btn-ru" class="text-slate-500 hover:text-white transition-colors">RU</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ua')" id="btn-ua" class="text-slate-500 hover:text-white transition-colors">UA</button>
+                </div>
+
+                <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="text-slate-400 hover:text-blue-400 transition-colors hidden sm:block" aria-label="Telegram"><i class="fa-brands fa-telegram text-lg md:text-xl"></i></a>
+                <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="text-slate-400 hover:text-white transition-colors hidden sm:block" aria-label="GitHub"><i class="fa-brands fa-github text-lg md:text-xl"></i></a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="xl:hidden w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-purple-500/20 hover:border-purple-500/40 transition-all focus:outline-none" aria-label="Toggle Navigation Menu">
+                    <i class="fa-solid fa-bars text-sm sm:text-lg" id="mobile-menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div id="mobile-menu" class="hidden xl:hidden border-t border-white/10 bg-slate-950/95 backdrop-blur-2xl shadow-2xl overflow-y-auto max-h-[calc(100vh-4rem)] transition-all">
+            <div class="max-w-7xl mx-auto px-6 py-6 space-y-1">
+                <a href="../../" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-house text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span>
+                </a>
+                <a href="../../opensource/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-code-branch text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span>
+                </a>
+                <a href="../../courses/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-graduation-cap text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span>
+                </a>
+                <a href="../../videos/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-circle-play text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span>
+                </a>
+                <a href="../../talks/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-microphone-lines text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span>
+                </a>
+                <a href="../../articles/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-pen-nib text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span>
+                </a>
+                <a href="../../interviews/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-regular fa-newspaper text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span>
+                </a>
+                <a href="../../blog/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-white bg-white/5 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-feather-pointed text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span>
+                </a>
+
+                <div class="pt-4 mt-3 border-t border-white/10 flex items-center justify-around text-slate-400">
+                    <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-blue-400 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-telegram text-xl"></i> Telegram
+                    </a>
+                    <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="p-2 hover:text-white transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-github text-xl"></i> GitHub
+                    </a>
+                    <a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-red-500 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-youtube text-xl"></i> YouTube
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="b-wrap relative z-10">
+        <nav class="b-crumbs" aria-label="breadcrumb">
+            <a href="../../"><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a><span>/</span><a href="../"><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a><span>/</span><a href="../?cat=reklama#posts">Реклама</a>
+        </nav>
+        <div class="b-layout has-toc">
+            <article class="bento-glass no-lift b-article" data-aos="fade-up">
+                <div class="bento-content">
+                    <div class="b-cats"><a class="b-chip b-chip-cat" href="../?cat=reklama#posts">Реклама</a><a class="b-chip b-chip-cat" href="../?cat=programmirovanie#posts">Программирование</a><a class="b-chip b-chip-cat" href="../?cat=r#posts">R</a></div>
+                    <h1 class="b-title outfit-font">Как загрузить статистику рекламных кампаний из API Facebook с помощью языка R</h1>
+                    <div class="b-meta">
+                        <span><i class="fa-regular fa-calendar" aria-hidden="true"></i><span class="ru-text">12 декабря 2016</span><span class="ua-text">12 грудня 2016</span><span class="en-text">12 Dec 2016</span></span>
+                        <span><i class="fa-regular fa-clock" aria-hidden="true"></i><span class="ru-text">20 мин чтения</span><span class="ua-text">20 хв читання</span><span class="en-text">20 min read</span></span>
+                        <span class="b-lang" title="Русский">RU</span>
+                    </div>
+                    <div class="b-note"><i class="fa-regular fa-clock" aria-hidden="true"></i><div><span class="ru-text">Материал опубликован в 2016 году — описанные инструменты и интерфейсы могли измениться.</span><span class="ua-text">Матеріал опубліковано у 2016 році — описані інструменти та інтерфейси могли змінитися.</span><span class="en-text">Published in 2016 — the tools and interfaces described may have changed since.</span></div></div>
+                    <figure class="b-cover"><img src="../images/covers/581.webp" alt="" width="1200" height="630" decoding="async"></figure>
+                    <div class="b-prose"><p>Популярность Facebook как рекламной площадки стремительно растет, но анализировать статистику в рекламном кабинете неудобно. Один из альтернативных способов — загрузить статистику в R и <a target="_blank" rel="noopener" href="https://netpeak.net/ru/blog/kak-vizualizirovat-pokazatel-kachestva-klyuchevyh-slov-retsept-skripta-na-yazyke-r/">визуализировать</a> ее. В этой статье я подробно расскажу, как получить данные из API Facebook и работать с ними в R.</p>
+<p>R — язык программирования для статистической обработки данных и работы с графикой, а также свободная программная среда вычислений с открытым исходным кодом в рамках проекта GNU. Пользователи ежедневно выкладывают в свободный доступ новые полезные пакеты, поэтому библиотека пакетов R богатая и значительно расширяет базовые возможности языка.</p>
+<p>Я написал ряд функций для работы с API Facebook и их собрал в пакет <a target="_blank" rel="noopener" href="https://github.com/selesnow/rfacebookstat">rfacebookstat</a>, доступный на <a target="_blank" rel="noopener" href="https://github.com/">GitHub</a> и <a target="_blank" rel="noopener" href="https://cran.r-project.org/package=rfacebookstat">CRAN</a>.</p>
+<h2 id="1-facebook">1. Создайте приложение в Facebook</h2>
+<p>1.1. Чтобы начать работу с API Facebook, нужно создать новое приложение. Для этого перейдите по этой <a target="_blank" rel="noopener" href="https://developers.facebook.com/apps/">ссылке</a>, или найдите пункт «Управление приложениями» в левом меню.</p>
+<p><img loading="lazy" decoding="async" alt="Создайте приложение в Facebook" width="231" height="330" src="../images/kak-zagruzit-statistiku-reklamnyh-k-sozdajte-prilozenie-v-fa-30d4892d.webp" /></p>
+<p>1.2. В кабинете разработчика нажмите кнопку «+ Добавить новое приложение».</p>
+<p><img loading="lazy" decoding="async" alt="Добавляем новое приложение в кабинете разработчика" width="327" height="235" src="../images/kak-zagruzit-statistiku-reklamnyh-k-dobavlaem-novoe-prilozen-e95c5e90.webp" /></p>
+<p>Заполните поля «Отображаемое название приложения»,«Эл. адрес для связи», «Категория» и нажмите «Создайте ID приложения».</p>
+<p>1.3. Далее вы попадете в меню «Установка и настройка продукта». Кликните на кнопку «Начать» напротив пункта «Вход через Facebook».</p>
+<p><img loading="lazy" decoding="async" alt="кнопка Начать напротив Входа через Facebook" width="1014" height="423" src="../images/kak-zagruzit-statistiku-reklamnyh-k-knopka-nacat-naprotiv-vh-fb584a3b.webp" /></p>
+<p>1.4. Выберите платформу веб.</p>
+<p><img loading="lazy" decoding="async" alt="Выбираем платформу веб" width="971" height="290" src="../images/kak-zagruzit-statistiku-reklamnyh-k-vybiraem-platformu-veb-2f9d08ed.webp" /></p>
+<p>1.5. Вводим <a target="_blank" rel="noopener" href="https://selesnow.githun.io/">https://selesnow.githun.io</a> в поле «URL сайта» и жмём Save — Продолжить — Далее…</p>
+<p><img loading="lazy" decoding="async" alt="Указываем урл сайта" width="1172" height="565" src="../images/kak-zagruzit-statistiku-reklamnyh-k-ukazyvaem-url-sajta-ca321cb1.webp" /></p>
+<p>1.6. В меню приложения перейдите в раздел «Вход через Facebook». В поле «Действительные URL-адреса для перенаправления OAuth» введите «https://selesnow.github.io/rfacebookstat/getToken/get_token.html».</p>
+<p><img loading="lazy" decoding="async" alt="Что делаем в меню приложения" width="899" height="471" src="../images/kak-zagruzit-statistiku-reklamnyh-k-cto-delaem-v-menu-priloz-585ad956.webp" /></p>
+<p>1.7. Подключаем ещё один продукт — «API Marketing»</p>
+<p><img loading="lazy" decoding="async" alt="Подключаем API Marketing" width="1224" height="452" src="../images/kak-zagruzit-statistiku-reklamnyh-k-podklucaem-api-marketing-514de796.webp" /></p>
+<p>На этом создание и настройка приложения завершены. Перейдите в меню Настройка — Основное и скопируйте идентификатор и секрет приложения.</p>
+<p><img loading="lazy" decoding="async" alt="Копируем идентификатор и секрет приложения" width="1213" height="287" src="../images/kak-zagruzit-statistiku-reklamnyh-k-kopiruem-identifikator-i-c99e0ede.webp" /></p>
+<p>Эти данные нам понадобятся для авторизации.</p>
+<p><strong>Важно</strong>: многие ошибочно выводят своё приложения из статуса «В разработке», и при попытке авторизации получают ошибку, так как для публикации приложения необходимо пройти серьёзные проверки со стороны Facebook. К счастью, если вы регистрируете приложение для своих личных нужд то выводить его из разработки не требуется.</p>
+<p><img loading="lazy" decoding="async" alt="если вы регистрируете приложение для своих личных нужд то не нужно выводить его из разработки" width="709" height="115" src="../images/kak-zagruzit-statistiku-reklamnyh-k-esli-vy-registriruete-pr-1d6b2b37.webp" /></p>
+<h2 id="2-rfacebookstat">2. Установите пакет rfacebookstat</h2>
+<p>Пакет rfacebookstat доступен для установки из CRAN и GitHub.</p>
+<p>2.1. Для установки пакетов с CRAN используйте стандартную команду install.packages().</p>
+<div class="codehilite"><pre><span></span><code>install.packages(&quot;rfacebookstat&quot;)
+</code></pre></div>
+
+<p>2.2. Подключите пакет rfacebookstat.</p>
+<p>Пакет можно рассматривать как отдельное программное обеспечение, поэтому, как и любую программу его необходимо сначала установить, и при каждой необходимости – запускать. В R подключение пакетов осуществляется функцией library().</p>
+<div class="codehilite"><pre><span></span><code>library(rfacebookstat)
+</code></pre></div>
+
+<h2 id="3-api-facebook">3. Получите токен для работы с API Facebook</h2>
+<p>Для начала работы с API Facebook осталось пройти авторизацию. Воспользуйтесь функцией fbAuth() в пакете rfacebookstat.</p>
+<p>3.1. На вкладке «Настройки» —&gt; «Основное» скопируйте ID и секрет вашего приложения и введите их в соответствующие аргументы функций.</p>
+<div class="codehilite"><pre><span></span><code>fbAuth(app_id     = 00000000000000,
+      app_secret = &quot;xxxxxxxxxxxxx&quot;, 
+      username   = &quot;ваш логин&quot;)
+</code></pre></div>
+
+<p>В аргумент username передайте ваш логин на Facebook.</p>
+<p>3.2. Возможно, впервые получая токен, вы попадете на страницу с предупреждением, что некоторые разрешения еще не одобрены для использования Facebook. Пропустите это предупреждение с помощью кнопки «Продолжить как, …».</p>
+<p>Подтвердите вход через Facebook.</p>
+<p><img loading="lazy" decoding="async" alt="Входим через ФБ" width="655" height="434" src="../images/kak-zagruzit-statistiku-reklamnyh-k-vhodim-cerez-fb-90d7067a.webp" /></p>
+<p>Далее вы будете перенаправлены на страницу сайта моих пакетов <a target="_blank" rel="noopener" href="https://selesnow.github.io">https://selesnow.github.io</a>, где для вас будет сгенерирован краткосрочный авторизационный токен.</p>
+<p>В своё время меня часто спрашивали о безопасности использования разработанных мной пакетов. Многих беспокоил именно процесс авторизации через мой сайт. Поэтому я написал о безопасности использования пакетов подробную статью  <a target="_blank" rel="noopener" href="https://habr.com/ru/post/430888/">«Насколько безопасно использовать R пакеты для работы с API рекламных систем»</a>.</p>
+<p>Если у вас включён JavaScript, то токен автоматически будет скопирован в буфер обмена,  и через 30 секунд вы будете перенаправлены на страницу с официальной справкой к пакету. Если вы отключили выполнение JavaScript, то самостоятельно скопируйте токен.</p>
+<p>3.3. Полученный токен необходимо ввести в R консоль.</p>
+<p><img loading="lazy" decoding="async" alt="Необходимый токен" width="1186" height="388" src="../images/kak-zagruzit-statistiku-reklamnyh-k-neobhodimyj-token-85575760.webp" /></p>
+<p>3.4. Далее ваш краткосрочный токен автоматически будет заменён на долгосрочный, и вы увидите в консоли сообщение:</p>
+<div class="codehilite"><pre><span></span><code>Token changed to long time successfully
+Do you want save your access token into rds file C:/Users/Username/Documents/blog_login.rfb_auth.rds for use it between R sessions ? 
+y / n (recmedation y) ?:
+</code></pre></div>
+
+<p>Первая строка сообщения говорит о том, что ваш краткосрочный токен был успешно заменён долгосрочным токеном. После, пакет спрашивает вас, хотите ли вы сохранить полученные учётные данные, что бы использовать в разных сессиях работы в R. Я крайне рекомендую вам отвечать на этот вопрос y, это избавить вас от необходимости постоянно проходить авторизацию через браузер.</p>
+<p>3.5. Проверить, что авторизация была успешно пройдена можно запросив список доступных аккаунтов.</p>
+<div class="codehilite"><pre><span></span><code>fbGetAdAccounts(username = &quot;ваш логин&quot;)
+</code></pre></div>
+
+<p>Если вы получите список аккаунтов – значит авторизация пройдена успешно, если получите ошибку — то скорее всего вы неправильно настроили приложение.</p>
+<h2 id="4-facebook">4. Получите статистику по рекламным аккаунтам в Facebook</h2>
+<p>Мы завершили подготовительный этап и можем перейти непосредственно к импорту данных.</p>
+<p>Основная функция пакета rfacebookstat — fbGetMarketingStat(). Рассмотрим подробнее работу с этой функцией, потому что с ее помощью можно получить любые данные об эффективности рекламного аккаунта.</p>
+<h3 id="41">4.1. Синтаксис</h3>
+<div class="codehilite"><pre><span></span><code>stat &lt;- fbGetMarketingStat(accounts_id  = &quot;act_0000000000&quot;,
+                           sorting      = NULL,
+                           level        = &quot;account&quot;,
+                           breakdowns   = NULL,
+                           fields       = &quot;account_id, 
+                                           campaign_name,
+                                           impressions, 
+                                           clicks, 
+                                           reach, 
+                                           spend&quot;,
+                           filtering    = NULL,
+                           date_start   = Sys.Date() - 30,
+                           date_stop    = Sys.Date(),
+                           username     = getOption(&quot;rfacebookstat.username&quot;),
+                           token_path = fbTokenPath())
+</code></pre></div>
+
+<p>В приведённом выше коде представлены значения большинства аргументов функции fbGetMarketingStat() принятые по умолчанию.</p>
+<h3 id="42">4.2. Аргументы функции</h3>
+<p><strong><em>4.2.1. accounts_id</em></strong><em>—</em>ID рекламного аккаунта. Это обязательный аргумент. Вы можете получить его из URL, если перейдете в нужный рекламный аккаунт Facebook.</p>
+<p><img loading="lazy" decoding="async" alt="accounts_id" width="551" height="40" src="../images/kak-zagruzit-statistiku-reklamnyh-k-accountsid-57396b44.webp" /></p>
+<p>Так как указывать id рекламного аккаунта вам необходимо при каждом обращении к API, вы можете избежать дублирования этой информации, передав в начале скрипта список нужных аккаунтов в опцию rfacebookstat.accounts_id.</p>
+<div class="codehilite"><pre><span></span><code>options( rfacebookstat.accounts_id = c(&quot;47725506&quot;, &quot;361373151&quot;) )
+</code></pre></div>
+
+<p>После чего, каждая функция пакета rfacebookstat автоматически будет подтягивать указанные в опции rfacebookstat.accounts_id аккаунты.</p>
+<p><strong><em>4.2.2. sorting —</em></strong>cортировка данных. Необязательный аргумент. На входе принимает список полей и направление сортировки (по возрастанию или по убыванию). Пример: reach_descending, impressions_ascending.</p>
+<p><strong><em>4.2.3. level</em></strong>— основной уровень детализации данных. Обязательный аргумент. Принимает значения ad, adset, campaign, account. Пример — level = “account”.</p>
+<p><strong><em>4.2.4. fields</em></strong>— список полей, по которым вы планируете получить данные. Обязательный аргумент. Пример: fields = “account_id,account_name,campaign_name,impressions,unique_impressions,clicks,unique_clicks,reach,spend”.</p>
+<p>Список доступных полей в версии API 2.8. смотрите в таблице ниже или <a target="_blank" rel="noopener" href="https://developers.facebook.com/docs/marketing-api/insights/fields/v2.8">официальной документации</a>.</p>
+<div class="b-table"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Поле</strong></td>
+<td><strong>Описание</strong></td>
+</tr>
+<tr>
+<td>account_idnumeric string</td>
+<td>Идентификатор рекламного аккаунта, с которым связана ваша рекламная деятельность. Рекламный аккаунт включает кампании, объявления и биллинг.<a target="_blank" rel="noopener" href="https://developers.facebook.com/docs/graph-api/using-graph-api/#fields">По умолчанию</a></td>
+</tr>
+<tr>
+<td>account_namestring</td>
+<td>Имя рекламного аккаунта, в котором сосредоточена ваша рекламная деятельность. Ваш рекламный аккаунт содержит кампании, объявления и биллинг.</td>
+</tr>
+<tr>
+<td>action_values<a target="_blank" rel="noopener" href="https://developers.facebook.com/docs/marketing-api/reference/ads-action-stats/">list<AdsActionStats></a></td>
+<td>Общая стоимость всех конверсий в результате просмотра рекламы.</td>
+</tr>
+<tr>
+<td>actions<a target="_blank" rel="noopener" href="https://developers.facebook.com/docs/marketing-api/reference/ads-action-stats/">list<AdsActionStats></a></td>
+<td>Общее количество действий, которые люди выполняют после просмотра рекламы. Действия могут включать вовлеченность, клики или конверсии.</td>
+</tr>
+<tr>
+<td>ad_idnumeric string</td>
+<td>Уникальный идентификатор объявления, который вы видите в отчете.<a target="_blank" rel="noopener" href="https://developers.facebook.com/docs/graph-api/using-graph-api/#fields">По умолчанию</a></td>
+</tr>
+<tr>
+<td>ad_namestring</td>
+<td>Уникальный ID объявления, который вы видите в отчете.</td>
+</tr>
+<tr>
+<td>adset_idnumeric string</td>
+<td>Уникальный идентификатор группы объявлений, который вы видите в отчете. Группа объявлений — это набор объявлений с одинаковыми настройками бюджета, графика показа, оптимизации и целевой аудитории.<a target="_blank" rel="noopener" href="https://developers.facebook.com/docs/graph-api/using-graph-api/#fields">По умолчанию</a></td>
+</tr>
+<tr>
+<td>adset_namestring</td>
+<td>Название группы объявлений, которое вы видите в отчете.</td>
+</tr>
+<tr>
+<td>app_store_clicksnumeric string</td>
+<td>Количество кликов по ссылкам на магазин приложений в вашей рекламе.</td>
+</tr>
+<tr>
+<td>buying_typestring</td>
+<td>Способы оплаты, таргетинга и измерения результатов рекламы в кампаниях: динамические ставки, фиксированные ставки или покупка охвата и частоты.</td>
+</tr>
+<tr>
+<td>call_to_action_clicksnumeric string</td>
+<td>Метрика указывает, сколько раз люди нажали кнопку с призывом к действию в рекламе.</td>
+</tr>
+<tr>
+<td>campaign_idnumeric string</td>
+<td>Уникальный ID рекламной кампании, который вы видите в отчете. Кампания включает группы объявлений и отдельные рекламные объявления.<a target="_blank" rel="noopener" href="https://developers.facebook.com/docs/graph-api/using-graph-api/#fields">По умолчанию</a></td>
+</tr>
+<tr>
+<td>campaign_namestring</td>
+<td>Название рекламной кампании в отчетах. Кампания включает группы объявлений и отдельные рекламные объявления.</td>
+</tr>
+<tr>
+<td>canvas_avg_view_percentnumeric string</td>
+<td>Среднее число просмотров Холста (в процентах). Холст — это экран, который открывается на мобильном устройстве после того, как человек нажимает ссылку Холста в вашей рекламе. Он может включать интерактивные или мультимедийные компоненты, такие как видео, изображения, каталоги продуктов и так далее.</td>
+</tr>
+<tr>
+<td>canvas_avg_view_timenumeric string</td>
+<td>Среднее время (в секундах), в течение которого люди просматривали Холст Facebook. Холст — это экран, который открывается на мобильном устройстве после того, как человек нажимает ссылку Холста в вашей рекламе. Он может включать интерактивные или мультимедийные компоненты, такие как видео, изображения, каталоги продуктов и так далее.</td>
+</tr>
+<tr>
+<td>clicksnumeric string</td>
+<td>Общее число нажатий вашего объявления. В это число могут входить сторонние клики на веб-сайт, отметки «Нравится» Страницы, комментарии к публикациям, ответы на приглашения или установки приложения</td>
+</tr>
+<tr>
+<td>cost_per_10_sec_video_view<a target="_blank" rel="noopener" href="https://developers.facebook.com/docs/marketing-api/reference/ads-action-stats/">list<AdsActionStats></a></td>
+<td>Средняя цена за каждый 10-секундный просмотр видео.</td>
+</tr>
+<tr>
+<td>cost_per_action_type<a target="_blank" rel="noopener" href="https://developers.facebook.com/docs/marketing-api/reference/ads-action-stats/">list<AdsActionStats></a></td>
+<td>Средняя цена за актуальное действие.</td>
+</tr>
+<tr>
+<td>cost_per_estimated_ad_recallersnumeric string</td>
+<td>Средняя цена за приблизительный прирост запоминаемости рекламы на человека.</td>
+</tr>
+<tr>
+<td>cost_per_inline_link_clicknumeric string</td>
+<td>Средняя стоимость клика по каждой встроенной ссылке.</td>
+</tr>
+<tr>
+<td>cost_per_inline_post_engagementnumeric string</td>
+<td>Средняя стоимость вовлеченности для каждой встроенной публикации.</td>
+</tr>
+<tr>
+<td>cost_per_total_actionnumeric string</td>
+<td>Средняя цена за актуальное действие.</td>
+</tr>
+<tr>
+<td>cost_per_unique_action_type<a target="_blank" rel="noopener" href="https://developers.facebook.com/docs/marketing-api/reference/ads-action-stats/">list<AdsActionStats></a></td>
+<td>Средняя цена каждого уникального действия.</td>
+</tr>
+<tr>
+<td>cost_per_unique_clicknumeric string</td>
+<td>Средняя цена за каждый уникальный клик по ссылке (все), полученный в результате вашей рекламы.</td>
+</tr>
+<tr>
+<td>cost_per_unique_inline_link_clicknumeric string</td>
+<td>Средняя цена каждого уникального клика по встроенной ссылке.</td>
+</tr>
+<tr>
+<td>cpcnumeric string</td>
+<td>Средняя цена за каждый клик в результате просмотра вашей рекламы.</td>
+</tr>
+<tr>
+<td>cpmnumeric string</td>
+<td>Средняя цена за 1 000 показов.</td>
+</tr>
+<tr>
+<td>cppnumeric string</td>
+<td>Средняя стоимость охвата 1 000 пользователей.</td>
+</tr>
+<tr>
+<td>ctrnumeric string</td>
+<td>Кликабельность для всех кликов. Общее количество полученных кликов (например, сторонние клики, отметки «Нравится», ответы на приглашения), деленное на количество показов.</td>
+</tr>
+<tr>
+<td>date_startstring</td>
+<td>Дата начала учета ваших данных. Эта метрика основана на диапазоне данных, который вы выбрали для своего представления отчетности.<a target="_blank" rel="noopener" href="https://developers.facebook.com/docs/graph-api/using-graph-api/#fields">По умолчанию</a></td>
+</tr>
+<tr>
+<td>date_stopstring</td>
+<td>Дата окончания учета ваших данных. Эта метрика основана на диапазоне данных, который вы выбрали для своего представления отчетности.<a target="_blank" rel="noopener" href="https://developers.facebook.com/docs/graph-api/using-graph-api/#fields">По умолчанию</a></td>
+</tr>
+<tr>
+<td>deeplink_clicksnumeric string</td>
+<td>Количество кликов по ссылкам на определенные части приложения.</td>
+</tr>
+<tr>
+<td>estimated_ad_recall_ratenumeric string</td>
+<td>Доля участников опроса (в процентах), которые вспомнили вашу рекламу в течение двух дней после просмотра.</td>
+</tr>
+<tr>
+<td>estimated_ad_recallersnumeric string</td>
+<td>Примерное количество людей, которые через два дня после просмотра могут вспомнить вашу рекламу, если их о ней спросят. Эта метрика показывает результативность рекламы с целями «Узнаваемость бренда», «Просмотры видео» и «Вовлеченность для публикации Страницы».</td>
+</tr>
+<tr>
+<td>frequencynumeric string</td>
+<td>Среднее количество просмотров рекламы каждым человеком.</td>
+</tr>
+<tr>
+<td>impressionsnumeric string</td>
+<td>Количество просмотров рекламы.<a target="_blank" rel="noopener" href="https://developers.facebook.com/docs/graph-api/using-graph-api/#fields">По умолчанию</a></td>
+</tr>
+<tr>
+<td>inline_link_click_ctrnumeric string</td>
+<td>Процентное отношение просмотров вашей рекламы к кликам по встроенной ссылке.</td>
+</tr>
+<tr>
+<td>inline_link_clicksnumeric string</td>
+<td>Количество кликов по ссылкам на выбранные адреса, входящие или не входящие в состав объектов монетизации Facebook. Для кликов по встроенным ссылкам используется фиксированное окно атрибуции «1 день после клика».</td>
+</tr>
+<tr>
+<td>inline_post_engagementnumeric string</td>
+<td>Общее количество действий, выполненных людьми с вашей рекламой (или, в некоторых случаях, все публикации). Для вовлеченности от встроенных публикаций используется фиксированное окно атрибуции «один день после клика».</td>
+</tr>
+<tr>
+<td>newsfeed_avg_positionnumeric string</td>
+<td>Средняя позиция, где ваша реклама была вставлена в ленты новостей на мобильных устройствах и ПК. Первая позиция находится наверху ленты новостей.</td>
+</tr>
+<tr>
+<td>newsfeed_clicksnumeric string</td>
+<td>Общее количество кликов на вашу рекламу в лентах новостей пользователей на мобильных устройствах и ПК.</td>
+</tr>
+<tr>
+<td>newsfeed_impressionsnumeric string</td>
+<td>Общее количество вставок вашей рекламы в ленты новостей пользователей на мобильных устройствах и ПК.</td>
+</tr>
+<tr>
+<td>objectivestring</td>
+<td>Цель, которую вы выбрали для кампании. Цель отражает, чего вы хотите добиться с помощью рекламы.</td>
+</tr>
+<tr>
+<td>reachnumeric string</td>
+<td>Количество людей, которые хотя бы раз увидели вашу рекламу. Отличие охвата от показов заключается в том, что последние могут включать просмотры рекламы одним и тем же человеком.</td>
+</tr>
+<tr>
+<td>relevance_scoreAdgroupRelevanceScore</td>
+<td>Оценка от 1 до 10, обозначающая уровень реагирования целевой аудитории на вашу рекламу. Данный показатель отображается после 500 показов и только для объявлений (не отображается для групп объявлений и кампаний).</td>
+</tr>
+<tr>
+<td>social_clicksnumeric string</td>
+<td>Количество всех кликов, полученных рекламой (например, отметки «Нравится», ответы на приглашения, клики с других сайтов) при отображении с социальной информацией (например, Алине Ивановой это нравится).</td>
+</tr>
+<tr>
+<td>social_impressionsnumeric string</td>
+<td>Количество просмотров вашей рекламы с упоминанием того, что кто-то из друзей на Facebook взаимодействовал с вашей Страницей Facebook или рекламой.</td>
+</tr>
+<tr>
+<td>social_reachnumeric string</td>
+<td>Количество людей, которые увидели вашу рекламу с упоминанием того, что один из их друзей на Facebook взаимодействовал с вашей Страницей Facebook или рекламой.</td>
+</tr>
+<tr>
+<td>social_spendnumeric string</td>
+<td>Общая сумма, которую вы уже потратили на свою рекламу, которая дополняется социальной информацией (например, Петру Соколову это нравится).</td>
+</tr>
+<tr>
+<td>spendnumeric string</td>
+<td>Общая сумма, которую вы потратили на кампанию, группу объявлений или рекламу в период показа.<a target="_blank" rel="noopener" href="https://developers.facebook.com/docs/graph-api/using-graph-api/#fields">По умолчанию</a></td>
+</tr>
+<tr>
+<td>total_action_valuenumeric string</td>
+<td>Общая стоимость всех конверсий в результате просмотра рекламы.</td>
+</tr>
+<tr>
+<td>total_actionsnumeric string</td>
+<td>Общее количество действий, которые люди выполняют после просмотра рекламы. Действия могут включать вовлеченность, клики или конверсии.</td>
+</tr>
+<tr>
+<td>total_unique_actionsnumeric string</td>
+<td>Количество людей, которые выполнили действие после просмотра рекламы.</td>
+</tr>
+<tr>
+<td>unique_actions<a target="_blank" rel="noopener" href="https://developers.facebook.com/docs/marketing-api/reference/ads-action-stats/">list<AdsActionStats></a></td>
+<td>Количество людей, которые выполнили действие после просмотра рекламы.</td>
+</tr>
+<tr>
+<td>unique_clicksnumeric string</td>
+<td>Общее количество уникальных пользователей, нажавших на ссылку вашего рекламного объявления. Например, если три человека нажали одно и то же объявление пять раз, число уникальных кликов — три.</td>
+</tr>
+<tr>
+<td>unique_ctrnumeric string</td>
+<td>Уникальная кликабельность для всех кликов. Количество людей, нажавших рекламу в любом месте, разделенное на количество охваченных людей. Например, вы получили 20 уникальных кликов, а реклама была показана 1 000 уникальным пользователям. Значит, соотношение кликов к показам составляет 2%.</td>
+</tr>
+<tr>
+<td>unique_impressionsnumeric string</td>
+<td>Количество людей, видевших рекламу как минимум раз.</td>
+</tr>
+<tr>
+<td>unique_inline_link_click_ctrnumeric string</td>
+<td>Отношение количества просмотров рекламы к кликам по ссылке. Для кликабельности встроенных элементов используется фиксированное окно атрибуции «1 день после клика».</td>
+</tr>
+<tr>
+<td>unique_inline_link_clicksnumeric string</td>
+<td>Количество человек, выполнивших клик по встроенной ссылке.</td>
+</tr>
+<tr>
+<td>unique_link_clicks_ctrnumeric string</td>
+<td>Доля людей, которые посмотрели вашу рекламу и нажали ссылку.</td>
+</tr>
+<tr>
+<td>unique_social_clicksnumeric string</td>
+<td>Количество людей, которые нажали эту рекламу (например, отметки «Нравится», ответы на приглашения, клики с других сайтов), пока она отображалась с социальной информацией (например, Алине Ивановой это нравится).</td>
+</tr>
+<tr>
+<td>unique_social_impressionsnumeric string</td>
+<td>Количество людей, которым было показано объявление в контекстной рекламе.</td>
+</tr>
+<tr>
+<td>video_10_sec_watched_actions<a target="_blank" rel="noopener" href="https://developers.facebook.com/docs/marketing-api/reference/ads-action-stats/">list<AdsActionStats></a></td>
+<td>Количество просмотров видео в течение как минимум 10 секунд или почти полностью (в зависимости от того, что произошло раньше).</td>
+</tr>
+<tr>
+<td>video_15_sec_watched_actions<a target="_blank" rel="noopener" href="https://developers.facebook.com/docs/marketing-api/reference/ads-action-stats/">list<AdsActionStats></a></td>
+<td>Количество просмотров вашего видео в течение как минимум 15 секунд или почти полностью в зависимости от того, что наступило раньше.</td>
+</tr>
+<tr>
+<td>video_30_sec_watched_actions<a target="_blank" rel="noopener" href="https://developers.facebook.com/docs/marketing-api/reference/ads-action-stats/">list<AdsActionStats></a></td>
+<td>Количество просмотров вашего видео в течение как минимум 30 секунд или почти полностью в зависимости от того, что наступило раньше.</td>
+</tr>
+<tr>
+<td>video_avg_pct_watched_actions<a target="_blank" rel="noopener" href="https://developers.facebook.com/docs/marketing-api/reference/ads-action-stats/">list<AdsActionStats></a></td>
+<td>(Использование данной метрики будет скоро прекращено, используйте video_avg_percent_watched_actions). Это общее время просмотра видео, разделенное на количество просмотров видео в течение всей его продолжительности. Метрика недоступна для прямых эфиров.</td>
+</tr>
+<tr>
+<td>video_avg_percent_watched_actions<a target="_blank" rel="noopener" href="https://developers.facebook.com/docs/marketing-api/reference/ads-action-stats/">list<AdsActionStats></a></td>
+<td>Среднее время просмотра видео (в процентах).</td>
+</tr>
+<tr>
+<td>video_avg_sec_watched_actions<a target="_blank" rel="noopener" href="https://developers.facebook.com/docs/marketing-api/reference/ads-action-stats/">list<AdsActionStats></a></td>
+<td>(Использование данной метрики будет скоро прекращено, используйте video_avg_time_watched_actions). Это общее время просмотра видео, разделенное на общее количество просмотров видео.</td>
+</tr>
+<tr>
+<td>video_avg_time_watched_actions<a target="_blank" rel="noopener" href="https://developers.facebook.com/docs/marketing-api/reference/ads-action-stats/">list<AdsActionStats></a></td>
+<td>Среднее время, в течение которого люди смотрели видео.</td>
+</tr>
+<tr>
+<td>video_complete_watched_actions<a target="_blank" rel="noopener" href="https://developers.facebook.com/docs/marketing-api/reference/ads-action-stats/">list<AdsActionStats></a></td>
+<td>Количество просмотров видео в течение как минимум 30 секунд или почти полностью (в зависимости от того, что произошло раньше).</td>
+</tr>
+<tr>
+<td>video_p100_watched_actions<a target="_blank" rel="noopener" href="https://developers.facebook.com/docs/marketing-api/reference/ads-action-stats/">list<AdsActionStats></a></td>
+<td>Количество раз, когда ваше видео было просмотрено в точке 100%, включая просмотры, когда человек прокрутил видео до этого момента.</td>
+</tr>
+<tr>
+<td>video_p25_watched_actions<a target="_blank" rel="noopener" href="https://developers.facebook.com/docs/marketing-api/reference/ads-action-stats/">list<AdsActionStats></a></td>
+<td>Количество раз, когда ваше видео было просмотрено в точке 25%, включая просмотры, когда человек прокрутил видео до этого момента.</td>
+</tr>
+<tr>
+<td>video_p50_watched_actions<a target="_blank" rel="noopener" href="https://developers.facebook.com/docs/marketing-api/reference/ads-action-stats/">list<AdsActionStats></a></td>
+<td>Количество раз, когда ваше видео было просмотрено в точке 50%, включая просмотры, когда человек прокрутил видео до этого момента.</td>
+</tr>
+<tr>
+<td>video_p75_watched_actions<a target="_blank" rel="noopener" href="https://developers.facebook.com/docs/marketing-api/reference/ads-action-stats/">list<AdsActionStats></a></td>
+<td>Количество раз, когда ваше видео было просмотрено в точке 75%, включая просмотры, когда человек прокрутил видео до этого момента.</td>
+</tr>
+<tr>
+<td>video_p95_watched_actions<a target="_blank" rel="noopener" href="https://developers.facebook.com/docs/marketing-api/reference/ads-action-stats/">list<AdsActionStats></a></td>
+<td>Количество раз, когда ваше видео было просмотрено в точке 95%, включая просмотры, когда человек прокрутил видео до этого момента.</td>
+</tr>
+<tr>
+<td>website_clicksnumeric string</td>
+<td>Количество кликов по ссылкам на сайт в вашей рекламе.</td>
+</tr>
+<tr>
+<td>website_ctr<a target="_blank" rel="noopener" href="https://developers.facebook.com/docs/marketing-api/reference/ads-action-stats/">list<AdsActionStats></a></td>
+<td>Процентное отношение просмотров вашей рекламы к кликам по сайту.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong><em>4.2.5. breakdowns</em></strong> — аргумент, с помощью которого можно получить данные в разбивке на различные сегменты. Можно разбивать информацию по следующим срезам:</p>
+<ul>
+<li>age;</li>
+<li>country;</li>
+<li>gender;</li>
+<li>frequency_value;</li>
+<li>hourly_stats_aggregated_by_advertiser_time_zone;</li>
+<li>hourly_stats_aggregated_by_audience_time_zone;</li>
+<li>impression_device;</li>
+<li>place_page_id;</li>
+<li>placement;</li>
+<li>device_platform;</li>
+<li>product_id;</li>
+<li>region;</li>
+<li>actions;</li>
+<li>publisher_platform;</li>
+<li>platform_position;</li>
+<li>impression_device.</li>
+</ul>
+<p>В одном запросе можно комбинировать несколько срезов. На данный момент доступны следующие комбинации:</p>
+<p>Поля, отмеченные звездочкой «*», могут запрашиваться вместе с <em>action_type, action_target_id</em> и <em>action_destination</em>.</p>
+<ul>
+<li>action_type *;</li>
+<li>action_target_id *;</li>
+<li>action_device *;</li>
+<li>action_device, placement *;</li>
+<li>action_device, placement, impression_device *;</li>
+<li>action_device, publisher_platform *;</li>
+<li>action_device, publisher_platform, impression_device *;</li>
+<li>action_device, publisher_platform, platform_position *;</li>
+<li>action_device, publisher_platform, platform_position, impression_device *;</li>
+<li>action_reaction;</li>
+<li>action_type, action_reaction;</li>
+<li>age *;</li>
+<li>gender *;</li>
+<li>age, gender *;</li>
+<li>country *;</li>
+<li>region *;</li>
+<li>placement *;</li>
+<li>placement, impression_device *;</li>
+<li>publisher_platform *;</li>
+<li>publisher_platform, impression_device *;</li>
+<li>publisher_platform, platform_position *;</li>
+<li>publisher_platform, platform_position, impression_device *;</li>
+<li>product_id *;</li>
+<li>hourly_stats_aggregated_by_advertiser_time_zone *;</li>
+<li>hourly_stats_aggregated_by_audience_time_zone *;</li>
+<li>action_carousel_card_id / action_carousel_card_name;</li>
+<li>action_carousel_card_id / action_carousel_card_name, placement;</li>
+<li>action_carousel_card_id / action_carousel_card_name, placement, impression_device;</li>
+<li>action_carousel_card_id / action_carousel_card_name, country;</li>
+<li>action_carousel_card_id / action_carousel_card_name, age;</li>
+<li>action_carousel_card_id / action_carousel_card_name, gender;</li>
+<li>action_carousel_card_id / action_carousel_card_name, age, gender.</li>
+</ul>
+<p>Пример: breakdowns = “region”</p>
+<p><strong><em>4.2.6. filtering</em></strong> — фильтр данных. Необязательный аргумент. Фильтры задаются в виде JSON объектов «ключ:значение». Необходимо прописать три свойства:</p>
+<ul>
+<li>field — поле, по которому будет осуществляться фильтрация;</li>
+<li>operator — оператор логического значения (‘EQUAL’, ‘NOT_EQUAL’, ‘GREATER_THAN’, ‘GREATER_THAN_OR_EQUAL’, ‘LESS_THAN’, ‘LESS_THAN_OR_EQUAL’, ‘IN_RANGE’, ‘NOT_IN_RANGE’, ‘CONTAIN’, ‘NOT_CONTAIN’, ‘IN’, ‘NOT_IN’, ‘ANY’, ‘ALL’, ‘NONE’);</li>
+<li>value — значения, по которому будет фильтроваться указанное поле.</li>
+</ul>
+<p>Пример:   filtering = “impressions LESS_THAN 5000”</p>
+<p><strong><em>4.2.7. date_start</em></strong> — начальная дата отчетного периода в формате YYYY-MM-DDD.</p>
+<p><strong><em>4.2.8. date_stop</em></strong> — конечная дата отчетного периода в формате YYYY-MM-DDD.</p>
+<p><strong><em>4.2.9. api_version</em></strong> — версия API Facebook.</p>
+<p><strong><em>4.2.10. access_token</em></strong> — токен доступа.</p>
+<h2 id="5-fbgetmarketingstat">5. Примеры использования функции fbGetMarketingStat</h2>
+<p>5.1. Перед тем как запускать описанные ниже примеры, сгенерируйте API-токен и сохраните его в виде файла, с помощью функции fbAuth().</p>
+<div class="codehilite"><pre><span></span><code>fbAuth(app_id     = 00000000000000,
+       app_secret = &quot;xxxxxxxxxxxxx&quot;, 
+       username   = &quot;ваш логин&quot;)
+</code></pre></div>
+
+<p>5.2. Чтобы получить статистику о количестве показов, кликов и затрат на рекламу на уровне аккаунта и в  разрезе регионов, введите следующий код:</p>
+<div class="codehilite"><pre><span></span><code>AccStat &lt;- fbGetMarketingStat( 
+                      accounts_id = «act_0000000000»,
+                      level = &quot;account&quot;,
+                      fields = &quot;account_id,
+                                account_name,
+                                impressions,
+                                clicks,
+                                spend&quot;,
+                      breakdowns = &quot;region&quot;,
+                      date_start = &quot;2020-03-01&quot;,
+                      date_stop = &quot;2020-03-30&quot;,
+                      username   = &quot;ваш логин&quot;)
+</code></pre></div>
+
+<p>5.3. Получите статистику по количеству уникальных показов и уникальных кликов, с фильтром по возрастным группам «18-24», «25-34» и сортировкой данных в порядке убывания количества уникальных показов (поле reach).</p>
+<div class="codehilite"><pre><span></span><code>CampStat &lt;-     fbGetMarketingStat(accounts_id = &quot;act_0000000000&quot;,
+                          level = &quot;campaign&quot;,
+                          fields = &quot;campaign_name,
+                                    reach,
+                                    unique_clicks&quot;,
+                          breakdowns = &quot;age&quot;,
+                          sorting = &quot;reach_descending&quot;,
+                          filtering  = &quot;age IN 18-24,25-34&quot;,
+                          date_start = &quot;2020-03-01&quot;,
+                          date_stop  = &quot;2020-03-30&quot;,
+                          username   = &quot;ваш логин&quot;)
+</code></pre></div>
+
+<h2 id="6">6. Официальные учебные материалы</h2>
+<p>Пакет rfacebookstat имеет хорошую русскоязычную документацию. В этом разделе приведу ряд ссылок, которые позволят вам максимально подробно разобраться со всеми его возможностями и особенностями синтаксиса.</p>
+<h3 id="_1">Официальные ссылки:</h3>
+<ol>
+<li>Виньетки:
+   - <a target="_blank" rel="noopener" href="https://cran.r-project.org/web/packages/rfacebookstat/vignettes/rfacebookstat-authorization.html">авторизация в API facebook</a>;
+   - <a target="_blank" rel="noopener" href="https://cran.r-project.org/web/packages/rfacebookstat/vignettes/rfacebookstat-get-statistics.html">загрузки статистики из рекламных аккаунтов Facebook</a>;</li>
+<li><a target="_blank" rel="noopener" href="https://selesnow.github.io/rfacebookstat">Страница документации</a>.</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=SgcxDqZ-5Qg&amp;list=PLD2LDq8edf4pItOb-vZTG5AXZK2niJ8_R">Плейлист с видеоуроками</a>.</li>
+<li><a target="_blank" rel="noopener" href="https://cran.r-project.org/package=rfacebookstat">Страница пакета на CRAN</a>.</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/selesnow/rfacebookstat/">Страница проекта на GitHub</a>.</li>
+</ol>
+<h2 id="_2">Выводы</h2>
+<p>Используя API Facebook и пакет функций на языке R rfacebookstat, вы сможете:</p>
+<ul>
+<li>получить данные по своим рекламным аккаунтам, кампаниям, объявлениям и так далее во множестве различных разрезов.</li>
+<li>строить на основе полученных данных любые визуализации, используя всю мощь языка R.</li>
+<li>передавать полученные данные в любую базу данных или сохранять в виде CSV-файла.</li>
+</ul>
+<hr />
+<p><em><a target="_blank" rel="noopener" href="https://netpeak.net/ru/blog/kak-zagruzit-statistiku-reklamnykh-kampanii-iz-api-facebook-s-pomoshch-yu-yazyka-r/">Оригинал публикации на блоге Netpeka.</a></em></p></div>
+                    
+                    <div class="b-tags"><a class="b-chip" href="../?tag=api#posts">API</a><a class="b-chip" href="../?tag=avtomatizatsiya#posts">Автоматизация</a><a class="b-chip" href="../?tag=import-dannyh#posts">Импорт данных</a><a class="b-chip" href="../?tag=facebook#posts">Facebook</a><a class="b-chip" href="../?tag=r#posts">R</a></div>
+                </div>
+            </article>
+            <aside class="b-toc" aria-label="Contents"><div class="b-toc-title"><span class="ru-text">Содержание</span><span class="ua-text">Зміст</span><span class="en-text">Contents</span></div><ul><li><a href="#1-facebook">1. Создайте приложение в Facebook</a></li><li><a href="#2-rfacebookstat">2. Установите пакет rfacebookstat</a></li><li><a href="#3-api-facebook">3. Получите токен для работы с API Facebook</a></li><li><a href="#4-facebook">4. Получите статистику по рекламным аккаунтам в Facebook</a><ul><li><a href="#41">4.1. Синтаксис</a></li><li><a href="#42">4.2. Аргументы функции</a></li></ul></li><li><a href="#5-fbgetmarketingstat">5. Примеры использования функции fbGetMarketingStat</a></li><li><a href="#6">6. Официальные учебные материалы</a><ul><li><a href="#_1">Официальные ссылки:</a></li></ul></li><li><a href="#_2">Выводы</a></li></ul></aside>
+        </div>
+        <section class="b-related">
+            <h2 class="outfit-font"><span class="ru-text">Читайте также</span><span class="ua-text">Читайте також</span><span class="en-text">Related posts</span></h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="../kak-svyazat-yandeks-direkt-s-microsoft-power-bi/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="0">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/kak-svyazat-yandeks-direkt-s-microsoft-power-bi-ustanovite-a-3bad2fbf.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">февр. 2017</span><span class="ua-text">лют. 2017</span><span class="en-text">Feb 2017</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2017</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">4 мин чтения</span><span class="ua-text">4 хв читання</span><span class="en-text">4 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Как связать Яндекс.Директ с Microsoft Power BI.</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">Яндекс.Директ собирает много данных, но, к сожалению, в веб-интерфейсе доступно очень мало информации для анализа. В этой статье я подробно опишу, как получить статистику о рекламных…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">API</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Яндекс Директ</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a>
+                <a href="../video-urok-kak-zagruzit-statistiku-po-reklamnym-akkauntam-kampaniyam-g/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="60">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/covers/1309.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">март 2020</span><span class="ua-text">берез. 2020</span><span class="en-text">Mar 2020</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2020</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">1 мин чтения</span><span class="ua-text">1 хв читання</span><span class="en-text">1 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Видео урок: Как загрузить статистику по рекламным аккаунтам, кампаниям, группам объявлений и объявлениям из Facebook Marketing API в Power BI с помощью языка R</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">В этом видео уроке мы разберёмся с довольно частой для интернет маркетинга задачей, а именно с тем, как загрузить данные о рекламных кампаниях из Facebook в Microsoft Power BI.</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">API</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">BI</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a>
+                <a href="../rfacebookstat-2-0-0-obzor-reliza-i-6-video-urokov-po-rabote-s-facebook/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="120">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/covers/1290.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">дек. 2019</span><span class="ua-text">груд. 2019</span><span class="en-text">Dec 2019</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2019</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">4 мин чтения</span><span class="ua-text">4 хв читання</span><span class="en-text">4 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">rfacebookstat 2.0.0 | Обзор релиза и 6 видео уроков по работе с Facebook Marketing API на языке R</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">Последние несколько месяцев я много работал над функционалом пакета rfacebookstat, предназначенным для работы с Facebook Marketing API на языке R. В результате чего пакет был значительно…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">API</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Facebook</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a></div>
+        </section>
+        <a href="../" class="b-back"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i><span class="ru-text">Ко всем материалам</span><span class="ua-text">До всіх матеріалів</span><span class="en-text">All posts</span></a>
+    </main>
+
+    <section class="px-6 max-w-7xl mx-auto pb-24 relative z-10">
+        <div class="grid md:grid-cols-2 gap-6" data-aos="fade-up">
+            <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(59, 130, 246, 0.1));">
+                <div class="bento-content w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center text-blue-400 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-telegram"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">Telegram-канал R4marketing</span><span class="ua-text">Telegram-канал R4marketing</span><span class="en-text">R4marketing on Telegram</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Новые статьи, видео и заметки по R — первыми.</span><span class="ua-text">Нові статті, відео та нотатки з R — першими.</span><span class="en-text">New articles, videos and R notes — first.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-blue-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+            <a href="https://www.youtube.com/R4marketing/?sub_confirmation=1" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(239, 68, 68, 0.1));">
+                <div class="bento-content w-16 h-16 bg-red-500/20 rounded-2xl flex items-center justify-center text-red-500 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-youtube"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">YouTube-канал R4marketing</span><span class="ua-text">YouTube-канал R4marketing</span><span class="en-text">R4marketing on YouTube</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Видеоуроки по R, аналитике и AI-инструментам.</span><span class="ua-text">Відеоуроки з R, аналітики та AI-інструментів.</span><span class="en-text">Video lessons on R, analytics and AI tools.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-red-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/5 bg-slate-950/80 backdrop-blur-md pt-16 pb-8 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
+                <div class="sm:col-span-2 lg:col-span-4">
+                    <a href="../../" class="inline-flex items-center gap-3 group mb-5">
+                        <img src="../../logo.jpg" alt="Alexey Seleznev" class="w-10 h-10 rounded-xl object-cover border border-white/10 group-hover:border-purple-500/50 transition-colors">
+                        <span class="text-lg font-black tracking-tight uppercase outfit-font text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+                    </a>
+                    <p class="text-sm text-slate-400 leading-relaxed max-w-sm mb-6"><span class="ru-text">Head of Analytics в Netpeak Group. Автор open source R-пакетов, бесплатных курсов по R и проекта R4marketing.</span><span class="ua-text">Head of Analytics у Netpeak Group. Автор open source R-пакетів, безкоштовних курсів з R та проєкту R4marketing.</span><span class="en-text">Head of Analytics at Netpeak Group. Author of open source R packages, free R courses and the R4marketing project.</span></p>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="https://t.me/R4marketing" target="_blank" rel="noopener" aria-label="Telegram R4marketing" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-400 hover:border-blue-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-telegram"></i></a>
+                        <a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" aria-label="YouTube R4marketing" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-red-500 hover:border-red-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="https://github.com/selesnow" target="_blank" rel="noopener" aria-label="GitHub" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-white hover:border-white/30 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://linkedin.com/in/selesnow" target="_blank" rel="noopener" aria-label="LinkedIn" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-500 hover:border-blue-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://facebook.com/selesnow" target="_blank" rel="noopener" aria-label="Facebook" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-600/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/alexey.selesnow" target="_blank" rel="noopener" aria-label="Instagram" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-pink-500 hover:border-pink-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://habr.com/ru/users/selesnow/" target="_blank" rel="noopener" aria-label="Habr" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-teal-400 hover:border-teal-400/40 transition-all hover:-translate-y-0.5"><i class="fa-solid fa-h"></i></a>
+                    </div>
+                </div>
+
+                <nav class="lg:col-span-2" aria-label="Site map">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">Сайт</span><span class="ua-text">Сайт</span><span class="en-text">Site</span></h3>
+                    <ul class="space-y-3">
+                        <li><a href="../../" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-house w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a></li>
+                        <li><a href="../../opensource/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-code-branch w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span></a></li>
+                        <li><a href="../../courses/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-graduation-cap w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a></li>
+                        <li><a href="../../videos/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-circle-play w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a></li>
+                        <li><a href="../../talks/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-microphone-lines w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a></li>
+                        <li><a href="../../articles/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-pen-nib w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a></li>
+                        <li><a href="../../interviews/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-regular fa-newspaper w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a></li>
+                        <li><a href="../../blog/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-feather-pointed w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a></li>
+                    </ul>
+                </nav>
+
+                <div class="lg:col-span-3">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">R4marketing и публикации</span><span class="ua-text">R4marketing і публікації</span><span class="en-text">R4marketing & writing</span></h3>
+                    <ul class="space-y-3">
+                        <li><a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-telegram w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Telegram-канал R4marketing</span><span class="ua-text">Telegram-канал R4marketing</span><span class="en-text">R4marketing Telegram</span></a></li>
+                        <li><a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-youtube w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">YouTube-канал R4marketing</span><span class="ua-text">YouTube-канал R4marketing</span><span class="en-text">R4marketing YouTube</span></a></li>
+                        <li><a href="https://alexeyseleznev.wordpress.com/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-pen-nib w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Личный блог</span><span class="ua-text">Особистий блог</span><span class="en-text">Personal blog</span></a></li>
+                        <li><a href="https://habr.com/ru/users/selesnow/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-h w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Профиль на Хабре</span><span class="ua-text">Профіль на Хабрі</span><span class="en-text">Habr profile</span></a></li>
+                        <li><a href="https://alexey-seleznev.pro/publications/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-layer-group w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Архив публикаций</span><span class="ua-text">Архів публікацій</span><span class="en-text">Publications archive</span></a></li>
+                        <li><a href="https://github.com/selesnow" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-github w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">GitHub</span><span class="ua-text">GitHub</span><span class="en-text">GitHub</span></a></li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-3">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">Контакты</span><span class="ua-text">Контакти</span><span class="en-text">Contacts</span></h3>
+                    <ul class="space-y-4">
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">Email</div><a href="mailto:me@alexey-seleznev.pro" class="text-sm text-slate-300 hover:text-purple-300 transition-colors break-all">me@alexey-seleznev.pro</a></li>
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">Telegram</div><a href="https://t.me/AlexeySeleznev" target="_blank" rel="noopener" class="text-sm text-slate-300 hover:text-blue-300 transition-colors break-all">@AlexeySeleznev</a></li>
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">LinkedIn</div><a href="https://linkedin.com/in/selesnow" target="_blank" rel="noopener" class="text-sm text-slate-300 hover:text-blue-300 transition-colors break-all">linkedin.com/in/selesnow</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-14 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+                <p>© 2026 Alexey Seleznev. <span class="ru-text">Все права защищены.</span><span class="ua-text">Усі права захищені.</span><span class="en-text">All rights reserved.</span></p>
+                <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="inline-flex items-center gap-2 font-semibold hover:text-white transition-colors group"><span class="ru-text">Наверх</span><span class="ua-text">Нагору</span><span class="en-text">Back to top</span><span class="w-7 h-7 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-purple-500 group-hover:border-purple-500 transition-all"><i class="fa-solid fa-arrow-up text-[10px]"></i></span></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script src="../../assets/site.js"></script>
+
+    <script>
+    (function () {
+        // кнопка «Копировать» у блоков кода
+        document.querySelectorAll('.b-prose .codehilite').forEach(box => {
+            const btn = document.createElement('button');
+            btn.type = 'button'; btn.className = 'b-copy'; btn.setAttribute('aria-label', 'Copy code');
+            btn.innerHTML = '<i class="fa-regular fa-copy" aria-hidden="true"></i>';
+            btn.addEventListener('click', () => {
+                navigator.clipboard.writeText(box.querySelector('pre').innerText).then(() => {
+                    btn.innerHTML = '<i class="fa-solid fa-check" aria-hidden="true"></i>';
+                    setTimeout(() => btn.innerHTML = '<i class="fa-regular fa-copy" aria-hidden="true"></i>', 1500);
+                });
+            });
+            box.appendChild(btn);
+        });
+        // подсветка текущего раздела в оглавлении
+        const links = Array.from(document.querySelectorAll('.b-toc a'));
+        if (links.length && 'IntersectionObserver' in window) {
+            const map = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+            const io = new IntersectionObserver(es => es.forEach(e => {
+                if (e.isIntersecting) { links.forEach(l => l.classList.remove('active')); const a = map.get(e.target.id); if (a) a.classList.add('active'); }
+            }), { rootMargin: '-80px 0px -70% 0px' });
+            map.forEach((_, id) => { const el = document.getElementById(id); if (el) io.observe(el); });
+        }
+    })();
+    </script>
+</body>
+</html>

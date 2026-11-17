@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Alexey Seleznev">
+    <meta name="theme-color" content="#030712">
+    <link rel="canonical" href="https://alexey-seleznev.pro/blog/r-paket-tidyr-i-ego-novye-funktsii-pivot-longer-i-pivot-wider/">
+
+    <title>R пакет tidyr и его новые функции pivot_longer и pivot_wider | Алексей Селезнёв</title>
+    <meta name="title" content="R пакет tidyr и его новые функции pivot_longer и pivot_wider | Алексей Селезнёв">
+    <meta name="description" content="Пакет tidyr входит в ядро одной из наиболее популярных библиотек на языке R — tidyverse.Основное назначение пакета — приведение данных к аккуратному виду. На Хабре уже…">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alexey-seleznev.pro/blog/r-paket-tidyr-i-ego-novye-funktsii-pivot-longer-i-pivot-wider/">
+    <meta property="og:site_name" content="ALEXEY-SELEZNEV.pro">
+    <meta property="og:title" content="R пакет tidyr и его новые функции pivot_longer и pivot_wider | Алексей Селезнёв">
+    <meta property="og:description" content="Пакет tidyr входит в ядро одной из наиболее популярных библиотек на языке R — tidyverse.Основное назначение пакета — приведение данных к аккуратному виду. На Хабре уже…">
+    <meta property="og:image" content="https://alexey-seleznev.pro/photo.jpg">
+    <meta property="og:image:alt" content="Алексей Селезнёв">
+    <meta property="og:locale" content="ru_RU">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="https://alexey-seleznev.pro/blog/r-paket-tidyr-i-ego-novye-funktsii-pivot-longer-i-pivot-wider/">
+    <meta name="twitter:title" content="R пакет tidyr и его новые функции pivot_longer и pivot_wider | Алексей Селезнёв">
+    <meta name="twitter:description" content="Пакет tidyr входит в ядро одной из наиболее популярных библиотек на языке R — tidyverse.Основное назначение пакета — приведение данных к аккуратному виду. На Хабре уже…">
+    <meta name="twitter:image" content="https://alexey-seleznev.pro/photo.jpg">
+
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z56YHE916N"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Z56YHE916N');
+    </script>
+    <link rel="icon" type="image/jpeg" href="../../logo.jpg">
+    <link rel="apple-touch-icon" href="../../logo.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;700;800;900&display=swap">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/site.css">
+    <!-- Tailwind собран заранее (_build/build.py) и подключается последним, как это делал CDN-скрипт -->
+    <link rel="stylesheet" href="../../assets/tailwind.css">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "R пакет tidyr и его новые функции pivot_longer и pivot_wider",
+  "datePublished": "2019-06-25",
+  "inLanguage": "ru",
+  "description": "Пакет tidyr входит в ядро одной из наиболее популярных библиотек на языке R — tidyverse.Основное назначение пакета — приведение данных к аккуратному виду. На Хабре уже…",
+  "author": {
+    "@id": "https://alexey-seleznev.pro/#person"
+  },
+  "mainEntityOfPage": "https://alexey-seleznev.pro/blog/r-paket-tidyr-i-ego-novye-funktsii-pivot-longer-i-pivot-wider/"
+}
+    </script>
+    <link rel="stylesheet" href="../blog.css">
+</head>
+<body class="relative lang-en">
+
+    <!-- Interactive Background -->
+    <div id="vanta-bg"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full z-50 top-0 left-0 border-b border-white/5 bg-slate-950/60 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 h-16 flex items-center justify-between">
+            <a href="../../" class="flex items-center gap-2 sm:gap-2.5 md:gap-3 group shrink min-w-0">
+                <img src="../../logo.jpg" alt="Alexey Seleznev" class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 rounded-lg sm:rounded-xl object-cover shadow-md border border-white/10 group-hover:border-purple-500/50 group-hover:scale-105 transition-all shrink-0">
+                <span class="text-xs min-[400px]:text-sm sm:text-base md:text-xl font-black tracking-tight uppercase outfit-font whitespace-nowrap text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+            </a>
+            <div class="hidden xl:flex gap-6 text-sm font-semibold text-slate-400">
+                <a href="../../" class="nav-link hover:text-white transition-colors"><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a>
+                <a href="../../opensource/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span></a>
+                <a href="../../courses/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a>
+                <a href="../../videos/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a>
+                <a href="../../talks/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a>
+                <a href="../../articles/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a>
+                <a href="../../interviews/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a>
+                <a href="../../blog/" class="nav-link hover:text-white transition-colors active"><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a>
+            </div>
+
+            <div class="flex items-center gap-1.5 sm:gap-2 md:gap-4 shrink-0">
+                <div class="lang-switcher flex gap-1 sm:gap-1.5 md:gap-2 text-[11px] sm:text-xs md:text-sm font-bold border-r border-white/10 pr-1.5 sm:pr-3 md:pr-4 mr-0.5 sm:mr-1 md:mr-2 outfit-font">
+                    <button onclick="changeLang('en')" id="btn-en" class="active hover:text-white transition-colors">EN</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ru')" id="btn-ru" class="text-slate-500 hover:text-white transition-colors">RU</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ua')" id="btn-ua" class="text-slate-500 hover:text-white transition-colors">UA</button>
+                </div>
+
+                <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="text-slate-400 hover:text-blue-400 transition-colors hidden sm:block" aria-label="Telegram"><i class="fa-brands fa-telegram text-lg md:text-xl"></i></a>
+                <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="text-slate-400 hover:text-white transition-colors hidden sm:block" aria-label="GitHub"><i class="fa-brands fa-github text-lg md:text-xl"></i></a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="xl:hidden w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-purple-500/20 hover:border-purple-500/40 transition-all focus:outline-none" aria-label="Toggle Navigation Menu">
+                    <i class="fa-solid fa-bars text-sm sm:text-lg" id="mobile-menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div id="mobile-menu" class="hidden xl:hidden border-t border-white/10 bg-slate-950/95 backdrop-blur-2xl shadow-2xl overflow-y-auto max-h-[calc(100vh-4rem)] transition-all">
+            <div class="max-w-7xl mx-auto px-6 py-6 space-y-1">
+                <a href="../../" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-house text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span>
+                </a>
+                <a href="../../opensource/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-code-branch text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span>
+                </a>
+                <a href="../../courses/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-graduation-cap text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span>
+                </a>
+                <a href="../../videos/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-circle-play text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span>
+                </a>
+                <a href="../../talks/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-microphone-lines text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span>
+                </a>
+                <a href="../../articles/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-pen-nib text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span>
+                </a>
+                <a href="../../interviews/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-regular fa-newspaper text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span>
+                </a>
+                <a href="../../blog/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-white bg-white/5 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-feather-pointed text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span>
+                </a>
+
+                <div class="pt-4 mt-3 border-t border-white/10 flex items-center justify-around text-slate-400">
+                    <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-blue-400 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-telegram text-xl"></i> Telegram
+                    </a>
+                    <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="p-2 hover:text-white transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-github text-xl"></i> GitHub
+                    </a>
+                    <a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-red-500 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-youtube text-xl"></i> YouTube
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="b-wrap relative z-10">
+        <nav class="b-crumbs" aria-label="breadcrumb">
+            <a href="../../"><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a><span>/</span><a href="../"><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a><span>/</span><a href="../?cat=programmirovanie#posts">Программирование</a>
+        </nav>
+        <div class="b-layout has-toc">
+            <article class="bento-glass no-lift b-article" data-aos="fade-up">
+                <div class="bento-content">
+                    <div class="b-cats"><a class="b-chip b-chip-cat" href="../?cat=programmirovanie#posts">Программирование</a><a class="b-chip b-chip-cat" href="../?cat=r#posts">R</a></div>
+                    <h1 class="b-title outfit-font">R пакет tidyr и его новые функции pivot_longer и pivot_wider</h1>
+                    <div class="b-meta">
+                        <span><i class="fa-regular fa-calendar" aria-hidden="true"></i><span class="ru-text">25 июня 2019</span><span class="ua-text">25 червня 2019</span><span class="en-text">25 Jun 2019</span></span>
+                        <span><i class="fa-regular fa-clock" aria-hidden="true"></i><span class="ru-text">13 мин чтения</span><span class="ua-text">13 хв читання</span><span class="en-text">13 min read</span></span>
+                        <span class="b-lang" title="Русский">RU</span>
+                    </div>
+                    <div class="b-note"><i class="fa-regular fa-clock" aria-hidden="true"></i><div><span class="ru-text">Материал опубликован в 2019 году — описанные инструменты и интерфейсы могли измениться.</span><span class="ua-text">Матеріал опубліковано у 2019 році — описані інструменти та інтерфейси могли змінитися.</span><span class="en-text">Published in 2019 — the tools and interfaces described may have changed since.</span></div></div>
+                    
+                    <div class="b-prose"><p>Пакет <strong>tidyr</strong> входит в ядро одной из наиболее популярных библиотек на языке R — <strong>tidyverse</strong>.<br />
+Основное назначение пакета — приведение данных к аккуратному виду.</p>
+<p>На Хабре уже есть <a target="_blank" rel="noopener" href="https://habr.com/ru/post/248741/">публикация</a> посвящённая данному пакету, но датируюется она 2015 годом. А я хочу рассказать, о наиболее актуальных изменениях, о которых несколько дней назад сообщил его автор Хедли Викхем.</p>
+<p><img loading="lazy" decoding="async" alt="image" width="617" height="335" src="../images/r-paket-tidyr-i-ego-novye-funktsii-pivot-longer-i-pivot-wide-06a05c2a.webp" /></p>
+<blockquote>
+<p><strong>SJK</strong>: Функции gather() и spread() будут считаться устаревшими?</p>
+<p><strong>Hadley Wickham</strong>: В какой то мере. Мы перестанем рекомендовать использование данных функций, и исправлять в них ошибки, но они и далее буду присутствовать в пакете в текущем состоянии.</p>
+</blockquote>
+<h2 id="_1">Содержание</h2>
+<ul>
+<li>Концепция TidyData</li>
+<li>Основные функции входящие в пакет tidyr</li>
+<li>Новая концепция преобразования данных из широкого формата в длинный и наоборот</li>
+<li>Установка наиболее актуальной версии tidyr 0.8.3.9000</li>
+<li>Переход на новые функции</li>
+<li>Простой пример преобразования данных из широкого формата в длинный</li>
+<li>Спецификации</li>
+<li>Спецификация с использованием нескольких значений(.value)</li>
+<li>Преобразование дата фреймов из длинного формата к широкому  </li>
+<li>Простейший пример приведения таблицы к широкому формату</li>
+<li>Генерация имени столбца из нескольких исходных переменных</li>
+<li>Несколько продвинутых примеров работы с новой концепцией tidyr  </li>
+<li>Приведение данных к аккуратному виду на примере набора данных о переписи дохода и арендной платы в США</li>
+<li>Всемирный банк</li>
+<li>Список контактов</li>
+<li>Заключение</li>
+</ul>
+<blockquote>
+<p>Впервые статья была опубликована на <a target="_blank" rel="noopener" href="https://habr.com/ru/post/444622/">Хабре</a></p>
+<p><a target="_blank" rel="noopener" href="https://habr.com/ru/post/444622/">https://habr.com/ru/post/444622/</a></p>
+</blockquote>
+<h2 id="tidydata">Концепция TidyData</h2>
+<p>Цель <strong>tidyr</strong> — помочь вам привести данные к так называемому аккуратному виду. Аккуратные данные — это данные, где:</p>
+<ul>
+<li>Каждая переменная находится в столбце.</li>
+<li>Каждое наблюдение — это строка.</li>
+<li>Каждое значение является ячейкой.</li>
+</ul>
+<p>С данными которые приведены к tidy data значительно проще и удобнее работать при проведении анализа.</p>
+<h2 id="tidyr">Основные функции входящие в пакет tidyr</h2>
+<p>tidyr содержит набор функции предназначенных для трансформации таблиц:</p>
+<ul>
+<li><code>fill()</code> — заполнение пропущенных значений в столбце, предыдущими значениями;</li>
+<li><code>separate()</code> — разбивает одно поле на несколько через разделитель;</li>
+<li><code>unite()</code> — совершает операцию объединения нескольких полей в одно, действие обратное функции <code>separate()</code>;</li>
+<li><code>pivot_longer()</code> — функция, преобразующая данные из широкого формата в длинный;</li>
+<li><code>pivot_wider()</code> — функция, преобразующая данные из длинного формата в широкий. Операция обратная той, которую осуществляет функция <code>pivot_longer()</code>.</li>
+<li><code>gather()</code><strong>устаревшая</strong> — функция, преобразующая данные из широкого формата в длинный;</li>
+<li><code>spread()</code><strong>устаревшая</strong> — функция, преобразующая данные из длинного формата в широкий. Операция обратная той, которую осуществляет функция <code>gather()</code>.</li>
+</ul>
+<h2 id="_2">Новая концепция преобразования данных из широкого формата в длинный и наоборот</h2>
+<p>Ранее для подобного рода трансформации использовались функции <code>gather()</code> и <code>spread()</code>. За годы существования этих функций стало очевидно, что для большинства пользователей, включая автора пакета, названия этих функций, и их аргументов были достаточно не очевидны, и вызывали сложности при их поиске и понимании того, какая из этих функций приводит дата фрейм из широко в длинный формат, и наоборот.</p>
+<p>В связи с чем в <strong>tidyr</strong> были добавлены две новые, важные функции, которые предназначены для трансформации дата фреймов.</p>
+<p>Новые функции <code>pivot_longer()</code> и <code>pivot_wider()</code> были созданы под впечатлением от некоторых функций из пакета <strong>cdata</strong>, созданного Джоном Маунтом и Ниной Зумель.</p>
+<h3 id="tidyr-0839000">Установка наиболее актуальной версии tidyr 0.8.3.9000</h3>
+<p>Для установки новой, наиболее актуальной версии пакета <strong>tidyr</strong> <em>0.8.3.9000</em>, в которой доступны новые функции, воспользуйтесь следующим кодом.</p>
+<p><code>devtools::install_github("tidyverse/tidyr")</code></p>
+<p>На момент написания статьи эти функции доступны только в dev версии пакета на GitHub.</p>
+<h3 id="_3">Переход на новые функции</h3>
+<p>На самом деле перевести старые скрипты на работу с новыми функциями несложно, для большего понимания, я возьму пример из документации старых функций и покажу как эти же операции выполняются с помощью новых <code>pivot_*()</code> функций.</p>
+<p>Преобразование широкого формата к длинному.<br />
+<strong>Пример кода из документации функции gather</strong></p>
+<div class="codehilite"><pre><span></span><code># example
+library(dplyr)
+stocks &lt;- data.frame(
+  time = as.Date(&#39;2009-01-01&#39;) + 0:9,
+  X = rnorm(10, 0, 1),
+  Y = rnorm(10, 0, 2),
+  Z = rnorm(10, 0, 4)
+)
+
+# old
+stocks_gather &lt;- stocks %&gt;% gather(key   = stock, 
+                                   value = price, 
+                                   -time)
+
+# new
+stocks_long   &lt;- stocks %&gt;% pivot_longer(cols      = -time, 
+                                       names_to  = &quot;stock&quot;, 
+                                       values_to = &quot;price&quot;)
+</code></pre></div>
+
+<p>Преобразование длинного формата к широкому.<br />
+<strong>Пример кода из документации функции spread</strong></p>
+<div class="codehilite"><pre><span></span><code># old
+stocks_spread &lt;- stocks_gather %&gt;% spread(key = stock, 
+                                          value = price) 
+
+# new 
+stock_wide    &lt;- stocks_long %&gt;% pivot_wider(names_from  = &quot;stock&quot;,
+                                            values_from = &quot;price&quot;)
+</code></pre></div>
+
+<p>Т.к. в приведённых выше примерах работы с <code>pivot_longer()</code> и <code>pivot_wider()</code>, в исходной таблице <em>stocks</em> нет столбцов перечисленных в аргументах <em>names_to</em> и <em>values_to</em> их имена необходимо указывать в кавычках.</p>
+<p>Таблица с помощью которой вам наиболее просто будет разобраться с тем, как перейти на работу с новой концепцией <strong>tidyr</strong>.</p>
+<p><img loading="lazy" decoding="async" alt="image" width="985" height="285" src="../images/r-paket-tidyr-i-ego-novye-funktsii-pivot-longer-i-pivot-wide-e4fe0360.webp" /></p>
+<h2 id="_4">Примечание от автора</h2>
+<blockquote>
+<p>Весь приведённый далее текст является адаптивным, я бы даже сказал свободным переводом <a target="_blank" rel="noopener" href="https://tidyr.tidyverse.org/dev/articles/pivot.html">виньетки</a> с официального сайта библиотеки tidyverse.</p>
+</blockquote>
+<h2 id="_5">Простой пример преобразования данных из широкого формата в длинный</h2>
+<p><code>pivot_longer ()</code> — делает наборы данных длиннее, уменьшая количество столбцов и увеличивая количество строк.</p>
+<p><img loading="lazy" decoding="async" alt="image" width="516" height="462" src="../images/r-paket-tidyr-i-ego-novye-funktsii-pivot-longer-i-pivot-wide-85a3d207.webp" /></p>
+<p>Для выполнения примеров, представленных в статье изначально необходимо подключить нужные пакеты:</p>
+<div class="codehilite"><pre><span></span><code>library(tidyr)
+library(dplyr)
+library(readr)
+</code></pre></div>
+
+<p>Допустим у нас есть таблица c результатами опроса, в котором (среди прочего) спрашивали людей об их религии и годовом доходе:</p>
+<div class="codehilite"><pre><span></span><code>#&gt; # A tibble: 18 x 11
+#&gt;    religion `&lt;$10k` `$10-20k` `$20-30k` `$30-40k` `$40-50k` `$50-75k`
+#&gt;    &lt;chr&gt;      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+#&gt;  1 Agnostic      27        34        60        81        76       137
+#&gt;  2 Atheist       12        27        37        52        35        70
+#&gt;  3 Buddhist      27        21        30        34        33        58
+#&gt;  4 Catholic     418       617       732       670       638      1116
+#&gt;  5 Don’t k…      15        14        15        11        10        35
+#&gt;  6 Evangel…     575       869      1064       982       881      1486
+#&gt;  7 Hindu          1         9         7         9        11        34
+#&gt;  8 Histori…     228       244       236       238       197       223
+#&gt;  9 Jehovah…      20        27        24        24        21        30
+#&gt; 10 Jewish        19        19        25        25        30        95
+#&gt; # … with 8 more rows, and 4 more variables: `$75-100k` &lt;dbl&gt;,
+#&gt; #   `$100-150k` &lt;dbl&gt;, `&gt;150k` &lt;dbl&gt;, `Don&#39;t know/refused` &lt;dbl&gt;
+</code></pre></div>
+
+<p>Эта таблица содержит данные о религии респондентов в строках, а уровень дохода разбросан по именам столбцов. Количество респондентов из каждой категории хранится в значениях ячеек на пересечении религии и уровня дохода. Чтобы привести таблицу к аккуратному, правильному формату, достаточно использовать <code>pivot_longer()</code>:</p>
+<div class="codehilite"><pre><span></span><code>pew %&gt;% 
+  pivot_longer(cols = -religion, names_to = &quot;income&quot;, values_to = &quot;count&quot;)
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code>pew %&gt;% 
+  pivot_longer(cols = -religion, names_to = &quot;income&quot;, values_to = &quot;count&quot;)
+#&gt; # A tibble: 180 x 3
+#&gt;    religion income             count
+#&gt;    &lt;chr&gt;    &lt;chr&gt;              &lt;dbl&gt;
+#&gt;  1 Agnostic &lt;$10k                 27
+#&gt;  2 Agnostic $10-20k               34
+#&gt;  3 Agnostic $20-30k               60
+#&gt;  4 Agnostic $30-40k               81
+#&gt;  5 Agnostic $40-50k               76
+#&gt;  6 Agnostic $50-75k              137
+#&gt;  7 Agnostic $75-100k             122
+#&gt;  8 Agnostic $100-150k            109
+#&gt;  9 Agnostic &gt;150k                 84
+#&gt; 10 Agnostic Don&#39;t know/refused    96
+#&gt; # … with 170 more rows
+</code></pre></div>
+
+<p>Аргументы функции <code>pivot_longer()</code></p>
+<ul>
+<li>Первый аргумент <em>cols</em>, описывает, какие столбцы необходимо объеденить. В данном случае все столбцы, кроме <em>time</em>.</li>
+<li>Аргумент <em>names_to</em> дает имя переменной, которая будет создана из имён столбцов, которые мы объединили.</li>
+<li><em>values_to</em> дает имя переменной, которая будет создана из данных, хранящихся в значениях ячеек объединённых столбцов.</li>
+</ul>
+<h2 id="_6">Спецификации</h2>
+<p>Это новый функционал пакета <strong>tidyr</strong>, который ранее при работе с устаревшими функциями был недоступен.</p>
+<p>Спецификация — это фрейм данных, каждая строка которого соответствует одному столбцу в новом выходном дата фрейме, и двумя специальными столбцами, которые начинаются с.:</p>
+<ul>
+<li><em>.name</em> содержит исходное название столбца.</li>
+<li><em>.value</em> содержит имя столбца, в который будут входить значения ячеек.</li>
+</ul>
+<p>Остальные столбцы спецификации отражают то, как в новом столбце будет выводиться название сжимаемых столбцов из <em>.name</em>.</p>
+<p>Спецификация описывает метаданные, хранящиеся в имени столбца, с одной строкой для каждого столбца и одним столбцом для каждой переменной, объединенной с именем столбца, наверное сейчас такое определение кажется запутанным, но после рассмотрения нескольких примеров всё станет значительно понятнее.</p>
+<p>Смысл спецификации заключается в том, что вы можете извлекать, изменять и задавать новые метаданные к преобразуемому датафрейму.</p>
+<p>Для работы со спецификациями при преобразовании таблицы из широкого формата в длинный служит функция <code>pivot_longer_spec()</code>.</p>
+<p>Как эта функция работает, она берёт любой дата фрейм, и формирует его метаданные описанным выше образом.</p>
+<p>Для примера давайте возмём набор данных who, который предоставляется вместе с пакетом <strong>tidyr</strong>. Этот набор данных содержит информацию предоставляемую международной организацией здравоохранения о заболеваемости туберкулёзом.</p>
+<div class="codehilite"><pre><span></span><code>who
+#&gt; # A tibble: 7,240 x 60
+#&gt;    country iso2  iso3   year new_sp_m014 new_sp_m1524 new_sp_m2534
+#&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;int&gt;       &lt;int&gt;        &lt;int&gt;        &lt;int&gt;
+#&gt;  1 Afghan… AF    AFG    1980          NA           NA           NA
+#&gt;  2 Afghan… AF    AFG    1981          NA           NA           NA
+#&gt;  3 Afghan… AF    AFG    1982          NA           NA           NA
+#&gt;  4 Afghan… AF    AFG    1983          NA           NA           NA
+#&gt;  5 Afghan… AF    AFG    1984          NA           NA           NA
+#&gt;  6 Afghan… AF    AFG    1985          NA           NA           NA
+#&gt;  7 Afghan… AF    AFG    1986          NA           NA           NA
+#&gt;  8 Afghan… AF    AFG    1987          NA           NA           NA
+#&gt;  9 Afghan… AF    AFG    1988          NA           NA           NA
+#&gt; 10 Afghan… AF    AFG    1989          NA           NA           NA
+#&gt; # … with 7,230 more rows, and 53 more variables
+</code></pre></div>
+
+<p>Построим его спецификацию.</p>
+<div class="codehilite"><pre><span></span><code>spec &lt;- who %&gt;%
+  pivot_longer_spec(new_sp_m014:newrel_f65, values_to = &quot;count&quot;)
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code>#&gt; # A tibble: 56 x 3
+#&gt;    .name        .value name        
+#&gt;    &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt;       
+#&gt;  1 new_sp_m014  count  new_sp_m014 
+#&gt;  2 new_sp_m1524 count  new_sp_m1524
+#&gt;  3 new_sp_m2534 count  new_sp_m2534
+#&gt;  4 new_sp_m3544 count  new_sp_m3544
+#&gt;  5 new_sp_m4554 count  new_sp_m4554
+#&gt;  6 new_sp_m5564 count  new_sp_m5564
+#&gt;  7 new_sp_m65   count  new_sp_m65  
+#&gt;  8 new_sp_f014  count  new_sp_f014 
+#&gt;  9 new_sp_f1524 count  new_sp_f1524
+#&gt; 10 new_sp_f2534 count  new_sp_f2534
+#&gt; # … with 46 more rows
+</code></pre></div>
+
+<p>Поля <em>country</em>, <em>iso2</em>, <em>iso3</em> уже являются переменными. Наша задача перевернуть столбцы с <em>new_sp_m014</em> по <em>newrel_f65</em>.</p>
+<p>В названиях этих столбцов хранится следующая информация:</p>
+<ul>
+<li>Префикс <code>new_</code> говорит о том, что столбец содержит данные о новых случаях заболевания туберкулёом, текущий дата фрейм содержит информацию только по новым заболеваниям, поэтому данный префикс в текущем контексте не несёт никакой смысловой нагрузки.</li>
+<li><code>sp</code>/<code>rel</code>/<code>sp</code>/<code>ep</code> описывает способ диагностики заболевания.</li>
+<li><code>m</code>/<code>f</code> пол пациента.</li>
+<li><code>014</code>/<code>1524</code>/<code>2535</code>/<code>3544</code>/<code>4554</code>/<code>65</code> возрастной диапазон пациента.</li>
+</ul>
+<p>Мы можем разделить эти столбцы с помощью функции <code>extract()</code>, используя регулярное выражение.</p>
+<div class="codehilite"><pre><span></span><code>spec &lt;- spec %&gt;%
+        extract(name, c(&quot;diagnosis&quot;, &quot;gender&quot;, &quot;age&quot;), &quot;new_?(.*)_(.)(.*)&quot;)
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code>#&gt; # A tibble: 56 x 5
+#&gt;    .name        .value diagnosis gender age  
+#&gt;    &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;
+#&gt;  1 new_sp_m014  count  sp        m      014  
+#&gt;  2 new_sp_m1524 count  sp        m      1524 
+#&gt;  3 new_sp_m2534 count  sp        m      2534 
+#&gt;  4 new_sp_m3544 count  sp        m      3544 
+#&gt;  5 new_sp_m4554 count  sp        m      4554 
+#&gt;  6 new_sp_m5564 count  sp        m      5564 
+#&gt;  7 new_sp_m65   count  sp        m      65   
+#&gt;  8 new_sp_f014  count  sp        f      014  
+#&gt;  9 new_sp_f1524 count  sp        f      1524 
+#&gt; 10 new_sp_f2534 count  sp        f      2534 
+#&gt; # … with 46 more rows
+</code></pre></div>
+
+<p>Обратите внимание, столбец <em>.name</em> должен оставаться неизменным, так как это наш индекс в именах столбцов исходного набора данных.</p>
+<p>Пол и возраст (столбцы <em>gender</em> и <em>age</em>) имеют фиксированные и известные значения, поэтому рекомендуется преобразовывать эти столбцы в факторы:</p>
+<div class="codehilite"><pre><span></span><code>spec &lt;-  spec %&gt;%
+            mutate(
+              gender = factor(gender, levels = c(&quot;f&quot;, &quot;m&quot;)),
+              age = factor(age, levels = unique(age), ordered = TRUE)
+            )
+</code></pre></div>
+
+<p>Наконец для того, чтобы применить созданную нами спецификацию к исходному дата фрейму <em>who</em> нам необходимо использовать аргумент <em>spec</em> в функции <code>pivot_longer()</code>.</p>
+<p><code>who %&gt;% pivot_longer(spec = spec)</code></p>
+<div class="codehilite"><pre><span></span><code>#&gt; # A tibble: 405,440 x 8
+#&gt;    country     iso2  iso3   year diagnosis gender age   count
+#&gt;    &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;chr&gt;     &lt;fct&gt;  &lt;ord&gt; &lt;int&gt;
+#&gt;  1 Afghanistan AF    AFG    1980 sp        m      014      NA
+#&gt;  2 Afghanistan AF    AFG    1980 sp        m      1524     NA
+#&gt;  3 Afghanistan AF    AFG    1980 sp        m      2534     NA
+#&gt;  4 Afghanistan AF    AFG    1980 sp        m      3544     NA
+#&gt;  5 Afghanistan AF    AFG    1980 sp        m      4554     NA
+#&gt;  6 Afghanistan AF    AFG    1980 sp        m      5564     NA
+#&gt;  7 Afghanistan AF    AFG    1980 sp        m      65       NA
+#&gt;  8 Afghanistan AF    AFG    1980 sp        f      014      NA
+#&gt;  9 Afghanistan AF    AFG    1980 sp        f      1524     NA
+#&gt; 10 Afghanistan AF    AFG    1980 sp        f      2534     NA
+#&gt; # … with 405,430 more rows
+</code></pre></div>
+
+<p>Всё, что мы только что сделали, схематично можно изобразить следующим образом:</p>
+<p><img loading="lazy" decoding="async" alt="image" width="638" height="584" src="../images/r-paket-tidyr-i-ego-novye-funktsii-pivot-longer-i-pivot-wide-c3c3a111.webp" /></p>
+<h2 id="value">Спецификация с использованием нескольких значений(.value)</h2>
+<p>В приведённом выше примере столбец спецификации <em>.value</em> содержал только одно значение, в большинстве случаев это так и бывает.</p>
+<p>Но изредка может возникнуть ситуация, когда вам необходимо собрать в значениях данные из столбцов с разными типами данных. С помощью устаревшей функции <code>spread()</code> это было бы сделать довольно сложно.</p>
+<p>Приведённый ниже пример заимствован из <a target="_blank" rel="noopener" href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-reshape.html">виньетки</a> к пакету <strong>data.table</strong>.</p>
+<p>Давайте создадим тренировачный датафрейм.</p>
+<div class="codehilite"><pre><span></span><code>family &lt;- tibble::tribble(
+  ~family,  ~dob_child1,  ~dob_child2, ~gender_child1, ~gender_child2,
+       1L, &quot;1998-11-26&quot;, &quot;2000-01-29&quot;,             1L,             2L,
+       2L, &quot;1996-06-22&quot;,           NA,             2L,             NA,
+       3L, &quot;2002-07-11&quot;, &quot;2004-04-05&quot;,             2L,             2L,
+       4L, &quot;2004-10-10&quot;, &quot;2009-08-27&quot;,             1L,             1L,
+       5L, &quot;2000-12-05&quot;, &quot;2005-02-28&quot;,             2L,             1L,
+)
+family &lt;- family %&gt;% mutate_at(vars(starts_with(&quot;dob&quot;)), parse_date)
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code>#&gt; # A tibble: 5 x 5
+#&gt;   family dob_child1 dob_child2 gender_child1 gender_child2
+#&gt;    &lt;int&gt; &lt;date&gt;     &lt;date&gt;             &lt;int&gt;         &lt;int&gt;
+#&gt; 1      1 1998-11-26 2000-01-29             1             2
+#&gt; 2      2 1996-06-22 NA                     2            NA
+#&gt; 3      3 2002-07-11 2004-04-05             2             2
+#&gt; 4      4 2004-10-10 2009-08-27             1             1
+#&gt; 5      5 2000-12-05 2005-02-28             2             1
+</code></pre></div>
+
+<p>Созданный дата фрейм в каждой строке содержит данные о детях одной семьи. В семьях может быть один или два ребёнка. По каждому ребёнку предоставляется данные о дате рождения и поле, причём данные по каждому ребёнку идут в отдельных столбцах, наша задача привести эти данные к правильному для анализа формату.</p>
+<p>Обратите внимание, что у нас есть две переменные с информацией о каждом ребенке: его пол и дата рождения (столбцы с префиксом <em>dop</em> содержат дату рождения, столбцы с префиксом <em>gender</em> содержат пол ребёнка). В ожидаемом результате они должны идти в отдельных столбцах. Мы можем сделать это, генерируя спецификацию, в которой столбец <code>.value</code> будет иметь два разных значения.</p>
+<div class="codehilite"><pre><span></span><code>spec &lt;- family %&gt;%
+  pivot_longer_spec(-family) %&gt;%
+  separate(col = name, into = c(&quot;.value&quot;, &quot;child&quot;))%&gt;%
+  mutate(child = parse_number(child))
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code>#&gt; # A tibble: 4 x 3
+#&gt;   .name         .value child
+#&gt;   &lt;chr&gt;         &lt;chr&gt;  &lt;dbl&gt;
+#&gt; 1 dob_child1    dob        1
+#&gt; 2 dob_child2    dob        2
+#&gt; 3 gender_child1 gender     1
+#&gt; 4 gender_child2 gender     2
+</code></pre></div>
+
+<p>Итак, давайте разберём по шагам действия, которые выполняются приведённым выше кодом.</p>
+<ul>
+<li><code>pivot_longer_spec(-family)</code> — создаём спецификацию, которая сжимает все имеющиеся столбцы, кроме столбца family.</li>
+<li><code>separate(col = name, into = c(".value", "child"))</code> — разделяем столбец <em>.name</em>, который содержит имена исходных полей, по нижнему подчёркиванию и заносим полученные значения в столбцы <em>.value</em> и <em>child</em>.</li>
+<li><code>mutate(child = parse_number(child))</code> — преобразуем значения поля <em>child</em> из текстового в числовой тип данных.</li>
+</ul>
+<p>Теперь мы можем применить к изначальному датафрейму полученную спецификацию, и привести таблицу к желаемому виду.</p>
+<div class="codehilite"><pre><span></span><code>family %&gt;% 
+    pivot_longer(spec = spec, na.rm = T)
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code>#&gt; # A tibble: 9 x 4
+#&gt;   family child dob        gender
+#&gt;    &lt;int&gt; &lt;dbl&gt; &lt;date&gt;      &lt;int&gt;
+#&gt; 1      1     1 1998-11-26      1
+#&gt; 2      1     2 2000-01-29      2
+#&gt; 3      2     1 1996-06-22      2
+#&gt; 4      3     1 2002-07-11      2
+#&gt; 5      3     2 2004-04-05      2
+#&gt; 6      4     1 2004-10-10      1
+#&gt; 7      4     2 2009-08-27      1
+#&gt; 8      5     1 2000-12-05      2
+#&gt; 9      5     2 2005-02-28      1
+</code></pre></div>
+
+<p>Мы используем аргумент <code>na.rm = TRUE</code>, потому, что текущая форма данных вынуждает создавать лишние строки для несуществующих наблюдений. Т.к. у семьи 2 есть всего один ребёнок, <code>na.rm = TRUE</code>гарантирует, что семья 2 будет иметь одну строку в выходных данных.</p>
+<h2 id="_7">Преобразование дата фреймов из длинного формата к широкому</h2>
+<p><code>pivot_wider()</code> — является обратным преобразованием, и наоборот увеличивает количество столбцов дата фрейма за счёт уменьшения количества строк.</p>
+<p><img loading="lazy" decoding="async" alt="image" width="432" height="406" src="../images/r-paket-tidyr-i-ego-novye-funktsii-pivot-longer-i-pivot-wide-0be2776b.webp" /></p>
+<p>Такого рода преобразование крайне редко используется для приведения данных к аккуратному виду, тем не менее этот приём может быть полезен для создания сводных таблиц используемых в презентациях, или для интеграции с какими либо другими инструментами.</p>
+<p>На самом деле функции <code>pivot_longer()</code> и <code>pivot_wider()</code> являются симметричными, и производят обратные друг другу действия, т.е: <code>df %&gt;% pivot_longer(spec = spec) %&gt;% pivot_wider(spec = spec)</code>и <code>df %&gt;% pivot_wider(spec = spec) %&gt;% pivot_longer(spec = spec)</code> вернёт исходный df.</p>
+<h3 id="_8">Простейший пример приведения таблицы к широкому формату</h3>
+<p>Для демострации работы функции <code>pivot_wider()</code> мы будем использовать набор данных <em>fish_encounters</em>, в котором хранится информация о том, как различные станции фиксируют передвижение рыб по реке.</p>
+<div class="codehilite"><pre><span></span><code>#&gt; # A tibble: 114 x 3
+#&gt;    fish  station  seen
+#&gt;    &lt;fct&gt; &lt;fct&gt;   &lt;int&gt;
+#&gt;  1 4842  Release     1
+#&gt;  2 4842  I80_1       1
+#&gt;  3 4842  Lisbon      1
+#&gt;  4 4842  Rstr        1
+#&gt;  5 4842  Base_TD     1
+#&gt;  6 4842  BCE         1
+#&gt;  7 4842  BCW         1
+#&gt;  8 4842  BCE2        1
+#&gt;  9 4842  BCW2        1
+#&gt; 10 4842  MAE         1
+#&gt; # … with 104 more rows
+</code></pre></div>
+
+<p>В большинстве случаев, эта таблица будет более информативной и удобна в использовании если представить информации по каждой станции в отдельном столбце.</p>
+<p><code>fish_encounters %&gt;% pivot_wider(names_from = station, values_from = seen)</code></p>
+<div class="codehilite"><pre><span></span><code>fish_encounters %&gt;% pivot_wider(names_from = station, values_from = seen)
+#&gt; # A tibble: 19 x 12
+#&gt;    fish  Release I80_1 Lisbon  Rstr Base_TD   BCE   BCW  BCE2  BCW2   MAE
+#&gt;    &lt;fct&gt;   &lt;int&gt; &lt;int&gt;  &lt;int&gt; &lt;int&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+#&gt;  1 4842        1     1      1     1       1     1     1     1     1     1
+#&gt;  2 4843        1     1      1     1       1     1     1     1     1     1
+#&gt;  3 4844        1     1      1     1       1     1     1     1     1     1
+#&gt;  4 4845        1     1      1     1       1    NA    NA    NA    NA    NA
+#&gt;  5 4847        1     1      1    NA      NA    NA    NA    NA    NA    NA
+#&gt;  6 4848        1     1      1     1      NA    NA    NA    NA    NA    NA
+#&gt;  7 4849        1     1     NA    NA      NA    NA    NA    NA    NA    NA
+#&gt;  8 4850        1     1     NA     1       1     1     1    NA    NA    NA
+#&gt;  9 4851        1     1     NA    NA      NA    NA    NA    NA    NA    NA
+#&gt; 10 4854        1     1     NA    NA      NA    NA    NA    NA    NA    NA
+#&gt; # … with 9 more rows, and 1 more variable: MAW &lt;int&gt;
+</code></pre></div>
+
+<p>Этот набор данных записывает информацию только в тех случаях, когда рыба была обнаружена станцией, т.е. если какая либо рыба не была зафиксированной какой то станцией, то этих данных в таблице не будет. Это означает, что выходные данные будут заполнены NA.</p>
+<p>Однако в этом случае мы знаем, что отсутствие записи означает, что рыба не была замечена, поэтому мы можем использовать аргумент <em>values_fill</em> в функции <code>pivot_wider()</code> и заполнить эти пропущенные значения нулями:</p>
+<div class="codehilite"><pre><span></span><code>fish_encounters %&gt;% pivot_wider(
+  names_from = station, 
+  values_from = seen,
+  values_fill = list(seen = 0)
+)
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code>#&gt; # A tibble: 19 x 12
+#&gt;    fish  Release I80_1 Lisbon  Rstr Base_TD   BCE   BCW  BCE2  BCW2   MAE
+#&gt;    &lt;fct&gt;   &lt;int&gt; &lt;int&gt;  &lt;int&gt; &lt;int&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+#&gt;  1 4842        1     1      1     1       1     1     1     1     1     1
+#&gt;  2 4843        1     1      1     1       1     1     1     1     1     1
+#&gt;  3 4844        1     1      1     1       1     1     1     1     1     1
+#&gt;  4 4845        1     1      1     1       1     0     0     0     0     0
+#&gt;  5 4847        1     1      1     0       0     0     0     0     0     0
+#&gt;  6 4848        1     1      1     1       0     0     0     0     0     0
+#&gt;  7 4849        1     1      0     0       0     0     0     0     0     0
+#&gt;  8 4850        1     1      0     1       1     1     1     0     0     0
+#&gt;  9 4851        1     1      0     0       0     0     0     0     0     0
+#&gt; 10 4854        1     1      0     0       0     0     0     0     0     0
+#&gt; # … with 9 more rows, and 1 more variable: MAW &lt;int&gt;
+</code></pre></div>
+
+<h3 id="_9">Генерация имени столбца из нескольких исходных переменных</h3>
+<p>Представьте, что у нас есть таблица, содержащая комбинацию продукта, страны и года. Для генерации тестового дата фрейма можно выполнить следующий код:</p>
+<div class="codehilite"><pre><span></span><code>df &lt;- expand_grid(
+  product = c(&quot;A&quot;, &quot;B&quot;), 
+  country = c(&quot;AI&quot;, &quot;EI&quot;), 
+  year = 2000:2014
+) %&gt;%
+  filter((product == &quot;A&quot; &amp; country == &quot;AI&quot;) | product == &quot;B&quot;) %&gt;% 
+  mutate(value = rnorm(nrow(.)))
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code>#&gt; # A tibble: 45 x 4
+#&gt;    product country  year    value
+#&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt;    &lt;dbl&gt;
+#&gt;  1 A       AI       2000 -2.05   
+#&gt;  2 A       AI       2001 -0.676  
+#&gt;  3 A       AI       2002  1.60   
+#&gt;  4 A       AI       2003 -0.353  
+#&gt;  5 A       AI       2004 -0.00530
+#&gt;  6 A       AI       2005  0.442  
+#&gt;  7 A       AI       2006 -0.610  
+#&gt;  8 A       AI       2007 -2.77   
+#&gt;  9 A       AI       2008  0.899  
+#&gt; 10 A       AI       2009 -0.106  
+#&gt; # … with 35 more rows
+</code></pre></div>
+
+<p>Наша задача расширить дата фрейм так, что бы один столбец содержал данные по каждой комбинации продукта и страны. Для этого достаточно передать в аргумент <em>names_from</em> вектор, содержащий названия объединяемых полей.</p>
+<div class="codehilite"><pre><span></span><code>df %&gt;% pivot_wider(names_from = c(product, country),
+                 values_from = &quot;value&quot;)
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code>#&gt; # A tibble: 15 x 4
+#&gt;     year     A_AI    B_AI    B_EI
+#&gt;    &lt;int&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+#&gt;  1  2000 -2.05     0.607   1.20  
+#&gt;  2  2001 -0.676    1.65   -0.114 
+#&gt;  3  2002  1.60    -0.0245  0.501 
+#&gt;  4  2003 -0.353    1.30   -0.459 
+#&gt;  5  2004 -0.00530  0.921  -0.0589
+#&gt;  6  2005  0.442   -1.55    0.594 
+#&gt;  7  2006 -0.610    0.380  -1.28  
+#&gt;  8  2007 -2.77     0.830   0.637 
+#&gt;  9  2008  0.899    0.0175 -1.30  
+#&gt; 10  2009 -0.106   -0.195   1.03  
+#&gt; # … with 5 more rows
+</code></pre></div>
+
+<p>Вы так же можете применять спецификации к функции <code>pivot_wider()</code>. Но при подаче в <code>pivot_wider()</code>спецификация выполняет преобразование, противоположное <code>pivot_longer()</code>: создаются столбцы, указанные в <em>.name</em>, используя значения из <em>.value</em> и других столбцов.</p>
+<p>Для этого набора данных вы можете сгенерировать пользовательскую спецификацию, если хотите, чтобы каждая возможная комбинация страны и продукта имела собственный столбец, а не только те, которые присутствуют в данных:</p>
+<div class="codehilite"><pre><span></span><code>spec &lt;- df %&gt;% 
+  expand(product, country, .value = &quot;value&quot;) %&gt;% 
+  unite(&quot;.name&quot;, product, country, remove = FALSE)
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code>#&gt; # A tibble: 4 x 4
+#&gt;   .name product country .value
+#&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; 
+#&gt; 1 A_AI  A       AI      value 
+#&gt; 2 A_EI  A       EI      value 
+#&gt; 3 B_AI  B       AI      value 
+#&gt; 4 B_EI  B       EI      value
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code>df %&gt;% pivot_wider(spec = spec) %&gt;% head()
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code>#&gt; # A tibble: 6 x 5
+#&gt;    year     A_AI  A_EI    B_AI    B_EI
+#&gt;   &lt;int&gt;    &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+#&gt; 1  2000 -2.05       NA  0.607   1.20  
+#&gt; 2  2001 -0.676      NA  1.65   -0.114 
+#&gt; 3  2002  1.60       NA -0.0245  0.501 
+#&gt; 4  2003 -0.353      NA  1.30   -0.459 
+#&gt; 5  2004 -0.00530    NA  0.921  -0.0589
+#&gt; 6  2005  0.442      NA -1.55    0.594
+</code></pre></div>
+
+<h2 id="tidyr_1">Несколько продвинутых примеров работы с новой концепцией tidyr</h2>
+<h3 id="_10">Приведение данных к аккуратному виду на примере набора данных о переписи дохода и арендной платы в США</h3>
+<p>Набор данных <em>us_rent_income</em> содержит информацию о среднем доходе и арендной плате для каждого штата в США за 2017 год (набор данных доступен в пакете <strong>tidycensus</strong>).</p>
+<div class="codehilite"><pre><span></span><code>us_rent_income
+#&gt; # A tibble: 104 x 5
+#&gt;    GEOID NAME       variable estimate   moe
+#&gt;    &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;
+#&gt;  1 01    Alabama    income      24476   136
+#&gt;  2 01    Alabama    rent          747     3
+#&gt;  3 02    Alaska     income      32940   508
+#&gt;  4 02    Alaska     rent         1200    13
+#&gt;  5 04    Arizona    income      27517   148
+#&gt;  6 04    Arizona    rent          972     4
+#&gt;  7 05    Arkansas   income      23789   165
+#&gt;  8 05    Arkansas   rent          709     5
+#&gt;  9 06    California income      29454   109
+#&gt; 10 06    California rent         1358     3
+#&gt; # … with 94 more rows
+</code></pre></div>
+
+<p>В том виде, в котором хранятся данные в датасете <em>us_rent_income</em> работать с ними крайне неудобно, поэтому мы хотели бы создать набор данных со столбцами: <em>rent</em>, <em>rent_moe</em>, <em>come</em>, <em>income_moe</em>. Существует множество способов создания этой спецификации, но главное в том, что нам нужно сгенерировать каждую комбинацию значений переменной и <em>estimate/moe</em>, а затем сгенерировать имя столбца.</p>
+<div class="codehilite"><pre><span></span><code>  spec &lt;- us_rent_income %&gt;% 
+    expand(variable, .value = c(&quot;estimate&quot;, &quot;moe&quot;)) %&gt;% 
+    mutate(
+      .name = paste0(variable, ifelse(.value == &quot;moe&quot;, &quot;_moe&quot;, &quot;&quot;))
+    )
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code>#&gt; # A tibble: 4 x 3
+#&gt;   variable .value   .name     
+#&gt;   &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;     
+#&gt; 1 income   estimate income    
+#&gt; 2 income   moe      income_moe
+#&gt; 3 rent     estimate rent      
+#&gt; 4 rent     moe      rent_moe
+</code></pre></div>
+
+<p>Предоставление этой спецификации <code>pivot_wider()</code> дает нам результат, который мы ищем:</p>
+<p><code>us_rent_income %&gt;% pivot_wider(spec = spec)</code></p>
+<div class="codehilite"><pre><span></span><code>#&gt; # A tibble: 52 x 6
+#&gt;    GEOID NAME                 income income_moe  rent rent_moe
+#&gt;    &lt;chr&gt; &lt;chr&gt;                 &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
+#&gt;  1 01    Alabama               24476        136   747        3
+#&gt;  2 02    Alaska                32940        508  1200       13
+#&gt;  3 04    Arizona               27517        148   972        4
+#&gt;  4 05    Arkansas              23789        165   709        5
+#&gt;  5 06    California            29454        109  1358        3
+#&gt;  6 08    Colorado              32401        109  1125        5
+#&gt;  7 09    Connecticut           35326        195  1123        5
+#&gt;  8 10    Delaware              31560        247  1076       10
+#&gt;  9 11    District of Columbia  43198        681  1424       17
+#&gt; 10 12    Florida               25952         70  1077        3
+#&gt; # … with 42 more rows
+</code></pre></div>
+
+<h3 id="_11">Всемирный банк</h3>
+<p>Иногда приведение набора данных в нужную форму требует нескольких шагов.<br />
+Датасет <em>world_bank_pop</em> содержит данные всемирного банка о населении каждой страны в период с 2000 по 2018 год.</p>
+<div class="codehilite"><pre><span></span><code>#&gt; # A tibble: 1,056 x 20
+#&gt;    country indicator `2000` `2001` `2002` `2003`  `2004`  `2005`   `2006`
+#&gt;    &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
+#&gt;  1 ABW     SP.URB.T… 4.24e4 4.30e4 4.37e4 4.42e4 4.47e+4 4.49e+4  4.49e+4
+#&gt;  2 ABW     SP.URB.G… 1.18e0 1.41e0 1.43e0 1.31e0 9.51e-1 4.91e-1 -1.78e-2
+#&gt;  3 ABW     SP.POP.T… 9.09e4 9.29e4 9.50e4 9.70e4 9.87e+4 1.00e+5  1.01e+5
+#&gt;  4 ABW     SP.POP.G… 2.06e0 2.23e0 2.23e0 2.11e0 1.76e+0 1.30e+0  7.98e-1
+#&gt;  5 AFG     SP.URB.T… 4.44e6 4.65e6 4.89e6 5.16e6 5.43e+6 5.69e+6  5.93e+6
+#&gt;  6 AFG     SP.URB.G… 3.91e0 4.66e0 5.13e0 5.23e0 5.12e+0 4.77e+0  4.12e+0
+#&gt;  7 AFG     SP.POP.T… 2.01e7 2.10e7 2.20e7 2.31e7 2.41e+7 2.51e+7  2.59e+7
+#&gt;  8 AFG     SP.POP.G… 3.49e0 4.25e0 4.72e0 4.82e0 4.47e+0 3.87e+0  3.23e+0
+#&gt;  9 AGO     SP.URB.T… 8.23e6 8.71e6 9.22e6 9.77e6 1.03e+7 1.09e+7  1.15e+7
+#&gt; 10 AGO     SP.URB.G… 5.44e0 5.59e0 5.70e0 5.76e0 5.75e+0 5.69e+0  4.92e+0
+#&gt; # … with 1,046 more rows, and 11 more variables: `2007` &lt;dbl&gt;,
+#&gt; #   `2008` &lt;dbl&gt;, `2009` &lt;dbl&gt;, `2010` &lt;dbl&gt;, `2011` &lt;dbl&gt;, `2012` &lt;dbl&gt;,
+#&gt; #   `2013` &lt;dbl&gt;, `2014` &lt;dbl&gt;, `2015` &lt;dbl&gt;, `2016` &lt;dbl&gt;, `2017` &lt;dbl&gt;
+</code></pre></div>
+
+<p>Наша цель состоит в том, чтобы создать аккуратный набор данных, где каждая переменная находится в отдельном столбце. Пока неясно, какие именно шаги необходимы, но мы начнём с самой очевидной проблемы: год распределен по нескольким столбцам.</p>
+<p>Для того, что бы это исправить необходимо использовать функцию <code>pivot_longer()</code>.</p>
+<div class="codehilite"><pre><span></span><code>pop2 &lt;- world_bank_pop %&gt;% 
+  pivot_longer(`2000`:`2017`, names_to = &quot;year&quot;)
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code>#&gt; # A tibble: 19,008 x 4
+#&gt;    country indicator   year  value
+#&gt;    &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt; &lt;dbl&gt;
+#&gt;  1 ABW     SP.URB.TOTL 2000  42444
+#&gt;  2 ABW     SP.URB.TOTL 2001  43048
+#&gt;  3 ABW     SP.URB.TOTL 2002  43670
+#&gt;  4 ABW     SP.URB.TOTL 2003  44246
+#&gt;  5 ABW     SP.URB.TOTL 2004  44669
+#&gt;  6 ABW     SP.URB.TOTL 2005  44889
+#&gt;  7 ABW     SP.URB.TOTL 2006  44881
+#&gt;  8 ABW     SP.URB.TOTL 2007  44686
+#&gt;  9 ABW     SP.URB.TOTL 2008  44375
+#&gt; 10 ABW     SP.URB.TOTL 2009  44052
+#&gt; # … with 18,998 more rows
+</code></pre></div>
+
+<p>Следующий шаг — рассмотреть переменную indicator.<br />
+<code>pop2 %&gt;% count(indicator)</code></p>
+<div class="codehilite"><pre><span></span><code>#&gt; # A tibble: 4 x 2
+#&gt;   indicator       n
+#&gt;   &lt;chr&gt;       &lt;int&gt;
+#&gt; 1 SP.POP.GROW  4752
+#&gt; 2 SP.POP.TOTL  4752
+#&gt; 3 SP.URB.GROW  4752
+#&gt; 4 SP.URB.TOTL  4752
+</code></pre></div>
+
+<p>Где SP.POP.GROW — прирост населения, SP.POP.TOTL — общая численность населения, а SP.URB. * тоже самое, но только для городской местности. Давайте разделим эти значения на две переменные: area — местность (total или urban) и переменную содержащую фактические данные (population или growth):</p>
+<div class="codehilite"><pre><span></span><code>pop3 &lt;- pop2 %&gt;% 
+  separate(indicator, c(NA, &quot;area&quot;, &quot;variable&quot;))
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code>#&gt; # A tibble: 19,008 x 5
+#&gt;    country area  variable year  value
+#&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;dbl&gt;
+#&gt;  1 ABW     URB   TOTL     2000  42444
+#&gt;  2 ABW     URB   TOTL     2001  43048
+#&gt;  3 ABW     URB   TOTL     2002  43670
+#&gt;  4 ABW     URB   TOTL     2003  44246
+#&gt;  5 ABW     URB   TOTL     2004  44669
+#&gt;  6 ABW     URB   TOTL     2005  44889
+#&gt;  7 ABW     URB   TOTL     2006  44881
+#&gt;  8 ABW     URB   TOTL     2007  44686
+#&gt;  9 ABW     URB   TOTL     2008  44375
+#&gt; 10 ABW     URB   TOTL     2009  44052
+#&gt; # … with 18,998 more rows
+</code></pre></div>
+
+<p>Теперь нам остаётся только разделить переменную variable на два столбца:</p>
+<div class="codehilite"><pre><span></span><code>pop3 %&gt;% 
+  pivot_wider(names_from = variable, values_from = value)
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code>#&gt; # A tibble: 9,504 x 5
+#&gt;    country area  year   TOTL    GROW
+#&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt;
+#&gt;  1 ABW     URB   2000  42444  1.18  
+#&gt;  2 ABW     URB   2001  43048  1.41  
+#&gt;  3 ABW     URB   2002  43670  1.43  
+#&gt;  4 ABW     URB   2003  44246  1.31  
+#&gt;  5 ABW     URB   2004  44669  0.951 
+#&gt;  6 ABW     URB   2005  44889  0.491 
+#&gt;  7 ABW     URB   2006  44881 -0.0178
+#&gt;  8 ABW     URB   2007  44686 -0.435 
+#&gt;  9 ABW     URB   2008  44375 -0.698 
+#&gt; 10 ABW     URB   2009  44052 -0.731 
+#&gt; # … with 9,494 more rows
+</code></pre></div>
+
+<h3 id="_12">Список контактов</h3>
+<p>Последний пример, представьте, что у вас есть список контактов, который вы скопировали и вставили с веб-сайта:</p>
+<div class="codehilite"><pre><span></span><code>contacts &lt;- tribble(
+  ~field, ~value,
+  &quot;name&quot;, &quot;Jiena McLellan&quot;,
+  &quot;company&quot;, &quot;Toyota&quot;, 
+  &quot;name&quot;, &quot;John Smith&quot;, 
+  &quot;company&quot;, &quot;google&quot;, 
+  &quot;email&quot;, &quot;john@google.com&quot;,
+  &quot;name&quot;, &quot;Huxley Ratcliffe&quot;
+)
+</code></pre></div>
+
+<p>Привести этот список к табличному виду достаточно сложно, потому что нет переменной, которая бы идентифицировала, какие данные принадлежат какому контакту. Мы можем исправить это, заметив, что данные по каждому новому контакту начинаются с имени (“name”), поэтому мы можем создать уникальный идентификатор, и увеличивать его на единицу каждый раз, когда в столбце field встречается значение “name”:</p>
+<div class="codehilite"><pre><span></span><code>contacts &lt;- contacts %&gt;% 
+  mutate(
+    person_id = cumsum(field == &quot;name&quot;)
+  )
+contacts
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code>#&gt; # A tibble: 6 x 3
+#&gt;   field   value            person_id
+#&gt;   &lt;chr&gt;   &lt;chr&gt;                &lt;int&gt;
+#&gt; 1 name    Jiena McLellan           1
+#&gt; 2 company Toyota                   1
+#&gt; 3 name    John Smith               2
+#&gt; 4 company google                   2
+#&gt; 5 email   john@google.com          2
+#&gt; 6 name    Huxley Ratcliffe         3
+</code></pre></div>
+
+<p>Теперь, когда у нас есть уникальный идентификатор для каждого контакта, мы можем повернуть поле и значение в столбцы:</p>
+<div class="codehilite"><pre><span></span><code>contacts %&gt;% 
+  pivot_wider(names_from = field, values_from = value)
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code>#&gt; # A tibble: 3 x 4
+#&gt;   person_id name             company email          
+#&gt;       &lt;int&gt; &lt;chr&gt;            &lt;chr&gt;   &lt;chr&gt;          
+#&gt; 1         1 Jiena McLellan   Toyota  &lt;NA&gt;           
+#&gt; 2         2 John Smith       google  john@google.com
+#&gt; 3         3 Huxley Ratcliffe &lt;NA&gt;    &lt;NA&gt;
+</code></pre></div>
+
+<h2 id="_13">Заключение</h2>
+<p>Лично моё мнение, что новая концепция <strong>tidyr</strong> действительно интуитивно более понятна, и значительно превосходит по функционалу устаревшие функций <code>spread()</code> и <code>gather()</code>. Надеюсь эта статья помогла вам разобраться с <code>pivot_longer()</code> и <code>pivot_wider()</code>.</p></div>
+                    
+                    <div class="b-tags"><a class="b-chip" href="../?tag=obrabotka-dannyh#posts">Обработка данных</a><a class="b-chip" href="../?tag=r#posts">R</a><a class="b-chip" href="../?tag=tidyverse#posts">tidyverse</a></div>
+                </div>
+            </article>
+            <aside class="b-toc" aria-label="Contents"><div class="b-toc-title"><span class="ru-text">Содержание</span><span class="ua-text">Зміст</span><span class="en-text">Contents</span></div><ul><li><a href="#_1">Содержание</a></li><li><a href="#tidydata">Концепция TidyData</a></li><li><a href="#tidyr">Основные функции входящие в пакет tidyr</a></li><li><a href="#_2">Новая концепция преобразования данных из широкого формата в длинный и наоборот</a><ul><li><a href="#tidyr-0839000">Установка наиболее актуальной версии tidyr 0.8.3.9000</a></li><li><a href="#_3">Переход на новые функции</a></li></ul></li><li><a href="#_4">Примечание от автора</a></li><li><a href="#_5">Простой пример преобразования данных из широкого формата в длинный</a></li><li><a href="#_6">Спецификации</a></li><li><a href="#value">Спецификация с использованием нескольких значений(.value)</a></li><li><a href="#_7">Преобразование дата фреймов из длинного формата к широкому</a><ul><li><a href="#_8">Простейший пример приведения таблицы к широкому формату</a></li><li><a href="#_9">Генерация имени столбца из нескольких исходных переменных</a></li></ul></li><li><a href="#tidyr_1">Несколько продвинутых примеров работы с новой концепцией tidyr</a><ul><li><a href="#_10">Приведение данных к аккуратному виду на примере набора данных о переписи дохода и арендной платы в США</a></li><li><a href="#_11">Всемирный банк</a></li><li><a href="#_12">Список контактов</a></li></ul></li><li><a href="#_13">Заключение</a></li></ul></aside>
+        </div>
+        <section class="b-related">
+            <h2 class="outfit-font"><span class="ru-text">Читайте также</span><span class="ua-text">Читайте також</span><span class="en-text">Related posts</span></h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="../shpargalki-manipulyatsiya-dannymi-v-r-i-python/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="0">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/covers/1471.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">март 2021</span><span class="ua-text">берез. 2021</span><span class="en-text">Mar 2021</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2021</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">1 мин чтения</span><span class="ua-text">1 хв читання</span><span class="en-text">1 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Шпаргалки: Манипуляция данными в R и Python</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">Мой telegram канал R4marketing совместно с каналом IT Resume подготовили набор шпаргалок, которые помогут быстро найти информацию и примеры кода по манипуляции данными на языке R и Python.</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Обработка данных</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">tidyverse</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a>
+                <a href="../razvorachivaem-vlozhennye-stolbtsy-spiski-s-pomoschyu-yazyka-r-paket-t/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="60">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/razvorachivaem-vlozhennye-stolbtsy-sp-7syfgrnpyegv-ihhcguupz-9349286e.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">нояб. 2020</span><span class="ua-text">листоп. 2020</span><span class="en-text">Nov 2020</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2020</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">8 мин чтения</span><span class="ua-text">8 хв читання</span><span class="en-text">8 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Разворачиваем вложенные столбцы — списки с помощью языка R (пакет tidyr и функции семейства unnest)</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">В большинстве случаев при работе с ответом полученным от API, или с любыми другими данными которые имеют сложную древовидную структуру, вы сталкиваетесь с форматами JSON и XML. Эти…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">R</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Обработка данных</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a>
+                <a href="../kakoy-yazyk-vybrat-dlya-raboty-s-dannymi-r-ili-python-oba-migriruem-s/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="120">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/covers/1378.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">авг. 2020</span><span class="ua-text">серп. 2020</span><span class="en-text">Aug 2020</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2020</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">22 мин чтения</span><span class="ua-text">22 хв читання</span><span class="en-text">22 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Какой язык выбрать для работы с данными — R или Python? Оба! Мигрируем с pandas на tidyverse и data.table и обратно</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">По запросу R или Python в интернете вы найдёте миллионы статей и километровых обсуждений по теме какой из них лучше, быстрее и удобнее для работы с данными. Но к сожалению особой пользы…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Анализ данных</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Обработка данных</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a></div>
+        </section>
+        <a href="../" class="b-back"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i><span class="ru-text">Ко всем материалам</span><span class="ua-text">До всіх матеріалів</span><span class="en-text">All posts</span></a>
+    </main>
+
+    <section class="px-6 max-w-7xl mx-auto pb-24 relative z-10">
+        <div class="grid md:grid-cols-2 gap-6" data-aos="fade-up">
+            <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(59, 130, 246, 0.1));">
+                <div class="bento-content w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center text-blue-400 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-telegram"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">Telegram-канал R4marketing</span><span class="ua-text">Telegram-канал R4marketing</span><span class="en-text">R4marketing on Telegram</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Новые статьи, видео и заметки по R — первыми.</span><span class="ua-text">Нові статті, відео та нотатки з R — першими.</span><span class="en-text">New articles, videos and R notes — first.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-blue-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+            <a href="https://www.youtube.com/R4marketing/?sub_confirmation=1" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(239, 68, 68, 0.1));">
+                <div class="bento-content w-16 h-16 bg-red-500/20 rounded-2xl flex items-center justify-center text-red-500 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-youtube"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">YouTube-канал R4marketing</span><span class="ua-text">YouTube-канал R4marketing</span><span class="en-text">R4marketing on YouTube</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Видеоуроки по R, аналитике и AI-инструментам.</span><span class="ua-text">Відеоуроки з R, аналітики та AI-інструментів.</span><span class="en-text">Video lessons on R, analytics and AI tools.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-red-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/5 bg-slate-950/80 backdrop-blur-md pt-16 pb-8 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
+                <div class="sm:col-span-2 lg:col-span-4">
+                    <a href="../../" class="inline-flex items-center gap-3 group mb-5">
+                        <img src="../../logo.jpg" alt="Alexey Seleznev" class="w-10 h-10 rounded-xl object-cover border border-white/10 group-hover:border-purple-500/50 transition-colors">
+                        <span class="text-lg font-black tracking-tight uppercase outfit-font text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+                    </a>
+                    <p class="text-sm text-slate-400 leading-relaxed max-w-sm mb-6"><span class="ru-text">Head of Analytics в Netpeak Group. Автор open source R-пакетов, бесплатных курсов по R и проекта R4marketing.</span><span class="ua-text">Head of Analytics у Netpeak Group. Автор open source R-пакетів, безкоштовних курсів з R та проєкту R4marketing.</span><span class="en-text">Head of Analytics at Netpeak Group. Author of open source R packages, free R courses and the R4marketing project.</span></p>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="https://t.me/R4marketing" target="_blank" rel="noopener" aria-label="Telegram R4marketing" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-400 hover:border-blue-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-telegram"></i></a>
+                        <a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" aria-label="YouTube R4marketing" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-red-500 hover:border-red-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="https://github.com/selesnow" target="_blank" rel="noopener" aria-label="GitHub" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-white hover:border-white/30 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://linkedin.com/in/selesnow" target="_blank" rel="noopener" aria-label="LinkedIn" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-500 hover:border-blue-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://facebook.com/selesnow" target="_blank" rel="noopener" aria-label="Facebook" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-600/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/alexey.selesnow" target="_blank" rel="noopener" aria-label="Instagram" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-pink-500 hover:border-pink-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://habr.com/ru/users/selesnow/" target="_blank" rel="noopener" aria-label="Habr" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-teal-400 hover:border-teal-400/40 transition-all hover:-translate-y-0.5"><i class="fa-solid fa-h"></i></a>
+                    </div>
+                </div>
+
+                <nav class="lg:col-span-2" aria-label="Site map">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">Сайт</span><span class="ua-text">Сайт</span><span class="en-text">Site</span></h3>
+                    <ul class="space-y-3">
+                        <li><a href="../../" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-house w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a></li>
+                        <li><a href="../../opensource/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-code-branch w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span></a></li>
+                        <li><a href="../../courses/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-graduation-cap w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a></li>
+                        <li><a href="../../videos/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-circle-play w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a></li>
+                        <li><a href="../../talks/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-microphone-lines w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a></li>
+                        <li><a href="../../articles/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-pen-nib w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a></li>
+                        <li><a href="../../interviews/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-regular fa-newspaper w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a></li>
+                        <li><a href="../../blog/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-feather-pointed w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a></li>
+                    </ul>
+                </nav>
+
+                <div class="lg:col-span-3">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">R4marketing и публикации</span><span class="ua-text">R4marketing і публікації</span><span class="en-text">R4marketing & writing</span></h3>
+                    <ul class="space-y-3">
+                        <li><a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-telegram w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Telegram-канал R4marketing</span><span class="ua-text">Telegram-канал R4marketing</span><span class="en-text">R4marketing Telegram</span></a></li>
+                        <li><a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-youtube w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">YouTube-канал R4marketing</span><span class="ua-text">YouTube-канал R4marketing</span><span class="en-text">R4marketing YouTube</span></a></li>
+                        <li><a href="https://alexeyseleznev.wordpress.com/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-pen-nib w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Личный блог</span><span class="ua-text">Особистий блог</span><span class="en-text">Personal blog</span></a></li>
+                        <li><a href="https://habr.com/ru/users/selesnow/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-h w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Профиль на Хабре</span><span class="ua-text">Профіль на Хабрі</span><span class="en-text">Habr profile</span></a></li>
+                        <li><a href="https://alexey-seleznev.pro/publications/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-layer-group w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Архив публикаций</span><span class="ua-text">Архів публікацій</span><span class="en-text">Publications archive</span></a></li>
+                        <li><a href="https://github.com/selesnow" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-github w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">GitHub</span><span class="ua-text">GitHub</span><span class="en-text">GitHub</span></a></li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-3">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">Контакты</span><span class="ua-text">Контакти</span><span class="en-text">Contacts</span></h3>
+                    <ul class="space-y-4">
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">Email</div><a href="mailto:me@alexey-seleznev.pro" class="text-sm text-slate-300 hover:text-purple-300 transition-colors break-all">me@alexey-seleznev.pro</a></li>
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">Telegram</div><a href="https://t.me/AlexeySeleznev" target="_blank" rel="noopener" class="text-sm text-slate-300 hover:text-blue-300 transition-colors break-all">@AlexeySeleznev</a></li>
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">LinkedIn</div><a href="https://linkedin.com/in/selesnow" target="_blank" rel="noopener" class="text-sm text-slate-300 hover:text-blue-300 transition-colors break-all">linkedin.com/in/selesnow</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-14 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+                <p>© 2026 Alexey Seleznev. <span class="ru-text">Все права защищены.</span><span class="ua-text">Усі права захищені.</span><span class="en-text">All rights reserved.</span></p>
+                <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="inline-flex items-center gap-2 font-semibold hover:text-white transition-colors group"><span class="ru-text">Наверх</span><span class="ua-text">Нагору</span><span class="en-text">Back to top</span><span class="w-7 h-7 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-purple-500 group-hover:border-purple-500 transition-all"><i class="fa-solid fa-arrow-up text-[10px]"></i></span></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script src="../../assets/site.js"></script>
+
+    <script>
+    (function () {
+        // кнопка «Копировать» у блоков кода
+        document.querySelectorAll('.b-prose .codehilite').forEach(box => {
+            const btn = document.createElement('button');
+            btn.type = 'button'; btn.className = 'b-copy'; btn.setAttribute('aria-label', 'Copy code');
+            btn.innerHTML = '<i class="fa-regular fa-copy" aria-hidden="true"></i>';
+            btn.addEventListener('click', () => {
+                navigator.clipboard.writeText(box.querySelector('pre').innerText).then(() => {
+                    btn.innerHTML = '<i class="fa-solid fa-check" aria-hidden="true"></i>';
+                    setTimeout(() => btn.innerHTML = '<i class="fa-regular fa-copy" aria-hidden="true"></i>', 1500);
+                });
+            });
+            box.appendChild(btn);
+        });
+        // подсветка текущего раздела в оглавлении
+        const links = Array.from(document.querySelectorAll('.b-toc a'));
+        if (links.length && 'IntersectionObserver' in window) {
+            const map = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+            const io = new IntersectionObserver(es => es.forEach(e => {
+                if (e.isIntersecting) { links.forEach(l => l.classList.remove('active')); const a = map.get(e.target.id); if (a) a.classList.add('active'); }
+            }), { rootMargin: '-80px 0px -70% 0px' });
+            map.forEach((_, id) => { const el = document.getElementById(id); if (el) io.observe(el); });
+        }
+    })();
+    </script>
+</body>
+</html>

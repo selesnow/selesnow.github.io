@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Alexey Seleznev">
+    <meta name="theme-color" content="#030712">
+    <link rel="canonical" href="https://alexey-seleznev.pro/blog/kak-vnedrit-business-intelligence-dlya-malogo-i-srednego-biznesa/">
+
+    <title>Как внедрить Business Intelligence для малого и среднего бизнеса | Алексей Селезнёв</title>
+    <meta name="title" content="Как внедрить Business Intelligence для малого и среднего бизнеса | Алексей Селезнёв">
+    <meta name="description" content="Даже небольшим предприятиям для оптимизации своей работы приходится анализировать много источников информации. Чтобы упростить рутинную работу и свести различные данные в визуально…">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alexey-seleznev.pro/blog/kak-vnedrit-business-intelligence-dlya-malogo-i-srednego-biznesa/">
+    <meta property="og:site_name" content="ALEXEY-SELEZNEV.pro">
+    <meta property="og:title" content="Как внедрить Business Intelligence для малого и среднего бизнеса | Алексей Селезнёв">
+    <meta property="og:description" content="Даже небольшим предприятиям для оптимизации своей работы приходится анализировать много источников информации. Чтобы упростить рутинную работу и свести различные данные в визуально…">
+    <meta property="og:image" content="https://alexey-seleznev.pro/photo.jpg">
+    <meta property="og:image:alt" content="Алексей Селезнёв">
+    <meta property="og:locale" content="ru_RU">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="https://alexey-seleznev.pro/blog/kak-vnedrit-business-intelligence-dlya-malogo-i-srednego-biznesa/">
+    <meta name="twitter:title" content="Как внедрить Business Intelligence для малого и среднего бизнеса | Алексей Селезнёв">
+    <meta name="twitter:description" content="Даже небольшим предприятиям для оптимизации своей работы приходится анализировать много источников информации. Чтобы упростить рутинную работу и свести различные данные в визуально…">
+    <meta name="twitter:image" content="https://alexey-seleznev.pro/photo.jpg">
+
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z56YHE916N"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Z56YHE916N');
+    </script>
+    <link rel="icon" type="image/jpeg" href="../../logo.jpg">
+    <link rel="apple-touch-icon" href="../../logo.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;700;800;900&display=swap">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/site.css">
+    <!-- Tailwind собран заранее (_build/build.py) и подключается последним, как это делал CDN-скрипт -->
+    <link rel="stylesheet" href="../../assets/tailwind.css">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Как внедрить Business Intelligence для малого и среднего бизнеса",
+  "datePublished": "2016-03-02",
+  "inLanguage": "ru",
+  "description": "Даже небольшим предприятиям для оптимизации своей работы приходится анализировать много источников информации. Чтобы упростить рутинную работу и свести различные данные в визуально…",
+  "author": {
+    "@id": "https://alexey-seleznev.pro/#person"
+  },
+  "mainEntityOfPage": "https://alexey-seleznev.pro/blog/kak-vnedrit-business-intelligence-dlya-malogo-i-srednego-biznesa/"
+}
+    </script>
+    <link rel="stylesheet" href="../blog.css">
+</head>
+<body class="relative lang-en">
+
+    <!-- Interactive Background -->
+    <div id="vanta-bg"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full z-50 top-0 left-0 border-b border-white/5 bg-slate-950/60 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 h-16 flex items-center justify-between">
+            <a href="../../" class="flex items-center gap-2 sm:gap-2.5 md:gap-3 group shrink min-w-0">
+                <img src="../../logo.jpg" alt="Alexey Seleznev" class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 rounded-lg sm:rounded-xl object-cover shadow-md border border-white/10 group-hover:border-purple-500/50 group-hover:scale-105 transition-all shrink-0">
+                <span class="text-xs min-[400px]:text-sm sm:text-base md:text-xl font-black tracking-tight uppercase outfit-font whitespace-nowrap text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+            </a>
+            <div class="hidden xl:flex gap-6 text-sm font-semibold text-slate-400">
+                <a href="../../" class="nav-link hover:text-white transition-colors"><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a>
+                <a href="../../opensource/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span></a>
+                <a href="../../courses/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a>
+                <a href="../../videos/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a>
+                <a href="../../talks/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a>
+                <a href="../../articles/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a>
+                <a href="../../interviews/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a>
+                <a href="../../blog/" class="nav-link hover:text-white transition-colors active"><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a>
+            </div>
+
+            <div class="flex items-center gap-1.5 sm:gap-2 md:gap-4 shrink-0">
+                <div class="lang-switcher flex gap-1 sm:gap-1.5 md:gap-2 text-[11px] sm:text-xs md:text-sm font-bold border-r border-white/10 pr-1.5 sm:pr-3 md:pr-4 mr-0.5 sm:mr-1 md:mr-2 outfit-font">
+                    <button onclick="changeLang('en')" id="btn-en" class="active hover:text-white transition-colors">EN</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ru')" id="btn-ru" class="text-slate-500 hover:text-white transition-colors">RU</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ua')" id="btn-ua" class="text-slate-500 hover:text-white transition-colors">UA</button>
+                </div>
+
+                <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="text-slate-400 hover:text-blue-400 transition-colors hidden sm:block" aria-label="Telegram"><i class="fa-brands fa-telegram text-lg md:text-xl"></i></a>
+                <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="text-slate-400 hover:text-white transition-colors hidden sm:block" aria-label="GitHub"><i class="fa-brands fa-github text-lg md:text-xl"></i></a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="xl:hidden w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-purple-500/20 hover:border-purple-500/40 transition-all focus:outline-none" aria-label="Toggle Navigation Menu">
+                    <i class="fa-solid fa-bars text-sm sm:text-lg" id="mobile-menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div id="mobile-menu" class="hidden xl:hidden border-t border-white/10 bg-slate-950/95 backdrop-blur-2xl shadow-2xl overflow-y-auto max-h-[calc(100vh-4rem)] transition-all">
+            <div class="max-w-7xl mx-auto px-6 py-6 space-y-1">
+                <a href="../../" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-house text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span>
+                </a>
+                <a href="../../opensource/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-code-branch text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span>
+                </a>
+                <a href="../../courses/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-graduation-cap text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span>
+                </a>
+                <a href="../../videos/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-circle-play text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span>
+                </a>
+                <a href="../../talks/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-microphone-lines text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span>
+                </a>
+                <a href="../../articles/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-pen-nib text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span>
+                </a>
+                <a href="../../interviews/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-regular fa-newspaper text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span>
+                </a>
+                <a href="../../blog/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-white bg-white/5 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-feather-pointed text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span>
+                </a>
+
+                <div class="pt-4 mt-3 border-t border-white/10 flex items-center justify-around text-slate-400">
+                    <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-blue-400 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-telegram text-xl"></i> Telegram
+                    </a>
+                    <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="p-2 hover:text-white transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-github text-xl"></i> GitHub
+                    </a>
+                    <a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-red-500 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-youtube text-xl"></i> YouTube
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="b-wrap relative z-10">
+        <nav class="b-crumbs" aria-label="breadcrumb">
+            <a href="../../"><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a><span>/</span><a href="../"><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a><span>/</span><a href="../?cat=bi#posts">BI</a>
+        </nav>
+        <div class="b-layout has-toc">
+            <article class="bento-glass no-lift b-article" data-aos="fade-up">
+                <div class="bento-content">
+                    <div class="b-cats"><a class="b-chip b-chip-cat" href="../?cat=bi#posts">BI</a><a class="b-chip b-chip-cat" href="../?cat=vizualizatsiya-dannyh#posts">Визуализация данных</a></div>
+                    <h1 class="b-title outfit-font">Как внедрить Business Intelligence для малого и среднего бизнеса</h1>
+                    <div class="b-meta">
+                        <span><i class="fa-regular fa-calendar" aria-hidden="true"></i><span class="ru-text">2 марта 2016</span><span class="ua-text">2 березня 2016</span><span class="en-text">2 Mar 2016</span></span>
+                        <span><i class="fa-regular fa-clock" aria-hidden="true"></i><span class="ru-text">21 мин чтения</span><span class="ua-text">21 хв читання</span><span class="en-text">21 min read</span></span>
+                        <span class="b-lang" title="Русский">RU</span>
+                    </div>
+                    <div class="b-note"><i class="fa-regular fa-clock" aria-hidden="true"></i><div><span class="ru-text">Материал опубликован в 2016 году — описанные инструменты и интерфейсы могли измениться.</span><span class="ua-text">Матеріал опубліковано у 2016 році — описані інструменти та інтерфейси могли змінитися.</span><span class="en-text">Published in 2016 — the tools and interfaces described may have changed since.</span></div></div>
+                    
+                    <div class="b-prose"><p>Даже небольшим предприятиям для оптимизации своей работы приходится анализировать много источников информации. Чтобы упростить рутинную работу и свести различные данные в визуально понятные отчеты, существуют специальные системы бизнес-аналитики. Если вы новичок, знакомство с BI стоит начать с самого доступного по цене решения. В этом посте я расскажу именно о нем.</p>
+<p><img loading="lazy" decoding="async" alt="Похожее изображение" src="https://v1.std3.ru/9b/dd/1444424808-9bdd6d38c4fce2b1d57c46b991770dff.jpeg" /></p>
+<h2 id="-">Обзор систем бизнес-аналитики</h2>
+<p>На Западе пик интереса к <a target="_blank" rel="noopener" href="https://ru.wikipedia.org/wiki/Business_Intelligence">Business Intelligence</a> (дальше BI) пришелся на 2008–2012, и рост популярности систем бизнес-аналитики сохраняется по сегодняшний день (хотя уже в меньшей мере). Страны СНГ в сфере аналитики, и в целом сбора и обработки информации, значительно отстают, поэтому в Рунете BI только начинает набирать популярность. На рынке BI технологий уже есть свои лидеры. Платформы Tableau, QlikView, Oracle Business Intelligence — достаточно популярные и мощные, способны связать и визуализировать террабайты информации из различных источниках данных. Основной минус всех перечисленных инструментов — их дороговизна. По данным исследования Gartner, внедрение наиболее популярных BI платформ обошлось бы вам в 2015 году от $13 000 до $71 000, средняя стоимость проекта — $46 525.</p>
+<p><img loading="lazy" decoding="async" alt="Обзор систем бизнес-аналитики" width="785" height="436" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-obzo-434e6d99.webp" /></p>
+<p>На просторах СНГ далеко не каждая компания может позволить себе такие затраты. Особенно — относительно молодой бизнес, который пока не располагает достаточными бюджетами для внедрения серьезных BI решений. К тому же, маленьким компаниям зачастую не требуется вся мощь упомянутых выше продуктов: вряд ли вы наймете два многотонных грузовика, если требуется перевести ведро песка. Именно поэтому я решил рассказать о малоизвестной и достаточно дешевой BI платформе — <a target="_blank" rel="noopener" href="http://ideal-analytics.com/">Ideal Analytics</a>.</p>
+<h2 id="ideal-analytics">Доступные источники данных в Ideal Analytics</h2>
+<p>В Ideal Analytics все доступные источники данных классифицированы и распределены на семь групп. 1. Box. 2. DataBases.</p>
+<ul>
+<li>IBM DB2;</li>
+<li>IBM informix;</li>
+<li>MS SQL Server 2000;</li>
+<li>MS SQL Server 2005;</li>
+<li>MS SQL Server 2008;</li>
+<li>MySQL server 5;</li>
+<li>Oracle 10g;</li>
+<li>PostgreSQL;</li>
+<li>Sybase IQ;</li>
+</ul>
+<ol start="3">
+<li>File.</li>
+</ol>
+<ul>
+<li>CSV;</li>
+<li>Microsoft Excel 2007;</li>
+<li>Microsoft Excel 1997–2003;</li>
+</ul>
+<ol start="4">
+<li>Google.</li>
+</ol>
+<ul>
+<li>Google Analytics;</li>
+</ul>
+<ol start="5">
+<li>Saleforce. 6. Social media.</li>
+</ol>
+<ul>
+<li>Facebook;</li>
+<li>Linkedin;</li>
+<li>Twitter;</li>
+</ul>
+<ol start="7">
+<li>System. В этой статье мы научимся подключать одну из самых распространенных систем аналитики — Google Analytics. Впрочем, все остальные источники данных подключаются аналогично описанным ниже инструкциям.</li>
+</ol>
+<h2 id="1-google-analytics">1. Подключаем Google Analytics</h2>
+<p>1.1. Чтобы подключить представление Google Analytics, в меню «+ New» выбираем пункт «New connector».</p>
+<p><img loading="lazy" decoding="async" alt="Подключаем Google Analytics" width="709" height="96" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-podk-1a9c586c.webp" /></p>
+<p>1.2. Заполняем поля в диалоговом окне «Save Connector» следующим образом: 1.2.1. Задаем имя подключения. 1.2.2. При необходимости вводим описание коннектора. 1.2.3. В поле «Connector source type» в выпадающем меню выбираем Google в качестве типа источника; 1.2.4. В поле «Service Provide» будет всего один доступный сервис — Google Analytics, который и требуется выбрать.</p>
+<p><img loading="lazy" decoding="async" alt="В поле «Service Provide» будет всего один доступный сервис — Google Analytics, который и требуется выбрать" width="537" height="498" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-v-po-e97cf528.webp" /></p>
+<p>1.3. Далее связываем аккаунт Google с Ideal Analytics, после чего появится сообщение, что соединение настроено.</p>
+<p><img loading="lazy" decoding="async" alt="Далее связываем аккаунт Google с Ideal Analytics, после чего появится сообщение, что соединение настроено" width="431" height="127" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-dale-94462f22.webp" /></p>
+<h2 id="2">2. Создаем необходимые источники данных</h2>
+<p>2.1. На основе созданных подключений добавляем источник данных, выбрав в меню «+ New» пункт «New DataSource».</p>
+<p><img loading="lazy" decoding="async" alt="На основе созданных подключений добавляем источник данных" width="453" height="123" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-na-o-157b56dc.webp" /></p>
+<p>2.2. В диалоговом окне «Save Datasource» задаем имя и описание источника, затем нажимаем на иконку с изображением пустого листа и карандаша.</p>
+<p><img loading="lazy" decoding="async" alt="В диалоговом окне «Save Datasource» задаем имя и описание источника" width="572" height="352" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-v-di-3af4d0f1.webp" /></p>
+<p>2.3. В открывшемся окне «Data Source Specification Wizard» выбираем нужное представление, параметры и показатели, а также даты, за которые требуется получить данные. Обратите внимание, что аналогично другим инструментам экспорта данных из Google Analytics, существует ограничение на количество параметров (не более семи) и показателей (не более десяти).</p>
+<p><img loading="lazy" decoding="async" alt="В открывшемся окне «Data Source Specification Wizard» выбираем нужное представление, параметры и показатели" width="709" height="269" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-v-ot-291732a9.webp" /></p>
+<p>В качестве примера мы выбрали следующие параметры (Dimensions):</p>
+<ul>
+<li>браузер (Browser);</li>
+<li>страна (Country);</li>
+<li>месяц (Month).</li>
+</ul>
+<p>Показатели (Metrics):</p>
+<ul>
+<li>посетители (Visitors);</li>
+<li>сеансы (Visits);</li>
+<li>отказы (Bounces ).</li>
+</ul>
+<p>Установили фильтр за период с 01.11.2015 по 31.01.2016. 2.4. Для дальнейшей работы жмем кнопку «Show preview». Результат этого запроса отобразиться в нижней части диалогового окна.</p>
+<p><img loading="lazy" decoding="async" alt="Для дальнейшей работы жмем кнопку «Show preview»" width="1066" height="403" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-dlya-3b3dbb64.webp" /></p>
+<p>2.5. Завершаем редактирования запроса, нажав «Apply». Кнопка размещена в нижнем правом углу диалогового окна. 2.6. После возвращения в окно «Save DataSource» видим сгенерированный текст нашего запроса в поле «DataSource Specification». Жмем «Save».</p>
+<p><img loading="lazy" decoding="async" alt="После возвращения в окно «Save DataSource» видим сгенерированный текст нашего запроса в поле «DataSource Specification»" width="441" height="323" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-posl-cc416f3d.webp" /></p>
+<h2 id="3">3. Добавляем первую панель мониторинга</h2>
+<p>3.1. Следующий шаг — создание первой панели мониторинга. Для этого в верхнем меню «+ New» выбираем пункт «New Dashboard».</p>
+<p><img loading="lazy" decoding="async" alt="Следующий шаг — создание первой панели мониторинга" width="564" height="107" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-sled-f6bd6901.webp" /></p>
+<p>3.2. В диалоговом окне «SaveDashBoard» задаем имя дашборда, устанавливаем тип (персональный или корпоративный) и создаем первую группу, введя название группы панелей мониторинга в поле «DashBoard Group».</p>
+<p><img loading="lazy" decoding="async" alt="В диалоговом окне «SaveDashBoard» задаем имя дашборда" width="312" height="281" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-v-di-46204c6f.webp" /></p>
+<h2 id="4">4. Формируем нужные нам наборы данных</h2>
+<p>4.1. Чтобы создать первый набор данных (DataSet), жмем кнопку «Show explorer» в верхнем левом углу экрана.</p>
+<p><img loading="lazy" decoding="async" alt="Чтобы создать первый набор данных (DataSet), жмем кнопку «Show explorer» в верхнем левом углу экрана" width="325" height="68" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-chto-228e9c85.webp" /></p>
+<p>4.2. Левым кликом мыши раскрываем список «APPLICATION ROOT», потом правым кликом жмем на папку «Document Root» и в выпадающем меню выбираем команду «Add Dataset».</p>
+<p><img loading="lazy" decoding="async" alt="Левым кликом мыши раскрываем список «APPLICATION ROOT», потом правым кликом жмем на папку «Document Root» и в выпадающем меню выбираем команду «Add Dataset»" width="462" height="382" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-levy-470ac5d1.webp" /></p>
+<p>4.3. В открывшемся конструкторе выбираем нужный источник данных.</p>
+<p><img loading="lazy" decoding="async" alt="В открывшемся конструкторе выбираем нужный источник данных" width="726" height="200" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-v-ot-f010fdce.webp" /></p>
+<p>Область «Preview Conteiner» заполнят данные из выбранного нами источника.</p>
+<p><img loading="lazy" decoding="async" alt="Область «Preview Conteiner» заполнят данные из выбранного нами источника" width="1293" height="213" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-obla-37663563.webp" /></p>
+<p>4.4. В поле «Configuration name» вводим имя источника данных, в нашем случае — «GA_Visit_By_Country».</p>
+<p><img loading="lazy" decoding="async" alt="В поле «Configuration name» вводим имя источника данных, в нашем случае — «GA_Visit_By_Country»" width="726" height="287" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-v-po-29a4ae63.webp" /></p>
+<p>4.5. Далее будем работать с областями «Source Colums» и «DataSet Configuration». Если мы планируем отобразить на дашборде круговую диаграмму, которая будет показывать долю каждой страны в общем объеме трафика, то достаточно будет полей «ga:country» и «ga:vesits». Отмечаем эти поля галочками в области «Source Columns», затем жмем кнопку «&gt;&gt;» для переноса полей в область «DataSet Configuration».</p>
+<p><img loading="lazy" decoding="async" alt="Далее будем работать с областями «Source Colums» и «DataSet Configuration»" width="1018" height="218" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-dale-4d17d8a6.webp" /></p>
+<p>4.6. Теперь мы можем переименовать поля, перенесенные в область «DataSet Configuration». Для этого в столбце «Alias Names» указываем новые название, также можно изменить тип поля. Поля бывают двух типов: параметры (D) и показатели (F). Параметрами служат категории, описывающие объект. Например, страна, дата, месяц, браузер. Показателями служат числовые метрики: количество сеансов, посетителей и другие. В поле «Data Type» можно изменить тип данных. По умолчанию все параметры имеют строчный тип (String), а показатели — числовой (Integer). В поле «Operation» требуется указать тип агрегации для данных, хранящихся в поле по умолчанию. Для параметров агрегация не применяется, поэтому для поля «ga:country» установлено значение N.A., а для «ga:visits» по умолчанию используется суммирование (Sum) — что нам и требуется. При необходимости доступны следующие типы агрегации:</p>
+<ul>
+<li>суммирование (SUM);</li>
+<li>среднее арифметическое (AVG);</li>
+<li>количество записей (COUNT);</li>
+<li>минимальное значение (MIN);</li>
+<li>максимальное значение (MAX);</li>
+<li>накопительное суммирование (CUM_SUM);</li>
+<li>процент смещения (PERCENT_CHANGE).</li>
+</ul>
+<p>Правый столбец области «DataSet Configuration» называется «Use as filter», с его помощью можно выбрать поля, по которым планируем фильтровать информацию. Для наглядного примера переведем в область «DataSet Configuration» поле «Month» и поставим напротив его названия галочку в столбце «Use as filter».</p>
+<p><img loading="lazy" decoding="async" alt="Для наглядного примера переведем в область «DataSet Configuration» поле «Month» и поставим напротив его названия галочку в столбце «Use as filter»" width="1010" height="122" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-dlya-b9951d1c.webp" /></p>
+<p>Созданный набор данных появится в области «Explorer».</p>
+<p><img loading="lazy" decoding="async" alt="Созданный набор данных появится в области «Explorer»" width="277" height="141" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-sozd-135849e9.webp" /></p>
+<h2 id="5">5. Создаем элемент будущего дашборда</h2>
+<p>5.1. Для создания первого элемента будущей панели мониторинга в окне «Explorer» дважды кликаем левой кнопкой мыши на нужном наборе данных, в нашем случае — «GA_Visit_By_Country», после чего попадем в окно редактирования отчета.</p>
+<p><img loading="lazy" decoding="async" alt="Создаем элемент будущего дашборда" width="1075" height="587" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-sozd-72fdf45b.webp" /></p>
+<p>5.2. Далее выбираем способ агрегации показателей, для нашего примера — это суммирование по полю «Session». Если бы в наборе данных было больше показателей, мы могли бы вывести в таблицу или на график больше показателей. 5.3. Для фильтрации данных необходимо кликнуть левой кнопкой мыши по строке со значением 01 в столбце «Month». Эта функция возможна благодаря тому, что, разрабатывая набор данных (на втором шаге настройки элемента дашборда), в поле «Month» мы установили галочку «Use as filter».</p>
+<p><img loading="lazy" decoding="async" alt="Для фильтрации данных необходимо кликнуть левой кнопкой мыши по строке со значением 01 в столбце «Month»" width="283" height="183" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-dlya-7c2403ea.webp" /></p>
+<p>5.4. Последний шаг на пути создания элемента панели мониторинга — это настройка визуализации данных.</p>
+<p><img loading="lazy" decoding="async" alt="Последний шаг на пути создания элемента панели мониторинга — это настройка визуализации данных" width="1071" height="281" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-posl-2af8bd73.webp" /></p>
+<p>Ideal Analytics в качестве представления данных по умолчанию устанавливает отображения и диаграммы и таблицы данных. Чтобы выбрать нужные нам элементы визуализации, воспользуемся набором кнопок, который находится в правом верхнем углу окна настройки.</p>
+<p><img loading="lazy" decoding="async" alt="Чтобы выбрать нужные нам элементы визуализации, воспользуемся набором кнопок, который находится в правом верхнем углу окна настройки" width="159" height="65" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-chto-35ce6708.webp" /></p>
+<p>Кликнув на иконку с диаграммой, выбираем сравнительный тип визуализации, в котором отображается только диаграмма, без таблицы данных. В режиме сравнения доступны следующие типы диаграмм:</p>
+<p><img loading="lazy" decoding="async" alt="В режиме сравнения доступны следующие типы диаграмм" width="400" height="338" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-v-re-c4c5c618.webp" /></p>
+<ul>
+<li>гистограмма (column);</li>
+<li>график (line);</li>
+<li>карты эффективности / древовидная карта (heat map / tree map).</li>
+</ul>
+<p>Нажав на кнопку с изображением таблицы, перейдем в табличный режим, без графиков и диаграмм. Также нам доступны некоторые настройки таблиц: для их изменения необходимо кликнуть на иконку с изображением шестеренки.</p>
+<p><img loading="lazy" decoding="async" alt="Нажав на кнопку с изображением таблицы, перейдем в табличный режим" width="1072" height="154" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-nazh-cea383d7.webp" /></p>
+<p>Окно дополнительных настроек таблицы:</p>
+<p><img loading="lazy" decoding="async" alt="Окно дополнительных настроек таблицы" width="662" height="548" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-okno-d33aa325.webp" /></p>
+<p>В области «Field» настраиваем группировку полей и их иерархию. Перетянув поля в область «Sort», можно настроить порядок сортировки данных. Самая интересная функциональность открывается после нажатия на кнопку, выделенную на рисунке выше, — это переключатель между режимом обычной и сводной таблицы. Перейдя в режим сводной таблицы, мы можем строить отчеты любой сложности, компоновать данные любым нужным образом.</p>
+<p><img loading="lazy" decoding="async" alt="Перейдя в режим сводной таблицы, мы можем строить отчеты любой сложности" width="603" height="500" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-pere-aef40b0b.webp" /></p>
+<p>Перетащив поля, согласно приведенному выше примеру, мы построим перекрестную таблицу. В строках будут перечислены страны, в столбцах — данные по месяцам, а в качестве значений — количество сеансов.</p>
+<p><img loading="lazy" decoding="async" alt="Перетащив поля, согласно приведенному выше примеру, мы построим перекрестную таблицу" width="1068" height="247" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-pere-7496aac1.webp" /></p>
+<p>5.5. Предлагаю все же вернуться в режим визуализации. Это можно сделать, нажав на иконку с изображением таблицы и диаграммы.</p>
+<p><img loading="lazy" decoding="async" alt="Предлагаю все же вернуться в режим визуализации. Это можно сделать, нажав на иконку с изображением таблицы и диаграммы" width="254" height="82" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-pred-242c3906.webp" /></p>
+<p>Режим визуализации предоставляет большой выбор диаграмм. Чтобы изменить тип диаграммы, жмем на иконку, которая располагается над построенной по умолчанию гистограммой.</p>
+<p><img loading="lazy" decoding="async" alt="Чтобы изменить тип диаграммы, жмем на иконку, которая располагается над построенной по умолчанию гистограммой" width="1073" height="279" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-chto-da505fab.webp" /></p>
+<p>Выбираем подходящий тип диаграммы:</p>
+<p><img loading="lazy" decoding="async" alt="Выбираем подходящий тип диаграммы" width="598" height="419" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-vybi-49756888.webp" /></p>
+<p>Все доступные диаграммы сгруппированы по типам сравнения и области применения: Позиционное сравнение (Comparison):</p>
+<ul>
+<li>гистограмма (Column);</li>
+<li>линейчатая (Bar);</li>
+<li>диаграмма с областями (Area).</li>
+</ul>
+<p>Покомпонентное сравнение (Contribution):</p>
+<ul>
+<li>нормализованная гистограмма (Column);</li>
+<li>нормализованная линейчатая диаграмма (Bar);</li>
+<li>нормализованная диаграмма с областями (Area);</li>
+<li>круговая диаграмма (Pie / Doughnut).</li>
+</ul>
+<p>Временное сравнение, тренды (Trend):</p>
+<ul>
+<li>график (Lines).</li>
+</ul>
+<p>Накопление (Accumulation):</p>
+<ul>
+<li>воронка (Piramid / Funnel).</li>
+</ul>
+<p>Датчик (Slab):</p>
+<ul>
+<li>спидометр (Circular gauge);</li>
+<li>вертикальный датчик (Vertical Linear Gauge);</li>
+<li>горизонтальный датчик (Horizontal Linear Gauge);</li>
+<li>корреляция (Correlation);</li>
+<li>пузырьковая диаграмма (Bubble).</li>
+</ul>
+<p>Прочие (Miscellaneous):</p>
+<ul>
+<li>радар / лепестковая диаграмма (Radar);</li>
+<li>маркированная (XY Plotter / Marker);</li>
+<li>древовидные карты (Tree map).</li>
+</ul>
+<p>При разработке набора данных мы запланировали добавить на дашборд диаграмму, отображающую долю каждой страны в общем объеме трафика. Для решения этой задачи подходят круговая диаграмма или древовидная карта. Поскольку в нашей таблице содержится информация по более чем 50 странам, а круговые диаграммы поддерживают до 50 элементов, мы построим древовидную карту.</p>
+<p><img loading="lazy" decoding="async" alt="Поскольку в нашей таблице содержится информация по более чем 50 странам, а круговые диаграммы поддерживают до 50 элементов, мы построим древовидную карту" width="600" height="422" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-posk-6379555e.webp" /></p>
+<blockquote>
+<p><img loading="lazy" decoding="async" alt="" src="https://netpeak.net/blog/img/social/tw-01.svg" /></p>
+</blockquote>
+<p>Если хотите узнать, какой тип диаграммы подойдет для ваших данных, читайте статью «Как построить диаграмму и не облажаться».</p>
+<p>Для более читабельного вида следует поставить галочку «Data Labels». На этом работа над первым элементом панели мониторинга завершена.</p>
+<p><img loading="lazy" decoding="async" alt="Для более читабельного вида следует поставить галочку «Data Labels»" width="536" height="279" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-dlya-96a3ba13.webp" /></p>
+<p>5.5. Чтобы добавить созданный элемент на ранее созданный дашборд, в верхнем меню с одноименным названием выбираем пункт «Save to Corporate / Personal dashboard» (зависит от того, на какой тип панели мониторинга нужно добавить элемент). Ранее мы создали пустой дашборд, выбрав в качестве его типа «Personal», соответственно нам подходит пункт «Save to Personal dashboard».</p>
+<p><img loading="lazy" decoding="async" alt="Ранее мы создали пустой дашборд, выбрав в качестве его типа «Personal», соответственно нам подходит пункт «Save to Personal dashboard»" width="579" height="158" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-rane-0fc133eb.webp" /></p>
+<p>5.6. В открывшемся диалоговом окне «Create DashBoard» нам следует выбрать между добавлением нового или заменой уже существующего элемента дашборда. Потом — задаем имя, заголовок элемента и выбираем, в какую панель мониторинга его требуется добавить. Также в данном окне можно создать новую панель мониторинга.</p>
+<p><img loading="lazy" decoding="async" alt="В открывшемся диалоговом окне «Create DashBoard» нам следует выбрать между добавлением нового элемента и заменой старого дашборда" width="581" height="450" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-v-ot-df345b18.webp" /></p>
+<p>5.7. Далее жмем «Save DashBoard item».</p>
+<h2 id="6-ideal-analytics">6. Добавляем вычисляемые поля в Ideal Analytics</h2>
+<p>Закрепим материал и дополнительно рассмотрим, как создавать вычисляемые поля. Для этого мы добавим на дашборд диаграмму, отображающую показатель отказов в зависимости от используемого браузера. Для этого создаем еще один набор данных на основе подключенного источника данных. Отметим, что в одну панель мониторинга можно встраивать элементы, созданные на основе совершенно разных подключений и источников. Вернемся к процессу разработки набора данных. Повторяем шаги, описанные в пункте 4 с учетом, что конфигурация источника данных, описанная в пункте 4.5, в этот раз будет такой:</p>
+<p><img loading="lazy" decoding="async" alt="Новая конфигурация источника" width="801" height="124" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-nova-7ce51468.webp" /></p>
+<p>Далее перейдем к разработке нового элемента диаграммы на основе созданного набора данных. Следуйте инструкциям, описанным в пункте 5. В качестве значения мы планируем вывести показатель отказов, но в наборе данных у нас нет этого показателя. Зато существуют поля, на основе которых можно его рассчитать. Поэтому далее опишем процедуру создания вычисляемого поля. 6.1. Кнопка управления вычисляемыми полями находится под основным меню дашборда.</p>
+<p><img loading="lazy" decoding="async" alt="Кнопка управления вычисляемыми полями находится под основным меню дашборда" width="574" height="238" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-knop-ceb109e7.webp" /></p>
+<p>Для создания поля «BounceRate» используем такую формулу:</p>
+<blockquote>
+<p><img loading="lazy" decoding="async" alt="" src="https://netpeak.net/blog/img/social/tw-01.svg" /></p>
+</blockquote>
+<p>@gabounces_2(SUM)@ / @gavisits_3(SUM)@ * 100</p>
+<p><img loading="lazy" decoding="async" alt="После нажатия кнопки с изображением дискеты в левой части диалогового окна «Manage Calculated Aggregate Value Columns» появится созданное вычисляемое поле" width="982" height="588" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-posl-3d5df71c.webp" /></p>
+<p>После нажатия кнопки с изображением дискеты в левой части диалогового окна «Manage Calculated Aggregate Value Columns» появится созданное вычисляемое поле.</p>
+<p><img loading="lazy" decoding="async" alt="Вычисляемое поле" width="350" height="312" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-posl-18841a2a.webp" /></p>
+<p>Также созданное вычисляемое поле теперь доступно в области «Select the data you would like to report on».</p>
+<p><img loading="lazy" decoding="async" alt="Созданное вычисляемое поле теперь доступно в области «Select the data you would like to report on»" width="374" height="216" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-sozd-af0dc280.webp" /></p>
+<p>6.2. Добавляем к нашей визуализации поле «Session». Это позволит вывести на график десять браузеров, из которых идет основной поток трафика, и не учитывать показатель отказов в менее популярных браузерах, из которых было всего несколько сеансов.</p>
+<p><img loading="lazy" decoding="async" alt="Добавляем к нашей визуализации поле «Session»" width="1359" height="137" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-doba-2ee14ed2.webp" /></p>
+<p><img loading="lazy" decoding="async" alt="Добавляем к нашей визуализации поле «Session»" width="1356" height="203" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-doba-d1d752a9.webp" /></p>
+<p>6.3. Кликнув по столбцу «Session» (SUM), отсортируем данные в табличной части области: «Chose your view» — «Comparion» — «Table» — «Visualize».</p>
+<p><img loading="lazy" decoding="async" alt="Кликнув по столбцу «Session» (SUM), отсортируем данные в табличной части области" width="655" height="245" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-klik-53d442ea.webp" /></p>
+<p>6.4. В области диаграммы нажимаем на кнопку настроек.</p>
+<p><img loading="lazy" decoding="async" alt="В области диаграммы нажимаем на кнопку настроек" width="671" height="249" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-v-ob-987efa64.webp" /></p>
+<p><img loading="lazy" decoding="async" alt="Окно настроек" width="396" height="298" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-okno-7abfa0fb.webp" /></p>
+<p>6.5. Чтобы сделать диаграмму максимально полезной и удобной, в столбце «Chart Type» для поля «Session» установим тип «Line». Поскольку шкала данных по количеству запросов значительно выше, чем по показателю отказов, переключаем поле «Sessions» на дополнительную шкалу — необходимо кликнуть по соответствующей иконке в столбце «Axis Position». После нажатия кнопки «Update Visualization» диаграмма будет выглядеть приблизительно так:</p>
+<p><img loading="lazy" decoding="async" alt="В столбце «Chart Type» для поля «Session» установим тип «Line»" width="662" height="187" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-v-st-f17b96af.webp" /></p>
+<p>Синие столбцы отображают уровень показателя отказов по каждому браузеру, а желтая линия — объем трафика. Как видим, пользователи чаще всего используют Google Chrome, при этом показатель отказов у таких посетителей около 40%, что значительно ниже, чем по остальным браузерам. 6.6. Чтобы добавить новый элемент, воспользуемся пунктом «Save to Personal dashboard» в меню панели мониторинга.</p>
+<h2 id="7">7. Начинаем работу с созданным дашбордом</h2>
+<p>7.1. Посмотрим на созданный ранее дашборд — выбираем пункт «DashBoard» в меню «Module».</p>
+<p><img loading="lazy" decoding="async" alt="Посмотрим на созданный ранее дашборд — выбираем пункт «DashBoard» в меню «Module»" width="730" height="122" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-posm-6706d8de.webp" /></p>
+<p>После этого будет открыт список всех доступных панелей мониторинга.</p>
+<p><img loading="lazy" decoding="async" alt="Будет открыт список всех доступных панелей мониторинга" width="1353" height="580" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-bude-1313168c.webp" /></p>
+<p>7.2. Дашборд можно расшарить и разослать ссылки с онлайн-доступами даже тем пользователям, которые не являются пользователями Ideal Analytics. Чтобы поделиться панелью мониторинга, воспользуемся кнопкой «Share» в меню, расположенном в верхней части дашборда.</p>
+<p><img loading="lazy" decoding="async" alt="Чтобы поделиться панелью мониторинга, воспользуемся кнопкой «Share»" width="297" height="87" src="../images/kak-vnedrit-business-intelligence-dlya-malogo-i-sredneg-chto-8bd59b18.webp" /></p>
+<p>После этого нам будут доступны остальные функции данного меню. С их помощью можно получить:</p>
+<ul>
+<li>сгенерированный HTML код для вставки дашборда на сайт или в электронное письмо;</li>
+<li>прямую ссылку, которой можно поделится с любым пользователем.</li>
+</ul>
+<p>Надеюсь, я сумел раскрыть в статье основные возможности Ideal Analytics. Несмотря на то, что функционал этой BI платформы значительно уступает конкурентам, его наверняка будет достаточно для решения большинства задач малого и среднего бизнеса.</p>
+<blockquote>
+<p>Больше конкретных советов по визуализации данных — в серии статей «Как работать с Excel в рекламной кампании».</p>
+</blockquote>
+<hr />
+<p><strong>UPD</strong>:</p>
+<p><em>Создатели Ideal Analytics на официальном сайте сервиса рекомендовали эту статью в качестве <a target="_blank" rel="noopener" href="http://ideal-analytics.com/russia-sends-a-beacon-with-ideal-analytics-for-smb-business-to-gear-up-in-russian-soil/">русскоязычного мануала</a>.</em></p>
+<p><em><a target="_blank" rel="noopener" href="https://netpeak.net/ru/blog/kak-vnedrit-business-intelligence-dlya-malogo-i-srednego-biznesa/">Оригинал публикации на блоге Netpeak.</a></em></p></div>
+                    
+                    <div class="b-tags"><a class="b-chip" href="../?tag=bi#posts">BI</a><a class="b-chip" href="../?tag=vizualizatsiya-dannyh#posts">Визуализация данных</a><a class="b-chip" href="../?tag=vystupleniya#posts">Выступления</a></div>
+                </div>
+            </article>
+            <aside class="b-toc" aria-label="Contents"><div class="b-toc-title"><span class="ru-text">Содержание</span><span class="ua-text">Зміст</span><span class="en-text">Contents</span></div><ul><li><a href="#-">Обзор систем бизнес-аналитики</a></li><li><a href="#ideal-analytics">Доступные источники данных в Ideal Analytics</a></li><li><a href="#1-google-analytics">1. Подключаем Google Analytics</a></li><li><a href="#2">2. Создаем необходимые источники данных</a></li><li><a href="#3">3. Добавляем первую панель мониторинга</a></li><li><a href="#4">4. Формируем нужные нам наборы данных</a></li><li><a href="#5">5. Создаем элемент будущего дашборда</a></li><li><a href="#6-ideal-analytics">6. Добавляем вычисляемые поля в Ideal Analytics</a></li><li><a href="#7">7. Начинаем работу с созданным дашбордом</a></li></ul></aside>
+        </div>
+        <section class="b-related">
+            <h2 class="outfit-font"><span class="ru-text">Читайте также</span><span class="ua-text">Читайте також</span><span class="en-text">Related posts</span></h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="../kak-rabotat-s-zakladkami-bookmarks-v-power-bi-podrobnoe-rukovodstvo/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="0">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/covers/1082.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">дек. 2017</span><span class="ua-text">груд. 2017</span><span class="en-text">Dec 2017</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2017</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">7 мин чтения</span><span class="ua-text">7 хв читання</span><span class="en-text">7 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Как работать с закладками (bookmarks) в Power BI — подробное руководство</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">Недавно вышла очередная, ежемесячная порция обновлений Power BI Desktop. Разработчики добавили множество новых функций и значительно доработали «Закладки» (Bookmarks), с помощью которых…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">BI</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Power BI</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a>
+                <a href="../kak-my-vnedrili-bi-analitiku-v-otdele-kontekstnoy-reklamy/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="60">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/kak-my-vnedrili-bi-analitiku-v-otdele-ko-bi-resenie-dla-bizn-16e2513c.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">дек. 2016</span><span class="ua-text">груд. 2016</span><span class="en-text">Dec 2016</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2016</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">15 мин чтения</span><span class="ua-text">15 хв читання</span><span class="en-text">15 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Как мы внедрили BI-аналитику в отделе контекстной рекламы</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">Хотите, я скажу, что делают ваши сотрудники прямо сейчас? Собирают вручную отчеты в электронных таблицах. Сколько времени они тратят зря, игнорируя автоматизацию? Увидеть реальную…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Веб-аналитика</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">API</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a>
+                <a href="../microsoft-power-bi-v-internet-marketinge-daydzhest-poleznyh-publikatsi/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="120">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/covers/1115.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">апр. 2018</span><span class="ua-text">квіт. 2018</span><span class="en-text">Apr 2018</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2018</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">6 мин чтения</span><span class="ua-text">6 хв читання</span><span class="en-text">6 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Microsoft Power BI в интернет-маркетинге — дайджест полезных публикаций</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">В предыдущих статьях я рассказывал, как автоматизировать бизнес-процессы с помощью языка R. В этой подборке я решил структурировать материал о еще одном важном инструменте каждого…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">BI</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Визуализация данных</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a></div>
+        </section>
+        <a href="../" class="b-back"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i><span class="ru-text">Ко всем материалам</span><span class="ua-text">До всіх матеріалів</span><span class="en-text">All posts</span></a>
+    </main>
+
+    <section class="px-6 max-w-7xl mx-auto pb-24 relative z-10">
+        <div class="grid md:grid-cols-2 gap-6" data-aos="fade-up">
+            <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(59, 130, 246, 0.1));">
+                <div class="bento-content w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center text-blue-400 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-telegram"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">Telegram-канал R4marketing</span><span class="ua-text">Telegram-канал R4marketing</span><span class="en-text">R4marketing on Telegram</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Новые статьи, видео и заметки по R — первыми.</span><span class="ua-text">Нові статті, відео та нотатки з R — першими.</span><span class="en-text">New articles, videos and R notes — first.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-blue-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+            <a href="https://www.youtube.com/R4marketing/?sub_confirmation=1" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(239, 68, 68, 0.1));">
+                <div class="bento-content w-16 h-16 bg-red-500/20 rounded-2xl flex items-center justify-center text-red-500 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-youtube"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">YouTube-канал R4marketing</span><span class="ua-text">YouTube-канал R4marketing</span><span class="en-text">R4marketing on YouTube</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Видеоуроки по R, аналитике и AI-инструментам.</span><span class="ua-text">Відеоуроки з R, аналітики та AI-інструментів.</span><span class="en-text">Video lessons on R, analytics and AI tools.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-red-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/5 bg-slate-950/80 backdrop-blur-md pt-16 pb-8 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
+                <div class="sm:col-span-2 lg:col-span-4">
+                    <a href="../../" class="inline-flex items-center gap-3 group mb-5">
+                        <img src="../../logo.jpg" alt="Alexey Seleznev" class="w-10 h-10 rounded-xl object-cover border border-white/10 group-hover:border-purple-500/50 transition-colors">
+                        <span class="text-lg font-black tracking-tight uppercase outfit-font text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+                    </a>
+                    <p class="text-sm text-slate-400 leading-relaxed max-w-sm mb-6"><span class="ru-text">Head of Analytics в Netpeak Group. Автор open source R-пакетов, бесплатных курсов по R и проекта R4marketing.</span><span class="ua-text">Head of Analytics у Netpeak Group. Автор open source R-пакетів, безкоштовних курсів з R та проєкту R4marketing.</span><span class="en-text">Head of Analytics at Netpeak Group. Author of open source R packages, free R courses and the R4marketing project.</span></p>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="https://t.me/R4marketing" target="_blank" rel="noopener" aria-label="Telegram R4marketing" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-400 hover:border-blue-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-telegram"></i></a>
+                        <a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" aria-label="YouTube R4marketing" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-red-500 hover:border-red-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="https://github.com/selesnow" target="_blank" rel="noopener" aria-label="GitHub" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-white hover:border-white/30 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://linkedin.com/in/selesnow" target="_blank" rel="noopener" aria-label="LinkedIn" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-500 hover:border-blue-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://facebook.com/selesnow" target="_blank" rel="noopener" aria-label="Facebook" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-600/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/alexey.selesnow" target="_blank" rel="noopener" aria-label="Instagram" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-pink-500 hover:border-pink-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://habr.com/ru/users/selesnow/" target="_blank" rel="noopener" aria-label="Habr" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-teal-400 hover:border-teal-400/40 transition-all hover:-translate-y-0.5"><i class="fa-solid fa-h"></i></a>
+                    </div>
+                </div>
+
+                <nav class="lg:col-span-2" aria-label="Site map">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">Сайт</span><span class="ua-text">Сайт</span><span class="en-text">Site</span></h3>
+                    <ul class="space-y-3">
+                        <li><a href="../../" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-house w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a></li>
+                        <li><a href="../../opensource/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-code-branch w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span></a></li>
+                        <li><a href="../../courses/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-graduation-cap w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a></li>
+                        <li><a href="../../videos/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-circle-play w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a></li>
+                        <li><a href="../../talks/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-microphone-lines w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a></li>
+                        <li><a href="../../articles/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-pen-nib w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a></li>
+                        <li><a href="../../interviews/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-regular fa-newspaper w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a></li>
+                        <li><a href="../../blog/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-feather-pointed w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a></li>
+                    </ul>
+                </nav>
+
+                <div class="lg:col-span-3">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">R4marketing и публикации</span><span class="ua-text">R4marketing і публікації</span><span class="en-text">R4marketing & writing</span></h3>
+                    <ul class="space-y-3">
+                        <li><a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-telegram w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Telegram-канал R4marketing</span><span class="ua-text">Telegram-канал R4marketing</span><span class="en-text">R4marketing Telegram</span></a></li>
+                        <li><a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-youtube w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">YouTube-канал R4marketing</span><span class="ua-text">YouTube-канал R4marketing</span><span class="en-text">R4marketing YouTube</span></a></li>
+                        <li><a href="https://alexeyseleznev.wordpress.com/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-pen-nib w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Личный блог</span><span class="ua-text">Особистий блог</span><span class="en-text">Personal blog</span></a></li>
+                        <li><a href="https://habr.com/ru/users/selesnow/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-h w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Профиль на Хабре</span><span class="ua-text">Профіль на Хабрі</span><span class="en-text">Habr profile</span></a></li>
+                        <li><a href="https://alexey-seleznev.pro/publications/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-layer-group w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Архив публикаций</span><span class="ua-text">Архів публікацій</span><span class="en-text">Publications archive</span></a></li>
+                        <li><a href="https://github.com/selesnow" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-github w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">GitHub</span><span class="ua-text">GitHub</span><span class="en-text">GitHub</span></a></li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-3">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">Контакты</span><span class="ua-text">Контакти</span><span class="en-text">Contacts</span></h3>
+                    <ul class="space-y-4">
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">Email</div><a href="mailto:me@alexey-seleznev.pro" class="text-sm text-slate-300 hover:text-purple-300 transition-colors break-all">me@alexey-seleznev.pro</a></li>
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">Telegram</div><a href="https://t.me/AlexeySeleznev" target="_blank" rel="noopener" class="text-sm text-slate-300 hover:text-blue-300 transition-colors break-all">@AlexeySeleznev</a></li>
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">LinkedIn</div><a href="https://linkedin.com/in/selesnow" target="_blank" rel="noopener" class="text-sm text-slate-300 hover:text-blue-300 transition-colors break-all">linkedin.com/in/selesnow</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-14 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+                <p>© 2026 Alexey Seleznev. <span class="ru-text">Все права защищены.</span><span class="ua-text">Усі права захищені.</span><span class="en-text">All rights reserved.</span></p>
+                <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="inline-flex items-center gap-2 font-semibold hover:text-white transition-colors group"><span class="ru-text">Наверх</span><span class="ua-text">Нагору</span><span class="en-text">Back to top</span><span class="w-7 h-7 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-purple-500 group-hover:border-purple-500 transition-all"><i class="fa-solid fa-arrow-up text-[10px]"></i></span></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script src="../../assets/site.js"></script>
+
+    <script>
+    (function () {
+        // кнопка «Копировать» у блоков кода
+        document.querySelectorAll('.b-prose .codehilite').forEach(box => {
+            const btn = document.createElement('button');
+            btn.type = 'button'; btn.className = 'b-copy'; btn.setAttribute('aria-label', 'Copy code');
+            btn.innerHTML = '<i class="fa-regular fa-copy" aria-hidden="true"></i>';
+            btn.addEventListener('click', () => {
+                navigator.clipboard.writeText(box.querySelector('pre').innerText).then(() => {
+                    btn.innerHTML = '<i class="fa-solid fa-check" aria-hidden="true"></i>';
+                    setTimeout(() => btn.innerHTML = '<i class="fa-regular fa-copy" aria-hidden="true"></i>', 1500);
+                });
+            });
+            box.appendChild(btn);
+        });
+        // подсветка текущего раздела в оглавлении
+        const links = Array.from(document.querySelectorAll('.b-toc a'));
+        if (links.length && 'IntersectionObserver' in window) {
+            const map = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+            const io = new IntersectionObserver(es => es.forEach(e => {
+                if (e.isIntersecting) { links.forEach(l => l.classList.remove('active')); const a = map.get(e.target.id); if (a) a.classList.add('active'); }
+            }), { rootMargin: '-80px 0px -70% 0px' });
+            map.forEach((_, id) => { const el = document.getElementById(id); if (el) io.observe(el); });
+        }
+    })();
+    </script>
+</body>
+</html>

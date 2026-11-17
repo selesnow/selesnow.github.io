@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Alexey Seleznev">
+    <meta name="theme-color" content="#030712">
+    <link rel="canonical" href="https://alexey-seleznev.pro/blog/vsemoguschaya-funktsiya-query-podrobnoe-rukovodstvo/">
+
+    <title>Всемогущая функция Query — подробное руководство | Алексей Селезнёв</title>
+    <meta name="title" content="Всемогущая функция Query — подробное руководство | Алексей Селезнёв">
+    <meta name="description" content="Думаю, все слышали о правиле Парето. В любой сфере 20% усилий дают 80% результата. Например, 20% своего гардероба вы носите 80% времени, 20% ваших клиентов приносят 80% дохода. Так же и…">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alexey-seleznev.pro/blog/vsemoguschaya-funktsiya-query-podrobnoe-rukovodstvo/">
+    <meta property="og:site_name" content="ALEXEY-SELEZNEV.pro">
+    <meta property="og:title" content="Всемогущая функция Query — подробное руководство | Алексей Селезнёв">
+    <meta property="og:description" content="Думаю, все слышали о правиле Парето. В любой сфере 20% усилий дают 80% результата. Например, 20% своего гардероба вы носите 80% времени, 20% ваших клиентов приносят 80% дохода. Так же и…">
+    <meta property="og:image" content="https://alexey-seleznev.pro/photo.jpg">
+    <meta property="og:image:alt" content="Алексей Селезнёв">
+    <meta property="og:locale" content="ru_RU">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="https://alexey-seleznev.pro/blog/vsemoguschaya-funktsiya-query-podrobnoe-rukovodstvo/">
+    <meta name="twitter:title" content="Всемогущая функция Query — подробное руководство | Алексей Селезнёв">
+    <meta name="twitter:description" content="Думаю, все слышали о правиле Парето. В любой сфере 20% усилий дают 80% результата. Например, 20% своего гардероба вы носите 80% времени, 20% ваших клиентов приносят 80% дохода. Так же и…">
+    <meta name="twitter:image" content="https://alexey-seleznev.pro/photo.jpg">
+
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z56YHE916N"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Z56YHE916N');
+    </script>
+    <link rel="icon" type="image/jpeg" href="../../logo.jpg">
+    <link rel="apple-touch-icon" href="../../logo.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;700;800;900&display=swap">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/site.css">
+    <!-- Tailwind собран заранее (_build/build.py) и подключается последним, как это делал CDN-скрипт -->
+    <link rel="stylesheet" href="../../assets/tailwind.css">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Всемогущая функция Query — подробное руководство",
+  "datePublished": "2016-01-14",
+  "inLanguage": "ru",
+  "description": "Думаю, все слышали о правиле Парето. В любой сфере 20% усилий дают 80% результата. Например, 20% своего гардероба вы носите 80% времени, 20% ваших клиентов приносят 80% дохода. Так же и…",
+  "author": {
+    "@id": "https://alexey-seleznev.pro/#person"
+  },
+  "mainEntityOfPage": "https://alexey-seleznev.pro/blog/vsemoguschaya-funktsiya-query-podrobnoe-rukovodstvo/"
+}
+    </script>
+    <link rel="stylesheet" href="../blog.css">
+</head>
+<body class="relative lang-en">
+
+    <!-- Interactive Background -->
+    <div id="vanta-bg"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full z-50 top-0 left-0 border-b border-white/5 bg-slate-950/60 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 h-16 flex items-center justify-between">
+            <a href="../../" class="flex items-center gap-2 sm:gap-2.5 md:gap-3 group shrink min-w-0">
+                <img src="../../logo.jpg" alt="Alexey Seleznev" class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 rounded-lg sm:rounded-xl object-cover shadow-md border border-white/10 group-hover:border-purple-500/50 group-hover:scale-105 transition-all shrink-0">
+                <span class="text-xs min-[400px]:text-sm sm:text-base md:text-xl font-black tracking-tight uppercase outfit-font whitespace-nowrap text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+            </a>
+            <div class="hidden xl:flex gap-6 text-sm font-semibold text-slate-400">
+                <a href="../../" class="nav-link hover:text-white transition-colors"><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a>
+                <a href="../../opensource/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span></a>
+                <a href="../../courses/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a>
+                <a href="../../videos/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a>
+                <a href="../../talks/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a>
+                <a href="../../articles/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a>
+                <a href="../../interviews/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a>
+                <a href="../../blog/" class="nav-link hover:text-white transition-colors active"><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a>
+            </div>
+
+            <div class="flex items-center gap-1.5 sm:gap-2 md:gap-4 shrink-0">
+                <div class="lang-switcher flex gap-1 sm:gap-1.5 md:gap-2 text-[11px] sm:text-xs md:text-sm font-bold border-r border-white/10 pr-1.5 sm:pr-3 md:pr-4 mr-0.5 sm:mr-1 md:mr-2 outfit-font">
+                    <button onclick="changeLang('en')" id="btn-en" class="active hover:text-white transition-colors">EN</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ru')" id="btn-ru" class="text-slate-500 hover:text-white transition-colors">RU</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ua')" id="btn-ua" class="text-slate-500 hover:text-white transition-colors">UA</button>
+                </div>
+
+                <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="text-slate-400 hover:text-blue-400 transition-colors hidden sm:block" aria-label="Telegram"><i class="fa-brands fa-telegram text-lg md:text-xl"></i></a>
+                <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="text-slate-400 hover:text-white transition-colors hidden sm:block" aria-label="GitHub"><i class="fa-brands fa-github text-lg md:text-xl"></i></a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="xl:hidden w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-purple-500/20 hover:border-purple-500/40 transition-all focus:outline-none" aria-label="Toggle Navigation Menu">
+                    <i class="fa-solid fa-bars text-sm sm:text-lg" id="mobile-menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div id="mobile-menu" class="hidden xl:hidden border-t border-white/10 bg-slate-950/95 backdrop-blur-2xl shadow-2xl overflow-y-auto max-h-[calc(100vh-4rem)] transition-all">
+            <div class="max-w-7xl mx-auto px-6 py-6 space-y-1">
+                <a href="../../" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-house text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span>
+                </a>
+                <a href="../../opensource/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-code-branch text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span>
+                </a>
+                <a href="../../courses/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-graduation-cap text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span>
+                </a>
+                <a href="../../videos/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-circle-play text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span>
+                </a>
+                <a href="../../talks/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-microphone-lines text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span>
+                </a>
+                <a href="../../articles/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-pen-nib text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span>
+                </a>
+                <a href="../../interviews/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-regular fa-newspaper text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span>
+                </a>
+                <a href="../../blog/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-white bg-white/5 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-feather-pointed text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span>
+                </a>
+
+                <div class="pt-4 mt-3 border-t border-white/10 flex items-center justify-around text-slate-400">
+                    <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-blue-400 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-telegram text-xl"></i> Telegram
+                    </a>
+                    <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="p-2 hover:text-white transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-github text-xl"></i> GitHub
+                    </a>
+                    <a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-red-500 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-youtube text-xl"></i> YouTube
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="b-wrap relative z-10">
+        <nav class="b-crumbs" aria-label="breadcrumb">
+            <a href="../../"><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a><span>/</span><a href="../"><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a><span>/</span><a href="../?cat=vizualizatsiya-dannyh#posts">Визуализация данных</a>
+        </nav>
+        <div class="b-layout has-toc">
+            <article class="bento-glass no-lift b-article" data-aos="fade-up">
+                <div class="bento-content">
+                    <div class="b-cats"><a class="b-chip b-chip-cat" href="../?cat=vizualizatsiya-dannyh#posts">Визуализация данных</a><a class="b-chip b-chip-cat" href="../?cat=tablitsy#posts">Таблицы</a></div>
+                    <h1 class="b-title outfit-font">Всемогущая функция Query — подробное руководство</h1>
+                    <div class="b-meta">
+                        <span><i class="fa-regular fa-calendar" aria-hidden="true"></i><span class="ru-text">14 января 2016</span><span class="ua-text">14 січня 2016</span><span class="en-text">14 Jan 2016</span></span>
+                        <span><i class="fa-regular fa-clock" aria-hidden="true"></i><span class="ru-text">20 мин чтения</span><span class="ua-text">20 хв читання</span><span class="en-text">20 min read</span></span>
+                        <span class="b-lang" title="Русский">RU</span>
+                    </div>
+                    <div class="b-note"><i class="fa-regular fa-clock" aria-hidden="true"></i><div><span class="ru-text">Материал опубликован в 2016 году — описанные инструменты и интерфейсы могли измениться.</span><span class="ua-text">Матеріал опубліковано у 2016 році — описані інструменти та інтерфейси могли змінитися.</span><span class="en-text">Published in 2016 — the tools and interfaces described may have changed since.</span></div></div>
+                    
+                    <div class="b-prose"><p>Думаю, все слышали о правиле Парето. В любой сфере 20% усилий дают 80% результата. Например, 20% своего гардероба вы носите 80% времени, 20% ваших клиентов приносят 80% дохода. Так же и в Google Таблицах: зная 20% существующих функций, вы сможете решить 80% всех возможных задач. Я считаю Query одной из наиболее полезных функций Google Таблиц. Но в <a target="_blank" rel="noopener" href="https://support.google.com/docs/answer/3093343">справке</a>Google она описывается очень поверхностно, и вся мощь данной функции не раскрыта. При более детальном знакомстве становится ясно, что она способна заменить большую часть существующих функций.</p>
+<p><img loading="lazy" decoding="async" alt="Картинки по запросу" src="https://www.empiricus.com.br/wp-content/uploads/2016/07/crmark-070716.jpg" /></p>
+<p>Для работы с QUERY вам понадобятся базовые знания SQL. Для тех, кто не в курсе: пугаться не надо, функция QUERY на самом деле поддерживает самые простые возможности SQL.</p>
+<h2 id="query">Синтаксис QUERY</h2>
+<div class="codehilite"><pre><span></span><code>QUERY(данные; запрос; [заголовки])
+</code></pre></div>
+
+<p>Где:</p>
+<ul>
+<li><strong>данные</strong> — это диапазон ячеек, который будет служить базой данных для SQL запроса;</li>
+<li><strong>запрос</strong> — текст SQL запроса;</li>
+<li><strong>заголовки</strong> — необязательный аргумент, в котором вы можете указать, сколько первых строк массива содержат заголовки.</li>
+</ul>
+<p>Для максимального восприятия дальнейшей информации предлагаю открыть и скопировать себе следующую <a target="_blank" rel="noopener" href="https://docs.google.com/spreadsheets/d/1MWq9eYSn7GcJ5vM_vUCLs1mR3FKNs4E-SALp8nFC0D0/edit#gid=0">Google Таблицу</a>. Для того, чтобы создать копию, воспользуйтесь меню «Файл» и выберите в нем пункт «Создать копию».</p>
+<p><img loading="lazy" decoding="async" alt="Для того, чтобы создать копию, воспользуйтесь меню «Файл» и выберите в нем пункт «Создать копию»" width="518" height="348" src="../images/vsemoguschaya-funktsiya-query-podrobnoe-ruko-dlya-togo-chtob-0ba668dd.webp" /></p>
+<p>В доксе, копию которого вы только что создали, существует несколько листов. Лист DB является базой данных, к которой мы будет обращаться с помощью функции QUERY. Листы Level содержат примеры, которые мы будем рассматривать в этой статье. C каждым новым уровнем пример будет усложняться.</p>
+<h2 id="sql-query">План SQL запроса в функции Query</h2>
+<p>Любой SQL запрос состоит из отдельных блоков, которые часто называют кляузами. В SQL для функции Query заложен синтаксис языка запросов API визуализации Google, который поддерживает следующие кляузы:</p>
+<ul>
+<li><strong>select</strong> — перечисление полей, которые будут возвращены запросом;</li>
+<li><strong>where</strong> — содержит перечень условий, с помощью которых будет отфильтрован массив данных, обрабатываемый запросом;</li>
+<li><strong>group by</strong> — содержит перечень полей, по которым вы хотите группировать результат;</li>
+<li><strong>pivot</strong> — помогает строить перекрестные таблицы, используя значение одного столбца в качестве названий столбцов финальной таблицы;</li>
+<li><strong>order by</strong> — отвечает за сортировку результатов;</li>
+<li><strong>limit</strong> — с помощью этой части запроса вы можете задать предел количеству строк, возвращаемых запросом;</li>
+<li><strong>offset</strong> — с помощью этой кляузы вы можете задать число первых строк, которые не надо обрабатывать запросом;</li>
+<li><strong>label</strong> — данная кляуза отвечает за название полей, возвращаемых запросом;</li>
+<li><strong>format</strong> — отвечает за формат выводимых данных;</li>
+<li><strong>options —</strong> дает возможность задавать дополнительные параметры вывода данных.</li>
+</ul>
+<h2 id="hello-world-query-select">Hello World для функции Query (Select)</h2>
+<p>Перейдем на лист Level_1 и посмотрим формулу в ячейке A1.</p>
+<div class="codehilite"><pre><span></span><code>=query(DB!A1:L1143;&quot;select * limit 100&quot;)
+</code></pre></div>
+
+<p>Часть формулы «<em>DB!A1:L1143»</em> отвечает за базу данных, с которой мы будем делать выборку. Вторая часть «<em>select * limit 100</em>» содержит непосредственно текст запроса. Символ «*» в данном случае означает возвращение всех полей, содержащихся в базе данных. С помощью «<em>limit 100</em>» мы ограничиваем вывод данных в 100 строк максимум. Это пример самого простого запроса. Мы выбрали 100 первых строк из базы данных. Это своего рода «Hello world» для функции Query.</p>
+<h2 id="where-order-by">Используем фильтры и сортировку (Where, Order by)</h2>
+<p>Переходим на лист Level_2. Выберем только некоторые нужные нам поля и зададим условия фильтрации и сортировки. Например, используем данные только по кампаниям Campaign_1 и Campaign_2 за период 22-25 октября 2015 года. Отсортируем их в порядке убывания по сумме сеансов. Для фильтра и сортировки в текст запроса необходимо добавить описание кляуз <strong>Where</strong> и <strong>Order</strong>. Для вывода в результирующую таблицу описанного выше примера нам понадобятся поля Campaign, Date и Sessions. Именно их и нужно перечислить в кляузе <strong>Select</strong>.</p>
+<p>Обращение к полям базы данных осуществляется через названия столбцов рабочего листа, на котором располагается база данных.</p>
+<p>В нашем случае данные, расположенные на листе DB, и обращение к определенным полям прописываются как название столбцов листа. Таким образом, нужные поля располагается в следующих столбцах:</p>
+<ul>
+<li>поле <strong>Date</strong> — столбец A;</li>
+<li>поле <strong>Campaign</strong> — столбец B;</li>
+<li>поле <strong>Sessions</strong> — столбец G.</li>
+</ul>
+<p><img loading="lazy" decoding="async" alt="Расположение полей в столбцах" width="1268" height="280" src="../images/vsemoguschaya-funktsiya-query-podrobnoe-ruko-raspolozhenie-p-f65457c0.webp" /></p>
+<p>Соответственно, часть запроса, отвечающая за перечень выводимых в результате данных, будет выглядеть так:</p>
+<div class="codehilite"><pre><span></span><code>Select A, B, G
+</code></pre></div>
+
+<p>Далее в запросе идет кляуза <strong>Where</strong>. При написании запроса кляузы обязательно должны располагаться в таком порядке, в котором были описаны в первом разделе этой статьи. После объявления <strong>Where</strong>нам необходимо перечислить условия фильтрации. В данном случае мы фильтруем данные по названию кампании (Campaign) и дате (Date). Мы используем несколько условий фильтрации. В тексте запроса между всеми условиями должен стоять логический оператор OR или AND. Фильтрация по датам немного отличается от фильтрации по числовым и текстовым значениям, для ее применения необходимо использовать оператор Date. Часть запроса, отвечающая за фильтрацию данных, будет выглядеть так:</p>
+<div class="codehilite"><pre><span></span><code>WHERE
+(A &amp;gt;= date&#39;2015-10-22&#39;
+AND A &amp;lt;= date&#39;2015-10-25&#39;)
+AND (B = &#39;Campaign_1&#39;
+OR B = &#39;Campaign_2&#39;)
+</code></pre></div>
+
+<p>Мы разбили с помощью скобок фильтрацию данных на две логических части: первая фильтрует по датам, вторая — по названию кампании. На данном этапе формула, описывающая данные, которые необходимо выбрать, и условия фильтрации данных, выглядит так:</p>
+<div class="codehilite"><pre><span></span><code>=query(DB!A1:L1143;&quot;
+Select A, B, G
+WHERE
+(A &amp;gt;= date&#39;2015-10-22&#39;
+AND A &amp;lt;= date&#39;2015-10-25&#39;)
+AND (B = &#39;Campaign_1&#39;
+OR B = &#39;Campaign_2&#39;)&quot;)
+</code></pre></div>
+
+<p>Вы можете скопировать ее и вставить, например, на новый лист документа, который используется в качестве примера в этом посте, и получите следующий результат:</p>
+<p><img loading="lazy" decoding="async" alt="Формула, описывающая данные, которые необходимо выбрать, и условия фильтрации данных" width="384" height="309" src="../images/vsemoguschaya-funktsiya-query-podrobnoe-ruko-formula-opisyva-fc53d27d.webp" /></p>
+<p>Помимо обычных логических операторов (=, &lt;, &gt;) блок WHERE поддерживает дополнительные операторы фильтрации:</p>
+<ul>
+<li><strong>contains</strong> — проверяет содержание определённых символов в строке. Например, WHERE A contains ‘John’ вернёт в фильтр все значения из столбца A, в которых встречается John, например, John Adams, Long John Silver;</li>
+<li><strong>starts with</strong> — фильтрует значения по префиксу, то есть проверяет символы в начале строки. Например, starts with ‘en’ вернёт значения engineering и english;</li>
+<li><strong>ends with</strong> — фильтрует значения по окончанию строки. Например, строка ‘cowboy’ будет возвращена конструкцией «ends with ‘boy’» или «ends with ‘y’»;</li>
+<li><strong>matches</strong> — соответствует регулярному выражению. Например: where matches ‘.*ia’ вернёт значения India и Nigeria.</li>
+<li><strong>like —</strong>упрощённая версия регулярных выражений, проверяет соответствия строки заданному выражению с использованиям символов подстановки. На данный момент like поддерживает два символа подстановки: «%» означает любое количество любых символов в строке, и «_» — означает один любой символ. Например, «where name like ‘fre%’» будет соответствовать строкам ‘fre’, ‘fred’, и ‘freddy’.</li>
+</ul>
+<p>Запрос уже отфильтровал данные за определенный период и оставил только нужные нам кампании. Остается только отсортировать результат по убыванию в зависимости от количества сеансов. Сортировка в данных запросах осуществляется традиционно для SQL с помощью кляузы <strong>Order by</strong>. По синтаксису она довольна простая: необходимо только перечислить поля, по которым требуется отсортировать результат, а также указать порядок сортировки. По умолчанию — порядок asc, то есть по возрастанию. Если укажете после название поле параметр desc, запрос вернет результат в порядке убывания указанных в кляузе <strong>Order by</strong> полей.</p>
+<p>В нашем случае за фильтрацию будет отвечать строчка в тексте запроса:</p>
+<div class="codehilite"><pre><span></span><code>Order by G desc
+</code></pre></div>
+
+<p>Соответственно, окончательный результат формулы на листе Level_2, решающий нужную нам задачу, выглядит так:</p>
+<div class="codehilite"><pre><span></span><code>=query(DB!A1:L1143;&quot;
+SELECT A, B, G
+WHERE (A &amp;gt;= date&#39;2015-10-22&#39;
+AND A &amp;lt;= date&#39;2015-10-25&#39;)
+AND (B = &#39;Campaign_1&#39;
+OR B = &#39;Campaign_2&#39;)
+ORDER BY G DESC&quot;)
+</code></pre></div>
+
+<p>Теперь вы умеете с помощью простейшего SQL синтаксиса и функции QUERY фильтровать и сортировать данные.</p>
+<h2 id="group-by-label">Агрегирующие функции, группировка данных и переименование столбцов (Group by, Label)</h2>
+<p>Переходим на лист Level_3 и усложняем задачу. В запросах вы можете не только делать выборки, но также проводить различные вычисления и агрегации данных. Для этого в SQL функции Query существует ряд агрегирующих функций и кляуза <strong>Group by</strong>. Агрегирующие функции:</p>
+<div class="b-table"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Функция</strong></td>
+<td><strong>Описание</strong></td>
+<td><strong>Поддерживаемый тип данных</strong></td>
+<td><strong>Возвращаемый тип данных</strong></td>
+</tr>
+<tr>
+<td>avg()</td>
+<td>Возвращает среднее значение для группы</td>
+<td>Числовой</td>
+<td>Числовой</td>
+</tr>
+<tr>
+<td>count()</td>
+<td>Возвращает количество значений в группе</td>
+<td>Любой</td>
+<td>Числовой</td>
+</tr>
+<tr>
+<td>max()</td>
+<td>Возвращает максимальное значение для группы</td>
+<td>Любой</td>
+<td>Аналогичный полю, к которому применяется</td>
+</tr>
+<tr>
+<td>min()</td>
+<td>Возвращает минимальное значение для группы</td>
+<td>Любой</td>
+<td>Аналогичный полю, к которому применяется</td>
+</tr>
+<tr>
+<td>sum()</td>
+<td>Возвращает сумму значений в группе</td>
+<td>Числовой</td>
+<td>Числовой</td>
+</tr>
+</tbody>
+</table></div>
+<p>Итак, давайте посчитаем данные по каждой кампании:</p>
+<ul>
+<li>среднесуточное количество сеансов;</li>
+<li>максимальное количество сеансов за сутки;</li>
+<li>минимальное количество сеансов за сутки;</li>
+<li>количество дней, когда по кампании был совершен хотя бы один сеанс;</li>
+<li>сумма всех сеансов по каждой кампании за весь период.</li>
+</ul>
+<p>Для решения этой задачи нам понадобятся данные только из двух полей: Campaign (находится в столбце B) и Sessions (находится в столбце G). Все агрегирующие функции прописываются вместе со списком полей для вывода данных в кляузе <strong>Select</strong>. В случае применения агрегирующих функций все поля, к которым не применяется данный тип функций, являются группирующими полями. Их необходимо перечислить в кляузе <strong>Group by</strong>. Агрегирующие функции работают обязательно в паре с Group by. Описание кляузы <strong>Select</strong> будет следующим:</p>
+<div class="codehilite"><pre><span></span><code>SELECT
+B,
+avg(G),
+max(G),
+min(G),
+count(G),
+sum(G)
+</code></pre></div>
+
+<p>Далее необходимо сгруппировать данные: в нашем случае требуется группировка только по одному полю Campaign, но вы можете осуществлять группировку по любому количеству столбцов. Описание кляузы <strong>Group by</strong> очень простое:</p>
+<div class="codehilite"><pre><span></span><code>GROUP BY B
+</code></pre></div>
+
+<p>В кляузе достаточно указать только столбец B, содержащий информацию о названии кампании. Потому что он единственный, к которому мы не применили никакой агрегирующей функции. Наша формула:</p>
+<div class="codehilite"><pre><span></span><code>=query(DB!A1:L1143;&quot;
+SELECT
+B,
+avg(G),
+max(G),
+min(G),
+count(G),
+sum(G)
+GROUP BY B&quot;)
+</code></pre></div>
+
+<p>Получим следующий результат:</p>
+<p><img loading="lazy" decoding="async" alt="Отображение кляузы GROUP BY B" width="659" height="500" src="../images/vsemoguschaya-funktsiya-query-podrobnoe-ruko-group-by-b-b541dc49.webp" /></p>
+<p>В принципе, мы получили желаемый результат, но названия столбцов можно подкорректировать с помощью кляузы <strong>Label</strong>. Результат будет лучше отображаться, если мы отсортируем отчет по названию кампании. Описание кляузы <strong>Order by</strong> мы уже рассмотрели выше.</p>
+<p>Для нужной сортировки достаточно добавить следующую строку после описания:</p>
+<div class="codehilite"><pre><span></span><code>Order by B
+</code></pre></div>
+
+<p>Чтобы переименовать столбцы в таблице, которую возвращает запрос, необходимо добавить описание кляузы <strong>Label</strong>. Синтаксис достаточно прост: сначала указываете выводимый столбец или функцию, которая будет возвращать значения в результирующую таблицу, и далее в одинарных кавычках указываете нужное название.</p>
+<p>Это будет выглядеть так:</p>
+<div class="codehilite"><pre><span></span><code>B &#39;Кампания&#39;,
+avg(G) &#39;Среднее&#39;,
+max(G) &#39;Максимальное&#39;,
+min(G) &#39;Минимальное&#39;,
+count(G) &#39;Количество&#39;,
+sum(G) &#39;Общая сумма&#39;
+</code></pre></div>
+
+<p>Преобразованная формула:</p>
+<div class="codehilite"><pre><span></span><code>=query(DB!A1:L1143;&quot;
+SELECT
+B,
+avg(G),
+max(G),
+min(G),
+count(G),
+sum(G)
+GROUP BY B
+
+ORDER BY B
+
+LABEL
+B &#39;Кампания&#39;,
+avg(G) &#39;Среднее&#39;,
+max(G) &#39;Максимальное&#39;,
+min(G) &#39;Минимальное&#39;,
+count(G) &#39;Количество&#39;,
+sum(G) &#39;Общая сумма&#39;&quot;)
+</code></pre></div>
+
+<p>А результат, возвращаемый формулой, выглядит так:</p>
+<p><img loading="lazy" decoding="async" alt="Результат формулы &quot;Order by B&quot;" width="679" height="300" src="../images/vsemoguschaya-funktsiya-query-podrobnoe-ruko-forula-order-by-91cdf154.webp" /></p>
+<p>Все поля названы соответствующим описанию кляузы <strong>Label</strong> образом. Последнее, что режет глаз в возвращаемой таблице, — формат, в котором выводятся данные в столбце «Среднее». Для корректировки форматов, выводимых запросом данных, требуется описать кляузу <strong>Format</strong>. Ее описание схоже с описанием <strong>Label</strong>, но вместо названия поля следует прописать маску вывода данных (также в одинарных кавычках).</p>
+<p>Округлим числа в столбце «Среднее» до двух знаков после запятой. Для округления выводимых данных до двух знаков после запятой маска должна выглядеть как ‘0.00’.</p>
+<h2 id="format">Описание кляузы Format</h2>
+<div class="codehilite"><pre><span></span><code>FORMAT avg(G) ‘0.00’
+</code></pre></div>
+
+<p>Соответственно, окончательная формула на листе Level_3 выглядит так:</p>
+<div class="codehilite"><pre><span></span><code>=query(DB!A1:L1143;
+&quot;SELECT
+B,
+avg(G),
+max(G),
+min(G),
+count(G),
+sum(G)
+GROUP BY B
+
+ORDER BY B
+
+LABEL
+B &#39;Кампания&#39;,
+avg(G) &#39;Среднее&#39;,
+max(G) &#39;Максимальное&#39;,
+min(G) &#39;Минимальное&#39;,
+count(G) &#39;Количество&#39;,
+sum(G) &#39;Общая сумма&#39;
+
+FORMAT
+avg(G) &#39;0.00&#39;&quot;)
+</code></pre></div>
+
+<p>В результате:</p>
+<p><img loading="lazy" decoding="async" alt="Результат кляузы Format" width="676" height="415" src="../images/vsemoguschaya-funktsiya-query-podrobnoe-ruko-rezultat-klyauz-f6514480.webp" /></p>
+<h2 id="pivot">Создание перекрестных таблиц (Pivot, скалярные функции)</h2>
+<p>Чтобы за считанные секунды с помощью функции QUERY создать перекрестную таблицу, следует добавить в запрос описание кляузы <strong>Pivot</strong>. Построим отчет, в котором в строках будет номер дня недели, в столбцах — тип устройства, а в качестве выводимых значений рассчитаем показатель отказов. Если вы внимательно изучили структуру базы данных, находящейся на листе DB, то наверняка заметили, что у нас нет поля, содержащего информацию о дне недели, как и поля, содержащего информацию о показателе отказов.</p>
+<p>Чтобы вычислить день недели, придется воспользоваться одной из множества скалярных функций. В нашей базе есть вся необходимая информация для расчета показателя отказов. Дальше достаточно просто применить арифметический оператор «Деление».</p>
+<h3 id="_1">Скалярные функции</h3>
+<p>На момент написания статьи SQL в Google Таблицах поддерживает 14 скалярных функций.</p>
+<div class="b-table"><table>
+<thead>
+<tr>
+<th><strong>Функция</strong></th>
+<th><strong>Описание</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>---</td>
+<td>---</td>
+</tr>
+<tr>
+<td>year()</td>
+<td>Возвращает номер года из «даты» или «даты и времени». <strong>Пример:</strong> year(date ‘2009-02-05’) вернет 2009. <strong>Запрашиваемые параметры:</strong> один параметр с типом дата или дата и время. <strong>Тип возвращаемых данных:</strong> число.</td>
+</tr>
+<tr>
+<td>month()</td>
+<td>Возвращает номер месяца из «даты» или «даты и времени». Но в данном случае январь будет возвращать 0, феврваль 1 и так далее. Началом отсчета для номера месяца является 0. <strong>Пример:</strong> month(date ‘2009-02-05’) вернет 1. Чтобы функция вернула номер месяца в привычном виде к ее результату прибавьте 1, month(date “2009-02-05”)+1 вернет 2. <strong>Запрашиваемые параметры:</strong> один параметр с типом дата или дата и время. <strong>Тип возвращаемых данных:</strong> число.</td>
+</tr>
+<tr>
+<td>day()</td>
+<td>Возвращает номер дня в месяце из «даты» или «даты и времени». <strong>Пример:</strong>day(date ‘2009-02-05’) вернет 5. <strong>Запрашиваемые параметры:</strong> один параметр с типом дата или дата и время. <strong>Тип возвращаемых данных:</strong> число.</td>
+</tr>
+<tr>
+<td>hour()</td>
+<td>Возвращает номер часа в дне из «даты и времени» или «времени». <strong>Пример:</strong>hour(timeofday ‘12:03:17′) вернет 12. <strong>Запрашиваемые параметры:</strong> один параметр с типом время или дата и время. <strong>Тип возвращаемых данных:</strong> число.</td>
+</tr>
+<tr>
+<td>minute()</td>
+<td>Возвращает номер минуты в часе из «даты и времени» или «времени». <strong>Пример:</strong>minute(timeofday ‘12:03:17′) вернет 3. <strong>Запрашиваемые параметры:</strong> один параметр с типом время или дата и время. <strong>Тип возвращаемых данных:</strong> число.</td>
+</tr>
+<tr>
+<td>second()</td>
+<td>Возвращает номер секунды в минуте из «даты и времени» или «времени». <strong>Пример:</strong>second(timeofday ‘12:03:17′) вернет 17. <strong>Запрашиваемые параметры:</strong> один параметр с типом время или дата и время. <strong>Тип возвращаемых данных:</strong> число.</td>
+</tr>
+<tr>
+<td>millisecond()</td>
+<td>Возвращает номер миллисекунды в секунде из «даты и времени» или «времени». <strong>Пример:</strong>millisecond(timeofday ‘12:03:17.123′) вернет 123. <strong>Запрашиваемые параметры:</strong> один параметр с типом время или дата и время. <strong>Тип возвращаемых данных:</strong> число.</td>
+</tr>
+<tr>
+<td>quarter()</td>
+<td>Возвращает номер квартала в году из «даты и времени» или «времени». Базовым значением или началом отсчета является 1, соответствено, для первого квартала функция вернет значение 1, для второго 2 и так далее. <strong>Пример:</strong>quarter(date ‘2009-02-05’) вернет 1. <strong>Запрашиваемые параметры:</strong> один параметр с типом дата или дата и время. <strong>Тип возвращаемых данных:</strong> число.</td>
+</tr>
+<tr>
+<td>dayOfWeek()</td>
+<td>Возвращает номер дня недели в неделе из «даты» или «даты и времени». Началом недели считается воскресенье, для воскресенья функция вернет значение 1, для понедельника 2 и так далее. <strong>Пример:</strong>dayOfWeek(date ‘2015-11-10’) вернет 3, так как 10 ноября 2015 года является вторником. <strong>Запрашиваемые параметры:</strong> один параметр с типом дата или дата и время. <strong>Тип возвращаемых данных:</strong>число.</td>
+</tr>
+<tr>
+<td>now()</td>
+<td>Возвращает текущую дату и время в часовом поясе GTM. <strong>Запрашиваемые параметры:</strong> не требует ввода параметров. <strong>Тип возвращаемых данных:</strong> дата и время.</td>
+</tr>
+<tr>
+<td>dateDiff()</td>
+<td>Возвращает разницу в днях между двумя датами. <strong>Пример:</strong>dateDiff(date ‘2008-03-13’ , date ‘2008-02-12’) вернет 29, так как 10 ноября 2015 года является вторником. <strong>Запрашиваемые параметры:</strong> два параметра с типом «дата» или «дата и время». <strong>Тип возвращаемых данных:</strong> число.</td>
+</tr>
+<tr>
+<td>toDate</td>
+<td>Возвращает преобразованное в дату значение из «даты» или «даты и времени» или «числа». <strong>Пример:</strong>  - toDate(date ‘2008-03-13’) вернет аналогичное значение в формате даты, ‘2008-03-13’. - toDate(dateTime‘2013-03-13 11:19:22’) вернет дату ‘2013-03-13’. - toDate(1234567890000) вернет дату ‘2009-02-13’.   <strong>Запрашиваемые параметры:</strong> один параметр с типом дата, дата и время или число. <strong>Тип возвращаемых данных:</strong> дата.</td>
+</tr>
+<tr>
+<td>upper()</td>
+<td>Преобразует все значения в строке в верхний регистр. <strong>Пример:</strong> upper( ‘foo’) вернет строку ‘FOO’. <strong>Запрашиваемые параметры:</strong> один параметр с текстовым типом данных. <strong>Тип возвращаемых данных:</strong> текст.</td>
+</tr>
+<tr>
+<td>lower()</td>
+<td>Преобразует все значения в строке в нижний регистр. <strong>Пример:</strong> upper( ‘Bar’) вернет строку ‘bar’. <strong>Запрашиваемые параметры:</strong> один параметр с текстовым типом данных. <strong>Тип возвращаемых данных:</strong> текст.</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="_2">Арифметические операторы</h3>
+<div class="b-table"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Оператор</strong></td>
+<td><strong>Описание</strong></td>
+</tr>
+<tr>
+<td>+</td>
+<td>Сложение нескольких числовых значений</td>
+</tr>
+<tr>
+<td>–</td>
+<td>Разница между числовыми значениями</td>
+</tr>
+<tr>
+<td>/</td>
+<td>Деление числовых значений</td>
+</tr>
+<tr>
+<td>*</td>
+<td>Умножение числовых значений</td>
+</tr>
+</tbody>
+</table></div>
+<p>Для решения нашей задачи потребуется использовать скалярную функцию dayOfWeek для вычисления дня недели, а также арифметический оператор «/» для подсчета показателя отказов.</p>
+<p>Давайте определим поля, которые будем использовать в запросе:</p>
+<ol>
+<li>Для вычисления дня недели нам потребуется данные поля Date в столбце A.</li>
+<li>Данные о типах устройств хранятся в поле Device category в столбце E.</li>
+<li>Для расчета показателя отказов потребуются данные полей Bounces и Sessions — в столбцах H и G.</li>
+</ol>
+<p>Опишем кляузу <strong>Select</strong> для нашего запроса. Поскольку в строках у нас будут данные по дням недели, нам достаточно прописать скалярную функцию, которая будет вычислять день недели, а также формулу вычисления показателя отказов.</p>
+<div class="codehilite"><pre><span></span><code>SELECT dayOfWeek(A), sum(H)/sum(G)
+</code></pre></div>
+
+<p>Именно так будет выглядеть описание нужных нам полей. Теперь с помощью кляузы <strong>Group by</strong> сгруппируем строки по дням недели. Для этого допишем в запрос следующую строку:</p>
+<div class="codehilite"><pre><span></span><code>GROUP BY dayOfWeek(A)
+</code></pre></div>
+
+<p>Уже видно, как меняется показатель отказов в зависимости от дня недели:</p>
+<p><img loading="lazy" decoding="async" alt="Видно, как меняется показатель отказов в зависимости от дня недели" width="414" height="248" src="../images/vsemoguschaya-funktsiya-query-podrobnoe-ruko-vidno-kak-menya-2f070072.webp" /></p>
+<p>Чтобы построить перекрестную таблицу, достаточно прописать кляузу <strong>Pivot</strong> с указанием столбца, значения из которого будут добавлены в виде столбцов. В нашем случае это столбец E, потому что именно он содержит информацию о типе устройств. Дописываем строку:</p>
+<div class="codehilite"><pre><span></span><code>PIVOT E
+</code></pre></div>
+
+<p>Теперь запрос возвращает результат:</p>
+<p><img loading="lazy" decoding="async" alt="Запрос возвращает результат" width="656" height="253" src="../images/vsemoguschaya-funktsiya-query-podrobnoe-ruko-zapros-vozvrash-28504f98.webp" /></p>
+<p>Нам остается только добавить последние штрихи: изменить названия столбцов и формат чисел с помощью пунктов LABEL и FORMAT.</p>
+<p>Окончательная формула на листе Level_4:</p>
+<div class="codehilite"><pre><span></span><code>=query(DB!A1:L1143;&quot;
+SELECT dayOfWeek(A), sum(H)/sum(G)
+GROUP BY dayOfWeek(A)
+PIVOT E
+LABEL
+dayOfWeek(A) &#39;День недели&#39;,
+sum(H)/sum(G)&#39;&#39;
+FORMAT sum(H)/sum(G) &#39;0.00%&#39;&quot;)
+</code></pre></div>
+
+<p>Получаем отчет:</p>
+<p><img loading="lazy" decoding="async" alt="Окончательная формула на листе “Level_4”" width="460" height="205" src="../images/vsemoguschaya-funktsiya-query-podrobnoe-ruko-okonchatelnaya-848595a0.webp" /></p>
+<p>Строкой <em>LABEL sum(H)/sum(G) ‘’</em> мы убрали из подписей столбца надпись, содержащую формулу расчета. Строкой <em>FORMAT sum(H)/sum(G) ‘0.00%’</em> мы передали процентный формат показателю отказов в отчете. В целом, описанного в примерах выше синтаксиса вполне достаточно, чтобы начать активно использовать функцию QUERY, но в завершении статьи хочу показать еще несколько интересных приемов, которые можно взять на вооружение.</p>
+<h2 id="query-google">Импорт данных с помощью QUERY из другой Google Таблицы</h2>
+<p>С помощью QUERY вы можете использовать в качестве базы данных другую Google Таблицу. Это можно сделать с помощью сочетания функций ImportRange и QUERY. Я создал <a target="_blank" rel="noopener" href="https://docs.google.com/spreadsheets/d/1aBytZCYsZF0-3RozYviSrMqVLtqtb49yxY9KBgT4pVo/edit#gid=0">новую Google Таблицу</a>, в которую продублировал данные с листа DB из приведенного в начале статьи <a target="_blank" rel="noopener" href="https://docs.google.com/spreadsheets/d/1MWq9eYSn7GcJ5vM_vUCLs1mR3FKNs4E-SALp8nFC0D0/edit#gid=0">документа</a>. Чтобы в качестве базы данных использовать данные из другой Google таблицы, в качестве первого аргумента функции Query выступит импортируемый функцией ImportRange диапазон.</p>
+<p>Разница в том, что при написании запроса к данным, импортируемым функцией ImportRange, вместо названия столбцов мы указываем их порядковый номер в возвращаемом функцией ImportRange диапазоне. На листе DataImport перепишем запрос, представленный в Level_4 таким образом, чтобы он обращался к данным, находящимся в <a target="_blank" rel="noopener" href="https://docs.google.com/spreadsheets/d/1aBytZCYsZF0-3RozYviSrMqVLtqtb49yxY9KBgT4pVo/edit#gid=0">новой таблице</a> на листе DB_Transfer. Синтаксис функции ImportRange достаточно прост:</p>
+<div class="codehilite"><pre><span></span><code>IMPORTRANGE(ключ, диапазон)
+</code></pre></div>
+
+<p>Где ключ — часть URL Google Таблицы:</p>
+<p><img loading="lazy" decoding="async" alt="ключ — часть URL Google Таблицы" width="956" height="210" src="../images/vsemoguschaya-funktsiya-query-podrobnoe-ruko-klyuch-chast-ur-71015b79.webp" /></p>
+<p>А диапазон — это ссылка на лист и (простите за каламбур) диапазон. В нашем случае диапазоном будет <em>DB_Transfer!A1:L1143</em>. Формула ImportRange:</p>
+<div class="codehilite"><pre><span></span><code>importrange(“1aBytZCYsZF0-3RozYviSrMqVLtqtb49yxY9KBgT4pVo”;”DB_Transfer!A1:L1143”)
+</code></pre></div>
+
+<p>Именно ее мы должны указать в качестве данных функции Query. Далее остается переписать запрос так, чтобы ссылаться на столбцы базы данных не по названию, а по порядковому номеру столбца. Определим, к каким столбцам мы обращались с помощью запроса на листе Level_4.</p>
+<div class="b-table"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Название</strong></td>
+<td><strong>Содержание</strong></td>
+<td><strong>Наименование в таблице</strong></td>
+<td><strong>Порядковый номер</strong></td>
+</tr>
+<tr>
+<td>Date</td>
+<td>Дата</td>
+<td>A</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Device type</td>
+<td>Тип устройства</td>
+<td>E</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Sessions</td>
+<td>Количество сеансов</td>
+<td>G</td>
+<td>7</td>
+</tr>
+<tr>
+<td>Bounces</td>
+<td>Количество отказов</td>
+<td>H</td>
+<td>8</td>
+</tr>
+</tbody>
+</table></div>
+<p><img loading="lazy" decoding="async" alt="Определим, к каким столбцам мы обращались с помощью запроса" width="1271" height="240" src="../images/vsemoguschaya-funktsiya-query-podrobnoe-ruko-opredelim-k-kak-4359e0c5.webp" /></p>
+<p>Текст запроса после замены названий столбцов на их порядковый номер:</p>
+<div class="codehilite"><pre><span></span><code>SELECT dayOfWeek(Col1), sum(Col8)/sum(Col7)
+GROUP BY dayOfWeek(Col1)
+PIVOT Col5
+LABEL
+dayOfWeek(Col1) &#39;День недели&#39;,
+sum(Col8)/sum(Col7) &#39;&#39;
+FORMAT sum(Col8)/sum(Col7) &#39;0.00%&#39;
+</code></pre></div>
+
+<p>Как видите, текст запроса практически не изменился, но вместо столбца A мы теперь указываем Col1, вместо столбца E — Col5, вместо G — Col7 и вместо H, соответственно, Col8. Получаем формулу:</p>
+<div class="codehilite"><pre><span></span><code>=query(IMPORTRANGE(&quot;1aBytZCYsZF0-3RozYviSrMqVLtqtb49yxY9KBgT4pVo&quot;;&quot;DB_Transfer!A1:L1143&quot;);&quot;
+SELECT dayOfWeek(Col1), sum(Col8)/sum(Col7)
+GROUP BY dayOfWeek(Col1)
+PIVOT Col5
+LABEL
+dayOfWeek(Col1) &#39;День недели&#39;,
+sum(Col8)/sum(Col7) &#39;&#39;
+FORMAT sum(Col8)/sum(Col7) &#39;0.00%&#39;&quot;)
+</code></pre></div>
+
+<p>В качестве первого аргумента функции Query выступает функция ImportRange с ссылкой на ключ нужной Google таблицы, которую вы можете скопировать из URL Google Таблицы, и ссылки на диапазон, включающий название листа, а также первой и последней ячейки нужного диапазона.</p>
+<p>Номера столбцов в запросе идут не со столбца A, а с того, который является первым в указанном вами диапазоне в функции ImportRange. Например, если бы в качестве импортируемого диапазона выступал <em>DB_Transfer!C1:L1143</em>, то данные из столбца C запрашивались ссылкой Col1, поскольку в импортируемом массиве этот столбец является первым.</p>
+<p>Окончательную формулу в работе вы можете посмотреть на листе DataImport.</p>
+<h2 id="_3">Строим запрос на основе объединения данных из нескольких таблиц с одинаковой структурой</h2>
+<p>Ещё одна довольно мощная возможность функции QUERY — построение запрос на основе нескольких массивов данных.</p>
+<p>Единственным условием для объединения данных является одинаковая структура входящих таблиц.</p>
+<p>Принцип объединения входящих данных заключается в том, что первый аргумент функции QUERY на вход может принимать либо ссылку на диапазон либо описание массива.</p>
+<blockquote>
+<p>Массив — это виртуальная таблица, которая содержит строки и столбцы.</p>
+<p>Массив всегда описывается внутри фигурных скобок, при этом необходимо соблюдать следующую пунктуацию:</p>
+</blockquote>
+<ul>
+<li><strong>обратная косая черта «/»</strong> — разделяет столбцы. Например, {1 / A}. Число 1 будет находится в правой левой ячейке массива, буква «A» в ячейке справа. Так мы описали диапазон, содержащий два столбца и одну строку.</li>
+<li><strong>точка с запятой «;»</strong> используется для перехода на следующую строку. Возьмем {1;A}. Этот массив будет состоять из одного столбца и двух строк, в первой строке будет содержаться значение 1, во второй строке буква «A».</li>
+</ul>
+<p>Таким образом вы можете два и более диапазона описать в одном массиве, например:</p>
+<div class="codehilite"><pre><span></span><code>=query({Table1!A1:B5; Table2!A1:B5; Table3!A1:B5};&quot;SELECT * WHERE Col2 &gt; 4&quot;)
+</code></pre></div>
+
+<p>В данном случае мы обращаемся с запросом к трём диапазонам данных, находящимся на разных листах, объединив их с помощью «;» в массив так, что вторая таблица является продолжением первой, а третья таблица — продолжением второй.</p>
+<p>Посмотрите этот пример <a target="_blank" rel="noopener" href="https://docs.google.com/spreadsheets/d/1cAHAM3u9FV0QcDau2RW6bApBn6pLKgHZBjgmJQ8bA3g/edit#gid=0">по ссылке</a>.</p>
+<h2 id="_4">Запрос с динамическими параметрами</h2>
+<p>Синтаксис запросов в функции QUERY сложен для неподготовленного пользователя. Поэтому вы можете добавить на рабочий лист различные интерактивные элементы в виде выпадающего списка, созданного с помощью функции «Проверка данных».</p>
+<p><img loading="lazy" decoding="async" alt="Запрос с динамическими параметрами" width="478" height="393" src="../images/vsemoguschaya-funktsiya-query-podrobnoe-ruko-zapros-s-dinami-3fdb39d8.webp" /></p>
+<p>А в тексте запроса — делать ссылки на ячейки, содержащие нужные данные. Например, мы можем динамически задать диапазон дат, который хотим вывести в динамическую таблицу, либо сделать возможность динамически добавлять и убирать различные поля результирующей таблицы. Посмотреть, как это выглядит наглядно, вы можете на листе DinamicQuery.</p>
+<p>Вы можете изменить все поля, закрашенные зеленым цветом, и таким образом выбрать интересующий диапазон дат, ввести удобные для вас название полей, а также обозначить, какие из пяти предложенных полей требуется вывести в отчет.</p>
+<p>При использовании данного конструктора отчета для отображения обязательно должна быть выбрана хотя бы одна мера и одно измерение.</p>
+<p>Укажите интересующий вас интервал дат в пределах от 24.09.2015 по 25.10.2015, поскольку данные, сгенерированные для тестовой базы и хранящиеся на листе DB, содержат только этот диапазон.</p>
+<p><img loading="lazy" decoding="async" alt="Укажите интересующий вас интервал дат" width="699" height="66" src="../images/vsemoguschaya-funktsiya-query-podrobnoe-ruko-ukazhite-intere-f684eb4d.webp" /></p>
+<p>Далее в конструкторе отчетов вы можете изменить название полей и оно будет отображаться в финальной таблице. Также можете указать, какие поля требуется вывести в отчет. Еще раз напомню, что необходимо указать как минимум одну меру и одно измерение.</p>
+<p><img loading="lazy" decoding="async" alt="В конструкторе отчетов вы можете изменить название полей" width="697" height="161" src="../images/vsemoguschaya-funktsiya-query-podrobnoe-ruko-v-konstruktore-7323b3a5.webp" /></p>
+<p>Во время изменения каких-либо параметров отчет под конструктором будет изменяться динамически.</p>
+<p><img loading="lazy" decoding="async" alt="Под конструктором динамически будет изменяться отчет в соответствии с указанными параметрами" width="396" height="344" src="../images/vsemoguschaya-funktsiya-query-podrobnoe-ruko-pod-konstruktor-d00ca0df.webp" /></p>
+<p>Формула, которая изменяет запрос в зависимости от настроенных параметров, выглядит так:</p>
+<div class="codehilite"><pre><span></span><code>=query(DB!A1:L1143;&quot;
+Select &quot;&amp;amp;join(&quot;,&quot;;filter(C7:C11;B7:B11=&quot;Да&quot;))&amp;amp;&quot;
+WHERE
+(A &amp;gt;= date&#39;&quot;&amp;amp;C2&amp;amp;&quot;-&quot;&amp;amp;D2&amp;amp;&quot;-&quot;&amp;amp;E2&amp;amp;&quot;&#39;
+AND A &amp;lt;= date&#39;&quot;&amp;amp;C3&amp;amp;&quot;-&quot;&amp;amp;D3&amp;amp;&quot;-&quot;&amp;amp;E3&amp;amp;&quot;&#39;)
+GROUP BY &quot;&amp;amp;join(&quot;,&quot;;filter(C7:C11;B7:B11=&quot;Да&quot;;D7:D11=&quot;Измерение&quot;))&amp;amp;&quot;
+LABEL &quot;&amp;amp;join(&quot;,&quot;;filter(E7:E11;B7:B11=&quot;Да&quot;)))
+</code></pre></div>
+
+<p>На самом деле функция Query может разрастаться до размеров программы и динамически изменять выводимую информацию в зависимости от указанных на рабочем листе данных.</p>
+<p>Надеюсь, у меня получилось объяснить, как пользоваться одной из наиболее сложных и в тоже время полезных функций Google Таблиц.</p>
+<p>Готов отвечать на вопросы в комментариях 🙂</p>
+<hr />
+<p><em><a target="_blank" rel="noopener" href="https://netpeak.net/ru/blog/vsemogushchaya-funktsiya-query-podrobnoe-rukovodstvo/">Оригинал публикации в блоге Netpeak.</a></em></p></div>
+                    
+                    <div class="b-tags"><a class="b-chip" href="../?tag=vizualizatsiya-dannyh#posts">Визуализация данных</a><a class="b-chip" href="../?tag=import-dannyh#posts">Импорт данных</a><a class="b-chip" href="../?tag=excel#posts">Excel</a><a class="b-chip" href="../?tag=google-tablitsy#posts">Google Таблицы</a></div>
+                </div>
+            </article>
+            <aside class="b-toc" aria-label="Contents"><div class="b-toc-title"><span class="ru-text">Содержание</span><span class="ua-text">Зміст</span><span class="en-text">Contents</span></div><ul><li><a href="#query">Синтаксис QUERY</a></li><li><a href="#sql-query">План SQL запроса в функции Query</a></li><li><a href="#hello-world-query-select">Hello World для функции Query (Select)</a></li><li><a href="#where-order-by">Используем фильтры и сортировку (Where, Order by)</a></li><li><a href="#group-by-label">Агрегирующие функции, группировка данных и переименование столбцов (Group by, Label)</a></li><li><a href="#format">Описание кляузы Format</a></li><li><a href="#pivot">Создание перекрестных таблиц (Pivot, скалярные функции)</a><ul><li><a href="#_1">Скалярные функции</a></li><li><a href="#_2">Арифметические операторы</a></li></ul></li><li><a href="#query-google">Импорт данных с помощью QUERY из другой Google Таблицы</a></li><li><a href="#_3">Строим запрос на основе объединения данных из нескольких таблиц с одинаковой структурой</a></li><li><a href="#_4">Запрос с динамическими параметрами</a></li></ul></aside>
+        </div>
+        <section class="b-related">
+            <h2 class="outfit-font"><span class="ru-text">Читайте также</span><span class="ua-text">Читайте також</span><span class="en-text">Related posts</span></h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="../kak-stroit-diagrammy-v-otdelnyh-yacheykah-excel-i-tablitsah-google/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="0">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/kak-stroit-diagrammy-v-otdelnyh-yache-my-dostatochno-chasto-cd50c68d.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">март 2016</span><span class="ua-text">берез. 2016</span><span class="en-text">Mar 2016</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2016</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">11 мин чтения</span><span class="ua-text">11 хв читання</span><span class="en-text">11 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Как строить диаграммы в отдельных ячейках Excel и таблицах Google</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">Когда приходится анализировать большие таблицы или делать выводы сразу по нескольким строкам с данными, классические диаграммы не спасают. Они громоздкие и неудобные. Но в Excel и Google…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Визуализация данных</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Google Таблицы</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a>
+                <a href="../kak-importirovat-dannye-iz-google-analytics-v-excel-s-pomoschyu-excell/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="60">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/covers/132.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">нояб. 2015</span><span class="ua-text">листоп. 2015</span><span class="en-text">Nov 2015</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2015</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">11 мин чтения</span><span class="ua-text">11 хв читання</span><span class="en-text">11 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Как импортировать данные из Google Analytics в Excel с помощью Excellent Analytics</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">В предыдущих постах из серии «О работе в Excel для специалистов по контекстной рекламе» я рассказывал о дополнении Google Analytics для Google Таблиц и возможностях надстройки Analytics…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Веб-аналитика</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Визуализация данных</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a>
+                <a href="../dopolnenie-google-analytics-dlya-google-tablits-polnoe-rukovodstvo/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="120">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/covers/107.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">окт. 2015</span><span class="ua-text">жовт. 2015</span><span class="en-text">Oct 2015</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2015</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">8 мин чтения</span><span class="ua-text">8 хв читання</span><span class="en-text">8 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Дополнение Google Analytics для Google Taблиц — полное руководство</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">Если вы столкнулись с ограничениями по визуализации данных в Google Analytics, эта статья именно для вас. Во время работы в интерфейсе Google Analytics специалисты рано или поздно…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">API</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Визуализация данных</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a></div>
+        </section>
+        <a href="../" class="b-back"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i><span class="ru-text">Ко всем материалам</span><span class="ua-text">До всіх матеріалів</span><span class="en-text">All posts</span></a>
+    </main>
+
+    <section class="px-6 max-w-7xl mx-auto pb-24 relative z-10">
+        <div class="grid md:grid-cols-2 gap-6" data-aos="fade-up">
+            <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(59, 130, 246, 0.1));">
+                <div class="bento-content w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center text-blue-400 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-telegram"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">Telegram-канал R4marketing</span><span class="ua-text">Telegram-канал R4marketing</span><span class="en-text">R4marketing on Telegram</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Новые статьи, видео и заметки по R — первыми.</span><span class="ua-text">Нові статті, відео та нотатки з R — першими.</span><span class="en-text">New articles, videos and R notes — first.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-blue-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+            <a href="https://www.youtube.com/R4marketing/?sub_confirmation=1" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(239, 68, 68, 0.1));">
+                <div class="bento-content w-16 h-16 bg-red-500/20 rounded-2xl flex items-center justify-center text-red-500 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-youtube"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">YouTube-канал R4marketing</span><span class="ua-text">YouTube-канал R4marketing</span><span class="en-text">R4marketing on YouTube</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Видеоуроки по R, аналитике и AI-инструментам.</span><span class="ua-text">Відеоуроки з R, аналітики та AI-інструментів.</span><span class="en-text">Video lessons on R, analytics and AI tools.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-red-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/5 bg-slate-950/80 backdrop-blur-md pt-16 pb-8 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
+                <div class="sm:col-span-2 lg:col-span-4">
+                    <a href="../../" class="inline-flex items-center gap-3 group mb-5">
+                        <img src="../../logo.jpg" alt="Alexey Seleznev" class="w-10 h-10 rounded-xl object-cover border border-white/10 group-hover:border-purple-500/50 transition-colors">
+                        <span class="text-lg font-black tracking-tight uppercase outfit-font text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+                    </a>
+                    <p class="text-sm text-slate-400 leading-relaxed max-w-sm mb-6"><span class="ru-text">Head of Analytics в Netpeak Group. Автор open source R-пакетов, бесплатных курсов по R и проекта R4marketing.</span><span class="ua-text">Head of Analytics у Netpeak Group. Автор open source R-пакетів, безкоштовних курсів з R та проєкту R4marketing.</span><span class="en-text">Head of Analytics at Netpeak Group. Author of open source R packages, free R courses and the R4marketing project.</span></p>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="https://t.me/R4marketing" target="_blank" rel="noopener" aria-label="Telegram R4marketing" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-400 hover:border-blue-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-telegram"></i></a>
+                        <a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" aria-label="YouTube R4marketing" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-red-500 hover:border-red-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="https://github.com/selesnow" target="_blank" rel="noopener" aria-label="GitHub" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-white hover:border-white/30 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://linkedin.com/in/selesnow" target="_blank" rel="noopener" aria-label="LinkedIn" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-500 hover:border-blue-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://facebook.com/selesnow" target="_blank" rel="noopener" aria-label="Facebook" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-600/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/alexey.selesnow" target="_blank" rel="noopener" aria-label="Instagram" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-pink-500 hover:border-pink-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://habr.com/ru/users/selesnow/" target="_blank" rel="noopener" aria-label="Habr" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-teal-400 hover:border-teal-400/40 transition-all hover:-translate-y-0.5"><i class="fa-solid fa-h"></i></a>
+                    </div>
+                </div>
+
+                <nav class="lg:col-span-2" aria-label="Site map">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">Сайт</span><span class="ua-text">Сайт</span><span class="en-text">Site</span></h3>
+                    <ul class="space-y-3">
+                        <li><a href="../../" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-house w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a></li>
+                        <li><a href="../../opensource/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-code-branch w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span></a></li>
+                        <li><a href="../../courses/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-graduation-cap w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a></li>
+                        <li><a href="../../videos/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-circle-play w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a></li>
+                        <li><a href="../../talks/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-microphone-lines w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a></li>
+                        <li><a href="../../articles/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-pen-nib w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a></li>
+                        <li><a href="../../interviews/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-regular fa-newspaper w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a></li>
+                        <li><a href="../../blog/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-feather-pointed w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a></li>
+                    </ul>
+                </nav>
+
+                <div class="lg:col-span-3">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">R4marketing и публикации</span><span class="ua-text">R4marketing і публікації</span><span class="en-text">R4marketing & writing</span></h3>
+                    <ul class="space-y-3">
+                        <li><a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-telegram w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Telegram-канал R4marketing</span><span class="ua-text">Telegram-канал R4marketing</span><span class="en-text">R4marketing Telegram</span></a></li>
+                        <li><a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-youtube w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">YouTube-канал R4marketing</span><span class="ua-text">YouTube-канал R4marketing</span><span class="en-text">R4marketing YouTube</span></a></li>
+                        <li><a href="https://alexeyseleznev.wordpress.com/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-pen-nib w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Личный блог</span><span class="ua-text">Особистий блог</span><span class="en-text">Personal blog</span></a></li>
+                        <li><a href="https://habr.com/ru/users/selesnow/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-h w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Профиль на Хабре</span><span class="ua-text">Профіль на Хабрі</span><span class="en-text">Habr profile</span></a></li>
+                        <li><a href="https://alexey-seleznev.pro/publications/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-layer-group w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Архив публикаций</span><span class="ua-text">Архів публікацій</span><span class="en-text">Publications archive</span></a></li>
+                        <li><a href="https://github.com/selesnow" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-github w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">GitHub</span><span class="ua-text">GitHub</span><span class="en-text">GitHub</span></a></li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-3">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">Контакты</span><span class="ua-text">Контакти</span><span class="en-text">Contacts</span></h3>
+                    <ul class="space-y-4">
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">Email</div><a href="mailto:me@alexey-seleznev.pro" class="text-sm text-slate-300 hover:text-purple-300 transition-colors break-all">me@alexey-seleznev.pro</a></li>
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">Telegram</div><a href="https://t.me/AlexeySeleznev" target="_blank" rel="noopener" class="text-sm text-slate-300 hover:text-blue-300 transition-colors break-all">@AlexeySeleznev</a></li>
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">LinkedIn</div><a href="https://linkedin.com/in/selesnow" target="_blank" rel="noopener" class="text-sm text-slate-300 hover:text-blue-300 transition-colors break-all">linkedin.com/in/selesnow</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-14 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+                <p>© 2026 Alexey Seleznev. <span class="ru-text">Все права защищены.</span><span class="ua-text">Усі права захищені.</span><span class="en-text">All rights reserved.</span></p>
+                <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="inline-flex items-center gap-2 font-semibold hover:text-white transition-colors group"><span class="ru-text">Наверх</span><span class="ua-text">Нагору</span><span class="en-text">Back to top</span><span class="w-7 h-7 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-purple-500 group-hover:border-purple-500 transition-all"><i class="fa-solid fa-arrow-up text-[10px]"></i></span></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script src="../../assets/site.js"></script>
+
+    <script>
+    (function () {
+        // кнопка «Копировать» у блоков кода
+        document.querySelectorAll('.b-prose .codehilite').forEach(box => {
+            const btn = document.createElement('button');
+            btn.type = 'button'; btn.className = 'b-copy'; btn.setAttribute('aria-label', 'Copy code');
+            btn.innerHTML = '<i class="fa-regular fa-copy" aria-hidden="true"></i>';
+            btn.addEventListener('click', () => {
+                navigator.clipboard.writeText(box.querySelector('pre').innerText).then(() => {
+                    btn.innerHTML = '<i class="fa-solid fa-check" aria-hidden="true"></i>';
+                    setTimeout(() => btn.innerHTML = '<i class="fa-regular fa-copy" aria-hidden="true"></i>', 1500);
+                });
+            });
+            box.appendChild(btn);
+        });
+        // подсветка текущего раздела в оглавлении
+        const links = Array.from(document.querySelectorAll('.b-toc a'));
+        if (links.length && 'IntersectionObserver' in window) {
+            const map = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+            const io = new IntersectionObserver(es => es.forEach(e => {
+                if (e.isIntersecting) { links.forEach(l => l.classList.remove('active')); const a = map.get(e.target.id); if (a) a.classList.add('active'); }
+            }), { rootMargin: '-80px 0px -70% 0px' });
+            map.forEach((_, id) => { const el = document.getElementById(id); if (el) io.observe(el); });
+        }
+    })();
+    </script>
+</body>
+</html>

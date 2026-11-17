@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Alexey Seleznev">
+    <meta name="theme-color" content="#030712">
+    <link rel="canonical" href="https://alexey-seleznev.pro/blog/kak-my-vnedrili-bi-analitiku-v-otdele-kontekstnoy-reklamy/">
+
+    <title>Как мы внедрили BI-аналитику в отделе контекстной рекламы | Алексей Селезнёв</title>
+    <meta name="title" content="Как мы внедрили BI-аналитику в отделе контекстной рекламы | Алексей Селезнёв">
+    <meta name="description" content="Хотите, я скажу, что делают ваши сотрудники прямо сейчас? Собирают вручную отчеты в электронных таблицах. Сколько времени они тратят зря, игнорируя автоматизацию? Увидеть реальную…">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alexey-seleznev.pro/blog/kak-my-vnedrili-bi-analitiku-v-otdele-kontekstnoy-reklamy/">
+    <meta property="og:site_name" content="ALEXEY-SELEZNEV.pro">
+    <meta property="og:title" content="Как мы внедрили BI-аналитику в отделе контекстной рекламы | Алексей Селезнёв">
+    <meta property="og:description" content="Хотите, я скажу, что делают ваши сотрудники прямо сейчас? Собирают вручную отчеты в электронных таблицах. Сколько времени они тратят зря, игнорируя автоматизацию? Увидеть реальную…">
+    <meta property="og:image" content="https://alexey-seleznev.pro/photo.jpg">
+    <meta property="og:image:alt" content="Алексей Селезнёв">
+    <meta property="og:locale" content="ru_RU">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="https://alexey-seleznev.pro/blog/kak-my-vnedrili-bi-analitiku-v-otdele-kontekstnoy-reklamy/">
+    <meta name="twitter:title" content="Как мы внедрили BI-аналитику в отделе контекстной рекламы | Алексей Селезнёв">
+    <meta name="twitter:description" content="Хотите, я скажу, что делают ваши сотрудники прямо сейчас? Собирают вручную отчеты в электронных таблицах. Сколько времени они тратят зря, игнорируя автоматизацию? Увидеть реальную…">
+    <meta name="twitter:image" content="https://alexey-seleznev.pro/photo.jpg">
+
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z56YHE916N"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Z56YHE916N');
+    </script>
+    <link rel="icon" type="image/jpeg" href="../../logo.jpg">
+    <link rel="apple-touch-icon" href="../../logo.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;700;800;900&display=swap">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/site.css">
+    <!-- Tailwind собран заранее (_build/build.py) и подключается последним, как это делал CDN-скрипт -->
+    <link rel="stylesheet" href="../../assets/tailwind.css">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Как мы внедрили BI-аналитику в отделе контекстной рекламы",
+  "datePublished": "2016-12-22",
+  "inLanguage": "ru",
+  "description": "Хотите, я скажу, что делают ваши сотрудники прямо сейчас? Собирают вручную отчеты в электронных таблицах. Сколько времени они тратят зря, игнорируя автоматизацию? Увидеть реальную…",
+  "author": {
+    "@id": "https://alexey-seleznev.pro/#person"
+  },
+  "mainEntityOfPage": "https://alexey-seleznev.pro/blog/kak-my-vnedrili-bi-analitiku-v-otdele-kontekstnoy-reklamy/"
+}
+    </script>
+    <link rel="stylesheet" href="../blog.css">
+</head>
+<body class="relative lang-en">
+
+    <!-- Interactive Background -->
+    <div id="vanta-bg"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full z-50 top-0 left-0 border-b border-white/5 bg-slate-950/60 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 h-16 flex items-center justify-between">
+            <a href="../../" class="flex items-center gap-2 sm:gap-2.5 md:gap-3 group shrink min-w-0">
+                <img src="../../logo.jpg" alt="Alexey Seleznev" class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 rounded-lg sm:rounded-xl object-cover shadow-md border border-white/10 group-hover:border-purple-500/50 group-hover:scale-105 transition-all shrink-0">
+                <span class="text-xs min-[400px]:text-sm sm:text-base md:text-xl font-black tracking-tight uppercase outfit-font whitespace-nowrap text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+            </a>
+            <div class="hidden xl:flex gap-6 text-sm font-semibold text-slate-400">
+                <a href="../../" class="nav-link hover:text-white transition-colors"><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a>
+                <a href="../../opensource/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span></a>
+                <a href="../../courses/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a>
+                <a href="../../videos/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a>
+                <a href="../../talks/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a>
+                <a href="../../articles/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a>
+                <a href="../../interviews/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a>
+                <a href="../../blog/" class="nav-link hover:text-white transition-colors active"><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a>
+            </div>
+
+            <div class="flex items-center gap-1.5 sm:gap-2 md:gap-4 shrink-0">
+                <div class="lang-switcher flex gap-1 sm:gap-1.5 md:gap-2 text-[11px] sm:text-xs md:text-sm font-bold border-r border-white/10 pr-1.5 sm:pr-3 md:pr-4 mr-0.5 sm:mr-1 md:mr-2 outfit-font">
+                    <button onclick="changeLang('en')" id="btn-en" class="active hover:text-white transition-colors">EN</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ru')" id="btn-ru" class="text-slate-500 hover:text-white transition-colors">RU</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ua')" id="btn-ua" class="text-slate-500 hover:text-white transition-colors">UA</button>
+                </div>
+
+                <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="text-slate-400 hover:text-blue-400 transition-colors hidden sm:block" aria-label="Telegram"><i class="fa-brands fa-telegram text-lg md:text-xl"></i></a>
+                <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="text-slate-400 hover:text-white transition-colors hidden sm:block" aria-label="GitHub"><i class="fa-brands fa-github text-lg md:text-xl"></i></a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="xl:hidden w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-purple-500/20 hover:border-purple-500/40 transition-all focus:outline-none" aria-label="Toggle Navigation Menu">
+                    <i class="fa-solid fa-bars text-sm sm:text-lg" id="mobile-menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div id="mobile-menu" class="hidden xl:hidden border-t border-white/10 bg-slate-950/95 backdrop-blur-2xl shadow-2xl overflow-y-auto max-h-[calc(100vh-4rem)] transition-all">
+            <div class="max-w-7xl mx-auto px-6 py-6 space-y-1">
+                <a href="../../" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-house text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span>
+                </a>
+                <a href="../../opensource/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-code-branch text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span>
+                </a>
+                <a href="../../courses/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-graduation-cap text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span>
+                </a>
+                <a href="../../videos/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-circle-play text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span>
+                </a>
+                <a href="../../talks/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-microphone-lines text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span>
+                </a>
+                <a href="../../articles/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-pen-nib text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span>
+                </a>
+                <a href="../../interviews/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-regular fa-newspaper text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span>
+                </a>
+                <a href="../../blog/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-white bg-white/5 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-feather-pointed text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span>
+                </a>
+
+                <div class="pt-4 mt-3 border-t border-white/10 flex items-center justify-around text-slate-400">
+                    <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-blue-400 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-telegram text-xl"></i> Telegram
+                    </a>
+                    <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="p-2 hover:text-white transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-github text-xl"></i> GitHub
+                    </a>
+                    <a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-red-500 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-youtube text-xl"></i> YouTube
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="b-wrap relative z-10">
+        <nav class="b-crumbs" aria-label="breadcrumb">
+            <a href="../../"><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a><span>/</span><a href="../"><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a><span>/</span><a href="../?cat=bi#posts">BI</a>
+        </nav>
+        <div class="b-layout has-toc">
+            <article class="bento-glass no-lift b-article" data-aos="fade-up">
+                <div class="bento-content">
+                    <div class="b-cats"><a class="b-chip b-chip-cat" href="../?cat=bi#posts">BI</a><a class="b-chip b-chip-cat" href="../?cat=vizualizatsiya-dannyh#posts">Визуализация данных</a><a class="b-chip b-chip-cat" href="../?cat=keysy#posts">Кейсы</a></div>
+                    <h1 class="b-title outfit-font">Как мы внедрили BI-аналитику в отделе контекстной рекламы</h1>
+                    <div class="b-meta">
+                        <span><i class="fa-regular fa-calendar" aria-hidden="true"></i><span class="ru-text">22 декабря 2016</span><span class="ua-text">22 грудня 2016</span><span class="en-text">22 Dec 2016</span></span>
+                        <span><i class="fa-regular fa-clock" aria-hidden="true"></i><span class="ru-text">15 мин чтения</span><span class="ua-text">15 хв читання</span><span class="en-text">15 min read</span></span>
+                        <span class="b-lang" title="Русский">RU</span>
+                    </div>
+                    <div class="b-note"><i class="fa-regular fa-clock" aria-hidden="true"></i><div><span class="ru-text">Материал опубликован в 2016 году — описанные инструменты и интерфейсы могли измениться.</span><span class="ua-text">Матеріал опубліковано у 2016 році — описані інструменти та інтерфейси могли змінитися.</span><span class="en-text">Published in 2016 — the tools and interfaces described may have changed since.</span></div></div>
+                    
+                    <div class="b-prose"><p>Хотите, я скажу, что делают ваши сотрудники прямо сейчас? Собирают вручную отчеты в электронных таблицах. Сколько времени они тратят зря, игнорируя автоматизацию? Увидеть реальную картину просто: посчитайте количество затраченных на отчетность человекочасов и умножьте на среднюю стоимость рабочего часа сотрудника.</p>
+<p><img loading="lazy" decoding="async" alt="Что получил Netpeak, разработав собственное BI-решение для отдела контекстной рекламы" width="1200" height="580" src="../images/kak-my-vnedrili-bi-analitiku-v-otdele-ko-bi-resenie-dla-bizn-16e2513c.webp" /></p>
+<p>В этой статье я расскажу, зачем внедрять <a target="_blank" rel="noopener" href="http://netpeak.ua/services/web-analytics/">BI-решение для бизнеса</a>, какие задачи можно решить с помощью автоматизации и что получил Netpeak, разработав собственное BI-решение для отдела контекстной рекламы.</p>
+<p><strong>Business intelligence</strong> (BI) — методы и инструменты для перевода необработанной информации в осмысленную, удобную форму. Эти данные используются для бизнес-анализа. Технологии BI обрабатывают большие объемы неструктурированных данных, чтобы найти стратегические возможности для бизнеса.</p>
+<h2 id="_1">Как долго длилось внедрение?</h2>
+<p>На реализацию проекта — от постановки задачи до завершения — ушло около 5 месяцев.</p>
+<p>Чем мы занимались все это время?</p>
+<p><strong>1. Предпроектная подготовка.</strong></p>
+<p>1.1. Определили основную и дополнительные цели внедрения BI.</p>
+<p>1.2. Определили источники, из которых следует получать необходимые данные. В качестве первоочередных источников выбраны Google AdWords, <a target="_blank" rel="noopener" href="https://netpeak.net/ru/blog/kak-vybrat-instrument-dlya-importa-dannyh-iz-google-analytics/">Google Analytics</a>, Яндекс. Директ и Facebook. На эти площадки уходит подавляющая часть всего рекламного бюджета по проектам наших клиентов. Также источником стала внутренняя ERP и ряд Google таблиц, которые заполняют сотрудники.</p>
+<p>1.3. Исходя из поставленных целей, определили перечень отчетов, диаграмм и фильтров, необходимых для решения бизнес-задач.</p>
+<p>1.4. Разработали архитектуру базы данных, в которой будет храниться необходимая для визуализации информация.</p>
+<p>1.5. Подобрали инструменты для реализации проекта при минимальных финансовых затратах.</p>
+<p><strong>2. Техническая реализация проекта.</strong></p>
+<p>2.1. Изучили документацию по работе с API всех выбранных ранее источников.</p>
+<ol>
+<li>
+<ol>
+<li>
+<ul>
+<li>Google Analytics — <a target="_blank" rel="noopener" href="https://developers.google.com/analytics/?hl=ru">документация по API</a>;</li>
+</ul>
+</li>
+<li>Google AdWords — <a target="_blank" rel="noopener" href="https://developers.google.com/adwords/api/docs/guides/start">документация по API</a>;</li>
+<li>Яндекс Директ — <a target="_blank" rel="noopener" href="https://tech.yandex.ru/direct/doc/dg-v4/concepts/About-docpage/">документация по API</a>;</li>
+<li>Facebook — <a target="_blank" rel="noopener" href="https://developers.facebook.com/docs/graph-api">документация по API.</a></li>
+</ol>
+</li>
+</ol>
+<p>2.2. Получили доступ к API всех необходимых источников.</p>
+<p>2.3. Написали пакеты функций на языке R для работы с API Яндекс. Директ и <a target="_blank" rel="noopener" href="https://netpeak.net/ru/blog/kak-zagruzit-statistiku-reklamnykh-kampanii-iz-api-facebook-s-pomoshch-yu-yazyka-r/">Facebook</a>:</p>
+<ol>
+<li>
+<ol>
+<li>
+<ul>
+<li>пакет <a target="_blank" rel="noopener" href="http://github.com/selesnow/ryandexdirect">ryandexdirect</a> для работы с API Яндекс Директ;</li>
+</ul>
+</li>
+<li>пакет <a target="_blank" rel="noopener" href="https://github.com/selesnow/rfacebookstat">rfacebookstat</a> для работы с API Facebook.</li>
+</ol>
+</li>
+</ol>
+<p>2.4. Изучили документацию пакетов функций для работы с API Google Analytics и Google AdWords, а также для перевода денежных данных в одну валюту.</p>
+<ol>
+<li>
+<ol>
+<li>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://cran.r-project.org/web/packages/RAdwords/RAdwords.pdf">RAdwords</a>;</li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://cran.r-project.org/web/packages/RGoogleAnalytics/RGoogleAnalytics.pdf">RGoogleAnalytics</a>;</li>
+<li><a target="_blank" rel="noopener" href="https://cran.r-project.org/web/packages/RGA/RGA.pdf">RGA</a>;</li>
+<li><a target="_blank" rel="noopener" href="https://cran.r-project.org/web/packages/quantmod/quantmod.pdf">quantmod.</a></li>
+</ol>
+</li>
+</ol>
+<p>2.5. Написали скрипты на языке R для сбора и записи данных из всех источников в базу.</p>
+<p>2.6. Настроили визуализацию всех отчетов и <a target="_blank" rel="noopener" href="https://netpeak.net/ru/blog/kak-postroit-diagrammu-i-ne-oblazhatsya/">диаграмм</a>.</p>
+<p>2.7. Разграничили уровни доступа к отчетам для сотрудников.</p>
+<p>А теперь — к подробностям.</p>
+<h2 id="bi">Как определить цели внедрения BI?</h2>
+<p>Как понять, что вашему бизнесу нужен <a target="_blank" rel="noopener" href="https://netpeak.net/ru/blog/kak-vnedrit-business-intelligence-dlya-malogo-i-srednego-biznesa/">BI</a>, а не ручной сбор и обработка данных в электронных таблицах?</p>
+<p>Проанализируйте:</p>
+<ul>
+<li>сколько времени уходит на ручной сбор и манипуляции с данными;</li>
+<li>какие именно задачи вы хотите решить с помощью BI.</li>
+</ul>
+<p>На момент написания статьи в штате Netpeak работает более 30 специалистов по контекстной рекламе. Каждый из них регулярно собирает и анализирует данные по кампаниям из различных систем. Чтобы у специалистов освободилось время на анализ данных и оптимизацию рекламы, мы решили собрать всю необходимую информацию «в одной вкладке».</p>
+<p>В отделе контекстной рекламы Netpeak определили такие цели:</p>
+<ol>
+<li>Контроль основных показателей эффективности рекламных кампаний на всех рекламных площадках и по всем проектам.</li>
+<li>Поиск путей масштабирования рекламных кампаний без потери эффективности.</li>
+<li>Рост бюджетов без снижения эффективности рекламных кампаний.</li>
+<li>Общий рост эффективности рекламных кампаний по всем проектам.</li>
+</ol>
+<h2 id="_2">Как определить, какие таблицы и диаграммы необходимы для достижения целей?</h2>
+<p><img loading="lazy" decoding="async" alt="Таблицы и диаграммы необходимы для достижения целей" width="800" height="429" src="../images/kak-my-vnedrili-bi-analitiku-v-otdele-ko-kakie-tablicy-i-dia-ffd9553a.webp" /></p>
+<p>Это просто. Когда вы четко сформулировали цель, понимание, какую информацию и в каком виде необходимо получить появляется автоматически.</p>
+<p>После общения со специалистами и руководством отдела, мы определили список отчетов, диаграмм и ключевых показателей, на которые опираются сотрудники при анализе рекламных кампаний, и руководство — при оценке эффективности отдела, состоящего из более чем 30 человек.</p>
+<p>В результате было описано 60 визуальных элементов и ряд фильтров (для удобства работы с ними).</p>
+<h2 id="_3">Как найти инструменты для реализации проекта при минимальных тратах?</h2>
+<p>При выборе инструментов лучше всего опираться на мнение специалиста, который владеет как минимум несколькими BI-платформами и базами данных, а также умеет работать с большими объемами данных.</p>
+<p>Еще один ориентир при выборе BI-платформы — <a target="_blank" rel="noopener" href="https://www.gartner.com/doc/reprints?id=1-2XXET8P&amp;ct=160204">ежегодное исследование</a>Gartner Magic Quadrant for Business Intelligence and Analytics Platforms.</p>
+<p><img loading="lazy" decoding="async" alt="ежегодное исследование Gartner Magic Quadrant for Business Intelligence and Analytics Platforms" width="800" height="800" src="../images/kak-my-vnedrili-bi-analitiku-v-otdele-ko-ezegodnoe-issledova-09977c4d.webp" /></p>
+<p>Лидеры в BI-отрасли не меняются уже достаточно много лет. Это Microsoft (<a target="_blank" rel="noopener" href="https://netpeak.net/ru/blog/kak-rabotat-s-microsoft-power-bi-podrobnoe-rukovodstvo/">Power BI</a>), Tableau Software (Tableau) и Qlik (QlikView, QlilSense). Именно на эти решения стоит обратить внимание.</p>
+<p>Подбирая BI-платформу для решения конкретной задачи, учитывайте:</p>
+<ul>
+<li>из каких источников необходимо получить данные для визуализации;</li>
+<li>потребуется ли вам онлайн-доступ к отчетам;</li>
+<li>каким бюджетом вы располагаете.</li>
+</ul>
+<p>Я выбрал следующие инструменты:</p>
+<ol>
+<li><strong>Таблицы Google</strong> — для хранения справочной информации по проектам, а также информации, которую сотрудники компании ежедневно вносят вручную. Как правило, это небольшие таблицы, которые состоят максимум из нескольких сотен строк. Данный инструмент бесплатный и идеально подходит для совместной работы сотрудников в одном документе в онлайн-режиме.</li>
+<li><strong>Язык R</strong> — для сбора информации из API рекламных систем. Этот инструмент также бесплатный и предназначен для быстрой обработки больших массивов информации.</li>
+<li><strong>MySQL</strong> — СУБД для хранения собранной информации, которую не требуется в дальнейшем каким-либо образом изменять. В базу данных мы записывали агрегированные данные, поэтому производительности MySQL с запасом хватает для решения нашей задачи. Ежемесячно поступает приблизительно 300 тысяч строк данных — при правильно настроенной конфигурации базы данных и правильной индексации таблиц производительности MySQL для обработки этого массива данных более чем достаточен. Как и предыдущие инструменты, MySQL совершенно бесплатный.</li>
+<li><strong>Microsoft Power BI</strong> — инструмент визуализации данных. Доступного функционала достаточно для решения поставленной задачи. К тому же, Power BI для десктопов — совершенно бесплатный, а онлайн-версия обойдется дешевле, чем конкуренты (нет необходимости покупать отдельный сервер, все данные хранятся и обрабатываются на серверах Microsoft).</li>
+</ol>
+<h2 id="_4">Техническая реализация проекта</h2>
+<p><img loading="lazy" decoding="async" alt="Техническая реализация проекта" width="700" height="344" src="../images/kak-my-vnedrili-bi-analitiku-v-otdele-ko-tehniceskaa-realiza-ab54d689.webp" /></p>
+<p>Техническую реализацию стоит начинать с описания процесса сбора, очистки, агрегации, хранения и визуализации данных.</p>
+<p>Чтобы рассчитать место, необходимое для хранения информации, обязательно выясните:</p>
+<ul>
+<li>с какой частотой необходимо обновлять отчеты;</li>
+<li>какой объем данных предполагается хранить;</li>
+<li>до каких объемов вырастет база в течении года.</li>
+</ul>
+<p>Мы собираем информацию ежемесячно, далее в течение месяца специалисты оптимизируют рекламные кампании на основе отчетов, и в следующем месяце мы видим информацию для дальнейшей оптимизации и масштабирования.</p>
+<h3 id="_5">Схема работы</h3>
+<p><img loading="lazy" decoding="async" alt="Схема работы BI-решения для отдела контекстной рекламы Netpeak" width="820" height="719" src="../images/kak-my-vnedrili-bi-analitiku-v-otdele-ko-shema-raboty-bi-res-9517fa3a.webp" /></p>
+<p><em>Схема работы BI-решения для отдела контекстной рекламы Netpeak</em></p>
+<ol>
+<li>Ежемесячно все маркетологи вносят в таблицу Google данные по своим проектам. Так мы собираем справочник, который содержит всю необходимую для работы скриптов информацию.</li>
+<li>После актуализации справочника запускаются R-скрипты, которые собирают информацию с помощью API из всех рекламных площадок, связывают ее, агрегируют и записывают в базу данных MySQL.</li>
+<li>В течение месяца сотрудники компании заполняют множество других документов в таблицах Google: с информацией об оценках эффективности проектов, новым и ушедшим проектам и так далее. Все эти документы связаны с Power BI Desktop с помощью R-коннектора.</li>
+<li>Раз в месяц, после сбора всей информации за прошлый месяц, с помощью нажатия одной кнопки «Обновить» в интерфейсе Power BI Desktop актуализируются все отчеты и диаграммы.</li>
+<li>Данные публикуются в Power BI Service для онлайн-доступа специалистов, тимлидов и руководства отдела.</li>
+</ol>
+<h2 id="bi-">Как специалисты по контекстной рекламе используют BI-решение?</h2>
+<p>Начнем с того, что в Power BI можно разграничить роли. Так каждый сотрудник получил доступ к определенному набору данных.</p>
+<p>Структура отдела:</p>
+<p><img loading="lazy" decoding="async" alt="Как специалисты по контекстной рекламе используют BI решение" width="1045" height="830" src="../images/kak-my-vnedrili-bi-analitiku-v-otdele-ko-kak-specialisty-po-a59e2a84.webp" /></p>
+<p><strong>DH</strong> (Department Head) — руководство. Сотрудники с этим уровнем доступа видят информацию по всем проектам, что помогает им контролировать работу отдела и своевременно реагировать на негативный тренд по ключевым показателям команд.</p>
+<p><strong>TL</strong> (Team Leaders) — руководители команд. Имеют доступ к информации по проектам специалистов входящих в их команду, но не видят данные по проектам других команд.</p>
+<p><strong>IM</strong> (Internet Marketer) — специалисты по контекстной рекламе. Имеют доступ к информации исключительно по своим проектам и не видят данные по проектам других специалистов.</p>
+<p>Мы четко разграничили доступ к данным. Каждый сотрудник получил доступ к необходимой ему информации и может принимать решения на своем уровне ответственности.</p>
+<p>В BI-отчетах можно посмотреть общую информацию по KPI, которые необходимо контролировать руководству отдела и команд:</p>
+<ul>
+<li>эффективность работы отдела,</li>
+<li>нагрузка специалистов,</li>
+<li>различная сегментация проектов и специалистов</li>
+<li>динамика изменения количества активных проектов и так далее.</li>
+</ul>
+<p>Рассмотрим подробно, как специалисты применяют разработанный инструмент при ведении рекламных кампаний.</p>
+<h3 id="1">1. Общий анализ проекта</h3>
+<p>Первая таблица, которую видит специалист, отображает данные о сумме потраченных средств, количестве показов, кликов, CTR и стоимости клика в разрезе проекта, источника и канала трафика.</p>
+<p><img loading="lazy" decoding="async" alt="Общий анализ проекта" width="1169" height="377" src="../images/kak-my-vnedrili-bi-analitiku-v-otdele-ko-obsij-analiz-proekt-40dd46d1.webp" /></p>
+<p>С этих данных начинается более глубокая аналитика каждого проекта. Специалист может перейти к изучению диаграмм, отображающих объем потерянных транзакций, дохода и конверсий, и на основе этих данных делать выводы по отдельному проекту или рекламной кампании.</p>
+<h3 id="2">2. Анализ объема потерянного дохода</h3>
+<p>Объем потерянной выгоды — на диаграмме с разбивкой на потери по бюджету и по рейтингу.</p>
+<p><img loading="lazy" decoding="async" alt="Анализ объема потерянного дохода" width="1074" height="464" src="../images/kak-my-vnedrili-bi-analitiku-v-otdele-ko-analiz-obema-potera-375f788a.webp" /></p>
+<p>Специалист сразу видит:</p>
+<ul>
+<li>проекты и рекламные кампании, где можно поднять бюджет без снижения эффективности рекламных кампаний;</li>
+<li>проекты и рекламные кампании, в которых нужно обратить внимание на показатель качества и стоимость лида, чтобы минимизировать потери в связи с низким рейтингом объявлений.</li>
+</ul>
+<p><strong>Потерянные конверсии в связи с нехваткой бюджета</strong> специалист также может проанализировать с помощью специальной таблицы. В ней по каждому проекту и рекламной кампании представлены данные о том, сколько средств не хватило для максимально возможного охвата и сколько транзакций недополучили в связи с этим.</p>
+<p><img loading="lazy" decoding="async" alt="Потерянные конверсии в связи с нехваткой бюджета" width="1223" height="488" src="../images/kak-my-vnedrili-bi-analitiku-v-otdele-ko-poterannye-konversi-ac109a43.webp" /></p>
+<p>Также специалисту доступен график, отражающий долю бюджета, которую потенциально можно было потратить без потери эффективности.</p>
+<p><img loading="lazy" decoding="async" alt="график отражающий долю бюджета" width="1009" height="374" src="../images/kak-my-vnedrili-bi-analitiku-v-otdele-ko-grafik-otrazausij-d-313f402a.webp" /></p>
+<p>Посмотрев перечисленные диаграммы и отчеты, специалист может написать письмо с рекомендациями на повышение бюджета, а также сразу указать объем дохода либо количество транзакций и конверсий, которые будут получены в результате повышения бюджета. Так специалист узнает, в каких проектах и по каким рекламным кампаниям можно эффективно растить рекламный бюджет и приносить больше выгоды клиентам.</p>
+<h3 id="3">3. Анализ потерянных конверсий в связи с рейтингом</h3>
+<p>Следующий шаг — минимизация потерянной выгоды в связи с низким рейтингом объявлений. В данном случае есть два пути.</p>
+<p><strong>3.1. Повышение показателя качества ключевых слов</strong></p>
+<p>В первую очередь необходимо уделить внимание показателю качества, так как это позволит оптимизировать стоимость транзакции.</p>
+<p>Для работы над показателем качества специалисту доступно шесть диаграмм.</p>
+<p>Первые две диаграммы показывают общую информацию о показателе качества по проектам. Также можно перейти на уровень рекламной кампании или группы объявлений.</p>
+<p><img loading="lazy" decoding="async" alt="Повышение показателя качества ключевых слов" width="1159" height="478" src="../images/kak-my-vnedrili-bi-analitiku-v-otdele-ko-povysenie-pokazatel-ea4ae4aa.webp" /></p>
+<p>Левая диаграмма разбивает все ключевые слова в аккаунте на три группы:</p>
+<ul>
+<li>High (обозначены зеленым цветом) — ключевые слова с высоким показателем качества, от 8 до 10 баллов.</li>
+<li>Middle (обозначены желтым цветом) — ключи со средней оценкой показателя качества, от 5 до 7 баллов.</li>
+<li>Low (обозначены красным цветом) — ключевые слова с показателем качества ниже 5 баллов.</li>
+</ul>
+<p>Правая диаграмма отражает средний показатель качества по аккаунту, рекламной кампании или группе объявлений.</p>
+<p>С помощью этих диаграмм специалист видит проблемные аккаунты, рекламные кампании, группы объявлений, и сразу может определить, какие ключевые слова необходимо оптимизировать.</p>
+<p>Следующие три диаграммы показывают каждую составляющую показателя качества в разрезе аккаунтов, рекламных кампаний и групп объявлений.</p>
+<p><img loading="lazy" decoding="async" alt="Анализ составляющих показателя качества" width="1240" height="419" src="../images/kak-my-vnedrili-bi-analitiku-v-otdele-ko-kazduu-sostavlausuu-0bbf1896.webp" /></p>
+<p>На каждом графике видно соотношение ключевых слов с разными оценками. Зеленым цветом обозначена доля ключевых слов с оценкой выше среднего уровня, желтым — со средней, красным — с оценкой ниже среднего уровня.</p>
+<p>В диаграмме слева вы увидите оценку ключевых слова <strong>по релевантности объявлению.</strong> Для ключей с низкой оценкой специалисту необходимо составить объявления, которые содержат в заголовке или тексте объявления ключевые слова.</p>
+<p>Центральная диаграмма отражает оценку ключевых слов <strong>по ожидаемому значению CTR</strong>. Эта составляющая больше остальных влияет на показатель качества, но изменить ее оценку довольно сложно. Если в группе высокая доля объявлений с низким уровнем ожидаемого CTR, специалисту необходимо сделать объявления более заметными и привлекательными: проверить, включены ли расширения объявлений, более креативно подойти к самим текстам и заголовкам объявлений.</p>
+<p>Диаграмма справа показывает оценку <strong>качества целевой страницы</strong>. В данном случае специалисту стоит попробовать изменить <a target="_blank" rel="noopener" href="http://netpeak.net/ru/blog/kak-uluchshit-otsenku-kachestva-tselevoi-stranitsy-v-google-adwords-eksperiment-netpeak">посадочную страницу</a> в объявлении на более релевантную или порекомендовать клиенту переписать текст посадочной страницы, чтобы ключевые слова из группы объявлений встречались чаще.</p>
+<p>После того, как специалист проработал показатель качества и вытянул его на максимальный уровень, снижается стоимость клика. Следовательно, растет количество кликов и транзакций в рамках прежнего бюджета.</p>
+<p><strong>3.2. Повышение ставок в рекламных кампаниях, где стоимость привлечения клиента это позволяет</strong></p>
+<p>Если после оптимизации показателя качества вы все также теряете показы в связи с низким рейтингом объявления, обратите внимание на установленные ставки. Чтобы маркетолог мог оценить, в силах ли он повысить ставки, мы добавили график, отображающий стоимость транзакции в разрезе рекламных кампаний.</p>
+<p><strong>Анализ стоимости транзакции</strong></p>
+<p>**</p>
+<p><img loading="lazy" decoding="async" alt="Анализ стоимости транзакции" width="828" height="413" src="../images/kak-my-vnedrili-bi-analitiku-v-otdele-ko-analiz-stoimosti-tr-05b420be.webp" /></p>
+<p>**</p>
+<p>В каждом проекте специалист знает допустимую стоимость конверсии и может сопоставить эти данные с тем, сколько было потеряно конверсий. Если стоимость транзакции ниже допустимой и при этом существуют потери дохода из-за низкого рейтинга, стоит поднять ставки. В таком случае количество проигранных аукционов снизится, и специалист сможет привлечь больше заинтересованных пользователей и в результате — увеличить доход.</p>
+<h3 id="4">4. Масштабирование кампаний</h3>
+<p>В BI-решении добавлен ряд отчетов по стоимости клика в Google AdWords в разрезе разных тематик, а также стран и городов. Основываясь на эти данные, маркетолог может оценить, стоит ли масштабировать рекламные кампании на конкретные города и регионы, и сделать это максимально эффективно в зависимости от возможностей и специфики бизнеса клиента.</p>
+<p>На данный момент доступна информация о стоимости клика:</p>
+<ul>
+<li>в 188 странах;</li>
+<li>25,7 тысячах городов;</li>
+<li>в разбивке на 27 тематик.</li>
+</ul>
+<p><img loading="lazy" decoding="async" alt="Маштабирование кампаний" width="1600" height="699" src="../images/kak-my-vnedrili-bi-analitiku-v-otdele-ko-mastabirovanie-kamp-c5535b9b.webp" /></p>
+<p>Также подобный отчет доступен и о стоимости клика в разбивке на тематики и страны в Facebook.</p>
+<h2 id="_6">Демоверсия части готового решения на случайно сгенерированной выборке данных</h2>
+<p>Посмотреть демоверсию описанного решения на тестовой выборке данных можно по <a target="_blank" rel="noopener" href="https://app.powerbi.com/view?r=eyJrIjoiMzMwOGE5ZDQtYjJkZC00MGJmLWFkZmEtMzA0YzcxZTVkNzRhIiwidCI6ImRlNjc1Y2JlLTlkNzMtNDhhMS04NGY3LWRiNDhiODVhYjUxOSIsImMiOjl9">этой ссылке</a>.</p>
+<p><a target="_blank" rel="noopener" href="https://app.powerbi.com/view?r=eyJrIjoiMzMwOGE5ZDQtYjJkZC00MGJmLWFkZmEtMzA0YzcxZTVkNzRhIiwidCI6ImRlNjc1Y2JlLTlkNzMtNDhhMS04NGY3LWRiNDhiODVhYjUxOSIsImMiOjl9">https://app.powerbi.com/view?r=eyJrIjoiMzMwOGE5ZDQtYjJkZC00MGJmLWFkZmEtMzA0YzcxZTVkNzRhIiwidCI6ImRlNjc1Y2JlLTlkNzMtNDhhMS04NGY3LWRiNDhiODVhYjUxOSIsImMiOjl9</a></p>
+<h2 id="_7">Выводы</h2>
+<p>Как мы внедрили BI-аналитику для отдела контекстной рекламы:</p>
+<ol>
+<li>Определили цели, источники и перечень отчетов, необходимых для решения бизнес-задач.</li>
+<li>Разработали архитектуру базы данных и подобрали инструменты для реализации проекта.</li>
+<li>Получили доступ к API всех необходимых источников и разработали необходимые пакеты функций на языке R.</li>
+<li>Визуализировали отчеты в Power BI.</li>
+<li>Разграничили доступы к данным в зависимости от роли сотрудника.</li>
+</ol>
+<p>Что в результате?</p>
+<ol>
+<li>Руководство:</li>
+</ol>
+<ul>
+<li>контролирует выполнение KPI отдела;</li>
+<li>получает данные для распределения проектов между специалистами в зависимости от их нагрузки.</li>
+</ul>
+<ol start="2">
+<li>Маркетологи на основе полученных данных:</li>
+</ol>
+<ul>
+<li>оценивают объем потерянного дохода; анализируют потерянные конверсии в связи с рейтингом;</li>
+<li>оптимизируют рекламные кампании и быстро определяют зоны роста;</li>
+<li>масштабируют рекламные кампании, подключая новые источники и регионы.</li>
+</ul>
+<p>Следите за рубрикой «Кейсы», чтобы первыми узнать, как BI-аналитика отдела контекстной рекламы повлияла на бизнес наших клиентов.</p>
+<hr />
+<p><em><a target="_blank" rel="noopener" href="https://netpeak.net/ru/blog/kak-my-vnedrili-bi-analitiku-v-otdele-kontekstnoi-reklamy/">Оригинал публикации в блоге Netpeak.</a></em></p></div>
+                    
+                    <div class="b-tags"><a class="b-chip" href="../?tag=veb-analitika#posts">Веб-аналитика</a><a class="b-chip" href="../?tag=api#posts">API</a><a class="b-chip" href="../?tag=bi#posts">BI</a><a class="b-chip" href="../?tag=avtomatizatsiya#posts">Автоматизация</a><a class="b-chip" href="../?tag=vizualizatsiya-dannyh#posts">Визуализация данных</a><a class="b-chip" href="../?tag=import-dannyh#posts">Импорт данных</a><a class="b-chip" href="../?tag=keysy#posts">Кейсы</a><a class="b-chip" href="../?tag=ppc#posts">PPC</a></div>
+                </div>
+            </article>
+            <aside class="b-toc" aria-label="Contents"><div class="b-toc-title"><span class="ru-text">Содержание</span><span class="ua-text">Зміст</span><span class="en-text">Contents</span></div><ul><li><a href="#_1">Как долго длилось внедрение?</a></li><li><a href="#bi">Как определить цели внедрения BI?</a></li><li><a href="#_2">Как определить, какие таблицы и диаграммы необходимы для достижения целей?</a></li><li><a href="#_3">Как найти инструменты для реализации проекта при минимальных тратах?</a></li><li><a href="#_4">Техническая реализация проекта</a><ul><li><a href="#_5">Схема работы</a></li></ul></li><li><a href="#bi-">Как специалисты по контекстной рекламе используют BI-решение?</a><ul><li><a href="#1">1. Общий анализ проекта</a></li><li><a href="#2">2. Анализ объема потерянного дохода</a></li><li><a href="#3">3. Анализ потерянных конверсий в связи с рейтингом</a></li><li><a href="#4">4. Масштабирование кампаний</a></li></ul></li><li><a href="#_6">Демоверсия части готового решения на случайно сгенерированной выборке данных</a></li><li><a href="#_7">Выводы</a></li></ul></aside>
+        </div>
+        <section class="b-related">
+            <h2 class="outfit-font"><span class="ru-text">Читайте также</span><span class="ua-text">Читайте також</span><span class="en-text">Related posts</span></h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="../kak-sekonomit-vremya-spetsialista-pri-rabote-s-krupnym-proektom-na-pri/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="0">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/covers/733.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">апр. 2017</span><span class="ua-text">квіт. 2017</span><span class="en-text">Apr 2017</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2017</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">6 мин чтения</span><span class="ua-text">6 хв читання</span><span class="en-text">6 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Как сэкономить время специалиста при работе с крупным проектом — на примере OLX</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">«Что мы делаем со временем? В ответе на этот вопрос состоит смысл жизни», — считает герой фильма «Молодость без молодости». Что делают большую часть времени специалисты по контекстной…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">API</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">BI</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a>
+                <a href="../kak-poluchit-i-obrabotat-syrye-dannye-iz-yandeks-metriki/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="60">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/covers/637.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">февр. 2017</span><span class="ua-text">лют. 2017</span><span class="en-text">Feb 2017</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2017</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">6 мин чтения</span><span class="ua-text">6 хв читання</span><span class="en-text">6 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Как получить и обработать сырые данные из Яндекс.Метрики</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">Хотите качественно анализировать статистику из Яндекс.Метрики? Отследить сложные воронки продаж, объединить данные из разных систем аналитики, контролировать расхождения в статистике, —…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">API</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Яндекс Метрика</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a>
+                <a href="../kak-my-sdelali-analiticheskiy-instrument-dlya-bloga-netpeak/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="120">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/kak-my-sdelali-analiticheskiy-instrum-s-novym-blogom-158e635c.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">дек. 2017</span><span class="ua-text">груд. 2017</span><span class="en-text">Dec 2017</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2017</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">13 мин чтения</span><span class="ua-text">13 хв читання</span><span class="en-text">13 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Как мы сделали аналитический инструмент для блога Netpeak</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">Как узнать, хорошую ли статью вы опубликовали? Ok, допустим, существуют привычные метрики — проведенное на странице время, количество просмотров, количество репостов. Но это все-таки…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Веб-аналитика</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">BI</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a></div>
+        </section>
+        <a href="../" class="b-back"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i><span class="ru-text">Ко всем материалам</span><span class="ua-text">До всіх матеріалів</span><span class="en-text">All posts</span></a>
+    </main>
+
+    <section class="px-6 max-w-7xl mx-auto pb-24 relative z-10">
+        <div class="grid md:grid-cols-2 gap-6" data-aos="fade-up">
+            <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(59, 130, 246, 0.1));">
+                <div class="bento-content w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center text-blue-400 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-telegram"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">Telegram-канал R4marketing</span><span class="ua-text">Telegram-канал R4marketing</span><span class="en-text">R4marketing on Telegram</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Новые статьи, видео и заметки по R — первыми.</span><span class="ua-text">Нові статті, відео та нотатки з R — першими.</span><span class="en-text">New articles, videos and R notes — first.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-blue-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+            <a href="https://www.youtube.com/R4marketing/?sub_confirmation=1" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(239, 68, 68, 0.1));">
+                <div class="bento-content w-16 h-16 bg-red-500/20 rounded-2xl flex items-center justify-center text-red-500 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-youtube"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">YouTube-канал R4marketing</span><span class="ua-text">YouTube-канал R4marketing</span><span class="en-text">R4marketing on YouTube</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Видеоуроки по R, аналитике и AI-инструментам.</span><span class="ua-text">Відеоуроки з R, аналітики та AI-інструментів.</span><span class="en-text">Video lessons on R, analytics and AI tools.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-red-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/5 bg-slate-950/80 backdrop-blur-md pt-16 pb-8 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
+                <div class="sm:col-span-2 lg:col-span-4">
+                    <a href="../../" class="inline-flex items-center gap-3 group mb-5">
+                        <img src="../../logo.jpg" alt="Alexey Seleznev" class="w-10 h-10 rounded-xl object-cover border border-white/10 group-hover:border-purple-500/50 transition-colors">
+                        <span class="text-lg font-black tracking-tight uppercase outfit-font text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+                    </a>
+                    <p class="text-sm text-slate-400 leading-relaxed max-w-sm mb-6"><span class="ru-text">Head of Analytics в Netpeak Group. Автор open source R-пакетов, бесплатных курсов по R и проекта R4marketing.</span><span class="ua-text">Head of Analytics у Netpeak Group. Автор open source R-пакетів, безкоштовних курсів з R та проєкту R4marketing.</span><span class="en-text">Head of Analytics at Netpeak Group. Author of open source R packages, free R courses and the R4marketing project.</span></p>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="https://t.me/R4marketing" target="_blank" rel="noopener" aria-label="Telegram R4marketing" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-400 hover:border-blue-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-telegram"></i></a>
+                        <a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" aria-label="YouTube R4marketing" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-red-500 hover:border-red-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="https://github.com/selesnow" target="_blank" rel="noopener" aria-label="GitHub" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-white hover:border-white/30 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://linkedin.com/in/selesnow" target="_blank" rel="noopener" aria-label="LinkedIn" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-500 hover:border-blue-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://facebook.com/selesnow" target="_blank" rel="noopener" aria-label="Facebook" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-600/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/alexey.selesnow" target="_blank" rel="noopener" aria-label="Instagram" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-pink-500 hover:border-pink-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://habr.com/ru/users/selesnow/" target="_blank" rel="noopener" aria-label="Habr" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-teal-400 hover:border-teal-400/40 transition-all hover:-translate-y-0.5"><i class="fa-solid fa-h"></i></a>
+                    </div>
+                </div>
+
+                <nav class="lg:col-span-2" aria-label="Site map">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">Сайт</span><span class="ua-text">Сайт</span><span class="en-text">Site</span></h3>
+                    <ul class="space-y-3">
+                        <li><a href="../../" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-house w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a></li>
+                        <li><a href="../../opensource/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-code-branch w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span></a></li>
+                        <li><a href="../../courses/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-graduation-cap w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a></li>
+                        <li><a href="../../videos/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-circle-play w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a></li>
+                        <li><a href="../../talks/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-microphone-lines w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a></li>
+                        <li><a href="../../articles/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-pen-nib w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a></li>
+                        <li><a href="../../interviews/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-regular fa-newspaper w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a></li>
+                        <li><a href="../../blog/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-feather-pointed w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a></li>
+                    </ul>
+                </nav>
+
+                <div class="lg:col-span-3">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">R4marketing и публикации</span><span class="ua-text">R4marketing і публікації</span><span class="en-text">R4marketing & writing</span></h3>
+                    <ul class="space-y-3">
+                        <li><a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-telegram w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Telegram-канал R4marketing</span><span class="ua-text">Telegram-канал R4marketing</span><span class="en-text">R4marketing Telegram</span></a></li>
+                        <li><a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-youtube w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">YouTube-канал R4marketing</span><span class="ua-text">YouTube-канал R4marketing</span><span class="en-text">R4marketing YouTube</span></a></li>
+                        <li><a href="https://alexeyseleznev.wordpress.com/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-pen-nib w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Личный блог</span><span class="ua-text">Особистий блог</span><span class="en-text">Personal blog</span></a></li>
+                        <li><a href="https://habr.com/ru/users/selesnow/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-h w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Профиль на Хабре</span><span class="ua-text">Профіль на Хабрі</span><span class="en-text">Habr profile</span></a></li>
+                        <li><a href="https://alexey-seleznev.pro/publications/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-layer-group w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Архив публикаций</span><span class="ua-text">Архів публікацій</span><span class="en-text">Publications archive</span></a></li>
+                        <li><a href="https://github.com/selesnow" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-github w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">GitHub</span><span class="ua-text">GitHub</span><span class="en-text">GitHub</span></a></li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-3">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">Контакты</span><span class="ua-text">Контакти</span><span class="en-text">Contacts</span></h3>
+                    <ul class="space-y-4">
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">Email</div><a href="mailto:me@alexey-seleznev.pro" class="text-sm text-slate-300 hover:text-purple-300 transition-colors break-all">me@alexey-seleznev.pro</a></li>
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">Telegram</div><a href="https://t.me/AlexeySeleznev" target="_blank" rel="noopener" class="text-sm text-slate-300 hover:text-blue-300 transition-colors break-all">@AlexeySeleznev</a></li>
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">LinkedIn</div><a href="https://linkedin.com/in/selesnow" target="_blank" rel="noopener" class="text-sm text-slate-300 hover:text-blue-300 transition-colors break-all">linkedin.com/in/selesnow</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-14 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+                <p>© 2026 Alexey Seleznev. <span class="ru-text">Все права защищены.</span><span class="ua-text">Усі права захищені.</span><span class="en-text">All rights reserved.</span></p>
+                <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="inline-flex items-center gap-2 font-semibold hover:text-white transition-colors group"><span class="ru-text">Наверх</span><span class="ua-text">Нагору</span><span class="en-text">Back to top</span><span class="w-7 h-7 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-purple-500 group-hover:border-purple-500 transition-all"><i class="fa-solid fa-arrow-up text-[10px]"></i></span></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script src="../../assets/site.js"></script>
+
+    <script>
+    (function () {
+        // кнопка «Копировать» у блоков кода
+        document.querySelectorAll('.b-prose .codehilite').forEach(box => {
+            const btn = document.createElement('button');
+            btn.type = 'button'; btn.className = 'b-copy'; btn.setAttribute('aria-label', 'Copy code');
+            btn.innerHTML = '<i class="fa-regular fa-copy" aria-hidden="true"></i>';
+            btn.addEventListener('click', () => {
+                navigator.clipboard.writeText(box.querySelector('pre').innerText).then(() => {
+                    btn.innerHTML = '<i class="fa-solid fa-check" aria-hidden="true"></i>';
+                    setTimeout(() => btn.innerHTML = '<i class="fa-regular fa-copy" aria-hidden="true"></i>', 1500);
+                });
+            });
+            box.appendChild(btn);
+        });
+        // подсветка текущего раздела в оглавлении
+        const links = Array.from(document.querySelectorAll('.b-toc a'));
+        if (links.length && 'IntersectionObserver' in window) {
+            const map = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+            const io = new IntersectionObserver(es => es.forEach(e => {
+                if (e.isIntersecting) { links.forEach(l => l.classList.remove('active')); const a = map.get(e.target.id); if (a) a.classList.add('active'); }
+            }), { rootMargin: '-80px 0px -70% 0px' });
+            map.forEach((_, id) => { const el = document.getElementById(id); if (el) io.observe(el); });
+        }
+    })();
+    </script>
+</body>
+</html>

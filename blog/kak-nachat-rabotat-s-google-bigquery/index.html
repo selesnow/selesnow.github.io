@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Alexey Seleznev">
+    <meta name="theme-color" content="#030712">
+    <link rel="canonical" href="https://alexey-seleznev.pro/blog/kak-nachat-rabotat-s-google-bigquery/">
+
+    <title>Как начать работать с Google BigQuery | Алексей Селезнёв</title>
+    <meta name="title" content="Как начать работать с Google BigQuery | Алексей Селезнёв">
+    <meta name="description" content="Ранее я публиковал цикл материалов о работе с Google BigQuery. В этой статье расскажу о преимуществах и особенностях сервиса, а также о дополнительных инструментах для BigQuery. Google…">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alexey-seleznev.pro/blog/kak-nachat-rabotat-s-google-bigquery/">
+    <meta property="og:site_name" content="ALEXEY-SELEZNEV.pro">
+    <meta property="og:title" content="Как начать работать с Google BigQuery | Алексей Селезнёв">
+    <meta property="og:description" content="Ранее я публиковал цикл материалов о работе с Google BigQuery. В этой статье расскажу о преимуществах и особенностях сервиса, а также о дополнительных инструментах для BigQuery. Google…">
+    <meta property="og:image" content="https://alexey-seleznev.pro/photo.jpg">
+    <meta property="og:image:alt" content="Алексей Селезнёв">
+    <meta property="og:locale" content="ru_RU">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="https://alexey-seleznev.pro/blog/kak-nachat-rabotat-s-google-bigquery/">
+    <meta name="twitter:title" content="Как начать работать с Google BigQuery | Алексей Селезнёв">
+    <meta name="twitter:description" content="Ранее я публиковал цикл материалов о работе с Google BigQuery. В этой статье расскажу о преимуществах и особенностях сервиса, а также о дополнительных инструментах для BigQuery. Google…">
+    <meta name="twitter:image" content="https://alexey-seleznev.pro/photo.jpg">
+
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z56YHE916N"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Z56YHE916N');
+    </script>
+    <link rel="icon" type="image/jpeg" href="../../logo.jpg">
+    <link rel="apple-touch-icon" href="../../logo.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;700;800;900&display=swap">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/site.css">
+    <!-- Tailwind собран заранее (_build/build.py) и подключается последним, как это делал CDN-скрипт -->
+    <link rel="stylesheet" href="../../assets/tailwind.css">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Как начать работать с Google BigQuery",
+  "datePublished": "2017-11-10",
+  "inLanguage": "ru",
+  "description": "Ранее я публиковал цикл материалов о работе с Google BigQuery. В этой статье расскажу о преимуществах и особенностях сервиса, а также о дополнительных инструментах для BigQuery. Google…",
+  "author": {
+    "@id": "https://alexey-seleznev.pro/#person"
+  },
+  "mainEntityOfPage": "https://alexey-seleznev.pro/blog/kak-nachat-rabotat-s-google-bigquery/"
+}
+    </script>
+    <link rel="stylesheet" href="../blog.css">
+</head>
+<body class="relative lang-en">
+
+    <!-- Interactive Background -->
+    <div id="vanta-bg"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full z-50 top-0 left-0 border-b border-white/5 bg-slate-950/60 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 h-16 flex items-center justify-between">
+            <a href="../../" class="flex items-center gap-2 sm:gap-2.5 md:gap-3 group shrink min-w-0">
+                <img src="../../logo.jpg" alt="Alexey Seleznev" class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 rounded-lg sm:rounded-xl object-cover shadow-md border border-white/10 group-hover:border-purple-500/50 group-hover:scale-105 transition-all shrink-0">
+                <span class="text-xs min-[400px]:text-sm sm:text-base md:text-xl font-black tracking-tight uppercase outfit-font whitespace-nowrap text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+            </a>
+            <div class="hidden xl:flex gap-6 text-sm font-semibold text-slate-400">
+                <a href="../../" class="nav-link hover:text-white transition-colors"><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a>
+                <a href="../../opensource/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span></a>
+                <a href="../../courses/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a>
+                <a href="../../videos/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a>
+                <a href="../../talks/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a>
+                <a href="../../articles/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a>
+                <a href="../../interviews/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a>
+                <a href="../../blog/" class="nav-link hover:text-white transition-colors active"><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a>
+            </div>
+
+            <div class="flex items-center gap-1.5 sm:gap-2 md:gap-4 shrink-0">
+                <div class="lang-switcher flex gap-1 sm:gap-1.5 md:gap-2 text-[11px] sm:text-xs md:text-sm font-bold border-r border-white/10 pr-1.5 sm:pr-3 md:pr-4 mr-0.5 sm:mr-1 md:mr-2 outfit-font">
+                    <button onclick="changeLang('en')" id="btn-en" class="active hover:text-white transition-colors">EN</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ru')" id="btn-ru" class="text-slate-500 hover:text-white transition-colors">RU</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ua')" id="btn-ua" class="text-slate-500 hover:text-white transition-colors">UA</button>
+                </div>
+
+                <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="text-slate-400 hover:text-blue-400 transition-colors hidden sm:block" aria-label="Telegram"><i class="fa-brands fa-telegram text-lg md:text-xl"></i></a>
+                <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="text-slate-400 hover:text-white transition-colors hidden sm:block" aria-label="GitHub"><i class="fa-brands fa-github text-lg md:text-xl"></i></a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="xl:hidden w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-purple-500/20 hover:border-purple-500/40 transition-all focus:outline-none" aria-label="Toggle Navigation Menu">
+                    <i class="fa-solid fa-bars text-sm sm:text-lg" id="mobile-menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div id="mobile-menu" class="hidden xl:hidden border-t border-white/10 bg-slate-950/95 backdrop-blur-2xl shadow-2xl overflow-y-auto max-h-[calc(100vh-4rem)] transition-all">
+            <div class="max-w-7xl mx-auto px-6 py-6 space-y-1">
+                <a href="../../" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-house text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span>
+                </a>
+                <a href="../../opensource/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-code-branch text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span>
+                </a>
+                <a href="../../courses/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-graduation-cap text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span>
+                </a>
+                <a href="../../videos/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-circle-play text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span>
+                </a>
+                <a href="../../talks/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-microphone-lines text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span>
+                </a>
+                <a href="../../articles/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-pen-nib text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span>
+                </a>
+                <a href="../../interviews/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-regular fa-newspaper text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span>
+                </a>
+                <a href="../../blog/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-white bg-white/5 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-feather-pointed text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span>
+                </a>
+
+                <div class="pt-4 mt-3 border-t border-white/10 flex items-center justify-around text-slate-400">
+                    <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-blue-400 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-telegram text-xl"></i> Telegram
+                    </a>
+                    <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="p-2 hover:text-white transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-github text-xl"></i> GitHub
+                    </a>
+                    <a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-red-500 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-youtube text-xl"></i> YouTube
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="b-wrap relative z-10">
+        <nav class="b-crumbs" aria-label="breadcrumb">
+            <a href="../../"><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a><span>/</span><a href="../"><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a><span>/</span><a href="../?cat=bazy-dannyh#posts">Базы данных</a>
+        </nav>
+        <div class="b-layout has-toc">
+            <article class="bento-glass no-lift b-article" data-aos="fade-up">
+                <div class="bento-content">
+                    <div class="b-cats"><a class="b-chip b-chip-cat" href="../?cat=bazy-dannyh#posts">Базы данных</a></div>
+                    <h1 class="b-title outfit-font">Как начать работать с Google BigQuery</h1>
+                    <div class="b-meta">
+                        <span><i class="fa-regular fa-calendar" aria-hidden="true"></i><span class="ru-text">10 ноября 2017</span><span class="ua-text">10 листопада 2017</span><span class="en-text">10 Nov 2017</span></span>
+                        <span><i class="fa-regular fa-clock" aria-hidden="true"></i><span class="ru-text">12 мин чтения</span><span class="ua-text">12 хв читання</span><span class="en-text">12 min read</span></span>
+                        <span class="b-lang" title="Русский">RU</span>
+                    </div>
+                    <div class="b-note"><i class="fa-regular fa-clock" aria-hidden="true"></i><div><span class="ru-text">Материал опубликован в 2017 году — описанные инструменты и интерфейсы могли измениться.</span><span class="ua-text">Матеріал опубліковано у 2017 році — описані інструменти та інтерфейси могли змінитися.</span><span class="en-text">Published in 2017 — the tools and interfaces described may have changed since.</span></div></div>
+                    <figure class="b-cover"><img src="../images/covers/1053.webp" alt="" width="1200" height="630" decoding="async"></figure>
+                    <div class="b-prose"><p>Ранее я публиковал цикл материалов о работе с Google BigQuery. В этой статье расскажу о преимуществах и особенностях сервиса, а также о дополнительных инструментах для BigQuery.</p>
+<p>Google BigQuery — это облачная база данных с высочайшей скоростью обработки огромных массивов данных.</p>
+<p><img loading="lazy" decoding="async" alt="Картинки по запросу картинки" src="https://i0.wp.com/minionomaniya.ru/wp-content/uploads/2016/01/miniony_kartinki_na_rabochi_stol_1920x1080.jpg" /></p>
+<h2 id="google-bigquery">Как начать работу в Google BigQuery</h2>
+<p>Войдите в <a target="_blank" rel="noopener" href="https://console.cloud.google.com/?hl=ru">Google Cloud Platform</a>. При первом запуске система предложит активировать бесплатный пробный период и получить кредит $300 на 12 месяцев. Честно говоря, чтобы потратить за год в BigQuery эту сумму, вам придется очень сильно постараться.</p>
+<p><img loading="lazy" decoding="async" alt="Как активировать бесплатный пробный период BigQuery" width="809" height="85" src="../images/kak-nachat-rabotat-s-google-bigquery-kak-aktivirovat-besplat-adc18564.webp" /></p>
+<p>Для дальнейшей работы введите платежные данные.</p>
+<p><img loading="lazy" decoding="async" alt="Как получить бесплатный триал в BigQuery" width="514" height="330" src="../images/kak-nachat-rabotat-s-google-bigquery-kak-polucit-besplatnyj-b3026c6e.webp" /></p>
+<p>Нажмите «Выбрать проект».</p>
+<p><img loading="lazy" decoding="async" alt="Как выбрать проект в BigQuery" width="625" height="107" src="../images/kak-nachat-rabotat-s-google-bigquery-kak-sozdat-proekt-v-big-cdc7aced.webp" /></p>
+<p>Затем — «Создать проект».</p>
+<p><img loading="lazy" decoding="async" alt="Как создать проект в BigQuery" width="747" height="562" src="../images/kak-nachat-rabotat-s-google-bigquery-s-cego-nacat-rabotu-v-b-8a18f751.webp" /></p>
+<p>Примите условия использования платформы.</p>
+<p><img loading="lazy" decoding="async" alt="Условия использования BigQuery" width="506" height="244" src="../images/kak-nachat-rabotat-s-google-bigquery-uslovia-ispolzovania-bi-019369f4.webp" /></p>
+<p>Наконец назовите проект, задайте настройки уведомлений и еще раз согласитесь с условиями использования платформы.</p>
+<p><img loading="lazy" decoding="async" alt="Как задать настройки уведомлений для BigQuery" width="472" height="388" src="../images/kak-nachat-rabotat-s-google-bigquery-kak-zadat-nastrojki-uve-ead16ff3.webp" /></p>
+<p>После подтверждения подождите несколько минут.</p>
+<p><img loading="lazy" decoding="async" alt="Как создать свой первый проект в сервисе BigQuery" width="407" height="217" src="../images/kak-nachat-rabotat-s-google-bigquery-kak-sozdat-svoj-pervyj-321a4d21.webp" /></p>
+<p>Вскоре вы получите оповещение, что проект создан.</p>
+<p><img loading="lazy" decoding="async" alt="Настройки оповещений при начале работы с BigQuery" width="397" height="145" src="../images/kak-nachat-rabotat-s-google-bigquery-nastrojki-opovesenij-pr-ecc4d119.webp" /></p>
+<p>Перейдите в раздел оплаты и привяжите платежный аккаунт.</p>
+<p><img loading="lazy" decoding="async" alt="Как привязать платежный аккаунт BigQuery" width="570" height="378" src="../images/kak-nachat-rabotat-s-google-bigquery-kak-privazat-plateznyj-8868cd82.webp" /></p>
+<p><img loading="lazy" decoding="async" alt="Как правильно выбрать привязку платежного аккаунта BigQuery" width="510" height="223" src="../images/kak-nachat-rabotat-s-google-bigquery-kak-pravilno-vybrat-pri-eff94e64.webp" /></p>
+<p>Теперь проект привязан к только что созданному платежному аккаунту.</p>
+<p><img loading="lazy" decoding="async" alt="Привязать проект к новому созданному аккаунту в BigQuery" width="673" height="444" src="../images/kak-nachat-rabotat-s-google-bigquery-privazat-proekt-k-novom-998dc7e5.webp" /></p>
+<p>Перейдите в <a target="_blank" rel="noopener" href="https://bigquery.cloud.google.com/welcom">интерфейс Google BigQuery</a> и напишите свой первый запрос.</p>
+<p>Чтобы открыть редактор запросов, нажмите «Compose query» или сочетание клавиш «Ctrl + Space».</p>
+<p><img loading="lazy" decoding="async" alt="Как написать запрос в BigQuery" width="793" height="338" src="../images/kak-nachat-rabotat-s-google-bigquery-kak-napisat-zapros-v-bi-7efb4330.webp" /></p>
+<p>Рассмотрим, как написать первый запрос на примере публичных данных в BigQuery. Возьмите первые 15 строк из таблицы project_tycho_reports, которая находится в наборе публичных данных lookerdata.</p>
+<div class="codehilite"><pre><span></span><code>SELECT *
+FROM [lookerdata:cdc.project_tycho_reports]
+LIMIT 25
+</code></pre></div>
+
+<p>Запрос вернет результат:</p>
+<p><img loading="lazy" decoding="async" alt="Как написать запрос на примере публичных данных в BigQuery" width="669" height="224" src="../images/kak-nachat-rabotat-s-google-bigquery-kak-napisat-zapros-na-p-67c3217a.webp" /></p>
+<p>Ранее я описывал самые простые <a target="_blank" rel="noopener" href="https://netpeak.net/ru/blog/kak-nachat-rabotu-s-bigdata-zagruzhaem-dannie-v-google-bigquery/">способы для загрузки собственных данных в Google BigQuery</a>, а в этой статье далее расскажу, как загрузить данные с помощью языка R.</p>
+<h2 id="google-bigquery_1">Преимущества Google BigQuery</h2>
+<p>Скорость — это основное преимущество BigQuery, но не единственное. BigQuery — облачный сервис. При его использовании не понадобится арендовать сервер и оплачивать поддержку.</p>
+<p>Стоимость BigQuery значительно ниже стоимости аренды самого примитивного сервера: даже если вы очень постараетесь и будете ежедневно записывать в эту базу данных миллионы строк, все равно вряд ли сможете потратить более $5.</p>
+<p>Следующее преимущество — простота использования. В любой другой системе управления базами данных (СУБД) помимо знания SQL придется долго разбираться с тонкостями администрирования и настройками базы.</p>
+<p>И если сам по себе SQL-диалект во всех базах данных очень похожий, то административная часть, как правило, везде устроена по-разному.</p>
+<p>У BigQuery всю административную часть на себя взял Google. В этом сервисе нет никаких настроек, индексов, движков таблиц, тайм-аутов или внешних ключей. Реализована поддержка только одной кодировки UTF-8.</p>
+<p>Для работы с BigQuery достаточно знать, как загрузить данные в BigQuery, и иметь базовые знания в SQL.</p>
+<p>Несмотря на простоту, в BigQuery реализована поддержка практически всех функций СУБД:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://netpeak.net/ru/blog/kak-rabotat-s-okonnymi-funktsiyami-v-google-bigquery-podrobnoe-rukovodstvo/">оконные функции</a>;</li>
+<li>хранение данных в виде структур (нереляционные возможности);</li>
+<li>представления и табличные выражения (common table expression).</li>
+</ul>
+<p>Правда, на момент публикации статьи сервис не поддерживает:</p>
+<ul>
+<li>рекурсивные запросы;</li>
+<li>создание хранимых процедур и функций;</li>
+<li>транзакции.</li>
+</ul>
+<h2 id="sql-google-bigquery">Особенности SQL для Google BigQuery</h2>
+<p>BigQuery умеет переключаться между стандартным SQL и своим диалектами. Между ними также есть разница.</p>
+<p>DML-операции INSERT, UPDATE и DELETE на данный момент поддерживаются только при использовании стандартного SQL.</p>
+<p>Еще одно отличие между этими диалектами — способ вертикального объединения таблиц. В стандартном SQL для этого служит оператор UNION и ключевое слов ALL или DISTINCT:</p>
+<div class="codehilite"><pre><span></span><code>SELECT 12 AS A, 32 AS B
+UNION ALL
+SELECT 2 AS A, 29 AS B
+</code></pre></div>
+
+<p>В собственном SQL-диалекте функционал для вертикального объединения таблиц значительно шире. Существует специальный набор функций подстановки таблиц (<a target="_blank" rel="noopener" href="https://cloud.google.com/bigquery/docs/reference/legacy-sql#tablewildcardfunctions">Table Wildcard Functions</a>).</p>
+<p>Как обрабатывать данные из множества таблиц в Google BigQuery</p>
+<p>Этот <a target="_blank" rel="noopener" href="https://netpeak.net/ru/blog/kak-obrabatyvat-dannie-iz-mnozhestva-tablits-v-google-bigquery/">способ объединения таблиц</a> я уже подробно описывал ранее.</p>
+<p>Для простого объединения достаточно просто перечислить названия нужных таблиц или подзапросы через запятую. Объединение запросов из примера выше на внутреннем диалекте SQL в BigQuery будет выглядеть так:</p>
+<div class="codehilite"><pre><span></span><code>SELECT *
+FROM (SELECT 12 AS A, 32 AS B), (SELECT 2 AS A, 29 AS B)
+</code></pre></div>
+
+<p>Переключатель между SQL-диалектами в BigQuery находится в интерфейсе в блоке опций: нажмите кнопку Show options под редактором запросов.</p>
+<p><img loading="lazy" decoding="async" alt="Переключаться между SQL диалектами в интерфейсе BigQuery" width="630" height="296" src="../images/kak-nachat-rabotat-s-google-bigquery-pereklucatsa-mezdu-sql-9c369505.webp" /></p>
+<p>С помощью галочки «SQL Dialect» переключитесь на нужный диалект.</p>
+<p><img loading="lazy" decoding="async" alt="Как найти галочку «SQL Dialect» для переключения на нужный диалект" width="598" height="348" src="../images/kak-nachat-rabotat-s-google-bigquery-kak-najti-galocku-sql-d-35a058b7.webp" /></p>
+<h2 id="bigquery">Инструменты для работы с BigQuery</h2>
+<p>Мы уже разобрались, как загружать данные в базу и как обращаться к данным SQL запросами. Но вряд ли вы хотите взаимодействовать с данными, ограничившись этими возможностями. Скорее всего, вы загружаете данные для построения дашбордов или чего-то подобного.</p>
+<p>Как получить данные в различных BI платформах, я писал в статьях об интеграции с <a target="_blank" rel="noopener" href="https://netpeak.net/ru/blog/integratsiya-google-bigquery-c-bi-platformami-i-elektronnymi-tablitsami/">электронными таблицами</a> и <a target="_blank" rel="noopener" href="https://netpeak.net/ru/blog/kak-svyazat-microsoft-power-bi-i-google-bigquery/">Microsoft Power BI.</a></p>
+<p>Microsoft Power BI, как и большинство популярных  BI-систем и электронных таблиц, с июля 2017 года поддерживает интеграцию с Google BigQuery из коробки. У коннектора довольно скудные возможности: он не умеет обращаться к сохраненным представлениям или отправлять в BigQuery запросы. Пока что с помощью встроенного коннектора можно вытягивать только плоские таблицы.</p>
+<h3 id="simba-drivers">Simba Drivers</h3>
+<p>Если вам необходимо получить данные из Google BigQuery в электронной таблице или BI-системе, которая из коробки не поддерживает интеграцию, воспользуйтесь бесплатным <a target="_blank" rel="noopener" href="https://cloud.google.com/bigquery/partners/simba-drivers/">Simba Drivers</a>.</p>
+<p>Этот драйвер поддерживает все необходимые возможности, включая переключения SQL-диалектов. Подробности настройки ищите в моей статье о связке Microsoft Power BI и Google BigQuery.</p>
+<h3 id="r">Язык R</h3>
+<p>Язык R — один из самых мощных инструментов для работы с данными. Он умеет как получать данные из Google BigQuery, так и записывать их. Для этого удобнее всего пакет <a target="_blank" rel="noopener" href="https://github.com/r-dbi/bigrquery">bigrquery</a>.</p>
+<p>Для начала <a target="_blank" rel="noopener" href="https://cran.r-project.org/bin/windows/base/">установите</a> язык R. Также для удобства работы с R я рекомендую <a target="_blank" rel="noopener" href="https://www.rstudio.com/products/rstudio/download/">установить</a> интегрированную среду разработки RStudio.</p>
+<p>Запустите RStudio и с помощью сочетания клавиш «Ctrl + Alt + Shift + 0» откройте все доступные в ней панели. Чаще всего понадобятся панели Source и Console.</p>
+<p><img loading="lazy" decoding="async" alt="Как запустить в RStudio панели Source и Console" width="803" height="609" src="../images/kak-nachat-rabotat-s-google-bigquery-kak-zapustit-v-rstudio-15b4a00c.webp" /></p>
+<p>Для установки develop-версии пакета bigrquery из репозитория на GitHub предварительно установите пакет devtools. Введите в окно Source код, затем выделите его (зажмите левой кнопки мыши) и нажмите «Ctrl + Enter» для выполнения команды:</p>
+<div class="codehilite"><pre><span></span><code>install.packages(&quot;devtools&quot;)
+</code></pre></div>
+
+<p>Теперь установите пакет bigrquery:</p>
+<div class="codehilite"><pre><span></span><code>devtools::install_github(&quot;rstats-db/bigrquery&quot;)
+</code></pre></div>
+
+<p>Чтобы в R были доступны функции пакета, после установки подключите их с помощью команды library или require. Например, подключим пакет bigrquery с помощью кода:</p>
+<div class="codehilite"><pre><span></span><code>library(bigrquery)
+</code></pre></div>
+
+<p>Структура данных в Google BigQuery состоит из проекта с набором данных, содержащим таблицы. Проект вы уже создали, а теперь для передачи информации создайте набор данных. Выберите в интерфейсе из выпадающего меню «Create new dataset».</p>
+<p><img loading="lazy" decoding="async" alt="BigQuery проект с набором данных, содержащим таблицы" width="529" height="309" src="../images/kak-nachat-rabotat-s-google-bigquery-bigquery-proekt-s-nabor-a1ea0460.webp" /></p>
+<p>Чтобы создать набор данных с помощью языка R, воспользуйтесь командой insert_dataset. Команда требует всего 2 аргумента:</p>
+<p><strong>project</strong> — ID проекта (возьмите из URL в BigQuery).<br />
+<img loading="lazy" decoding="async" alt="Чтобы создать набор данных с помощью языка R, воспользуйтесь командой insert_dataset" width="736" height="239" src="../images/kak-nachat-rabotat-s-google-bigquery-ctoby-sozdat-nabor-dann-caf0e098.webp" /></p>
+<p><strong>dataset</strong> — название нового набора данных.</p>
+<p>Давайте создадим первый набор данных с названием myFirstDataSet. Введите в область Source приведенный ниже код, выделите команду с помощью мыши и нажмите «Ctrl+Enter» для выполнения.</p>
+<div class="codehilite"><pre><span></span><code>insert_dataset(project = &quot;myfirstproject-185308&quot;, dataset = &quot;myFirstDataSet&quot;)
+</code></pre></div>
+
+<p>В окне Console в RStudio появится запрос о создании учетных данных, чтобы в дальнейшем не требовалась повторная аутентификация.</p>
+<p><img loading="lazy" decoding="async" alt="Окно Console в RStudio, запрос о создании учетных данных" width="511" height="277" src="../images/kak-nachat-rabotat-s-google-bigquery-okno-console-v-rstudio-8f739e2e.webp" /></p>
+<p>Введите на запрос Selection в Console ответ Yes и нажмите Enter. Откроется браузер — разрешите доступ к данным и получите авторизационный код.</p>
+<p><img loading="lazy" decoding="async" alt="Как на апрос Selection в Console разрешить доступа к данным и получить авторизационный код" width="462" height="442" src="../images/kak-nachat-rabotat-s-google-bigquery-kak-na-apros-selection-e785675f.webp" /></p>
+<p><img loading="lazy" decoding="async" alt="Авторизационный код в Bigquery" width="462" height="601" src="../images/kak-nachat-rabotat-s-google-bigquery-avtorizacionnyj-kod-v-b-aa1567c5.webp" /></p>
+<p><img loading="lazy" decoding="async" alt="Как сгенерированный код вставить в Console RStudio в ответ на запрос авторизационного кода" width="541" height="148" src="../images/kak-nachat-rabotat-s-google-bigquery-kak-sgenerirovannyj-kod-dc62e0b0.webp" /></p>
+<p>Скопируйте сгенерированный код. Затем вставьте его в Console RStudio в ответ на запрос авторизационного кода и нажмите Enter.</p>
+<p>Отлично, вы создали набор данных.</p>
+<p><img loading="lazy" decoding="async" alt="BigQuery и увидеть созданный dataset" width="307" height="221" src="../images/kak-nachat-rabotat-s-google-bigquery-bigquery-kak-uvidet-soz-b48c64d9.webp" /></p>
+<p>Теперь запишите встроенную в R таблицу mtcars в набор данных myFirstDataSet. Для передачи данных из R в BigQuery в пакете bigrquery есть функция insert_upload_job. Она принимает такие аргументы:</p>
+<p><strong>project</strong> — ID проекта (смотрите либо в URL проекта, либо в режиме переключения проектов).<br />
+<img loading="lazy" decoding="async" alt="Для передачи данных из R в BigQuery функция insert_upload_job" width="922" height="465" src="../images/kak-nachat-rabotat-s-google-bigquery-dla-peredaci-dannyh-iz-8097fee7.webp" /></p>
+<p><strong>dataset</strong> — название набора данных, куда вы планируете отправить данные. В нашем случае myFirstDataSet.</p>
+<p><strong>table</strong> — название таблицы с записанными данными.</p>
+<p><strong>values</strong> — data frame (таблица данных) в R с данными для передачи в BigQuery.</p>
+<p><strong>billing</strong> = project аккаунта для оплаты операции. По умолчанию — платежный аккаунт, который привязан к проекту.</p>
+<p><strong>create_disposition</strong> — опция для определения необходимых действий.<br />
+Если в BigQuery нет таблицы с заданным в аргументе table названием, укажите “CREATE_IF_NEEDED” — система создаст новую таблицу.<br />
+Если указать “CREATE_NEVER” и таблица с заданным именем не найдется в наборе данных, будет возвращена соответствующая ошибка.</p>
+<p><strong>write_disposition</strong> — опция для выбора добавления данных в существующую таблицу.<br />
+“WRITE_APPEND” — дописать данные в таблицу.<br />
+“WRITE_TRUNCATE” — перезаписать данные в таблице.<br />
+“WRITE_EMPTY” — записать данные для пустой таблицы.</p>
+<p>Код для передачи в BigQuery встроенной в R таблицы mtcars:</p>
+<div class="codehilite"><pre><span></span><code>insert_upload_job(project = &quot;myfirstproject-185308&quot;,
+                 dataset = &quot;myFirstDataSet&quot;,
+                 table = &quot;mtcars_bigquery&quot;,
+                 values = mtcars,
+                 create_disposition = &quot;CREATE_IF_NEEDED&quot;,
+                 write_disposition = &quot;WRITE_APPEND&quot;)
+</code></pre></div>
+
+<p>При успешном выполнении операции в консоли R появится дополнительная информация, а в интерфейсе BigQuery — созданная таблица mtcars_bigquery.</p>
+<p><img loading="lazy" decoding="async" alt="BigQuery таблица mtcars_bigquery" width="306" height="238" src="../images/kak-nachat-rabotat-s-google-bigquery-bigquery-tablica-mtcars-eba405b0.webp" /></p>
+<p>Для запроса данных из BigQuery в R в пакете bigrquery предназначена функция query_exec. Основные аргументы:</p>
+<p><strong>query</strong> — текст SQL-запроса, результат которого вы хотите загрузить в R.</p>
+<p><strong>project</strong> — ID проекта для запроса данных.</p>
+<p><strong>page_size</strong> — максимальный размер возвращаемого результата в строках (по умолчанию 10000).</p>
+<p><strong>max_pages</strong> — максимальное количество страниц возврата запросом (по умолчанию 10).</p>
+<p><strong>use_legacy_sql</strong> — выбор SQL-диалекта для обработки запроса.<br />
+По умолчанию задано значение TRUE с внутренним диалектом BigQuery.<br />
+Для стандартного диалекта SQL задайте в этом аргументе значение FALSE.</p>
+<p>Для обратного запроса данных, которые вы отправили в BigQuery в прошлом шаге, задайте команду:</p>
+<div class="codehilite"><pre><span></span><code>bq_mtcars_table &lt;- query_exec(query = &quot;SELECT * FROM myFirstDataSet.mtcars_bigquery&quot;,
+                             project = &quot;myfirstproject-185308&quot;,
+                             use_legacy_sql = TRUE)
+</code></pre></div>
+
+<p>В рабочем окружении (описание которого вы видите в окне Environment) появится новый объект bq_mtcars_table.</p>
+<p><img loading="lazy" decoding="async" alt="Bigquery объект bq_mtcars_table" width="974" height="538" src="../images/kak-nachat-rabotat-s-google-bigquery-bigquery-obekt-bqmtcars-d8b1e623.webp" /></p>
+<h2 id="_1">Выводы</h2>
+<p>Google BigQuery — простой в работе и в то же время мощнейший инструмент для хранения и обработки данных. Это облачная база данных с поддержкой большинства функций СУБД.</p>
+<p>Сервис обходится значительно дешевле содержания, поддержки и администрирования сервера для бесплатных баз данных (MySQL или PostgreSQL).</p>
+<p>Надеюсь, мой цикл инструкций для начала работы с Google BigQuery упростит ваши будни.</p>
+<p>Успехов в работе с большими данными!</p>
+<hr />
+<p><a target="_blank" rel="noopener" href="https://netpeak.net/ru/blog/google-bigquery-podrobnyy-obzor-funktsii/">Оригинал публикации в блоге Netpeak.</a></p></div>
+                    
+                    <div class="b-tags"><a class="b-chip" href="../?tag=bigquery#posts">BigQuery</a><a class="b-chip" href="../?tag=bazy-dannyh#posts">Базы данных</a><a class="b-chip" href="../?tag=obrabotka-dannyh#posts">Обработка данных</a><a class="b-chip" href="../?tag=r#posts">R</a></div>
+                </div>
+            </article>
+            <aside class="b-toc" aria-label="Contents"><div class="b-toc-title"><span class="ru-text">Содержание</span><span class="ua-text">Зміст</span><span class="en-text">Contents</span></div><ul><li><a href="#google-bigquery">Как начать работу в Google BigQuery</a></li><li><a href="#google-bigquery_1">Преимущества Google BigQuery</a></li><li><a href="#sql-google-bigquery">Особенности SQL для Google BigQuery</a></li><li><a href="#bigquery">Инструменты для работы с BigQuery</a><ul><li><a href="#simba-drivers">Simba Drivers</a></li><li><a href="#r">Язык R</a></li></ul></li><li><a href="#_1">Выводы</a></li></ul></aside>
+        </div>
+        <section class="b-related">
+            <h2 class="outfit-font"><span class="ru-text">Читайте также</span><span class="ua-text">Читайте також</span><span class="en-text">Related posts</span></h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="../kak-zagruzhat-dannye-v-google-bigquery/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="0">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/kak-zagruzhat-dannye-v-google-bigquery-v-menyu-ukazyvaem-cre-4a4b2bbe.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">апр. 2016</span><span class="ua-text">квіт. 2016</span><span class="en-text">Apr 2016</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2016</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">12 мин чтения</span><span class="ua-text">12 хв читання</span><span class="en-text">12 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Как загружать данные в Google BigQuery.</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">Все говорят о BigData, необходимости анализировать большие объемы информации, но при этом не знают, как обрабатывать данные, и не решаются сделать первые шаги. В этом посте мы расскажем…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">BigQuery</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Базы данных</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a>
+                <a href="../zagruzka-statistiki-iz-vkontakte-i-facebook-v-google-bigquery-rukovods/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="60">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/covers/1095.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">февр. 2018</span><span class="ua-text">лют. 2018</span><span class="en-text">Feb 2018</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2018</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">1 мин чтения</span><span class="ua-text">1 хв читання</span><span class="en-text">1 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Загрузка статистики из «ВКонтакте» и Facebook в Google BigQuery — руководство</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">Вторая статья от ребят из eLama посвящённая загрузки данных из рекламных площадок в Google BigQuery, на этот раз Михаил Гусев написал подробную инструкцию о том, как получить данные из…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">API</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">BigQuery</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a>
+                <a href="../partitsionirovanie-tablits-v-google-bigquery-ponyatnaya-instruktsiya/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="120">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/partitsionirovanie-tablits-v-google-bigquery-ponya-147326302-30f789b7.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">янв. 2018</span><span class="ua-text">січ. 2018</span><span class="en-text">Jan 2018</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2018</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">8 мин чтения</span><span class="ua-text">8 хв читання</span><span class="en-text">8 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Партиционирование таблиц в Google BigQuery — понятная инструкция</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">Знаете, как максимально продуктивно и экономно работать с данными в Google BigQuery с помощью разделения больших таблиц на партиции? В этой статье я расскажу, как создавать партиции и…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">BigQuery</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Базы данных</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a></div>
+        </section>
+        <a href="../" class="b-back"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i><span class="ru-text">Ко всем материалам</span><span class="ua-text">До всіх матеріалів</span><span class="en-text">All posts</span></a>
+    </main>
+
+    <section class="px-6 max-w-7xl mx-auto pb-24 relative z-10">
+        <div class="grid md:grid-cols-2 gap-6" data-aos="fade-up">
+            <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(59, 130, 246, 0.1));">
+                <div class="bento-content w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center text-blue-400 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-telegram"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">Telegram-канал R4marketing</span><span class="ua-text">Telegram-канал R4marketing</span><span class="en-text">R4marketing on Telegram</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Новые статьи, видео и заметки по R — первыми.</span><span class="ua-text">Нові статті, відео та нотатки з R — першими.</span><span class="en-text">New articles, videos and R notes — first.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-blue-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+            <a href="https://www.youtube.com/R4marketing/?sub_confirmation=1" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(239, 68, 68, 0.1));">
+                <div class="bento-content w-16 h-16 bg-red-500/20 rounded-2xl flex items-center justify-center text-red-500 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-youtube"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">YouTube-канал R4marketing</span><span class="ua-text">YouTube-канал R4marketing</span><span class="en-text">R4marketing on YouTube</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Видеоуроки по R, аналитике и AI-инструментам.</span><span class="ua-text">Відеоуроки з R, аналітики та AI-інструментів.</span><span class="en-text">Video lessons on R, analytics and AI tools.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-red-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/5 bg-slate-950/80 backdrop-blur-md pt-16 pb-8 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
+                <div class="sm:col-span-2 lg:col-span-4">
+                    <a href="../../" class="inline-flex items-center gap-3 group mb-5">
+                        <img src="../../logo.jpg" alt="Alexey Seleznev" class="w-10 h-10 rounded-xl object-cover border border-white/10 group-hover:border-purple-500/50 transition-colors">
+                        <span class="text-lg font-black tracking-tight uppercase outfit-font text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+                    </a>
+                    <p class="text-sm text-slate-400 leading-relaxed max-w-sm mb-6"><span class="ru-text">Head of Analytics в Netpeak Group. Автор open source R-пакетов, бесплатных курсов по R и проекта R4marketing.</span><span class="ua-text">Head of Analytics у Netpeak Group. Автор open source R-пакетів, безкоштовних курсів з R та проєкту R4marketing.</span><span class="en-text">Head of Analytics at Netpeak Group. Author of open source R packages, free R courses and the R4marketing project.</span></p>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="https://t.me/R4marketing" target="_blank" rel="noopener" aria-label="Telegram R4marketing" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-400 hover:border-blue-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-telegram"></i></a>
+                        <a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" aria-label="YouTube R4marketing" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-red-500 hover:border-red-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="https://github.com/selesnow" target="_blank" rel="noopener" aria-label="GitHub" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-white hover:border-white/30 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://linkedin.com/in/selesnow" target="_blank" rel="noopener" aria-label="LinkedIn" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-500 hover:border-blue-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://facebook.com/selesnow" target="_blank" rel="noopener" aria-label="Facebook" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-600/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/alexey.selesnow" target="_blank" rel="noopener" aria-label="Instagram" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-pink-500 hover:border-pink-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://habr.com/ru/users/selesnow/" target="_blank" rel="noopener" aria-label="Habr" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-teal-400 hover:border-teal-400/40 transition-all hover:-translate-y-0.5"><i class="fa-solid fa-h"></i></a>
+                    </div>
+                </div>
+
+                <nav class="lg:col-span-2" aria-label="Site map">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">Сайт</span><span class="ua-text">Сайт</span><span class="en-text">Site</span></h3>
+                    <ul class="space-y-3">
+                        <li><a href="../../" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-house w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a></li>
+                        <li><a href="../../opensource/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-code-branch w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span></a></li>
+                        <li><a href="../../courses/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-graduation-cap w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a></li>
+                        <li><a href="../../videos/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-circle-play w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a></li>
+                        <li><a href="../../talks/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-microphone-lines w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a></li>
+                        <li><a href="../../articles/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-pen-nib w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a></li>
+                        <li><a href="../../interviews/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-regular fa-newspaper w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a></li>
+                        <li><a href="../../blog/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-feather-pointed w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a></li>
+                    </ul>
+                </nav>
+
+                <div class="lg:col-span-3">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">R4marketing и публикации</span><span class="ua-text">R4marketing і публікації</span><span class="en-text">R4marketing & writing</span></h3>
+                    <ul class="space-y-3">
+                        <li><a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-telegram w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Telegram-канал R4marketing</span><span class="ua-text">Telegram-канал R4marketing</span><span class="en-text">R4marketing Telegram</span></a></li>
+                        <li><a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-youtube w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">YouTube-канал R4marketing</span><span class="ua-text">YouTube-канал R4marketing</span><span class="en-text">R4marketing YouTube</span></a></li>
+                        <li><a href="https://alexeyseleznev.wordpress.com/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-pen-nib w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Личный блог</span><span class="ua-text">Особистий блог</span><span class="en-text">Personal blog</span></a></li>
+                        <li><a href="https://habr.com/ru/users/selesnow/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-h w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Профиль на Хабре</span><span class="ua-text">Профіль на Хабрі</span><span class="en-text">Habr profile</span></a></li>
+                        <li><a href="https://alexey-seleznev.pro/publications/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-layer-group w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Архив публикаций</span><span class="ua-text">Архів публікацій</span><span class="en-text">Publications archive</span></a></li>
+                        <li><a href="https://github.com/selesnow" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-github w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">GitHub</span><span class="ua-text">GitHub</span><span class="en-text">GitHub</span></a></li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-3">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">Контакты</span><span class="ua-text">Контакти</span><span class="en-text">Contacts</span></h3>
+                    <ul class="space-y-4">
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">Email</div><a href="mailto:me@alexey-seleznev.pro" class="text-sm text-slate-300 hover:text-purple-300 transition-colors break-all">me@alexey-seleznev.pro</a></li>
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">Telegram</div><a href="https://t.me/AlexeySeleznev" target="_blank" rel="noopener" class="text-sm text-slate-300 hover:text-blue-300 transition-colors break-all">@AlexeySeleznev</a></li>
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">LinkedIn</div><a href="https://linkedin.com/in/selesnow" target="_blank" rel="noopener" class="text-sm text-slate-300 hover:text-blue-300 transition-colors break-all">linkedin.com/in/selesnow</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-14 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+                <p>© 2026 Alexey Seleznev. <span class="ru-text">Все права защищены.</span><span class="ua-text">Усі права захищені.</span><span class="en-text">All rights reserved.</span></p>
+                <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="inline-flex items-center gap-2 font-semibold hover:text-white transition-colors group"><span class="ru-text">Наверх</span><span class="ua-text">Нагору</span><span class="en-text">Back to top</span><span class="w-7 h-7 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-purple-500 group-hover:border-purple-500 transition-all"><i class="fa-solid fa-arrow-up text-[10px]"></i></span></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script src="../../assets/site.js"></script>
+
+    <script>
+    (function () {
+        // кнопка «Копировать» у блоков кода
+        document.querySelectorAll('.b-prose .codehilite').forEach(box => {
+            const btn = document.createElement('button');
+            btn.type = 'button'; btn.className = 'b-copy'; btn.setAttribute('aria-label', 'Copy code');
+            btn.innerHTML = '<i class="fa-regular fa-copy" aria-hidden="true"></i>';
+            btn.addEventListener('click', () => {
+                navigator.clipboard.writeText(box.querySelector('pre').innerText).then(() => {
+                    btn.innerHTML = '<i class="fa-solid fa-check" aria-hidden="true"></i>';
+                    setTimeout(() => btn.innerHTML = '<i class="fa-regular fa-copy" aria-hidden="true"></i>', 1500);
+                });
+            });
+            box.appendChild(btn);
+        });
+        // подсветка текущего раздела в оглавлении
+        const links = Array.from(document.querySelectorAll('.b-toc a'));
+        if (links.length && 'IntersectionObserver' in window) {
+            const map = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+            const io = new IntersectionObserver(es => es.forEach(e => {
+                if (e.isIntersecting) { links.forEach(l => l.classList.remove('active')); const a = map.get(e.target.id); if (a) a.classList.add('active'); }
+            }), { rootMargin: '-80px 0px -70% 0px' });
+            map.forEach((_, id) => { const el = document.getElementById(id); if (el) io.observe(el); });
+        }
+    })();
+    </script>
+</body>
+</html>

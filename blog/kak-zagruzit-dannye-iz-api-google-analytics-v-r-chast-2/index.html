@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Alexey Seleznev">
+    <meta name="theme-color" content="#030712">
+    <link rel="canonical" href="https://alexey-seleznev.pro/blog/kak-zagruzit-dannye-iz-api-google-analytics-v-r-chast-2/">
+
+    <title>Как загрузить данные из API Google Analytics в R: часть 2 | Алексей Селезнёв</title>
+    <meta name="title" content="Как загрузить данные из API Google Analytics в R: часть 2 | Алексей Селезнёв">
+    <meta name="description" content="Несколько лет назад я уже рассказывал о том как работать с API Google Analytics на языке R с помощью пакета RGA. Пакет RGA всем хорош, но он работает только с Google Analytics Core…">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alexey-seleznev.pro/blog/kak-zagruzit-dannye-iz-api-google-analytics-v-r-chast-2/">
+    <meta property="og:site_name" content="ALEXEY-SELEZNEV.pro">
+    <meta property="og:title" content="Как загрузить данные из API Google Analytics в R: часть 2 | Алексей Селезнёв">
+    <meta property="og:description" content="Несколько лет назад я уже рассказывал о том как работать с API Google Analytics на языке R с помощью пакета RGA. Пакет RGA всем хорош, но он работает только с Google Analytics Core…">
+    <meta property="og:image" content="https://alexey-seleznev.pro/photo.jpg">
+    <meta property="og:image:alt" content="Алексей Селезнёв">
+    <meta property="og:locale" content="ru_RU">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="https://alexey-seleznev.pro/blog/kak-zagruzit-dannye-iz-api-google-analytics-v-r-chast-2/">
+    <meta name="twitter:title" content="Как загрузить данные из API Google Analytics в R: часть 2 | Алексей Селезнёв">
+    <meta name="twitter:description" content="Несколько лет назад я уже рассказывал о том как работать с API Google Analytics на языке R с помощью пакета RGA. Пакет RGA всем хорош, но он работает только с Google Analytics Core…">
+    <meta name="twitter:image" content="https://alexey-seleznev.pro/photo.jpg">
+
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z56YHE916N"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Z56YHE916N');
+    </script>
+    <link rel="icon" type="image/jpeg" href="../../logo.jpg">
+    <link rel="apple-touch-icon" href="../../logo.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;700;800;900&display=swap">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/site.css">
+    <!-- Tailwind собран заранее (_build/build.py) и подключается последним, как это делал CDN-скрипт -->
+    <link rel="stylesheet" href="../../assets/tailwind.css">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Как загрузить данные из API Google Analytics в R: часть 2",
+  "datePublished": "2020-08-12",
+  "inLanguage": "ru",
+  "description": "Несколько лет назад я уже рассказывал о том как работать с API Google Analytics на языке R с помощью пакета RGA. Пакет RGA всем хорош, но он работает только с Google Analytics Core…",
+  "author": {
+    "@id": "https://alexey-seleznev.pro/#person"
+  },
+  "mainEntityOfPage": "https://alexey-seleznev.pro/blog/kak-zagruzit-dannye-iz-api-google-analytics-v-r-chast-2/"
+}
+    </script>
+    <link rel="stylesheet" href="../blog.css">
+</head>
+<body class="relative lang-en">
+
+    <!-- Interactive Background -->
+    <div id="vanta-bg"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full z-50 top-0 left-0 border-b border-white/5 bg-slate-950/60 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 h-16 flex items-center justify-between">
+            <a href="../../" class="flex items-center gap-2 sm:gap-2.5 md:gap-3 group shrink min-w-0">
+                <img src="../../logo.jpg" alt="Alexey Seleznev" class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 rounded-lg sm:rounded-xl object-cover shadow-md border border-white/10 group-hover:border-purple-500/50 group-hover:scale-105 transition-all shrink-0">
+                <span class="text-xs min-[400px]:text-sm sm:text-base md:text-xl font-black tracking-tight uppercase outfit-font whitespace-nowrap text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+            </a>
+            <div class="hidden xl:flex gap-6 text-sm font-semibold text-slate-400">
+                <a href="../../" class="nav-link hover:text-white transition-colors"><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a>
+                <a href="../../opensource/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span></a>
+                <a href="../../courses/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a>
+                <a href="../../videos/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a>
+                <a href="../../talks/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a>
+                <a href="../../articles/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a>
+                <a href="../../interviews/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a>
+                <a href="../../blog/" class="nav-link hover:text-white transition-colors active"><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a>
+            </div>
+
+            <div class="flex items-center gap-1.5 sm:gap-2 md:gap-4 shrink-0">
+                <div class="lang-switcher flex gap-1 sm:gap-1.5 md:gap-2 text-[11px] sm:text-xs md:text-sm font-bold border-r border-white/10 pr-1.5 sm:pr-3 md:pr-4 mr-0.5 sm:mr-1 md:mr-2 outfit-font">
+                    <button onclick="changeLang('en')" id="btn-en" class="active hover:text-white transition-colors">EN</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ru')" id="btn-ru" class="text-slate-500 hover:text-white transition-colors">RU</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ua')" id="btn-ua" class="text-slate-500 hover:text-white transition-colors">UA</button>
+                </div>
+
+                <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="text-slate-400 hover:text-blue-400 transition-colors hidden sm:block" aria-label="Telegram"><i class="fa-brands fa-telegram text-lg md:text-xl"></i></a>
+                <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="text-slate-400 hover:text-white transition-colors hidden sm:block" aria-label="GitHub"><i class="fa-brands fa-github text-lg md:text-xl"></i></a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="xl:hidden w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-purple-500/20 hover:border-purple-500/40 transition-all focus:outline-none" aria-label="Toggle Navigation Menu">
+                    <i class="fa-solid fa-bars text-sm sm:text-lg" id="mobile-menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div id="mobile-menu" class="hidden xl:hidden border-t border-white/10 bg-slate-950/95 backdrop-blur-2xl shadow-2xl overflow-y-auto max-h-[calc(100vh-4rem)] transition-all">
+            <div class="max-w-7xl mx-auto px-6 py-6 space-y-1">
+                <a href="../../" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-house text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span>
+                </a>
+                <a href="../../opensource/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-code-branch text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span>
+                </a>
+                <a href="../../courses/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-graduation-cap text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span>
+                </a>
+                <a href="../../videos/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-circle-play text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span>
+                </a>
+                <a href="../../talks/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-microphone-lines text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span>
+                </a>
+                <a href="../../articles/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-pen-nib text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span>
+                </a>
+                <a href="../../interviews/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-regular fa-newspaper text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span>
+                </a>
+                <a href="../../blog/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-white bg-white/5 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-feather-pointed text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span>
+                </a>
+
+                <div class="pt-4 mt-3 border-t border-white/10 flex items-center justify-around text-slate-400">
+                    <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-blue-400 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-telegram text-xl"></i> Telegram
+                    </a>
+                    <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="p-2 hover:text-white transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-github text-xl"></i> GitHub
+                    </a>
+                    <a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-red-500 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-youtube text-xl"></i> YouTube
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="b-wrap relative z-10">
+        <nav class="b-crumbs" aria-label="breadcrumb">
+            <a href="../../"><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a><span>/</span><a href="../"><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a><span>/</span><a href="../?cat=google-analytics#posts">Google Analytics</a>
+        </nav>
+        <div class="b-layout has-toc">
+            <article class="bento-glass no-lift b-article" data-aos="fade-up">
+                <div class="bento-content">
+                    <div class="b-cats"><a class="b-chip b-chip-cat" href="../?cat=google-analytics#posts">Google Analytics</a><a class="b-chip b-chip-cat" href="../?cat=r#posts">R</a><a class="b-chip b-chip-cat" href="../?cat=veb-analitika#posts">Веб-аналитика</a></div>
+                    <h1 class="b-title outfit-font">Как загрузить данные из API Google Analytics в R: часть 2</h1>
+                    <div class="b-meta">
+                        <span><i class="fa-regular fa-calendar" aria-hidden="true"></i><span class="ru-text">12 августа 2020</span><span class="ua-text">12 серпня 2020</span><span class="en-text">12 Aug 2020</span></span>
+                        <span><i class="fa-regular fa-clock" aria-hidden="true"></i><span class="ru-text">17 мин чтения</span><span class="ua-text">17 хв читання</span><span class="en-text">17 min read</span></span>
+                        <span class="b-lang" title="Русский">RU</span>
+                    </div>
+                    <div class="b-note"><i class="fa-regular fa-clock" aria-hidden="true"></i><div><span class="ru-text">Материал опубликован в 2020 году — описанные инструменты и интерфейсы могли измениться.</span><span class="ua-text">Матеріал опубліковано у 2020 році — описані інструменти та інтерфейси могли змінитися.</span><span class="en-text">Published in 2020 — the tools and interfaces described may have changed since.</span></div></div>
+                    <figure class="b-cover"><img src="../images/covers/1388.webp" alt="" width="1200" height="630" decoding="async"></figure>
+                    <div class="b-prose"><p>Несколько лет назад я уже рассказывал о том <a target="_blank" rel="noopener" href="https://netpeak.net/ru/blog/kak-poluchit-dannye-iz-google-analytics-v-r-a-takzhe-nestandartnaya-zagruzka-dannykh-iz-api-google-analytics-v-power-bi/">как работать с API Google Analytics на языке R с помощью пакета RGA</a>. Пакет RGA всем хорош, но он работает только с Google Analytics Core Reporting API v3, а уже давно вышла четвертая версия, у которой функционал намного шире.</p>
+<p>Мы рассмотрим новый пакет googleAnalyticsR, написанный Марком Эдмондсом. Марк ведет <a target="_blank" rel="noopener" href="https://code.markedmondson.me/">личный блог</a> и <a target="_blank" rel="noopener" href="https://code.markedmondson.me/googleAnalyticsR/index.html">сайт с документацией</a> к пакету, о котором сегодня пойдет речь.</p>
+<p>В этой статье много примеров кода взято с <a target="_blank" rel="noopener" href="https://code.markedmondson.me/googleAnalyticsR/">официального сайта пакета googleAnalyticsR</a>.</p>
+<blockquote>
+<p>Изначально статья была написана и опубликована на блоге Netpeak</p>
+<p><a target="_blank" rel="noopener" href="https://netpeak.net/ru/blog/kak-zagruzit-dannyye-iz-api-google-analytics-v-r-chast-2/#comments">https://netpeak.net/ru/blog/kak-zagruzit-dannyye-iz-api-google-analytics-v-r-chast-2/</a></p>
+</blockquote>
+<p><img loading="lazy" decoding="async" alt="" src="https://ericonanalytics.com/wp-content/uploads/2017/06/gar_logo_1000-1-e1498463596371.png" /></p>
+<h2 id="googleanalyticsr">Какие дополительные функции есть в googleAnalyticsR</h2>
+<p>Самые интересные функции пакета googleAnalyticsR:</p>
+<ul>
+<li>автоматическая авторизация с помощью переменных среды;</li>
+<li>User Activity API, который дает вам возможность запрашивать сырые данные;</li>
+<li>расширенные возможности по сегментации данных;</li>
+<li>управление пользователями Google Analytics;</li>
+<li>продвинутая технология обхода семплирования;</li>
+<li>когортный анализ;</li>
+<li>возможность сравнивать данные за два указанных периода;</li>
+<li>пакетная отправка запросов;</li>
+<li>вычисляемые показатели.</li>
+</ul>
+<p>Перед тем, как сделать свой первый запрос к API Google Analytics, необходимо пройти несколько подготовительных шагов.</p>
+<ol>
+<li>Выбрать наиболее подходящий способ авторизации.</li>
+<li>При необходимости создать проект в Google Cloud, если его у вас до сих пор нет.</li>
+<li>Создать ключ сервисного аккаунта или обычные учетные данные.</li>
+<li>Если создали сервисный аккаунт, дать на его почтовый адрес доступ к нужным аккаунтам Google Analytics.</li>
+<li>При необходимости создать переменные среды.</li>
+<li>Включить API Google Analytics.</li>
+</ol>
+<p>В каждом из этих этапов есть свои нюансы, поэтому рассмотрим блоки подробно.</p>
+<h2 id="_1">Авторизация</h2>
+<p>Работа с любым API начинается с авторизации. В googleAnalyticsR существуют такие способы:</p>
+<ol>
+<li>Авторизация со стандартными параметрами пакета.</li>
+<li>Авторизация через собственное приложение, созданное в Google Cloud Console.</li>
+<li>Авторизация через сервисный аккаунт.</li>
+</ol>
+<h3 id="1">1. Авторизация через стандартные параметры</h3>
+<p>Самый простой способ прохождения авторизации — использование ga_auth() со стандартными значениями аргументов, которые установлены по умолчанию.</p>
+<p>Пакет googleAnalyticsR довольно активно используется, и большинство пользователей проходят авторизацию таким способом. В связи с этим вы можете столкнуться с лимитом 50000 запросов к API из одного приложения в сутки.</p>
+<p>Поэтому я рекомендую использовать один из двух описанных ниже способов авторизации.</p>
+<h3 id="2">2. Авторизация через собственное приложение</h3>
+<p>Для авторизации через свое приложение необходимо зайти в <a target="_blank" rel="noopener" href="https://console.cloud.google.com/">Google Cloud Console</a> и зарегистрировать его.</p>
+<ol>
+<li>Если у вас на данный момент не создан ни один проект, создаем его, нажав “+”.</li>
+<li>Переходим в «Основное меню» &gt; «API и сервисы» &gt; «Учетные данные».<br />
+<img loading="lazy" decoding="async" alt="Авторизация в Google Cloud Platform через собственное приложение" width="479" height="446" src="../images/kak-zagruzit-dannye-iz-api-google-analytics-v-r-chast-2-avto-9f049d62.webp" /></li>
+<li>«Создать учетные данные» &gt; «Идентификатор клиента OAuth».<br />
+<img loading="lazy" decoding="async" alt="Идентификатор клиента OAuth для работы с пакетом R" width="707" height="353" src="../images/kak-zagruzit-dannye-iz-api-google-analytics-v-r-chast-2-iden-cdf7c32a.webp" /></li>
+<li>Вводим название.<br />
+<img loading="lazy" decoding="async" alt="простой способ выгрузить данные из api google" width="586" height="463" src="../images/kak-zagruzit-dannye-iz-api-google-analytics-v-r-chast-2-pros-d3d6b2b4.webp" /></li>
+<li>Далее будет сгенерирован id и secret вашего приложения, и для дальнейшей работы вам необходимо скачать JSON файл со сгенерированными данными.</li>
+</ol>
+<p><img loading="lazy" decoding="async" alt="Как скачать идентификатор клиента для работы с большими массивами данных" width="777" height="123" src="../images/kak-zagruzit-dannye-iz-api-google-analytics-v-r-chast-2-kak-dcdd42e3.webp" /></p>
+<p>После того, как вы создали приложение и скачали в JSON формате учетные данные, можете использовать его для авторизации:</p>
+<div class="codehilite"><pre><span></span><code>ga_auth(token = &quot;D:/ga_auth/ga.json&quot;, email = &quot;yourmail@gmail.com&quot;)
+</code></pre></div>
+
+<p>В представленном выше коде вам необходимо изменить путь к скачанному JSON файлу и указать свою почту, под которой есть доступ к нужным аккаунтам Google Analytics. Далее в браузере подтверждаете разрешение на доступ к данным.</p>
+<h4 id="_2">Автоматическая авторизация через свое приложение</h4>
+<p>Теперь вы можете настроить автоматическую авторизацию, сделать это можно несколькими способами.</p>
+<p>Первый заключается в установке переменных окружения с помощью R функции Sys.setenv. Важно прописать переменные до подключения пакета:</p>
+<div class="codehilite"><pre><span></span><code>Sys.setenv(GAR_CLIENT_JSON = &quot;D:/ga_auth/ga.json&quot;)
+Sys.setenv(GARGLE_EMAIL = &quot;yourmail@gmail.com&quot;)
+library(googleAnalyticsR)
+</code></pre></div>
+
+<p>Если вы сделали все верно, то при подключении пакета в консоли вы увидите сообщение про автоаутентификацию:</p>
+<div class="codehilite"><pre><span></span><code>Setting your own client.id
+2019-09-05 13:02:20&gt; Setting client.id from gar_auth_configure(path = json)
+Successfully auto-authenticated via yourusername@gmail.com
+</code></pre></div>
+
+<p>Второй способ — прописать эти переменные в файл <strong>.Renviron</strong>. Этот файл считывается при старте каждой R сессии, и позволяет вам задавать необходимые переменные окружения. Находится этот файл в домашнем каталоге языка R, посмотреть расположение домашнего каталога можно с помощью команды path.expand(“~”).</p>
+<div class="codehilite"><pre><span></span><code>[1] &quot;C:/Users/Alsey/Documents&quot;
+</code></pre></div>
+
+<p>Если такой файл у вас есть, то изначально он, скорее всего, будет пустой, но даже если это не так, просто добавьте в него две строки. Если файла вообще нет, создайте обычный тектовый файл, впишите в него указанные две строки и переименуйте в <strong>.Renviron</strong>:</p>
+<div class="codehilite"><pre><span></span><code>GAR_CLIENT_JSON=&quot;D:/ga_auth/ga.json&quot;
+GARGLE_EMAIL=&quot;yourusername@gmail.com&quot;
+</code></pre></div>
+
+<p>И последний способ, если вы работаете на Windows — создайте две переменные окружения: GAR_CLIENT_JSON, GARGLE_EMAIL.</p>
+<p><strong>Для Windows 10 и Windows 8</strong></p>
+<ol>
+<li>В строке «Поиск» выполните поиск: «Система (Панель управления)».</li>
+<li>Нажмите на ссылку «Дополнительные параметры системы».</li>
+<li>Нажмите «Переменные среды».</li>
+<li>В разделе «Переменные среды» нажмите «Создать».</li>
+<li>По очереди создайте две переменные.</li>
+</ol>
+<p><img loading="lazy" decoding="async" alt="Переменные для работы с языком R на Windows" width="652" height="162" src="../images/kak-zagruzit-dannye-iz-api-google-analytics-v-r-chast-2-pere-1fc00f29.webp" /></p>
+<p>В случае использования второго и третьего метода установки опций вы будете автоматически авторизованы в Google Analytics при подключении пакета googleAnalyticsR.</p>
+<h3 id="3">3. Авторизация с помощью сервисного аккаунта</h3>
+<p>Третий способ авторизации позволяет вам использовать сервисный аккаунт. Для начала необходимо создать сервисный аккаунт, перейдите в <a target="_blank" rel="noopener" href="https://console.cloud.google.com/iam-admin/serviceaccounts/create">Google Cloud Platform</a> и заполните название и описание сервисного аккаунта.</p>
+<p><img loading="lazy" decoding="async" alt="Настройка сервисного аккаунта для работы с языком R" width="531" height="337" src="../images/kak-zagruzit-dannye-iz-api-google-analytics-v-r-chast-2-nast-5d4209d7.webp" /></p>
+<p>Права доступа для сервисного аккаунта мы будем задавать позже, через вебинтерфейс Google Analytics, поэтому на следующем шаге просто жмем «Продолжить».</p>
+<p>Создаем JSON ключ:</p>
+<p><img loading="lazy" decoding="async" alt="Как создать JSON ключ" width="532" height="239" src="../images/kak-zagruzit-dannye-iz-api-google-analytics-v-r-chast-2-kak-9b66ab4d.webp" /></p>
+<p><img loading="lazy" decoding="async" alt="Настройка ключей и необходимых доступов для работы с большими данными" width="530" height="350" src="../images/kak-zagruzit-dannye-iz-api-google-analytics-v-r-chast-2-nast-4eaf1c69.webp" /></p>
+<p>Скачиваем JSON и нажимаем «Готово».</p>
+<p>Открываем только что созданный ключ и копируем почту:</p>
+<p><img loading="lazy" decoding="async" alt="Сведения о сервисном аккаунте Алексей Селезнев блог Нетпик" width="527" height="280" src="../images/kak-zagruzit-dannye-iz-api-google-analytics-v-r-chast-2-sved-a381b244.webp" /></p>
+<p>Заходим в Google Analytics и расшариваем доступ к нужным аккаунтам, ресурсам и представлениям на этот электронный адрес.</p>
+<p><img loading="lazy" decoding="async" alt="Управление правами доступа для работы с пакетами анализ данных" width="405" height="459" src="../images/kak-zagruzit-dannye-iz-api-google-analytics-v-r-chast-2-upra-a2df50ce.webp" /></p>
+<p><img loading="lazy" decoding="async" alt="Загружаем данные из API Google Analytics Power BI R" width="948" height="522" src="../images/kak-zagruzit-dannye-iz-api-google-analytics-v-r-chast-2-zagr-0d92e17d.webp" /></p>
+<p>Далее проходим авторизацию с помощью функции googleAuthR::gar_auth_service, передав в аргумент json_file путь к json файлу с учетными данными.</p>
+<div class="codehilite"><pre><span></span><code>googleAuthR::gar_auth_service(json_file = &quot;D:/ga_auth/service.json&quot;)
+</code></pre></div>
+
+<p>Также вы можете настроить автоматическую авторизацию через сервисный аккаунт, создав переменную среды <em>GA_AUTH_FILE</em>и передав в нее путь к скачанному JSON файлу.</p>
+<p><img loading="lazy" decoding="async" alt="Как настроить скрипт языка R API Google Analytics" width="651" height="165" src="../images/kak-zagruzit-dannye-iz-api-google-analytics-v-r-chast-2-kak-0e1cf0e0.webp" /></p>
+<h3 id="google-analytics-api">Включаем Google Analytics API</h3>
+<p>Последний подготовительный шаг — включить в вашем проекте API сервисы Google Analytics.</p>
+<p>Сделать это можно через библиотеку в <a target="_blank" rel="noopener" href="https://console.cloud.google.com/apis/library?filter=category:advertising">Google Cloud Platform</a>. Либо перейдите по прямым ссылкам и включите:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://console.cloud.google.com/apis/library/analyticsreporting.googleapis.com">Google Analytics Reporting API</a>;</li>
+<li><a target="_blank" rel="noopener" href="https://console.cloud.google.com/apis/library/analytics.googleapis.com">Google Analytics API</a>.</li>
+</ul>
+<p>Включенные API выглядят так:</p>
+<p><img loading="lazy" decoding="async" alt="Google Analytics Reporting API" width="707" height="189" src="../images/kak-zagruzit-dannye-iz-api-google-analytics-v-r-chast-2-goog-86bc3652.webp" /></p>
+<p><img loading="lazy" decoding="async" alt="Как понять что работают API Google Analytics" width="700" height="186" src="../images/kak-zagruzit-dannye-iz-api-google-analytics-v-r-chast-2-kak-a24e586b.webp" /></p>
+<p>На этом все подготовительные работы закончились и можно сделать первый запрос к API Google Analytics.</p>
+<h2 id="metadata-api">Metadata API</h2>
+<p>Метадата API — самый простой программный интерфейс в Google Analytics, который предназначен для запроса списка возможных полей.</p>
+<p>В googleAnalyticsR для этого API существует две функции, при этом они не требуют передачи каких либо дополнительных аргументов:</p>
+<ul>
+<li><strong>google_analytics_meta()</strong> — таблица метрик и параметров, с описанием;</li>
+<li><strong>allowed_metric_dim()</strong> — получить вектор с имена всех возможных полей.</li>
+</ul>
+<h2 id="management-api">Management API</h2>
+<p>В статье, о которой я говорил в начале поста, я подробно описывал API интерфейсы, поэтому не буду дублировать эту информацию.</p>
+<h3 id="google-analytics">Загрузка объектов из иерархии Google Analytics</h3>
+<ul>
+<li><strong>ga_account_list()</strong> — загрузка информации по всем доступным вам аккаунтам, ресурсам и представлениям;</li>
+<li><strong>ga_accounts()</strong> — получить список доступных вам аккаунтов;</li>
+<li><strong>ga_webproperty_list()</strong> — получить список всех ресурсов из одного аккаунта;</li>
+<li><strong>ga_webproperty()</strong> — получить метаданные по одному ресурсу;</li>
+<li><strong>ga_view_list()</strong> — получить список представлений из конкретного ресурса;</li>
+<li><strong>ga_view()</strong> — получить метаданные по одному конкретному представлению.</li>
+</ul>
+<p>То есть все перечисленные функции позволяют загрузить различные объекты и метаданные из иерархии Google Analytics. При этом функция ga_account_list() запрашивает всю иерархию объектов для конкретного пользователя.</p>
+<p><img loading="lazy" decoding="async" alt="Иерархия объектов в Google Analytics" width="644" height="331" src="../images/kak-zagruzit-dannye-iz-api-google-analytics-v-r-chast-2-iera-676e4988.webp" /></p>
+<p>В зависимости от звена, занимаемого в иерархии, вам необходимо с помощью аргументов указывать родительский объект. Например, если вы хотите получить список всех ресурсов, нужно указать, из какого аккаунта вы хотите получить подчиненные ресурсы. Соответственно при запросе данных по представлениям вам необходимо указывать родительский ресурс и аккаунт.</p>
+<p>Все перечисленные функции, кроме ga_account_list(), в зависимости от места в иерархии требуют использования одного или более аргументов:</p>
+<ul>
+<li><strong>accountId</strong> — идентификатор аккаунта;</li>
+<li><strong>webPropertyId</strong> — идентификатор ресурса в формате UA-XXXXX-X;</li>
+<li><strong>profileId</strong> — идентификатор представления.</li>
+</ul>
+<p>Идентификация пользователя задается при авторизации, поэтому в функциях указывать логин пользователя не нужно.</p>
+<h3 id="_3">Управление пользователями</h3>
+<p>Пакет googleAnayticsR так же позволяет вам управлять пользователями. Ниже приведен список функций:</p>
+<ul>
+<li><strong>ga_users_list()</strong> — загрузка списка пользователей у которых есть доступ к аккаунту, ресурсу или представлению;</li>
+<li><strong>ga_users_delete()</strong> — удаление доступа для конкретного пользователя;</li>
+<li><strong>ga_users_delete_linkid()</strong> —удаление доступа по LinkID;</li>
+<li><strong>ga_users_add()</strong> — предоставить доступ пользователю;</li>
+<li><strong>ga_users_update()</strong> — редактирование прав доступа определённого пользователя.</li>
+</ul>
+<p>Пример кода:</p>
+<div class="codehilite"><pre><span></span><code># добавление пользователя
+ga_users_add(email = c(&quot;newuser@gmail.com&quot;), 
+              permissions = &quot;EDIT&quot;, accountId = 12345)
+
+# добавляем прав пользователю
+# список изменений
+o &lt;- list(permissions = list(local = list(&quot;MANAGE_USERS&quot;)))
+
+# расширяем права пользователю
+ga_users_update(&quot;UA-1112233-1:1234567890123456789&quot;,
+                 update_object = o,
+                 accountId = 12345,
+                 webPropertyId = &quot;UA-1112233-1&quot;)
+
+# удаляем доступ для пользователя
+ga_users_delete(&quot;newuser@gmail.com&quot;, accountId = 12345)
+</code></pre></div>
+
+<p>LinkId можно получить из таблицы с помощью функции ga_users_list().</p>
+<p>В Google Analytics существуют уровни доступа для пользователей:</p>
+<ul>
+<li>MANAGE_USERS — позволяет выполнять запросы на запись к API разрешений пользователей;</li>
+<li>EDIT — позволяет изменять ресурсы управления данными;</li>
+<li>COLLABORATE — позволяет создавать, изменять и удалять объекты, а также предоставлять доступ к ним;</li>
+<li>READ_AND_ANALYZE — позволяет просматривать и использовать отчёты.</li>
+</ul>
+<p>Подробнее о каждом можно узнать в <a target="_blank" rel="noopener" href="https://support.google.com/analytics/answer/2884495?hl=ru">Google Справке</a>.</p>
+<h3 id="management-api_1">Другие полезные функции для работы с Management API</h3>
+<ul>
+<li><strong>ga_filter_list()</strong> — cписок фильтров;</li>
+<li><strong>ga_experiment_list()</strong> — cписок экспериментов;</li>
+<li><strong>ga_goal_list()</strong> — cписок целей;</li>
+<li><strong>ga_remarketing_list()</strong> — cписок ремаркетинговых аудиторий;</li>
+<li><strong>ga_segment_list()</strong> — cписок сегментов.</li>
+</ul>
+<h2 id="google-analytics-reporting-api-v4">Google Analytics Reporting API v4</h2>
+<p>Reporting API — это основный API, предназначенный для загрузки статистики из Google Analytics программным путем.</p>
+<p>Основная функция для запроса отчетов — google_analytics. У нее такой набор аргументов:</p>
+<ul>
+<li><strong>viewId</strong> — ID представления Google Analytics, из которого необходимо экспортировать данные;</li>
+<li><strong>date_range</strong> — отчетный период, задается в формате вектора дат из двух или четырех элементов. Например c (start, end), или c (start1,end1,start2,end2). Даты необходимо указывать в формате «ГГГГ-ММ-ДД»;</li>
+<li><strong>metrics</strong> — список показателей, которые вам необходимо запросить из API;</li>
+<li><strong>dimensions</strong>— список параметров, которые вам необходимо запросить из API;</li>
+<li><strong>dim_filters, met_filters</strong> — аргументы предназначенные для фильтрации данных, о них более подробно будет написано ниже;</li>
+<li><strong>order</strong> — сортировка данных, так же будет рассмотрена более подробно;</li>
+<li><strong>segments</strong> — применение к данным сегментов;</li>
+<li><strong>pivots</strong> — позволяет изменять форму возвращаемых данных;</li>
+<li><strong>cohorts</strong> — запрос данных по когортам;</li>
+<li><strong>max</strong> — максимальное количество строк в запросе, для того, чтобы получить все строки укажите -1;</li>
+<li><strong>samplingLevel</strong> — уровень семплирования;</li>
+<li><strong>metricFormat</strong> — тип данных в возвращаемых метриках;</li>
+<li><strong>anti_sample</strong> — включение механизма обхода семплинга данных;</li>
+<li><strong>anti_sample_batches</strong> — алгоритм обхода семплинга, можно указать auto, или указать количество дней, по которым будет происходить разбивка подзапросов;</li>
+<li><strong>slow_fetch</strong> — механизм замедления отправки запросов, при больших запросах помогает избежать 500-й ошибки;</li>
+<li><strong>rows_per_call</strong> — управляет количеством строк, запрашиваемым за один запрос, не более 100000.</li>
+</ul>
+<p>Простой вызов функции будет выглядеть так:</p>
+<div class="codehilite"><pre><span></span><code>google_analytics(ga_id, 
+                 date_range = c(&quot;2020-01-01&quot;, &quot;2020-01-10&quot;), 
+                 metrics = &quot;sessions&quot;, 
+                 dimensions = &quot;date&quot;)
+</code></pre></div>
+
+<p>Вместо ga_id подставьте идентификатор представления, из которого хотите получить данные. Такой запрос вернет вам количество сеансов в разрезе дней с 1 по 10 января 2020 года.</p>
+<p>Полный список всех параметров и показателей можно найти в <a target="_blank" rel="noopener" href="https://ga-dev-tools.appspot.com/dimensions-metrics-explorer/">Dimensions &amp; Metrics Explorer</a>, либо запросить с помощью функций, рассмотренных ранее в разделе про Metadata API. Работу с некоторыми аргументами стоит рассмотреть более подробно.</p>
+<h3 id="date_range">date_range — сравниваем данные за разные периоды</h3>
+<p>Если передать в аргумент date_range вектор из двух или четырех дат, во втором случае вы получите таблицу сравнения показателей за указанные периоды.</p>
+<div class="codehilite"><pre><span></span><code>google_analytics(ga_id, 
+                 date_range = c(&quot;16daysAgo&quot;, &quot;9daysAgo&quot;, &quot;8daysAgo&quot;, &quot;yesterday&quot;), 
+                 dimensions = &quot;source&quot;,
+                 metrics = &quot;sessions&quot;)
+</code></pre></div>
+
+<p>Приведенный выше код сравнит количество сессий по источникам за 7 предыдущих дней с 7 днями, которые были до них.</p>
+<p><img loading="lazy" decoding="async" alt="Код сравнения сессий пользователя" width="248" height="351" src="../images/kak-zagruzit-dannye-iz-api-google-analytics-v-r-chast-2-kod-9b943e55.webp" /></p>
+<div class="codehilite"><pre><span></span><code>delta_sess &lt;- order_type(&quot;sessions&quot;,&quot;DESCENDING&quot;, &quot;DELTA&quot;)
+
+google_analytics(ga_id, 
+                 date_range = c(&quot;16daysAgo&quot;, &quot;9daysAgo&quot;, &quot;8daysAgo&quot;, &quot;yesterday&quot;), 
+                 dimensions = &quot;source&quot;,
+                 metrics = &quot;sessions&quot;, 
+                 order = delta_sess)
+</code></pre></div>
+
+<p>Также можно отсортировать полученный результат в порядке убывания или возрастания дельты по указанному показателю с помощью функции order_type(). То есть получить рейтинг источников, по которым был максимальный рост или падение трафика.</p>
+<h3 id="_4">Фильтрация данных</h3>
+<p>Для тех, кто привык работать с Core Reporting API v3, можно использовать аргумент filtersExpression.</p>
+<p>Но так как googleAnalyticsR работает с более новой версией Core Reporting API v4, рекомендую использовать другой подход.</p>
+<p>Для фильтрации данных служит целый набор дополнительных функций:</p>
+<ul>
+<li><strong>met_filter</strong> — создает объект фильтрации для показателей;</li>
+<li><strong>dim_filter</strong> — создает объект фильтрации для параметров;</li>
+<li><strong>filter_clause_ga4</strong> — конвертирует объекты фильтрации в формат для API v4 и позволяет задать логическую И / ИЛИ связь, если вы одновременно применяете несколько фильтров.</li>
+</ul>
+<p>При использовании функции filter_clause_ga4 объекты фильтрации необходимо обвернуть в функцию list.</p>
+<p>И аргументы dim_filters и dim_filters. Пример для одного условия фильтрации:</p>
+<div class="codehilite"><pre><span></span><code>campaign_filter &lt;- dim_filter(dimension=&quot;campaign&quot;,operator=&quot;REGEXP&quot;,expressions=&quot;welcome&quot;)
+
+my_filter_clause &lt;- filter_clause_ga4(list(campaign_filter))
+
+data_fetch &lt;- google_analytics(
+                ga_id,date_range = c(&quot;2016-01-01&quot;,&quot;2016-12-31&quot;),
+                metrics = c(&quot;itemRevenue&quot;,&quot;itemQuantity&quot;),
+                dimensions = c(&quot;campaign&quot;,&quot;transactionId&quot;,&quot;dateHour&quot;),
+                dim_filters = my_filter_clause)
+</code></pre></div>
+
+<p>Пример применения одновременно нескольких фильтров с указанием логической связи:</p>
+<div class="codehilite"><pre><span></span><code>mf &lt;- met_filter(&quot;bounces&quot;, &quot;GREATER_THAN&quot;, 0)
+mf2 &lt;- met_filter(&quot;sessions&quot;, &quot;GREATER&quot;, 2)
+
+df &lt;- dim_filter(&quot;source&quot;,&quot;BEGINS_WITH&quot;,&quot;1&quot;,not = TRUE)
+df2 &lt;- dim_filter(&quot;source&quot;,&quot;BEGINS_WITH&quot;,&quot;a&quot;,not = TRUE)
+
+fc2 &lt;- filter_clause_ga4(list(df, df2), operator = &quot;AND&quot;)
+fc &lt;- filter_clause_ga4(list(mf, mf2), operator = &quot;AND&quot;)
+
+ga_data1 &lt;- google_analytics(
+               ga_id, 
+               date_range = c(&quot;2019-07-30&quot;,&quot;2019-10-01&quot;),
+               dimensions=c(&#39;source&#39;,&#39;medium&#39;), 
+               metrics = c(&#39;sessions&#39;,&#39;bounces&#39;), 
+               met_filters = fc, 
+               dim_filters = fc2)
+</code></pre></div>
+
+<h3 id="_5">Вычисляемые показатели</h3>
+<p>Вы можете вычислять собственные показатели на лету с помощью функции вычисляемых показателей. По смыслу они похожи на вычисляемые показатели в интерфейсе Google Analytics.</p>
+<div class="codehilite"><pre><span></span><code>my_custom_metric &lt;- c(visitPerVisitor = &quot;ga:visits/ga:visitors&quot;)
+
+ga_data4 &lt;- google_analytics(ga_id,
+                  date_range = c(&quot;2019-07-30&quot;,
+                                 &quot;2019-10-01&quot;),
+                  dimensions=c(&#39;medium&#39;), 
+                  metrics = c(my_custom_metric,
+                             &#39;bounces&#39;), 
+                  metricFormat = c(&quot;FLOAT&quot;,&quot;INTEGER&quot;))
+</code></pre></div>
+
+<p>Для этого достаточно создать именнованный вектор, в который необходимо передать формулу расчета. В нашем примере мы вычисляем количество сеансов на одного пользователя.</p>
+<p>Аргумент metricFormat позволяет указать для каждой метрики тип данных из поддерживаемых:</p>
+<ul>
+<li>METRIC_TYPE_UNSPECIFIED — тип показателя не задан;</li>
+<li>INTEGER — целочисленное значение;</li>
+<li>FLOAT — число с плавающей точкой;</li>
+<li>CURRENCY — валюта;</li>
+<li>PERCENT — проценты;</li>
+<li>TIME — время в формате ЧЧ:ММ:СС.</li>
+</ul>
+<p>Более подробно о каждом типе можно узнать в <a target="_blank" rel="noopener" href="https://developers.google.com/analytics/devguides/reporting/core/v4/rest/v4/reports/batchGet#MetricType">официальной справке Google Analytics</a>.</p>
+<h3 id="_6">Сегменты</h3>
+<p>Вы можете использовать устаревший способ обращения к сегментам, позаимствованный из API v3.</p>
+<div class="codehilite"><pre><span></span><code>segment_def_for_call &lt;- &quot;sessions::condition::ga:medium=~^(cpc|ppc|cpa|cpm|cpv|cpp)$&quot;
+
+seg_obj &lt;- segment_ga4(&quot;PaidTraffic&quot;, segment_id = segment_def_for_call)
+
+segmented_ga1 &lt;- google_analytics(ga_id, 
+                          c(&quot;2019-07-30&quot;,&quot;2019-10-01&quot;), 
+                          dimensions=c(&#39;source&#39;,&#39;medium&#39;,&#39;segment&#39;), 
+                          segments = seg_obj, 
+                          metrics = c(&#39;sessions&#39;,&#39;bounces&#39;)
+)
+</code></pre></div>
+
+<p>Но сегменты в API v4 более функциональные, хоть и значительно сложнее.</p>
+<p>Для создания сегмента в API v4 следуйте иерархии функций:</p>
+<ol>
+<li><strong>segment_element</strong>— позволяет задать условия фильтрации (по какой метрике или измерению вы будете определять сегмент). Далее полученный объект необходимо передать либо в функцию <em>segment_vector_simple()</em> либо в segment_vector_sequence();</li>
+<li><strong>segment_vector_simple()</strong> и <strong>segment_vector_sequence()</strong> — позволяют определить, является ли ваш сегмент последовательностью или нет;</li>
+<li><strong>segment_define()</strong> — задает логическую последовательность в сегменте;</li>
+<li><strong>segment_ga4()</strong> — позволяет задать уровень действия сегмента, то есть пользователь или сеанс, а также дать сегменту имя, которое будет отображаться в результирующей таблице при вызове параметра <em>ga:segment</em>.</li>
+</ol>
+<p>Пример создания и использования сегмента:</p>
+<div class="codehilite"><pre><span></span><code>se2 &lt;- segment_element(&quot;medium&quot;, 
+                       operator = &quot;EXACT&quot;, 
+                       type = &quot;DIMENSION&quot;, 
+                       expressions = &quot;organic&quot;)
+
+se3 &lt;- segment_element(&quot;medium&quot;,
+                       operator = &quot;EXACT&quot;,
+                       type = &quot;DIMENSION&quot;,
+                       not = TRUE,
+                       expressions = &quot;organic&quot;)
+
+sv_sequence &lt;- segment_vector_sequence(list(list(se2), 
+                                            list(se3)))
+
+seq_defined2 &lt;- segment_define(list(sv_sequence))
+
+segment4_seq &lt;- segment_ga4(&quot;sequence&quot;, user_segment = seq_defined2)
+
+segment_seq_example &lt;- google_analytics(ga_id, 
+                            c(&quot;2019-08-01&quot;,&quot;2019-09-01&quot;), 
+                            dimensions=c(&#39;source&#39;,&#39;segment&#39;), 
+                            segments = segment4_seq,
+                            metrics = c(&#39;sessions&#39;,&#39;bounces&#39;)
+)
+</code></pre></div>
+
+<p>Синтаксис сегментов достаточно сложный, поэтому вы можете использовать готовый аддон для RStudio и создавать сегменты с помощью графического интерфейса.</p>
+<p><img loading="lazy" decoding="async" alt="Как работать с кодом скрипта для RSudio Алексей Селезнев" width="873" height="1167" src="../images/kak-zagruzit-dannye-iz-api-google-analytics-v-r-chast-2-kak-69d8250f.gif" /></p>
+<h3 id="_7">Когортный анализ</h3>
+<p><a target="_blank" rel="noopener" href="https://netpeak.net/ru/blog/kogortniy-analiz-v-google-analytics-poshagovaya-instruktsiya/">Когортный анализ в Google Analytics: пошаговая инструкция</a>Еще одна функция, недоступная в API v3. Если вы пока не знаете, <a target="_blank" rel="noopener" href="https://netpeak.net/ru/blog/kogortniy-analiz-v-google-analytics-poshagovaya-instruktsiya/">что такое когортный анализ</a> и как читать этот отчет, рекомендую сначала прочитать нашу статью по теме.</p>
+<p>Для получения когортного отчета выполните шаги:</p>
+<ol>
+<li>Создайте когорты с помощью функции make_cohort_group().</li>
+<li>Используйте аргумент cohort в функции google_analytics().</li>
+</ol>
+<p>Пример создания когортного отчета:</p>
+<div class="codehilite"><pre><span></span><code>cohort4 &lt;- make_cohort_group(list(&quot;Oct2019&quot; = c(&quot;2019-10-01&quot;, &quot;2019-10-31&quot;), 
+                                  &quot;Feb2019&quot; = c(&quot;2019-11-01&quot;, &quot;2019-11-30&quot;),
+                                  &quot;Dec2019&quot; = c(&quot;2019-12-01&quot;, &quot;2019-12-31&quot;)))
+
+google_analytics(ga_id, 
+             dimensions=c(&#39;cohort&#39;,&#39;ga:cohortNthMonth&#39;), 
+             metrics = c(&#39;cohortTotalUsers&#39;,&#39;ga:cohortActiveUsers&#39;),
+             cohort = cohort4
+             )
+</code></pre></div>
+
+<p>Список специальных параметров и показателей для когортного отчета можно в <a target="_blank" rel="noopener" href="https://developers.google.com/analytics/devguides/reporting/core/v4/advanced#cohort_and_lifetime_value_ltv_dimensions_and_metrics">официальной документации</a>.</p>
+<h3 id="user-activity-api">User Activity API</h3>
+<p>Самый новый API из всех доступных в Google Analytics. Позволяет запрашивать данные об активности пользователя, то есть дает возможность получать сырые данные.</p>
+<p>Чтобы получить сырые данные по пользователям изначально необходимо получить список идентификаторов — client_id всех пользователей. Сделать это можно, запросив параметр clientId.</p>
+<div class="codehilite"><pre><span></span><code>cids &lt;- google_analytics(ga_id, 
+                date_range = c(&quot;16DaysAgo&quot;,&quot;yesterday&quot;), 
+                metrics = &quot;sessions&quot;, dimensions = &quot;clientId&quot;)
+</code></pre></div>
+
+<p>Используя функцию <em>ga_clientid_activity()</em> вы можете получить все действия любого посетителя сайта за указанный период. Также на вход можно передать вектор из идентификаторов клиентов.</p>
+<div class="codehilite"><pre><span></span><code>users &lt;- ga_clientid_activity(cids$clientId,
+                              ga_id, 
+                              date_range = c(&quot;16DaysAgo&quot;,&quot;yesterday&quot;))
+</code></pre></div>
+
+<p>Аргументы функции <em>ga_clientid_activity()</em>:</p>
+<ul>
+<li><strong>ids</strong> — вектор содержащий ClientID или UserID;</li>
+<li><strong>viewId</strong> — идентификатор представления;</li>
+<li><strong>id_type</strong> — тип идентификатора, возможные значения: “CLIENT_ID”, “USER_ID”;</li>
+<li><strong>activity_type</strong> — фильтрация по типу действий, которые вы хотите получить, возможные значения: “PAGEVIEW”, “SCREENVIEW”, “GOAL”, “ECOMMERCE”, “EVENT”;</li>
+<li><strong>date_range</strong> — диапазон дат, за который вы хотите получить данные по посетителям.</li>
+</ul>
+<p>В результаты работы функции вы получите объект со всеми сеансами и хитами. Если объект называется как в моем примере users, то обратиться к сеансам или хитам можно так:</p>
+<div class="codehilite"><pre><span></span><code>users$sessions # сеансы
+users$hits     # хиты
+</code></pre></div>
+
+<h2 id="_8">Выводы</h2>
+<p>В этой статье мы подробно рассмотрели основные возможности API Google Analytics и пакета <strong>googleAnalyticsR</strong>. Теперь вы умеете:</p>
+<ul>
+<li>проходить авторизацию в API Google Analytics различными способами;</li>
+<li>получать сырые данные из API Google Analytics;</li>
+<li>получать данные в разрезе когорт;</li>
+<li>запрашивать стандартные отчеты из Google Analytics Core Reporting API.</li>
+</ul>
+<p>На самом деле уместить в одну статью весь доступный в googleAnalyticsR функционал довольно сложно, но я постарался описать самый важный. Если у вас возникли вопросы, задавайте в комментариях.</p>
+<p>Если вам понравилась данная статья думаю вам так же будут интересны мои <a target="_blank" rel="noopener" href="https://t.me/R4marketing">телеграм</a> и <a target="_blank" rel="noopener" href="https://www.youtube.com/R4marketing/?sub_confirmation=1">youtube</a> каналы, подписывайтесь.</p></div>
+                    
+                    <div class="b-tags"><a class="b-chip" href="../?tag=google-analytics#posts">Google Analytics</a><a class="b-chip" href="../?tag=r#posts">R</a></div>
+                </div>
+            </article>
+            <aside class="b-toc" aria-label="Contents"><div class="b-toc-title"><span class="ru-text">Содержание</span><span class="ua-text">Зміст</span><span class="en-text">Contents</span></div><ul><li><a href="#googleanalyticsr">Какие дополительные функции есть в googleAnalyticsR</a></li><li><a href="#_1">Авторизация</a><ul><li><a href="#1">1. Авторизация через стандартные параметры</a></li><li><a href="#2">2. Авторизация через собственное приложение</a></li><li><a href="#3">3. Авторизация с помощью сервисного аккаунта</a></li><li><a href="#google-analytics-api">Включаем Google Analytics API</a></li></ul></li><li><a href="#metadata-api">Metadata API</a></li><li><a href="#management-api">Management API</a><ul><li><a href="#google-analytics">Загрузка объектов из иерархии Google Analytics</a></li><li><a href="#_3">Управление пользователями</a></li><li><a href="#management-api_1">Другие полезные функции для работы с Management API</a></li></ul></li><li><a href="#google-analytics-reporting-api-v4">Google Analytics Reporting API v4</a><ul><li><a href="#date_range">date95range — сравниваем данные за разные периоды</a></li><li><a href="#_4">Фильтрация данных</a></li><li><a href="#_5">Вычисляемые показатели</a></li><li><a href="#_6">Сегменты</a></li><li><a href="#_7">Когортный анализ</a></li><li><a href="#user-activity-api">User Activity API</a></li></ul></li><li><a href="#_8">Выводы</a></li></ul></aside>
+        </div>
+        <section class="b-related">
+            <h2 class="outfit-font"><span class="ru-text">Читайте также</span><span class="ua-text">Читайте також</span><span class="en-text">Related posts</span></h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="../doklad-kak-rabotat-s-api-google-analytics-na-yazyke-r-s-pomoschyu-pake/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="0">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/8p-online-2021-googleanalyticsr-maxresdefault.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">февр. 2021</span><span class="ua-text">лют. 2021</span><span class="en-text">Feb 2021</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2021</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">1 мин чтения</span><span class="ua-text">1 хв читання</span><span class="en-text">1 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Доклад: Как работать с API Google Analytics на языке R с помощью пакета googleAnalyticsR (8P Online Edition 2020)</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">9 июля впервые конференция 8P прошла в online формате, в связи с Covid-19. На конференции я выступил с воркшопом, в ходе которого показал как с помощью языка R и пакета googleAnalyticsR…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Google Analytics</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">R</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a>
+                <a href="../kak-poluchit-dannye-iz-google-analytics-v-r-i-zagruzit-v-power-bi/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="60">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/kak-poluchit-dannye-iz-google-analytics-v-r-i-zagruzit-358ed-e6df77bc.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">июнь 2017</span><span class="ua-text">черв. 2017</span><span class="en-text">Jun 2017</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2017</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">17 мин чтения</span><span class="ua-text">17 хв читання</span><span class="en-text">17 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Как получить данные из Google Analytics в R и загрузить в Power BI</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">В предыдущих статьях я неоднократно упоминал, что Google Analytics — отличный инструмент для сбора данных о посещениях сайта, но в плане визуализации данных, на мой взгляд, далеко не…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">API</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Веб-аналитика</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a>
+                <a href="../kak-otsenit-poteryannyy-dohod-v-google-adwords-s-pomoschyu-yazyka-r/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="120">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/kak-otsenit-poteryannyy-dohod-v-google-adwords-s-po-kak-otse-60e7772b.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">июнь 2016</span><span class="ua-text">черв. 2016</span><span class="en-text">Jun 2016</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2016</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">15 мин чтения</span><span class="ua-text">15 хв читання</span><span class="en-text">15 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Как оценить потерянный доход в Google AdWords с помощью языка R</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">Сколько прибыли вы не получили в Google AdWords из-за нехватки бюджета или низкого рейтинга ключевых слов? Стандартные отчеты не позволяют это проанализировать, но я знаю способ, как…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Веб-аналитика</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Визуализация данных</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a></div>
+        </section>
+        <a href="../" class="b-back"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i><span class="ru-text">Ко всем материалам</span><span class="ua-text">До всіх матеріалів</span><span class="en-text">All posts</span></a>
+    </main>
+
+    <section class="px-6 max-w-7xl mx-auto pb-24 relative z-10">
+        <div class="grid md:grid-cols-2 gap-6" data-aos="fade-up">
+            <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(59, 130, 246, 0.1));">
+                <div class="bento-content w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center text-blue-400 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-telegram"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">Telegram-канал R4marketing</span><span class="ua-text">Telegram-канал R4marketing</span><span class="en-text">R4marketing on Telegram</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Новые статьи, видео и заметки по R — первыми.</span><span class="ua-text">Нові статті, відео та нотатки з R — першими.</span><span class="en-text">New articles, videos and R notes — first.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-blue-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+            <a href="https://www.youtube.com/R4marketing/?sub_confirmation=1" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(239, 68, 68, 0.1));">
+                <div class="bento-content w-16 h-16 bg-red-500/20 rounded-2xl flex items-center justify-center text-red-500 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-youtube"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">YouTube-канал R4marketing</span><span class="ua-text">YouTube-канал R4marketing</span><span class="en-text">R4marketing on YouTube</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Видеоуроки по R, аналитике и AI-инструментам.</span><span class="ua-text">Відеоуроки з R, аналітики та AI-інструментів.</span><span class="en-text">Video lessons on R, analytics and AI tools.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-red-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/5 bg-slate-950/80 backdrop-blur-md pt-16 pb-8 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
+                <div class="sm:col-span-2 lg:col-span-4">
+                    <a href="../../" class="inline-flex items-center gap-3 group mb-5">
+                        <img src="../../logo.jpg" alt="Alexey Seleznev" class="w-10 h-10 rounded-xl object-cover border border-white/10 group-hover:border-purple-500/50 transition-colors">
+                        <span class="text-lg font-black tracking-tight uppercase outfit-font text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+                    </a>
+                    <p class="text-sm text-slate-400 leading-relaxed max-w-sm mb-6"><span class="ru-text">Head of Analytics в Netpeak Group. Автор open source R-пакетов, бесплатных курсов по R и проекта R4marketing.</span><span class="ua-text">Head of Analytics у Netpeak Group. Автор open source R-пакетів, безкоштовних курсів з R та проєкту R4marketing.</span><span class="en-text">Head of Analytics at Netpeak Group. Author of open source R packages, free R courses and the R4marketing project.</span></p>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="https://t.me/R4marketing" target="_blank" rel="noopener" aria-label="Telegram R4marketing" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-400 hover:border-blue-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-telegram"></i></a>
+                        <a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" aria-label="YouTube R4marketing" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-red-500 hover:border-red-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="https://github.com/selesnow" target="_blank" rel="noopener" aria-label="GitHub" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-white hover:border-white/30 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://linkedin.com/in/selesnow" target="_blank" rel="noopener" aria-label="LinkedIn" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-500 hover:border-blue-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://facebook.com/selesnow" target="_blank" rel="noopener" aria-label="Facebook" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-600/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/alexey.selesnow" target="_blank" rel="noopener" aria-label="Instagram" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-pink-500 hover:border-pink-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://habr.com/ru/users/selesnow/" target="_blank" rel="noopener" aria-label="Habr" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-teal-400 hover:border-teal-400/40 transition-all hover:-translate-y-0.5"><i class="fa-solid fa-h"></i></a>
+                    </div>
+                </div>
+
+                <nav class="lg:col-span-2" aria-label="Site map">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">Сайт</span><span class="ua-text">Сайт</span><span class="en-text">Site</span></h3>
+                    <ul class="space-y-3">
+                        <li><a href="../../" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-house w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a></li>
+                        <li><a href="../../opensource/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-code-branch w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span></a></li>
+                        <li><a href="../../courses/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-graduation-cap w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a></li>
+                        <li><a href="../../videos/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-circle-play w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a></li>
+                        <li><a href="../../talks/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-microphone-lines w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a></li>
+                        <li><a href="../../articles/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-pen-nib w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a></li>
+                        <li><a href="../../interviews/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-regular fa-newspaper w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a></li>
+                        <li><a href="../../blog/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-feather-pointed w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a></li>
+                    </ul>
+                </nav>
+
+                <div class="lg:col-span-3">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">R4marketing и публикации</span><span class="ua-text">R4marketing і публікації</span><span class="en-text">R4marketing & writing</span></h3>
+                    <ul class="space-y-3">
+                        <li><a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-telegram w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Telegram-канал R4marketing</span><span class="ua-text">Telegram-канал R4marketing</span><span class="en-text">R4marketing Telegram</span></a></li>
+                        <li><a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-youtube w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">YouTube-канал R4marketing</span><span class="ua-text">YouTube-канал R4marketing</span><span class="en-text">R4marketing YouTube</span></a></li>
+                        <li><a href="https://alexeyseleznev.wordpress.com/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-pen-nib w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Личный блог</span><span class="ua-text">Особистий блог</span><span class="en-text">Personal blog</span></a></li>
+                        <li><a href="https://habr.com/ru/users/selesnow/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-h w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Профиль на Хабре</span><span class="ua-text">Профіль на Хабрі</span><span class="en-text">Habr profile</span></a></li>
+                        <li><a href="https://alexey-seleznev.pro/publications/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-layer-group w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Архив публикаций</span><span class="ua-text">Архів публікацій</span><span class="en-text">Publications archive</span></a></li>
+                        <li><a href="https://github.com/selesnow" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-github w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">GitHub</span><span class="ua-text">GitHub</span><span class="en-text">GitHub</span></a></li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-3">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">Контакты</span><span class="ua-text">Контакти</span><span class="en-text">Contacts</span></h3>
+                    <ul class="space-y-4">
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">Email</div><a href="mailto:me@alexey-seleznev.pro" class="text-sm text-slate-300 hover:text-purple-300 transition-colors break-all">me@alexey-seleznev.pro</a></li>
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">Telegram</div><a href="https://t.me/AlexeySeleznev" target="_blank" rel="noopener" class="text-sm text-slate-300 hover:text-blue-300 transition-colors break-all">@AlexeySeleznev</a></li>
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">LinkedIn</div><a href="https://linkedin.com/in/selesnow" target="_blank" rel="noopener" class="text-sm text-slate-300 hover:text-blue-300 transition-colors break-all">linkedin.com/in/selesnow</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-14 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+                <p>© 2026 Alexey Seleznev. <span class="ru-text">Все права защищены.</span><span class="ua-text">Усі права захищені.</span><span class="en-text">All rights reserved.</span></p>
+                <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="inline-flex items-center gap-2 font-semibold hover:text-white transition-colors group"><span class="ru-text">Наверх</span><span class="ua-text">Нагору</span><span class="en-text">Back to top</span><span class="w-7 h-7 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-purple-500 group-hover:border-purple-500 transition-all"><i class="fa-solid fa-arrow-up text-[10px]"></i></span></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script src="../../assets/site.js"></script>
+
+    <script>
+    (function () {
+        // кнопка «Копировать» у блоков кода
+        document.querySelectorAll('.b-prose .codehilite').forEach(box => {
+            const btn = document.createElement('button');
+            btn.type = 'button'; btn.className = 'b-copy'; btn.setAttribute('aria-label', 'Copy code');
+            btn.innerHTML = '<i class="fa-regular fa-copy" aria-hidden="true"></i>';
+            btn.addEventListener('click', () => {
+                navigator.clipboard.writeText(box.querySelector('pre').innerText).then(() => {
+                    btn.innerHTML = '<i class="fa-solid fa-check" aria-hidden="true"></i>';
+                    setTimeout(() => btn.innerHTML = '<i class="fa-regular fa-copy" aria-hidden="true"></i>', 1500);
+                });
+            });
+            box.appendChild(btn);
+        });
+        // подсветка текущего раздела в оглавлении
+        const links = Array.from(document.querySelectorAll('.b-toc a'));
+        if (links.length && 'IntersectionObserver' in window) {
+            const map = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+            const io = new IntersectionObserver(es => es.forEach(e => {
+                if (e.isIntersecting) { links.forEach(l => l.classList.remove('active')); const a = map.get(e.target.id); if (a) a.classList.add('active'); }
+            }), { rootMargin: '-80px 0px -70% 0px' });
+            map.forEach((_, id) => { const el = document.getElementById(id); if (el) io.observe(el); });
+        }
+    })();
+    </script>
+</body>
+</html>

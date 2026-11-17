@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Alexey Seleznev">
+    <meta name="theme-color" content="#030712">
+    <link rel="canonical" href="https://alexey-seleznev.pro/blog/kakoy-yazyk-vybrat-dlya-raboty-s-dannymi-r-ili-python-oba-migriruem-s/">
+
+    <title>Какой язык выбрать для работы с данными — R или Python? Оба! Мигрируем с pandas на tidyverse и data.table и обратно | Алексей Селезнёв</title>
+    <meta name="title" content="Какой язык выбрать для работы с данными — R или Python? Оба! Мигрируем с pandas на tidyverse и data.table и обратно | Алексей Селезнёв">
+    <meta name="description" content="По запросу R или Python в интернете вы найдёте миллионы статей и километровых обсуждений по теме какой из них лучше, быстрее и удобнее для работы с данными. Но к сожалению особой пользы…">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alexey-seleznev.pro/blog/kakoy-yazyk-vybrat-dlya-raboty-s-dannymi-r-ili-python-oba-migriruem-s/">
+    <meta property="og:site_name" content="ALEXEY-SELEZNEV.pro">
+    <meta property="og:title" content="Какой язык выбрать для работы с данными — R или Python? Оба! Мигрируем с pandas на tidyverse и data.table и обратно | Алексей Селезнёв">
+    <meta property="og:description" content="По запросу R или Python в интернете вы найдёте миллионы статей и километровых обсуждений по теме какой из них лучше, быстрее и удобнее для работы с данными. Но к сожалению особой пользы…">
+    <meta property="og:image" content="https://alexey-seleznev.pro/photo.jpg">
+    <meta property="og:image:alt" content="Алексей Селезнёв">
+    <meta property="og:locale" content="ru_RU">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="https://alexey-seleznev.pro/blog/kakoy-yazyk-vybrat-dlya-raboty-s-dannymi-r-ili-python-oba-migriruem-s/">
+    <meta name="twitter:title" content="Какой язык выбрать для работы с данными — R или Python? Оба! Мигрируем с pandas на tidyverse и data.table и обратно | Алексей Селезнёв">
+    <meta name="twitter:description" content="По запросу R или Python в интернете вы найдёте миллионы статей и километровых обсуждений по теме какой из них лучше, быстрее и удобнее для работы с данными. Но к сожалению особой пользы…">
+    <meta name="twitter:image" content="https://alexey-seleznev.pro/photo.jpg">
+
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z56YHE916N"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Z56YHE916N');
+    </script>
+    <link rel="icon" type="image/jpeg" href="../../logo.jpg">
+    <link rel="apple-touch-icon" href="../../logo.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;700;800;900&display=swap">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/site.css">
+    <!-- Tailwind собран заранее (_build/build.py) и подключается последним, как это делал CDN-скрипт -->
+    <link rel="stylesheet" href="../../assets/tailwind.css">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Какой язык выбрать для работы с данными — R или Python? Оба! Мигрируем с pandas на tidyverse и data.table и обратно",
+  "datePublished": "2020-08-05",
+  "inLanguage": "ru",
+  "description": "По запросу R или Python в интернете вы найдёте миллионы статей и километровых обсуждений по теме какой из них лучше, быстрее и удобнее для работы с данными. Но к сожалению особой пользы…",
+  "author": {
+    "@id": "https://alexey-seleznev.pro/#person"
+  },
+  "mainEntityOfPage": "https://alexey-seleznev.pro/blog/kakoy-yazyk-vybrat-dlya-raboty-s-dannymi-r-ili-python-oba-migriruem-s/"
+}
+    </script>
+    <link rel="stylesheet" href="../blog.css">
+</head>
+<body class="relative lang-en">
+
+    <!-- Interactive Background -->
+    <div id="vanta-bg"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full z-50 top-0 left-0 border-b border-white/5 bg-slate-950/60 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 h-16 flex items-center justify-between">
+            <a href="../../" class="flex items-center gap-2 sm:gap-2.5 md:gap-3 group shrink min-w-0">
+                <img src="../../logo.jpg" alt="Alexey Seleznev" class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 rounded-lg sm:rounded-xl object-cover shadow-md border border-white/10 group-hover:border-purple-500/50 group-hover:scale-105 transition-all shrink-0">
+                <span class="text-xs min-[400px]:text-sm sm:text-base md:text-xl font-black tracking-tight uppercase outfit-font whitespace-nowrap text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+            </a>
+            <div class="hidden xl:flex gap-6 text-sm font-semibold text-slate-400">
+                <a href="../../" class="nav-link hover:text-white transition-colors"><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a>
+                <a href="../../opensource/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span></a>
+                <a href="../../courses/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a>
+                <a href="../../videos/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a>
+                <a href="../../talks/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a>
+                <a href="../../articles/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a>
+                <a href="../../interviews/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a>
+                <a href="../../blog/" class="nav-link hover:text-white transition-colors active"><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a>
+            </div>
+
+            <div class="flex items-center gap-1.5 sm:gap-2 md:gap-4 shrink-0">
+                <div class="lang-switcher flex gap-1 sm:gap-1.5 md:gap-2 text-[11px] sm:text-xs md:text-sm font-bold border-r border-white/10 pr-1.5 sm:pr-3 md:pr-4 mr-0.5 sm:mr-1 md:mr-2 outfit-font">
+                    <button onclick="changeLang('en')" id="btn-en" class="active hover:text-white transition-colors">EN</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ru')" id="btn-ru" class="text-slate-500 hover:text-white transition-colors">RU</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ua')" id="btn-ua" class="text-slate-500 hover:text-white transition-colors">UA</button>
+                </div>
+
+                <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="text-slate-400 hover:text-blue-400 transition-colors hidden sm:block" aria-label="Telegram"><i class="fa-brands fa-telegram text-lg md:text-xl"></i></a>
+                <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="text-slate-400 hover:text-white transition-colors hidden sm:block" aria-label="GitHub"><i class="fa-brands fa-github text-lg md:text-xl"></i></a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="xl:hidden w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-purple-500/20 hover:border-purple-500/40 transition-all focus:outline-none" aria-label="Toggle Navigation Menu">
+                    <i class="fa-solid fa-bars text-sm sm:text-lg" id="mobile-menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div id="mobile-menu" class="hidden xl:hidden border-t border-white/10 bg-slate-950/95 backdrop-blur-2xl shadow-2xl overflow-y-auto max-h-[calc(100vh-4rem)] transition-all">
+            <div class="max-w-7xl mx-auto px-6 py-6 space-y-1">
+                <a href="../../" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-house text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span>
+                </a>
+                <a href="../../opensource/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-code-branch text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span>
+                </a>
+                <a href="../../courses/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-graduation-cap text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span>
+                </a>
+                <a href="../../videos/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-circle-play text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span>
+                </a>
+                <a href="../../talks/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-microphone-lines text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span>
+                </a>
+                <a href="../../articles/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-pen-nib text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span>
+                </a>
+                <a href="../../interviews/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-regular fa-newspaper text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span>
+                </a>
+                <a href="../../blog/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-white bg-white/5 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-feather-pointed text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span>
+                </a>
+
+                <div class="pt-4 mt-3 border-t border-white/10 flex items-center justify-around text-slate-400">
+                    <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-blue-400 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-telegram text-xl"></i> Telegram
+                    </a>
+                    <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="p-2 hover:text-white transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-github text-xl"></i> GitHub
+                    </a>
+                    <a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-red-500 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-youtube text-xl"></i> YouTube
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="b-wrap relative z-10">
+        <nav class="b-crumbs" aria-label="breadcrumb">
+            <a href="../../"><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a><span>/</span><a href="../"><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a><span>/</span><a href="../?cat=programmirovanie#posts">Программирование</a>
+        </nav>
+        <div class="b-layout has-toc">
+            <article class="bento-glass no-lift b-article" data-aos="fade-up">
+                <div class="bento-content">
+                    <div class="b-cats"><a class="b-chip b-chip-cat" href="../?cat=programmirovanie#posts">Программирование</a><a class="b-chip b-chip-cat" href="../?cat=python#posts">Python</a><a class="b-chip b-chip-cat" href="../?cat=r#posts">R</a></div>
+                    <h1 class="b-title outfit-font">Какой язык выбрать для работы с данными — R или Python? Оба! Мигрируем с pandas на tidyverse и data.table и обратно</h1>
+                    <div class="b-meta">
+                        <span><i class="fa-regular fa-calendar" aria-hidden="true"></i><span class="ru-text">5 августа 2020</span><span class="ua-text">5 серпня 2020</span><span class="en-text">5 Aug 2020</span></span>
+                        <span><i class="fa-regular fa-clock" aria-hidden="true"></i><span class="ru-text">22 мин чтения</span><span class="ua-text">22 хв читання</span><span class="en-text">22 min read</span></span>
+                        <span class="b-lang" title="Русский">RU</span>
+                    </div>
+                    <div class="b-note"><i class="fa-regular fa-clock" aria-hidden="true"></i><div><span class="ru-text">Материал опубликован в 2020 году — описанные инструменты и интерфейсы могли измениться.</span><span class="ua-text">Матеріал опубліковано у 2020 році — описані інструменти та інтерфейси могли змінитися.</span><span class="en-text">Published in 2020 — the tools and interfaces described may have changed since.</span></div></div>
+                    <figure class="b-cover"><img src="../images/covers/1378.webp" alt="" width="1200" height="630" decoding="async"></figure>
+                    <div class="b-prose"><p>По запросу R или Python в интернете вы найдёте миллионы статей и километровых обсуждений по теме какой из них лучше, быстрее и удобнее для работы с данными. Но к сожалению особой пользы все эти статьи и споры не несут.</p>
+<blockquote>
+<p>Изначально статья была написана для Хабра, и опубликована там же</p>
+<p>Первоисточник: <a target="_blank" rel="noopener" href="https://habr.com/ru/post/475210/">https://habr.com/ru/post/475210/</a></p>
+</blockquote>
+<p><img loading="lazy" decoding="async" alt="" width="720" height="720" src="../images/kakoy-yazyk-vybrat-dlya-raboty-s-dannym-byjd0gzkqjbrvfmaeujt-158cc18a.webp" /></p>
+<p>Цель этой статьи — сравнить основные приёмы обработки данных в наиболее популярных пакетах обоих языков. И помочь читателям максимально быстро овладеть тем, который они ещё не знают. Для тех кто пишет на Python узнать как выполнять всё то же самое в R, и соответственно наоборот.</p>
+<p>В ходе статьи мы разберём синтаксис наиболее популярных пакетов на R. Это пакеты входящие в библиотеку <code>tidyverse</code>, а также пакет <code>data.table</code>. И сравним их синтаксис с <code>pandas</code>, наиболее популярным пакетом для анализа данных в Python.</p>
+<p>Мы пошагово пройдём весь путь анализа данных от их загрузки до выполнения аналитических, оконных функций средствами Python и R.</p>
+<h1 id="_1">Содержание</h1>
+<p>Данная статья может использоваться как шпаргалка, в случае если вы забыли как в одном из рассматриваемых пакетов выполнить некоторую операцию по обработке данных.</p>
+<p><img loading="lazy" decoding="async" alt="" width="808" height="323" src="../images/kakoy-yazyk-vybrat-dlya-raboty-s-dannym-d5q7aybtr5ws-f-ad-k1-b795774b.webp" /></p>
+<ol>
+<li>Основные отличия синтаксиса в R и Python<br />
+   1.1. Обращение к функциям пакетов<br />
+   1.2. Присваивание<br />
+   1.3. Индексация<br />
+   1.4. Методы и ООП<br />
+   1.5. Пайплайны<br />
+   1.6. Структуры данных</li>
+<li>Несколько слов о пакетах которые мы будем использовать<br />
+   2.1. tidyverse<br />
+   2.2. data.table<br />
+   2.3. pandas</li>
+<li>Установка пакетов</li>
+<li>Загрузка данных</li>
+<li>Создание датафреймов</li>
+<li>Выбор нужных столбцов</li>
+<li>Фильтрация строк</li>
+<li>Группировка и агрегация</li>
+<li>Вертикальное объединение таблиц (UNION)</li>
+<li>Горизонтальное объединение таблиц (JOIN)</li>
+<li>Простейшие оконные функции и вычисляемые столбцы</li>
+<li>Таблица соответствия методов обработки данных в R и Python</li>
+<li>Заключение</li>
+<li>Небольшой опрос о том какой пакет вы используете</li>
+</ol>
+<p><em>Если вы интересуетесь анализом данных возможно вам будут полезны мои <a target="_blank" rel="noopener" href="https://t.me/R4marketing">telegram</a> и <a target="_blank" rel="noopener" href="https://www.youtube.com/R4marketing/?sub_confirmation=1">youtube</a> каналы. Большая часть контента которых посвящены языку R.</em></p>
+<h1 id="r-python">Основные отличия синтаксиса в R и Python</h1>
+<p>Что бы вам было проще с переходом из Python к R, или наоборот, приведу несколько основных моментов, на которые необходимо обратить внимание.</p>
+<h3 id="_2">Обращение к функциям пакетов</h3>
+<p>После загрузки пакета в R, для обращения к его функциям нет необходимости указывать имя пакета. В большинстве случаев в R это не принято, но допустимо. Вы вообще можете не импортировать пакет если в коде вам понадобится какая-либо одна его функция, а просто вызвать её указав название пакета и имя функции. Разделителем между названием пакета и функции в R служит двойное двоеточие <code>package_name::function_name()</code>.</p>
+<p>В Python наоборот, классикой считается обращение к функциям пакета, явно указав его имя. При загрузке пакета, как правило, ему присваивают сокращённое имя, например для <code>pandas</code> обычно используется псевдоним <code>pd</code>. Обращение к функции пакета идёт через точку <code>package_name.function_name()</code>.</p>
+<h3 id="_3">Присваивание</h3>
+<p>В R для присваивания значения объекту принято использовать стрелку <code>obj_name &lt;- value</code>, хотя допускается и одинарный знак равенства, но одинарный знак равенства в R используют в основном для передачи значений аргументам функций.</p>
+<p>В Python присваивание осуществляется исключительно одинарным знаком равенства <code>obj_name = value</code>.</p>
+<h3 id="_4">Индексация</h3>
+<p>Тут тоже есть довольно весомые отличия. В R индексация начинается с единицы и включает в результирующий диапазон все указанные элементы,</p>
+<p>в Python индексация начинается с нуля и выбираемый диапазон не включается последний элемент указанный в индексации. Так конструкция <code>x[i:j]</code> в Python не будет включать элемент j.</p>
+<p>Также есть различия в отрицательной индексации, в R запись <code>x[-1]</code> вернёт все элементы вектора, кроме последнего. В Python аналогичная запись вернёт только последний элемент.</p>
+<h3 id="_5">Методы и ООП</h3>
+<p>В R по своему реализовано ООП, об этом я писал в статье <a target="_blank" rel="noopener" href="https://habr.com/ru/post/453964/">“ООП в языке R (часть 1): S3 классы”</a>. В целом R функциональный язык, и всё в нём построено на функциях. Поэтому к примеру для пользователей Excel перейти на <code>tydiverse</code> будет проще, чем на <code>pandas</code>. Хотя возможно это моё субъективное мнение.</p>
+<p>Если вкратце, то объекты в R не имеют методов (если говорить про S3 классы, но есть и другие реализации ООП, которые встречаются значительно реже). Есть лишь обобщённые функции, которые в зависимости от класса объекта по-разному их обрабатывают.</p>
+<h3 id="_6">Пайплайны</h3>
+<p>Возможно это название для <code>pandas</code> будет не совсем корректно, но я попробую объяснить смысл.</p>
+<p>Что бы не сохранять промежуточные вычисления и не плодить в рабочем окружении ненужные объекты вы можете использовать своеобразный конвейер. Т.е. передавать результат вычисления из одной функции в следующую, и не сохранять промежуточные результаты.</p>
+<p>Возьмём следующий пример кода, в котором мы сохраняем в отдельные объекты промежуточные вычисления:</p>
+<div class="codehilite"><pre><span></span><code>temp_object &lt;- func1()
+temp_object2 &lt;- func2(temp_object )
+obj &lt;- func3(temp_object2 )
+</code></pre></div>
+
+<p>Мы последовательно выполнили 3 операции, и результат каждой сохранили в отдельный объект. Но на самом деле эти промежуточные объекты нам не нужны.</p>
+<p>Либо ещё хуже, но привычнее пользователям Excel.</p>
+<div class="codehilite"><pre><span></span><code>obj  &lt;- func3(func2(func1()))
+</code></pre></div>
+
+<p>В данном случае мы не сохраняли промежуточные результаты вычислений, но читать код с вложенными друг, в друга функциями крайне не удобно.</p>
+<p>Мы будем рассматривать несколько подходов к обработке данных в R, и в них по разному выполняются подобные операции.</p>
+<p>Пайплайны в библиотеке <code>tidyverse</code> реализуются оператором <code>%&gt;%</code>.</p>
+<div class="codehilite"><pre><span></span><code>obj &lt;- func1() %&gt;% 
+            func2() %&gt;%
+            func3()
+</code></pre></div>
+
+<p>Таким образом мы берём результат работы <code>func1()</code> и передаём его в качестве первого аргумента в <code>func2()</code>, далее результат этого вычисления передаём в качестве первого аргумента <code>func3()</code>. И в конце концов, все выполненные вычисления записываем в объект <code>obj &lt;-</code>.</p>
+<p>Лучше слов всё вышеописанное иллюстирирует этот мем:<br />
+<img loading="lazy" decoding="async" alt="" width="950" height="388" src="../images/kakoy-yazyk-vybrat-dlya-raboty-s-dannym-7782b0e7a63ba14311ed-d3c73a1d.webp" /></p>
+<p>В <code>data.table</code> похожим образом используются цепочки.</p>
+<div class="codehilite"><pre><span></span><code>newDT &lt;- DT[where, select|update|do, by][where, select|update|do, by][where, select|update|do, by]
+</code></pre></div>
+
+<p>В каждой из квадратных скобок вы можете использовать результат предыдущей операции.</p>
+<p>В <code>pandas</code> такие операции разделяются точкой.</p>
+<div class="codehilite"><pre><span></span><code>obj = df.fun1().fun2().fun3()
+</code></pre></div>
+
+<p>Т.е. мы берём нашу таблицу <strong>df</strong> и используем её метод <code>fun1()</code>, далее к полученному результату применяем метод <code>fun2()</code>, после <code>fun3()</code>. Полученный результат сохраняем в объект <strong>obj</strong>.</p>
+<h3 id="_7">Структуры данных</h3>
+<p>Структуры данных в R и Python схожи, но имеют разные названия.</p>
+<div class="b-table"><table>
+<thead>
+<tr>
+<th>Описание</th>
+<th>Название в R</th>
+<th>Название в Python / pandas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Табличная структура</td>
+<td>data.frame, data.table, tibble</td>
+<td>DataFrame</td>
+</tr>
+<tr>
+<td>Одномерный список значений</td>
+<td>Вектор</td>
+<td>Series в pandas или список (list) в чистом Python</td>
+</tr>
+<tr>
+<td>Многоуровневая не табличная структура</td>
+<td>Список (List)</td>
+<td>Словарь (dict)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Некоторые другие особенности и различия синтаксиса мы рассмотрим далее.</p>
+<h1 id="_8">Несколько слов о пакетах которые мы будем использовать</h1>
+<p>Для начала расскажу немного о пакетах с которыми в ходе этой статьи вы познакомитесь.</p>
+<h3 id="tidyverse">tidyverse</h3>
+<p>Официальный сайт: <a target="_blank" rel="noopener" href="https://www.tidyverse.org/">tidyverse.org</a>  </p>
+<p>Библиотека <code>tidyverse</code> написана Хедли Викхемом, старшим научным сотрудником RStudio. <code>tidyverse</code> состоит из внушительного набора пакетов упрощающих обработку данных, 5 из которых входят в топ 10 загружаемых из репозитория CRAN.</p>
+<p>Ядро библиотеки состоит из следующих пакетов: <code>ggplot2</code>, <code>dplyr</code>, <code>tidyr</code>, <code>readr</code>, <code>purrr</code>, <code>tibble</code>, <code>stringr</code>, <code>forcats</code>. Каждый из этих пакетов направлен на решение определённой задачи. Например <code>dplyr</code> создан для манипуляции с данными, <code>tidyr</code> для приведения данных к аккуратному виду, <code>stringr</code> упрощает работу со строками, а <code>ggplot2</code> является одним из наиболее популярных инструментов для визуализации данных.</p>
+<p>Преимуществом <code>tidyverse</code> является простота и легко читаемость синтаксиса, который во многом похож на язык запросов SQL.</p>
+<h3 id="datatable">data.table</h3>
+<p>Официальный сайт: <a target="_blank" rel="noopener" href="https://www.r-datatable.com/">r-datatable.com</a></p>
+<p>Автором <code>data.table</code> является Мэтт Доул из H2O.ai.</p>
+<p>Первый релиз библиотеки состоялся в 2006 году.</p>
+<p>Синтаксис пакета не так удобен как в <code>tidyverse</code> и больше напоминает классические датафреймы в R, но при этом значительно расширенные по функционалу.</p>
+<p>Все манипуляции с таблицей в данном пакете описываются в квадратных скобках, и если перевести синтаксис <code>data.table</code> на SQL, то получится примерно следующее: <code>data.table[ WHERE, SELECT, GROUP BY ]</code></p>
+<p>Сильной стороной данного пакета является скорость обработки больших объёмов данных.</p>
+<h3 id="pandas">pandas</h3>
+<p>Официальный сайт: <a target="_blank" rel="noopener" href="https://pandas.pydata.org/">pandas.pydata.org</a></p>
+<p>Название библиотеки происходит от эконометрического термина «панельные данные» (англ. panel data), используемого для описания многомерных структурированных наборов информации.</p>
+<p>Автором <code>pandas</code> является американец Уэс Мак-Кинни.</p>
+<p>Когда речь идёт об анализе данных на Python, равных <code>pandas</code> нет. Очень многофункциональный, высокоуровневый пакет, который позволяет вам провести с данными любые манипуляции начиная от загрузки данных из любых источников до их визуализации.</p>
+<h1 id="_9">Установка дополнительных пакетов</h1>
+<p>Пакеты о которых пойдёт речь в этой статье не входят в базовые дистрибутивы R и Python. Хотя есть небольшая оговорка, если вы установили дистрибутив Anaconda то ставить дополнительно <code>pandas</code> не требуется.</p>
+<h3 id="r">Установка пакетов в R</h3>
+<p>Если вы хотя бы раз открывали среду разработки RStudio наверняка вы и так уже знаете как установить нужный пакет в R. Для установки пакетов воспользуйтесь стандартной командой <code>install.packages()</code> запустив её непосредственно в самом R.</p>
+<div class="codehilite"><pre><span></span><code># установка пакетов
+install.packages(&quot;vroom&quot;)
+install.packages(&quot;readr&quot;)
+install.packages(&quot;dplyr&quot;)
+install.packages(&quot;data.table&quot;)
+</code></pre></div>
+
+<p>После установки пакеты необходимо подключить, для чего в большистве случаев используется команда <code>library()</code>.</p>
+<div class="codehilite"><pre><span></span><code># подключение или импорт пакетов в рабочее окружение
+library(vroom)
+library(readr)
+library(dplyr)
+library(data.table)
+</code></pre></div>
+
+<h3 id="python">Установка пакетов в Python</h3>
+<p>Итак, если у вас установлен чистый Python, то <code>pandas</code> вам необходимо доустанавливать руками. Открываем командную строку, или терминал, в зависимости от вашей операционной системы и вводим следующую команду.</p>
+<div class="codehilite"><pre><span></span><code>pip install pandas
+</code></pre></div>
+
+<p>После чего возвращаемся в Python и импортируем установленный пакет командой <code>import</code>.</p>
+<div class="codehilite"><pre><span></span><code>import pandas as pd
+</code></pre></div>
+
+<h1 id="_10">Загрузка данных</h1>
+<p>Добыча данных является одним из важнейших этапов анализа данных. И Python и R при желании предоставляют вам обширные возможности для получения данных из любых источников: локальные файлы, файлы из интернета, веб сайты, всевозможные базы данных.</p>
+<p><img loading="lazy" decoding="async" alt="" width="1600" height="900" src="../images/kakoy-yazyk-vybrat-dlya-raboty-s-dannym-svno3ve4yywdrqnyohzn-3292678e.webp" /></p>
+<p>В ходе статьи мы будем использовать несколько наборов данных:</p>
+<ol>
+<li>Две выгрузки из Google Analytics.</li>
+<li>Набор данных о пассажирах титаника.</li>
+</ol>
+<p>Все данные лежат у меня на <a target="_blank" rel="noopener" href="https://github.com/selesnow/publications/tree/master/data_example/r_python_data">GitHub</a> в виде csv и tsv файлов. От куда мы их и будем запрашивать.</p>
+<h3 id="r-tidyverse-vroom-readr">Загрузка данных в R: tidyverse, vroom, readr</h3>
+<p>Для загрузки данных в библиотеке <code>tidyverse</code> предназначены два пакета: <code>vroom</code>, <code>readr</code>. <code>vroom</code> более современный, но в будущем возможно пакеты будут объединены.</p>
+<p>Цитата из <a target="_blank" rel="noopener" href="https://www.tidyverse.org/blog/2019/05/vroom-1-0-0/#vroom-vs-readr">официальной документации</a> <code>vroom</code>.</p>
+<blockquote>
+<p>vroom vs readr<br />
+What does the release of <code>vroom</code> mean for <code>readr</code>? For now we plan to let the two packages evolve separately, but likely we will unite the packages in the future. One disadvantage to vroom’s lazy reading is certain data problems can’t be reported up front, so how best to unify them requires some thought.</p>
+<p>vroom против readr<br />
+Что означает выпуск <code>vroom</code> для <code>readr</code>? На данный момент мы планируем развивать оба пакета отдельно, но, вероятно, мы объединим их в будущем. Одним из недостатков ленивого чтения <code>vroom</code> является то, что о некоторых проблемах с данными нельзя сообщить заранее, поэтому, необходимо подумать о том как лучше их объединить.</p>
+</blockquote>
+<p>В этой статье мы рассмотрим оба пакета для загрузки данных:<br />
+<strong>Загрузка данных в R: пакет vroom</strong></p>
+<div class="codehilite"><pre><span></span><code># install.packages(&quot;vroom&quot;)
+library(vroom)
+
+# Чтение данных
+## vroom
+ga_nov  &lt;- vroom(&quot;https://raw.githubusercontent.com/selesnow/publications/master/data_example/r_python_data/ga_nowember.csv&quot;)
+ga_dec  &lt;- vroom(&quot;https://raw.githubusercontent.com/selesnow/publications/master/data_example/r_python_data/ga_december.csv&quot;)
+titanic &lt;- vroom(&quot;https://raw.githubusercontent.com/selesnow/publications/master/data_example/r_python_data/titanic.csv&quot;)
+</code></pre></div>
+
+<p><strong>Загрузка данных в R: readr</strong></p>
+<div class="codehilite"><pre><span></span><code># install.packages(&quot;readr&quot;)
+library(readr)
+
+# Чтение данных
+## readr
+ga_nov  &lt;- read_tsv(&quot;https://raw.githubusercontent.com/selesnow/publications/master/data_example/r_python_data/ga_nowember.csv&quot;)
+ga_dec  &lt;- read_tsv(&quot;https://raw.githubusercontent.com/selesnow/publications/master/data_example/r_python_data/ga_december.csv&quot;)
+titanic &lt;- read_csv(&quot;https://raw.githubusercontent.com/selesnow/publications/master/data_example/r_python_data/titanic.csv&quot;)
+</code></pre></div>
+
+<p>В пакете <code>vroom</code>, не зависимо от формата данных csv / tsv загрузка осуществляется одноимённой функцией <code>vroom()</code>, в пакете <code>readr</code> мы используем под каждый формат свою функцию <code>read_tsv()</code> и <code>read_csv()</code>.</p>
+<h3 id="r-datatable">Загрузка данных в R: data.table</h3>
+<p>В <code>data.table</code> для загрузки данных присутствует функция <code>fread()</code>.<br />
+<strong>Загрузка данных в R: пакет data.table</strong></p>
+<div class="codehilite"><pre><span></span><code># install.packages(&quot;data.table&quot;)
+library(data.table)
+
+## data.table
+ga_nov  &lt;- fread(&quot;https://raw.githubusercontent.com/selesnow/publications/master/data_example/r_python_data/ga_nowember.csv&quot;)
+ga_dec  &lt;- fread(&quot;https://raw.githubusercontent.com/selesnow/publications/master/data_example/r_python_data/ga_december.csv&quot;)
+titanic &lt;- fread(&quot;https://raw.githubusercontent.com/selesnow/publications/master/data_example/r_python_data/titanic.csv&quot;)
+</code></pre></div>
+
+<h3 id="python-pandas">Загрузка данных в Python: pandas</h3>
+<p>Если сравнивать с R пакетами, то в данном случае наиболее близким по синтаксису к <code>pandas</code> будет <code>readr</code>, т.к. <code>pandas</code> умеет запрашивать данные от куда угодно, и в этом пакете присутствует целое семейство функций <code>read_*()</code>.</p>
+<ul>
+<li><code>read_csv()</code></li>
+<li><code>read_excel()</code></li>
+<li><code>read_sql()</code></li>
+<li><code>read_json()</code></li>
+<li><code>read_html()</code></li>
+</ul>
+<p>И много других функций предназначенных для чтения данных из всевозможных форматов. Но для наших целей достаточно <code>read_table()</code> или <code>read_csv()</code> с использованием аргумента <em>sep</em> для указания разделителя столбцов.<br />
+<strong>Загрузка данных в Python: pandas</strong></p>
+<div class="codehilite"><pre><span></span><code>import pandas as pd
+
+ga_nov  = pd.read_csv(&quot;https://raw.githubusercontent.com/selesnow/publications/master/data_example/russian_text_in_r/ga_nowember.csv&quot;, sep = &quot;\t&quot;)
+ga_dec  = pd.read_csv(&quot;https://raw.githubusercontent.com/selesnow/publications/master/data_example/russian_text_in_r/ga_december.csv&quot;, sep = &quot;\t&quot;)
+titanic = pd.read_csv(&quot;https://raw.githubusercontent.com/selesnow/publications/master/data_example/russian_text_in_r/titanic.csv&quot;)
+</code></pre></div>
+
+<h1 id="_11">Создание датафреймов</h1>
+<p>В таблице <em>titanic</em>, которую мы загрузили, есть поле <em>Sex</em>, в котором хранится идентификатор пола пассажира.</p>
+<p>Но для более удобного представления данных в разрезе пола пассажира следует использовать не код пола, а название.</p>
+<p>Для этого мы создадим небольшой справочник, таблицу в которой будет всего 2 столбца (код и название пола) и 2 строки соответственно.</p>
+<h3 id="r-tidyverse-dplyr">Создание датафрейма в R: tidyverse, dplyr</h3>
+<p>В приведённом ниже примере кода мы создаём нужный датафрейм с помощью функции <code>tibble()</code> .<br />
+<strong>Создание датафрейма в R: dplyr</strong></p>
+<div class="codehilite"><pre><span></span><code>## dplyr
+### создаём справочник
+gender &lt;- tibble(id = c(1, 2),
+                 gender = c(&quot;female&quot;, &quot;male&quot;))
+</code></pre></div>
+
+<h3 id="r-datatable_1">Создание датафрейма в R: data.table</h3>
+<p><strong>Создание датафрейма в R: data.table</strong></p>
+<div class="codehilite"><pre><span></span><code>## data.table
+### создаём справочник
+gender &lt;- data.table(id = c(1, 2),
+                    gender = c(&quot;female&quot;, &quot;male&quot;))
+</code></pre></div>
+
+<h3 id="python-pandas_1">Создание датафрейма в Python: pandas</h3>
+<p>В <code>pandas</code> создание фреймов осуществляется в несколько этапов, сперва мы создаём словарь, а потом преобразуем словарь в датафрейм.<br />
+<strong>Создание датафрейма в Python: pandas</strong></p>
+<div class="codehilite"><pre><span></span><code># создаём дата фрейм
+gender_dict = {&#39;id&#39;: [1, 2],
+               &#39;gender&#39;: [&quot;female&quot;, &quot;male&quot;]}
+# преобразуем словарь в датафрейм
+gender = pd.DataFrame.from_dict(gender_dict)
+</code></pre></div>
+
+<h1 id="_12">Выбор столбцов</h1>
+<p>Таблицы с которыми вы работаете могут содержать десятки, и даже сотни столбцов с данными. Но для проведения анализа, как правило, вам нужны далеко не все столбцы которые доступны в исходной таблице.</p>
+<p><img loading="lazy" decoding="async" alt="" width="481" height="156" src="../images/kakoy-yazyk-vybrat-dlya-raboty-s-dannym-5b36d5e5580c2b9d04fc-c1b3925e.webp" /></p>
+<p>Поэтому одной из первых операций которые вы будете выполнять с исходной таблицей, это очистка её от ненужной информации, и освобождение памяти которую эта информация занимает.</p>
+<h3 id="r-tidyverse-dplyr_1">Выбор столбцов в R: tidyverse, dplyr</h3>
+<p>Синтаксис <code>dplyr</code> очень похож на язык запросов SQL, если вы с ним знакомы то довольно быстро овладеете этим пакетом.</p>
+<p>Для выбора столбцов используется функция <code>select()</code>.</p>
+<p>Ниже примеры кода с помощью которого вы можете выбрать столбцы следующими способами:</p>
+<ul>
+<li>Перечислив названия нужных столбцов</li>
+<li>Обратиться к именам столбцов используя регулярные выражения</li>
+<li>По типу данных или любому другому свойству данных которые содержатся в столбце</li>
+</ul>
+<p><strong>Выбор столбцов в R: dplyr</strong></p>
+<div class="codehilite"><pre><span></span><code># Выбор нужных столбцов
+## dplyr
+### выбрать по названию столбцов
+select(ga_nov, date, source, sessions)
+### исключь по названию столбцов
+select(ga_nov, -medium, -bounces)
+### выбрать по регулярному выражению, стобцы имена которых заканчиваются на s
+select(ga_nov, matches(&quot;s$&quot;))
+### выбрать по условию, выбираем только целочисленные столбцы
+select_if(ga_nov, is.integer)
+</code></pre></div>
+
+<h3 id="r-datatable_2">Выбор столбцов в R: data.table</h3>
+<p>Те же операции в <code>data.table</code> выполняются несколько иначе, в начале статьи я привёл описание того, какие аргументы есть внутри квадратных скобок в <code>data.table</code>.</p>
+<p><code>DT[i,j,by]</code></p>
+<p>Где:<br />
+i — where, т.е. фильтрация по строкам<br />
+j — select|update|do, т.е. выбор столбцов и их преобразование<br />
+by — группировка данных<br />
+<strong>Выбор столбцов в R: data.table</strong></p>
+<div class="codehilite"><pre><span></span><code>## data.table
+### выбрать по названию столбцов
+ga_nov[ , .(date, source, sessions) ]
+### исключь по названию столбцов
+ga_nov[ , .SD, .SDcols = ! names(ga_nov) %like% &quot;medium|bounces&quot; ]
+### выбрать по регулярному выражению
+ga_nov[, .SD, .SDcols = patterns(&quot;s$&quot;)]
+</code></pre></div>
+
+<p>Переменная <code>.SD</code> позволяет вам обратиться ко всем столбцам, а <code>.SDcols</code> отфильтровать нужные столбцы используя регулярные выражения, или другие функции для фильтрации названий нужных вам столбцов.</p>
+<h3 id="python-pandas_2">Выбор столбцов в Python, pandas</h3>
+<p>Для выбора столбцов по названию в <code>pandas</code> достаточно передать список их названий. А для выбора или исключения столбцов по названию используя регулярные выражения необходимо использовать функции <code>drop()</code> и <code>filter()</code>, и аргумент <em>axis=1</em>, с помощью которого вы указываете, что обрабатывать надо не строки а столбцы.</p>
+<p>Для выбора поля по типу данных используйте функцию <code>select_dtypes()</code>, и в аргументы <em>include</em> или <em>exclude</em> передайте список типов данных соответствующие тем, какие поля вам необходимо выбрать.<br />
+<strong>Выбор столбцов в Python: pandas</strong></p>
+<div class="codehilite"><pre><span></span><code># Выбор полей по названию
+ga_nov[[&#39;date&#39;, &#39;source&#39;, &#39;sessions&#39;]]
+# Исключить по названию
+ga_nov.drop([&#39;medium&#39;, &#39;bounces&#39;], axis=1)
+# Выбрать по регулярному выражению
+ga_nov.filter(regex=&quot;s$&quot;, axis=1)
+# Выбрать числовые поля
+ga_nov.select_dtypes(include=[&#39;number&#39;])
+# Выбрать текстовые поля
+ga_nov.select_dtypes(include=[&#39;object&#39;])
+</code></pre></div>
+
+<h1 id="_13">Фильтрация строк</h1>
+<p>Например, в исходной таблице могут храниться данные за несколько лет, а вам необходимо проанализировать только прошлый месяц. Опять же, лишние строки замедлят процесс обработки данных и будут засорять память ПК.</p>
+<p><img loading="lazy" decoding="async" alt="" width="365" height="162" src="../images/kakoy-yazyk-vybrat-dlya-raboty-s-dannym-f01ab9e3ed790b706486-5334539f.webp" /></p>
+<h3 id="r-tydyverse-dplyr">Фильтрация строк в R: tydyverse, dplyr</h3>
+<p>В <code>dplyr</code> для фильтрации строк используется функция <code>filter()</code>. В качестве первого аргумента она принимает датафрейм, далее вы перечисляете условия фильтрации.</p>
+<p>При написании логических выражений для фильтрации таблицы в данном случае имена столбцов указываете без кавычек, и без объявления имени таблицы.</p>
+<p>Применяя для фильтрации несколько логических выражений используйте следующие операторы:</p>
+<ul>
+<li>&amp; или запятая — логическое И</li>
+<li>| — логическое ИЛИ</li>
+</ul>
+<p><strong>Фильтрация строк в R: dplyr</strong></p>
+<div class="codehilite"><pre><span></span><code># фильтрация строк
+## dplyr
+### фильтрация строк по одному условию
+filter(ga_nov, source == &quot;google&quot;)
+### фильтр по двум условиям соединённым логическим и
+filter(ga_nov, source == &quot;google&quot; &amp; sessions &gt;= 10)
+### фильтр по двум условиям соединённым логическим или
+filter(ga_nov, source == &quot;google&quot; | sessions &gt;= 10)
+</code></pre></div>
+
+<h3 id="r-datatable_3">Фильтрация строк в R: data.table</h3>
+<p>Как я уже писал выше, в <code>data.table</code> синтаксис преобразования данных заключён в квадратные скобки.</p>
+<p><code>DT[i,j,by]</code></p>
+<p>Где:<br />
+i — where, т.е. фильтрация по строкам<br />
+j — select|update|do, т.е. выбор столбцов и их преобразование<br />
+by — группировка данных</p>
+<p>Для фильтрации строк используется аргумент <em>i</em>, который имеет первую позицию в квадратных скобках.</p>
+<p>Обращение к столбцам в логических выражениях осуществляется без кавычек и указания имени таблицы.</p>
+<p>Логические выражения связываются между собой так же как и в <code>dplyr</code> через операторы &amp; и |.<br />
+<strong>Фильтрация строк в R: data.table</strong></p>
+<div class="codehilite"><pre><span></span><code>## data.table
+### фильтрация строк по одному условию
+ga_nov[source == &quot;google&quot;]
+### фильтр по двум условиям соединённым логическим и
+ga_nov[source == &quot;google&quot; &amp; sessions &gt;= 10]
+### фильтр по двум условиям соединённым логическим или
+ga_nov[source == &quot;google&quot; | sessions &gt;= 10]
+</code></pre></div>
+
+<h3 id="python-pandas_3">Фильтрация строк в Python: pandas</h3>
+<p>Фильтрация по строкам в <code>pandas</code> схожа с фильтрацией в <code>data.table</code>, и осуществляется в квадратных скобках.</p>
+<p>Обращение к столбцам в данном случае осуществляется обязательно с указанием имени датафрейма, далее название столбца можно так же указать в кавычках в квадратных скобках (<em>пример</em> <code>df['col_name']</code>), либо без кавычек после точки (<em>пример</em> <code>df.col_name</code>).</p>
+<p>В случае, если вам необходимо отфильтровать датафрейм по нескольким условиям, каждое из условий необходимо взять в круглые скобки. Связываются между собой логический условия операторами <code>&amp;</code> и <code>|</code>.<br />
+<strong>Фильтрация строк в Python: pandas</strong></p>
+<div class="codehilite"><pre><span></span><code># Фильтрация строк таблицы
+### фильтрация строк по одному условию
+ga_nov[ ga_nov[&#39;source&#39;] == &quot;google&quot; ]
+### фильтр по двум условиям соединённым логическим и
+ga_nov[(ga_nov[&#39;source&#39;] == &quot;google&quot;) &amp; (ga_nov[&#39;sessions&#39;] &gt;= 10)]
+### фильтр по двум условиям соединённым логическим или
+ga_nov[(ga_nov[&#39;source&#39;] == &quot;google&quot;) | (ga_nov[&#39;sessions&#39;] &gt;= 10)]
+</code></pre></div>
+
+<h1 id="_14">Группировка и агрегация данных</h1>
+<p>Одна из наиболее часто используемых операций в анализе данных — группировка и агрегация.</p>
+<p><img loading="lazy" decoding="async" alt="" width="381" height="159" src="../images/kakoy-yazyk-vybrat-dlya-raboty-s-dannym-7c6695e6ac9d290b95e3-cb90e3a8.webp" /></p>
+<p>Синтаксис для выполнения этих операций разрознен во всех рассматриваемых нами пакетах.</p>
+<p>В данном случае в качестве примера мы возьмём датафрейм <em>titanic</em>, и посчитаем количество и среднюю стоимость билетов в зависимости от класса каюты.</p>
+<h3 id="r-tidyverse-dplyr_2">Группировка и агрегация данных в R: tidyverse, dplyr</h3>
+<p>В <code>dplyr</code> для группировки используется функция <code>group_by()</code>, а для агрегации <code>summarise()</code>. На самом деле у <code>dplyr</code> есть целое семейство функций <code>summarise_*()</code>, но цель этой статьи сравнить базовый синтаксис, поэтому не будем лезть в такие дебри.</p>
+<p>Основные агрегирующие функции:</p>
+<ul>
+<li><code>sum()</code> — суммирование</li>
+<li><code>min()</code> / <code>max()</code> — минимальное и максимальное значение</li>
+<li><code>mean()</code> — среднее арифметическое</li>
+<li><code>median()</code> — медиана</li>
+<li><code>length()</code> — количество</li>
+</ul>
+<p><strong>Группировка и агрегация в R: dplyr</strong></p>
+<div class="codehilite"><pre><span></span><code>## dplyr
+### группировка и агрегация строк
+group_by(titanic, Pclass) %&gt;%
+  summarise(passangers = length(PassengerId),
+            avg_price  = mean(Fare))
+</code></pre></div>
+
+<p>В функцию <code>group_by()</code> в качестве первого аргумента мы передали таблицу <em>titanic</em>, и далее указали поле <em>Pclass</em>, по которому мы будем группировать нашу таблицу. Результат этой операции с помощью оператора <code>%&gt;%</code> передали в качестве первого аргумента в функцию <code>summarise()</code>, и добавили ещё 2 поля: <em>passangers</em> и <em>avg_price</em>. В первом, используя функцию <code>length()</code> рассчитали количество билетов, а во втором с помощью функции <code>mean()</code> получили среднюю стоимость билета.</p>
+<h3 id="r-datatable_4">Группировка и агрегация данных в R: data.table</h3>
+<p>В <code>data.table</code> для агрегации служит аргумент <code>j</code> который имеет вторую позицию в квадратных скобках, а для группировки <code>by</code> или <code>keyby</code>, которые имеют третью позицию.</p>
+<p>Список агрегирующих функций в данном случае идентичен описанному в <code>dplyr</code>, т.к. это функции из базового синтаксиса R.<br />
+<strong>Группировка и агрегация в R: data.table</strong></p>
+<div class="codehilite"><pre><span></span><code>## data.table
+### фильтрация строк по одному условию
+titanic[, .(passangers = length(PassengerId),
+            avg_price  = mean(Fare)),
+        by = Pclass]
+</code></pre></div>
+
+<h3 id="python-pandas_4">Группировка и агрегация данных в Python: pandas</h3>
+<p>Группировка в <code>pandas</code> схожа с <code>dplyr</code>, а вот агрегация не похожа ни на <code>dplyr</code> ни на <code>data.table</code>.</p>
+<p>Для группировки используйте метод <code>groupby()</code>, в который необходимо передать список столбцов, по которым будет сгруппирован датафрейм.</p>
+<p>Для агрегации можно использовать метод <code>agg()</code>, который принимает словарь. Ключами словаря являются столбцы к которым вы будете применять агрегирующие функции, а значениями будут имена агрегирующих функций.</p>
+<p>Агрегирующие функции:</p>
+<ul>
+<li><code>sum()</code> — суммирование</li>
+<li><code>min()</code> / <code>max()</code> — минимальное и максимальное значение</li>
+<li><code>mean()</code> — среднее арифметическое</li>
+<li><code>median()</code> — медиана</li>
+<li><code>count()</code> — количество</li>
+</ul>
+<p>Функция <code>reset_index()</code> в примере ниже используется для того, что бы сбросить вложенные индексы, которые <code>pandas</code> по умолчанию устанавливает после агрегации данных.</p>
+<p>Символ <code>\</code> позволяет вам переходить на следующую строку.<br />
+<strong>Группировка и агрегация в Python: pandas</strong></p>
+<div class="codehilite"><pre><span></span><code># группировка и агрегация данных
+titanic.groupby([&quot;Pclass&quot;]).\
+    agg({&#39;PassengerId&#39;: &#39;count&#39;, &#39;Fare&#39;: &#39;mean&#39;}).\
+        reset_index()
+</code></pre></div>
+
+<h1 id="_15">Вертикальное объединение таблиц</h1>
+<p>Операция, при которой вы объединяете две или более таблиц одинаковой структуры. В загруженных нами данными есть таблицы <em>ga_nov</em> и <em>ga_dec</em>. Эти таблицы одинаковы по структуре, т.е. имеют одинаковые столбцы, и типы данных в этих столбцах.</p>
+<p><img loading="lazy" decoding="async" alt="" width="382" height="317" src="../images/kakoy-yazyk-vybrat-dlya-raboty-s-dannym-846717f312a310dd0f72-75d18c93.webp" /></p>
+<p>Это выгрузка из Google Analytics за ноябрь и декабрь месяц, в этом разделе мы объедим эти данные в одну таблицу.</p>
+<h3 id="r-tidyverse-dplyr_3">Вертикальное объединение таблиц в R: tidyverse, dplyr</h3>
+<p>В <code>dplyr</code> объединить 2 таблицы в одну можно с помощью функции <code>bind_rows()</code>, передав в качестве её аргументов таблицы.<br />
+<strong>Фильтрация строк в R: dplyr</strong></p>
+<div class="codehilite"><pre><span></span><code># Вертикальное объединение таблиц
+## dplyr
+bind_rows(ga_nov, ga_dec)
+</code></pre></div>
+
+<h3 id="r-datatable_5">Вертикальное объединение таблиц в R: data.table</h3>
+<p>Так же ничего сложного, используем <code>rbind()</code>.<br />
+<strong>Фильтрация строк в R: data.table</strong></p>
+<div class="codehilite"><pre><span></span><code>## data.table
+rbind(ga_nov, ga_dec)
+</code></pre></div>
+
+<h3 id="python-pandas_5">Вертикальное объединение таблиц в Python: pandas</h3>
+<p>В <code>pandas</code> для объединения таблиц служит функция <code>concat()</code>, в которую необходимо передать список фреймов для их объединения.<br />
+<strong>Фильтрация строк в Python: pandas</strong></p>
+<div class="codehilite"><pre><span></span><code># вертикальное объединение таблиц
+pd.concat([ga_nov, ga_dec])
+</code></pre></div>
+
+<h1 id="_16">Горизонтальное объединение таблиц</h1>
+<p>Операция при которой, к первой таблице добавляются столбцы из второй по ключу. Зачастую используется при обогащении таблицы фактов (например таблице с данными о продажах), некоторыми справочными данными (например стоимостью товара).</p>
+<p><img loading="lazy" decoding="async" alt="" width="380" height="348" src="../images/kakoy-yazyk-vybrat-dlya-raboty-s-dannym-7d379b45772544f9e719-51fb7a91.webp" /></p>
+<p>Есть несколько типов объединения:</p>
+<p><img loading="lazy" decoding="async" alt="" width="440" height="320" src="../images/kakoy-yazyk-vybrat-dlya-raboty-s-dannym-5c60963f6a76a72df5e2-acb0347e.webp" /></p>
+<p>В загруженной ранее таблице <em>titanic</em> у нас имеется столбец <em>Sex</em>, который соответствует коду пола пассажира:</p>
+<p>1 — женский<br />
+2 — мужской</p>
+<p>Также, мы с вами создали таблицу — справочник <em>gender</em>. Для более удобного представления данных по полу пассажиров нам необходимо добавить название пола, из справочника <em>gender</em> в таблицу <em>titanic</em>.</p>
+<h3 id="r-tidyverse-dplyr_4">Горизонтальное объединение таблиц в R: tidyverse, dplyr</h3>
+<p>В <code>dplyr</code> для горизонтального объединения присутствует целое семейство функций:</p>
+<ul>
+<li><code>inner_join()</code></li>
+<li><code>left_join()</code></li>
+<li><code>right_join()</code></li>
+<li><code>full_join()</code></li>
+<li><code>semi_join()</code></li>
+<li><code>nest_join()</code></li>
+<li><code>anti_join()</code></li>
+</ul>
+<p>Наиболее часто используемой в моей практике является <code>left_join()</code>.</p>
+<p>В качестве первых двух аргументов перечисленные выше функцию принимают две таблицы для объединения, а в качестве третьего аргумента <em>by</em> необходимо указать столбцы для объединения.<br />
+<strong>Горизонтальное объединение таблиц в R: dplyr</strong></p>
+<div class="codehilite"><pre><span></span><code># объединяем таблицы
+left_join(titanic, gender,
+          by = c(&quot;Sex&quot; = &quot;id&quot;))
+</code></pre></div>
+
+<h3 id="r-datatable_6">Горизонтальное объединение таблиц в R: data.table</h3>
+<p>В <code>data.table</code> объединять таблицы по ключу необходимо с помощью функции <code>merge()</code>.</p>
+<p><strong>Аргументы функции merge() в data.table</strong></p>
+<ul>
+<li>x, y — Таблицы для объелинения</li>
+<li>by — Столбец, который является ключом для объединения, если в обеих таблицах он имеет одинаковое название</li>
+<li>by.x, by.y — Имена столбцов для объединения, в случае если в таблицах они имеют разное название</li>
+<li>all, all.x, all.y — Тип соединения, all вернёт все строки из обеих таблиц, all.x соответствует операции LEFT JOIN (оставит все строки первой таблицы), all.y — соответствует операции RIGHT JOIN (оставит все строки второй таблицы).</li>
+</ul>
+<p><strong>Горизонтальное объединение таблиц в R: data.table</strong></p>
+<div class="codehilite"><pre><span></span><code># объединяем таблицы
+merge(titanic, gender, by.x = &quot;Sex&quot;, by.y = &quot;id&quot;, all.x = T)
+</code></pre></div>
+
+<h3 id="python-pandas_6">Горизонтальное объединение таблиц в Python: pandas</h3>
+<p>Так же как и в <code>data.table</code>, в <code>pandas</code> для объединения таблиц используется функция <code>merge()</code>.</p>
+<p><strong>Аргументы функции merge() в pandas</strong></p>
+<ul>
+<li>how — Тип соединения: left, right, outer, inner</li>
+<li>on — Столбец, который является ключом, в случае если имеет одинаковое название в обеих таблицах</li>
+<li>left_on, right_on — Имена столбцов ключей, в случае если они имеют разные имена в таблицах</li>
+</ul>
+<p><strong>Горизонтальное объединение таблиц в Python: pandas</strong></p>
+<div class="codehilite"><pre><span></span><code># объединяем по ключу
+titanic.merge(gender, how = &quot;left&quot;, left_on = &quot;Sex&quot;, right_on = &quot;id&quot;)
+</code></pre></div>
+
+<h1 id="_17">Простейшие оконные функции и вычисляемые столбцы</h1>
+<p>Оконные функции по смыслу похожи на агрегирующие, и так же часто используются в анализе данных. Но в отличие от агрегирующих функций, оконные не меняют количество строк исходящего датафрейма.</p>
+<p><img loading="lazy" decoding="async" alt="" width="426" height="164" src="../images/kakoy-yazyk-vybrat-dlya-raboty-s-dannym-16b2eb130dfef8affa63-c677075e.webp" /></p>
+<p>По сути с помощью оконных функцию мы разбиваем входящий датафрейм на части по какому-то признаку, т.е. по значению поля, или нескольких полей. И проводим над каждым окном арифметические операции. Результат этих операций будет возвращён в каждую строку, т.е. не изменяя общего количества строк в таблице.</p>
+<p>Для примера возьмём таблицу <em>titanic</em>. Мы можем посчитать какой процент составила стоимость каждого билета в рамках его класса кают.</p>
+<p>Для этого нам необходимо в каждой строке получить общую стоимость билета по текущему классу кают, к которому относится билет в данной строке, потом разделить стоимость каждого билета на общую стоимость всех билетов этого же класса кают.</p>
+<h3 id="r-tidyverse-dplyr_5">Оконные функции в R: tidyverse, dplyr</h3>
+<p>Для добавления новых столбцов, без применения группировки строк, в <code>dplyr</code> служит функция <code>mutate()</code>.</p>
+<p>Решить описанную выше задачу можно сгруппировав данные по полю <em>Pclass</em> и просуммировав в новом столбце поле <em>Fare</em>. Далее разгруппировываем таблицу и делим значения поля <em>Fare</em> на то, что получилось в прошлом шаге.<br />
+<strong>Оконные функции в R: dplyr</strong></p>
+<div class="codehilite"><pre><span></span><code>group_by(titanic, Pclass) %&gt;%
+  mutate(Pclass_cost = sum(Fare)) %&gt;%
+  ungroup() %&gt;%
+  mutate(ticket_fare_rate = Fare / Pclass_cost)
+</code></pre></div>
+
+<h3 id="r-datatable_7">Оконные функции в R: data.table</h3>
+<p>Алгоритм решения остаётся такой же, как в <code>dplyr</code>, нам необходимо разбить таблицу на окна по полю <em>Pclass</em>. Вывести в новом столбце сумму по соответствующей каждой строке группе, и добавить столбец в котором мы рассчитаем долю стоимости каждого билета в его группе.</p>
+<p>Для добавления новых столбцов в <code>data.table</code> присутствует оператор <code>:=</code>. Ниже приведён пример решения задачи с помощью пакета <code>data.table</code><br />
+<strong>Оконные функции в R: data.table</strong></p>
+<div class="codehilite"><pre><span></span><code>titanic[,c(&quot;Pclass_cost&quot;,&quot;ticket_fare_rate&quot;) := .(sum(Fare), Fare / Pclass_cost), 
+        by = Pclass]
+</code></pre></div>
+
+<h3 id="python-pandas_7">Оконные функции в Python: pandas</h3>
+<p>Один из способов добавить новый столбец в <code>pandas</code> — использовать функцию <code>assign()</code>. Для суммирования стоимости билетов по классу кают, без группировки строк мы будем использовать функцию <code>transform()</code>.</p>
+<p>Ниже пример решения, в котором мы добавляем в таблицу <em>titanic</em> те же 2 столбца.<br />
+<strong>Оконные функции в Python: pandas</strong></p>
+<div class="codehilite"><pre><span></span><code>titanic.assign(Pclass_cost      =  titanic.groupby(&#39;Pclass&#39;).Fare.transform(sum),
+               ticket_fare_rate = lambda x: x[&#39;Fare&#39;] / x[&#39;Pclass_cost&#39;])
+</code></pre></div>
+
+<h1 id="_18">Таблица соответствия функций и методов</h1>
+<p>Далее привожу таблицу соответствия методов для выполнения различных операций с данными в рассмотренных нами пакетах.</p>
+<div class="b-table"><table>
+<thead>
+<tr>
+<th>Описание</th>
+<th>tidyverse</th>
+<th>data.table</th>
+<th>pandas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Загрузка данных</td>
+<td><code>vroom()</code>/ <code>readr::read_csv()</code> / <code>readr::read_tsv()</code></td>
+<td><code>fread()</code></td>
+<td><code>read_csv()</code></td>
+</tr>
+<tr>
+<td>Создание датафреймов</td>
+<td><code>tibble()</code></td>
+<td><code>data.table()</code></td>
+<td><code>dict()</code> + <code>from_dict()</code></td>
+</tr>
+<tr>
+<td>Выбор столбцов</td>
+<td><code>select()</code></td>
+<td>аргумент <em>j</em>, вторая позиция в квадратных скобках</td>
+<td>передаём список нужных столбцов в квадратных скобках / <code>drop()</code> / <code>filter()</code> / <code>select_dtypes()</code></td>
+</tr>
+<tr>
+<td>Фильтрация строк</td>
+<td><code>filter()</code></td>
+<td>аргумент <em>i</em>, первая позиция в квадратных скобках</td>
+<td>перечисляем условия фильтрации в квадратных скобках / <code>filter()</code></td>
+</tr>
+<tr>
+<td>Группировка и агрегация</td>
+<td><code>group_by()</code> + <code>summarise()</code></td>
+<td>аргументы <em>j</em> + <em>by</em></td>
+<td><code>groupby()</code> + <code>agg()</code></td>
+</tr>
+<tr>
+<td>Вертикальное объединение таблиц (UNION)</td>
+<td><code>bind_rows()</code></td>
+<td><code>rbind()</code></td>
+<td><code>concat()</code></td>
+</tr>
+<tr>
+<td>Горизонтальное объединение таблиц (JOIN)</td>
+<td><code>left_join()</code> / <code>*_join()</code></td>
+<td><code>merge()</code></td>
+<td><code>merge()</code></td>
+</tr>
+<tr>
+<td>Простейшие оконные функции и добавление рассчитываемых столбцов</td>
+<td><code>group_by()</code> + <code>mutate()</code></td>
+<td>аргумент <em>j</em> с использованием оператора <code>:=</code> + аргумент <em>by</em></td>
+<td><code>transform()</code> + <code>assign()</code></td>
+</tr>
+</tbody>
+</table></div>
+<h1 id="_19">Заключение</h1>
+<p>Возможно в статье я описал не самые оптимальные реализации обработки данных, поэтому буду рад если исправите мои ошибки в комментариях, или же просто дополните приведённую в статье информацию другими приёмами работы с данными в R / Python.</p>
+<p>Как я уже писал выше, цель статьи заключась не в том, что бы навязывать своё мнение о том, какой из языков лучше, а упростить возможность изучить оба языка, либо по необходимости мигрировать между ними.</p>
+<p>Если вам понравилась статья буду рад новым подписчикам на моих <a target="_blank" rel="noopener" href="https://www.youtube.com/channel/UCyHC6R3mCCP8bhD9tPbjnzQ/?sub_confirmation=1">youtube</a> и <a target="_blank" rel="noopener" href="http://t.me/R4marketing">телеграм</a> каналах.</p></div>
+                    
+                    <div class="b-tags"><a class="b-chip" href="../?tag=analiz-dannyh#posts">Анализ данных</a><a class="b-chip" href="../?tag=obrabotka-dannyh#posts">Обработка данных</a><a class="b-chip" href="../?tag=tidyverse#posts">tidyverse</a><a class="b-chip" href="../?tag=r#posts">R</a><a class="b-chip" href="../?tag=python#posts">Python</a></div>
+                </div>
+            </article>
+            <aside class="b-toc" aria-label="Contents"><div class="b-toc-title"><span class="ru-text">Содержание</span><span class="ua-text">Зміст</span><span class="en-text">Contents</span></div><ul><li><a href="#_2">Обращение к функциям пакетов</a></li><li><a href="#_3">Присваивание</a></li><li><a href="#_4">Индексация</a></li><li><a href="#_5">Методы и ООП</a></li><li><a href="#_6">Пайплайны</a></li><li><a href="#_7">Структуры данных</a></li><li><a href="#tidyverse">tidyverse</a></li><li><a href="#datatable">data.table</a></li><li><a href="#pandas">pandas</a></li><li><a href="#r">Установка пакетов в R</a></li><li><a href="#python">Установка пакетов в Python</a></li><li><a href="#r-tidyverse-vroom-readr">Загрузка данных в R: tidyverse, vroom, readr</a></li><li><a href="#r-datatable">Загрузка данных в R: data.table</a></li><li><a href="#python-pandas">Загрузка данных в Python: pandas</a></li><li><a href="#r-tidyverse-dplyr">Создание датафрейма в R: tidyverse, dplyr</a></li><li><a href="#r-datatable_1">Создание датафрейма в R: data.table</a></li><li><a href="#python-pandas_1">Создание датафрейма в Python: pandas</a></li><li><a href="#r-tidyverse-dplyr_1">Выбор столбцов в R: tidyverse, dplyr</a></li><li><a href="#r-datatable_2">Выбор столбцов в R: data.table</a></li><li><a href="#python-pandas_2">Выбор столбцов в Python, pandas</a></li><li><a href="#r-tydyverse-dplyr">Фильтрация строк в R: tydyverse, dplyr</a></li><li><a href="#r-datatable_3">Фильтрация строк в R: data.table</a></li><li><a href="#python-pandas_3">Фильтрация строк в Python: pandas</a></li><li><a href="#r-tidyverse-dplyr_2">Группировка и агрегация данных в R: tidyverse, dplyr</a></li><li><a href="#r-datatable_4">Группировка и агрегация данных в R: data.table</a></li><li><a href="#python-pandas_4">Группировка и агрегация данных в Python: pandas</a></li><li><a href="#r-tidyverse-dplyr_3">Вертикальное объединение таблиц в R: tidyverse, dplyr</a></li><li><a href="#r-datatable_5">Вертикальное объединение таблиц в R: data.table</a></li><li><a href="#python-pandas_5">Вертикальное объединение таблиц в Python: pandas</a></li><li><a href="#r-tidyverse-dplyr_4">Горизонтальное объединение таблиц в R: tidyverse, dplyr</a></li><li><a href="#r-datatable_6">Горизонтальное объединение таблиц в R: data.table</a></li><li><a href="#python-pandas_6">Горизонтальное объединение таблиц в Python: pandas</a></li><li><a href="#r-tidyverse-dplyr_5">Оконные функции в R: tidyverse, dplyr</a></li><li><a href="#r-datatable_7">Оконные функции в R: data.table</a></li><li><a href="#python-pandas_7">Оконные функции в Python: pandas</a></li></ul></aside>
+        </div>
+        <section class="b-related">
+            <h2 class="outfit-font"><span class="ru-text">Читайте также</span><span class="ua-text">Читайте також</span><span class="en-text">Related posts</span></h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="../shpargalki-manipulyatsiya-dannymi-v-r-i-python/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="0">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/covers/1471.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">март 2021</span><span class="ua-text">берез. 2021</span><span class="en-text">Mar 2021</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2021</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">1 мин чтения</span><span class="ua-text">1 хв читання</span><span class="en-text">1 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Шпаргалки: Манипуляция данными в R и Python</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">Мой telegram канал R4marketing совместно с каналом IT Resume подготовили набор шпаргалок, которые помогут быстро найти информацию и примеры кода по манипуляции данными на языке R и Python.</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Обработка данных</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">tidyverse</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a>
+                <a href="../video-obzor-dplyr-1-0-0-select-relocate-rename-with/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="60">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/covers/1313.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">апр. 2020</span><span class="ua-text">квіт. 2020</span><span class="en-text">Apr 2020</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2020</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">1 мин чтения</span><span class="ua-text">1 хв читання</span><span class="en-text">1 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Видео обзор: dplyr 1.0.0 –  select(), relocate(), rename_with()</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">В мае ожидается релиз dplyr 1.0.0, после чего интерфейс пакета практически не будет меняться. На данный момент новые функционал можно попробовать установив его dev версию.</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">tidyverse</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Анализ данных</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a>
+                <a href="../razvorachivaem-vlozhennye-stolbtsy-spiski-s-pomoschyu-yazyka-r-paket-t/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="120">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/razvorachivaem-vlozhennye-stolbtsy-sp-7syfgrnpyegv-ihhcguupz-9349286e.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">нояб. 2020</span><span class="ua-text">листоп. 2020</span><span class="en-text">Nov 2020</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2020</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">8 мин чтения</span><span class="ua-text">8 хв читання</span><span class="en-text">8 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Разворачиваем вложенные столбцы — списки с помощью языка R (пакет tidyr и функции семейства unnest)</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">В большинстве случаев при работе с ответом полученным от API, или с любыми другими данными которые имеют сложную древовидную структуру, вы сталкиваетесь с форматами JSON и XML. Эти…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">R</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Обработка данных</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a></div>
+        </section>
+        <a href="../" class="b-back"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i><span class="ru-text">Ко всем материалам</span><span class="ua-text">До всіх матеріалів</span><span class="en-text">All posts</span></a>
+    </main>
+
+    <section class="px-6 max-w-7xl mx-auto pb-24 relative z-10">
+        <div class="grid md:grid-cols-2 gap-6" data-aos="fade-up">
+            <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(59, 130, 246, 0.1));">
+                <div class="bento-content w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center text-blue-400 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-telegram"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">Telegram-канал R4marketing</span><span class="ua-text">Telegram-канал R4marketing</span><span class="en-text">R4marketing on Telegram</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Новые статьи, видео и заметки по R — первыми.</span><span class="ua-text">Нові статті, відео та нотатки з R — першими.</span><span class="en-text">New articles, videos and R notes — first.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-blue-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+            <a href="https://www.youtube.com/R4marketing/?sub_confirmation=1" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(239, 68, 68, 0.1));">
+                <div class="bento-content w-16 h-16 bg-red-500/20 rounded-2xl flex items-center justify-center text-red-500 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-youtube"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">YouTube-канал R4marketing</span><span class="ua-text">YouTube-канал R4marketing</span><span class="en-text">R4marketing on YouTube</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Видеоуроки по R, аналитике и AI-инструментам.</span><span class="ua-text">Відеоуроки з R, аналітики та AI-інструментів.</span><span class="en-text">Video lessons on R, analytics and AI tools.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-red-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/5 bg-slate-950/80 backdrop-blur-md pt-16 pb-8 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
+                <div class="sm:col-span-2 lg:col-span-4">
+                    <a href="../../" class="inline-flex items-center gap-3 group mb-5">
+                        <img src="../../logo.jpg" alt="Alexey Seleznev" class="w-10 h-10 rounded-xl object-cover border border-white/10 group-hover:border-purple-500/50 transition-colors">
+                        <span class="text-lg font-black tracking-tight uppercase outfit-font text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+                    </a>
+                    <p class="text-sm text-slate-400 leading-relaxed max-w-sm mb-6"><span class="ru-text">Head of Analytics в Netpeak Group. Автор open source R-пакетов, бесплатных курсов по R и проекта R4marketing.</span><span class="ua-text">Head of Analytics у Netpeak Group. Автор open source R-пакетів, безкоштовних курсів з R та проєкту R4marketing.</span><span class="en-text">Head of Analytics at Netpeak Group. Author of open source R packages, free R courses and the R4marketing project.</span></p>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="https://t.me/R4marketing" target="_blank" rel="noopener" aria-label="Telegram R4marketing" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-400 hover:border-blue-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-telegram"></i></a>
+                        <a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" aria-label="YouTube R4marketing" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-red-500 hover:border-red-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="https://github.com/selesnow" target="_blank" rel="noopener" aria-label="GitHub" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-white hover:border-white/30 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://linkedin.com/in/selesnow" target="_blank" rel="noopener" aria-label="LinkedIn" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-500 hover:border-blue-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://facebook.com/selesnow" target="_blank" rel="noopener" aria-label="Facebook" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-600/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/alexey.selesnow" target="_blank" rel="noopener" aria-label="Instagram" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-pink-500 hover:border-pink-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://habr.com/ru/users/selesnow/" target="_blank" rel="noopener" aria-label="Habr" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-teal-400 hover:border-teal-400/40 transition-all hover:-translate-y-0.5"><i class="fa-solid fa-h"></i></a>
+                    </div>
+                </div>
+
+                <nav class="lg:col-span-2" aria-label="Site map">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">Сайт</span><span class="ua-text">Сайт</span><span class="en-text">Site</span></h3>
+                    <ul class="space-y-3">
+                        <li><a href="../../" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-house w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a></li>
+                        <li><a href="../../opensource/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-code-branch w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span></a></li>
+                        <li><a href="../../courses/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-graduation-cap w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a></li>
+                        <li><a href="../../videos/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-circle-play w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a></li>
+                        <li><a href="../../talks/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-microphone-lines w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a></li>
+                        <li><a href="../../articles/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-pen-nib w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a></li>
+                        <li><a href="../../interviews/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-regular fa-newspaper w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a></li>
+                        <li><a href="../../blog/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-feather-pointed w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a></li>
+                    </ul>
+                </nav>
+
+                <div class="lg:col-span-3">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">R4marketing и публикации</span><span class="ua-text">R4marketing і публікації</span><span class="en-text">R4marketing & writing</span></h3>
+                    <ul class="space-y-3">
+                        <li><a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-telegram w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Telegram-канал R4marketing</span><span class="ua-text">Telegram-канал R4marketing</span><span class="en-text">R4marketing Telegram</span></a></li>
+                        <li><a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-youtube w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">YouTube-канал R4marketing</span><span class="ua-text">YouTube-канал R4marketing</span><span class="en-text">R4marketing YouTube</span></a></li>
+                        <li><a href="https://alexeyseleznev.wordpress.com/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-pen-nib w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Личный блог</span><span class="ua-text">Особистий блог</span><span class="en-text">Personal blog</span></a></li>
+                        <li><a href="https://habr.com/ru/users/selesnow/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-h w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Профиль на Хабре</span><span class="ua-text">Профіль на Хабрі</span><span class="en-text">Habr profile</span></a></li>
+                        <li><a href="https://alexey-seleznev.pro/publications/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-layer-group w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Архив публикаций</span><span class="ua-text">Архів публікацій</span><span class="en-text">Publications archive</span></a></li>
+                        <li><a href="https://github.com/selesnow" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-github w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">GitHub</span><span class="ua-text">GitHub</span><span class="en-text">GitHub</span></a></li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-3">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">Контакты</span><span class="ua-text">Контакти</span><span class="en-text">Contacts</span></h3>
+                    <ul class="space-y-4">
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">Email</div><a href="mailto:me@alexey-seleznev.pro" class="text-sm text-slate-300 hover:text-purple-300 transition-colors break-all">me@alexey-seleznev.pro</a></li>
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">Telegram</div><a href="https://t.me/AlexeySeleznev" target="_blank" rel="noopener" class="text-sm text-slate-300 hover:text-blue-300 transition-colors break-all">@AlexeySeleznev</a></li>
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">LinkedIn</div><a href="https://linkedin.com/in/selesnow" target="_blank" rel="noopener" class="text-sm text-slate-300 hover:text-blue-300 transition-colors break-all">linkedin.com/in/selesnow</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-14 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+                <p>© 2026 Alexey Seleznev. <span class="ru-text">Все права защищены.</span><span class="ua-text">Усі права захищені.</span><span class="en-text">All rights reserved.</span></p>
+                <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="inline-flex items-center gap-2 font-semibold hover:text-white transition-colors group"><span class="ru-text">Наверх</span><span class="ua-text">Нагору</span><span class="en-text">Back to top</span><span class="w-7 h-7 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-purple-500 group-hover:border-purple-500 transition-all"><i class="fa-solid fa-arrow-up text-[10px]"></i></span></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script src="../../assets/site.js"></script>
+
+    <script>
+    (function () {
+        // кнопка «Копировать» у блоков кода
+        document.querySelectorAll('.b-prose .codehilite').forEach(box => {
+            const btn = document.createElement('button');
+            btn.type = 'button'; btn.className = 'b-copy'; btn.setAttribute('aria-label', 'Copy code');
+            btn.innerHTML = '<i class="fa-regular fa-copy" aria-hidden="true"></i>';
+            btn.addEventListener('click', () => {
+                navigator.clipboard.writeText(box.querySelector('pre').innerText).then(() => {
+                    btn.innerHTML = '<i class="fa-solid fa-check" aria-hidden="true"></i>';
+                    setTimeout(() => btn.innerHTML = '<i class="fa-regular fa-copy" aria-hidden="true"></i>', 1500);
+                });
+            });
+            box.appendChild(btn);
+        });
+        // подсветка текущего раздела в оглавлении
+        const links = Array.from(document.querySelectorAll('.b-toc a'));
+        if (links.length && 'IntersectionObserver' in window) {
+            const map = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+            const io = new IntersectionObserver(es => es.forEach(e => {
+                if (e.isIntersecting) { links.forEach(l => l.classList.remove('active')); const a = map.get(e.target.id); if (a) a.classList.add('active'); }
+            }), { rootMargin: '-80px 0px -70% 0px' });
+            map.forEach((_, id) => { const el = document.getElementById(id); if (el) io.observe(el); });
+        }
+    })();
+    </script>
+</body>
+</html>

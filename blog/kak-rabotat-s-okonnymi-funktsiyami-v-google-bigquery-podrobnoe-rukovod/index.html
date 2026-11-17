@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Alexey Seleznev">
+    <meta name="theme-color" content="#030712">
+    <link rel="canonical" href="https://alexey-seleznev.pro/blog/kak-rabotat-s-okonnymi-funktsiyami-v-google-bigquery-podrobnoe-rukovod/">
+
+    <title>Как работать с оконными функциями в Google BigQuery — подробное руководство | Алексей Селезнёв</title>
+    <meta name="title" content="Как работать с оконными функциями в Google BigQuery — подробное руководство | Алексей Селезнёв">
+    <meta name="description" content="Количество данных стремительно растет. Растет и интерес к сервисам для их хранения и обработки. Один из сравнительно новых и качественных инструментов в области хранения и обработки…">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alexey-seleznev.pro/blog/kak-rabotat-s-okonnymi-funktsiyami-v-google-bigquery-podrobnoe-rukovod/">
+    <meta property="og:site_name" content="ALEXEY-SELEZNEV.pro">
+    <meta property="og:title" content="Как работать с оконными функциями в Google BigQuery — подробное руководство | Алексей Селезнёв">
+    <meta property="og:description" content="Количество данных стремительно растет. Растет и интерес к сервисам для их хранения и обработки. Один из сравнительно новых и качественных инструментов в области хранения и обработки…">
+    <meta property="og:image" content="https://alexey-seleznev.pro/photo.jpg">
+    <meta property="og:image:alt" content="Алексей Селезнёв">
+    <meta property="og:locale" content="ru_RU">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="https://alexey-seleznev.pro/blog/kak-rabotat-s-okonnymi-funktsiyami-v-google-bigquery-podrobnoe-rukovod/">
+    <meta name="twitter:title" content="Как работать с оконными функциями в Google BigQuery — подробное руководство | Алексей Селезнёв">
+    <meta name="twitter:description" content="Количество данных стремительно растет. Растет и интерес к сервисам для их хранения и обработки. Один из сравнительно новых и качественных инструментов в области хранения и обработки…">
+    <meta name="twitter:image" content="https://alexey-seleznev.pro/photo.jpg">
+
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z56YHE916N"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Z56YHE916N');
+    </script>
+    <link rel="icon" type="image/jpeg" href="../../logo.jpg">
+    <link rel="apple-touch-icon" href="../../logo.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;700;800;900&display=swap">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/site.css">
+    <!-- Tailwind собран заранее (_build/build.py) и подключается последним, как это делал CDN-скрипт -->
+    <link rel="stylesheet" href="../../assets/tailwind.css">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Как работать с оконными функциями в Google BigQuery — подробное руководство",
+  "datePublished": "2016-02-25",
+  "inLanguage": "ru",
+  "description": "Количество данных стремительно растет. Растет и интерес к сервисам для их хранения и обработки. Один из сравнительно новых и качественных инструментов в области хранения и обработки…",
+  "author": {
+    "@id": "https://alexey-seleznev.pro/#person"
+  },
+  "mainEntityOfPage": "https://alexey-seleznev.pro/blog/kak-rabotat-s-okonnymi-funktsiyami-v-google-bigquery-podrobnoe-rukovod/"
+}
+    </script>
+    <link rel="stylesheet" href="../blog.css">
+</head>
+<body class="relative lang-en">
+
+    <!-- Interactive Background -->
+    <div id="vanta-bg"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full z-50 top-0 left-0 border-b border-white/5 bg-slate-950/60 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 h-16 flex items-center justify-between">
+            <a href="../../" class="flex items-center gap-2 sm:gap-2.5 md:gap-3 group shrink min-w-0">
+                <img src="../../logo.jpg" alt="Alexey Seleznev" class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 rounded-lg sm:rounded-xl object-cover shadow-md border border-white/10 group-hover:border-purple-500/50 group-hover:scale-105 transition-all shrink-0">
+                <span class="text-xs min-[400px]:text-sm sm:text-base md:text-xl font-black tracking-tight uppercase outfit-font whitespace-nowrap text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+            </a>
+            <div class="hidden xl:flex gap-6 text-sm font-semibold text-slate-400">
+                <a href="../../" class="nav-link hover:text-white transition-colors"><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a>
+                <a href="../../opensource/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span></a>
+                <a href="../../courses/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a>
+                <a href="../../videos/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a>
+                <a href="../../talks/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a>
+                <a href="../../articles/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a>
+                <a href="../../interviews/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a>
+                <a href="../../blog/" class="nav-link hover:text-white transition-colors active"><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a>
+            </div>
+
+            <div class="flex items-center gap-1.5 sm:gap-2 md:gap-4 shrink-0">
+                <div class="lang-switcher flex gap-1 sm:gap-1.5 md:gap-2 text-[11px] sm:text-xs md:text-sm font-bold border-r border-white/10 pr-1.5 sm:pr-3 md:pr-4 mr-0.5 sm:mr-1 md:mr-2 outfit-font">
+                    <button onclick="changeLang('en')" id="btn-en" class="active hover:text-white transition-colors">EN</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ru')" id="btn-ru" class="text-slate-500 hover:text-white transition-colors">RU</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ua')" id="btn-ua" class="text-slate-500 hover:text-white transition-colors">UA</button>
+                </div>
+
+                <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="text-slate-400 hover:text-blue-400 transition-colors hidden sm:block" aria-label="Telegram"><i class="fa-brands fa-telegram text-lg md:text-xl"></i></a>
+                <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="text-slate-400 hover:text-white transition-colors hidden sm:block" aria-label="GitHub"><i class="fa-brands fa-github text-lg md:text-xl"></i></a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="xl:hidden w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-purple-500/20 hover:border-purple-500/40 transition-all focus:outline-none" aria-label="Toggle Navigation Menu">
+                    <i class="fa-solid fa-bars text-sm sm:text-lg" id="mobile-menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div id="mobile-menu" class="hidden xl:hidden border-t border-white/10 bg-slate-950/95 backdrop-blur-2xl shadow-2xl overflow-y-auto max-h-[calc(100vh-4rem)] transition-all">
+            <div class="max-w-7xl mx-auto px-6 py-6 space-y-1">
+                <a href="../../" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-house text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span>
+                </a>
+                <a href="../../opensource/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-code-branch text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span>
+                </a>
+                <a href="../../courses/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-graduation-cap text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span>
+                </a>
+                <a href="../../videos/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-circle-play text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span>
+                </a>
+                <a href="../../talks/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-microphone-lines text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span>
+                </a>
+                <a href="../../articles/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-pen-nib text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span>
+                </a>
+                <a href="../../interviews/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-regular fa-newspaper text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span>
+                </a>
+                <a href="../../blog/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-white bg-white/5 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-feather-pointed text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span>
+                </a>
+
+                <div class="pt-4 mt-3 border-t border-white/10 flex items-center justify-around text-slate-400">
+                    <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-blue-400 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-telegram text-xl"></i> Telegram
+                    </a>
+                    <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="p-2 hover:text-white transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-github text-xl"></i> GitHub
+                    </a>
+                    <a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-red-500 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-youtube text-xl"></i> YouTube
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="b-wrap relative z-10">
+        <nav class="b-crumbs" aria-label="breadcrumb">
+            <a href="../../"><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a><span>/</span><a href="../"><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a><span>/</span><a href="../?cat=bazy-dannyh#posts">Базы данных</a>
+        </nav>
+        <div class="b-layout">
+            <article class="bento-glass no-lift b-article" data-aos="fade-up">
+                <div class="bento-content">
+                    <div class="b-cats"><a class="b-chip b-chip-cat" href="../?cat=bazy-dannyh#posts">Базы данных</a></div>
+                    <h1 class="b-title outfit-font">Как работать с оконными функциями в Google BigQuery — подробное руководство</h1>
+                    <div class="b-meta">
+                        <span><i class="fa-regular fa-calendar" aria-hidden="true"></i><span class="ru-text">25 февраля 2016</span><span class="ua-text">25 лютого 2016</span><span class="en-text">25 Feb 2016</span></span>
+                        <span><i class="fa-regular fa-clock" aria-hidden="true"></i><span class="ru-text">19 мин чтения</span><span class="ua-text">19 хв читання</span><span class="en-text">19 min read</span></span>
+                        <span class="b-lang" title="Русский">RU</span>
+                    </div>
+                    <div class="b-note"><i class="fa-regular fa-clock" aria-hidden="true"></i><div><span class="ru-text">Материал опубликован в 2016 году — описанные инструменты и интерфейсы могли измениться.</span><span class="ua-text">Матеріал опубліковано у 2016 році — описані інструменти та інтерфейси могли змінитися.</span><span class="en-text">Published in 2016 — the tools and interfaces described may have changed since.</span></div></div>
+                    <figure class="b-cover"><img src="../images/covers/209.webp" alt="" width="1200" height="630" decoding="async"></figure>
+                    <div class="b-prose"><p>Количество данных стремительно растет. Растет и интерес к сервисам для их хранения и обработки. Один из сравнительно новых и качественных инструментов в области хранения и обработки больших массивов информации — облачная база данных <a target="_blank" rel="noopener" href="https://cloud.google.com/bigquery/">Google BigQuery</a>. Инструмент способен обрабатывать сотни тысяч строк в секунду. Если верить открытым источникам, среди множества инструментов, направленных на обработку Big Data, Google BigQuery предпочитают «М. Видео», «Юлмарт», «Связной», Ozon.Travel, «Эльдорадо», Onlinetours, Anywayanyday и «Вымпелком».</p>
+<p><img loading="lazy" decoding="async" alt="Картинки по запросу Как работать с оконными функциями в Google BigQuery — подробное руководство" width="1280" height="1150" src="../images/209-img8538.webp" /></p>
+<p>В работе BigQuery является более простым инструментом, чем MySQL и PostgreSQL, да и большинство других. Все потому, что в инструменте отсутствует часть работы, связанная с администрированием сервера. Оптимизацией работы базы занимается непосредственно Google. Второй приятный бонус — вам не придется тратиться на дорогостоящие сервера, так как вся информация в данном случае хранится и обрабатывается на серверах Google. Относительный минус — учебного материала по работе с BigQuery очень мало. На русском языке его практически нет. Я решил исправить сей обидный факт, поэтому знакомлю вас с некоторыми возможностями этой базы данных. Для дальнейшей работы вам необходимо скачать <a target="_blank" rel="noopener" href="https://drive.google.com/file/d/0B1rgddqnM9XJUjBCSnppNGw3S3M/view">csv файл</a>, который мы сейчас загрузим в BigQuery.</p>
+<h2 id="google-bigquery-csv">Загрузка данных в Google BigQuery из CSV файла</h2>
+<p>Научимся загружать данные в BigQuery. Этот навык пригодится для отработки на практике всех примеров запросов, описанных далее в статье. 1. Выбираем проект, в который нам необходимо загрузить таблицу. Жмем на кнопку меню напротив названия проекта и выбираем пункт «Create new dataset».</p>
+<p><img loading="lazy" decoding="async" alt="Жмем на кнопку меню напротив названия проекта и выбираем пункт «Create new dataset»" width="552" height="350" src="../images/209-zhmem-na-knopku-menyu-naprotiv-nazvaniya-proekta-i-vybir-283aad88.webp" /></p>
+<ol start="2">
+<li>Задаем имя набора данных и жмем «OK».</li>
+</ol>
+<p><img loading="lazy" decoding="async" alt="Задаем имя набора данных и жмем «OK»" width="672" height="234" src="../images/209-Zadaem-imya-nabora-dannyh-i-zhmem---OK--.webp" /></p>
+<ol start="3">
+<li>Далее в созданном наборе данных жмем «+».</li>
+</ol>
+<p><img loading="lazy" decoding="async" alt="В созданном наборе данных жмем «+»" width="337" height="325" src="../images/209-V-sozdannom-nabore-dannyh-zhmem------.webp" /></p>
+<ol start="4">
+<li>На вкладке «Choose destination» задаем имя таблицы и жмем «Next» в нижней части диалогового окна.</li>
+</ol>
+<p><img loading="lazy" decoding="async" alt="На вкладке «Choose destination» задаем имя таблицы" width="640" height="246" src="../images/209-Na-vkladke---Choose-destination---zadaem-imya-tablitsy.webp" /></p>
+<ol start="5">
+<li>На вкладке «Select data» жмем кнопку «Choose file».</li>
+</ol>
+<p><img loading="lazy" decoding="async" alt="На вкладке «Select data» жмем кнопку «Choose file»" width="534" height="292" src="../images/209-Na-vkladke---Select-data---zhmem-knopku---Choose-file--.webp" /></p>
+<ol start="6">
+<li>Выбираем скачанный ранее файл и жмем «Next».</li>
+</ol>
+<p><img loading="lazy" decoding="async" alt="Выбираем скачанный ранее файл и жмем «Next»" width="683" height="479" src="../images/209-Vybiraem-skachanniy-ranee-fayl-i-zhmem---Next--.webp" /></p>
+<ol start="7">
+<li>На вкладке «Specify schema» описываем структуру таблицы, добавляя поля нажатием кнопки «Add fields».</li>
+</ol>
+<p><img loading="lazy" decoding="async" alt="На вкладке «Specify schema» описываем структуру таблицы, добавляя поля нажатием кнопки «Add fields»" width="680" height="401" src="../images/209-na-vkladke-specify-schema-opisyvaem-strukturu-tablitsy-d-499e25f9.webp" /></p>
+<ol start="8">
+<li>На вкладке «Advanced options» мы должны задать разделитель полей. В нашем случае это точка с запятой. Устанавливаем переключатель «Field delimiter» в положение «Other» и в текстовом поле прописываем «;». Также можем задать другие настройки. Например, в нашем исходном файле первая строка содержит заголовки, которые нам не надо загружать в таблицу. Поэтому в текстовом поле настройки «Header rows to skip» указываем 1 и жмем «Submit».</li>
+</ol>
+<p><img loading="lazy" decoding="async" alt="На вкладке «Advanced options» мы должны задать разделитель полей" width="658" height="355" src="../images/209-Na-vkladke---Advanced-options---my-dolzhny-zadat-razdelitel-poley.webp" /></p>
+<ol start="9">
+<li>После этого будет запущен процесс загрузки данных в созданную таблицу.</li>
+</ol>
+<p><img loading="lazy" decoding="async" alt="После этого будет запущен процесс загрузки данных в созданную таблицу" width="258" height="307" src="../images/209-Posle-etogo-budet-zapushchen-protsess-zagruzki-dannyh-v-sozdannuyu-tablitsu.webp" /></p>
+<ol start="10">
+<li>Жмем кнопку «Compose query».</li>
+</ol>
+<p><img loading="lazy" decoding="async" alt="Жмем кнопку «Compose query»" width="316" height="352" src="../images/209-ZHmem-knopku---Compose-query--.webp" /></p>
+<p>Теперь вы можете писать свой первый запрос, к только что загруженным данным:</p>
+<div class="codehilite"><pre><span></span><code>select *
+from Test_WF.test_structure
+</code></pre></div>
+
+<p><img loading="lazy" decoding="async" alt="Первый запрос" width="595" height="512" src="../images/209-Perviy-zapros.webp" /></p>
+<h2 id="google-bigquery">Оконные функции в Google BigQuery</h2>
+<p>Оконные функции являются, пожалуй, самыми полезными в BigQuery. По сути, их действие схоже с агрегирующими функциями. Разница заключается в том, что при использовании агрегирующих функций необходимо группировать результат по полям, к которым агрегирующие функции не применяются. А оконные функции выполняют подобные вычисления без группировки, возвращая агрегированный нужным вам способом результат для каждой строки. Таким образом, этот тип функций не меняет выборку, а лишь добавляет в нее необходимую информацию. Давайте разберемся, что в данном случае подразумевается под окном.</p>
+<p>Окно — это некое выражение, описывающее разделение всей таблицы на отдельные наборы строк, а также описывающее сортировку строк в этих наборах.</p>
+<p>Схематически работу оконной функции можно показать следующим образом. Возьмем функцию <strong>SUM (Salary) OVER (PARTITION BY Development)</strong>, запущенную на загруженных ранее тестовых данных. Результат:</p>
+<p><img loading="lazy" decoding="async" alt="Результат работы оконной функции" width="1107" height="570" src="../images/209-Rezultat-raboty-okonnoy-funktsii.webp" /></p>
+<p>Синтаксис всех оконных функций, существующих в Google BigQuery, требует обязательный пункт OVER. Данный пункт дает возможность описать три дополнительных параметра для разделения данных таблицы на окна.</p>
+<ol>
+<li><strong>Partition</strong> позволяет указать признак формирования окна, то есть признак, по которому вы будете разделять данные для агрегирования.</li>
+<li><strong>Order</strong> позволит вам задать сортировку внутри окна.</li>
+<li><strong>Window Frame</strong>дает возможность устанавливать смещение строк внутри окна по различным признакам, например, по времени.</li>
+</ol>
+<p>Синтаксис оконных функций выглядит так:</p>
+<p><img loading="lazy" decoding="async" alt="Синтаксис оконной функции" width="458" height="233" src="../images/209-Sintaksis-okonnoy-funktsii.webp" /></p>
+<p>Рассмотрим отдельные блоки и их предназначение.</p>
+<h3 id="1-partition-by">1. PARTITION BY</h3>
+<p>Определяет, по какому принципу будет разделен массив данных на окна. Вам необходимо прописать перечень полей, по которым вы хотите разделить таблицу, к которой обращается запрос. При использовании оконных функций вы не можете группировать данные с помощью GROUP BY в том же подзапросе, в котором применяется оконная функция. Если вам необходимо сгруппировать полученный результат, используйте GROUP BY в подзапросе, который находится на уровень выше. Более подробно об этом я расскажу немного позже.</p>
+<h3 id="2-order-by">2. ORDER BY</h3>
+<p>ORDER BY позволяет задавать сортировку внутри каждого созданного с помощью PARTITION BY окна.</p>
+<h3 id="3-window-frame">3. WINDOW FRAME</h3>
+<p>С помощью этой необязательной опции вы можете задавать смещение внутри каждого окна. Например, вам нужно просуммировать текущую строку таблицы с двумя предыдущими. Синтаксис функции будет выглядеть так:</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">sum</span><span class="p">(</span><span class="nx">Salary</span><span class="p">)</span><span class="w"> </span><span class="nx">over</span><span class="w"> </span><span class="p">(</span><span class="nx">ROWS</span><span class="w"> </span><span class="nx">BETWEEN</span><span class="w"> </span><span class="mf">2</span><span class="w"> </span><span class="nx">PRECEDING</span><span class="w"> </span><span class="nx">AND</span><span class="w"> </span><span class="nx">CURRENT</span><span class="w"> </span><span class="nx">ROW</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Синтаксис опции Window Frame можно описать отдельно, он выглядит следующим образом:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span><span class="nx">ROWS</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">RANGE</span><span class="p">}</span><span class="w"> </span><span class="p">{</span><span class="nx">BETWEEN</span><span class="w"> </span><span class="nx">start</span><span class="w"> </span><span class="nx">AND</span><span class="w"> </span><span class="nx">end</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">start</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">end</span><span class="p">}</span>
+</code></pre></div>
+
+<p>Описание Window Frame начинается с одного из ключевых слов, ROWS или RANGE.</p>
+<h3 id="31-rows">3.1. ROWS</h3>
+<p>Используется, когда вам необходимо применить межстрочное вычисление. Например, просуммировать текущую строку таблицы с несколькими предыдущими. Для этого достаточно задать количество строк, которые необходимо агрегировать. Пример использования ROWS на наших тестовых данных:</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">sum</span><span class="p">(</span><span class="nx">Salary</span><span class="p">)</span><span class="w"> </span><span class="nx">over</span><span class="w"> </span><span class="p">(</span><span class="nx">ROWS</span><span class="w"> </span><span class="nx">BETWEEN</span><span class="w"> </span><span class="mf">2</span><span class="w"> </span><span class="nx">PRECEDING</span><span class="w"> </span><span class="nx">AND</span><span class="w"> </span><span class="nx">CURRENT</span><span class="w"> </span><span class="nx">ROW</span><span class="p">)</span>
+</code></pre></div>
+
+<p>3.2. RANGE</p>
+<p>Дает возможность указать диапазон значений для вычислений. Например:</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">sum</span><span class="p">(</span><span class="nx">Salary</span><span class="p">)</span><span class="w"> </span><span class="nx">over</span><span class="w"> </span><span class="p">(</span><span class="nx">order</span><span class="w"> </span><span class="nx">by</span><span class="w"> </span><span class="nx">Salary</span><span class="w"> </span><span class="nx">RANGE</span><span class="w"> </span><span class="nx">BETWEEN</span><span class="w"> </span><span class="mf">1000</span><span class="w"> </span><span class="nx">PRECEDING</span><span class="w"> </span><span class="nx">AND</span><span class="w"> </span><span class="nx">CURRENT</span><span class="w"> </span><span class="nx">ROW</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Формула просуммирует зарплаты сотрудников со всеми зарплатами, которые попадают в диапазон «на 1000 меньше», чем у сотрудника в текущей строке в рамках каждого окна. С выбранным ключевым словом ROW или RANGE, как вы уже могли заметить из примеров, необходимо задавать диапазон агрегирования по схеме:</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">BETWEEN</span><span class="w"> </span><span class="nx">start</span><span class="w"> </span><span class="nx">AND</span><span class="w"> </span><span class="nx">end</span>
+</code></pre></div>
+
+<h3 id="33-between-start-and-end">3.3. BETWEEN START AND END</h3>
+<p>Start описывает начальное смещение в рамках окна относительно текущей строки. Start принимает следующие значения:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span><span class="nx">UNBOUNDED</span><span class="w"> </span><span class="nx">PRECEDING</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">CURRENT</span><span class="w"> </span><span class="nx">ROW</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">expr</span><span class="w"> </span><span class="nx">PRECEDING</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">expr</span><span class="w"> </span><span class="nx">FOLLOWING</span><span class="p">}</span>
+</code></pre></div>
+
+<p>где:</p>
+<ul>
+<li>UNBOUNDED PRECEDING — первая строка текущего окна;</li>
+<li>CURRENT ROW — текущая строка;</li>
+<li>expr PRECEDING — определяет количество предыдущих, участвующих в расчетах строк. Вместо <strong>expr</strong> вы должны указать количество предыдущих участвующих в расчетах строк относительно текущей строки;</li>
+<li>expr FOLLOWING — определяет количество строк для агрегации из числа тех, что следуют за текущей строкой.</li>
+</ul>
+<p>End описывает конечное значение диапазона смещения и принимает такие же значения, как и Start. Например:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span><span class="nx">UNBOUNDED</span><span class="w"> </span><span class="nx">FOLLOWING</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">CURRENT</span><span class="w"> </span><span class="nx">ROW</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">expr</span><span class="w"> </span><span class="nx">PRECEDING</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">expr</span><span class="w"> </span><span class="nx">FOLLOWING</span><span class="p">}</span>
+</code></pre></div>
+
+<p>UNBOUNDED FOLLOWING в данном случае используется для того, чтобы задать в качестве последней строки агрегации последнюю строку текущего окна. Пример описания Between Start and End в функции:</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">sum</span><span class="p">(</span><span class="nx">Salary</span><span class="p">)</span><span class="w"> </span><span class="nx">over</span><span class="w"> </span><span class="p">(</span><span class="nx">ROWS</span><span class="w"> </span><span class="nx">BETWEEN</span><span class="w"> </span><span class="mf">2</span><span class="w"> </span><span class="nx">PRECEDING</span><span class="w"> </span><span class="nx">AND</span><span class="w"> </span><span class="nx">CURRENT</span><span class="w"> </span><span class="nx">ROW</span><span class="p">)</span>
+</code></pre></div>
+
+<p>В данном случае Start — это «2 PRECEDING» а End — «CURRENT ROW». Эта функция говорит просуммировать в рамках текущего окна поля Salary две предыдущие строки и текущую. Поскольку пункт PARTITION BY не описан, текущим окном является вся таблица.</p>
+<blockquote>
+<p>Главным отличием оконных функций от агрегирующих является то, что они не группируют результат, а указывают агрегированное значение для каждой отдельной строки. Данный функционал очень полезен для построения аналитических отчетов, расчета скользящего среднего и нарастающих итогов.</p>
+</blockquote>
+<p>Например, результат следующего запроса выведет нарастающий итог по пяти строкам.</p>
+<div class="codehilite"><pre><span></span><code>SELECT name, value, SUM(value) OVER (ORDER BY value) AS RunningTotal
+FROM
+(SELECT &quot;a&quot; AS name, 0 AS value),
+(SELECT &quot;b&quot; AS name, 1 AS value),
+(SELECT &quot;c&quot; AS name, 2 AS value),
+(SELECT &quot;d&quot; AS name, 3 AS value),
+(SELECT &quot;e&quot; AS name, 4 AS value);
+</code></pre></div>
+
+<p>Результат:</p>
+<p><img loading="lazy" decoding="async" alt="Нарастающий итог по пяти строкам" width="241" height="166" src="../images/209-Narastayushchiy-itog-po-pyati-strokam.webp" /></p>
+<p>Чтобы посчитать нарастающий итог по зарплатам сотрудников на тестовых данных, загруженных нами ранее, запустим следующий запрос:</p>
+<div class="codehilite"><pre><span></span><code>SELECT
+CONCAT(First_name, &quot; &quot;, Last_name) as fullName,
+Salary,
+SUM(Salary) OVER (ORDER BY fullName) as runningTotal
+FROM Test_WF.test_structure
+</code></pre></div>
+
+<p>Результат:</p>
+<p><img loading="lazy" decoding="async" alt="Нарастающий итог по зарплатам" width="274" height="442" src="../images/209-Narastayushchiy-itog-po-zarplatam.webp" /></p>
+<p>Поле «runningTotal» вернуло нарастающий итог по зарплатам.</p>
+<blockquote>
+<p><img loading="lazy" decoding="async" alt="" src="https://netpeak.net/blog/img/social/tw-01.svg" /></p>
+</blockquote>
+<p>Внимание: чтобы получить в результате нарастающий итог, описывайте пункт ORDER BY, иначе напротив каждой строки будет указываться сумма зарплат всех сотрудников.</p>
+<p>Еще один пример использования функции sum как оконной, а не агрегирующей. Например, мы хотим узнать, какая часть фонда заработной платы в каждом отделе приходится на начальника. Запрос:</p>
+<div class="codehilite"><pre><span></span><code>SELECT
+Department,
+Position,
+round(Salary / departmentSalarySum * 100 , 2) as headSalaryPercent
+FROM
+(SELECT
+Position,
+Department,
+Salary,
+SUM(Salary) OVER (PARTITION BY Department) as departmentSalarySum
+
+FROM Test_WF.test_structure)
+
+WHERE
+Position in(&#39;Department head&#39;,&#39;CTO&#39;,&#39;CFO&#39;,&#39;Cheif Accountant&#39;)
+</code></pre></div>
+
+<p>Результат:</p>
+<p><img loading="lazy" decoding="async" alt="Какая часть фонда заработной платы в каждом отделе приходится на начальника" width="327" height="155" src="../images/209-kakaya-chast-fonda-zarabotnoy-platy-v-kazhdom-otdele-prihoditsya-na-nachalnika.webp" /></p>
+<p>Если вы хотите производить какие-либо вычисления с результатами, которые возвращает оконная функция, их необходимо выносить в запрос на уровень выше, а сами вычисления производить в отдельном подзапросе.</p>
+<div class="codehilite"><pre><span></span><code>SELECT
+Position,
+Department,
+Salary,
+SUM(Salary) OVER (PARTITION BY Department) as departmentSalarySum
+
+FROM Test_WF.test_structure
+</code></pre></div>
+
+<p>Подзапрос возвращает следующий результат:</p>
+<p><img loading="lazy" decoding="async" alt="Вычисления с результатами, которые возвращает оконная функция" width="403" height="521" src="../images/209-Vychisleniya-s-rezultatami-kotorie-vozvrashchaet-okonnaya-funktsiya.webp" /></p>
+<p>Далее мы уже работаем с данными, который вернул представленный выше подзапрос. Вычисляем процент зарплаты сотрудников от фонда зарплаты отдела:</p>
+<div class="codehilite"><pre><span></span><code>SELECT
+Department,
+Position,
+round(Salary / departmentSalarySum * 100 , 2) as headSalaryPercent
+
+Потом остается только отфильтровать результат запроса, чтобы итоговая таблица содержала данные только по руководителям отделов.
+
+WHERE
+Position in(&#39;Department head&#39;,&#39;CTO&#39;,&#39;CFO&#39;,&#39;Cheif Accountant&#39;)
+</code></pre></div>
+
+<p>Рассмотрим все существующие на момент написания статьи оконные функции BigQuery.</p>
+<h3 id="1-avgnumeric_expr-count-countdistinct-field-maxfield-minfield-stddevnumeric_expr-sumfield">1. Функции AVG(numeric_expr), COUNT(*), COUNT([DISTINCT] field), MAX(field), MIN(field), STDDEV(numeric_expr), SUM(field)</h3>
+<p>Список стандартных агрегирущих функций, доступных для использования в виде оконных функций. Их синтаксис при этом не меняется, только добавляется описание окна с помошью пункта OVER.</p>
+<ul>
+<li>AVG — среднее арифметическое;</li>
+<li>COUNT — количество значений;</li>
+<li>COUNT[Distinct] — количество уникальных значений;</li>
+<li>MAX — максимальное значение;</li>
+<li>MIN — минимальное значение;</li>
+<li>STDDEV — среднеквадратичное отклонение;</li>
+<li>SUM — сумма значений.</li>
+</ul>
+<p>Пример запроса:</p>
+<div class="codehilite"><pre><span></span><code>SELECT
+  Department,
+  AVG(Salary) OVER (PARTITION BY Department) as winAvg,
+  COUNT(Salary) OVER (PARTITION BY Department) as winCount,
+  COUNT(DISTINCT Position) OVER (PARTITION BY Department) as winCountDistinct,
+  MAX(Salary) OVER (PARTITION BY Department) as winMax,
+  MIN(Salary) OVER (PARTITION BY Department) as winMin,
+  STDDEV(Salary) OVER (PARTITION BY Department) as winStDev,
+  SUM(Salary) OVER (PARTITION BY Department) as winSum
+FROM Test_WF.test_structure
+</code></pre></div>
+
+<p>Результат запроса:</p>
+<p><img loading="lazy" decoding="async" alt="Результат запроса агрегирующих функций" width="773" height="201" src="../images/209-Rezultat-zaprosa-agregiruyushchih-funktsiy.webp" /></p>
+<p>Данный запрос вернет все перечисленные в описании значения с разбивкой по отделам для каждой строки таблицы.</p>
+<h3 id="2-cume_dist">2. Функция CUME_DIST()</h3>
+<p>Возвращает кумулятивное распределение значения группе значений. Рассчитывается по формуле &lt;количество предыдущих строк окна, включая текущую&gt; / &lt;общее количество строк окна&gt;. Для данной функции описание ORDER BY в пункте OVER является обязательным. Пример запроса:</p>
+<div class="codehilite"><pre><span></span><code>SELECT
+  Department,
+  Salary,
+  CUME_DIST(Salary) OVER (PARTITION BY Department ORDER BY Salary)
+FROM Test_WF.test_structure
+WHERE Department = &#39;Finance&#39;
+</code></pre></div>
+
+<p>Результат запроса:</p>
+<p><img loading="lazy" decoding="async" alt="Результат запроса к функции Функция CUME_DIST" width="216" height="132" src="../images/209-Funktsiya-CUME_DIST.webp" /></p>
+<p>Часть результата запроса, касающаяся финансового отдела, является отдельным окном, так как мы указали PARTITION BY Department, и в качестве расчетного поля указали Salary. Также задали сортировку по полю Salary, рассчитали значения столбца f0_, который показывает значения, возвращенные функцией CUME_DIST. В финансовом отделе, как вы видите, четыре записи, из которых три уникальны по полю Salary (3000, 3900, 6700). В связи с этим значения были рассчитаны следующим образом:</p>
+<ul>
+<li>1 / 4 = 0,25 (1 строка окна делится на общее количество строк в окне);</li>
+<li>3 / 4 = 0,75 (количество предыдущих строк окна — это 1 + 2, так как значение второй строки окна (3900) встречается дважды. Делится на общее количество строк окна — 4.</li>
+<li>Расчет третьей строки полностью идентичен второй строке. Значение поля Salary в них одинаковое.</li>
+<li>4 / 4 = 1 (количество предыдущих значений — 3 плюс 1, так как значение новой строки является уникальным и ранее учтено не было. Делится на общее количество значений данного окна.</li>
+</ul>
+<h3 id="3-dense_rank">3. Функция DENSE_RANK()</h3>
+<p>Возвращает ранг значения текущей строки относительно значений всего окна, исходя из заданной сортировки. Для данной функции описание сортировки в пункте OVER с помощью ORDER BY является обязательным. Пример запроса:</p>
+<div class="codehilite"><pre><span></span><code>SELECT
+Department,
+Salary,
+DENSE_RANK(Salary) OVER (PARTITION BY Department ORDER BY Salary)
+FROM Test_WF.test_structure
+WHERE Department in (&#39;Finance&#39;,&#39;Sales&#39;)
+</code></pre></div>
+
+<p>Результат запроса:</p>
+<p><img loading="lazy" decoding="async" alt="Функция DENSE_RANK" width="209" height="314" src="../images/209-Funktsiya-DENSE_RANK.webp" /></p>
+<p>Как видим, результат запроса вернул ранг значения каждой строки относительно окна. В данном случае таблица состоит из двух окон Department = ‘Finance’ и Department = ‘Sales’.</p>
+<h3 id="4-first_valuefield_name">4. Функция FIRST_VALUE(field_name)</h3>
+<p>Возвращает значение первой строки окна, согласно указанной сортировке. При этом для данной функции описание ORDER BY не является обязательным. Пример запроса:</p>
+<div class="codehilite"><pre><span></span><code>SELECT
+Department,
+Salary,
+FIRST_VALUE(Salary) OVER (PARTITION BY Department)
+FROM Test_WF.test_structure
+WHERE Department in (&#39;Finance&#39;,&#39;Sales&#39;)
+</code></pre></div>
+
+<p>Результат запроса:</p>
+<p><img loading="lazy" decoding="async" alt="Функция FIRST_VALUE" width="219" height="314" src="../images/209-Funktsiya-FIRST_VALUE.webp" /></p>
+<p>Функция вернула первое значение поля Salary для каждого окна. То, что это значение является самым большим, просто совпадение в данном случае. Так как мы не задавали сортировку, функция вернула просто значение из первой строки окна.</p>
+<h3 id="5-lag">5. Функция LAG</h3>
+<p>Синтаксис:</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">LAG</span><span class="w"> </span><span class="p">(</span><span class="nx">field_name</span><span class="p">[,</span><span class="w"> </span><span class="nx">offset</span><span class="p">[,</span><span class="w"> </span><span class="nx">default_value</span><span class="p">]])</span>
+</code></pre></div>
+
+<p>Возвращает значение строки по указанному полю, при этом поле смещено на указанное в функции количество строк до текущей строки. Если строка не найдена будет возвращено значение по умолчанию заданное в , значение по умолчанию обязательно должно иметь формат INT64, то есть указано с помощью функции INTEGER(expr). Пример запроса:</p>
+<div class="codehilite"><pre><span></span><code>SELECT
+Department,
+Salary,
+LAG(Salary, 2) OVER (PARTITION BY Department)
+FROM Test_WF.test_structure
+WHERE Department in (&#39;Finance&#39;,&#39;Sales&#39;)
+</code></pre></div>
+
+<p>Результат запроса:</p>
+<p><img loading="lazy" decoding="async" alt="Функция LAG" width="219" height="315" src="../images/209-Funktsiya-LAG.webp" /></p>
+<p>Функция LAG вернула значение со смещением на 2 строки вверх относительно текущей строки. Таким образом было возвращено значение 6700 в строку 3, полученное из поля Salary строки 1.</p>
+<h3 id="6-last_valuefield_name">6. Функция LAST_VALUE(field_name)</h3>
+<p>По смыслу функция похожа на функцию FIRST_VALUE, но в данном случае функция возвращает значение из последней строки окна. Пример запроса:</p>
+<div class="codehilite"><pre><span></span><code>SELECT
+Department,
+Salary,
+LAST_VALUE(Salary) OVER (PARTITION BY Department)
+FROM Test_WF.test_structure
+WHERE Department in (&#39;Finance&#39;,&#39;Sales&#39;)
+</code></pre></div>
+
+<p>Результат запроса:</p>
+<p><img loading="lazy" decoding="async" alt="Функция LAST_VALUE" width="220" height="315" src="../images/209-Funktsiya-LAST_VALUE.webp" /></p>
+<p>В строках 1-4 функция вернула значение 3000, так как это значение находится в последней строке окна ‘Finance’. В строках 5-11 мы получили значение 3800, так как оно находится в последней строке окна ‘Sales’.</p>
+<h3 id="7-lead">7. Функция LEAD</h3>
+<p>Синтаксис:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">(</span><span class="nx">expr</span><span class="w"> </span><span class="p">[,</span><span class="w"> </span><span class="nx">offset</span><span class="p">[,</span><span class="w"> </span><span class="nx">default_value</span><span class="p">]])</span>
+</code></pre></div>
+
+<p>По смыслу похожа на функцию LAG, но возвращает значение со смещением на указанное количество строк в после текущей строки. Значение по умолчанию должно указываться в формате INT64, то есть быть завернуто в функцию INTEGER(), как показано в примере к данной функции. Пример запроса:</p>
+<div class="codehilite"><pre><span></span><code>SELECT
+Department,
+Salary,
+LEAD(Salary, 2, INTEGER(0)) OVER (PARTITION BY Department)
+FROM Test_WF.test_structure
+WHERE Department in (&#39;Finance&#39;,&#39;Sales&#39;)
+</code></pre></div>
+
+<p>Результат запроса:</p>
+<p><img loading="lazy" decoding="async" alt="Функция LEAD" width="220" height="314" src="../images/209-Funktsiya-LEAD.webp" /></p>
+<p>В первой строке функция вернула значение 3900, так как это значение получено из третьей строки, которая находится на указанное количество строк (2) дальше после текущей, первой строки. Аналогично во второй строке функция вернула значение 3000 из четвертой строки.</p>
+<h3 id="8-nth_valueexpr-n">8. Функция NTH_VALUE(expr, n)</h3>
+<p>Возвращает значение из строки окна, соответствующей заданному индексу внутри этого окна. В случае, если окно содержит меньше строк, чем вы указали в качестве индекса, функция вернет null. Пример запроса:</p>
+<div class="codehilite"><pre><span></span><code>SELECT
+Department,
+Salary,
+NTH_VALUE(Salary, 2) OVER (PARTITION BY Department)
+FROM Test_WF.test_structure
+WHERE Department in (&#39;Finance&#39;,&#39;Sales&#39;)
+</code></pre></div>
+
+<p>Результат запроса:</p>
+<p><img loading="lazy" decoding="async" alt="Функция NTH_VALUE" width="219" height="315" src="../images/209-Funktsiya-NTH_VALUE.webp" /></p>
+<p>В строках 1-4 функция вернула значение 3900, так как в качестве индекса мы указали 2. Cоответственно, значение второй строки окна «Finance» содержит 3900. Аналогично для окна «Sales». Функция вернула 4000, так как вторая строка этого окна, или шестая строка нашей таблицы, содержит значение 4000.</p>
+<h3 id="9-ntilenum_buckets">9. Функция NTILE(num_buckets)</h3>
+<p>Делит окно на заданное в num_buckets количество одинаковых по количеству строк разделов и возвращает номер раздела окна для каждой строки. Пример запроса:</p>
+<div class="codehilite"><pre><span></span><code>SELECT
+Department,
+Salary,
+NTILE(4) OVER (PARTITION BY Department)
+FROM Test_WF.test_structure
+WHERE Department in (&#39;Finance&#39;,&#39;Sales&#39;)
+</code></pre></div>
+
+<p>Результат запроса:</p>
+<p><img loading="lazy" decoding="async" alt="Функция NTILE" width="209" height="313" src="../images/209-Funktsiya-NTILE.webp" /></p>
+<p>Поскольку в пункте OVER в опции PARTITION BY в качестве разделителя окон мы указали Department, функция разбила нашу таблицу на два окна (в фильтре WHERE мы указали два отдела «Finance» и «Sales»). Далее функция NTILE разбила каждое окно на указанное количество разделов. Мы указали четыре раздела. Первое окно «Finance» имеет всего четыре строки, соответственно, каждая строка окна является отделом, и каждой строке данного окна был присвоен свой номер раздела. Окно «Sales» содержит 7 строк. Если разбить 7 строк на 4 раздела, получится, что почти все разделы, кроме последнего, будут состоять из двух строк. Соответственно, строки 5 и 6 являются первым разделом окна Sales, 7-8 строка — вторым разделом, 9-10 строки — третьим разделом, и последний, четвертый раздел, содержит всего одну — 11 строку.</p>
+<h3 id="10-percent_rank">10. Функция PERCENT_RANK()</h3>
+<p>Возвращает ранг текущей строки относительно других строк раздела в процентом выражении. Возвращает значение от 0 до 1 включительно, первое значение окна всегда равно 0.0, последние 1.0. Для данной функции описание ORDER BY является обязательным. Пример запроса:</p>
+<div class="codehilite"><pre><span></span><code>SELECT
+Department,
+Salary,
+PERCENT_RANK(Salary) OVER (PARTITION BY Department ORDER BY Salary)
+FROM Test_WF.test_structure
+WHERE Department in (&#39;Finance&#39;,&#39;Sales&#39;)
+</code></pre></div>
+
+<p>Результат запроса:</p>
+<p><img loading="lazy" decoding="async" alt="Функция PERCENT_RANK" width="322" height="315" src="../images/209-Funktsiya-PERCENT_RANK.webp" /></p>
+<p>Каждая первая строка окна имеет нулевой индекс. Индекс каждой следующей строки увеличивается в случае, если значение поля, указанного в функции, уникально для количества предыдущих строк, в которых значения повторялись. Если значение повторяется, то и индекс для расчета также повторяется. Соответственно, последняя строка окна имеет индекс количества строк равный единице. Давайте более детально рассмотрим расчет для каждой строки окна «Sales». Общее количество строк в данном окне — 7, то есть индекс последней — это 7-1 = 6. Первая строка всегда имеет индекс 0. Расчет пятой строки, или первой строки окна «Sales», происходит по формуле:</p>
+<blockquote>
+<p><img loading="lazy" decoding="async" alt="" src="https://netpeak.net/blog/img/social/tw-01.svg" /></p>
+</blockquote>
+<p>Индекс текущей строки / индекс последней строки. В нашем случае 0/6 = 0.0.</p>
+<p>Шестая строка содержит новое уникальное значение поля Salary. Индекс данной строки в этом случае рассчитывается так же, как индекс предыдущей, плюс один пункт, и равен единице. Следовательно, функция вернет значение по формуле:</p>
+<blockquote>
+<p><img loading="lazy" decoding="async" alt="" src="https://netpeak.net/blog/img/social/tw-01.svg" /></p>
+</blockquote>
+<p>индекс текущей строки / индекс последней строки. В нашем случае 1 / 6 = 0.16.</p>
+<p>Поскольку значение в строке 7 повторяется, то и индекс для этой строки так же повторяется и будет равен 1. Соответственно, функция вернет значение 1 / 6 = 0.16. Восьмая строка вновь содержит уникальное значение. Её индекс должен быть увеличен относительно индекса прошлой строки на количество тех предыдущих строк, в которых значение повторялось. В нашем случае значение 3600 повторялось в двух предыдущих строках. Значит, индекс прошлой первой строки мы должны увеличить на 2 и получить индекс восьмой строки равный 3. Расчет значения будет 3 / 6 = 0.5. Девятая строка также содержит новое значение, 4000. Увеличиваем индекс на 1, так как значение прошлой строки не повторялось и содержится только в одной строке. Индекс текущей строки — 3 + 1 = 4, а значение, которое возвращает функция: 4 / 6 = 0.66. Десятая строка содержит такое же значение поля Salary, как и предыдущая. Соответственно, индекс остается 4 и значение поля рассчитывается так: 4 / 6 = 0.66. Одиннадцатая строка содержит новое значение, равное 4800, поскольку прошлое значение поля Salary повторялось. Дважды увеличиваем индекс на 2. 4 + 2 = 6. Значение поля, возвращаемое функцией PERCENT_RANK: 6 / 6 = 1.0</p>
+<h3 id="11-percentile_contpercentile">11. Функция PERCENTILE_CONT(percentile)</h3>
+<p>Возвращает значения, основанные на линейной интерполяции между значениями группы, после сортировки, описанной в пункте ORDER BY. Процентиль должен иметь значение в диапазоне от 0 до 1. Для данной функции описание пункта ORDER BY является обязательным. Пример запроса:</p>
+<div class="codehilite"><pre><span></span><code>SELECT
+Department,
+Salary,
+PERCENTILE_CONT(0.5) OVER (PARTITION BY Department ORDER BY Salary)
+FROM Test_WF.test_structure
+WHERE Department in (&#39;Finance&#39;,&#39;Sales&#39;)
+</code></pre></div>
+
+<p>Результат запроса:</p>
+<p><img loading="lazy" decoding="async" alt="Функция PERCENTILE_CONT" width="221" height="316" src="../images/209-Funktsiya-PERCENTILE_CONT.webp" /></p>
+<p>Поскольку мы в качестве процентиля указали 0,5, в нашем случае он будет равен медиане и возвращает значение медианы. Вы можете указать любой процентиль в интервале от 0 до 1. К примеру, значение 0,25 будет соответствовать второму квартилю, а значение 0,75 — третьему квартилю.</p>
+<h3 id="12-percentile_discpercentile">12. Функция PERCENTILE_DISC(percentile)</h3>
+<p>Возвращает значение с наименьшим кумулятивным распределением, большее или равное указанному в процентилю. Для данной функции описание пункта ORDER BY является обязательным. Пример запроса:</p>
+<div class="codehilite"><pre><span></span><code>SELECT
+Department,
+Salary,
+PERCENTILE_DISC(0.25) OVER (PARTITION BY Department ORDER BY Salary)
+FROM Test_WF.test_structure
+WHERE Department in (&#39;Finance&#39;,&#39;Sales&#39;)
+</code></pre></div>
+
+<p>Результат запроса:</p>
+<p><img loading="lazy" decoding="async" alt="Функция PERCENTILE_DISC" width="222" height="315" src="../images/209-Funktsiya-PERCENTILE_DISC.webp" /></p>
+<p>Функция возвращает значение, соответствующее указанному процентилю. Поскольку мы указали в качестве процентиля 0,25, функция вернула значение первого квартиля. Значение 0,5 вернет значение второго квартиля, который, в свою очередь, равен медиане. Значение 0,75 вернет значение третьего квартиля.</p>
+<h3 id="13-rank">13. Функция RANK()</h3>
+<p>Возвращает ранг значения на основе сравнения с другими значениями в рамках окна. Равнозначные значения отображаются с одинаковым рангом. Ранг следующего значения увеличивается на количество значений, соответствующих прошлому рангу. Например, если два значения имеют ранг 2, то ранг следующего по величине значения будет 4.</p>
+<blockquote>
+<p><img loading="lazy" decoding="async" alt="" src="https://netpeak.net/blog/img/social/tw-01.svg" /></p>
+</blockquote>
+<p>Если вам необходимо получить непрерывное ранжирование, используйте функцию DENSE_RANK ().</p>
+<p>Параметр ORDER BY в пункте OVER для данной функции является обязательным. Пример запроса:</p>
+<div class="codehilite"><pre><span></span><code>SELECT
+Department,
+Salary,
+RANK(Salary) OVER (PARTITION BY Department ORDER BY Salary)
+FROM Test_WF.test_structure
+WHERE Department in (&#39;Finance&#39;,&#39;Sales&#39;)
+</code></pre></div>
+
+<p>Результат запроса:</p>
+<p><img loading="lazy" decoding="async" alt="Функция RANK" width="212" height="316" src="../images/209-Funktsiya-RANK.webp" /></p>
+<p>Как функция рассчитала ранг для окна «Finance»? Наименьшее значение находится в первой строке и равняется 3000, оно имеет первый ранг. Далее во второй и третьей строках идет равнозначное значение 3900. Обе строки имеют ранг 2. Так как ранг 2 повторялся дважды, то ранг следующего значения, находящегося в четвертой строке, увеличивается на 2 относительного ранга в строке 3 и равняется 4.</p>
+<h3 id="14-ratio_to_report">14. Функция RATIO_TO_REPORT()</h3>
+<p>Возвращает отношение текущего значения к сумме значений указанного поля в данном окне. Пример запроса:</p>
+<div class="codehilite"><pre><span></span><code>SELECT
+Department,
+Salary,
+RATIO_TO_REPORT(Salary) OVER (PARTITION BY Department ORDER BY Salary)
+FROM Test_WF.test_structure
+WHERE Department in (&#39;Finance&#39;,&#39;Sales&#39;)
+</code></pre></div>
+
+<p>Результат запроса:</p>
+<p><img loading="lazy" decoding="async" alt="Функция RATIO_TO_REPORT" width="323" height="314" src="../images/209-Funktsiya-RATIO_TO_REPORT1.webp" /></p>
+<p>Для первой строки мы берем текущее значение, то есть 3000, и делим на сумму всех значений окна (3000+3900+3900+6700). Получаем 0,17, то есть значение первой строки составляет 17% от суммы значений всего окна «Finance».</p>
+<h3 id="15-row_number">15. Функция ROW_NUMBER()</h3>
+<p>Возвращает номер текущей строки в окне. Нумерация начинается с единицы. Пример запроса:</p>
+<div class="codehilite"><pre><span></span><code>SELECT
+Department,
+Salary,
+ROW_NUMBER() OVER (PARTITION BY Department)
+FROM Test_WF.test_structure
+WHERE Department in (&#39;Finance&#39;,&#39;Sales&#39;)
+</code></pre></div>
+
+<p>Результат запроса:</p>
+<p><img loading="lazy" decoding="async" alt="Функция ROW_NUMBER" width="211" height="313" src="../images/209-Funktsiya-ROW_NUMBER1.webp" /></p>
+<p>Работа данной функции достаточно проста. Функция просто возвращает номер строки в окне. На первый взгляд, оконные функции могут показаться сложными. Но, потратив немного времени и разобравшись с их немногочисленными настройками, описанными в этой статье, вы значительно расширите свои навыки работы с различными базами данных. Этот тип функций поддерживается не только в BigQuery. Большая часть описанных функций с сохранением описанного выше синтаксиса работает и в PostgreSQL, и в MS SQL, а также в других достаточно известных системах управления базами данных. Если остались вопросы, готов разъяснить в комментариях.</p>
+<hr />
+<p><em><a target="_blank" rel="noopener" href="https://netpeak.net/ru/blog/kak-rabotat-s-okonnymi-funktsiyami-v-google-bigquery-podrobnoe-rukovodstvo/">Оригинал публикации на блоге Netpeak.</a></em></p></div>
+                    
+                    <div class="b-tags"><a class="b-chip" href="../?tag=sql#posts">SQL</a><a class="b-chip" href="../?tag=bigquery#posts">BigQuery</a></div>
+                </div>
+            </article>
+            
+        </div>
+        <section class="b-related">
+            <h2 class="outfit-font"><span class="ru-text">Читайте также</span><span class="ua-text">Читайте також</span><span class="en-text">Related posts</span></h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="../google-bigquery-dinamicheskiy-upsert-s-pomoschyu-execute-immediate/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="0">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/covers/1577.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">сент. 2022</span><span class="ua-text">верес. 2022</span><span class="en-text">Sep 2022</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2022</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">2 мин чтения</span><span class="ua-text">2 хв читання</span><span class="en-text">2 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Google BigQuery: Динамический UPSERT с помощью EXECUTE IMMEDIATE</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">Обычный паттерн обновления данных в BigQuery — добавление новых записей, даже если это означает дублирование данных. А затем обрабатывать дубликаты при чтении с помощью группировки или…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">BigQuery</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">SQL</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a>
+                <a href="../partitsionirovanie-tablits-v-google-bigquery-ponyatnaya-instruktsiya/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="60">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/partitsionirovanie-tablits-v-google-bigquery-ponya-147326302-30f789b7.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">янв. 2018</span><span class="ua-text">січ. 2018</span><span class="en-text">Jan 2018</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2018</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">8 мин чтения</span><span class="ua-text">8 хв читання</span><span class="en-text">8 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Партиционирование таблиц в Google BigQuery — понятная инструкция</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">Знаете, как максимально продуктивно и экономно работать с данными в Google BigQuery с помощью разделения больших таблиц на партиции? В этой статье я расскажу, как создавать партиции и…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">BigQuery</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Базы данных</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a>
+                <a href="../kak-obrabatyvat-dannye-iz-mnozhestva-tablits-v-google-bigquery/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="120">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/kak-obrabatyvat-dannye-iz-mnozhestva-kak-obrabatyvat-dannie-bdb55e6f.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">март 2016</span><span class="ua-text">берез. 2016</span><span class="en-text">Mar 2016</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2016</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">5 мин чтения</span><span class="ua-text">5 хв читання</span><span class="en-text">5 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Как обрабатывать данные из множества таблиц в Google BigQuery.</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">В прошлой статье я рассказывал об оконных функциях в Google BigQuery. Сегодня рассмотрим функции подстановки таблиц. Здесь всё проще.;</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Обработка данных</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">BigQuery</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a></div>
+        </section>
+        <a href="../" class="b-back"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i><span class="ru-text">Ко всем материалам</span><span class="ua-text">До всіх матеріалів</span><span class="en-text">All posts</span></a>
+    </main>
+
+    <section class="px-6 max-w-7xl mx-auto pb-24 relative z-10">
+        <div class="grid md:grid-cols-2 gap-6" data-aos="fade-up">
+            <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(59, 130, 246, 0.1));">
+                <div class="bento-content w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center text-blue-400 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-telegram"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">Telegram-канал R4marketing</span><span class="ua-text">Telegram-канал R4marketing</span><span class="en-text">R4marketing on Telegram</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Новые статьи, видео и заметки по R — первыми.</span><span class="ua-text">Нові статті, відео та нотатки з R — першими.</span><span class="en-text">New articles, videos and R notes — first.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-blue-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+            <a href="https://www.youtube.com/R4marketing/?sub_confirmation=1" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(239, 68, 68, 0.1));">
+                <div class="bento-content w-16 h-16 bg-red-500/20 rounded-2xl flex items-center justify-center text-red-500 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-youtube"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">YouTube-канал R4marketing</span><span class="ua-text">YouTube-канал R4marketing</span><span class="en-text">R4marketing on YouTube</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Видеоуроки по R, аналитике и AI-инструментам.</span><span class="ua-text">Відеоуроки з R, аналітики та AI-інструментів.</span><span class="en-text">Video lessons on R, analytics and AI tools.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-red-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/5 bg-slate-950/80 backdrop-blur-md pt-16 pb-8 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
+                <div class="sm:col-span-2 lg:col-span-4">
+                    <a href="../../" class="inline-flex items-center gap-3 group mb-5">
+                        <img src="../../logo.jpg" alt="Alexey Seleznev" class="w-10 h-10 rounded-xl object-cover border border-white/10 group-hover:border-purple-500/50 transition-colors">
+                        <span class="text-lg font-black tracking-tight uppercase outfit-font text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+                    </a>
+                    <p class="text-sm text-slate-400 leading-relaxed max-w-sm mb-6"><span class="ru-text">Head of Analytics в Netpeak Group. Автор open source R-пакетов, бесплатных курсов по R и проекта R4marketing.</span><span class="ua-text">Head of Analytics у Netpeak Group. Автор open source R-пакетів, безкоштовних курсів з R та проєкту R4marketing.</span><span class="en-text">Head of Analytics at Netpeak Group. Author of open source R packages, free R courses and the R4marketing project.</span></p>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="https://t.me/R4marketing" target="_blank" rel="noopener" aria-label="Telegram R4marketing" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-400 hover:border-blue-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-telegram"></i></a>
+                        <a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" aria-label="YouTube R4marketing" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-red-500 hover:border-red-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="https://github.com/selesnow" target="_blank" rel="noopener" aria-label="GitHub" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-white hover:border-white/30 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://linkedin.com/in/selesnow" target="_blank" rel="noopener" aria-label="LinkedIn" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-500 hover:border-blue-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://facebook.com/selesnow" target="_blank" rel="noopener" aria-label="Facebook" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-600/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/alexey.selesnow" target="_blank" rel="noopener" aria-label="Instagram" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-pink-500 hover:border-pink-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://habr.com/ru/users/selesnow/" target="_blank" rel="noopener" aria-label="Habr" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-teal-400 hover:border-teal-400/40 transition-all hover:-translate-y-0.5"><i class="fa-solid fa-h"></i></a>
+                    </div>
+                </div>
+
+                <nav class="lg:col-span-2" aria-label="Site map">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">Сайт</span><span class="ua-text">Сайт</span><span class="en-text">Site</span></h3>
+                    <ul class="space-y-3">
+                        <li><a href="../../" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-house w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a></li>
+                        <li><a href="../../opensource/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-code-branch w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span></a></li>
+                        <li><a href="../../courses/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-graduation-cap w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a></li>
+                        <li><a href="../../videos/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-circle-play w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a></li>
+                        <li><a href="../../talks/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-microphone-lines w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a></li>
+                        <li><a href="../../articles/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-pen-nib w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a></li>
+                        <li><a href="../../interviews/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-regular fa-newspaper w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a></li>
+                        <li><a href="../../blog/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-feather-pointed w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a></li>
+                    </ul>
+                </nav>
+
+                <div class="lg:col-span-3">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">R4marketing и публикации</span><span class="ua-text">R4marketing і публікації</span><span class="en-text">R4marketing & writing</span></h3>
+                    <ul class="space-y-3">
+                        <li><a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-telegram w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Telegram-канал R4marketing</span><span class="ua-text">Telegram-канал R4marketing</span><span class="en-text">R4marketing Telegram</span></a></li>
+                        <li><a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-youtube w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">YouTube-канал R4marketing</span><span class="ua-text">YouTube-канал R4marketing</span><span class="en-text">R4marketing YouTube</span></a></li>
+                        <li><a href="https://alexeyseleznev.wordpress.com/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-pen-nib w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Личный блог</span><span class="ua-text">Особистий блог</span><span class="en-text">Personal blog</span></a></li>
+                        <li><a href="https://habr.com/ru/users/selesnow/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-h w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Профиль на Хабре</span><span class="ua-text">Профіль на Хабрі</span><span class="en-text">Habr profile</span></a></li>
+                        <li><a href="https://alexey-seleznev.pro/publications/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-layer-group w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Архив публикаций</span><span class="ua-text">Архів публікацій</span><span class="en-text">Publications archive</span></a></li>
+                        <li><a href="https://github.com/selesnow" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-github w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">GitHub</span><span class="ua-text">GitHub</span><span class="en-text">GitHub</span></a></li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-3">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">Контакты</span><span class="ua-text">Контакти</span><span class="en-text">Contacts</span></h3>
+                    <ul class="space-y-4">
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">Email</div><a href="mailto:me@alexey-seleznev.pro" class="text-sm text-slate-300 hover:text-purple-300 transition-colors break-all">me@alexey-seleznev.pro</a></li>
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">Telegram</div><a href="https://t.me/AlexeySeleznev" target="_blank" rel="noopener" class="text-sm text-slate-300 hover:text-blue-300 transition-colors break-all">@AlexeySeleznev</a></li>
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">LinkedIn</div><a href="https://linkedin.com/in/selesnow" target="_blank" rel="noopener" class="text-sm text-slate-300 hover:text-blue-300 transition-colors break-all">linkedin.com/in/selesnow</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-14 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+                <p>© 2026 Alexey Seleznev. <span class="ru-text">Все права защищены.</span><span class="ua-text">Усі права захищені.</span><span class="en-text">All rights reserved.</span></p>
+                <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="inline-flex items-center gap-2 font-semibold hover:text-white transition-colors group"><span class="ru-text">Наверх</span><span class="ua-text">Нагору</span><span class="en-text">Back to top</span><span class="w-7 h-7 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-purple-500 group-hover:border-purple-500 transition-all"><i class="fa-solid fa-arrow-up text-[10px]"></i></span></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script src="../../assets/site.js"></script>
+
+    <script>
+    (function () {
+        // кнопка «Копировать» у блоков кода
+        document.querySelectorAll('.b-prose .codehilite').forEach(box => {
+            const btn = document.createElement('button');
+            btn.type = 'button'; btn.className = 'b-copy'; btn.setAttribute('aria-label', 'Copy code');
+            btn.innerHTML = '<i class="fa-regular fa-copy" aria-hidden="true"></i>';
+            btn.addEventListener('click', () => {
+                navigator.clipboard.writeText(box.querySelector('pre').innerText).then(() => {
+                    btn.innerHTML = '<i class="fa-solid fa-check" aria-hidden="true"></i>';
+                    setTimeout(() => btn.innerHTML = '<i class="fa-regular fa-copy" aria-hidden="true"></i>', 1500);
+                });
+            });
+            box.appendChild(btn);
+        });
+        // подсветка текущего раздела в оглавлении
+        const links = Array.from(document.querySelectorAll('.b-toc a'));
+        if (links.length && 'IntersectionObserver' in window) {
+            const map = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+            const io = new IntersectionObserver(es => es.forEach(e => {
+                if (e.isIntersecting) { links.forEach(l => l.classList.remove('active')); const a = map.get(e.target.id); if (a) a.classList.add('active'); }
+            }), { rootMargin: '-80px 0px -70% 0px' });
+            map.forEach((_, id) => { const el = document.getElementById(id); if (el) io.observe(el); });
+        }
+    })();
+    </script>
+</body>
+</html>

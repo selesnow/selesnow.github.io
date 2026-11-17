@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Alexey Seleznev">
+    <meta name="theme-color" content="#030712">
+    <link rel="canonical" href="https://alexey-seleznev.pro/blog/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-i-tablits/">
+
+    <title>Как построить сводные таблицы в Excel, LibreOffice, OpenOffice и таблицах Google | Алексей Селезнёв</title>
+    <meta name="title" content="Как построить сводные таблицы в Excel, LibreOffice, OpenOffice и таблицах Google | Алексей Селезнёв">
+    <meta name="description" content="В предыдущих публикациях я поделился информацией о том, как импортировать данные из Google Analytics в различные процессоры электронных таблиц (мы рассматривали импорт в Google таблицы и…">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alexey-seleznev.pro/blog/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-i-tablits/">
+    <meta property="og:site_name" content="ALEXEY-SELEZNEV.pro">
+    <meta property="og:title" content="Как построить сводные таблицы в Excel, LibreOffice, OpenOffice и таблицах Google | Алексей Селезнёв">
+    <meta property="og:description" content="В предыдущих публикациях я поделился информацией о том, как импортировать данные из Google Analytics в различные процессоры электронных таблиц (мы рассматривали импорт в Google таблицы и…">
+    <meta property="og:image" content="https://alexey-seleznev.pro/photo.jpg">
+    <meta property="og:image:alt" content="Алексей Селезнёв">
+    <meta property="og:locale" content="ru_RU">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="https://alexey-seleznev.pro/blog/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-i-tablits/">
+    <meta name="twitter:title" content="Как построить сводные таблицы в Excel, LibreOffice, OpenOffice и таблицах Google | Алексей Селезнёв">
+    <meta name="twitter:description" content="В предыдущих публикациях я поделился информацией о том, как импортировать данные из Google Analytics в различные процессоры электронных таблиц (мы рассматривали импорт в Google таблицы и…">
+    <meta name="twitter:image" content="https://alexey-seleznev.pro/photo.jpg">
+
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z56YHE916N"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Z56YHE916N');
+    </script>
+    <link rel="icon" type="image/jpeg" href="../../logo.jpg">
+    <link rel="apple-touch-icon" href="../../logo.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;700;800;900&display=swap">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/site.css">
+    <!-- Tailwind собран заранее (_build/build.py) и подключается последним, как это делал CDN-скрипт -->
+    <link rel="stylesheet" href="../../assets/tailwind.css">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Как построить сводные таблицы в Excel, LibreOffice, OpenOffice и таблицах Google",
+  "datePublished": "2015-12-16",
+  "inLanguage": "ru",
+  "description": "В предыдущих публикациях я поделился информацией о том, как импортировать данные из Google Analytics в различные процессоры электронных таблиц (мы рассматривали импорт в Google таблицы и…",
+  "author": {
+    "@id": "https://alexey-seleznev.pro/#person"
+  },
+  "mainEntityOfPage": "https://alexey-seleznev.pro/blog/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-i-tablits/"
+}
+    </script>
+    <link rel="stylesheet" href="../blog.css">
+</head>
+<body class="relative lang-en">
+
+    <!-- Interactive Background -->
+    <div id="vanta-bg"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full z-50 top-0 left-0 border-b border-white/5 bg-slate-950/60 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 h-16 flex items-center justify-between">
+            <a href="../../" class="flex items-center gap-2 sm:gap-2.5 md:gap-3 group shrink min-w-0">
+                <img src="../../logo.jpg" alt="Alexey Seleznev" class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 rounded-lg sm:rounded-xl object-cover shadow-md border border-white/10 group-hover:border-purple-500/50 group-hover:scale-105 transition-all shrink-0">
+                <span class="text-xs min-[400px]:text-sm sm:text-base md:text-xl font-black tracking-tight uppercase outfit-font whitespace-nowrap text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+            </a>
+            <div class="hidden xl:flex gap-6 text-sm font-semibold text-slate-400">
+                <a href="../../" class="nav-link hover:text-white transition-colors"><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a>
+                <a href="../../opensource/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span></a>
+                <a href="../../courses/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a>
+                <a href="../../videos/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a>
+                <a href="../../talks/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a>
+                <a href="../../articles/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a>
+                <a href="../../interviews/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a>
+                <a href="../../blog/" class="nav-link hover:text-white transition-colors active"><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a>
+            </div>
+
+            <div class="flex items-center gap-1.5 sm:gap-2 md:gap-4 shrink-0">
+                <div class="lang-switcher flex gap-1 sm:gap-1.5 md:gap-2 text-[11px] sm:text-xs md:text-sm font-bold border-r border-white/10 pr-1.5 sm:pr-3 md:pr-4 mr-0.5 sm:mr-1 md:mr-2 outfit-font">
+                    <button onclick="changeLang('en')" id="btn-en" class="active hover:text-white transition-colors">EN</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ru')" id="btn-ru" class="text-slate-500 hover:text-white transition-colors">RU</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ua')" id="btn-ua" class="text-slate-500 hover:text-white transition-colors">UA</button>
+                </div>
+
+                <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="text-slate-400 hover:text-blue-400 transition-colors hidden sm:block" aria-label="Telegram"><i class="fa-brands fa-telegram text-lg md:text-xl"></i></a>
+                <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="text-slate-400 hover:text-white transition-colors hidden sm:block" aria-label="GitHub"><i class="fa-brands fa-github text-lg md:text-xl"></i></a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="xl:hidden w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-purple-500/20 hover:border-purple-500/40 transition-all focus:outline-none" aria-label="Toggle Navigation Menu">
+                    <i class="fa-solid fa-bars text-sm sm:text-lg" id="mobile-menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div id="mobile-menu" class="hidden xl:hidden border-t border-white/10 bg-slate-950/95 backdrop-blur-2xl shadow-2xl overflow-y-auto max-h-[calc(100vh-4rem)] transition-all">
+            <div class="max-w-7xl mx-auto px-6 py-6 space-y-1">
+                <a href="../../" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-house text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span>
+                </a>
+                <a href="../../opensource/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-code-branch text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span>
+                </a>
+                <a href="../../courses/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-graduation-cap text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span>
+                </a>
+                <a href="../../videos/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-circle-play text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span>
+                </a>
+                <a href="../../talks/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-microphone-lines text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span>
+                </a>
+                <a href="../../articles/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-pen-nib text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span>
+                </a>
+                <a href="../../interviews/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-regular fa-newspaper text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span>
+                </a>
+                <a href="../../blog/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-white bg-white/5 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-feather-pointed text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span>
+                </a>
+
+                <div class="pt-4 mt-3 border-t border-white/10 flex items-center justify-around text-slate-400">
+                    <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-blue-400 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-telegram text-xl"></i> Telegram
+                    </a>
+                    <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="p-2 hover:text-white transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-github text-xl"></i> GitHub
+                    </a>
+                    <a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-red-500 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-youtube text-xl"></i> YouTube
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="b-wrap relative z-10">
+        <nav class="b-crumbs" aria-label="breadcrumb">
+            <a href="../../"><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a><span>/</span><a href="../"><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a><span>/</span><a href="../?cat=vizualizatsiya-dannyh#posts">Визуализация данных</a>
+        </nav>
+        <div class="b-layout has-toc">
+            <article class="bento-glass no-lift b-article" data-aos="fade-up">
+                <div class="bento-content">
+                    <div class="b-cats"><a class="b-chip b-chip-cat" href="../?cat=vizualizatsiya-dannyh#posts">Визуализация данных</a><a class="b-chip b-chip-cat" href="../?cat=tablitsy#posts">Таблицы</a></div>
+                    <h1 class="b-title outfit-font">Как построить сводные таблицы в Excel, LibreOffice, OpenOffice и таблицах Google</h1>
+                    <div class="b-meta">
+                        <span><i class="fa-regular fa-calendar" aria-hidden="true"></i><span class="ru-text">16 декабря 2015</span><span class="ua-text">16 грудня 2015</span><span class="en-text">16 Dec 2015</span></span>
+                        <span><i class="fa-regular fa-clock" aria-hidden="true"></i><span class="ru-text">25 мин чтения</span><span class="ua-text">25 хв читання</span><span class="en-text">25 min read</span></span>
+                        <span class="b-lang" title="Русский">RU</span>
+                    </div>
+                    <div class="b-note"><i class="fa-regular fa-clock" aria-hidden="true"></i><div><span class="ru-text">Материал опубликован в 2015 году — описанные инструменты и интерфейсы могли измениться.</span><span class="ua-text">Матеріал опубліковано у 2015 році — описані інструменти та інтерфейси могли змінитися.</span><span class="en-text">Published in 2015 — the tools and interfaces described may have changed since.</span></div></div>
+                    
+                    <div class="b-prose"><p>В предыдущих публикациях я поделился информацией о том, как импортировать данные из Google Analytics в различные процессоры электронных таблиц (мы рассматривали импорт в <a target="_blank" rel="noopener" href="http://netpeak.net/ru/blog/dopolnenie-google-analytics-dlya-google-tablits-polnoe-rukovodstvo/">Google таблицы</a> и <a target="_blank" rel="noopener" href="http://netpeak.net/ru/blog/import-dannyh-iz-google-analytics-v-excel-s-pomoshchyu-analytics-edge-podrobnoe-rukovodstvo/">Excel</a>). Но импорт — это только первый шаг на пути к полноценному анализу данных. После загрузки всей необходимой вам информации в редактор электронных таблиц, ее необходимо визуализировать и только потом анализировать.</p>
+<p><img loading="lazy" decoding="async" alt="" src="https://i0.wp.com/images.cmsmagazine.ru/klarnetCMSlocal/resized_images/articles_elements/1013/2000/uploadg9xrdm1rlt.jpg" /></p>
+<p>Самый удобный и быстрый инструмент для преобразования массива данных в информативный отчет — сводные таблицы. В основе сводных таблиц лежит технология OLAP, описанная в 1993 году известным исследователем баз данных и автором реляционной модели данных Эдгаром Коддом. По сути, сводная таблица — это инструмент обработки данных для их группировки и обобщения.</p>
+<p>Любая сводная таблица строится на основе определенной базы данных. В виде базы данных выступает массив, состоящий из полей и записей. Каждая строка (запись) в базе данных представляет собой информацию об отдельном случае, объекте или состоянии изучаемого объекта, а каждый столбец (поле) является параметром, свойством или признаком всех исследуемых объектов. Например, параметром может быть источник трафика, описание информации об источнике. В поле «источник трафика» будет, например, Google. Все поля базы данных разделяются на два типа: измерения («параметры» в терминологии Google Analytics) и меры («показатели» в терминологии Google Analytics). Измерением является название или свойство объекта, в разрезе которых мы можем анализировать различные количественные показатели.</p>
+<p>Каждое измерение содержит ряд элементов. Например, элементами измерения «Источник трафика» будут: Google, Yandex и любые другие возможные источники трафика. Мерой являются количественные показатели, которые мы сравниваем между элементами измерений. Например: количество кликов, количество транзакций, сумма дохода. С общим понятием, что такое сводная таблица, мы ознакомились. Далее рассмотрим, как строятся сводные таблицы в различных процессорах электронных таблиц.</p>
+<blockquote>
+<p>Безусловным лидером в реализации всего возможного функционала сводных таблиц является Microsoft Excel. По функциональным возможностям с данным инструментом могут соревноваться только такие гиганты BI индустрии, как QlikView и Tableau, но в связи с тем, что данные платформы являются достаточно дорогостоящими и в русскоязычном сегменте пока не успели получить особую популярность, в данной статье рассматриваться не будут.</p>
+</blockquote>
+<p>Для построения сводных таблиц в описанных ниже мануалах используется одна и та же импровизированная база данных, состоящая из выгруженной из Google Analytics информации. Вы можете скачать эту таблицу <a target="_blank" rel="noopener" href="https://drive.google.com/file/d/0B1rgddqnM9XJSTNMUDZybFNDeG8/view?usp=sharing">по ссылке</a>.</p>
+<h2 id="microsoft-excel-2013">Сводные таблицы в Microsoft Excel 2013</h2>
+<p>Для построения сводной таблицы в Microsoft Excel 2013 вам необходимо открыть скачанный ранее csv файл. После чего, установив курсор на любой из ячеек таблицы, нажмите Ctrl+A — этим действием вы выделите всю базу данных. На её основе мы будем строить сводную таблицу. Далее перейдите на вкладку «Вставка» и в группе «Таблицы» нажмите «Сводная таблица».</p>
+<p><img loading="lazy" decoding="async" alt="Далее перейдите на вкладку «Вставка» и в группе «Таблицы» нажмите «Сводная таблица»" width="805" height="350" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-9a870c20.webp" /></p>
+<p>В открывшимся диалоговом окне «Создание сводной таблицы» ничего не меняем и жмем ОК.</p>
+<p><img loading="lazy" decoding="async" alt="В открывшимся диалоговом окне «Создание сводной таблицы» ничего не меняем и жмем ОК" width="456" height="333" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-99a2c656.webp" /></p>
+<p>На этом процесс создания закончен и мы приступаем к работе со сводной таблицей. После создания таблицы в книге Excel будет создан новый лист. Он будет выглядеть так:</p>
+<p><img loading="lazy" decoding="async" alt="После создания таблицы в книге Excel будет создан новый лист" width="677" height="585" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-00a0712f.webp" /></p>
+<p>Как вы видите на скриншоте, данный лист состоит из самой сводной таблицы и конструктора сводной таблицы. Конструктор состоит, в свою очередь, из пяти частей:</p>
+<ul>
+<li>список полей;</li>
+<li>фильтры;</li>
+<li>колонны;</li>
+<li>строки;</li>
+<li>значения.</li>
+</ul>
+<p>Для того, чтобы понять принцип работы сводной таблицы, давайте произведем следующие действия в конструкторе сводной таблицы:</p>
+<ol>
+<li>Поле Date с помощью правой кнопки мыши перетащим в область строк.</li>
+<li>Поле Device category перетащим в область колонн.</li>
+<li>Поле User type — в область фильтров.</li>
+<li>Поле Session — в область значений.</li>
+</ol>
+<p>В итоге должно получиться так:</p>
+<p><img loading="lazy" decoding="async" alt="Как работает сводная таблица" width="801" height="586" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-54d328fd.webp" /></p>
+<p>В результате четырех произведенных действий мы построили перекрестную таблицу, которую в Google Analytics построить нельзя. В строках мы видим даты, а по столбцам у нас располагается информация о количестве сеансов за определенную дату по каждому типу устройств. Это получилось, потому что мы перенесли поле Date в область строк. В отчете сводной таблицы в каждой строке появилась определенная дата.</p>
+<p>После того, как мы перетащили поле Device category в область колонн, каждый столбец сводной таблицы получил название одного из существующих в базе типов устройств.</p>
+<p>Перенеся поле Sessions в область значений, мы заполнили область значений сводной таблицы информацией о количестве сеансов за каждый день по каждому типу устройств. В полях, которые были добавлены в область значений конструктора сводной таблицы, можно изменять агрегирующую функцию. По умолчанию для числовых полей применяется суммирование, но вы можете выбрать любую другую из предложенных агрегирующих функций. Для этого достаточно в области значений сводной таблицы кликнуть правой кнопкой мыши и в выпадающем меню «Итоги по» выбрать нужную функцию.</p>
+<p><img loading="lazy" decoding="async" alt="Изменение агрегирующей функции" width="703" height="490" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-7b2476ba.webp" /></p>
+<p>Остается вопрос: а что же нам дал перенос поля User type в фильтры? Чтобы это понять, давайте применим фильтр сводной таблицы и выведем в отчет информацию только по новым пользователям.</p>
+<ol>
+<li>Откройте перечень элементов поля User type, нажав на ярлык с изображением воронки в области фильтров сводной таблицы.</li>
+<li>Выберите элемент New user.</li>
+<li>Нажмите ОК.</li>
+</ol>
+<p><img loading="lazy" decoding="async" alt="Информация только по новым пользователям" width="514" height="510" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-895d7d45.webp" /></p>
+<p>Теперь в область значений сводной таблицы выводится информация о количестве сеансов, совершенных только новыми пользователями в разрезе дат и типов устройств. Выше показан пример простейшей сводной таблицы, но на самом деле это далеко не весь функционал, который вы можете использовать для построения отчетов сводных таблиц. Любые параметры могут быть выведены в отчет в виде определенной иерархии. Для примера перенесем в область строк поле Week таким образом, чтобы оно находилось выше, чем поле Date.</p>
+<p><img loading="lazy" decoding="async" alt="Перенесем в область строк поле Week таким образом, чтобы оно находилось выше, чем поле Date" width="253" height="531" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-8e95e1fc.webp" /></p>
+<p>Отчет сводной таблицы будет сгруппирован не только по датам, но и по неделям. К тому же к каждой неделе будут прикреплены промежуточные итоги для более удобного анализа отображаемой информации. Теперь сводная таблица приобрела следующий вид:</p>
+<p><img loading="lazy" decoding="async" alt="Отчет сводной таблицы будет сгруппирован не только по датам, но и по неделям" width="492" height="444" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-75238940.webp" /></p>
+<p>Такие иерархии можно строить и в области колонн. Вы можете смотреть информацию на уровне недель и при необходимости детализировать информацию по количеству сеансов до уровня дат простым нажатием на иконку +/−.</p>
+<p><img loading="lazy" decoding="async" alt="Строить иерархии в области колонн" width="493" height="442" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-cddff3c4.webp" /></p>
+<p>Очень полезной функцией сводных таблиц в Microsoft Excel является возможность дополнительных вычислений над любыми выведенными в таблицу показателями.</p>
+<p>Например, мы хотим посмотреть не количество сеансов за каждую дату в разбивке по типам устройств, а какую долю сеансов в каждой дате занимает каждый тип устройств. Для этого достаточно кликнуть правой кнопкой мыши в области значений сводной таблицы, и в контекстном меню выбрать пункт «Дополнительные вычисления» =&gt; «% от суммы по строке».</p>
+<p><img loading="lazy" decoding="async" alt="Дополнительные вычисления" width="712" height="589" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-403d80e7.webp" /></p>
+<p>Теперь сводная таблица показывает долю каждого типа устройства в общем объеме сеансов за день.</p>
+<p><img loading="lazy" decoding="async" alt="Теперь сводная таблица показывает долю каждого типа устройства в общем объеме сеансов за день" width="498" height="423" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-3ee7495f.webp" /></p>
+<p>Зачастую при анализе данных нам необходимо получить какой либо относительный расчетный показатель. При правильном построении базы данных такие показатели в ней не содержатся, но информация о полях, необходимых для вычисления какого-либо расчетного показателя, как правило, в базе данных есть. Приведем пример. Нам надо вывести в таблицу показатель отказов для каждого типа устройств.</p>
+<p>Показатель отказов является относительным расчетным показателем. В самой базе данных, на основе которой мы строили сводную таблицу, он не содержится, но у нас есть все необходимые поля для его вычисления. Чтобы создать вычисляемое поле в сводной таблице, необходимо передвинуть курсор в любую ячейку и перейти на вкладку «Анализ» в основном меню.</p>
+<p>Далее в группе «Вычисления» открыть выпадающее меню «Поля, элементы и наборы» и выбрать пункт «Вычисляемое поле».</p>
+<p><img loading="lazy" decoding="async" alt="В группе «Вычисления» открыть выпадающее меню «Поля, элементы и наборы» и выбрать пункт «Вычисляемое поле»" width="581" height="367" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-6db116ba.webp" /></p>
+<p>После этого появится диалоговое окно «Вставка вычисляемого поля», в котором необходимо дать название вашему вычисляемому полю. В данном случае наиболее подходящим будет «Показатель отказов». Заполнив название нужных полей сводной таблицы, напишите формулу, по которой будет рассчитываться наш показатель. При написании формул вы можете использовать все существующие формулы Microsoft Excel.</p>
+<p>Единственное отличие от использования функций при создании вычисляемого поля и рабочего листа заключается в том, что при написании формулы в ячейке рабочего листа вы ссылаетесь на адреса нужных вам ячеек (например, A1), а при написании формулы вычисляемого поля сводной таблицы вы ссылаетесь на название полей сводной таблицы.</p>
+<p>В нашем случае формула вычисляемого поля будет выглядеть как «=Bounces / Sessions». Дальше жмем OК.</p>
+<p><img loading="lazy" decoding="async" alt="При написании формулы вычисляемого поля сводной таблицы вы ссылаетесь на название полей сводной таблицы" width="514" height="315" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-6dc33908.webp" /></p>
+<p>В область значений отчета сводной таблицы будет добавлено поле «Показатель отказов»:</p>
+<p><img loading="lazy" decoding="async" alt="В область значений отчета сводной таблицы будет добавлено поле «Показатель отказов»" width="1423" height="450" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-6bffd876.webp" /></p>
+<p>После добавления нового расчетного поля в таблице были автоматически созданы четыре новые колонны. И если сейчас посмотреть на конструктор сводной таблицы, мы увидим, что в область «Колонны» добавлено поле «Значения».</p>
+<p><img loading="lazy" decoding="async" alt="В область «Колонны» добавлено поле «Значения»" width="260" height="408" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-fc44450b.webp" /></p>
+<p>Это поле появляется автоматически, если в область «Значения» добавлено более одного поля. Вы можете перенести поле «Значения» в строки или колонны, в область фильтров и значений данное поля перенести нельзя.</p>
+<p>По сути, это поле содержит название всех показателей (полей), выведенных в область значений. Для закрепления материала и преобразования сводной таблицы в более читабельный вид перетянем поле «Значения» в область строк под поле Date.</p>
+<p><img loading="lazy" decoding="async" alt="Перетянем поле «Значения» в область строк под поле Date" width="481" height="481" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-fbf2d667.webp" /></p>
+<p>Теперь в таблице каждая дата разбита на две строки. В первой выводится доля сеансов по каждому типу устройства, во второй — показатель отказов для каждого типа устройств. Иногда в ходе анализа нам требуется каким-либо образом объединить некоторые элементы измерения в группы. Например, в данном случае нам может понадобиться объединить типы устройств mobile и tablet в одну группу и назвать ее Other.</p>
+<p>Таким образом мы можем проанализировать различие между настольными устройствами и всеми остальными. Все, что нам необходимо сделать для группировки измерения, — это выделить нужные его элементы с помощью мыши, после чего вызвать контекстное меню правым кликом мыши и выбрать пункт «Группировать».</p>
+<p><img loading="lazy" decoding="async" alt="Все, что нам необходимо сделать для группировки измерения, — это выделить нужные его элементы с помощью мыши, после чего вызвать контекстное меню правым кликом мыши и выбрать пункт «Группировать»" width="654" height="396" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-c5baee38.webp" /></p>
+<p>Элементы mobile и tablet будут объединены в группу, которой по умолчанию присваивается название «Группа 1». Чтобы переименовать группу, просто перейдите в ячейку с названием и введите новое Other.</p>
+<p><img loading="lazy" decoding="async" alt="Чтобы переименовать группу, просто перейдите в ячейку с названием и введите новое Other" width="543" height="201" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-c6cb436e.webp" /></p>
+<p>После группировки некоторых элементов измерения область столбцов отчета сводной таблицы стала двухуровневой, так же, как и область строк после добавления в нее поля Week. Теперь вы можете анализировать информацию по типам устройств на двух уровнях, переключаясь между ними с помощью +/−.</p>
+<p><img loading="lazy" decoding="async" alt="Вы можете анализировать информацию по типам устройств на двух уровнях, переключаясь между ними" width="440" height="255" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-9b8db392.webp" /></p>
+<p>Далее вы можете настроить внешний вид вашей сводной таблицы, используя готовые шаблонные стили, либо выбрав свой собственный. Для создания кастомного стиля с помощью мыши выберите любую ячейку, которая входит в область отчета сводной таблицы, и, перейдя на вкладку «Конструктор», выберите один из предложенных стилей оформления.</p>
+<p><img loading="lazy" decoding="async" alt="Перейдя на вкладку «Конструктор», выберите один из предложенных стилей оформления" width="801" height="225" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-67f80094.webp" /></p>
+<p>Также существует возможность добавления срезов и временных шкал. Хочу заметить, что этот функционал не доступен в старых версиях Microsoft Excel, возможность добавления срезов появилась в 2010 версии, а временные шкалы добавили только в 2013 году. Срез выполняет ту же функцию что и фильтр, который мы построили, добавив поле User type при построении сводной таблицы в область фильтров.</p>
+<p>Единственное отличие заключается в том, что срез имеет более удобную визуализацию. Давайте добавим срез по Source. Для этого выделите любую ячейку, относящуюся к области отчета сводной таблицы, перейдите на вкладку «Анализ» и в группе «Фильтры» нажмите иконку «Вставить срез».</p>
+<p><img loading="lazy" decoding="async" alt="Перейдите на вкладку «Анализ» и в группе «Фильтры» нажмите иконку «Вставить срез»" width="836" height="196" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-9086a9cf.webp" /></p>
+<p>Откроется диалоговое окно «Вставка срезов», в котором вам необходимо выбрать, по каким полям вы хотите создать срезы. В нашем случае это поле Source.</p>
+<p><img loading="lazy" decoding="async" alt="Откроется диалоговое окно «Вставка срезов», в котором вам необходимо выбрать, по каким полям вы хотите создать срезы. В нашем случае это поле Source" width="251" height="454" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-42531281.webp" /></p>
+<p>После нажатия ОК на рабочий лист будет добавлен срез. Использовать срез можно так же, как и обычный фильтр. Давайте для примера в созданном нами срезе выберем элемент «google» и тем самым в отчет сводной таблицы выведем информацию о доле каждого типа устройств по каждой дате только по сеансам, совершенным из источника «google».</p>
+<p><img loading="lazy" decoding="async" alt="Сеансы, совершенные из источника «google»" width="689" height="488" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-46f94ceb.webp" /></p>
+<p>Зажав левый Ctrl, вы можете выбрать любое количество элементов среза, информацию по которым планируете вывести в отчет. Временная шкала работает по такому же принципу, как и срез, но строить ее можно только на основе полей, содержащих данные в формате даты. Создается она на вкладке «Анализ» с помощью кнопки «Вставить временную шкалу», находящейся в группе «Фильтры».</p>
+<p>С помощью временной шкалы очень удобно выбирать период, за который мы хотим вывести данные в отчет сводной таблицы. Например, мы с помощью нескольких кликов можем вывести в отчет информацию только за август.</p>
+<p><img loading="lazy" decoding="async" alt="С помощью временной шкалы очень удобно выбирать период, за который мы хотим вывести данные в отчет сводной таблицы" width="830" height="299" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-3964077a.webp" /></p>
+<p>Функциональные возможности работы со сводными таблицами в Microsoft Excel 2013 выходят далеко за пределы описанного выше функционала, и в рамках одной статьи осветить все не получится.</p>
+<p>Для тех, кто решил всерьез углубиться в изучение этого инструмента, советую ознакомиться с материалами, изложенными одним из ведущих специалистов по программному обеспечению электронных таблиц Биллом Джеленом в своей <a target="_blank" rel="noopener" href="http://www.williamspublishing.com/cgi-bin/buy.cgi?isbn=978-5-8459-1861-1&amp;next=yes">книге</a> «Сводные таблицы в Microsoft Excel 2013» (если интересно, у меня есть электронная версия «Сводных таблиц в Microsoft Excel 2010»).</p>
+<h2 id="google-spreadsheets-google">Сводные таблицы в Google Spreadsheets (Google таблицы)</h2>
+<p>Основное преимущество Google Spreadsheets — доступ к ним есть всегда и везде при условии наличия подключения к интернету. Именно это делает данный продукт наиболее удобным при совместной работе нескольких пользователей. Для построения сводной таблицы в Google Spreadsheets необходимо создать новую таблицу в своем Google Диске, перейдя по <a target="_blank" rel="noopener" href="https://drive.google.com/drive/my-drive">этой ссылке</a>.</p>
+<p><img loading="lazy" decoding="async" alt="Создайте пустую таблицу" width="285" height="398" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-69f68a5b.webp" /></p>
+<p>После этого импортируйте в созданную таблицу скачанную ранее базу данных (<a target="_blank" rel="noopener" href="https://drive.google.com/file/d/0B1rgddqnM9XJSTNMUDZybFNDeG8/view?usp=sharing">скачать</a> csv файл с базой данных). Чтобы загрузить базу данных в таблицу, в меню «Файл» выберите пункт «Импорт».</p>
+<p><img loading="lazy" decoding="async" alt="Чтобы загрузить базу данных в таблицу, в меню «Файл» выберите пункт «Импорт»" width="453" height="542" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-2ec2cd3d.webp" /></p>
+<p>В открывшемся диалоговом окне переходим на вкладку «Загрузка» и жмем кнопку «Выберите файл на компьютере», после чего выбираем скачанный ранее файл <a target="_blank" rel="noopener" href="https://drive.google.com/file/d/0B1rgddqnM9XJSTNMUDZybFNDeG8/view?usp=sharing">pivotTableDB.csv</a>.</p>
+<p><img loading="lazy" decoding="async" alt="В открывшемся диалоговом окне переходим на вкладку «Загрузка» и жмем кнопку «Выберите файл на компьютере», после чего выбираем скачанный раннее файл" width="929" height="601" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-ad20af58.webp" /></p>
+<p>В диалоговом окне «Импорт файла» устанавливаем переключатель «Действие после импорта» в положение «Заменить текущий лист», а переключатель «Разделитель» устанавливаем в положение «Другое». В качестве разделителя вводим точку с запятой.</p>
+<p><img loading="lazy" decoding="async" alt="В диалоговом окне «Импорт файла» устанавливаем переключатель «Действие после импорта» в положение «Заменить текущий лист», а переключатель «Разделитель» устанавливаем в положение «Другое»" width="398" height="518" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-728296f8.webp" /></p>
+<p>После нажатия кнопки «Импортировать» данные будут загружены в вашу таблицу на «Лист1». Теперь можно приступить непосредственно к созданию сводной таблицы. Для этого надо выделить весь загруженный массив данных. Наиболее быстрым способом в этом случае будет перейти в ячейку A1 и последовательно использовать сочетание клавиш <em>Ctrl + Shift + Стрелка вправо</em>, затем <em>Ctrl + Shift + Стрелка вниз</em>.</p>
+<p>Далее переходим в меню «Данные» и жмем на пункт «Сводная таблица».</p>
+<p><img loading="lazy" decoding="async" alt="Выделите весь загруженный массив данных" width="580" height="434" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-9bf0bd7c.webp" /></p>
+<p>Далее в Google таблице, так же как и в Microsoft Excel, будет создан новый лист с названием «Сводная таблица 1», областью сводной таблицы и редактором отчетов.</p>
+<p><img loading="lazy" decoding="async" alt="Будет создан новый лист с названием «Сводная таблица 1», областью сводной таблицы и редактором отчетов" width="830" height="440" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-3f70c26d.webp" /></p>
+<p>Редактор отчет так же состоит из четырех областей: «Строки», «Столбцы», «Значения», «Фильтры». Давайте пройдем путь построения сводной таблицы, описанный в примере выше. Для этого произведем те же четыре действия.</p>
+<ol>
+<li>В область «Строки» добавляем поле Date.</li>
+<li>В область «Столбцы» добавляем поле Device Category.</li>
+<li>В область «Значения» добавляем поле Sessions.</li>
+<li>В область «Фильтры» добавляем поле User type.</li>
+</ol>
+<p><img loading="lazy" decoding="async" alt="Давайте пройдем путь построения сводной таблицы, описанный в примере выше" width="350" height="221" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-df7effb3.webp" /></p>
+<p>Сводная таблица приобрела знакомый из описания Microsoft Excel вид:</p>
+<p><img loading="lazy" decoding="async" alt="Сводная таблица приобрела знакомый из описания Microsoft Excel вид" width="509" height="298" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-80dd9f16.webp" /></p>
+<p>Так же, как и в Microsoft Excel, для полей, добавленных в область значений в Google таблицах, вы можете изменять агрегирующую функцию. Сделать это можно, выбрав нужную функцию из выпадающего списка в области значений редактора отчетов «Суммировать по».</p>
+<p><img loading="lazy" decoding="async" alt="Для полей, добавленных в область значений в Google таблицах, вы можете изменять агрегирующую функцию" width="309" height="392" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-05edd27d.webp" /></p>
+<p>На данный момент единственным наиболее заметным отличием является то, что в область сводной таблицы не выводятся поля, добавленные в область фильтра редактора отчетов. Применить фильтр в сводных таблицах Google Spreadsheets можно только используя редактор отчета. Давайте отфильтруем сводную таблицу по новым пользователям.</p>
+<p>Для этого в области фильтра редактора отчетов в выпадающем списке «Показать» отмечаем галочкой элемент New Visitor.</p>
+<p><img loading="lazy" decoding="async" alt="В области фильтра редактора отчетов в выпадающем списке «Показать» отмечаем галочкой элемент New Visitor" width="315" height="318" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-ee9cd67f.webp" /></p>
+<p>Далее, чтобы добавить возможность детализировать информацию не только по датам, но и по неделям, необходимо в редакторе отчетов в область строки добавить поле Week и перетащить его на уровень выше, чем поле Date.</p>
+<p><img loading="lazy" decoding="async" alt="В редакторе отчетов в область строки добавить поле Week и перетащить его на уровень выше, чем поле Date" width="250" height="411" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-b78991c3.webp" /></p>
+<p>Теперь в отчете сводной таблицы представлены два уровня детализации, по неделям и датам.</p>
+<p><img loading="lazy" decoding="async" alt="В отчете сводной таблицы представлены два уровня детализации, по неделям и датам" width="609" height="361" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-68b86dc0.webp" /></p>
+<p>Для подсчета показателя отказов с помощью расчетного поля в области значений редактора отчетов нажмите «Добавить поле» и выберите пункт «Рассчитываемое поле».</p>
+<p><img loading="lazy" decoding="async" alt="Для подсчета показателя отказов с помощью расчетного поля в области значений редактора отчетов нажмите «Добавить поле» и выберите пункт «Рассчитываемое поле»" width="372" height="241" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-7e0a14a5.webp" /></p>
+<p>Далее необходимо ввести название расчетного поля и формулу. В нашем случае названием поля будет «Показатель отказов», а формулой для расчета «=bounces / sessions».</p>
+<blockquote>
+<p>В отличие от Microsoft Excel, в данном случае названия полей в формуле расчета можно ввести только с клавиатуры. Это важно.</p>
+</blockquote>
+<p><img loading="lazy" decoding="async" alt="Названия полей в формуле расчета можно ввести только с клавиатуры" width="232" height="180" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-993bfd14.webp" /></p>
+<p>Теперь сводная таблица имеет следующий вид:</p>
+<p><img loading="lazy" decoding="async" alt="Сводная таблица" width="1038" height="382" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-be864822.webp" /></p>
+<p>Для каждого типа устройства добавлен дополнительный столбец с информацией о показателе отказов. Если хотите привести таблицу в более читабельный вид и показатель отказов выводить второй строкой для каждой даты, а не вторым столбцом для каждого типа устройств, в редакторе отчетов в области значений переставьте переключатель в положение «как: Строки».</p>
+<p><img loading="lazy" decoding="async" alt="в редакторе отчетов в области значений переставьте переключатель в положение «как: Строки»" width="263" height="162" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-afa3dc32.webp" /></p>
+<p>Отчет примет вид, в котором на каждую дату приходится две строки данных. В первой будет количество сеансов, во второй — показатель отказов.</p>
+<p><img loading="lazy" decoding="async" alt="Отчет примет вид, в котором на каждую дату приходится две строки данных" width="709" height="439" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-42e43400.webp" /></p>
+<p>На этом функциональные возможности Google таблиц заканчиваются. В целом, этого достаточно для построения визуализации данных для проведения анализа.</p>
+<h2 id="libreoffice-openoffice">Сводные таблицы в LibreOffice и OpenOffice</h2>
+<p>LibreOffice — бесплатный, десктопный процессор электронных таблиц. По функционалу возможности сводных таблиц LibreOffice и OpenOffice значительно уступают Microsoft Excel, но для решения большей части задач они вполне сгодятся. Процедуры построения сводных таблиц в LibreOffice и OpenOffice совершенно одинаковые, в связи с чем нет смысла описывать все этапы по отдельности. Поэтому в данном случае в качестве примера возьмем LibreOficce, но в OpenOffice с помощью совершенно идентичных действий вы можете создать такую же сводную таблицу.</p>
+<p>Для создания сводной таблицы в меню «Файл» LibreOffice выберите пункт «Открыть», после чего укажите скачанный ранее файл <em>pivotTableDB.csv</em>. В диалоговом окне «Импорт текста» установите переключатель «Параметры разделителя» в положение «Разделитель», и в качестве разделителя установите «Точка с запятой».</p>
+<p><img loading="lazy" decoding="async" alt="Импорт текста" width="566" height="574" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-5b0fbb63.webp" /></p>
+<p>После нажатия ОК необходимая таблица данных будет загружена в документ. Теперь, когда у вас есть база данных, необходимо выделить ее нажатием Ctrl+A, и в в группе «Сводная таблица» (меню «Данные») нажать кнопку «Создать».</p>
+<p><img loading="lazy" decoding="async" alt="После нажатия ОК необходимая таблица данных будет загружена в документ" width="635" height="452" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-dfd5a97d.webp" /></p>
+<p>В качестве источника в диалоговом окне «Выбрать источник» устанавливаем переключатель в положение «Выбранное выделение». Нажимаем ОК.</p>
+<p><img loading="lazy" decoding="async" alt="Устанавливаем переключатель в положение «Выбранное выделение»" width="357" height="192" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-74514d56.webp" /></p>
+<p>Далее появится диалоговое окно «Разметка сводной таблицы». Оно и является своеобразным конструктором сводной табицы из приведенных выше примеров с Microsoft Excel и Google Spreadsheets. Чтобы построить сводную таблицу, аналогичную двум предыдущим примерам, сделайте следующие действия.</p>
+<ol>
+<li>
+<p>В область «Поля страниц» перетащите поле User type, так как в LibreOffice область «Поля страниц» является областью фильтров сводной таблицы.</p>
+</li>
+<li>
+<p>В область столбцов перенесите поле Device category. По умолчанию область столбцов уже будет содержать поле с именем «Данные». С помощью этого поля вы можете изменять положение рассчитываемых метрик. Примерно так же, как мы делали это в Excel и Google Таблицах. Тогда мы располагали информацию так, чтобы каждая дата содержала две строки: одну с данными о сессиях, а вторую — о показателе отказов. Так же и в LibreOffice вы можете менять расположение вычисляемых данных, отображая их в строках или столбцах.</p>
+</li>
+<li>
+<p>В область «Поля строк» перенесите сначала поле Week, после чего под этим полем расположите поле Date.</p>
+</li>
+<li>
+<p>В область «Поля данных» перетащите поле Sessions. Для того, чтобы изменить агрегирующую функцию либо настроить дополнительное вычисление для рассчитываемого поля, достаточно дважды кликнуть на него левой кнопкой мыши и выбрать из списка нужную функцию либо дополнительное вычисление. Ранее мы в примере с Microsoft Excel устанавливали в качестве дополнительного вычисления «Процент от суммы по строке». Чтобы настроить подобное вычисление в LibreOffice после двойного клика по полю Sessions, расположенного в области данных, в открывшемся диалоговом окне «Поле данных» раскройте меню «Отображаемое значение», установите «Тип: % от строки» и нажмите ОК.</p>
+</li>
+</ol>
+<p><img loading="lazy" decoding="async" alt="В открывшемся диалоговом окне «Поле данных» раскройте меню «Отображаемое значение», установите «Тип: % от строки» и нажмите ОК" width="345" height="464" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-e044eb37.webp" /></p>
+<ol start="5">
+<li>Для быстрого изменения уровня детализации откройте подменю «Параметры», находящееся в нижней части диалогового окна «Разметка сводной таблицы», и установите там флажки «Добавить фильтр» и «Разрешить переход к деталям». Нажмите OK.</li>
+</ol>
+<p><img loading="lazy" decoding="async" alt="Быстрое изменение уровня детализации" width="656" height="635" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-0958e673.webp" /></p>
+<p>В ваш документ будет добавлена сводная таблица, аналогичная приведенным выше примерам. С одним исключением: в данной сводной таблице мы не вывели поле «Показатель отказов», так как на момент написания статьи LibreOffice не поддерживает функционал рассчитываемых полей. У вас получится такая сводная таблица:</p>
+<p><img loading="lazy" decoding="async" alt="Финальная сводная таблица" width="602" height="344" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-e37f6dd7.webp" /></p>
+<h2 id="_1">Заключение</h2>
+<p>Предлагаю сравнить функционал Microsoft Excel, Google Spreadsheets и OpenOffice по работе со сводными таблицами.</p>
+<p><img loading="lazy" decoding="async" alt="Сравнение функционала Microsoft Excel, Google Spreadsheets и OpenOffice по работе со сводными таблицами" width="857" height="310" src="../images/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-f82540aa.webp" /></p>
+<p>В данной таблице перечислен только тот функционал, который был описан в данной статье. Относительно Microsoft Excel, это даже не половина всех существующих возможностей по построению и использованию сводных таблиц.</p>
+<p>Сводные таблицы — самый удобный инструмент для анализа больших массивов данных. Время, инвестируемое в изучение сводных таблиц, с лихвой окупится в будущем, когда вы за считанные минуты сможете из массива данных, насчитывающего десятки, а в некоторых случаях и сотни тысяч строк извлекать необходимую для анализа информацию.</p>
+<hr />
+<p><em><a target="_blank" rel="noopener" href="https://netpeak.net/ru/blog/kak-postroit-svodnie-tablitsy-v-excel-libreoffice-openoffice-i-tablitsah-google/">Оригинал публикации на блоге Netpeak</a></em></p>
+<p><em><a target="_blank" rel="noopener" href="http://www.cmsmagazine.ru/library/items/web-analytics/how-to-build-summary-tables/">Перепубликация статьи на CMSmagazine</a></em></p></div>
+                    
+                    <div class="b-tags"><a class="b-chip" href="../?tag=excel#posts">Excel</a><a class="b-chip" href="../?tag=google-tablitsy#posts">Google Таблицы</a></div>
+                </div>
+            </article>
+            <aside class="b-toc" aria-label="Contents"><div class="b-toc-title"><span class="ru-text">Содержание</span><span class="ua-text">Зміст</span><span class="en-text">Contents</span></div><ul><li><a href="#microsoft-excel-2013">Сводные таблицы в Microsoft Excel 2013</a></li><li><a href="#google-spreadsheets-google">Сводные таблицы в Google Spreadsheets (Google таблицы)</a></li><li><a href="#libreoffice-openoffice">Сводные таблицы в LibreOffice и OpenOffice</a></li><li><a href="#_1">Заключение</a></li></ul></aside>
+        </div>
+        <section class="b-related">
+            <h2 class="outfit-font"><span class="ru-text">Читайте также</span><span class="ua-text">Читайте також</span><span class="en-text">Related posts</span></h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="../kak-stroit-diagrammy-v-otdelnyh-yacheykah-excel-i-tablitsah-google/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="0">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/kak-stroit-diagrammy-v-otdelnyh-yache-my-dostatochno-chasto-cd50c68d.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">март 2016</span><span class="ua-text">берез. 2016</span><span class="en-text">Mar 2016</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2016</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">11 мин чтения</span><span class="ua-text">11 хв читання</span><span class="en-text">11 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Как строить диаграммы в отдельных ячейках Excel и таблицах Google</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">Когда приходится анализировать большие таблицы или делать выводы сразу по нескольким строкам с данными, классические диаграммы не спасают. Они громоздкие и неудобные. Но в Excel и Google…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Визуализация данных</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Google Таблицы</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a>
+                <a href="../kak-vybrat-instrument-dlya-importa-dannyh-iz-google-analytics/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="60">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/covers/187.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">янв. 2016</span><span class="ua-text">січ. 2016</span><span class="en-text">Jan 2016</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2016</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">8 мин чтения</span><span class="ua-text">8 хв читання</span><span class="en-text">8 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Как выбрать инструмент для импорта данных из Google Analytics</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">В октябре-январе я опубликовал в блоге серию мануалов о том, как выгрузить данные из Google Analytics в Excel и Google Spreadsheets. Один из читателей задал вопрос, как из всех описанных…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">API</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Веб-аналитика</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a>
+                <a href="../vsemoguschaya-funktsiya-query-podrobnoe-rukovodstvo/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="120">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/vsemoguschaya-funktsiya-query-podrobnoe-ruko-dlya-togo-chtob-0ba668dd.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">янв. 2016</span><span class="ua-text">січ. 2016</span><span class="en-text">Jan 2016</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2016</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">20 мин чтения</span><span class="ua-text">20 хв читання</span><span class="en-text">20 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Всемогущая функция Query — подробное руководство</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">Думаю, все слышали о правиле Парето. В любой сфере 20% усилий дают 80% результата. Например, 20% своего гардероба вы носите 80% времени, 20% ваших клиентов приносят 80% дохода. Так же и…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Визуализация данных</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Импорт данных</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a></div>
+        </section>
+        <a href="../" class="b-back"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i><span class="ru-text">Ко всем материалам</span><span class="ua-text">До всіх матеріалів</span><span class="en-text">All posts</span></a>
+    </main>
+
+    <section class="px-6 max-w-7xl mx-auto pb-24 relative z-10">
+        <div class="grid md:grid-cols-2 gap-6" data-aos="fade-up">
+            <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(59, 130, 246, 0.1));">
+                <div class="bento-content w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center text-blue-400 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-telegram"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">Telegram-канал R4marketing</span><span class="ua-text">Telegram-канал R4marketing</span><span class="en-text">R4marketing on Telegram</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Новые статьи, видео и заметки по R — первыми.</span><span class="ua-text">Нові статті, відео та нотатки з R — першими.</span><span class="en-text">New articles, videos and R notes — first.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-blue-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+            <a href="https://www.youtube.com/R4marketing/?sub_confirmation=1" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(239, 68, 68, 0.1));">
+                <div class="bento-content w-16 h-16 bg-red-500/20 rounded-2xl flex items-center justify-center text-red-500 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-youtube"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">YouTube-канал R4marketing</span><span class="ua-text">YouTube-канал R4marketing</span><span class="en-text">R4marketing on YouTube</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Видеоуроки по R, аналитике и AI-инструментам.</span><span class="ua-text">Відеоуроки з R, аналітики та AI-інструментів.</span><span class="en-text">Video lessons on R, analytics and AI tools.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-red-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/5 bg-slate-950/80 backdrop-blur-md pt-16 pb-8 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
+                <div class="sm:col-span-2 lg:col-span-4">
+                    <a href="../../" class="inline-flex items-center gap-3 group mb-5">
+                        <img src="../../logo.jpg" alt="Alexey Seleznev" class="w-10 h-10 rounded-xl object-cover border border-white/10 group-hover:border-purple-500/50 transition-colors">
+                        <span class="text-lg font-black tracking-tight uppercase outfit-font text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+                    </a>
+                    <p class="text-sm text-slate-400 leading-relaxed max-w-sm mb-6"><span class="ru-text">Head of Analytics в Netpeak Group. Автор open source R-пакетов, бесплатных курсов по R и проекта R4marketing.</span><span class="ua-text">Head of Analytics у Netpeak Group. Автор open source R-пакетів, безкоштовних курсів з R та проєкту R4marketing.</span><span class="en-text">Head of Analytics at Netpeak Group. Author of open source R packages, free R courses and the R4marketing project.</span></p>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="https://t.me/R4marketing" target="_blank" rel="noopener" aria-label="Telegram R4marketing" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-400 hover:border-blue-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-telegram"></i></a>
+                        <a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" aria-label="YouTube R4marketing" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-red-500 hover:border-red-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="https://github.com/selesnow" target="_blank" rel="noopener" aria-label="GitHub" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-white hover:border-white/30 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://linkedin.com/in/selesnow" target="_blank" rel="noopener" aria-label="LinkedIn" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-500 hover:border-blue-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://facebook.com/selesnow" target="_blank" rel="noopener" aria-label="Facebook" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-600/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/alexey.selesnow" target="_blank" rel="noopener" aria-label="Instagram" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-pink-500 hover:border-pink-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://habr.com/ru/users/selesnow/" target="_blank" rel="noopener" aria-label="Habr" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-teal-400 hover:border-teal-400/40 transition-all hover:-translate-y-0.5"><i class="fa-solid fa-h"></i></a>
+                    </div>
+                </div>
+
+                <nav class="lg:col-span-2" aria-label="Site map">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">Сайт</span><span class="ua-text">Сайт</span><span class="en-text">Site</span></h3>
+                    <ul class="space-y-3">
+                        <li><a href="../../" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-house w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a></li>
+                        <li><a href="../../opensource/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-code-branch w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span></a></li>
+                        <li><a href="../../courses/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-graduation-cap w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a></li>
+                        <li><a href="../../videos/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-circle-play w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a></li>
+                        <li><a href="../../talks/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-microphone-lines w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a></li>
+                        <li><a href="../../articles/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-pen-nib w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a></li>
+                        <li><a href="../../interviews/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-regular fa-newspaper w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a></li>
+                        <li><a href="../../blog/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-feather-pointed w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a></li>
+                    </ul>
+                </nav>
+
+                <div class="lg:col-span-3">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">R4marketing и публикации</span><span class="ua-text">R4marketing і публікації</span><span class="en-text">R4marketing & writing</span></h3>
+                    <ul class="space-y-3">
+                        <li><a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-telegram w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Telegram-канал R4marketing</span><span class="ua-text">Telegram-канал R4marketing</span><span class="en-text">R4marketing Telegram</span></a></li>
+                        <li><a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-youtube w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">YouTube-канал R4marketing</span><span class="ua-text">YouTube-канал R4marketing</span><span class="en-text">R4marketing YouTube</span></a></li>
+                        <li><a href="https://alexeyseleznev.wordpress.com/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-pen-nib w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Личный блог</span><span class="ua-text">Особистий блог</span><span class="en-text">Personal blog</span></a></li>
+                        <li><a href="https://habr.com/ru/users/selesnow/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-h w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Профиль на Хабре</span><span class="ua-text">Профіль на Хабрі</span><span class="en-text">Habr profile</span></a></li>
+                        <li><a href="https://alexey-seleznev.pro/publications/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-layer-group w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Архив публикаций</span><span class="ua-text">Архів публікацій</span><span class="en-text">Publications archive</span></a></li>
+                        <li><a href="https://github.com/selesnow" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-github w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">GitHub</span><span class="ua-text">GitHub</span><span class="en-text">GitHub</span></a></li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-3">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">Контакты</span><span class="ua-text">Контакти</span><span class="en-text">Contacts</span></h3>
+                    <ul class="space-y-4">
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">Email</div><a href="mailto:me@alexey-seleznev.pro" class="text-sm text-slate-300 hover:text-purple-300 transition-colors break-all">me@alexey-seleznev.pro</a></li>
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">Telegram</div><a href="https://t.me/AlexeySeleznev" target="_blank" rel="noopener" class="text-sm text-slate-300 hover:text-blue-300 transition-colors break-all">@AlexeySeleznev</a></li>
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">LinkedIn</div><a href="https://linkedin.com/in/selesnow" target="_blank" rel="noopener" class="text-sm text-slate-300 hover:text-blue-300 transition-colors break-all">linkedin.com/in/selesnow</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-14 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+                <p>© 2026 Alexey Seleznev. <span class="ru-text">Все права защищены.</span><span class="ua-text">Усі права захищені.</span><span class="en-text">All rights reserved.</span></p>
+                <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="inline-flex items-center gap-2 font-semibold hover:text-white transition-colors group"><span class="ru-text">Наверх</span><span class="ua-text">Нагору</span><span class="en-text">Back to top</span><span class="w-7 h-7 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-purple-500 group-hover:border-purple-500 transition-all"><i class="fa-solid fa-arrow-up text-[10px]"></i></span></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script src="../../assets/site.js"></script>
+
+    <script>
+    (function () {
+        // кнопка «Копировать» у блоков кода
+        document.querySelectorAll('.b-prose .codehilite').forEach(box => {
+            const btn = document.createElement('button');
+            btn.type = 'button'; btn.className = 'b-copy'; btn.setAttribute('aria-label', 'Copy code');
+            btn.innerHTML = '<i class="fa-regular fa-copy" aria-hidden="true"></i>';
+            btn.addEventListener('click', () => {
+                navigator.clipboard.writeText(box.querySelector('pre').innerText).then(() => {
+                    btn.innerHTML = '<i class="fa-solid fa-check" aria-hidden="true"></i>';
+                    setTimeout(() => btn.innerHTML = '<i class="fa-regular fa-copy" aria-hidden="true"></i>', 1500);
+                });
+            });
+            box.appendChild(btn);
+        });
+        // подсветка текущего раздела в оглавлении
+        const links = Array.from(document.querySelectorAll('.b-toc a'));
+        if (links.length && 'IntersectionObserver' in window) {
+            const map = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+            const io = new IntersectionObserver(es => es.forEach(e => {
+                if (e.isIntersecting) { links.forEach(l => l.classList.remove('active')); const a = map.get(e.target.id); if (a) a.classList.add('active'); }
+            }), { rootMargin: '-80px 0px -70% 0px' });
+            map.forEach((_, id) => { const el = document.getElementById(id); if (el) io.observe(el); });
+        }
+    })();
+    </script>
+</body>
+</html>

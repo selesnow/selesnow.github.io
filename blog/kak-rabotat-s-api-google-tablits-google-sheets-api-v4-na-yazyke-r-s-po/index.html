@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Alexey Seleznev">
+    <meta name="theme-color" content="#030712">
+    <link rel="canonical" href="https://alexey-seleznev.pro/blog/kak-rabotat-s-api-google-tablits-google-sheets-api-v4-na-yazyke-r-s-po/">
+
+    <title>Как работать с API Google Таблиц (Google Sheets API v4) на языке R с помощью нового пакета googlesheets4 | Алексей Селезнёв</title>
+    <meta name="title" content="Как работать с API Google Таблиц (Google Sheets API v4) на языке R с помощью нового пакета googlesheets4 | Алексей Селезнёв">
+    <meta name="description" content="Электронные таблицы по-прежнему остаются довольно популярным инструментом для работы с данными, а среди различных процессоров электронных таблиц наиболее популярными являются Google…">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alexey-seleznev.pro/blog/kak-rabotat-s-api-google-tablits-google-sheets-api-v4-na-yazyke-r-s-po/">
+    <meta property="og:site_name" content="ALEXEY-SELEZNEV.pro">
+    <meta property="og:title" content="Как работать с API Google Таблиц (Google Sheets API v4) на языке R с помощью нового пакета googlesheets4 | Алексей Селезнёв">
+    <meta property="og:description" content="Электронные таблицы по-прежнему остаются довольно популярным инструментом для работы с данными, а среди различных процессоров электронных таблиц наиболее популярными являются Google…">
+    <meta property="og:image" content="https://alexey-seleznev.pro/photo.jpg">
+    <meta property="og:image:alt" content="Алексей Селезнёв">
+    <meta property="og:locale" content="ru_RU">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="https://alexey-seleznev.pro/blog/kak-rabotat-s-api-google-tablits-google-sheets-api-v4-na-yazyke-r-s-po/">
+    <meta name="twitter:title" content="Как работать с API Google Таблиц (Google Sheets API v4) на языке R с помощью нового пакета googlesheets4 | Алексей Селезнёв">
+    <meta name="twitter:description" content="Электронные таблицы по-прежнему остаются довольно популярным инструментом для работы с данными, а среди различных процессоров электронных таблиц наиболее популярными являются Google…">
+    <meta name="twitter:image" content="https://alexey-seleznev.pro/photo.jpg">
+
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z56YHE916N"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Z56YHE916N');
+    </script>
+    <link rel="icon" type="image/jpeg" href="../../logo.jpg">
+    <link rel="apple-touch-icon" href="../../logo.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;700;800;900&display=swap">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/site.css">
+    <!-- Tailwind собран заранее (_build/build.py) и подключается последним, как это делал CDN-скрипт -->
+    <link rel="stylesheet" href="../../assets/tailwind.css">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Как работать с API Google Таблиц (Google Sheets API v4) на языке R с помощью нового пакета googlesheets4",
+  "datePublished": "2020-11-02",
+  "inLanguage": "ru",
+  "description": "Электронные таблицы по-прежнему остаются довольно популярным инструментом для работы с данными, а среди различных процессоров электронных таблиц наиболее популярными являются Google…",
+  "author": {
+    "@id": "https://alexey-seleznev.pro/#person"
+  },
+  "mainEntityOfPage": "https://alexey-seleznev.pro/blog/kak-rabotat-s-api-google-tablits-google-sheets-api-v4-na-yazyke-r-s-po/"
+}
+    </script>
+    <link rel="stylesheet" href="../blog.css">
+</head>
+<body class="relative lang-en">
+
+    <!-- Interactive Background -->
+    <div id="vanta-bg"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full z-50 top-0 left-0 border-b border-white/5 bg-slate-950/60 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 h-16 flex items-center justify-between">
+            <a href="../../" class="flex items-center gap-2 sm:gap-2.5 md:gap-3 group shrink min-w-0">
+                <img src="../../logo.jpg" alt="Alexey Seleznev" class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 rounded-lg sm:rounded-xl object-cover shadow-md border border-white/10 group-hover:border-purple-500/50 group-hover:scale-105 transition-all shrink-0">
+                <span class="text-xs min-[400px]:text-sm sm:text-base md:text-xl font-black tracking-tight uppercase outfit-font whitespace-nowrap text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+            </a>
+            <div class="hidden xl:flex gap-6 text-sm font-semibold text-slate-400">
+                <a href="../../" class="nav-link hover:text-white transition-colors"><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a>
+                <a href="../../opensource/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span></a>
+                <a href="../../courses/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a>
+                <a href="../../videos/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a>
+                <a href="../../talks/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a>
+                <a href="../../articles/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a>
+                <a href="../../interviews/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a>
+                <a href="../../blog/" class="nav-link hover:text-white transition-colors active"><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a>
+            </div>
+
+            <div class="flex items-center gap-1.5 sm:gap-2 md:gap-4 shrink-0">
+                <div class="lang-switcher flex gap-1 sm:gap-1.5 md:gap-2 text-[11px] sm:text-xs md:text-sm font-bold border-r border-white/10 pr-1.5 sm:pr-3 md:pr-4 mr-0.5 sm:mr-1 md:mr-2 outfit-font">
+                    <button onclick="changeLang('en')" id="btn-en" class="active hover:text-white transition-colors">EN</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ru')" id="btn-ru" class="text-slate-500 hover:text-white transition-colors">RU</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ua')" id="btn-ua" class="text-slate-500 hover:text-white transition-colors">UA</button>
+                </div>
+
+                <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="text-slate-400 hover:text-blue-400 transition-colors hidden sm:block" aria-label="Telegram"><i class="fa-brands fa-telegram text-lg md:text-xl"></i></a>
+                <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="text-slate-400 hover:text-white transition-colors hidden sm:block" aria-label="GitHub"><i class="fa-brands fa-github text-lg md:text-xl"></i></a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="xl:hidden w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-purple-500/20 hover:border-purple-500/40 transition-all focus:outline-none" aria-label="Toggle Navigation Menu">
+                    <i class="fa-solid fa-bars text-sm sm:text-lg" id="mobile-menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div id="mobile-menu" class="hidden xl:hidden border-t border-white/10 bg-slate-950/95 backdrop-blur-2xl shadow-2xl overflow-y-auto max-h-[calc(100vh-4rem)] transition-all">
+            <div class="max-w-7xl mx-auto px-6 py-6 space-y-1">
+                <a href="../../" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-house text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span>
+                </a>
+                <a href="../../opensource/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-code-branch text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span>
+                </a>
+                <a href="../../courses/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-graduation-cap text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span>
+                </a>
+                <a href="../../videos/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-circle-play text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span>
+                </a>
+                <a href="../../talks/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-microphone-lines text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span>
+                </a>
+                <a href="../../articles/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-pen-nib text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span>
+                </a>
+                <a href="../../interviews/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-regular fa-newspaper text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span>
+                </a>
+                <a href="../../blog/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-white bg-white/5 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-feather-pointed text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span>
+                </a>
+
+                <div class="pt-4 mt-3 border-t border-white/10 flex items-center justify-around text-slate-400">
+                    <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-blue-400 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-telegram text-xl"></i> Telegram
+                    </a>
+                    <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="p-2 hover:text-white transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-github text-xl"></i> GitHub
+                    </a>
+                    <a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-red-500 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-youtube text-xl"></i> YouTube
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="b-wrap relative z-10">
+        <nav class="b-crumbs" aria-label="breadcrumb">
+            <a href="../../"><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a><span>/</span><a href="../"><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a><span>/</span><a href="../?cat=tablitsy#posts">Таблицы</a>
+        </nav>
+        <div class="b-layout has-toc">
+            <article class="bento-glass no-lift b-article" data-aos="fade-up">
+                <div class="bento-content">
+                    <div class="b-cats"><a class="b-chip b-chip-cat" href="../?cat=tablitsy#posts">Таблицы</a><a class="b-chip b-chip-cat" href="../?cat=programmirovanie#posts">Программирование</a><a class="b-chip b-chip-cat" href="../?cat=r#posts">R</a></div>
+                    <h1 class="b-title outfit-font">Как работать с API Google Таблиц (Google Sheets API v4) на языке R с помощью нового пакета googlesheets4</h1>
+                    <div class="b-meta">
+                        <span><i class="fa-regular fa-calendar" aria-hidden="true"></i><span class="ru-text">2 ноября 2020</span><span class="ua-text">2 листопада 2020</span><span class="en-text">2 Nov 2020</span></span>
+                        <span><i class="fa-regular fa-clock" aria-hidden="true"></i><span class="ru-text">13 мин чтения</span><span class="ua-text">13 хв читання</span><span class="en-text">13 min read</span></span>
+                        <span class="b-lang" title="Русский">RU</span>
+                    </div>
+                    <div class="b-note"><i class="fa-regular fa-clock" aria-hidden="true"></i><div><span class="ru-text">Материал опубликован в 2020 году — описанные инструменты и интерфейсы могли измениться.</span><span class="ua-text">Матеріал опубліковано у 2020 році — описані інструменти та інтерфейси могли змінитися.</span><span class="en-text">Published in 2020 — the tools and interfaces described may have changed since.</span></div></div>
+                    
+                    <div class="b-prose"><p>Электронные таблицы по-прежнему остаются довольно популярным инструментом для работы с данными, а среди различных процессоров электронных таблиц наиболее популярными являются Google Таблицы. Во-первых, это бесплатный инструмент, во-вторых, функционал Google Таблиц достаточно широк, и они предоставляют вам возможность в онлайн режиме получить доступ к данным.</p>
+<p>В этой статье мы разберёмся с тем, как на языке программирования R работать с Google Sheets API v4 с помощью пакета <code>googlesheets4</code>, а точнее:</p>
+<ul>
+<li>Как пройти авторизацию для работы с Google Таблицами по API;</li>
+<li>Рассмотрим основные функции пакета;</li>
+<li>Разберём примеры кода для чтения данных, создания новых таблиц и выполнения других манипуляций с Google Таблицами по API.</li>
+</ul>
+<p>Также эта статья поможет пользователям устаревшего пакета <code>googlesheets</code> мигрировать на новый <code>googlesheets4</code>.</p>
+<p>Для тех кому лень читать статью, вот <a target="_blank" rel="noopener" href="https://youtu.be/no75MyT87l0">ссылка</a> на 10 минутный, русскоязычный видео урок на YouTube. Остальным добро пожаловать под кат.</p>
+<p><img loading="lazy" decoding="async" alt="" width="1600" height="1000" src="../images/kak-rabotat-s-api-google-tablits-google-sheets-api-v4-na-yaz-9dd85cb9.webp" /></p>
+<blockquote>
+<p>Изначально статья была опубликована на Хабре</p>
+<p><a target="_blank" rel="noopener" href="https://habr.com/ru/post/488756/">https://habr.com/ru/post/488756/</a></p>
+</blockquote>
+<h1 id="_1">Содержание</h1>
+<p><em>Если вы интересуетесь анализом данных, и в частности языком R, возможно вам будут интересны мои <a target="_blank" rel="noopener" href="https://t.me/R4marketing">telegram</a> и <a target="_blank" rel="noopener" href="https://www.youtube.com/R4marketing/?sub_confirmation=1">youtube</a> каналы. Большая часть контента которых посвящена языку R.</em></p>
+<ol>
+<li>Зачем переходить на работу с пакетом googlesheet4</li>
+<li>Миграция с googlesheets на googlesheets4</li>
+<li>Установка пакета googlesheets4</li>
+<li>Авторизация<br />
+   4.1. Авторизация со стандартными параметрами<br />
+   4.2. Авторизация через собственное приложение<br />
+   4.3. Авторизация через сервисный аккаунт<br />
+   4.4. Разница между авторизацией через приложение и через сервисный аккаунт</li>
+<li>Основные функции пакета googlesheets4</li>
+<li>Пример работы с API Google Таблиц на языке R<br />
+   6.1. Загрузка данных из существующих Google Таблиц<br />
+   6.2. Создание Google Таблиц с помощью API<br />
+   6.3. Создание нового листа в Google Таблице<br />
+   6.4. Дописываем строки в существующий лист<br />
+   6.5. Перемещение Google Таблиц между папками Google Диска</li>
+<li>Полезные ссылки по теме статьи</li>
+<li>Заключение</li>
+</ol>
+<h1 id="googlesheet4">Зачем переходить на работу с пакетом googlesheet4</h1>
+<p>Если вы уже являетесь активным пользователем языка R, и на практике вам встречались задачи по работе с Google Sheets API наверняка вы уже знакомы с пакетом <code>googlesheet</code>. И вполне резонно, что первый вопрос который возник у вас в голове — “А чем же googlesheets4 лучше?”.</p>
+<p>На самом деле по функционалу они похожи, возможно даже <code>googlesheets</code> пока имеет больше возможностей, но он работает только с Google Sheets API <strong>V3</strong>. Google несколько месяцев назад сообщил, что поддержка 3 версии данного API будет прекращена 3 марта 2020 года.</p>
+<p><img loading="lazy" decoding="async" alt="" width="1248" height="295" src="../images/kak-rabotat-s-api-google-tablits-google-sheets-api-v4-na-yaz-d52c772d.webp" /></p>
+<p>Именно поэтому, даже если вас вполне устраивает пакет <code>googlesheets</code>, вам в любом случае до 3 марта необходимо мигрировать на <code>googlesheets4</code>, надеюсь данная статья вам в этом поможет.</p>
+<h1 id="googlesheets-googlesheets4">Миграция с googlesheets на googlesheets4</h1>
+<p>Что бы максимально упростить миграцию с устаревшего пакета <code>googlesheets</code> на новый <code>googlesheets4</code> я решил добавить таблицу соответвия новых функций старым.</p>
+<div class="b-table"><table>
+<thead>
+<tr>
+<th>googlesheets</th>
+<th>googlesheets4</th>
+<th>Краткое описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gs_auth()</code></td>
+<td><code>gs4_auth()</code></td>
+<td>авторизация</td>
+</tr>
+<tr>
+<td><code>gs_key()</code>, <code>gs_url()</code></td>
+<td><code>as_sheets_id()</code></td>
+<td>подключение к таблице</td>
+</tr>
+<tr>
+<td><code>gs_read()</code></td>
+<td><code>range_read()</code></td>
+<td>чтение данных</td>
+</tr>
+<tr>
+<td><code>gs_new()</code></td>
+<td><code>gs4_create()</code></td>
+<td>создание таблицы</td>
+</tr>
+<tr>
+<td><code>gs_ws_new()</code></td>
+<td><code>sheet_add()</code></td>
+<td>создание нового листа</td>
+</tr>
+<tr>
+<td><code>gs_add_row()</code></td>
+<td><code>sheet_append()</code></td>
+<td>дописывание новых строк</td>
+</tr>
+</tbody>
+</table></div>
+<h1 id="googlesheets4">Установка пакета googlesheets4</h1>
+<p>Для работы с API Google Таблиц, как я уже писал выше, мы будем использовать пакет <code>googlesheets4</code>, написанный Дженни Брайан из RStudio.</p>
+<p>Установить его можно как из CRAN, так и из GitHub.</p>
+<p>Устновка из CRAN:</p>
+<div class="codehilite"><pre><span></span><code>install.packages(&#39;googlesheets4&#39;)
+</code></pre></div>
+
+<p>Установка из GitHub:</p>
+<div class="codehilite"><pre><span></span><code># установка пакета devtools
+if ( !require(devtools) ) install.packages(&quot;devtools&quot;)
+# установка пакета googlesheets4
+devtools::install_github(&quot;tidyverse/googlesheets4&quot;)
+
+# подключаем пакет
+library(googlesheets4)
+</code></pre></div>
+
+<h1 id="_2">Авторизация</h1>
+<p>В пакете <code>googlesheets4</code> есть по меньшей мере 3 способа авторизации:</p>
+<ol>
+<li>Использовать стандартные параметры функции <code>gs4_auth()</code>.</li>
+<li>Авторизоваться через собственное приложение.</li>
+<li>Авторизоваться через сервисный аккаунт.</li>
+</ol>
+<h2 id="_3">Авторизация со стандартными значениями аргументов</h2>
+<p>Наиболее простой способ авторизации предоставляет функция <code>gs4_auth()</code> со значением аргументов принятых в ней по умолчанию.</p>
+<p>Минус этого подхода заключается в том, что вы будете использовать приложение вшитое в пакет по умолчанию, как и 90% других его пользователей. Каждое приложение имеет квоты на количество отправляемых запросов, поэтому с ростом количества пользователей данного пакета возрастает и шанс выйти за выделенные лимиты.</p>
+<p>Поэтому я рекомендую самостоятельно создать приложение в Gogle Cloud, и пройти авторизацию с его помощью.</p>
+<h2 id="_4">Авторизация через собственное приложение</h2>
+<h3 id="_5">Как создать своё приложение?</h3>
+<p>Для создания приложения следуйте приведённым ниже инструкциям:</p>
+<ol>
+<li>Переходим в <a target="_blank" rel="noopener" href="https://console.cloud.google.com/">Google Cloud Console</a> и создаём там проект, если у вас ещё нет созданного. Также для создания проекта можно воспользоваться <a target="_blank" rel="noopener" href="https://console.cloud.google.com/projectcreate">ссылкой</a>.</li>
+<li>Переходим в «Основное меню» &gt; «API и сервисы» &gt; «Учетные данные».</li>
+<li>«Создать учетные данные» &gt; «Идентификатор клиента OAuth».</li>
+<li>Вводим любое произвольное название для вашего приложения.</li>
+<li>Далее будет сгенерирован id и secret вашего приложения.</li>
+<li>Теперь вам необходимо либо скачать JSON файл с созданными учётными данными, либо скопировать id и секрет созданного вами приложения.</li>
+</ol>
+<p><em>Скачиваем JSON</em><br />
+<img loading="lazy" decoding="async" alt="" width="990" height="178" src="../images/kak-rabotat-s-api-google-tablits-google-sheets-api-v4-na-yaz-4417b446.webp" /></p>
+<p><em>Копируем ID и секрет приложения</em><br />
+<img loading="lazy" decoding="async" alt="" width="617" height="224" src="../images/kak-rabotat-s-api-google-tablits-google-sheets-api-v4-na-yaz-4d63b532.webp" /></p>
+<p>Если вы впервые создаёте приложение в Google Console, то также вам предварительно понадобиться создать “Окно запроса доступа OAuth”, просто заполните в нём название и ваш email, насколько я помню больше там никаких обязательных полей нет.</p>
+<p><img loading="lazy" decoding="async" alt="" width="484" height="560" src="../images/kak-rabotat-s-api-google-tablits-google-sheets-api-v4-na-yaz-6b62233c.webp" /></p>
+<p>Последний шаг, включаем Google Sheets API, для этого достаточно перейти по <a target="_blank" rel="noopener" href="https://console.developers.google.com/apis/library/sheets.googleapis.com">этой ссылке</a> и нажать кнопку включить API.</p>
+<p><img loading="lazy" decoding="async" alt="" width="757" height="248" src="../images/kak-rabotat-s-api-google-tablits-google-sheets-api-v4-na-yaz-e2840bbe.webp" /></p>
+<p>Теперь возвращаемся в RStudio, подключаем пакет и проходим авторизацию через своё приложение.</p>
+<p><strong>Проходим авторизацию через JSON файл:</strong></p>
+<div class="codehilite"><pre><span></span><code># подключаем пакет
+library(googlesheets4)
+
+# указываем путь к JSON файлу, который ранее скачали
+gs4_auth_configure(path = &quot;C:/path/to/app_credential.json&quot;)
+
+# проходим авторизацию
+gs4_auth(email = &quot;your_email@gmail.com&quot;)
+</code></pre></div>
+
+<p><strong>Проходим авторизацию указав в коде ID и Секрет приложения:</strong></p>
+<div class="codehilite"><pre><span></span><code># подключаем пакет
+library(googlesheets4)
+
+# указываем путь к JSON файлу, который ранее скачали
+httr::oauth_app(appname = &quot;app_name&quot;, 
+                  key    = &quot;00000000-abcdefghk.apps.googleusercontent.com&quot;, 
+                  secret = &quot;qwertyuiopasdf&quot;)
+
+# проходим авторизацию
+gs4_auth(email = &quot;your_email@gmail.com&quot;)
+</code></pre></div>
+
+<p>После запуска функции <code>gs4_auth()</code>, в приведённых выше примерах кода, вы будете перенаправлены в браузер. Там вы подтверждаете разрешение на доступ к данным и возвращаетесь в RStudio для продолжения работы.</p>
+<h2 id="_6">Авторизация через сервисный аккаунт</h2>
+<p>Для начала надо создать сервисный аккаунт, вот алгоритм действий который вам необходимо выполнить:</p>
+<ol>
+<li>Создать проект в Google Cloud, если он ещё не создан.</li>
+<li>Включить Google Sheets API, для этого необходимо перейти по <a target="_blank" rel="noopener" href="https://console.developers.google.com/apis/library/sheets.googleapis.com">этой ссылке</a>.</li>
+<li>Для создания сервисного аккаунта перейдите по этой <a target="_blank" rel="noopener" href="https://console.cloud.google.com/iam-admin/serviceaccounts/create">ссылке</a>.</li>
+<li>Заполните его название и описание (при необходимости) и нажмите “Создать”.<br />
+<img loading="lazy" decoding="async" alt="" width="543" height="464" src="../images/kak-rabotat-s-api-google-tablits-google-sheets-api-v4-na-yaz-7d2d3e21.webp" /></li>
+<li>Роль устанавливать не надо, поэтому жмём “Продолжить”.</li>
+<li>В следующем окне жмём “Создать ключ” &gt; Тип ключа выбираем JSON &gt; Создать.</li>
+<li>Запоминаем расположение и название JSON файла, при сохранении вы можете дать ему любое название.</li>
+<li>Жмём “Готово”.</li>
+</ol>
+<p>Теперь у вас появился сервисный аккаунт, откройте его и скопируйте почту.<br />
+<img loading="lazy" decoding="async" alt="" width="565" height="301" src="../images/kak-rabotat-s-api-google-tablits-google-sheets-api-v4-na-yaz-2d435974.webp" /></p>
+<p>При авторизации под сервисным аккаунтам вы можете работать только с теми Google Таблицами к которым вы предоставили доступ для созданного сервисного аккаунта по его почте. Доступ предоставляется также, как и обычному пользователю.</p>
+<ol>
+<li>Открываем Google Таблицу.</li>
+<li>Жмём “Настройка доступа”.</li>
+<li>Открываем доступ на почту созданного сервисного аккаунта.</li>
+</ol>
+<p><strong>Проходим авторизацию через сервисный аккаунт:</strong></p>
+<div class="codehilite"><pre><span></span><code># подключаем пакет
+library(googlesheets4)
+
+# проходим авторизацию через сервисный аккаунт
+gs4_auth(path = &quot;C:/path/to/service_credential.json&quot;)
+</code></pre></div>
+
+<p>При авторизации через сервисный аккаунт вам не понадобится подтверждать доступ к данным через браузер, но ещё раз напомню, что вам надо отдельно расшаривать доступ сервисному аккаунту к каждой Google Таблице, с которой вам необходимо работать по API.</p>
+<h2 id="_7">Разница между авторизацией через приложение и через сервисный аккаунт</h2>
+<p>Основными отличиями между авторизацией через приложение и через серверный аккаунт являются:</p>
+<ol>
+<li>При авторизации через сервисный аккаунт не требуется подтверждать доступ к данным через браузер.</li>
+<li>Сервисный аккаунт имеет доступ только к тем Google таблицам к которым вы сами ему предоставили доступ на почту. При авторизации через приложение вы подтверждаете доступ ко всей доступной вашему Google аккаунту информации.</li>
+</ol>
+<p>По этим двум причинам наиболее предпочтительным способом автризации является авторизация через сервисный аккаунт. Но важно понимать, что если кто-то посторонний получит доступ к JSON файлу с ключём от сервисного аккаунта, он автоматически завладеет всеми правами и доступами которые вы предоставили этому сервисному аккаунту.</p>
+<h1 id="googlesheets4_1">Основные функции пакета googlesheets4</h1>
+<p>Все функции пакета <code>googlesheets4</code> разделены на 3 группы, каждая группа функций имеет свой префикс, который говорит об области действия этой функции:</p>
+<ul>
+<li><code>gs4_</code> — объединяет функции реализующие операции над книгой GoogleSheets</li>
+<li><code>sheet_</code> — операции над рабочими листами</li>
+<li><code>range_</code> — операции над отдельными диапазонами ячеек</li>
+<li><code>cell_</code> — операции над отдельными ячейками</li>
+</ul>
+<p>Давайте рассмотрим основные функции пакета googlesheets4.</p>
+<ul>
+<li><code>gs4_auth()</code> — Авторизация;</li>
+<li><code>gs4_create()</code> — Создаёт новую Google Таблицу;</li>
+<li><code>gs4_browse()</code> — Открывает Google Таблицу в браузере;</li>
+<li><code>as_sheets_id()</code> — Инициализирует подключение к Google Таблице, в качестве единственного аргумента принимает URL или ключ нужной Google Таблицы;</li>
+<li><code>range_read()</code> — Считывает данные из указанного листа Google Таблицы;</li>
+<li><code>sheet_write()</code> — Записывает данные в Google Таблицу, при необходимости создаёт новый лист. Если вы пытаетесь записать данные на существующий лист то все данные будут перезаписаны;</li>
+<li><code>sheet_append()</code> — Дописывает данные на уже существующий лист;</li>
+<li><code>sheet_add()</code> — Создаёт новые листы в существующей Google Таблице;</li>
+<li><code>sheet_delete()</code> — Удаляет существующие листы из Google Таблицы;</li>
+<li><code>sheet_names()</code> — Выводит вектор содержащий имена листов Google Таблицы.</li>
+</ul>
+<p>Пакет содержит также множество вспомогательных функций, но думаю перечисленных выше вам будет более чем достаточно для выполнения любых действий с Google Таблицами.</p>
+<h1 id="api-google-r">Пример работы с API Google Таблиц на языке R</h1>
+<p>Теперь я приведу примеры кода для выполнения основных операций с Google Таблицами.</p>
+<p><img loading="lazy" decoding="async" alt="" width="764" height="430" src="../images/kak-rabotat-s-api-google-tablits-google-sheets-api-v4-na-yaz-746d02b7.webp" /><br />
+Для примера нам потребуются какие-нибудь тестовые наборы данных. Что бы не изобретать велосипед мы будем использовать созданную мной <a target="_blank" rel="noopener" href="https://docs.google.com/spreadsheets/d/1hP1OwJuSHfvrTZvZUgEHDwcPPVlDMwPwCqCQPs64OSE/">Google Таблицу</a> и встроенные в R датасеты <code>iris</code>, <code>mtcars</code> и <code>ToothGrowth</code>.</p>
+<h2 id="google">Загрузка данных из существующих Google Таблиц</h2>
+<p>Считывание данных из Google Таблицы является наиболее часто используемой операцией.</p>
+<p>Алгоритм действий достаточно прост, вам необходимо инициализировать подключение к нужной таблице, и считать данные с существующего в ней листа.</p>
+<p>Для подключения вам необходимо воспользоваться функцией <code>as_sheet_id()</code>, в которую следуют передать ключ или URL адрес Google Таблицы.</p>
+<div class="codehilite"><pre><span></span><code>URL: https://docs.google.com/spreadsheets/d/1hP1OwJuSHfvrTZvZUgEHDwcPPVlDMwPwCqCQPs64OSE/
+Ключ: 1hP1OwJuSHfvrTZvZUgEHDwcPPVlDMwPwCqCQPs64OSE
+</code></pre></div>
+
+<p>Как вы поняли из приведённого выше примера ключ это часть URL адреса таблицы, которая находится между <code>/d/</code> и следующие слешем .</p>
+<p>Для чтения данных в <code>googlesheets4</code> предназначена функция <code>range_read()</code>.</p>
+<p><strong>Пример кода для чтения данных из Google Таблицы</strong></p>
+<div class="codehilite"><pre><span></span><code># подключаем пакет
+library(googlesheets4)
+
+# проходим авторизацию одним из описанных способов
+gs4_auth(email = &quot;your_mail@gmail.com&quot;)
+
+# подключаемся к тестовому доксу
+my_dox &lt;- as_sheets_id(&quot;1hP1OwJuSHfvrTZvZUgEHDwcPPVlDMwPwCqCQPs64OSE&quot;)
+# считываем данные с листа test_data
+data   &lt;- range_read(my_dox, sheet = &quot;test_data&quot;)
+</code></pre></div>
+
+<p>Процесс подключения и чтения данных можно записать более компактно используя пайплайны.</p>
+<div class="codehilite"><pre><span></span><code>data &lt;- as_sheets_id(&quot;1hP1OwJuSHfvrTZvZUgEHDwcPPVlDMwPwCqCQPs64OSE&quot;) %&gt;%
+        range_read(&quot;test_data&quot;)
+</code></pre></div>
+
+<h2 id="google-api">Создание Google Таблиц с помощью API</h2>
+<p>Для создания новой таблицы используйте функцию <code>gs4_create()</code> и следующие её аргументы.</p>
+<ul>
+<li>name — Имя Google Таблицы;</li>
+<li>locale — Региональные настройки;</li>
+<li>timeZone — Часовой пояс;</li>
+<li>sheets — Принимает вектор с именами листов, либо список, название каждого элемента списка будет сконвертировано в имя листа, а в качестве значений вы можете передать дата фреймы которые будут записаны на эти листы.</li>
+</ul>
+<p><strong>Пример создания Google Таблицы</strong></p>
+<div class="codehilite"><pre><span></span><code># подключаем пакет
+library(googlesheets4)
+
+# проходим авторизацию одним из описанных способов
+gs4_auth(email = &quot;your_email@gmail.com&quot;)
+
+# создаём Google Таблицу
+ss &lt;- gs4_create(name = &quot;my_new_dox&quot;, 
+                    locale = &quot;ru_RU&quot;,
+                    sheets = list(mtcars = mtcars,
+                                  iris   = head(iris)))
+
+# открываем созданную таблицу в браузере
+gs4_browse(ss)
+</code></pre></div>
+
+<p>Приведённый выше код создаст новую Google Таблицу “my_new_dox”, в которой будут 2 листа: mtcars, iris.</p>
+<h2 id="google_1">Создание нового листа в Google Таблице</h2>
+<p>Итак, только что мы создали новую Google Таблицу, и при этом инициировали объект подключения к ней, который назвали <code>ss</code>.</p>
+<p>Теперь мы можем проводить с созданной таблицей различные манипуляции, например создать в ней новый лист.</p>
+<p><strong>Пример кода для создания нового листа с данными</strong></p>
+<div class="codehilite"><pre><span></span><code># создаём новый лист с данными
+sheet_write(ToothGrowth, ss, 
+             sheet = &quot;tooth_growth&quot;)
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code>Writing to &#39;my_new_dox&#39;
+Writing to sheet &quot;tooth_growth&quot;
+</code></pre></div>
+
+<p>Функция <code>sheet_write()</code> имеет 3 основных аргумента:</p>
+<ul>
+<li>data — Дата фрейм с данными которые вы хотите записать на новый лист, или перезаписать данные на существующем листе.</li>
+<li>ss — Объект подключения к Google Таблице, который вы можете получить с помощью функций <code>as_sheets_id()</code> или <code>gs4_create()</code>.</li>
+<li>sheet — Название листа который будет создан в Google Таблице, или на котором будут перезаписаны данные.</li>
+</ul>
+<h2 id="_8">Дописывание строк в существующий лист</h2>
+<p>Ещё одна достаточно важная операция — добавление данных на уже существующий лист.</p>
+<p>Осуществляется эта операция функцией <code>sheet_append()</code>, которая имеет 3, уже знакомых вам аргумента.</p>
+<ul>
+<li>data — Дата фрейм с данными которые вы хотите дописать на существующий лист.</li>
+<li>ss — Объект подключения к Google Таблице, который вы можете получить с помощью функций <code>as_sheets_id()</code> или <code>gs4_create()</code>.</li>
+<li>sheet — Название листа на который требуется дописать строки.</li>
+</ul>
+<p>При создании таблицы my_new_dox мы записали на лист iris только первые 6 строк с данными, давайте допишем оставшиеся.</p>
+<p><strong>Пример кода для добавления строк на существующий лист</strong></p>
+<div class="codehilite"><pre><span></span><code># дописываем строки на лист iris
+sheet_append(data = iris[7:150,], ss, 
+              sheet = &quot;iris&quot;)
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code>Writing to &#39;my_new_dox&#39;
+Appending 144 row(s) to &#39;iris&#39;
+</code></pre></div>
+
+<h2 id="google-google">Перемещение Google Таблиц между папаками Google Диска</h2>
+<p>Ещё одна операция которая может вам пригодиться, но в данном случае помимо <code>googlesheets4</code> вам понадобится пакет <code>googledrive</code>.</p>
+<p><strong>Установка googledrive</strong></p>
+<div class="codehilite"><pre><span></span><code>install.packages(&quot;googledrive&quot;)
+</code></pre></div>
+
+<p>Переместить созданную ранее Google Таблицу можно с помощью функции <code>drive_mv()</code>. Но предварительно необходимо пройти автооризацию с помощью функции <code>drive_auth()</code>.</p>
+<p>Авторизация в пакете <code>googledrive</code> ничем не отличается от описанной в начале этой статьи, т.к. оба рассматриваемых пакета для авторизации используют вспомогательный пакет <code>gargle</code>. Авторизовавшись с попощью функции <code>drive_auth()</code> вы можете передать полученный токен в пакет <code>googlesheets4</code> для совместного использования: <code>gs4_auth(token = drive_token())</code>.</p>
+<p>Далее открываем на Google Диске нужную папку и копируем её URL или ключ. Если нужная папка ещё не создана её можно создать с помощью функции <code>drive_mkdir()</code>.</p>
+<p>Для инициализации подключения к папке используем функцию <code>as_id()</code>.</p>
+<p><strong>Пример кода для перемещения Google Таблицы из одной папки Google Диска в другую</strong></p>
+<div class="codehilite"><pre><span></span><code># Подключаем библиотеки
+library(googlesheets4)
+library(googledrive)
+
+# авторизация
+## можно либо дважды пройти авторизацию, отдельно под каждым пакетом
+## gs4_auth(email = &quot;your_email@gmail.com&quot;)
+## drive_auth(email = &quot;your_email@gmail.com&quot;)
+
+## либо пройти авторизацию с помощью google drive, и передать полученный токен для дальнейшего использования в google sheets
+drive_auth(email = &quot;your_email@gmail.com&quot;)
+gs4_auth(token = drive_token())
+
+# Инициируем подключение к таблице и папке
+## Подключаемся к таблице которую требуется переместить
+ss     &lt;- as_sheets_id(&quot;1BNrYUajVSR3wuGySY0ybXrqH3-Jjq-eIS5_f_a6kt_c&quot;)
+
+## Подключаемся к папке в которую надо перенести Google таблицу
+folder &lt;- as_id(&quot;1x94xChfZwSCPFzHvWqwk6HyF85_ASDFW&quot;)
+
+# Либо создаём новую папку
+## folder &lt;- drive_mkdir(&quot;my_folder&quot;)
+
+# Переносим Google Таблицу в нужную директорию
+drive_mv(file = ss, 
+         path = folder)
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code>File moved:
+  * my_new_dox -&gt; my_folder/my_new_dox
+</code></pre></div>
+
+<h1 id="_9">Полезные ссылки</h1>
+<p>В этом разделе приведу несколько полезных ссылок по теме статьи:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://youtu.be/no75MyT87l0">Видео урок на YouTube по работе с пакетом googlesheets4</a> <em>(русский)</em></li>
+<li><a target="_blank" rel="noopener" href="https://googlesheets4.tidyverse.org/">Официальная документация к пакету googlesheets4</a> <em>(english)</em></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/tidyverse/googlesheets4">Страница пакета на GitHub</a> <em>(english)</em></li>
+<li><a target="_blank" rel="noopener" href="https://cran.r-project.org/package=googlesheets4">Страница пакета на CRAN</a> <em>(english)</em></li>
+</ul>
+<h1 id="_10">Заключение</h1>
+<p>Описанных в статье возможностей пакета <code>googlesheets4</code> достаточно для решения подавляющего большинства задач, в которых необходимо использовать Google Sheets API.</p>
+<p>На данный момент <code>googlesheets4</code> находится в стадии активной разработки. Автор пакета планирует реализовать его функционал в полном объёме к марту 2020 года, в связи с чем в статье возможны корректировки и дополнения по мере изменения или расширения возможностей пакета.</p>
+<p>Если вы дочитали до этого параграфа, то наверняка интересуетесь, и скорее всего уже используете язык R в работе. Если это так, то думаю вам будет интересен мой <a target="_blank" rel="noopener" href="https://t.me/R4marketing">телеграм</a> и <a target="_blank" rel="noopener" href="https://www.youtube.com/R4marketing/?sub_confirmation=1">youtube</a> каналы, большая часть контента которых посвящена языку R.</p></div>
+                    
+                    <div class="b-tags"><a class="b-chip" href="../?tag=google-tablitsy#posts">Google Таблицы</a><a class="b-chip" href="../?tag=r#posts">R</a></div>
+                </div>
+            </article>
+            <aside class="b-toc" aria-label="Contents"><div class="b-toc-title"><span class="ru-text">Содержание</span><span class="ua-text">Зміст</span><span class="en-text">Contents</span></div><ul><li><a href="#_3">Авторизация со стандартными значениями аргументов</a></li><li><a href="#_4">Авторизация через собственное приложение</a><ul><li><a href="#_5">Как создать своё приложение?</a></li></ul></li><li><a href="#_6">Авторизация через сервисный аккаунт</a></li><li><a href="#_7">Разница между авторизацией через приложение и через сервисный аккаунт</a></li><li><a href="#google">Загрузка данных из существующих Google Таблиц</a></li><li><a href="#google-api">Создание Google Таблиц с помощью API</a></li><li><a href="#google_1">Создание нового листа в Google Таблице</a></li><li><a href="#_8">Дописывание строк в существующий лист</a></li><li><a href="#google-google">Перемещение Google Таблиц между папаками Google Диска</a></li></ul></aside>
+        </div>
+        <section class="b-related">
+            <h2 class="outfit-font"><span class="ru-text">Читайте также</span><span class="ua-text">Читайте також</span><span class="en-text">Related posts</span></h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="../kak-napisat-svoy-mcp-server-na-yazyke-r/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="0">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/kak-napisat-svoy-mcp-server-na-yazyke-r-b2ad6c115892d005d893-7e8c5964.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">дек. 2025</span><span class="ua-text">груд. 2025</span><span class="en-text">Dec 2025</span></div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">7 мин чтения</span><span class="ua-text">7 хв читання</span><span class="en-text">7 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Как написать свой MCP сервер на языке R</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">Ранее я уже рассказывал про разработку AI чатов на языке R. Теперь сделаем шаг дальше. В этой статье мы разберем, как научить модель работать с вашими функциями и сервисами через MCP…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">AI</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">LLM</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a>
+                <a href="../kak-my-vnedrili-llm-v-rabochie-protsessy-analitikov-na-r-i-sdelali-eto/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="60">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/covers/1669.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">май 2025</span><span class="ua-text">трав. 2025</span><span class="en-text">May 2025</span></div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">12 мин чтения</span><span class="ua-text">12 хв читання</span><span class="en-text">12 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Как мы внедрили LLM в рабочие процессы аналитиков на R — и сделали это бесплатно</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">В этой статье расскажу, как мы в команде аналитиков начали использовать большие языковые модели (LLM) в повседневных рабочих инструментах. Всё построено на R, и покажу на практике, как…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">AI</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">ChatGPT</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a>
+                <a href="../pishem-telegram-bota-na-yazyke-r-chast-5-upravlenie-pravami-polzovatel/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="120">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/pishem-telegram-bota-na-yazyke-r-chast-5-upravlen-zx1mk2dp30-2c7a0a1d.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">июнь 2022</span><span class="ua-text">черв. 2022</span><span class="en-text">Jun 2022</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2022</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">5 мин чтения</span><span class="ua-text">5 хв читання</span><span class="en-text">5 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Пишем telegram бота на языке R (часть 5): Управление правами пользователей бота</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">В предыдущих статьях мы достаточно подробно разобрали тему ботостроения, от отправки первого сообщения до программирования логического диалога с ботом. Это последняя статья из данной…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">API</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">R</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a></div>
+        </section>
+        <a href="../" class="b-back"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i><span class="ru-text">Ко всем материалам</span><span class="ua-text">До всіх матеріалів</span><span class="en-text">All posts</span></a>
+    </main>
+
+    <section class="px-6 max-w-7xl mx-auto pb-24 relative z-10">
+        <div class="grid md:grid-cols-2 gap-6" data-aos="fade-up">
+            <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(59, 130, 246, 0.1));">
+                <div class="bento-content w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center text-blue-400 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-telegram"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">Telegram-канал R4marketing</span><span class="ua-text">Telegram-канал R4marketing</span><span class="en-text">R4marketing on Telegram</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Новые статьи, видео и заметки по R — первыми.</span><span class="ua-text">Нові статті, відео та нотатки з R — першими.</span><span class="en-text">New articles, videos and R notes — first.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-blue-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+            <a href="https://www.youtube.com/R4marketing/?sub_confirmation=1" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(239, 68, 68, 0.1));">
+                <div class="bento-content w-16 h-16 bg-red-500/20 rounded-2xl flex items-center justify-center text-red-500 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-youtube"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">YouTube-канал R4marketing</span><span class="ua-text">YouTube-канал R4marketing</span><span class="en-text">R4marketing on YouTube</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Видеоуроки по R, аналитике и AI-инструментам.</span><span class="ua-text">Відеоуроки з R, аналітики та AI-інструментів.</span><span class="en-text">Video lessons on R, analytics and AI tools.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-red-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/5 bg-slate-950/80 backdrop-blur-md pt-16 pb-8 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
+                <div class="sm:col-span-2 lg:col-span-4">
+                    <a href="../../" class="inline-flex items-center gap-3 group mb-5">
+                        <img src="../../logo.jpg" alt="Alexey Seleznev" class="w-10 h-10 rounded-xl object-cover border border-white/10 group-hover:border-purple-500/50 transition-colors">
+                        <span class="text-lg font-black tracking-tight uppercase outfit-font text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+                    </a>
+                    <p class="text-sm text-slate-400 leading-relaxed max-w-sm mb-6"><span class="ru-text">Head of Analytics в Netpeak Group. Автор open source R-пакетов, бесплатных курсов по R и проекта R4marketing.</span><span class="ua-text">Head of Analytics у Netpeak Group. Автор open source R-пакетів, безкоштовних курсів з R та проєкту R4marketing.</span><span class="en-text">Head of Analytics at Netpeak Group. Author of open source R packages, free R courses and the R4marketing project.</span></p>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="https://t.me/R4marketing" target="_blank" rel="noopener" aria-label="Telegram R4marketing" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-400 hover:border-blue-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-telegram"></i></a>
+                        <a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" aria-label="YouTube R4marketing" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-red-500 hover:border-red-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="https://github.com/selesnow" target="_blank" rel="noopener" aria-label="GitHub" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-white hover:border-white/30 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://linkedin.com/in/selesnow" target="_blank" rel="noopener" aria-label="LinkedIn" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-500 hover:border-blue-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://facebook.com/selesnow" target="_blank" rel="noopener" aria-label="Facebook" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-600/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/alexey.selesnow" target="_blank" rel="noopener" aria-label="Instagram" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-pink-500 hover:border-pink-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://habr.com/ru/users/selesnow/" target="_blank" rel="noopener" aria-label="Habr" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-teal-400 hover:border-teal-400/40 transition-all hover:-translate-y-0.5"><i class="fa-solid fa-h"></i></a>
+                    </div>
+                </div>
+
+                <nav class="lg:col-span-2" aria-label="Site map">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">Сайт</span><span class="ua-text">Сайт</span><span class="en-text">Site</span></h3>
+                    <ul class="space-y-3">
+                        <li><a href="../../" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-house w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a></li>
+                        <li><a href="../../opensource/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-code-branch w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span></a></li>
+                        <li><a href="../../courses/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-graduation-cap w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a></li>
+                        <li><a href="../../videos/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-circle-play w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a></li>
+                        <li><a href="../../talks/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-microphone-lines w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a></li>
+                        <li><a href="../../articles/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-pen-nib w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a></li>
+                        <li><a href="../../interviews/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-regular fa-newspaper w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a></li>
+                        <li><a href="../../blog/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-feather-pointed w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a></li>
+                    </ul>
+                </nav>
+
+                <div class="lg:col-span-3">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">R4marketing и публикации</span><span class="ua-text">R4marketing і публікації</span><span class="en-text">R4marketing & writing</span></h3>
+                    <ul class="space-y-3">
+                        <li><a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-telegram w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Telegram-канал R4marketing</span><span class="ua-text">Telegram-канал R4marketing</span><span class="en-text">R4marketing Telegram</span></a></li>
+                        <li><a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-youtube w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">YouTube-канал R4marketing</span><span class="ua-text">YouTube-канал R4marketing</span><span class="en-text">R4marketing YouTube</span></a></li>
+                        <li><a href="https://alexeyseleznev.wordpress.com/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-pen-nib w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Личный блог</span><span class="ua-text">Особистий блог</span><span class="en-text">Personal blog</span></a></li>
+                        <li><a href="https://habr.com/ru/users/selesnow/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-h w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Профиль на Хабре</span><span class="ua-text">Профіль на Хабрі</span><span class="en-text">Habr profile</span></a></li>
+                        <li><a href="https://alexey-seleznev.pro/publications/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-layer-group w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Архив публикаций</span><span class="ua-text">Архів публікацій</span><span class="en-text">Publications archive</span></a></li>
+                        <li><a href="https://github.com/selesnow" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-github w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">GitHub</span><span class="ua-text">GitHub</span><span class="en-text">GitHub</span></a></li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-3">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">Контакты</span><span class="ua-text">Контакти</span><span class="en-text">Contacts</span></h3>
+                    <ul class="space-y-4">
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">Email</div><a href="mailto:me@alexey-seleznev.pro" class="text-sm text-slate-300 hover:text-purple-300 transition-colors break-all">me@alexey-seleznev.pro</a></li>
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">Telegram</div><a href="https://t.me/AlexeySeleznev" target="_blank" rel="noopener" class="text-sm text-slate-300 hover:text-blue-300 transition-colors break-all">@AlexeySeleznev</a></li>
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">LinkedIn</div><a href="https://linkedin.com/in/selesnow" target="_blank" rel="noopener" class="text-sm text-slate-300 hover:text-blue-300 transition-colors break-all">linkedin.com/in/selesnow</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-14 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+                <p>© 2026 Alexey Seleznev. <span class="ru-text">Все права защищены.</span><span class="ua-text">Усі права захищені.</span><span class="en-text">All rights reserved.</span></p>
+                <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="inline-flex items-center gap-2 font-semibold hover:text-white transition-colors group"><span class="ru-text">Наверх</span><span class="ua-text">Нагору</span><span class="en-text">Back to top</span><span class="w-7 h-7 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-purple-500 group-hover:border-purple-500 transition-all"><i class="fa-solid fa-arrow-up text-[10px]"></i></span></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script src="../../assets/site.js"></script>
+
+    <script>
+    (function () {
+        // кнопка «Копировать» у блоков кода
+        document.querySelectorAll('.b-prose .codehilite').forEach(box => {
+            const btn = document.createElement('button');
+            btn.type = 'button'; btn.className = 'b-copy'; btn.setAttribute('aria-label', 'Copy code');
+            btn.innerHTML = '<i class="fa-regular fa-copy" aria-hidden="true"></i>';
+            btn.addEventListener('click', () => {
+                navigator.clipboard.writeText(box.querySelector('pre').innerText).then(() => {
+                    btn.innerHTML = '<i class="fa-solid fa-check" aria-hidden="true"></i>';
+                    setTimeout(() => btn.innerHTML = '<i class="fa-regular fa-copy" aria-hidden="true"></i>', 1500);
+                });
+            });
+            box.appendChild(btn);
+        });
+        // подсветка текущего раздела в оглавлении
+        const links = Array.from(document.querySelectorAll('.b-toc a'));
+        if (links.length && 'IntersectionObserver' in window) {
+            const map = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+            const io = new IntersectionObserver(es => es.forEach(e => {
+                if (e.isIntersecting) { links.forEach(l => l.classList.remove('active')); const a = map.get(e.target.id); if (a) a.classList.add('active'); }
+            }), { rootMargin: '-80px 0px -70% 0px' });
+            map.forEach((_, id) => { const el = document.getElementById(id); if (el) io.observe(el); });
+        }
+    })();
+    </script>
+</body>
+</html>

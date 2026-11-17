@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Alexey Seleznev">
+    <meta name="theme-color" content="#030712">
+    <link rel="canonical" href="https://alexey-seleznev.pro/blog/razvorachivaem-vlozhennye-stolbtsy-spiski-s-pomoschyu-yazyka-r-paket-t/">
+
+    <title>Разворачиваем вложенные столбцы — списки с помощью языка R (пакет tidyr и функции семейства unnest) | Алексей Селезнёв</title>
+    <meta name="title" content="Разворачиваем вложенные столбцы — списки с помощью языка R (пакет tidyr и функции семейства unnest) | Алексей Селезнёв">
+    <meta name="description" content="В большинстве случаев при работе с ответом полученным от API, или с любыми другими данными которые имеют сложную древовидную структуру, вы сталкиваетесь с форматами JSON и XML. Эти…">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alexey-seleznev.pro/blog/razvorachivaem-vlozhennye-stolbtsy-spiski-s-pomoschyu-yazyka-r-paket-t/">
+    <meta property="og:site_name" content="ALEXEY-SELEZNEV.pro">
+    <meta property="og:title" content="Разворачиваем вложенные столбцы — списки с помощью языка R (пакет tidyr и функции семейства unnest) | Алексей Селезнёв">
+    <meta property="og:description" content="В большинстве случаев при работе с ответом полученным от API, или с любыми другими данными которые имеют сложную древовидную структуру, вы сталкиваетесь с форматами JSON и XML. Эти…">
+    <meta property="og:image" content="https://alexey-seleznev.pro/photo.jpg">
+    <meta property="og:image:alt" content="Алексей Селезнёв">
+    <meta property="og:locale" content="ru_RU">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="https://alexey-seleznev.pro/blog/razvorachivaem-vlozhennye-stolbtsy-spiski-s-pomoschyu-yazyka-r-paket-t/">
+    <meta name="twitter:title" content="Разворачиваем вложенные столбцы — списки с помощью языка R (пакет tidyr и функции семейства unnest) | Алексей Селезнёв">
+    <meta name="twitter:description" content="В большинстве случаев при работе с ответом полученным от API, или с любыми другими данными которые имеют сложную древовидную структуру, вы сталкиваетесь с форматами JSON и XML. Эти…">
+    <meta name="twitter:image" content="https://alexey-seleznev.pro/photo.jpg">
+
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z56YHE916N"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Z56YHE916N');
+    </script>
+    <link rel="icon" type="image/jpeg" href="../../logo.jpg">
+    <link rel="apple-touch-icon" href="../../logo.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;700;800;900&display=swap">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/site.css">
+    <!-- Tailwind собран заранее (_build/build.py) и подключается последним, как это делал CDN-скрипт -->
+    <link rel="stylesheet" href="../../assets/tailwind.css">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Разворачиваем вложенные столбцы — списки с помощью языка R (пакет tidyr и функции семейства unnest)",
+  "datePublished": "2020-11-10",
+  "inLanguage": "ru",
+  "description": "В большинстве случаев при работе с ответом полученным от API, или с любыми другими данными которые имеют сложную древовидную структуру, вы сталкиваетесь с форматами JSON и XML. Эти…",
+  "author": {
+    "@id": "https://alexey-seleznev.pro/#person"
+  },
+  "mainEntityOfPage": "https://alexey-seleznev.pro/blog/razvorachivaem-vlozhennye-stolbtsy-spiski-s-pomoschyu-yazyka-r-paket-t/"
+}
+    </script>
+    <link rel="stylesheet" href="../blog.css">
+</head>
+<body class="relative lang-en">
+
+    <!-- Interactive Background -->
+    <div id="vanta-bg"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full z-50 top-0 left-0 border-b border-white/5 bg-slate-950/60 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 h-16 flex items-center justify-between">
+            <a href="../../" class="flex items-center gap-2 sm:gap-2.5 md:gap-3 group shrink min-w-0">
+                <img src="../../logo.jpg" alt="Alexey Seleznev" class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 rounded-lg sm:rounded-xl object-cover shadow-md border border-white/10 group-hover:border-purple-500/50 group-hover:scale-105 transition-all shrink-0">
+                <span class="text-xs min-[400px]:text-sm sm:text-base md:text-xl font-black tracking-tight uppercase outfit-font whitespace-nowrap text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+            </a>
+            <div class="hidden xl:flex gap-6 text-sm font-semibold text-slate-400">
+                <a href="../../" class="nav-link hover:text-white transition-colors"><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a>
+                <a href="../../opensource/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span></a>
+                <a href="../../courses/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a>
+                <a href="../../videos/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a>
+                <a href="../../talks/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a>
+                <a href="../../articles/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a>
+                <a href="../../interviews/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a>
+                <a href="../../blog/" class="nav-link hover:text-white transition-colors active"><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a>
+            </div>
+
+            <div class="flex items-center gap-1.5 sm:gap-2 md:gap-4 shrink-0">
+                <div class="lang-switcher flex gap-1 sm:gap-1.5 md:gap-2 text-[11px] sm:text-xs md:text-sm font-bold border-r border-white/10 pr-1.5 sm:pr-3 md:pr-4 mr-0.5 sm:mr-1 md:mr-2 outfit-font">
+                    <button onclick="changeLang('en')" id="btn-en" class="active hover:text-white transition-colors">EN</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ru')" id="btn-ru" class="text-slate-500 hover:text-white transition-colors">RU</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ua')" id="btn-ua" class="text-slate-500 hover:text-white transition-colors">UA</button>
+                </div>
+
+                <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="text-slate-400 hover:text-blue-400 transition-colors hidden sm:block" aria-label="Telegram"><i class="fa-brands fa-telegram text-lg md:text-xl"></i></a>
+                <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="text-slate-400 hover:text-white transition-colors hidden sm:block" aria-label="GitHub"><i class="fa-brands fa-github text-lg md:text-xl"></i></a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="xl:hidden w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-purple-500/20 hover:border-purple-500/40 transition-all focus:outline-none" aria-label="Toggle Navigation Menu">
+                    <i class="fa-solid fa-bars text-sm sm:text-lg" id="mobile-menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div id="mobile-menu" class="hidden xl:hidden border-t border-white/10 bg-slate-950/95 backdrop-blur-2xl shadow-2xl overflow-y-auto max-h-[calc(100vh-4rem)] transition-all">
+            <div class="max-w-7xl mx-auto px-6 py-6 space-y-1">
+                <a href="../../" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-house text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span>
+                </a>
+                <a href="../../opensource/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-code-branch text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span>
+                </a>
+                <a href="../../courses/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-graduation-cap text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span>
+                </a>
+                <a href="../../videos/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-circle-play text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span>
+                </a>
+                <a href="../../talks/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-microphone-lines text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span>
+                </a>
+                <a href="../../articles/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-pen-nib text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span>
+                </a>
+                <a href="../../interviews/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-regular fa-newspaper text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span>
+                </a>
+                <a href="../../blog/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-white bg-white/5 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-feather-pointed text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span>
+                </a>
+
+                <div class="pt-4 mt-3 border-t border-white/10 flex items-center justify-around text-slate-400">
+                    <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-blue-400 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-telegram text-xl"></i> Telegram
+                    </a>
+                    <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="p-2 hover:text-white transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-github text-xl"></i> GitHub
+                    </a>
+                    <a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-red-500 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-youtube text-xl"></i> YouTube
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="b-wrap relative z-10">
+        <nav class="b-crumbs" aria-label="breadcrumb">
+            <a href="../../"><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a><span>/</span><a href="../"><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a><span>/</span><a href="../?cat=programmirovanie#posts">Программирование</a>
+        </nav>
+        <div class="b-layout">
+            <article class="bento-glass no-lift b-article" data-aos="fade-up">
+                <div class="bento-content">
+                    <div class="b-cats"><a class="b-chip b-chip-cat" href="../?cat=programmirovanie#posts">Программирование</a><a class="b-chip b-chip-cat" href="../?cat=r#posts">R</a></div>
+                    <h1 class="b-title outfit-font">Разворачиваем вложенные столбцы — списки с помощью языка R (пакет tidyr и функции семейства unnest)</h1>
+                    <div class="b-meta">
+                        <span><i class="fa-regular fa-calendar" aria-hidden="true"></i><span class="ru-text">10 ноября 2020</span><span class="ua-text">10 листопада 2020</span><span class="en-text">10 Nov 2020</span></span>
+                        <span><i class="fa-regular fa-clock" aria-hidden="true"></i><span class="ru-text">8 мин чтения</span><span class="ua-text">8 хв читання</span><span class="en-text">8 min read</span></span>
+                        <span class="b-lang" title="Русский">RU</span>
+                    </div>
+                    <div class="b-note"><i class="fa-regular fa-clock" aria-hidden="true"></i><div><span class="ru-text">Материал опубликован в 2020 году — описанные инструменты и интерфейсы могли измениться.</span><span class="ua-text">Матеріал опубліковано у 2020 році — описані інструменти та інтерфейси могли змінитися.</span><span class="en-text">Published in 2020 — the tools and interfaces described may have changed since.</span></div></div>
+                    
+                    <div class="b-prose"><p>В большинстве случаев при работе с ответом полученным от API, или с любыми другими данными которые имеют сложную древовидную структуру, вы сталкиваетесь с форматами JSON и XML.</p>
+<p>Эти форматы имеют множество преимуществ: они достаточно компактно хранят данные и позволяют избежать излишнего дублирования информации.</p>
+<p>Минусом данных форматов является сложность их обработки и анализа. Неструктурированные данные невозможно использовать в вычислениях и нельзя строить на их основе визуализацию.</p>
+<p><img loading="lazy" decoding="async" alt="" width="915" height="306" src="../images/razvorachivaem-vlozhennye-stolbtsy-sp-7syfgrnpyegv-ihhcguupz-9349286e.webp" /></p>
+<p>Данная статья является логическим продолжением публикации <a target="_blank" rel="noopener" href="https://habr.com/ru/post/444622/">“R пакет tidyr и его новые функции pivot_longer и pivot_wider”</a>. Она поможет вам привести неструктурированные конструкции данных к привычному, и пригодному для анализа табличному виду с помощью пакета <code>tidyr</code>, входящего в ядро библиотеки <code>tidyverse</code>, и его функций семейства <code>unnest_*()</code>.</p>
+<h1 id="_1">Содержание</h1>
+<p><em>Если вы интересуетесь анализом данных возможно вам будут интересны мои <a target="_blank" rel="noopener" href="https://t.me/R4marketing">telegram</a> и <a target="_blank" rel="noopener" href="https://www.youtube.com/R4marketing/?sub_confirmation=1">youtube</a> каналы. Большая часть контента которых посвящены языку R.</em></p>
+<ol>
+<li>Введение</li>
+<li>Пользователи GitHub</li>
+<li>Репозитории Github</li>
+<li>Персонажи Игры Престолов</li>
+<li>Геокодирование с помощью Google</li>
+<li>Дискография Шарлы Гельфанд</li>
+<li>Заключение</li>
+</ol>
+<blockquote>
+<p>Изначально статья была написана для Хабры</p>
+<p><a target="_blank" rel="noopener" href="https://habr.com/ru/post/491726/">https://habr.com/ru/post/491726/</a></p>
+</blockquote>
+<h1 id="_2">Введение</h1>
+<p><strong>Rectangling</strong> <em>(прим. переводчика, не нашел адекватных вариантов перевода этого термина, поэтому оставим его как есть.)</em> — это процесс приведения не структурированных данных с вложенными массивами к двухмерной таблице, состоящей из привычных нам строк и столбцов. В <code>tidyr</code> есть несколько функций, которые помогут вам развернуть вложенные столбцы-списки и привести данные к прямоугольной, табличной форме:</p>
+<ul>
+<li><code>unnest_longer()</code> берет каждый элемент списка-столбца и создает новую строку.</li>
+<li><code>unnest_wider()</code> берет каждый элемент списка-столбца и создает новый столбец.</li>
+<li><code>unnest_auto()</code> автоматически определяет какую из функций лучше использовать<br />
+<code>unnest_longer()</code> или <code>unnest_wider()</code>.</li>
+<li><code>hoist()</code> похожа на <code>unnest_wider()</code> но отбирает только указанные компоненты и позволяет работать с несколькими уровнями вложенности.</li>
+</ul>
+<p>Большинство проблем связанных с приведением не структурированных данных с несколькими уровнями вложенности к двухмерной таблице можно решить, комбинируя перечисленные функции с dplyr.</p>
+<p>Для демонстрации этих приемов, мы будем использовать пакет <code>repurrrsive</code>, который предоставляет несколько сложных, многоуровневых списков, полученных из веб-API.</p>
+<div class="codehilite"><pre><span></span><code>library(tidyr)
+library(dplyr)
+library(repurrrsive)
+</code></pre></div>
+
+<h1 id="github">Пользователи GitHub</h1>
+<p>Начнем с <em>gh_users</em>, списка, который содержит информацию о шести пользователях GitHub. Для начала преобразуем список <em>gh_users</em> в <em>tibble</em> фрейм.:</p>
+<div class="codehilite"><pre><span></span><code>users &lt;-   tibble( user = gh_users )
+</code></pre></div>
+
+<p>Это кажется немного нелогичным: зачем приводить список <em>gh_users</em>, к более сложной структуре данных? Но у дата фрейма есть большое преимущество: он объединяет несколько векторов, так что все отслеживается в одном объекте.</p>
+<p>Каждый элемент объекта <code>users</code> представляет собой именованный список, в котором каждый элемент представляет столбец.</p>
+<div class="codehilite"><pre><span></span><code>names(users$user[[1]])
+#&gt;  [1] &quot;login&quot;               &quot;id&quot;                  &quot;avatar_url&quot;         
+#&gt;  [4] &quot;gravatar_id&quot;         &quot;url&quot;                 &quot;html_url&quot;           
+#&gt;  [7] &quot;followers_url&quot;       &quot;following_url&quot;       &quot;gists_url&quot;          
+#&gt; [10] &quot;starred_url&quot;         &quot;subscriptions_url&quot;   &quot;organizations_url&quot;  
+#&gt; [13] &quot;repos_url&quot;           &quot;events_url&quot;          &quot;received_events_url&quot;
+#&gt; [16] &quot;type&quot;                &quot;site_admin&quot;          &quot;name&quot;               
+#&gt; [19] &quot;company&quot;             &quot;blog&quot;                &quot;location&quot;           
+#&gt; [22] &quot;email&quot;               &quot;hireable&quot;            &quot;bio&quot;                
+#&gt; [25] &quot;public_repos&quot;        &quot;public_gists&quot;        &quot;followers&quot;          
+#&gt; [28] &quot;following&quot;           &quot;created_at&quot;          &quot;updated_at&quot;
+</code></pre></div>
+
+<p>Есть два способа превратить компоненты списка в столбцы. <code>unnest_wider()</code> берет каждый компонент и создает новый столбец:</p>
+<div class="codehilite"><pre><span></span><code>users %&gt;% unnest_wider(user)
+#&gt; # A tibble: 6 x 30
+#&gt;   login     id avatar_url gravatar_id url   html_url followers_url
+#&gt;   &lt;chr&gt;  &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;        
+#&gt; 1 gabo… 6.60e5 https://a… &quot;&quot;          http… https:/… https://api.…
+#&gt; 2 jenn… 5.99e5 https://a… &quot;&quot;          http… https:/… https://api.…
+#&gt; 3 jtle… 1.57e6 https://a… &quot;&quot;          http… https:/… https://api.…
+#&gt; 4 juli… 1.25e7 https://a… &quot;&quot;          http… https:/… https://api.…
+#&gt; 5 leep… 3.51e6 https://a… &quot;&quot;          http… https:/… https://api.…
+#&gt; 6 masa… 8.36e6 https://a… &quot;&quot;          http… https:/… https://api.…
+#&gt; # … with 23 more variables: following_url &lt;chr&gt;, gists_url &lt;chr&gt;,
+#&gt; #   starred_url &lt;chr&gt;, subscriptions_url &lt;chr&gt;, organizations_url &lt;chr&gt;,
+#&gt; #   repos_url &lt;chr&gt;, events_url &lt;chr&gt;, received_events_url &lt;chr&gt;,
+#&gt; #   type &lt;chr&gt;, site_admin &lt;lgl&gt;, name &lt;chr&gt;, company &lt;chr&gt;, blog &lt;chr&gt;,
+#&gt; #   location &lt;chr&gt;, email &lt;chr&gt;, public_repos &lt;int&gt;, public_gists &lt;int&gt;,
+#&gt; #   followers &lt;int&gt;, following &lt;int&gt;, created_at &lt;chr&gt;, updated_at &lt;chr&gt;,
+#&gt; #   bio &lt;chr&gt;, hireable &lt;lgl&gt;
+</code></pre></div>
+
+<p>В этом случае мы получили таблицу состоящую из 30 столбцов, и большинство из них нам не понадобятся, поэтому мы можем вместо <code>unnest_wider()</code> использовать <code>hoist()</code>. <code>hoist()</code> позволяет нам извлекать выбранные компоненты, используя тот же синтаксис, что и <code>purrr::pluck()</code>:</p>
+<div class="codehilite"><pre><span></span><code>users %&gt;% hoist(user, 
+  followers = &quot;followers&quot;, 
+  login = &quot;login&quot;, 
+  url = &quot;html_url&quot;
+)
+#&gt; # A tibble: 6 x 4
+#&gt;   followers login       url                            user             
+#&gt;       &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;                          &lt;list&gt;           
+#&gt; 1       303 gaborcsardi https://github.com/gaborcsardi &lt;named list [27]&gt;
+#&gt; 2       780 jennybc     https://github.com/jennybc     &lt;named list [27]&gt;
+#&gt; 3      3958 jtleek      https://github.com/jtleek      &lt;named list [27]&gt;
+#&gt; 4       115 juliasilge  https://github.com/juliasilge  &lt;named list [27]&gt;
+#&gt; 5       213 leeper      https://github.com/leeper      &lt;named list [27]&gt;
+#&gt; 6        34 masalmon    https://github.com/masalmon    &lt;named list [27]&gt;
+</code></pre></div>
+
+<p><code>hoist()</code> удаляет указанные именованные компоненты из списка-столбца <em>user</em>, поэтому вы можете рассматривать <code>hoist()</code> как перемещение компонентов из внутреннего списка дата фрейма к его верхнему уровню.</p>
+<h1 id="github_1">Репозитории Github</h1>
+<p>Выравнивание списка <code>gh_repos</code> мы начинаем аналогично, преобразуя его в <code>tibble</code>:</p>
+<div class="codehilite"><pre><span></span><code>repos &lt;- tibble(repo = gh_repos)
+repos
+#&gt; # A tibble: 6 x 1
+#&gt;   repo       
+#&gt;   &lt;list&gt;     
+#&gt; 1 &lt;list [30]&gt;
+#&gt; 2 &lt;list [30]&gt;
+#&gt; 3 &lt;list [30]&gt;
+#&gt; 4 &lt;list [26]&gt;
+#&gt; 5 &lt;list [30]&gt;
+#&gt; 6 &lt;list [30]&gt;
+</code></pre></div>
+
+<p>На этот раз элементы <em>user</em> представляют собой список репозиториев, принадлежащих этому пользователю. Каждый репозиторий является отдельным наблюдением, поэтому согласно концепции аккуратных данных <em>(прим. tidy data)</em> они должны стать новыми строками, в связи с чем мы используем <code>unnest_longer()</code> а не <code>unnest_wider()</code>:</p>
+<div class="codehilite"><pre><span></span><code>repos &lt;- repos %&gt;% unnest_longer(repo)
+repos
+#&gt; # A tibble: 176 x 1
+#&gt;    repo             
+#&gt;    &lt;list&gt;           
+#&gt;  1 &lt;named list [68]&gt;
+#&gt;  2 &lt;named list [68]&gt;
+#&gt;  3 &lt;named list [68]&gt;
+#&gt;  4 &lt;named list [68]&gt;
+#&gt;  5 &lt;named list [68]&gt;
+#&gt;  6 &lt;named list [68]&gt;
+#&gt;  7 &lt;named list [68]&gt;
+#&gt;  8 &lt;named list [68]&gt;
+#&gt;  9 &lt;named list [68]&gt;
+#&gt; 10 &lt;named list [68]&gt;
+#&gt; # … with 166 more rows
+</code></pre></div>
+
+<p>Теперь мы можем использовать <code>unnest_wider()</code> или <code>hoist()</code> :</p>
+<div class="codehilite"><pre><span></span><code>repos %&gt;% hoist(repo, 
+  login = c(&quot;owner&quot;, &quot;login&quot;), 
+  name = &quot;name&quot;,
+  homepage = &quot;homepage&quot;,
+  watchers = &quot;watchers_count&quot;
+)
+#&gt; # A tibble: 176 x 5
+#&gt;    login       name        homepage watchers repo             
+#&gt;    &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;       &lt;int&gt; &lt;list&gt;           
+#&gt;  1 gaborcsardi after       &lt;NA&gt;            5 &lt;named list [65]&gt;
+#&gt;  2 gaborcsardi argufy      &lt;NA&gt;           19 &lt;named list [65]&gt;
+#&gt;  3 gaborcsardi ask         &lt;NA&gt;            5 &lt;named list [65]&gt;
+#&gt;  4 gaborcsardi baseimports &lt;NA&gt;            0 &lt;named list [65]&gt;
+#&gt;  5 gaborcsardi citest      &lt;NA&gt;            0 &lt;named list [65]&gt;
+#&gt;  6 gaborcsardi clisymbols  &quot;&quot;             18 &lt;named list [65]&gt;
+#&gt;  7 gaborcsardi cmaker      &lt;NA&gt;            0 &lt;named list [65]&gt;
+#&gt;  8 gaborcsardi cmark       &lt;NA&gt;            0 &lt;named list [65]&gt;
+#&gt;  9 gaborcsardi conditions  &lt;NA&gt;            0 &lt;named list [65]&gt;
+#&gt; 10 gaborcsardi crayon      &lt;NA&gt;           52 &lt;named list [65]&gt;
+#&gt; # … with 166 more rows
+</code></pre></div>
+
+<p>Обратите внимание на использование <code>c("owner", "login")</code>: это позволяет нам получить значение второго уровня из вложенного списка <code>owner</code>. Альтернативный подход состоит в том, чтобы получить весь список <code>owner</code> и затем с помощью функции <code>unnest_wider()</code> поместить каждый его элемент в столбец:</p>
+<div class="codehilite"><pre><span></span><code>repos %&gt;% 
+  hoist(repo, owner = &quot;owner&quot;) %&gt;% 
+  unnest_wider(owner)
+#&gt; # A tibble: 176 x 18
+#&gt;    login     id avatar_url gravatar_id url   html_url followers_url
+#&gt;    &lt;chr&gt;  &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;        
+#&gt;  1 gabo… 660288 https://a… &quot;&quot;          http… https:/… https://api.…
+#&gt;  2 gabo… 660288 https://a… &quot;&quot;          http… https:/… https://api.…
+#&gt;  3 gabo… 660288 https://a… &quot;&quot;          http… https:/… https://api.…
+#&gt;  4 gabo… 660288 https://a… &quot;&quot;          http… https:/… https://api.…
+#&gt;  5 gabo… 660288 https://a… &quot;&quot;          http… https:/… https://api.…
+#&gt;  6 gabo… 660288 https://a… &quot;&quot;          http… https:/… https://api.…
+#&gt;  7 gabo… 660288 https://a… &quot;&quot;          http… https:/… https://api.…
+#&gt;  8 gabo… 660288 https://a… &quot;&quot;          http… https:/… https://api.…
+#&gt;  9 gabo… 660288 https://a… &quot;&quot;          http… https:/… https://api.…
+#&gt; 10 gabo… 660288 https://a… &quot;&quot;          http… https:/… https://api.…
+#&gt; # … with 166 more rows, and 11 more variables: following_url &lt;chr&gt;,
+#&gt; #   gists_url &lt;chr&gt;, starred_url &lt;chr&gt;, subscriptions_url &lt;chr&gt;,
+#&gt; #   organizations_url &lt;chr&gt;, repos_url &lt;chr&gt;, events_url &lt;chr&gt;,
+#&gt; #   received_events_url &lt;chr&gt;, type &lt;chr&gt;, site_admin &lt;lgl&gt;, repo &lt;list&gt;
+</code></pre></div>
+
+<p>Вместо того, что бы размышлять над выбором нужной функции <code>unnest_longer()</code> или <code>unnest_wider()</code> вы можете использовать <code>unnest_auto()</code>. Эта функция использует несколько эвристических методов для подбора наиболее подходящей функции для трансформации данных, и выводит сообщение о выбранном способе.</p>
+<div class="codehilite"><pre><span></span><code>tibble(repo = gh_repos) %&gt;% 
+  unnest_auto(repo) %&gt;% 
+  unnest_auto(repo)
+#&gt; Using `unnest_longer(repo)`; no element has names
+#&gt; Using `unnest_wider(repo)`; elements have 68 names in common
+#&gt; # A tibble: 176 x 67
+#&gt;        id name  full_name owner private html_url description fork  url  
+#&gt;     &lt;int&gt; &lt;chr&gt; &lt;chr&gt;     &lt;lis&gt; &lt;lgl&gt;   &lt;chr&gt;    &lt;chr&gt;       &lt;lgl&gt; &lt;chr&gt;
+#&gt;  1 6.12e7 after gaborcsa… &lt;nam… FALSE   https:/… Run Code i… FALSE http…
+#&gt;  2 4.05e7 argu… gaborcsa… &lt;nam… FALSE   https:/… Declarativ… FALSE http…
+#&gt;  3 3.64e7 ask   gaborcsa… &lt;nam… FALSE   https:/… Friendly C… FALSE http…
+#&gt;  4 3.49e7 base… gaborcsa… &lt;nam… FALSE   https:/… Do we get … FALSE http…
+#&gt;  5 6.16e7 cite… gaborcsa… &lt;nam… FALSE   https:/… Test R pac… TRUE  http…
+#&gt;  6 3.39e7 clis… gaborcsa… &lt;nam… FALSE   https:/… Unicode sy… FALSE http…
+#&gt;  7 3.72e7 cmak… gaborcsa… &lt;nam… FALSE   https:/… port of cm… TRUE  http…
+#&gt;  8 6.80e7 cmark gaborcsa… &lt;nam… FALSE   https:/… CommonMark… TRUE  http…
+#&gt;  9 6.32e7 cond… gaborcsa… &lt;nam… FALSE   https:/… &lt;NA&gt;        TRUE  http…
+#&gt; 10 2.43e7 cray… gaborcsa… &lt;nam… FALSE   https:/… R package … FALSE http…
+#&gt; # … with 166 more rows, and 58 more variables: forks_url &lt;chr&gt;,
+#&gt; #   keys_url &lt;chr&gt;, collaborators_url &lt;chr&gt;, teams_url &lt;chr&gt;,
+#&gt; #   hooks_url &lt;chr&gt;, issue_events_url &lt;chr&gt;, events_url &lt;chr&gt;,
+#&gt; #   assignees_url &lt;chr&gt;, branches_url &lt;chr&gt;, tags_url &lt;chr&gt;,
+#&gt; #   blobs_url &lt;chr&gt;, git_tags_url &lt;chr&gt;, git_refs_url &lt;chr&gt;,
+#&gt; #   trees_url &lt;chr&gt;, statuses_url &lt;chr&gt;, languages_url &lt;chr&gt;,
+#&gt; #   stargazers_url &lt;chr&gt;, contributors_url &lt;chr&gt;, subscribers_url &lt;chr&gt;,
+#&gt; #   subscription_url &lt;chr&gt;, commits_url &lt;chr&gt;, git_commits_url &lt;chr&gt;,
+#&gt; #   comments_url &lt;chr&gt;, issue_comment_url &lt;chr&gt;, contents_url &lt;chr&gt;,
+#&gt; #   compare_url &lt;chr&gt;, merges_url &lt;chr&gt;, archive_url &lt;chr&gt;,
+#&gt; #   downloads_url &lt;chr&gt;, issues_url &lt;chr&gt;, pulls_url &lt;chr&gt;,
+#&gt; #   milestones_url &lt;chr&gt;, notifications_url &lt;chr&gt;, labels_url &lt;chr&gt;,
+#&gt; #   releases_url &lt;chr&gt;, deployments_url &lt;chr&gt;, created_at &lt;chr&gt;,
+#&gt; #   updated_at &lt;chr&gt;, pushed_at &lt;chr&gt;, git_url &lt;chr&gt;, ssh_url &lt;chr&gt;,
+#&gt; #   clone_url &lt;chr&gt;, svn_url &lt;chr&gt;, size &lt;int&gt;, stargazers_count &lt;int&gt;,
+#&gt; #   watchers_count &lt;int&gt;, language &lt;chr&gt;, has_issues &lt;lgl&gt;,
+#&gt; #   has_downloads &lt;lgl&gt;, has_wiki &lt;lgl&gt;, has_pages &lt;lgl&gt;,
+#&gt; #   forks_count &lt;int&gt;, open_issues_count &lt;int&gt;, forks &lt;int&gt;,
+#&gt; #   open_issues &lt;int&gt;, watchers &lt;int&gt;, default_branch &lt;chr&gt;,
+#&gt; #   homepage &lt;chr&gt;
+</code></pre></div>
+
+<h1 id="_3">Персонажи Игры Престолов</h1>
+<p><code>got_chars</code> имеет идентичную структуру с <code>gh_users</code>: это набор именованных списков, где каждый элемент внутреннего списка описывает некоторый атрибут персонажа Игры Престолов. Приведение <code>got_chars</code> к табличному виду мы начинаем с создания дата фрейма, так же как и в приведённых ранее примерах, а затем переведём каждый элемент в отдельный столбец:</p>
+<div class="codehilite"><pre><span></span><code>chars &lt;- tibble(char = got_chars)
+chars
+#&gt; # A tibble: 30 x 1
+#&gt;    char             
+#&gt;    &lt;list&gt;           
+#&gt;  1 &lt;named list [18]&gt;
+#&gt;  2 &lt;named list [18]&gt;
+#&gt;  3 &lt;named list [18]&gt;
+#&gt;  4 &lt;named list [18]&gt;
+#&gt;  5 &lt;named list [18]&gt;
+#&gt;  6 &lt;named list [18]&gt;
+#&gt;  7 &lt;named list [18]&gt;
+#&gt;  8 &lt;named list [18]&gt;
+#&gt;  9 &lt;named list [18]&gt;
+#&gt; 10 &lt;named list [18]&gt;
+#&gt; # … with 20 more rows
+
+chars2 &lt;- chars %&gt;% unnest_wider(char)
+chars2
+#&gt; # A tibble: 30 x 18
+#&gt;    url      id name  gender culture born  died  alive titles aliases father
+#&gt;    &lt;chr&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;lgl&gt; &lt;list&gt; &lt;list&gt;  &lt;chr&gt; 
+#&gt;  1 http…  1022 Theo… Male   Ironbo… In 2… &quot;&quot;    TRUE  &lt;chr … &lt;chr [… &quot;&quot;    
+#&gt;  2 http…  1052 Tyri… Male   &quot;&quot;      In 2… &quot;&quot;    TRUE  &lt;chr … &lt;chr [… &quot;&quot;    
+#&gt;  3 http…  1074 Vict… Male   Ironbo… In 2… &quot;&quot;    TRUE  &lt;chr … &lt;chr [… &quot;&quot;    
+#&gt;  4 http…  1109 Will  Male   &quot;&quot;      &quot;&quot;    In 2… FALSE &lt;chr … &lt;chr [… &quot;&quot;    
+#&gt;  5 http…  1166 Areo… Male   Norvos… In 2… &quot;&quot;    TRUE  &lt;chr … &lt;chr [… &quot;&quot;    
+#&gt;  6 http…  1267 Chett Male   &quot;&quot;      At H… In 2… FALSE &lt;chr … &lt;chr [… &quot;&quot;    
+#&gt;  7 http…  1295 Cres… Male   &quot;&quot;      In 2… In 2… FALSE &lt;chr … &lt;chr [… &quot;&quot;    
+#&gt;  8 http…   130 Aria… Female Dornish In 2… &quot;&quot;    TRUE  &lt;chr … &lt;chr [… &quot;&quot;    
+#&gt;  9 http…  1303 Daen… Female Valyri… In 2… &quot;&quot;    TRUE  &lt;chr … &lt;chr [… &quot;&quot;    
+#&gt; 10 http…  1319 Davo… Male   Wester… In 2… &quot;&quot;    TRUE  &lt;chr … &lt;chr [… &quot;&quot;    
+#&gt; # … with 20 more rows, and 7 more variables: mother &lt;chr&gt;, spouse &lt;chr&gt;,
+#&gt; #   allegiances &lt;list&gt;, books &lt;list&gt;, povBooks &lt;list&gt;, tvSeries &lt;list&gt;,
+#&gt; #   playedBy &lt;list&gt;
+</code></pre></div>
+
+<p>Структура <code>got_chars</code> несколько сложнее, чем <code>gh_users</code>, т.к. некоторые компоненты списка <code>char</code> сами по себе являются списком, в результате мы получаем столбы — списки:</p>
+<div class="codehilite"><pre><span></span><code>chars2 %&gt;% select_if(is.list)
+#&gt; # A tibble: 30 x 7
+#&gt;    titles    aliases    allegiances books     povBooks  tvSeries  playedBy 
+#&gt;    &lt;list&gt;    &lt;list&gt;     &lt;list&gt;      &lt;list&gt;    &lt;list&gt;    &lt;list&gt;    &lt;list&gt;   
+#&gt;  1 &lt;chr [3]&gt; &lt;chr [4]&gt;  &lt;chr [1]&gt;   &lt;chr [3]&gt; &lt;chr [2]&gt; &lt;chr [6]&gt; &lt;chr [1]&gt;
+#&gt;  2 &lt;chr [2]&gt; &lt;chr [11]&gt; &lt;chr [1]&gt;   &lt;chr [2]&gt; &lt;chr [4]&gt; &lt;chr [6]&gt; &lt;chr [1]&gt;
+#&gt;  3 &lt;chr [2]&gt; &lt;chr [1]&gt;  &lt;chr [1]&gt;   &lt;chr [3]&gt; &lt;chr [2]&gt; &lt;chr [1]&gt; &lt;chr [1]&gt;
+#&gt;  4 &lt;chr [1]&gt; &lt;chr [1]&gt;  &lt;???&gt;       &lt;chr [1]&gt; &lt;chr [1]&gt; &lt;chr [1]&gt; &lt;chr [1]&gt;
+#&gt;  5 &lt;chr [1]&gt; &lt;chr [1]&gt;  &lt;chr [1]&gt;   &lt;chr [3]&gt; &lt;chr [2]&gt; &lt;chr [2]&gt; &lt;chr [1]&gt;
+#&gt;  6 &lt;chr [1]&gt; &lt;chr [1]&gt;  &lt;???&gt;       &lt;chr [2]&gt; &lt;chr [1]&gt; &lt;chr [1]&gt; &lt;chr [1]&gt;
+#&gt;  7 &lt;chr [1]&gt; &lt;chr [1]&gt;  &lt;???&gt;       &lt;chr [2]&gt; &lt;chr [1]&gt; &lt;chr [1]&gt; &lt;chr [1]&gt;
+#&gt;  8 &lt;chr [1]&gt; &lt;chr [1]&gt;  &lt;chr [1]&gt;   &lt;chr [4]&gt; &lt;chr [1]&gt; &lt;chr [1]&gt; &lt;chr [1]&gt;
+#&gt;  9 &lt;chr [5]&gt; &lt;chr [11]&gt; &lt;chr [1]&gt;   &lt;chr [1]&gt; &lt;chr [4]&gt; &lt;chr [6]&gt; &lt;chr [1]&gt;
+#&gt; 10 &lt;chr [4]&gt; &lt;chr [5]&gt;  &lt;chr [2]&gt;   &lt;chr [1]&gt; &lt;chr [3]&gt; &lt;chr [5]&gt; &lt;chr [1]&gt;
+#&gt; # … with 20 more rows
+</code></pre></div>
+
+<p>Ваши дальнейшие действия зависят от целей анализа. Возможно, вам необходимо поместить в строки информацию по каждой книге и сериале, в котором появляется персонаж:</p>
+<div class="codehilite"><pre><span></span><code>chars2 %&gt;% 
+  select(name, books, tvSeries) %&gt;% 
+  pivot_longer(c(books, tvSeries), names_to = &quot;media&quot;, values_to = &quot;value&quot;) %&gt;% 
+  unnest_longer(value)
+#&gt; # A tibble: 180 x 3
+#&gt;    name             media    value            
+#&gt;    &lt;chr&gt;            &lt;chr&gt;    &lt;chr&gt;            
+#&gt;  1 Theon Greyjoy    books    A Game of Thrones
+#&gt;  2 Theon Greyjoy    books    A Storm of Swords
+#&gt;  3 Theon Greyjoy    books    A Feast for Crows
+#&gt;  4 Theon Greyjoy    tvSeries Season 1         
+#&gt;  5 Theon Greyjoy    tvSeries Season 2         
+#&gt;  6 Theon Greyjoy    tvSeries Season 3         
+#&gt;  7 Theon Greyjoy    tvSeries Season 4         
+#&gt;  8 Theon Greyjoy    tvSeries Season 5         
+#&gt;  9 Theon Greyjoy    tvSeries Season 6         
+#&gt; 10 Tyrion Lannister books    A Feast for Crows
+#&gt; # … with 170 more rows
+</code></pre></div>
+
+<p>Или, может быть, вы хотите создать таблицу, которая позволит вам сопоставить персонажа и произведение:</p>
+<div class="codehilite"><pre><span></span><code>chars2 %&gt;% 
+  select(name, title = titles) %&gt;% 
+  unnest_longer(title)
+#&gt; # A tibble: 60 x 2
+#&gt;    name              title                                               
+#&gt;    &lt;chr&gt;             &lt;chr&gt;                                               
+#&gt;  1 Theon Greyjoy     Prince of Winterfell                                
+#&gt;  2 Theon Greyjoy     Captain of Sea Bitch                                
+#&gt;  3 Theon Greyjoy     Lord of the Iron Islands (by law of the green lands)
+#&gt;  4 Tyrion Lannister  Acting Hand of the King (former)                    
+#&gt;  5 Tyrion Lannister  Master of Coin (former)                             
+#&gt;  6 Victarion Greyjoy Lord Captain of the Iron Fleet                      
+#&gt;  7 Victarion Greyjoy Master of the Iron Victory                          
+#&gt;  8 Will              &quot;&quot;                                                  
+#&gt;  9 Areo Hotah        Captain of the Guard at Sunspear                    
+#&gt; 10 Chett             &quot;&quot;                                                  
+#&gt; # … with 50 more rows
+</code></pre></div>
+
+<p>(Обратите внимание, на пустые значения <code>""</code> в поле <code>title</code>, это связано с ошибками допущенными при вводе данных в <code>got_chars</code>: на самом деле персонажи для которых нет соответствующих заголовков книг и сериалов в поле <code>title</code> должны иметь вектор длины 0, а не вектор длины 1, содержащий пустую строку.)</p>
+<p>Мы можем переписать приведённый выше пример используя функцию <code>unnest_auto()</code>. Этот подход удобен для разового анализа, но не стоит полагаться на <code>unnest_auto()</code> для использования на регулярной основе. Дело в том, что если ваша структура данных изменится <code>unnest_auto()</code> может поменять выбранный механизм преобразования данных, если изначально он разворачивал столбцы-списки в строки используя <code>unnest_longer()</code>, то при изменении структуры входящих данных логика может быть изменена в пользу <code>unnest_wider()</code>, и использование такого подхода на постоянной основе может привести к непредвиденным ошибкам.</p>
+<div class="codehilite"><pre><span></span><code>tibble(char = got_chars) %&gt;% 
+  unnest_auto(char) %&gt;% 
+  select(name, title = titles) %&gt;% 
+  unnest_auto(title)
+#&gt; Using `unnest_wider(char)`; elements have 18 names in common
+#&gt; Using `unnest_longer(title)`; no element has names
+#&gt; # A tibble: 60 x 2
+#&gt;    name              title                                               
+#&gt;    &lt;chr&gt;             &lt;chr&gt;                                               
+#&gt;  1 Theon Greyjoy     Prince of Winterfell                                
+#&gt;  2 Theon Greyjoy     Captain of Sea Bitch                                
+#&gt;  3 Theon Greyjoy     Lord of the Iron Islands (by law of the green lands)
+#&gt;  4 Tyrion Lannister  Acting Hand of the King (former)                    
+#&gt;  5 Tyrion Lannister  Master of Coin (former)                             
+#&gt;  6 Victarion Greyjoy Lord Captain of the Iron Fleet                      
+#&gt;  7 Victarion Greyjoy Master of the Iron Victory                          
+#&gt;  8 Will              &quot;&quot;                                                  
+#&gt;  9 Areo Hotah        Captain of the Guard at Sunspear                    
+#&gt; 10 Chett             &quot;&quot;                                                  
+#&gt; # … with 50 more rows
+</code></pre></div>
+
+<h1 id="google">Геокодирование с помощью Google</h1>
+<p>Далее мы рассмотрим более сложную структуру данных, получаемых от службы геокодирования Google. Кэширование учётных данных противоречит условиям работы с API Google maps, поэтому я сначала напишу простую оболочку к API. Которая основана на хранении ключа API Google карт в переменной среды; если в переменных среды у вас не сохранён ключ для работы с API Google Maps, фрагменты кода представленные в этом разделе выполняться не будут.</p>
+<div class="codehilite"><pre><span></span><code>has_key &lt;- !identical(Sys.getenv(&quot;GOOGLE_MAPS_API_KEY&quot;), &quot;&quot;)
+if (!has_key) {
+  message(&quot;No Google Maps API key found; code chunks will not be run&quot;)
+}
+
+# https://developers.google.com/maps/documentation/geocoding
+geocode &lt;- function(address, api_key = Sys.getenv(&quot;GOOGLE_MAPS_API_KEY&quot;)) {
+  url &lt;- &quot;https://maps.googleapis.com/maps/api/geocode/json&quot;
+  url &lt;- paste0(url, &quot;?address=&quot;, URLencode(address), &quot;&amp;key=&quot;, api_key)
+
+  jsonlite::read_json(url)
+}
+</code></pre></div>
+
+<p>Список, который возвращает эта функция, довольно сложен:</p>
+<div class="codehilite"><pre><span></span><code>houston &lt;- geocode(&quot;Houston TX&quot;)
+str(houston)
+#&gt; List of 2
+#&gt;  $ results:List of 1
+#&gt;   ..$ :List of 5
+#&gt;   .. ..$ address_components:List of 4
+#&gt;   .. .. ..$ :List of 3
+#&gt;   .. .. .. ..$ long_name : chr &quot;Houston&quot;
+#&gt;   .. .. .. ..$ short_name: chr &quot;Houston&quot;
+#&gt;   .. .. .. ..$ types     :List of 2
+#&gt;   .. .. .. .. ..$ : chr &quot;locality&quot;
+#&gt;   .. .. .. .. ..$ : chr &quot;political&quot;
+#&gt;   .. .. ..$ :List of 3
+#&gt;   .. .. .. ..$ long_name : chr &quot;Harris County&quot;
+#&gt;   .. .. .. ..$ short_name: chr &quot;Harris County&quot;
+#&gt;   .. .. .. ..$ types     :List of 2
+#&gt;   .. .. .. .. ..$ : chr &quot;administrative_area_level_2&quot;
+#&gt;   .. .. .. .. ..$ : chr &quot;political&quot;
+#&gt;   .. .. ..$ :List of 3
+#&gt;   .. .. .. ..$ long_name : chr &quot;Texas&quot;
+#&gt;   .. .. .. ..$ short_name: chr &quot;TX&quot;
+#&gt;   .. .. .. ..$ types     :List of 2
+#&gt;   .. .. .. .. ..$ : chr &quot;administrative_area_level_1&quot;
+#&gt;   .. .. .. .. ..$ : chr &quot;political&quot;
+#&gt;   .. .. ..$ :List of 3
+#&gt;   .. .. .. ..$ long_name : chr &quot;United States&quot;
+#&gt;   .. .. .. ..$ short_name: chr &quot;US&quot;
+#&gt;   .. .. .. ..$ types     :List of 2
+#&gt;   .. .. .. .. ..$ : chr &quot;country&quot;
+#&gt;   .. .. .. .. ..$ : chr &quot;political&quot;
+#&gt;   .. ..$ formatted_address : chr &quot;Houston, TX, USA&quot;
+#&gt;   .. ..$ geometry          :List of 4
+#&gt;   .. .. ..$ bounds       :List of 2
+#&gt;   .. .. .. ..$ northeast:List of 2
+#&gt;   .. .. .. .. ..$ lat: num 30.1
+#&gt;   .. .. .. .. ..$ lng: num -95
+#&gt;   .. .. .. ..$ southwest:List of 2
+#&gt;   .. .. .. .. ..$ lat: num 29.5
+#&gt;   .. .. .. .. ..$ lng: num -95.8
+#&gt;   .. .. ..$ location     :List of 2
+#&gt;   .. .. .. ..$ lat: num 29.8
+#&gt;   .. .. .. ..$ lng: num -95.4
+#&gt;   .. .. ..$ location_type: chr &quot;APPROXIMATE&quot;
+#&gt;   .. .. ..$ viewport     :List of 2
+#&gt;   .. .. .. ..$ northeast:List of 2
+#&gt;   .. .. .. .. ..$ lat: num 30.1
+#&gt;   .. .. .. .. ..$ lng: num -95
+#&gt;   .. .. .. ..$ southwest:List of 2
+#&gt;   .. .. .. .. ..$ lat: num 29.5
+#&gt;   .. .. .. .. ..$ lng: num -95.8
+#&gt;   .. ..$ place_id          : chr &quot;ChIJAYWNSLS4QIYROwVl894CDco&quot;
+#&gt;   .. ..$ types             :List of 2
+#&gt;   .. .. ..$ : chr &quot;locality&quot;
+#&gt;   .. .. ..$ : chr &quot;political&quot;
+#&gt;  $ status : chr &quot;OK&quot;
+</code></pre></div>
+
+<p>К счастью, мы можем пошагово решить проблему преобразования этих данных в табличный вид с помощью функций <code>tidyr</code>. Чтобы сделать задачу немного сложнее и реалистичнее, я начну с геокодирования нескольких городов:</p>
+<div class="codehilite"><pre><span></span><code>  city &lt;-   c ( &quot;Houston&quot; , &quot;LA&quot; , &quot;New York&quot; , &quot;Chicago&quot; , &quot;Springfield&quot; )  city_geo &lt;-   purrr::map (city, geocode)
+</code></pre></div>
+
+<p>Полученный результат я преобразую в <code>tibble</code>, для удобства добавлю столбец с соответствующим названием города.</p>
+<div class="codehilite"><pre><span></span><code>loc &lt;- tibble(city = city, json = city_geo)
+loc
+#&gt; # A tibble: 5 x 2
+#&gt;   city        json            
+#&gt;   &lt;chr&gt;       &lt;list&gt;          
+#&gt; 1 Houston     &lt;named list [2]&gt;
+#&gt; 2 LA          &lt;named list [2]&gt;
+#&gt; 3 New York    &lt;named list [2]&gt;
+#&gt; 4 Chicago     &lt;named list [2]&gt;
+#&gt; 5 Springfield &lt;named list [2]&gt;
+</code></pre></div>
+
+<p>Первый уровень содержит компоненты <code>status</code> и <code>result</code>, который мы можем развернуть с помощью <code>unnest_wider()</code> :</p>
+<div class="codehilite"><pre><span></span><code>loc %&gt;%
+  unnest_wider(json)
+#&gt; # A tibble: 5 x 3
+#&gt;   city        results    status
+#&gt;   &lt;chr&gt;       &lt;list&gt;     &lt;chr&gt; 
+#&gt; 1 Houston     &lt;list [1]&gt; OK    
+#&gt; 2 LA          &lt;list [1]&gt; OK    
+#&gt; 3 New York    &lt;list [1]&gt; OK    
+#&gt; 4 Chicago     &lt;list [1]&gt; OK    
+#&gt; 5 Springfield &lt;list [1]&gt; OK
+</code></pre></div>
+
+<p>Обратите внимание, что <code>results</code> является многоуровневым списком. У большинства городов есть 1 элемент (представляющий уникальное значение, соответствующее API геокодирования), но у Спрингфилда их два. Мы можем вытащить их в отдельные строки с помощью <code>unnest_longer()</code> :</p>
+<div class="codehilite"><pre><span></span><code>loc %&gt;%
+  unnest_wider(json) %&gt;% 
+  unnest_longer(results)
+#&gt; # A tibble: 5 x 3
+#&gt;   city        results          status
+#&gt;   &lt;chr&gt;       &lt;list&gt;           &lt;chr&gt; 
+#&gt; 1 Houston     &lt;named list [5]&gt; OK    
+#&gt; 2 LA          &lt;named list [5]&gt; OK    
+#&gt; 3 New York    &lt;named list [5]&gt; OK    
+#&gt; 4 Chicago     &lt;named list [5]&gt; OK    
+#&gt; 5 Springfield &lt;named list [5]&gt; OK
+</code></pre></div>
+
+<p>Теперь все они имеют одинаковые компоненты, в чём можно убедиться с помощью <code>unnest_wider()</code>:</p>
+<div class="codehilite"><pre><span></span><code>loc %&gt;%
+  unnest_wider(json) %&gt;% 
+  unnest_longer(results) %&gt;% 
+  unnest_wider(results)
+#&gt; # A tibble: 5 x 7
+#&gt;   city   address_componen… formatted_addre… geometry place_id  types status
+#&gt;   &lt;chr&gt;  &lt;list&gt;            &lt;chr&gt;            &lt;list&gt;   &lt;chr&gt;     &lt;lis&gt; &lt;chr&gt; 
+#&gt; 1 Houst… &lt;list [4]&gt;        Houston, TX, USA &lt;named … ChIJAYWN… &lt;lis… OK    
+#&gt; 2 LA     &lt;list [4]&gt;        Los Angeles, CA… &lt;named … ChIJE9on… &lt;lis… OK    
+#&gt; 3 New Y… &lt;list [3]&gt;        New York, NY, U… &lt;named … ChIJOwg_… &lt;lis… OK    
+#&gt; 4 Chica… &lt;list [4]&gt;        Chicago, IL, USA &lt;named … ChIJ7cv0… &lt;lis… OK    
+#&gt; 5 Sprin… &lt;list [5]&gt;        Springfield, MO… &lt;named … ChIJP5jI… &lt;lis… OK
+</code></pre></div>
+
+<p>Мы можем найти координаты широты и долготы каждого города развернув список <code>geometry</code>:</p>
+<div class="codehilite"><pre><span></span><code>loc %&gt;%
+  unnest_wider(json) %&gt;% 
+  unnest_longer(results) %&gt;% 
+  unnest_wider(results) %&gt;% 
+  unnest_wider(geometry)
+#&gt; # A tibble: 5 x 10
+#&gt;   city  address_compone… formatted_addre… bounds location location_type
+#&gt;   &lt;chr&gt; &lt;list&gt;           &lt;chr&gt;            &lt;list&gt; &lt;list&gt;   &lt;chr&gt;        
+#&gt; 1 Hous… &lt;list [4]&gt;       Houston, TX, USA &lt;name… &lt;named … APPROXIMATE  
+#&gt; 2 LA    &lt;list [4]&gt;       Los Angeles, CA… &lt;name… &lt;named … APPROXIMATE  
+#&gt; 3 New … &lt;list [3]&gt;       New York, NY, U… &lt;name… &lt;named … APPROXIMATE  
+#&gt; 4 Chic… &lt;list [4]&gt;       Chicago, IL, USA &lt;name… &lt;named … APPROXIMATE  
+#&gt; 5 Spri… &lt;list [5]&gt;       Springfield, MO… &lt;name… &lt;named … APPROXIMATE  
+#&gt; # … with 4 more variables: viewport &lt;list&gt;, place_id &lt;chr&gt;, types &lt;list&gt;,
+#&gt; #   status &lt;chr&gt;
+</code></pre></div>
+
+<p>А затем местоположение, для чего требуется развернуть <code>location</code>:</p>
+<div class="codehilite"><pre><span></span><code>loc %&gt;%
+  unnest_wider(json) %&gt;%
+  unnest_longer(results) %&gt;%
+  unnest_wider(results) %&gt;%
+  unnest_wider(geometry) %&gt;%
+  unnest_wider(location)
+#&gt; # A tibble: 5 x 11
+#&gt;   city  address_compone… formatted_addre… bounds   lat    lng location_type
+#&gt;   &lt;chr&gt; &lt;list&gt;           &lt;chr&gt;            &lt;list&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;        
+#&gt; 1 Hous… &lt;list [4]&gt;       Houston, TX, USA &lt;name…  29.8  -95.4 APPROXIMATE  
+#&gt; 2 LA    &lt;list [4]&gt;       Los Angeles, CA… &lt;name…  34.1 -118.  APPROXIMATE  
+#&gt; 3 New … &lt;list [3]&gt;       New York, NY, U… &lt;name…  40.7  -74.0 APPROXIMATE  
+#&gt; 4 Chic… &lt;list [4]&gt;       Chicago, IL, USA &lt;name…  41.9  -87.6 APPROXIMATE  
+#&gt; 5 Spri… &lt;list [5]&gt;       Springfield, MO… &lt;name…  37.2  -93.3 APPROXIMATE  
+#&gt; # … with 4 more variables: viewport &lt;list&gt;, place_id &lt;chr&gt;, types &lt;list&gt;,
+#&gt; #   status &lt;chr&gt;
+</code></pre></div>
+
+<p>Опять же, <code>unnest_auto()</code> упрощает описанную операцию с некоторыми рисками, которые могут быть вызваны изменением структуры входящих данных:</p>
+<div class="codehilite"><pre><span></span><code>loc %&gt;%
+  unnest_auto(json) %&gt;%
+  unnest_auto(results) %&gt;%
+  unnest_auto(results) %&gt;%
+  unnest_auto(geometry) %&gt;%
+  unnest_auto(location)
+#&gt; Using `unnest_wider(json)`; elements have 2 names in common
+#&gt; Using `unnest_longer(results)`; no element has names
+#&gt; Using `unnest_wider(results)`; elements have 5 names in common
+#&gt; Using `unnest_wider(geometry)`; elements have 4 names in common
+#&gt; Using `unnest_wider(location)`; elements have 2 names in common
+#&gt; # A tibble: 5 x 11
+#&gt;   city  address_compone… formatted_addre… bounds   lat    lng location_type
+#&gt;   &lt;chr&gt; &lt;list&gt;           &lt;chr&gt;            &lt;list&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;        
+#&gt; 1 Hous… &lt;list [4]&gt;       Houston, TX, USA &lt;name…  29.8  -95.4 APPROXIMATE  
+#&gt; 2 LA    &lt;list [4]&gt;       Los Angeles, CA… &lt;name…  34.1 -118.  APPROXIMATE  
+#&gt; 3 New … &lt;list [3]&gt;       New York, NY, U… &lt;name…  40.7  -74.0 APPROXIMATE  
+#&gt; 4 Chic… &lt;list [4]&gt;       Chicago, IL, USA &lt;name…  41.9  -87.6 APPROXIMATE  
+#&gt; 5 Spri… &lt;list [5]&gt;       Springfield, MO… &lt;name…  37.2  -93.3 APPROXIMATE  
+#&gt; # … with 4 more variables: viewport &lt;list&gt;, place_id &lt;chr&gt;, types &lt;list&gt;,
+#&gt; #   status &lt;chr&gt;
+</code></pre></div>
+
+<p>Мы также можем просто посмотреть на первый адрес для каждого города:</p>
+<div class="codehilite"><pre><span></span><code>loc %&gt;%
+  unnest_wider(json) %&gt;%
+  hoist(results, first_result = 1) %&gt;%
+  unnest_wider(first_result) %&gt;%
+  unnest_wider(geometry) %&gt;%
+  unnest_wider(location)
+#&gt; # A tibble: 5 x 11
+#&gt;   city  address_compone… formatted_addre… bounds   lat    lng location_type
+#&gt;   &lt;chr&gt; &lt;list&gt;           &lt;chr&gt;            &lt;list&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;        
+#&gt; 1 Hous… &lt;list [4]&gt;       Houston, TX, USA &lt;name…  29.8  -95.4 APPROXIMATE  
+#&gt; 2 LA    &lt;list [4]&gt;       Los Angeles, CA… &lt;name…  34.1 -118.  APPROXIMATE  
+#&gt; 3 New … &lt;list [3]&gt;       New York, NY, U… &lt;name…  40.7  -74.0 APPROXIMATE  
+#&gt; 4 Chic… &lt;list [4]&gt;       Chicago, IL, USA &lt;name…  41.9  -87.6 APPROXIMATE  
+#&gt; 5 Spri… &lt;list [5]&gt;       Springfield, MO… &lt;name…  37.2  -93.3 APPROXIMATE  
+#&gt; # … with 4 more variables: viewport &lt;list&gt;, place_id &lt;chr&gt;, types &lt;list&gt;,
+#&gt; #   status &lt;chr&gt;
+</code></pre></div>
+
+<p>Или использовать <code>hoist()</code> для многоуровневого погружения, чтобы перейти непосредственно к <code>lat</code> и <code>lng</code>.</p>
+<div class="codehilite"><pre><span></span><code>loc %&gt;%
+  hoist(json,
+    lat = list(&quot;results&quot;, 1, &quot;geometry&quot;, &quot;location&quot;, &quot;lat&quot;),
+    lng = list(&quot;results&quot;, 1, &quot;geometry&quot;, &quot;location&quot;, &quot;lng&quot;)
+  )
+#&gt; # A tibble: 5 x 4
+#&gt;   city          lat    lng json            
+#&gt;   &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt; &lt;list&gt;          
+#&gt; 1 Houston      29.8  -95.4 &lt;named list [2]&gt;
+#&gt; 2 LA           34.1 -118.  &lt;named list [2]&gt;
+#&gt; 3 New York     40.7  -74.0 &lt;named list [2]&gt;
+#&gt; 4 Chicago      41.9  -87.6 &lt;named list [2]&gt;
+#&gt; 5 Springfield  37.2  -93.3 &lt;named list [2]&gt;
+</code></pre></div>
+
+<h1 id="_4">Дискография Шарлы Гельфанд</h1>
+<p>В завершении мы рассмотрим самую сложную конструкцию — дискографию Шарлы Гельфанд. Как и в приведённых выше примерах, мы начинаем с конвертации списка в дата фрейм с одним столбцом, а затем расширим его, чтобы каждый компонент был отдельным столбцом. Также я преобразую столбец <code>date_added</code> в соответствующий формат даты и времени в R.</p>
+<div class="codehilite"><pre><span></span><code>discs &lt;- tibble(disc = discog) %&gt;% 
+  unnest_wider(disc) %&gt;% 
+  mutate(date_added = as.POSIXct(strptime(date_added, &quot;%Y-%m-%dT%H:%M:%S&quot;))) 
+discs
+#&gt; # A tibble: 155 x 5
+#&gt;    instance_id date_added          basic_information       id rating
+#&gt;          &lt;int&gt; &lt;dttm&gt;              &lt;list&gt;               &lt;int&gt;  &lt;int&gt;
+#&gt;  1   354823933 2019-02-16 17:48:59 &lt;named list [11]&gt;  7496378      0
+#&gt;  2   354092601 2019-02-13 14:13:11 &lt;named list [11]&gt;  4490852      0
+#&gt;  3   354091476 2019-02-13 14:07:23 &lt;named list [11]&gt;  9827276      0
+#&gt;  4   351244906 2019-02-02 11:39:58 &lt;named list [11]&gt;  9769203      0
+#&gt;  5   351244801 2019-02-02 11:39:37 &lt;named list [11]&gt;  7237138      0
+#&gt;  6   351052065 2019-02-01 20:40:53 &lt;named list [11]&gt; 13117042      0
+#&gt;  7   350315345 2019-01-29 15:48:37 &lt;named list [11]&gt;  7113575      0
+#&gt;  8   350315103 2019-01-29 15:47:22 &lt;named list [11]&gt; 10540713      0
+#&gt;  9   350314507 2019-01-29 15:44:08 &lt;named list [11]&gt; 11260950      0
+#&gt; 10   350314047 2019-01-29 15:41:35 &lt;named list [11]&gt; 11726853      0
+#&gt; # … with 145 more rows
+</code></pre></div>
+
+<p>На этом уровне мы получили информацию о том, когда каждый диск был добавлен в дискографию Шарлы, но при этом не видим никаких данных об этих дисках. Для этого нам нужно расширить столбец <code>basic_information</code>:</p>
+<div class="codehilite"><pre><span></span><code>discs %&gt;% unnest_wider(basic_information)
+#&gt; Column name `id` must not be duplicated.
+#&gt; Use .name_repair to specify repair.
+</code></pre></div>
+
+<p>К сожалению мы получим ошибку, т.к. внутри списка <code>basic_information</code> есть одноимённый столбец <code>basic_information</code>. При возникновении подобной ошибки, для того, что бы быстро определить её причину можно использовать <code>names_repair = "unique"</code>:</p>
+<div class="codehilite"><pre><span></span><code>discs %&gt;% unnest_wider(basic_information, names_repair = &quot;unique&quot;)
+#&gt; New names:
+#&gt; * id -&gt; id...6
+#&gt; * id -&gt; id...14
+#&gt; # A tibble: 155 x 15
+#&gt;    instance_id date_added          labels  year artists id...6 thumb title
+#&gt;          &lt;int&gt; &lt;dttm&gt;              &lt;list&gt; &lt;int&gt; &lt;list&gt;   &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
+#&gt;  1   354823933 2019-02-16 17:48:59 &lt;list…  2015 &lt;list … 7.50e6 http… Demo 
+#&gt;  2   354092601 2019-02-13 14:13:11 &lt;list…  2013 &lt;list … 4.49e6 http… Obse…
+#&gt;  3   354091476 2019-02-13 14:07:23 &lt;list…  2017 &lt;list … 9.83e6 http… I    
+#&gt;  4   351244906 2019-02-02 11:39:58 &lt;list…  2017 &lt;list … 9.77e6 http… Oído…
+#&gt;  5   351244801 2019-02-02 11:39:37 &lt;list…  2015 &lt;list … 7.24e6 http… A Ca…
+#&gt;  6   351052065 2019-02-01 20:40:53 &lt;list…  2019 &lt;list … 1.31e7 http… Tash…
+#&gt;  7   350315345 2019-01-29 15:48:37 &lt;list…  2014 &lt;list … 7.11e6 http… Demo 
+#&gt;  8   350315103 2019-01-29 15:47:22 &lt;list…  2015 &lt;list … 1.05e7 http… Let …
+#&gt;  9   350314507 2019-01-29 15:44:08 &lt;list…  2017 &lt;list … 1.13e7 &quot;&quot;    Sub …
+#&gt; 10   350314047 2019-01-29 15:41:35 &lt;list…  2017 &lt;list … 1.17e7 http… Demo 
+#&gt; # … with 145 more rows, and 7 more variables: formats &lt;list&gt;,
+#&gt; #   cover_image &lt;chr&gt;, resource_url &lt;chr&gt;, master_id &lt;int&gt;,
+#&gt; #   master_url &lt;chr&gt;, id...14 &lt;int&gt;, rating &lt;int&gt;
+</code></pre></div>
+
+<p>Проблема в том, что <code>basic_information</code> повторяет столбец id который также хранится на верхнем уровне, поэтому мы можем просто удалить его:</p>
+<div class="codehilite"><pre><span></span><code>discs %&gt;% 
+  select(-id) %&gt;% 
+  unnest_wider(basic_information)
+#&gt; # A tibble: 155 x 14
+#&gt;    instance_id date_added          labels  year artists     id thumb title
+#&gt;          &lt;int&gt; &lt;dttm&gt;              &lt;list&gt; &lt;int&gt; &lt;list&gt;   &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
+#&gt;  1   354823933 2019-02-16 17:48:59 &lt;list…  2015 &lt;list … 7.50e6 http… Demo 
+#&gt;  2   354092601 2019-02-13 14:13:11 &lt;list…  2013 &lt;list … 4.49e6 http… Obse…
+#&gt;  3   354091476 2019-02-13 14:07:23 &lt;list…  2017 &lt;list … 9.83e6 http… I    
+#&gt;  4   351244906 2019-02-02 11:39:58 &lt;list…  2017 &lt;list … 9.77e6 http… Oído…
+#&gt;  5   351244801 2019-02-02 11:39:37 &lt;list…  2015 &lt;list … 7.24e6 http… A Ca…
+#&gt;  6   351052065 2019-02-01 20:40:53 &lt;list…  2019 &lt;list … 1.31e7 http… Tash…
+#&gt;  7   350315345 2019-01-29 15:48:37 &lt;list…  2014 &lt;list … 7.11e6 http… Demo 
+#&gt;  8   350315103 2019-01-29 15:47:22 &lt;list…  2015 &lt;list … 1.05e7 http… Let …
+#&gt;  9   350314507 2019-01-29 15:44:08 &lt;list…  2017 &lt;list … 1.13e7 &quot;&quot;    Sub …
+#&gt; 10   350314047 2019-01-29 15:41:35 &lt;list…  2017 &lt;list … 1.17e7 http… Demo 
+#&gt; # … with 145 more rows, and 6 more variables: formats &lt;list&gt;,
+#&gt; #   cover_image &lt;chr&gt;, resource_url &lt;chr&gt;, master_id &lt;int&gt;,
+#&gt; #   master_url &lt;chr&gt;, rating &lt;int&gt;
+</code></pre></div>
+
+<p>В качестве альтернативы, мы могли бы использовать <code>hoist()</code>:</p>
+<div class="codehilite"><pre><span></span><code>discs %&gt;% 
+  hoist(basic_information,
+    title = &quot;title&quot;,
+    year = &quot;year&quot;,
+    label = list(&quot;labels&quot;, 1, &quot;name&quot;),
+    artist = list(&quot;artists&quot;, 1, &quot;name&quot;)
+  )
+#&gt; # A tibble: 155 x 9
+#&gt;    instance_id date_added          title  year label artist
+#&gt;          &lt;int&gt; &lt;dttm&gt;              &lt;chr&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; 
+#&gt;  1   354823933 2019-02-16 17:48:59 Demo   2015 Tobi… Mollot
+#&gt;  2   354092601 2019-02-13 14:13:11 Obse…  2013 La V… Una B…
+#&gt;  3   354091476 2019-02-13 14:07:23 I      2017 La V… S.H.I…
+#&gt;  4   351244906 2019-02-02 11:39:58 Oído…  2017 La V… Rata …
+#&gt;  5   351244801 2019-02-02 11:39:37 A Ca…  2015 Kato… Ivy (…
+#&gt;  6   351052065 2019-02-01 20:40:53 Tash…  2019 High… Tashme
+#&gt;  7   350315345 2019-01-29 15:48:37 Demo   2014 Mind… Desgr…
+#&gt;  8   350315103 2019-01-29 15:47:22 Let …  2015 Not … Phant…
+#&gt;  9   350314507 2019-01-29 15:44:08 Sub …  2017 Not … Sub S…
+#&gt; 10   350314047 2019-01-29 15:41:35 Demo   2017 Pres… Small…
+#&gt; # … with 145 more rows, and 3 more variables: basic_information &lt;list&gt;,
+#&gt; #   id &lt;int&gt;, rating &lt;int&gt;
+</code></pre></div>
+
+<p>Здесь я быстро извлекаю имя первого лейбла и исполнителя по индексу, погрузившись во вложенный список.</p>
+<p>Более систематический подход заключается в создании отдельных таблиц для исполнителя и лейбла:</p>
+<div class="codehilite"><pre><span></span><code>discs %&gt;% 
+  hoist(basic_information, artist = &quot;artists&quot;) %&gt;% 
+  select(disc_id = id, artist) %&gt;% 
+  unnest_longer(artist) %&gt;% 
+  unnest_wider(artist)
+#&gt; # A tibble: 167 x 8
+#&gt;     disc_id join  name        anv   tracks role  resource_url            id
+#&gt;       &lt;int&gt; &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                &lt;int&gt;
+#&gt;  1  7496378 &quot;&quot;    Mollot      &quot;&quot;    &quot;&quot;     &quot;&quot;    https://api.discog… 4.62e6
+#&gt;  2  4490852 &quot;&quot;    Una Bèstia… &quot;&quot;    &quot;&quot;     &quot;&quot;    https://api.discog… 3.19e6
+#&gt;  3  9827276 &quot;&quot;    S.H.I.T. (… &quot;&quot;    &quot;&quot;     &quot;&quot;    https://api.discog… 2.77e6
+#&gt;  4  9769203 &quot;&quot;    Rata Negra  &quot;&quot;    &quot;&quot;     &quot;&quot;    https://api.discog… 4.28e6
+#&gt;  5  7237138 &quot;&quot;    Ivy (18)    &quot;&quot;    &quot;&quot;     &quot;&quot;    https://api.discog… 3.60e6
+#&gt;  6 13117042 &quot;&quot;    Tashme      &quot;&quot;    &quot;&quot;     &quot;&quot;    https://api.discog… 5.21e6
+#&gt;  7  7113575 &quot;&quot;    Desgraciad… &quot;&quot;    &quot;&quot;     &quot;&quot;    https://api.discog… 4.45e6
+#&gt;  8 10540713 &quot;&quot;    Phantom He… &quot;&quot;    &quot;&quot;     &quot;&quot;    https://api.discog… 4.27e6
+#&gt;  9 11260950 &quot;&quot;    Sub Space … &quot;&quot;    &quot;&quot;     &quot;&quot;    https://api.discog… 5.69e6
+#&gt; 10 11726853 &quot;&quot;    Small Man … &quot;&quot;    &quot;&quot;     &quot;&quot;    https://api.discog… 6.37e6
+#&gt; # … with 157 more rows
+
+discs %&gt;% 
+  hoist(basic_information, format = &quot;formats&quot;) %&gt;% 
+  select(disc_id = id, format) %&gt;% 
+  unnest_longer(format) %&gt;% 
+  unnest_wider(format) %&gt;% 
+  unnest_longer(descriptions)
+#&gt; # A tibble: 280 x 5
+#&gt;     disc_id descriptions text  name     qty  
+#&gt;       &lt;int&gt; &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;
+#&gt;  1  7496378 Numbered     Black Cassette 1    
+#&gt;  2  4490852 LP           &lt;NA&gt;  Vinyl    1    
+#&gt;  3  9827276 &quot;7\&quot;&quot;        &lt;NA&gt;  Vinyl    1    
+#&gt;  4  9827276 45 RPM       &lt;NA&gt;  Vinyl    1    
+#&gt;  5  9827276 EP           &lt;NA&gt;  Vinyl    1    
+#&gt;  6  9769203 LP           &lt;NA&gt;  Vinyl    1    
+#&gt;  7  9769203 Album        &lt;NA&gt;  Vinyl    1    
+#&gt;  8  7237138 &quot;7\&quot;&quot;        &lt;NA&gt;  Vinyl    1    
+#&gt;  9  7237138 45 RPM       &lt;NA&gt;  Vinyl    1    
+#&gt; 10 13117042 &quot;7\&quot;&quot;        &lt;NA&gt;  Vinyl    1    
+#&gt; # … with 270 more rows
+</code></pre></div>
+
+<p>Затем вы можете присоединить их обратно к исходному набору данных по мере необходимости.</p>
+<h1 id="_5">Заключение</h1>
+<p>В ядро библиотеки <code>tidyverse</code> входят множество полезных пакетов объединённые общей философией обработки данных.</p>
+<p>В этой статье мы разобрали семейство функций <code>unnest_*()</code>, которые направлены на работу с извлечением элементов из вложенных списков. Данный пакет содержит множество других полезных функций, которые упрощают преобразование данных согласно концепции <em>Tidy Data</em></p></div>
+                    
+                    <div class="b-tags"><a class="b-chip" href="../?tag=r#posts">R</a><a class="b-chip" href="../?tag=obrabotka-dannyh#posts">Обработка данных</a><a class="b-chip" href="../?tag=tidyverse#posts">tidyverse</a></div>
+                </div>
+            </article>
+            
+        </div>
+        <section class="b-related">
+            <h2 class="outfit-font"><span class="ru-text">Читайте также</span><span class="ua-text">Читайте також</span><span class="en-text">Related posts</span></h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="../shpargalki-manipulyatsiya-dannymi-v-r-i-python/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="0">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/covers/1471.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">март 2021</span><span class="ua-text">берез. 2021</span><span class="en-text">Mar 2021</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2021</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">1 мин чтения</span><span class="ua-text">1 хв читання</span><span class="en-text">1 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Шпаргалки: Манипуляция данными в R и Python</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">Мой telegram канал R4marketing совместно с каналом IT Resume подготовили набор шпаргалок, которые помогут быстро найти информацию и примеры кода по манипуляции данными на языке R и Python.</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Обработка данных</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">tidyverse</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a>
+                <a href="../kakoy-yazyk-vybrat-dlya-raboty-s-dannymi-r-ili-python-oba-migriruem-s/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="60">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/covers/1378.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">авг. 2020</span><span class="ua-text">серп. 2020</span><span class="en-text">Aug 2020</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2020</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">22 мин чтения</span><span class="ua-text">22 хв читання</span><span class="en-text">22 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Какой язык выбрать для работы с данными — R или Python? Оба! Мигрируем с pandas на tidyverse и data.table и обратно</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">По запросу R или Python в интернете вы найдёте миллионы статей и километровых обсуждений по теме какой из них лучше, быстрее и удобнее для работы с данными. Но к сожалению особой пользы…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Анализ данных</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Обработка данных</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a>
+                <a href="../rabota-s-datami-na-yazyke-r-bazovye-vozmozhnosti-a-takzhe-pakety-lubri/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="120">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/rabota_s_datami_na_yazike_r-l2mgnl_5u7eejcuu1hazlp5xocg.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">июль 2020</span><span class="ua-text">лип. 2020</span><span class="en-text">Jul 2020</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2020</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">10 мин чтения</span><span class="ua-text">10 хв читання</span><span class="en-text">10 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Работа с датами на языке R (базовые возможности, а также пакеты lubridate и timeperiodsR)</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">Получить текущую дату в любом языке программирования, операция эквивалентная “Hello world!”. Язык R не является исключением. В этой статье мы разберёмся с тем, как устроена работа с…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">tidyverse</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Обработка данных</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a></div>
+        </section>
+        <a href="../" class="b-back"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i><span class="ru-text">Ко всем материалам</span><span class="ua-text">До всіх матеріалів</span><span class="en-text">All posts</span></a>
+    </main>
+
+    <section class="px-6 max-w-7xl mx-auto pb-24 relative z-10">
+        <div class="grid md:grid-cols-2 gap-6" data-aos="fade-up">
+            <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(59, 130, 246, 0.1));">
+                <div class="bento-content w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center text-blue-400 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-telegram"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">Telegram-канал R4marketing</span><span class="ua-text">Telegram-канал R4marketing</span><span class="en-text">R4marketing on Telegram</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Новые статьи, видео и заметки по R — первыми.</span><span class="ua-text">Нові статті, відео та нотатки з R — першими.</span><span class="en-text">New articles, videos and R notes — first.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-blue-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+            <a href="https://www.youtube.com/R4marketing/?sub_confirmation=1" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(239, 68, 68, 0.1));">
+                <div class="bento-content w-16 h-16 bg-red-500/20 rounded-2xl flex items-center justify-center text-red-500 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-youtube"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">YouTube-канал R4marketing</span><span class="ua-text">YouTube-канал R4marketing</span><span class="en-text">R4marketing on YouTube</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Видеоуроки по R, аналитике и AI-инструментам.</span><span class="ua-text">Відеоуроки з R, аналітики та AI-інструментів.</span><span class="en-text">Video lessons on R, analytics and AI tools.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-red-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/5 bg-slate-950/80 backdrop-blur-md pt-16 pb-8 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
+                <div class="sm:col-span-2 lg:col-span-4">
+                    <a href="../../" class="inline-flex items-center gap-3 group mb-5">
+                        <img src="../../logo.jpg" alt="Alexey Seleznev" class="w-10 h-10 rounded-xl object-cover border border-white/10 group-hover:border-purple-500/50 transition-colors">
+                        <span class="text-lg font-black tracking-tight uppercase outfit-font text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+                    </a>
+                    <p class="text-sm text-slate-400 leading-relaxed max-w-sm mb-6"><span class="ru-text">Head of Analytics в Netpeak Group. Автор open source R-пакетов, бесплатных курсов по R и проекта R4marketing.</span><span class="ua-text">Head of Analytics у Netpeak Group. Автор open source R-пакетів, безкоштовних курсів з R та проєкту R4marketing.</span><span class="en-text">Head of Analytics at Netpeak Group. Author of open source R packages, free R courses and the R4marketing project.</span></p>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="https://t.me/R4marketing" target="_blank" rel="noopener" aria-label="Telegram R4marketing" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-400 hover:border-blue-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-telegram"></i></a>
+                        <a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" aria-label="YouTube R4marketing" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-red-500 hover:border-red-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="https://github.com/selesnow" target="_blank" rel="noopener" aria-label="GitHub" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-white hover:border-white/30 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://linkedin.com/in/selesnow" target="_blank" rel="noopener" aria-label="LinkedIn" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-500 hover:border-blue-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://facebook.com/selesnow" target="_blank" rel="noopener" aria-label="Facebook" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-600/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/alexey.selesnow" target="_blank" rel="noopener" aria-label="Instagram" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-pink-500 hover:border-pink-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://habr.com/ru/users/selesnow/" target="_blank" rel="noopener" aria-label="Habr" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-teal-400 hover:border-teal-400/40 transition-all hover:-translate-y-0.5"><i class="fa-solid fa-h"></i></a>
+                    </div>
+                </div>
+
+                <nav class="lg:col-span-2" aria-label="Site map">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">Сайт</span><span class="ua-text">Сайт</span><span class="en-text">Site</span></h3>
+                    <ul class="space-y-3">
+                        <li><a href="../../" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-house w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a></li>
+                        <li><a href="../../opensource/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-code-branch w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span></a></li>
+                        <li><a href="../../courses/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-graduation-cap w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a></li>
+                        <li><a href="../../videos/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-circle-play w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a></li>
+                        <li><a href="../../talks/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-microphone-lines w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a></li>
+                        <li><a href="../../articles/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-pen-nib w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a></li>
+                        <li><a href="../../interviews/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-regular fa-newspaper w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a></li>
+                        <li><a href="../../blog/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-feather-pointed w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a></li>
+                    </ul>
+                </nav>
+
+                <div class="lg:col-span-3">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">R4marketing и публикации</span><span class="ua-text">R4marketing і публікації</span><span class="en-text">R4marketing & writing</span></h3>
+                    <ul class="space-y-3">
+                        <li><a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-telegram w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Telegram-канал R4marketing</span><span class="ua-text">Telegram-канал R4marketing</span><span class="en-text">R4marketing Telegram</span></a></li>
+                        <li><a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-youtube w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">YouTube-канал R4marketing</span><span class="ua-text">YouTube-канал R4marketing</span><span class="en-text">R4marketing YouTube</span></a></li>
+                        <li><a href="https://alexeyseleznev.wordpress.com/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-pen-nib w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Личный блог</span><span class="ua-text">Особистий блог</span><span class="en-text">Personal blog</span></a></li>
+                        <li><a href="https://habr.com/ru/users/selesnow/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-h w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Профиль на Хабре</span><span class="ua-text">Профіль на Хабрі</span><span class="en-text">Habr profile</span></a></li>
+                        <li><a href="https://alexey-seleznev.pro/publications/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-layer-group w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Архив публикаций</span><span class="ua-text">Архів публікацій</span><span class="en-text">Publications archive</span></a></li>
+                        <li><a href="https://github.com/selesnow" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-github w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">GitHub</span><span class="ua-text">GitHub</span><span class="en-text">GitHub</span></a></li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-3">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">Контакты</span><span class="ua-text">Контакти</span><span class="en-text">Contacts</span></h3>
+                    <ul class="space-y-4">
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">Email</div><a href="mailto:me@alexey-seleznev.pro" class="text-sm text-slate-300 hover:text-purple-300 transition-colors break-all">me@alexey-seleznev.pro</a></li>
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">Telegram</div><a href="https://t.me/AlexeySeleznev" target="_blank" rel="noopener" class="text-sm text-slate-300 hover:text-blue-300 transition-colors break-all">@AlexeySeleznev</a></li>
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">LinkedIn</div><a href="https://linkedin.com/in/selesnow" target="_blank" rel="noopener" class="text-sm text-slate-300 hover:text-blue-300 transition-colors break-all">linkedin.com/in/selesnow</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-14 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+                <p>© 2026 Alexey Seleznev. <span class="ru-text">Все права защищены.</span><span class="ua-text">Усі права захищені.</span><span class="en-text">All rights reserved.</span></p>
+                <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="inline-flex items-center gap-2 font-semibold hover:text-white transition-colors group"><span class="ru-text">Наверх</span><span class="ua-text">Нагору</span><span class="en-text">Back to top</span><span class="w-7 h-7 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-purple-500 group-hover:border-purple-500 transition-all"><i class="fa-solid fa-arrow-up text-[10px]"></i></span></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script src="../../assets/site.js"></script>
+
+    <script>
+    (function () {
+        // кнопка «Копировать» у блоков кода
+        document.querySelectorAll('.b-prose .codehilite').forEach(box => {
+            const btn = document.createElement('button');
+            btn.type = 'button'; btn.className = 'b-copy'; btn.setAttribute('aria-label', 'Copy code');
+            btn.innerHTML = '<i class="fa-regular fa-copy" aria-hidden="true"></i>';
+            btn.addEventListener('click', () => {
+                navigator.clipboard.writeText(box.querySelector('pre').innerText).then(() => {
+                    btn.innerHTML = '<i class="fa-solid fa-check" aria-hidden="true"></i>';
+                    setTimeout(() => btn.innerHTML = '<i class="fa-regular fa-copy" aria-hidden="true"></i>', 1500);
+                });
+            });
+            box.appendChild(btn);
+        });
+        // подсветка текущего раздела в оглавлении
+        const links = Array.from(document.querySelectorAll('.b-toc a'));
+        if (links.length && 'IntersectionObserver' in window) {
+            const map = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+            const io = new IntersectionObserver(es => es.forEach(e => {
+                if (e.isIntersecting) { links.forEach(l => l.classList.remove('active')); const a = map.get(e.target.id); if (a) a.classList.add('active'); }
+            }), { rootMargin: '-80px 0px -70% 0px' });
+            map.forEach((_, id) => { const el = document.getElementById(id); if (el) io.observe(el); });
+        }
+    })();
+    </script>
+</body>
+</html>

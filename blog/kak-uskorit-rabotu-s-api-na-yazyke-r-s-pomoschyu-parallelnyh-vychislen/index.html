@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Alexey Seleznev">
+    <meta name="theme-color" content="#030712">
+    <link rel="canonical" href="https://alexey-seleznev.pro/blog/kak-uskorit-rabotu-s-api-na-yazyke-r-s-pomoschyu-parallelnyh-vychislen/">
+
+    <title>Как ускорить работу с API на языке R с помощью параллельных вычислений, на примере API Яндекс.Директ (Часть 2) | Алексей Селезнёв</title>
+    <meta name="title" content="Как ускорить работу с API на языке R с помощью параллельных вычислений, на примере API Яндекс.Директ (Часть 2) | Алексей Селезнёв">
+    <meta name="description" content="В прошлой статье я рассказал о том, что такое многопоточность, и привёл примеры её реализации на языке R при работе с API Яндекс.Директ с помощью пакетов doSNOW, doParallel и…">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alexey-seleznev.pro/blog/kak-uskorit-rabotu-s-api-na-yazyke-r-s-pomoschyu-parallelnyh-vychislen/">
+    <meta property="og:site_name" content="ALEXEY-SELEZNEV.pro">
+    <meta property="og:title" content="Как ускорить работу с API на языке R с помощью параллельных вычислений, на примере API Яндекс.Директ (Часть 2) | Алексей Селезнёв">
+    <meta property="og:description" content="В прошлой статье я рассказал о том, что такое многопоточность, и привёл примеры её реализации на языке R при работе с API Яндекс.Директ с помощью пакетов doSNOW, doParallel и…">
+    <meta property="og:image" content="https://alexey-seleznev.pro/photo.jpg">
+    <meta property="og:image:alt" content="Алексей Селезнёв">
+    <meta property="og:locale" content="ru_RU">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="https://alexey-seleznev.pro/blog/kak-uskorit-rabotu-s-api-na-yazyke-r-s-pomoschyu-parallelnyh-vychislen/">
+    <meta name="twitter:title" content="Как ускорить работу с API на языке R с помощью параллельных вычислений, на примере API Яндекс.Директ (Часть 2) | Алексей Селезнёв">
+    <meta name="twitter:description" content="В прошлой статье я рассказал о том, что такое многопоточность, и привёл примеры её реализации на языке R при работе с API Яндекс.Директ с помощью пакетов doSNOW, doParallel и…">
+    <meta name="twitter:image" content="https://alexey-seleznev.pro/photo.jpg">
+
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z56YHE916N"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Z56YHE916N');
+    </script>
+    <link rel="icon" type="image/jpeg" href="../../logo.jpg">
+    <link rel="apple-touch-icon" href="../../logo.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;700;800;900&display=swap">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/site.css">
+    <!-- Tailwind собран заранее (_build/build.py) и подключается последним, как это делал CDN-скрипт -->
+    <link rel="stylesheet" href="../../assets/tailwind.css">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Как ускорить работу с API на языке R с помощью параллельных вычислений, на примере API Яндекс.Директ (Часть 2)",
+  "datePublished": "2019-10-03",
+  "inLanguage": "ru",
+  "description": "В прошлой статье я рассказал о том, что такое многопоточность, и привёл примеры её реализации на языке R при работе с API Яндекс.Директ с помощью пакетов doSNOW, doParallel и…",
+  "author": {
+    "@id": "https://alexey-seleznev.pro/#person"
+  },
+  "mainEntityOfPage": "https://alexey-seleznev.pro/blog/kak-uskorit-rabotu-s-api-na-yazyke-r-s-pomoschyu-parallelnyh-vychislen/"
+}
+    </script>
+    <link rel="stylesheet" href="../blog.css">
+</head>
+<body class="relative lang-en">
+
+    <!-- Interactive Background -->
+    <div id="vanta-bg"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full z-50 top-0 left-0 border-b border-white/5 bg-slate-950/60 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 h-16 flex items-center justify-between">
+            <a href="../../" class="flex items-center gap-2 sm:gap-2.5 md:gap-3 group shrink min-w-0">
+                <img src="../../logo.jpg" alt="Alexey Seleznev" class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 rounded-lg sm:rounded-xl object-cover shadow-md border border-white/10 group-hover:border-purple-500/50 group-hover:scale-105 transition-all shrink-0">
+                <span class="text-xs min-[400px]:text-sm sm:text-base md:text-xl font-black tracking-tight uppercase outfit-font whitespace-nowrap text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+            </a>
+            <div class="hidden xl:flex gap-6 text-sm font-semibold text-slate-400">
+                <a href="../../" class="nav-link hover:text-white transition-colors"><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a>
+                <a href="../../opensource/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span></a>
+                <a href="../../courses/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a>
+                <a href="../../videos/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a>
+                <a href="../../talks/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a>
+                <a href="../../articles/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a>
+                <a href="../../interviews/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a>
+                <a href="../../blog/" class="nav-link hover:text-white transition-colors active"><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a>
+            </div>
+
+            <div class="flex items-center gap-1.5 sm:gap-2 md:gap-4 shrink-0">
+                <div class="lang-switcher flex gap-1 sm:gap-1.5 md:gap-2 text-[11px] sm:text-xs md:text-sm font-bold border-r border-white/10 pr-1.5 sm:pr-3 md:pr-4 mr-0.5 sm:mr-1 md:mr-2 outfit-font">
+                    <button onclick="changeLang('en')" id="btn-en" class="active hover:text-white transition-colors">EN</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ru')" id="btn-ru" class="text-slate-500 hover:text-white transition-colors">RU</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ua')" id="btn-ua" class="text-slate-500 hover:text-white transition-colors">UA</button>
+                </div>
+
+                <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="text-slate-400 hover:text-blue-400 transition-colors hidden sm:block" aria-label="Telegram"><i class="fa-brands fa-telegram text-lg md:text-xl"></i></a>
+                <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="text-slate-400 hover:text-white transition-colors hidden sm:block" aria-label="GitHub"><i class="fa-brands fa-github text-lg md:text-xl"></i></a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="xl:hidden w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-purple-500/20 hover:border-purple-500/40 transition-all focus:outline-none" aria-label="Toggle Navigation Menu">
+                    <i class="fa-solid fa-bars text-sm sm:text-lg" id="mobile-menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div id="mobile-menu" class="hidden xl:hidden border-t border-white/10 bg-slate-950/95 backdrop-blur-2xl shadow-2xl overflow-y-auto max-h-[calc(100vh-4rem)] transition-all">
+            <div class="max-w-7xl mx-auto px-6 py-6 space-y-1">
+                <a href="../../" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-house text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span>
+                </a>
+                <a href="../../opensource/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-code-branch text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span>
+                </a>
+                <a href="../../courses/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-graduation-cap text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span>
+                </a>
+                <a href="../../videos/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-circle-play text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span>
+                </a>
+                <a href="../../talks/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-microphone-lines text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span>
+                </a>
+                <a href="../../articles/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-pen-nib text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span>
+                </a>
+                <a href="../../interviews/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-regular fa-newspaper text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span>
+                </a>
+                <a href="../../blog/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-white bg-white/5 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-feather-pointed text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span>
+                </a>
+
+                <div class="pt-4 mt-3 border-t border-white/10 flex items-center justify-around text-slate-400">
+                    <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-blue-400 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-telegram text-xl"></i> Telegram
+                    </a>
+                    <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="p-2 hover:text-white transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-github text-xl"></i> GitHub
+                    </a>
+                    <a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-red-500 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-youtube text-xl"></i> YouTube
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="b-wrap relative z-10">
+        <nav class="b-crumbs" aria-label="breadcrumb">
+            <a href="../../"><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a><span>/</span><a href="../"><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a><span>/</span><a href="../?cat=programmirovanie#posts">Программирование</a>
+        </nav>
+        <div class="b-layout has-toc">
+            <article class="bento-glass no-lift b-article" data-aos="fade-up">
+                <div class="bento-content">
+                    <div class="b-cats"><a class="b-chip b-chip-cat" href="../?cat=programmirovanie#posts">Программирование</a><a class="b-chip b-chip-cat" href="../?cat=r#posts">R</a></div>
+                    <h1 class="b-title outfit-font">Как ускорить работу с API на языке R с помощью параллельных вычислений, на примере API Яндекс.Директ (Часть 2)</h1>
+                    <div class="b-meta">
+                        <span><i class="fa-regular fa-calendar" aria-hidden="true"></i><span class="ru-text">3 октября 2019</span><span class="ua-text">3 жовтня 2019</span><span class="en-text">3 Oct 2019</span></span>
+                        <span><i class="fa-regular fa-clock" aria-hidden="true"></i><span class="ru-text">17 мин чтения</span><span class="ua-text">17 хв читання</span><span class="en-text">17 min read</span></span>
+                        <span class="b-lang" title="Русский">RU</span>
+                    </div>
+                    <div class="b-note"><i class="fa-regular fa-clock" aria-hidden="true"></i><div><span class="ru-text">Материал опубликован в 2019 году — описанные инструменты и интерфейсы могли измениться.</span><span class="ua-text">Матеріал опубліковано у 2019 році — описані інструменти та інтерфейси могли змінитися.</span><span class="en-text">Published in 2019 — the tools and interfaces described may have changed since.</span></div></div>
+                    
+                    <div class="b-prose"><p>В прошлой <a target="_blank" rel="noopener" href="https://habr.com/ru/post/437078/">статье</a> я рассказал о том, что такое многопоточность, и привёл примеры её реализации на языке R при работе с API Яндекс. Директ с помощью пакетов <code>doSNOW</code>, <code>doParallel</code> и конструкции <code>foreach</code>.</p>
+<p>Данная статья является продолжением, но может быть рассмотрена как автономное руководство по многопоточности в R. К её написанию меня подтолкнули комментарии полученные к первой части (тут отдельная благодарность <a target="_blank" rel="noopener" href="https://habr.com/ru/users/alexey_mosc/">Alexey_mosc</a>, <a target="_blank" rel="noopener" href="https://habr.com/ru/users/satcat/">SatCat</a>, <a target="_blank" rel="noopener" href="https://habr.com/ru/users/ananiev_genrih/">Ananiev_Genrih</a>), в которых мне привели ряд пакетов, представляющих более современный подход к реализации многопоточности в R, о них далее и пойдёт речь.</p>
+<p><img loading="lazy" decoding="async" alt="Многопоточность" width="1022" height="579" src="../images/kak-uskorit-rabotu-s-api-na-yazyke-r-s-pomo-2-3021a15709dae9-81c116c2.webp" /></p>
+<h1 id="_1">Содержание</h1>
+<ul>
+<li><a href="#zadacha">Задача</a></li>
+<li><a href="#podgotovka">Подготовка</a></li>
+<li><a href="#primer-resheniya-v-posledovatelnom-rezhime-obrabotki-funkciya-sapply-i-paket-purrr">Пример решения в последовательном режиме обработки, функция sapply и пакет purrr</a>  </li>
+<li><a href="#funkciya-sapply">Функция sapply</a></li>
+<li><a href="#paket-purrr">Пакет purrr</a></li>
+<li><a href="#mnogopotochnye-varianty-resheniya-zadachi-po-sboru-klyuchevyh-slov-iz-yandeksdirekt">Многопоточные варианты решения задачи по сбору ключевых слов из Яндекс. Директ</a>  </li>
+<li><a href="#paket-parallel">Пакет parallel</a></li>
+<li><a href="#paket-future">Пакет future</a></li>
+<li><a href="#obyortki-nad-future">Обёртки над future</a>  <ul>
+<li><a href="#paket-futureapply">Пакет future.apply</a></li>
+<li><a href="#paket-furrr">Пакет furrr</a></li>
+</ul>
+</li>
+<li><a href="#test-skorosti">Тест скорости</a></li>
+<li><a href="#zaklyuchenie">Заключение</a></li>
+</ul>
+<h1 id="_2">Задача</h1>
+<p>В качестве примера мы возмём задачу рассмотренную в <a target="_blank" rel="noopener" href="https://habr.com/ru/post/437078/">прошлой публикации</a>, т.е. в многопоточном режиме собрать список ключевых слов из 4ёх рекламных аккаунтов Яндекс. Директ.</p>
+<p>Для работы с API Яндекс. Директ мы будем использовать пакет <code>ryandexdirect</code>. Официальная документация к нему находится по <a target="_blank" rel="noopener" href="https://selesnow.github.io/ryandexdirect">ссылке</a>, но для реализации описанной задачи нам понадобится всего 2 функции:</p>
+<ul>
+<li><code>yadirAuth</code> — авторизация в API Яндекс. Директ;</li>
+<li><code>yadirGetKeyWords</code> — Загрузка списка ключевых слов из рекламных аккаунтов.</li>
+</ul>
+<p>Я не просто так выбрал именно процесс загрузки ключевых слов, дело в том, что это одна из наиболее длительных операций в API Яндекс. Директ. Во вторых во всех аккаунтах количество ключевых слов разное, следовательно и время на выполнение этой операции для каждого аккаунта будет сильно отличаться, в нашем случае от 1 до 20 секунд.</p>
+<h1 id="_3">Подготовка</h1>
+<p>Изначально вам необходимо установить все рассматриваемые в этой статье пакеты, для этого можно воспользоваться приведённым ниже кодом.<br />
+<strong>Код 1: Установка пакетов</strong></p>
+<div class="codehilite"><pre><span></span><code># Установка нужных пакетов
+install.packages(&quot;ryandexdirect&quot;)
+install.packages(&quot;tictoc&quot;)
+install.packages(&quot;rbenchmark&quot;)
+install.packages(&quot;dplyr&quot;)
+install.packages(&quot;purrr&quot;)
+install.packages(&quot;future&quot;)
+install.packages(&quot;promises&quot;)
+install.packages(&quot;furrr&quot;)
+install.packages(&quot;future.apply&quot;)
+</code></pre></div>
+
+<p>Чтобы вам были доступны функций пакета, его необходимо подключить с помощью команды <code>library</code>. Для удобства я буду отдельно подключать все необходимые пакеты в каждом приведённом примере кода.</p>
+<p>Создаём вектор состоящий из логинов Яндекс. Директ, из которых в последствии мы будем запрашивать ключевые слова:<br />
+<strong>Код 2: Создание вектора логинов</strong></p>
+<div class="codehilite"><pre><span></span><code>logins &lt;- c(&quot;login1&quot;, 
+            &quot;login2&quot;, 
+            &quot;login3&quot;, 
+            &quot;login4&quot;)
+</code></pre></div>
+
+<p>Для работы с API Яндекс. Директ предварительно требуется пройти авторизацию под каждым аккаунтом, для этого можно воспользоваться следующей конструкцией:<br />
+<strong>Код 3: Авторизация в API Яндекс. Директ</strong></p>
+<div class="codehilite"><pre><span></span><code>lapply(logins,
+       function(l) {
+        yadirAuth(Login = l)})
+</code></pre></div>
+
+<p>После запуска приведенного выше кода, для авторизации под каждым аккаунтом будет открыт браузер. Вы подтвердите разрешение для <code>ryandexdirect</code> на доступ к вашим рекламным материалам. Будете перенаправлены на страницу, на которой вам надо скопировать код подтверждения. Введя его в консоль R завершите процесс авторизации. Данная операция повторяется для каждого логина который вы указали при создании вектора logins.</p>
+<p>Некоторых пользователей, в процессе авторизации, может смущать факт редиректа на сторонний ресурс, но никакой опасности для ваших аккаунт в этом нет, более подробно эту тему я описал в статье <a target="_blank" rel="noopener" href="https://habr.com/ru/post/430888/">“Насколько безопасно использовать R пакеты для работы с API рекламных систем”</a>.</p>
+<p>Далее мы рассмотрим несколько примеров реализации описанной задачи. Каждый из которых будет начинаться с примера кода, и дальнейшего его объяснения. Я думаю, такой вариант будет наиболее удобен для восприятия.</p>
+<h1 id="sapply-purrr">Пример решения в последовательном режиме обработки, функция sapply и пакет purrr</h1>
+<p><img loading="lazy" decoding="async" alt="" width="430" height="270" src="../images/kak-uskorit-rabotu-s-api-na-yazyke-r-s-pomo-2-36972e9d8707c1-1989aa81.webp" /></p>
+<p>В <a target="_blank" rel="noopener" href="https://habr.com/ru/post/437078/">прошлой статье</a> в качестве примера я приводил решение с использованием цикла <code>for</code>. Поскольку мы рассматривали многопоточность с использованием пакета <code>foreach</code>, который по синтаксису напоминает циклы, там этот пример был уместен не смотря на то, что использование циклов не приветствуется пользователями R.</p>
+<p>Пакеты которые мы рассмотрим в этой статье, по синтаксису больше напоминают функции семейства apply, поэтому и пример решения в последовательном режиме я приведу с их использованием.</p>
+<h3 id="sapply">Функция <code>sapply</code></h3>
+<blockquote>
+<p>Для оценки времени выполнения команд, в каждом из рассматриваемых подходов, мы будем использовать пакет <code>tictoc</code>.</p>
+</blockquote>
+<p><strong>Код 4: Пример решения в последовательном режиме с помощью функции sapply</strong></p>
+<div class="codehilite"><pre><span></span><code>library(tictoc)
+library(dplyr)
+
+tic() # включаем таймер
+kw.sapply &lt;-
+      sapply(
+        logins,          # Список логинов, который будет перебираться функцией
+          function(x)    # Анонимная функция которая будет выполнена по очереди 
+                         #  с каждый указанном логином
+             { yadirGetKeyWords(Login = x) %&gt;%  
+               mutate(login = x) },
+        simplify = FALSE # Режим упрощенного вывода результата
+      )
+toc() # время выполнения
+
+# приводим полученный результат к табличному виду
+result.sapply &lt;- do.call(&quot;rbind&quot;, kw.sapply)
+</code></pre></div>
+
+<p>Время выполнения: <code>39.36 sec elapsed</code></p>
+<p>По началу синтаксис функций семейства <code>apply</code> воспринимается не так легко как синтаксис циклов, но на самом деле всё достаточно просто.</p>
+<p><code>sapply(X, FUN)</code></p>
+<p>Где:</p>
+<ul>
+<li><em>X</em> — Объект, элементы которого мы будем перебирать и по очереди использовать на каждой итерации, в цикле <code>for</code> это выглядело так: <code>for(i in X)</code>;</li>
+<li><em>FUN</em> — Функция, в которую мы будем по очереди подставлять каждый элемент объекта <em>X</em>, если провести аналогию с <code>for</code>, то это тело цикла.</li>
+</ul>
+<p>В примере <strong>Код 4</strong>, созданный ранее вектор <em>logins</em> передаётся в аргумент <em>X</em>. Каждый элемент вектора <em>logins</em> по очереди передаётся в качестве единственного аргумента анонимной функции <code>function(x) { yadirGetKeyWords(Login = x) %&gt;% mutate(login = x) }</code>, которая была передана в аргумент <em>FUN</em>.</p>
+<p>Т.е. <code>sapply</code> выполнит 4 раза указанную в <em>FUN</em> функцию, подставляя в неё по очереди логины, и вернёт полученный результат в виде списка (объект класса <em>list</em>) состоящего из 4ёх элементов. Каждый элемент это таблица со списком ключевых слов полученных из аккаунта на каждой итерации.</p>
+<ol>
+<li><code>yadirGetKeyWords(Login = "login1") %&gt;% mutate(login = "login1")</code></li>
+<li><code>yadirGetKeyWords(Login = "login2") %&gt;% mutate(login = "login2")</code></li>
+<li><code>yadirGetKeyWords(Login = "login3") %&gt;% mutate(login = "login3")</code></li>
+<li><code>yadirGetKeyWords(Login = "login4") %&gt;% mutate(login = "login4")</code></li>
+</ol>
+<p>Полученный с помощью <code>sapply</code> объект имеет следующую структуру:</p>
+<div class="codehilite"><pre><span></span><code>summary(kw.sapply)
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code>         Length Class      Mode
+login1   19     data.frame list
+login2   19     data.frame list
+login3   19     data.frame list
+login4   19     data.frame list
+</code></pre></div>
+
+<p>В завершении этого примера команда <code>result.sapply &lt;- do.call("rbind", kw.sapply)</code>, объединяет все 4 элемента списка <em>kw.sapply</em> в один фрейм <em>result.sapply</em>.</p>
+<div class="codehilite"><pre><span></span><code># A tibble: 6,804 x 1
+   result.sapply$Id $Keyword $AdGroupId $CampaignId $ServingStatus $State
+              &lt;dbl&gt; &lt;fct&gt;         &lt;dbl&gt;       &lt;int&gt; &lt;fct&gt;          &lt;fct&gt; 
+ 1      15164230566 Недвижи~ 3597453985    39351725 ELIGIBLE       ON    
+ 2      15164230567 Жилье в~ 3597453985    39351725 ELIGIBLE       ON    
+ 3      15164230568 Купить ~ 3597453985    39351725 ELIGIBLE       ON    
+ 4      15164230569 Продажа~ 3597453985    39351725 ELIGIBLE       ON    
+ 5      15164230570 Болгарс~ 3597453985    39351725 ELIGIBLE       ON    
+ 6      15164230571 Купить ~ 3597453985    39351725 ELIGIBLE       ON    
+ 7      15164230572 Продажа~ 3597453985    39351725 ELIGIBLE       ON    
+ 8      15164230573 Цены на~ 3597453985    39351725 ELIGIBLE       ON    
+ 9      15164230574 Стоимос~ 3597453985    39351725 ELIGIBLE       ON    
+10      15164230575 Сколько~ 3597453985    39351725 ELIGIBLE       ON    
+# ... with 6,794 more rows, and 13 more variables: $Status &lt;fct&gt;,
+#   $StrategyPriority &lt;fct&gt;, $StatisticsSearchImpressions &lt;int&gt;,
+#   $StatisticsSearchClicks &lt;int&gt;, $StatisticsNetworkImpressions &lt;int&gt;,
+#   $StatisticsNetworkClicks &lt;lgl&gt;, $UserParam1 &lt;chr&gt;, $UserParam2 &lt;chr&gt;,
+#   $ProductivityValue &lt;lgl&gt;, $ProductivityReferences &lt;lgl&gt;, $Bid &lt;dbl&gt;,
+#   $ContextBid &lt;dbl&gt;, $login &lt;chr&gt;
+</code></pre></div>
+
+<p>Помимо <code>sapply</code> в семейство функций <code>*apply</code> входят: <code>apply</code>, <code>lapply</code>, <code>vapply</code>, <code>mapply</code> и другие.</p>
+<h3 id="purrr">Пакет <code>purrr</code></h3>
+<p><strong>Код 5: Пример решения с помощью функций пакета purrr</strong></p>
+<div class="codehilite"><pre><span></span><code>library(purrr)
+library(dplyr)
+library(tictoc)
+
+tic() # включаем таймер
+result.purrr &lt;-
+  map_df(
+    logins, # Список логинов, который будет перебираться функцией
+    ~       # Сокращение от function(.x)
+    { yadirGetKeyWords(Login = .x) %&gt;%  
+        mutate(login = .x) }
+  )
+toc() # время выполнения
+</code></pre></div>
+
+<p>Время выполнения: <code>35.46 sec elapsed</code></p>
+<p>Пакет <code>purrr</code> входит в ядро библиотеки <code>tidyverse</code>, автором которой является Хедли Викхем.</p>
+<p>По смыслу и синтаксису основные функции пакета очень похожи на <code>sapply</code>, основное его преимущество заключается в следующем:</p>
+<ul>
+<li>Функции разделены на семейства <code>map</code>, <code>map2</code>, <code>pmap</code>, <code>walk</code> и так далее, отдельные функции входящие в одно семейство возвращают результат в разных форматах: <em>chr</em>, <em>dbl</em>, <em>int</em>, <em>df</em> и т.д.;</li>
+<li>Функции семейства <code>map2</code> позволяют перебирать элементы (итерироваться) одновременно двух объектов;</li>
+<li>Функции семейства <code>pmap</code> позволяют одновременно перебирать элементы любого количества объектов. На вход в аргумент <em>.l</em> <em>(аналог аргумента X в sapply)</em> вы можете передавать таблицу, каждый столбец которой будет содержать значения, по которым вы будете итерироваться, и которые будут подставлены по очереди в одноимённые аргументы функции, переданной в <em>.f</em> <em>(аналог FUN из sapply)</em>.</li>
+</ul>
+<p>В какой ситуации нам понадобиться перебирать элементы нескольких объектов. Например, вы работаете с несколькими агентскими аккаунтами, и рекламные аккаунты из которых требуется получить список ключевых слов разбросаны между ними. В таком случае вы можете создать вектор из названий агентских аккаунтов, и итерироваться по нему, параллельно тому как вы перебираете логины рекламных аккаунтов.<br />
+<strong>Код 6: Пример работы с несколькими агентскими аккаунтами</strong></p>
+<div class="codehilite"><pre><span></span><code>library(purrr)
+
+# создаём вектор соответствующих агентских аккаунтов
+agencies &lt;- c(&quot;agency1&quot;,
+              NA,
+              &quot;agency2&quot;,
+              &quot;agency1&quot;)
+
+# собираем данные о ключевых словах
+# из рекламных кабинетов разбросанных по разным агентским аккаунтам
+result.pmap2 &lt;- map2_df(.x = logins,
+                        .y = agencies,
+                        ~
+               { yadirGetKeyWords(Login         = .x,
+                                  AgencyAccount = .y) %&gt;%  
+                   mutate(login = .x) })
+</code></pre></div>
+
+<p>А теперь представим ситуацию, что вы при авторизации под разными аккаунтами сохраняли файл с учётными данными в разных папках, тогда вам потребуется итерироваться сразу по трём объектам: логины рекламных аккаунтов, логины агентских аккаунтов, путь в которых хранится файл с учётными данными. Реализовать это можно с помощь. функций семейства <code>pmap</code>.<br />
+<strong>Код 7: Пример работы с функцией pmap</strong></p>
+<div class="codehilite"><pre><span></span><code>library(purrr)
+
+# создаём вектор, содержащий путь к папке где храняться 
+# учётные данные для каждого аккаунта
+TokenPath &lt;- c(&quot;C:\\proj1\\tokens&quot;,
+               &quot;C:\\yandex\\token&quot;,
+               &quot;C:\\yandex\\token&quot;,
+               &quot;C:\\my_yandex_acoount&quot;)
+
+# собираем данные
+pmap.result &lt;- pmap_df(list(Login         = logins,
+                            AgencyAccount = agencies,
+                            TokenPath     = TokenPath), 
+                       yadirGetKeyWords)
+</code></pre></div>
+
+<p>Соответственно результатом выполнения функций <code>map_df</code>, <code>map2_df</code> и <code>pmap_df</code> является дата фрейм, и при их использовании последний шаг из примера с <code>sapply</code> (<code>do.call("rbind", kw.sapply)</code>) не требуется.</p>
+<p>Код стал компактнее, и выполнился немного быстрее, но тем не менее оба описанных подхода, <code>sapply</code> и <code>purrr</code>, выполняют сбор ключевых слов из каждого аккаунта последовательно. Поэтому общее время выполнения этой операции равняется сумме длительностей выполнения сбора данных из всех четырёх аккаунтов.</p>
+<p><strong>Time[total]</strong> = <em>Time[login1] + Time[login2] + Time[login3] + Time[login4]</em></p>
+<h1 id="_4">Многопоточные варианты решения задачи по сбору ключевых слов из Яндекс. Директ</h1>
+<p><img loading="lazy" decoding="async" alt="" width="543" height="347" src="../images/kak-uskorit-rabotu-s-api-na-yazyke-r-s-pomo-2-ab353ccf566421-aad65c95.webp" /></p>
+<p>Итак, если вы уже читали <a target="_blank" rel="noopener" href="https://habr.com/ru/post/437078/">первую статью</a>, то знаете, что у многопоточного режима работы есть несколько особенностей:</p>
+<ul>
+<li>Каждый поток запускается в отдельном R сеансе с чистым рабочим окружением.</li>
+<li>По той же причине в отдельный запущенный процесс, по умолчанию не передаются подключенные ранее пакеты.</li>
+</ul>
+<p>Экспорт объектов созданных в рабочем окружении, и подключение пакетов в каждом подходе реализовано по разному, далее мы рассмотрим их более детально.</p>
+<h3 id="parallel">Пакет <code>parallel</code></h3>
+<p>Данный пакет впервые был включён в комплектацию R в версии 2.14.0 и по сей день поставляется вместе с самим R.<br />
+<strong>Код 8: Пример решения задачи через пакет parallel</strong></p>
+<div class="codehilite"><pre><span></span><code>library(parallel)
+library(tictoc)
+
+# создаём кластер
+cl &lt;- makeCluster(4)
+# экспортируем в кластер нужные объекты
+clusterExport(cl = cl, varlist = &quot;logins&quot;)
+# задаём команды, которые необходимо выполнить при запуске
+# каждого процесса, а нашем случае это подключения пакета ryandexdirect
+clusterEvalQ(cl = cl, {
+    library(ryandexdirect)
+    library(dplyr) 
+  }
+)
+
+tic() # включаем таймер
+parallel.kw &lt;- parSapplyLB(cl  = cl,      # Кластер процессов
+                    X   = logins,       # Объект, элементы которого будем перебирать
+                    FUN = function(x) { # Функция в которую будет подставляться
+                                        # по очереди каждый элемент объекта X
+                             yadirGetKeyWords(Login = x) %&gt;%
+                             mutate(login = x)
+                    }, 
+                    simplify = F)       # Упрощённый вывод результата
+toc() # смотрим за временем выполнения
+
+# останавливаем кластер
+stopCluster(cl)
+# приводим результат к табличному виду
+result.parallel &lt;- dplyr::bind_rows(parallel.kw)
+</code></pre></div>
+
+<p>Время выполнения: <code>16.75 sec elapsed</code></p>
+<p>Давайте попробуем разобрать <strong>Код 8</strong>. Функция <code>makeCluster</code> создаёт кластер из 4 процессов. В созданный кластер с помощью функции <code>clusterExport</code> мы можем экспортировать объекты из нашего основного рабочего окружения, для этого надо использовать её аргументы:</p>
+<ul>
+<li><em>cl</em> — Кластер, в который мы будем экспортировать объекты</li>
+<li><em>varlist</em> — Текстовый вектор, содержащий имена объектов, которые необходимо экспортировать в каждый процесс кластера.</li>
+</ul>
+<p>Один из способов подключения нужных пакетов на каждом узле кластера — использовать функцию <code>clusterEvalQ</code>. В нашем примере мы используем её для подключения пакетов, но вы можете написать внутри <code>clusterEvalQ</code> любой R код, и он будет запускаться при старте каждого узла кластера. Аргументы этой функции достаточно очевидны, вам необходимо задать кластер и команды которые будут в нем выполняться.</p>
+<p><code>parSapplyLB</code> это параллельная версия функции <code>sapply</code> с балансировкой нагрузки между узлами кластера, используют её также, но вам необходимо с помощью аргумента <em>cl</em> указать нужный кластер.</p>
+<p>Также в <code>parallel</code> есть и другие распараллеленные варианты функций семейства <code>*apply</code>: <code>parLapply</code>, <code>parSapply</code>, <code>parApply</code> и др.</p>
+<p><code>parSapply</code> отличается от <code>parSapplyLB</code> только тем, что у неё нет балансировки нагрузки на узлы кластера.</p>
+<p>Функция <code>stopCluster</code> служит для остановки созданного кластера.</p>
+<p>Последней командой, <code>dplyr::bind_rows(parallel.kw)</code> мы объединяем полученный с помощью <code>parSapplyLB</code> объект <em>parallel.kw</em> в одну таблицу.</p>
+<p>Для Linux в <code>parallel</code> есть отдельные функции: <code>mclapply</code>, <code>mcmapply</code>, <code>mcMap</code>. Зачастую в этой операционной системе команды выполняются быстрее, а код становится более компактным.<br />
+<strong>Код 9: Решение с помощью функции mclapply для Linux</strong></p>
+<div class="codehilite"><pre><span></span><code>library(parallel)
+library(tictic)
+library(dplyr)
+library(ryandexdirect)
+
+tic()
+mclapply.kw &lt;- mclapply(logins, 
+                FUN = function(x) { # Функция в которую будет подставляться
+                                              # по очереди каждый элемент объекта X
+                yadirGetKeyWords(Login = x) %&gt;%
+                  mutate(login = x)
+              }, mc.cores = 4)
+toc()
+</code></pre></div>
+
+<p>При использовании этих функций нет необходимости запускать кластер с помощью команды <code>makeCluster</code> т.к. количество узлов вы задаёте с помощью аргумента <em>mc.cores</em>. Так же нет необходимости в подключении пакетов и экспорте объектов, эти операции выполняются автоматически.</p>
+<h3 id="future">Пакет <code>future</code></h3>
+<p>Один из наиболее современных подходов к асинхронному программированию в R.</p>
+<p>Код, который в параллельном режиме решит нашу задачу с помощью <code>future</code> достаточно сложен для понимания. Поэтому давайте разберём его работу на более простом примере, запросим список ключевых слов из одного аккаунта.<br />
+<strong>Код 10: Простейший пример использования пакета future</strong></p>
+<div class="codehilite"><pre><span></span><code>library(future)
+
+# Мультисессионный режим работы
+plan(multiprocess)
+
+# Запускаем процесс загрузки ключевых слов
+# в фоновом режиме
+future.kw &lt;- future({yadirGetKeyWords(Login = logins[4])},
+                    packages = &quot;ryandexdirect&quot;,
+                    globals  = &quot;logins&quot;)
+
+# Проверка статуса выполнения выражения
+resolved(future.kw)
+
+# Получаем результат выполнения выражения
+future.result.1 &lt;- value(future.kw)
+</code></pre></div>
+
+<p>Попробуем разобраться с примером <strong>Код 10</strong>. Функция <code>plan</code> позволяет вам устанавливать и менять режим выполнения заданных выражений, вот основные из них:</p>
+<ul>
+<li><em>sequential</em> — Это обычный режим работы R, команды выполняются последовательно в текущей сессии;</li>
+<li><em>multisession</em> — Параллельный режим, команды будут выполняться в запущенных в фоновом режиме сеансах на текущей машине, при этом ваш рабочий сеанс не будет блокироваться;</li>
+<li><em>cluster</em> — Параллельный режим, команды будут выполняться на текущей или удалённой машине, аналогично тому, как это реализовано в пакете <code>parallel</code>.</li>
+</ul>
+<p>Весь пакет <code>future</code> основан на выполнении команд в фоновых процессах без блокировки текущего сеанса. Запускать выполнение команд следует одноимённой функцией <code>future</code>, поэтому когда мы запускаем команду:</p>
+<div class="codehilite"><pre><span></span><code>future({yadirGetKeyWords(Login = logins[4])},
+                    packages = &quot;ryandexdirect&quot;,
+                    globals  = &quot;logins&quot;)
+</code></pre></div>
+
+<p>Наш текущий сеанс работы в R не блокируется, а команда выполняется в запущенной в фоновом режиме, другой R сессии.</p>
+<p>Проверить текущее состояние процесса выполнения заданного выражения можно с помощью функции <code>resolved</code>. И наконец для получения результата выполнения <code>future</code> используется функция <code>value</code>. Если функцию <code>value</code> запустить раньше, чем ваш <code>future</code> выполниться в параллельно запущенном сеансе, то текущий рабочий сеанс будет заблокирован до тех пор, пока выражение параллельной сессии не завершит работу.</p>
+<p>Наиболее продвинутым примером работы является использование <code>future</code> совместно с <code>promises</code>.<br />
+<strong>Код 11: Пример совместного использования пакетов <code>future</code> и <code>promises</code></strong></p>
+<div class="codehilite"><pre><span></span><code>library(future)
+library(promises)
+
+# Мультисессионный режим работы
+plan(multiprocess)
+
+# Запускаем процесс загрузки ключевых слов
+# в фоновом режиме
+future.kw &lt;- future({suppressMessages(
+                     yadirGetKeyWords(Login = logins[4]))},
+                    packages = &quot;ryandexdirect&quot;,
+                    globals  = &quot;logins&quot;) %...&gt;% # Оператор который ждёт выполнения future, 
+                                                # и передаёт его результат дальше 
+             nrow() %...&gt;%
+             paste(&quot;words loaded&quot;) %...&gt;% 
+             print()
+</code></pre></div>
+
+<p>Пакет <code>promises</code> предоставляет набор конвеерных операторов отлично дополняющих функционал <code>future</code>.</p>
+<p>В примере <strong>Код 11</strong> мы в фоновом режиме запускаем процесс загрузки ключевых слов из одного рекламного аккаунта. Далее конвеерный оператор <code>%...&gt;%</code> без блокировки рабочего сеанса ждёт выполнения <code>future</code>, и выполняет оставшиеся операции. В результате выполнения кода, по завершению работы <code>future</code>, в консоль будет выведено количество ключевых слов из заданного аккаунта:</p>
+<div class="codehilite"><pre><span></span><code>[1] &quot;1855 words loaded&quot;
+</code></pre></div>
+
+<blockquote>
+<p>В конце статьи будет продемонстрирован более наглядный пример связки <code>future</code> и <code>promises</code>.</p>
+</blockquote>
+<p>По умолчанию пакет <code>future</code> сам экспортирует всё рабочее пространство в каждую параллельно запущенную сессию, но вы самостоятельно можно задавать список объектов для экспорта с помощью аргумента <em>globals</em>.</p>
+<p>Для подключения пакетов в <code>future</code> следует передать вектор содержащий их названия в аргумент <em>packages</em>.</p>
+<p>Теперь вернёмся к нашей задаче, следущий пример кода в параллельном режиме загрузит список ключевых слов из 4ёх аккаунтов:<br />
+<strong>Код 12: Пример решения задачи с помощью пакета future</strong></p>
+<div class="codehilite"><pre><span></span><code>library(future)
+library(tictoc)
+
+# план обработки
+plan(&quot;multisession&quot;, workers = 4)
+
+tic() # запускаем таймер
+futs      &lt;- lapply(logins,     # Объект элементы которого будем перебирать
+                    function(i) # Функция которая будет выполняться под каждый элемент
+                      # Создаём фьючерс
+                      future({ yadirGetKeyWords(Login = i) %&gt;%  
+                               mutate(login = i) }, 
+                               packages = c(&quot;ryandexdirect&quot;,
+                                            &quot;dplyr&quot;)))
+
+completed &lt;- sapply(futs, resolved) # проверка выполненных заданий
+kw        &lt;- lapply(futs, value)    # получения всех результатов
+toc() # смотрим время работы
+
+# преобразуем результат в таблицу
+result.future &lt;- dplyr::bind_rows(kw)
+</code></pre></div>
+
+<p>Время выполнения: <code>14.83 sec elapsed</code></p>
+<p>Для загрузки списка ключевых слов в многопоточном режиме из всех перечисленных в векторе <em>logins</em> рекламных аккаунтов необходимо запустить в фоновом режиме выполнение отдельной <code>future</code>. В примере <strong>Код 12</strong> мы реализуем это с помощью функции <code>lapply</code>.</p>
+<p>Результатом работы <code>lapply</code> будет список запущенных <code>future</code>. Проверить статус каждой можно с помощью команды <code>sapply(futs, resolved)</code>, которая вернёт логический вектор где <em>TRUE</em> будет означать, что <code>future</code> выполнена, а <em>FALSE</em>, что <code>future</code> на данный момент в процессе выполнения.</p>
+<p>Для получения результатов из каждой <code>future</code>, после завершения их работы, мы используем команду <code>lapply(futs, value)</code>.</p>
+<p>В конце нам остаётся соединить полученные результаты в одну таблицу: <code>result.future &lt;- dplyr::bind_rows(kw)</code>.</p>
+<h3 id="future_1">Обёртки над <code>future</code></h3>
+<p>Обёртка в текущем контексте это пакет, написанный на основе другого пакета (в нашем случае<br />
+<code>future</code>), изменяющий интерфейс взаимодействия с его функционалом.</p>
+<h6 id="futureapply">Пакет <code>future.apply</code></h6>
+<p><code>future.apply</code> обвёртка написанная автором самого <code>future</code>, Хенриком Бенгтссоном.<br />
+<strong>Код 13: Пример решения задачи с помощью пакета future.apply</strong></p>
+<div class="codehilite"><pre><span></span><code>library(future.apply)
+library(tictoc)
+
+# устанавливаем план обработки
+plan(&quot;multisession&quot;, workers = 4)
+
+tic() # запускам таймер
+kw.future.apply &lt;- future_sapply(logins, # объект который будем перебирать, вектор логинов
+                     function(x) { 
+                       # функция запрашивающая ключевые слова
+                        yadirGetKeyWords(Login = x) %&gt;%
+                        mutate(login = x)    
+                     }, 
+                     simplify = FALSE, # Упрощённый вывод результата 
+                     # подключение пакетов
+                     future.packages = c(&quot;ryandexdirect&quot;,
+                                         &quot;dplyr&quot;),
+                     future.globals  = TRUE
+                     )
+toc() # смотрим время работы
+</code></pre></div>
+
+<p>Время выполнения: <code>17.28 sec elapsed</code></p>
+<p>В примере <strong>Код 13</strong> видно, что <code>future.apply</code> позволяет решить нашу задачу более компактно чем пакет <code>future</code>, но при этом внутри он использует тот же функционал.</p>
+<p>Сначала мы задаём параллельный режим обработки состоящий из 4ёх процессов: <code>plan("multisession", workers = 4)</code>.</p>
+<p><code>future_sapply</code> по очереди перебирает элементы вектора <em>logins</em> запрашивая список ключевых слов. Т.е. делает в точности, тоже самое, что описанная в самом начале статьи функция <code>sapply</code>, но в многопоточном режиме.</p>
+<p>Для подключения пакетов внутри параллельной <code>future_sapply</code> необходимо использовать аргумент <em>future.packages</em>. Для передачи объектов из глобального окружения в каждый запущенный процесс служит аргумент <em>future.globals</em>. По умолчанию он экспортирует всё рабочее окружение, но вы можете менять это поведение задав текстовый вектор из имён нужных вам объектов.</p>
+<h4 id="furrr">Пакет <code>furrr</code></h4>
+<p>Ещё одна обёртка над <code>future</code>. Я не зря в начале статьи рассказал о пакете <code>purrr</code>, так вот <code>furrr</code> является его многопоточным братом близнецом.<br />
+<strong>Код 14: Пример решения с помощью пакета furrr</strong></p>
+<div class="codehilite"><pre><span></span><code>library(furrr)
+library(tictoc)
+
+# создаём кластер
+cl &lt;- parallel::makeCluster(4)
+plan(cluster, workers = cl)
+
+tic() # запускаем таймер
+furrr.kw &lt;- 
+   future_map(logins, 
+           ~ # сокращение от function(.x)
+           yadirGetKeyWords(Login = .x) %&gt;%
+           mutate(login = .x), 
+           .options = future_options(packages = c(&quot;ryandexdirect&quot;,
+                                                  &quot;dplyr&quot;),
+                                     globals  = c()))
+
+toc() # смотрим время выполнения
+# соединяем результат в единую таблицу
+result.furrr &lt;-dplyr::bind_rows(furrr.kw)
+</code></pre></div>
+
+<p>Время выполнения: <code>15.45 sec elapsed</code></p>
+<p><code>furrr</code> предоставляет в параллельном режиме почти весь набор функций из <code>purrr</code>. При этом и синтаксис <code>purrr</code> полностью сохранён, но добавлен ряд аргументов для работы с настройками параллельных процессов.</p>
+<p>Для изменения различных опций каждого узла запущенного кластера служит аргумент <em>.options</em>. Передав в качества значения <em>.options</em> функцию <code>future_options</code> вы можете инициализировать подключение пакетов, и передачу объектов из глобального окружения в узлы кластера.</p>
+<p>В примере <strong>Код 14</strong> мы использовали аргументы <em>packages</em> и <em>globals</em> выполнили эту операцию так:</p>
+<div class="codehilite"><pre><span></span><code>.options = future_options(packages = c(&quot;ryandexdirect&quot;,
+                                       &quot;dplyr&quot;),
+                                     globals  = c())
+</code></pre></div>
+
+<h1 id="_5">Тест скорости</h1>
+<p>Как и в прошлой статье для тестирования будем использовать пакет <code>rbenchmark</code>.</p>
+<p>Немного выше я обещал, что в конце статьи будет более наглядный пример взаимодействия <code>future</code> с <code>promises</code>. Тест скорости выполнения нашей задачи по всем приведённым в статье подходам является идеальным для этого примером.</p>
+<p>Дело в том, что тест скорости с 20 повторениями каждого из подходов с участием 4ёх рекламных аккаунтов очень дорогая (длительная) операция.</p>
+<p>Длительность теста скорости = (T[подход1] * 20) + (T[подход2] * 20) + (T[подходN] * 20)<br />
+<strong>Код 15: Тест скорости и наглядный пример совместного использования future и promises</strong></p>
+<div class="codehilite"><pre><span></span><code>library(furrr)
+library(parallel)
+library(dplyr)
+library(future)
+library(ryandexdirect)
+library(tictoc)
+library(rbenchmark)
+
+# вектор логинов
+logins &lt;- c(&quot;login1&quot;, 
+            &quot;login2&quot;, 
+            &quot;login3&quot;, 
+            &quot;login4&quot;)
+
+# создаём обёртку для каждого из описанных подходов
+# функции написанные под параллельные вычисления имеют префикс par
+
+par.furrr &lt;- function(logins) {
+  cl &lt;- parallel::makeCluster(4)
+  plan(cluster, workers = cl)
+
+  furrr.kw &lt;- 
+    future_map(logins, 
+               ~            
+                 yadirGetKeyWords(Login = .x) %&gt;%
+                 mutate(login = .x), 
+               .options = future_options(packages = c(&quot;ryandexdirect&quot;,
+                                                      &quot;dplyr&quot;),
+                                         globals  = c()))
+
+  result.furrr &lt;-dplyr::bind_rows(furrr.kw)
+}
+
+par.future &lt;- function(logins) {
+  plan(&quot;multisession&quot;, workers = 4)
+
+  futs      &lt;- lapply(logins, 
+                      function(i) 
+                        future({ yadirGetKeyWords(Login = i) %&gt;%  
+                            mutate(login = i) }, 
+                            packages = c(&quot;ryandexdirect&quot;,
+                                         &quot;dplyr&quot;)))
+  completed &lt;- sapply(futs, resolved) 
+  kw        &lt;- lapply(futs, value)
+  result.future &lt;- dplyr::bind_rows(kw)
+}
+
+par.future.apply &lt;- function(logins) {
+  plan(&quot;multisession&quot;, workers = 4)
+
+  kw.future.apply &lt;- future_sapply(logins,
+                                   function(x) { 
+                                     yadirGetKeyWords(Login = x) %&gt;%
+                                       mutate(login = x)    
+                                   }, 
+                                   simplify = FALSE, 
+                                   future.packages = c(&quot;ryandexdirect&quot;,
+                                                       &quot;dplyr&quot;),
+                                   future.globals  = TRUE
+  )
+  result.future.apply &lt;- dplyr::bind_rows(kw.future.apply)
+}
+
+par.parallel &lt;- function(logins) {
+
+  cl &lt;- parallel::makeCluster(4)
+  clusterExport(cl = cl, varlist = &quot;logins&quot;)
+
+  clusterEvalQ(cl = cl, {
+    library(ryandexdirect)
+    library(dplyr) 
+  }
+  )
+
+  parallel.kw &lt;- parSapplyLB(cl  = cl,  
+                             X   = logins, 
+                             FUN = function(x) { 
+                               yadirGetKeyWords(Login = x) %&gt;%
+                                 mutate(login = x)
+                             }, 
+                             simplify = F) 
+  stopCluster(cl)
+  result.parallel &lt;- dplyr::bind_rows(parallel.kw)
+}
+
+# Функция для решения задачи в последовательном режиме имеют префикс seq
+
+seq.apply &lt;- function(logins) {
+  kw.sapply &lt;-
+    sapply(
+      logins, 
+      function(x)  
+      { yadirGetKeyWords(Login = x) %&gt;%  
+          mutate(login = x) },
+      simplify = FALSE 
+    )
+
+  result.sapply &lt;- do.call(&quot;rbind&quot;, kw.sapply)
+}
+
+seq.purrr &lt;- function(logins) {
+  kw.purrr &lt;-
+    map_df(
+      logins, 
+      ~  
+      { yadirGetKeyWords(Login = .x) %&gt;%  
+          mutate(login = .x) }
+    )
+  result.purrr &lt;- do.call(&quot;rbind&quot;, kw.purrr) 
+}
+
+# запускаем тест скорости с помощью пакета rbenchmark
+# используем связку future + promises 
+# для того, что бы не блокировать текущую сессию
+# и по завершению теста результат вывелся в консоль автоматически
+plan(list(tweak(multisession, workers = 2), tweak(multisession, workers = 4)))
+
+tic()
+speed.test &lt;-
+    future({
+    # запускаем тест скорости сбора данных по двум написанным функциям
+    within(benchmark(furrr        = par.furrr(logins),
+                     future       = par.future(logins),
+                     future.apply = par.future.apply(logins),
+                     parallel     = par.parallel(logins),
+                     apply        = seq.apply(logins),
+                     purrr        = seq.purrr(logins),
+                     replications = c(20),
+                     columns      = c(&#39;test&#39;, 
+                                      &#39;replications&#39;, 
+                                      &#39;elapsed&#39;),
+                     order        = c(&#39;elapsed&#39;, 
+                                      &#39;test&#39;)),
+           { average = round(elapsed/replications, 2) }) 
+      },
+    packages =  c(&quot;dplyr&quot;,
+                  &quot;ryandexdirect&quot;,
+                  &quot;rbenchmark&quot;,
+                  &quot;parallel&quot;,
+                  &quot;purrr&quot;,
+                  &quot;future&quot;,
+                  &quot;promises&quot;,
+                  &quot;furrr&quot;,
+                  &quot;future.apply&quot;),
+    globals  = c(&quot;logins&quot;,
+                 &quot;par.furrr&quot;,
+                 &quot;par.future&quot;,
+                 &quot;par.future.apply&quot;,
+                 &quot;par.parallel&quot;,
+                 &quot;seq.apply&quot;,
+                 &quot;seq.purrr&quot;)) %...&gt;%
+      print() %...T&gt;%
+      toc()
+
+message(&quot;My Session is not blocked&quot;)
+</code></pre></div>
+
+<p>В моём примере тест скорости длился 3370 секунд, т.е. без малого час.</p>
+<p>Результатом выполнения теста является фрейм с результатами теста выведенный в консоль. Для того, что бы моя рабочая сессия не блокировалась на это время я запустил тест как <code>future</code> в параллельной сессии, а с помощью операторов из пакета <code>promises</code> настроил поведение таким образом, что оно самостоятельно мониторит статус выполнения теста и по завершению выводит результаты и длительность его выполнения в консоль.</p>
+<p>В это время мой сеанс работы не блокируется, и я могу продолжать в нём работу. Для демонстрации этого поведения я специально вывел сообщение “My Session is not blocked”, которое в коде идёт после запуска теста, но в консоль выводится до его результатов, т.к. сеанс при вычислении теста не блокируется.</p>
+<p>Операторы <code>promises</code> которые я использую:</p>
+<ul>
+<li><code>%...&gt;%</code> — По смыслу похож на <code>%&gt;%</code>, но работает в фоновом режиме. Т.е. он за нас, в фоновом режиме постоянно выполняет функцию <code>resolved</code>, для проверки статуса выполнения <code>future</code>, и сразу после её выполенения получает результат аналогично функции <code>value</code> и передаёт её результат в качестве первого аргумента следующей операции. В тесте скорости он ожидает его результата, после чего передаёт его на печать в функцию <code>print</code>.</li>
+<li><code>%...T&gt;%</code> — Аналог <code>%T&gt;%</code>, является разветвителем, и используется как правило для вывода в консоль промежуточной информации. Он выполняет текущую операцию, но в следующую операцию передаёт вместо результата выполнения текущей операции, результат полученный на предыдущей операции, т.е. в нашем примере т.к. функция <code>print</code> ничего не возвращает мы просто её выполняем, и идём дальше, не забирая её результат.</li>
+<li>%…T!% — Оператор который используется для отлавливания ошибок.</li>
+</ul>
+<p>В <strong>Код 15</strong> внутри <code>plan</code> мы используем функцию <code>tweak</code> (<code>plan(list(tweak(multisession, workers = 2), tweak(multisession, workers = 4)))</code>), такая конструкция позволяет создать иерархию процессов, изначально мы запускаем 2 процесса, далее внутри <code>future</code> каждый вызов будет распареллелин ещё на 4 процесса.</p>
+<p>Результат выполнения приведённого выше кода теста скорости:</p>
+<div class="codehilite"><pre><span></span><code>My Session is not blocked
+          test replications elapsed average
+4     parallel           20  393.02   19.65
+1        furrr           20  402.09   20.10
+2       future           20  431.19   21.56
+3 future.apply           20  432.29   21.61
+5        apply           20  847.77   42.39
+6        purrr           20  864.19   43.21
+3370.55 sec elapsed
+</code></pre></div>
+
+<p><img loading="lazy" decoding="async" alt="image" width="996" height="720" src="../images/kak-uskorit-rabotu-s-api-na-yazyke-r-s-pomo-2-16e90683145df4-164a7833.webp" /></p>
+<p>В моём случае, с незначительным преимуществом наиболее быстрым оказался пакет <code>parallel</code>, возможно за счёт балансировки нагрузки между узлами кластера. Второе место занял <code>furrr</code>, и немного медленнее были <code>future</code> и <code>future.apply</code>.</p>
+<p>Но интерпретировать разницу в 1 секунду, в выполнении задачи среди разных подходов предоставляющих возможность параллельного её решения, было бы неправильно. Поскольку такая незначительная разница скорее всего имеет другую природу, как вариант различная нагрузка на API Яндекс. Директ в момент тестирования разных функций.</p>
+<p>Тем не менее, даже на примере из 4ёх аккаунтов разница между параллельными и последовательными решениями двукратная, а на большем количестве аккаунтов она будет ещё более значима.</p>
+<h1 id="_6">Заключение</h1>
+<p>Из материалов представленных в двух статьях вы ознакомились с множеством различных подходов параллелизации языка R, и о том как с её помощью ускорить запрос данных из различных API.</p>
+<p>Подход достаточно универсален, и будет работать с API большинства известных вам сервисов. О пакетах для работы с множеством других рекламных платформ я писал в статье <a target="_blank" rel="noopener" href="https://habr.com/ru/post/425425/">“Обзор R пакетов для интернет маркетинга, часть 1”</a>.</p>
+<p>Все описанные в двух статьях подходы можно сгруппировать следующим образом:</p>
+<ul>
+<li>doSNOW / doParallel + foreach</li>
+<li>future + promises</li>
+<li>future.apply / furrr</li>
+<li>parallel</li>
+</ul>
+<p>Значительной разницы в скорости работы между описанными подходами нет, выбирать стоит тот, синтаксис которого для вас наиболее понятен и компактен.</p>
+<p>В конце этой статьи я решил провести небольшой опрос, чтобы узнать какой из подходов для реализации многопоточности в R вы используете.</p></div>
+                    
+                    <div class="b-tags"><a class="b-chip" href="../?tag=yandeks-direkt#posts">Яндекс Директ</a><a class="b-chip" href="../?tag=parallelnye-vychisleniya#posts">Параллельные вычисления</a><a class="b-chip" href="../?tag=r#posts">R</a><a class="b-chip" href="../?tag=pakety-r#posts">Пакеты R</a></div>
+                </div>
+            </article>
+            <aside class="b-toc" aria-label="Contents"><div class="b-toc-title"><span class="ru-text">Содержание</span><span class="ua-text">Зміст</span><span class="en-text">Contents</span></div><ul><li><a href="#sapply">Функция sapply</a></li><li><a href="#purrr">Пакет purrr</a></li><li><a href="#parallel">Пакет parallel</a></li><li><a href="#future">Пакет future</a></li><li><a href="#future_1">Обёртки над future</a></li></ul></aside>
+        </div>
+        <section class="b-related">
+            <h2 class="outfit-font"><span class="ru-text">Читайте также</span><span class="ua-text">Читайте також</span><span class="en-text">Related posts</span></h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="../kak-uskorit-rabotu-s-api-na-yazyke-r-s-pomoschyu-parallelnyh-vychislen-2/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="0">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/kak-uskorit-rabotu-s-api-na-yazyke-r-s-pomosch-86f042b609e10-231f7505.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">июнь 2019</span><span class="ua-text">черв. 2019</span><span class="en-text">Jun 2019</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2019</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">13 мин чтения</span><span class="ua-text">13 хв читання</span><span class="en-text">13 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Как ускорить работу с API на языке R с помощью параллельных вычислений, на примере API Яндекс.Директ (Часть 1)</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">Язык R на сегодняшний день является одним из мощнейших и многофункциональных инструментов для работы с данными, но как мы знаем практически всегда, в любой бочке мёда найдётся ложка…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Параллельные вычисления</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">R</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a>
+                <a href="../obzor-r-paketov-dlya-internet-marketinga-chast-1/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="60">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/covers/1140.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">окт. 2018</span><span class="ua-text">жовт. 2018</span><span class="en-text">Oct 2018</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2018</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">9 мин чтения</span><span class="ua-text">9 хв читання</span><span class="en-text">9 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Обзор R пакетов для интернет маркетинга, часть 1</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">Всем привет, если вы занимаетесь интернет маркетингом наверняка вам ежедневно приходится сталкиваться со множеством рекламных сервисов и как минимум одной платформой веб аналитики, если…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">API</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Веб-аналитика</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a>
+                <a href="../v-paket-ryandexdirect-dobavlena-vozmozhnost-raboty-s-servisom-reports/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="120">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/covers/26.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">март 2017</span><span class="ua-text">берез. 2017</span><span class="en-text">Mar 2017</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2017</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">3 мин чтения</span><span class="ua-text">3 хв читання</span><span class="en-text">3 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">В пакет ryandexdirect добавлена возможность работы с сервисом Reports, и возможность загрузки справочной информации.</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">1. Релиз сервиса Reports и возможность работы с ним из ryandexdirect. 22 марта 2017 года в официальном блоге Яндекс Директ был объявлен релиз сервиса Reports.</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">API</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">Яндекс Директ</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a></div>
+        </section>
+        <a href="../" class="b-back"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i><span class="ru-text">Ко всем материалам</span><span class="ua-text">До всіх матеріалів</span><span class="en-text">All posts</span></a>
+    </main>
+
+    <section class="px-6 max-w-7xl mx-auto pb-24 relative z-10">
+        <div class="grid md:grid-cols-2 gap-6" data-aos="fade-up">
+            <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(59, 130, 246, 0.1));">
+                <div class="bento-content w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center text-blue-400 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-telegram"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">Telegram-канал R4marketing</span><span class="ua-text">Telegram-канал R4marketing</span><span class="en-text">R4marketing on Telegram</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Новые статьи, видео и заметки по R — первыми.</span><span class="ua-text">Нові статті, відео та нотатки з R — першими.</span><span class="en-text">New articles, videos and R notes — first.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-blue-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+            <a href="https://www.youtube.com/R4marketing/?sub_confirmation=1" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(239, 68, 68, 0.1));">
+                <div class="bento-content w-16 h-16 bg-red-500/20 rounded-2xl flex items-center justify-center text-red-500 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-youtube"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">YouTube-канал R4marketing</span><span class="ua-text">YouTube-канал R4marketing</span><span class="en-text">R4marketing on YouTube</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Видеоуроки по R, аналитике и AI-инструментам.</span><span class="ua-text">Відеоуроки з R, аналітики та AI-інструментів.</span><span class="en-text">Video lessons on R, analytics and AI tools.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-red-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/5 bg-slate-950/80 backdrop-blur-md pt-16 pb-8 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
+                <div class="sm:col-span-2 lg:col-span-4">
+                    <a href="../../" class="inline-flex items-center gap-3 group mb-5">
+                        <img src="../../logo.jpg" alt="Alexey Seleznev" class="w-10 h-10 rounded-xl object-cover border border-white/10 group-hover:border-purple-500/50 transition-colors">
+                        <span class="text-lg font-black tracking-tight uppercase outfit-font text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+                    </a>
+                    <p class="text-sm text-slate-400 leading-relaxed max-w-sm mb-6"><span class="ru-text">Head of Analytics в Netpeak Group. Автор open source R-пакетов, бесплатных курсов по R и проекта R4marketing.</span><span class="ua-text">Head of Analytics у Netpeak Group. Автор open source R-пакетів, безкоштовних курсів з R та проєкту R4marketing.</span><span class="en-text">Head of Analytics at Netpeak Group. Author of open source R packages, free R courses and the R4marketing project.</span></p>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="https://t.me/R4marketing" target="_blank" rel="noopener" aria-label="Telegram R4marketing" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-400 hover:border-blue-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-telegram"></i></a>
+                        <a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" aria-label="YouTube R4marketing" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-red-500 hover:border-red-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="https://github.com/selesnow" target="_blank" rel="noopener" aria-label="GitHub" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-white hover:border-white/30 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://linkedin.com/in/selesnow" target="_blank" rel="noopener" aria-label="LinkedIn" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-500 hover:border-blue-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://facebook.com/selesnow" target="_blank" rel="noopener" aria-label="Facebook" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-600/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/alexey.selesnow" target="_blank" rel="noopener" aria-label="Instagram" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-pink-500 hover:border-pink-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://habr.com/ru/users/selesnow/" target="_blank" rel="noopener" aria-label="Habr" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-teal-400 hover:border-teal-400/40 transition-all hover:-translate-y-0.5"><i class="fa-solid fa-h"></i></a>
+                    </div>
+                </div>
+
+                <nav class="lg:col-span-2" aria-label="Site map">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">Сайт</span><span class="ua-text">Сайт</span><span class="en-text">Site</span></h3>
+                    <ul class="space-y-3">
+                        <li><a href="../../" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-house w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a></li>
+                        <li><a href="../../opensource/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-code-branch w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span></a></li>
+                        <li><a href="../../courses/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-graduation-cap w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a></li>
+                        <li><a href="../../videos/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-circle-play w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a></li>
+                        <li><a href="../../talks/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-microphone-lines w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a></li>
+                        <li><a href="../../articles/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-pen-nib w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a></li>
+                        <li><a href="../../interviews/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-regular fa-newspaper w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a></li>
+                        <li><a href="../../blog/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-feather-pointed w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a></li>
+                    </ul>
+                </nav>
+
+                <div class="lg:col-span-3">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">R4marketing и публикации</span><span class="ua-text">R4marketing і публікації</span><span class="en-text">R4marketing & writing</span></h3>
+                    <ul class="space-y-3">
+                        <li><a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-telegram w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Telegram-канал R4marketing</span><span class="ua-text">Telegram-канал R4marketing</span><span class="en-text">R4marketing Telegram</span></a></li>
+                        <li><a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-youtube w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">YouTube-канал R4marketing</span><span class="ua-text">YouTube-канал R4marketing</span><span class="en-text">R4marketing YouTube</span></a></li>
+                        <li><a href="https://alexeyseleznev.wordpress.com/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-pen-nib w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Личный блог</span><span class="ua-text">Особистий блог</span><span class="en-text">Personal blog</span></a></li>
+                        <li><a href="https://habr.com/ru/users/selesnow/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-h w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Профиль на Хабре</span><span class="ua-text">Профіль на Хабрі</span><span class="en-text">Habr profile</span></a></li>
+                        <li><a href="https://alexey-seleznev.pro/publications/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-layer-group w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Архив публикаций</span><span class="ua-text">Архів публікацій</span><span class="en-text">Publications archive</span></a></li>
+                        <li><a href="https://github.com/selesnow" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-github w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">GitHub</span><span class="ua-text">GitHub</span><span class="en-text">GitHub</span></a></li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-3">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">Контакты</span><span class="ua-text">Контакти</span><span class="en-text">Contacts</span></h3>
+                    <ul class="space-y-4">
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">Email</div><a href="mailto:me@alexey-seleznev.pro" class="text-sm text-slate-300 hover:text-purple-300 transition-colors break-all">me@alexey-seleznev.pro</a></li>
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">Telegram</div><a href="https://t.me/AlexeySeleznev" target="_blank" rel="noopener" class="text-sm text-slate-300 hover:text-blue-300 transition-colors break-all">@AlexeySeleznev</a></li>
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">LinkedIn</div><a href="https://linkedin.com/in/selesnow" target="_blank" rel="noopener" class="text-sm text-slate-300 hover:text-blue-300 transition-colors break-all">linkedin.com/in/selesnow</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-14 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+                <p>© 2026 Alexey Seleznev. <span class="ru-text">Все права защищены.</span><span class="ua-text">Усі права захищені.</span><span class="en-text">All rights reserved.</span></p>
+                <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="inline-flex items-center gap-2 font-semibold hover:text-white transition-colors group"><span class="ru-text">Наверх</span><span class="ua-text">Нагору</span><span class="en-text">Back to top</span><span class="w-7 h-7 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-purple-500 group-hover:border-purple-500 transition-all"><i class="fa-solid fa-arrow-up text-[10px]"></i></span></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script src="../../assets/site.js"></script>
+
+    <script>
+    (function () {
+        // кнопка «Копировать» у блоков кода
+        document.querySelectorAll('.b-prose .codehilite').forEach(box => {
+            const btn = document.createElement('button');
+            btn.type = 'button'; btn.className = 'b-copy'; btn.setAttribute('aria-label', 'Copy code');
+            btn.innerHTML = '<i class="fa-regular fa-copy" aria-hidden="true"></i>';
+            btn.addEventListener('click', () => {
+                navigator.clipboard.writeText(box.querySelector('pre').innerText).then(() => {
+                    btn.innerHTML = '<i class="fa-solid fa-check" aria-hidden="true"></i>';
+                    setTimeout(() => btn.innerHTML = '<i class="fa-regular fa-copy" aria-hidden="true"></i>', 1500);
+                });
+            });
+            box.appendChild(btn);
+        });
+        // подсветка текущего раздела в оглавлении
+        const links = Array.from(document.querySelectorAll('.b-toc a'));
+        if (links.length && 'IntersectionObserver' in window) {
+            const map = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+            const io = new IntersectionObserver(es => es.forEach(e => {
+                if (e.isIntersecting) { links.forEach(l => l.classList.remove('active')); const a = map.get(e.target.id); if (a) a.classList.add('active'); }
+            }), { rootMargin: '-80px 0px -70% 0px' });
+            map.forEach((_, id) => { const el = document.getElementById(id); if (el) io.observe(el); });
+        }
+    })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Alexey Seleznev">
+    <meta name="theme-color" content="#030712">
+    <link rel="canonical" href="https://alexey-seleznev.pro/blog/vzaimodeystvie-r-s-bazami-dannyh-na-primere-microsoft-sql-server-i-dru/">
+
+    <title>Взаимодействие R с базами данных на примере Microsoft SQL Server и других СУБД | Алексей Селезнёв</title>
+    <meta name="title" content="Взаимодействие R с базами данных на примере Microsoft SQL Server и других СУБД | Алексей Селезнёв">
+    <meta name="description" content="Поскольку львиная доля бизнес информации храниться в базах данных. На каком бы языке программирования вы не писали, вам придётся производить различные действия с ними. В этой статье я…">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alexey-seleznev.pro/blog/vzaimodeystvie-r-s-bazami-dannyh-na-primere-microsoft-sql-server-i-dru/">
+    <meta property="og:site_name" content="ALEXEY-SELEZNEV.pro">
+    <meta property="og:title" content="Взаимодействие R с базами данных на примере Microsoft SQL Server и других СУБД | Алексей Селезнёв">
+    <meta property="og:description" content="Поскольку львиная доля бизнес информации храниться в базах данных. На каком бы языке программирования вы не писали, вам придётся производить различные действия с ними. В этой статье я…">
+    <meta property="og:image" content="https://alexey-seleznev.pro/photo.jpg">
+    <meta property="og:image:alt" content="Алексей Селезнёв">
+    <meta property="og:locale" content="ru_RU">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="https://alexey-seleznev.pro/blog/vzaimodeystvie-r-s-bazami-dannyh-na-primere-microsoft-sql-server-i-dru/">
+    <meta name="twitter:title" content="Взаимодействие R с базами данных на примере Microsoft SQL Server и других СУБД | Алексей Селезнёв">
+    <meta name="twitter:description" content="Поскольку львиная доля бизнес информации храниться в базах данных. На каком бы языке программирования вы не писали, вам придётся производить различные действия с ними. В этой статье я…">
+    <meta name="twitter:image" content="https://alexey-seleznev.pro/photo.jpg">
+
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z56YHE916N"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Z56YHE916N');
+    </script>
+    <link rel="icon" type="image/jpeg" href="../../logo.jpg">
+    <link rel="apple-touch-icon" href="../../logo.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;700;800;900&display=swap">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/site.css">
+    <!-- Tailwind собран заранее (_build/build.py) и подключается последним, как это делал CDN-скрипт -->
+    <link rel="stylesheet" href="../../assets/tailwind.css">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Взаимодействие R с базами данных на примере Microsoft SQL Server и других СУБД",
+  "datePublished": "2020-04-28",
+  "inLanguage": "ru",
+  "description": "Поскольку львиная доля бизнес информации храниться в базах данных. На каком бы языке программирования вы не писали, вам придётся производить различные действия с ними. В этой статье я…",
+  "author": {
+    "@id": "https://alexey-seleznev.pro/#person"
+  },
+  "mainEntityOfPage": "https://alexey-seleznev.pro/blog/vzaimodeystvie-r-s-bazami-dannyh-na-primere-microsoft-sql-server-i-dru/"
+}
+    </script>
+    <link rel="stylesheet" href="../blog.css">
+</head>
+<body class="relative lang-en">
+
+    <!-- Interactive Background -->
+    <div id="vanta-bg"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full z-50 top-0 left-0 border-b border-white/5 bg-slate-950/60 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 h-16 flex items-center justify-between">
+            <a href="../../" class="flex items-center gap-2 sm:gap-2.5 md:gap-3 group shrink min-w-0">
+                <img src="../../logo.jpg" alt="Alexey Seleznev" class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 rounded-lg sm:rounded-xl object-cover shadow-md border border-white/10 group-hover:border-purple-500/50 group-hover:scale-105 transition-all shrink-0">
+                <span class="text-xs min-[400px]:text-sm sm:text-base md:text-xl font-black tracking-tight uppercase outfit-font whitespace-nowrap text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+            </a>
+            <div class="hidden xl:flex gap-6 text-sm font-semibold text-slate-400">
+                <a href="../../" class="nav-link hover:text-white transition-colors"><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a>
+                <a href="../../opensource/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span></a>
+                <a href="../../courses/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a>
+                <a href="../../videos/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a>
+                <a href="../../talks/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a>
+                <a href="../../articles/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a>
+                <a href="../../interviews/" class="nav-link hover:text-white transition-colors"><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a>
+                <a href="../../blog/" class="nav-link hover:text-white transition-colors active"><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a>
+            </div>
+
+            <div class="flex items-center gap-1.5 sm:gap-2 md:gap-4 shrink-0">
+                <div class="lang-switcher flex gap-1 sm:gap-1.5 md:gap-2 text-[11px] sm:text-xs md:text-sm font-bold border-r border-white/10 pr-1.5 sm:pr-3 md:pr-4 mr-0.5 sm:mr-1 md:mr-2 outfit-font">
+                    <button onclick="changeLang('en')" id="btn-en" class="active hover:text-white transition-colors">EN</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ru')" id="btn-ru" class="text-slate-500 hover:text-white transition-colors">RU</button>
+                    <span class="text-slate-600">/</span>
+                    <button onclick="changeLang('ua')" id="btn-ua" class="text-slate-500 hover:text-white transition-colors">UA</button>
+                </div>
+
+                <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="text-slate-400 hover:text-blue-400 transition-colors hidden sm:block" aria-label="Telegram"><i class="fa-brands fa-telegram text-lg md:text-xl"></i></a>
+                <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="text-slate-400 hover:text-white transition-colors hidden sm:block" aria-label="GitHub"><i class="fa-brands fa-github text-lg md:text-xl"></i></a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="xl:hidden w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-purple-500/20 hover:border-purple-500/40 transition-all focus:outline-none" aria-label="Toggle Navigation Menu">
+                    <i class="fa-solid fa-bars text-sm sm:text-lg" id="mobile-menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div id="mobile-menu" class="hidden xl:hidden border-t border-white/10 bg-slate-950/95 backdrop-blur-2xl shadow-2xl overflow-y-auto max-h-[calc(100vh-4rem)] transition-all">
+            <div class="max-w-7xl mx-auto px-6 py-6 space-y-1">
+                <a href="../../" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-house text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span>
+                </a>
+                <a href="../../opensource/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-code-branch text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span>
+                </a>
+                <a href="../../courses/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-graduation-cap text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span>
+                </a>
+                <a href="../../videos/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-circle-play text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span>
+                </a>
+                <a href="../../talks/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-microphone-lines text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span>
+                </a>
+                <a href="../../articles/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-pen-nib text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span>
+                </a>
+                <a href="../../interviews/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-regular fa-newspaper text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span>
+                </a>
+                <a href="../../blog/" class="flex items-center gap-3.5 px-4 py-3 rounded-xl text-white bg-white/5 hover:text-white hover:bg-white/5 font-semibold text-base transition-colors">
+                    <i class="fa-solid fa-feather-pointed text-purple-400 w-5 text-center"></i>
+                    <span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span>
+                </a>
+
+                <div class="pt-4 mt-3 border-t border-white/10 flex items-center justify-around text-slate-400">
+                    <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-blue-400 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-telegram text-xl"></i> Telegram
+                    </a>
+                    <a href="https://github.com/selesnow" target="_blank" rel="noopener" class="p-2 hover:text-white transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-github text-xl"></i> GitHub
+                    </a>
+                    <a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" class="p-2 hover:text-red-500 transition-colors flex items-center gap-2 text-sm font-semibold">
+                        <i class="fa-brands fa-youtube text-xl"></i> YouTube
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="b-wrap relative z-10">
+        <nav class="b-crumbs" aria-label="breadcrumb">
+            <a href="../../"><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a><span>/</span><a href="../"><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a><span>/</span><a href="../?cat=programmirovanie#posts">Программирование</a>
+        </nav>
+        <div class="b-layout has-toc">
+            <article class="bento-glass no-lift b-article" data-aos="fade-up">
+                <div class="bento-content">
+                    <div class="b-cats"><a class="b-chip b-chip-cat" href="../?cat=programmirovanie#posts">Программирование</a><a class="b-chip b-chip-cat" href="../?cat=r#posts">R</a></div>
+                    <h1 class="b-title outfit-font">Взаимодействие R с базами данных на примере Microsoft SQL Server и других СУБД</h1>
+                    <div class="b-meta">
+                        <span><i class="fa-regular fa-calendar" aria-hidden="true"></i><span class="ru-text">28 апреля 2020</span><span class="ua-text">28 квітня 2020</span><span class="en-text">28 Apr 2020</span></span>
+                        <span><i class="fa-regular fa-clock" aria-hidden="true"></i><span class="ru-text">12 мин чтения</span><span class="ua-text">12 хв читання</span><span class="en-text">12 min read</span></span>
+                        <span class="b-lang" title="Русский">RU</span>
+                    </div>
+                    <div class="b-note"><i class="fa-regular fa-clock" aria-hidden="true"></i><div><span class="ru-text">Материал опубликован в 2020 году — описанные инструменты и интерфейсы могли измениться.</span><span class="ua-text">Матеріал опубліковано у 2020 році — описані інструменти та інтерфейси могли змінитися.</span><span class="en-text">Published in 2020 — the tools and interfaces described may have changed since.</span></div></div>
+                    
+                    <div class="b-prose"><p>Поскольку львиная доля бизнес информации храниться в базах данных. На каком бы языке программирования вы не писали, вам придётся производить различные действия с ними.</p>
+<p>В этой статье я расскажу о двух интерфейса для работы с базами данных в R. Большая часть примеров демонстрируют работу с Microsoft SQL Server, тем не менее все примеры кода будут работать и с другими базами данных, такими как: MySQL, PostgreSQL, SQLite, ClickHouse, Google BigQuery и др.</p>
+<p><img loading="lazy" decoding="async" alt="image" width="1332" height="850" src="../images/vzaimodeystvie-r-s-bazami-dannyh-na-pri-925a23786a89917d9a31-30a78146.webp" /></p>
+<h1 id="_1">Содержание</h1>
+<p><em>Если вы интересуетесь анализом данных, и в частности языком R, возможно вам будут интересны мои <a target="_blank" rel="noopener" href="https://t.me/R4marketing">telegram</a> и <a target="_blank" rel="noopener" href="https://www.youtube.com/R4marketing/?sub_confirmation=1">youtube</a> каналы. Большая часть контента которых посвящена языку R.</em></p>
+<blockquote>
+<p>Впервые статья была опубликована на Хабре</p>
+<p><a target="_blank" rel="noopener" href="https://habr.com/ru/post/461063/">https://habr.com/ru/post/461063/</a></p>
+</blockquote>
+<ul>
+<li><a href="#trebuemoe-programnoe-obespechenie">Требуемое программное обеспечение</a></li>
+<li><a href="#paket-dbi">Пакет DBI</a></li>
+<li><a href="#paket-dbi">Список основных функций DBI</a></li>
+<li><a href="#podklyuchenie-k-bazam-dannyh">Подключение к базам данных</a><ul>
+<li><a href="#primer-podklyucheniya-k-microsoft-sql-server-s-pomoschyu-paketa-odbc">Пример подключения к Microsoft SQL Server с помощью пакета odbc</a></li>
+<li><a href="#primer-podklyucheniya-k-microsoft-sql-server-s-pomoschyu-paketa-odbc">Пример подключения к Microsoft SQL Server с помощью пакета RMSSQL</a></li>
+<li><a href="#kak-skryt-paroli-ot-bazy-dannyh-v-r-skriptah">Как скрыть пароли от базы данных в R скриптах</a></li>
+</ul>
+</li>
+<li><a href="#sozdanie-tablic-i-zapis-v-bazu-dannyh">Создание таблиц и запись в базу данных</a></li>
+<li><a href="#chtenie-dannyh-iz-subd">Чтение данных из СУБД</a></li>
+<li><a href="#manipulirovanie-dannymi-v-subd-dml">Манипулирование данными в СУБД (DML)</a></li>
+<li><a href="#tranzakcii-v-subd">Транзакции в СУБД</a></li>
+<li><a href="#paket-rodbc">Пакет RODBC</a></li>
+<li><a href="#osnovnye-funkcii-paketa-rodbc">Основные функции пакета RODBC</a></li>
+<li><a href="#primer-raboty-s-rodbc">Пример работы с RODBC</a></li>
+<li><a href="#tranzakcionnost">Транзакционность</a></li>
+<li><a href="#zaklyuchenie">Заключение</a></li>
+</ul>
+<h1 id="_2">Требуемое программное обеспечение</h1>
+<p>Для того, что бы повторить все описанные в статье примеры работы с СУБД вам потребуется перечисленное ниже, бесплатное программное обеспечение:</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://cran.r-project.org/bin/windows/base/">Язык R</a>;</li>
+<li>Среда разработки <a target="_blank" rel="noopener" href="https://www.rstudio.com/products/rstudio/download/#download">RStudio</a>;</li>
+<li>Система Управления Базами Данных, на выбор:<br />
+   3.1. <a target="_blank" rel="noopener" href="https://www.microsoft.com/ru-RU/download/details.aspx?id=55994">Microsoft SQL Server</a><br />
+   3.2. <a target="_blank" rel="noopener" href="https://dev.mysql.com/downloads/mysql/">MySQL</a><br />
+   3.3. <a target="_blank" rel="noopener" href="https://www.enterprisedb.com/downloads/postgres-postgresql-downloads">PostgreSQL</a></li>
+</ol>
+<h1 id="dbi">Пакет DBI</h1>
+<p>Пакет <code>DBI</code> является наиболее популярным и удобным способом взаимодействия с базами данных в R.</p>
+<p><code>DBI</code> предоставляет вам набор функций, с помощью которых вы можете управлять базами данных. Но для подключения к базам данных требуется установка дополнительных пакетов, которые являются драйверами к различным системам управления базами данных (СУБД).</p>
+<h3 id="dbi_1">Список основных функций DBI</h3>
+<ul>
+<li><code>dbConnect</code> — подключение к базе данных;</li>
+<li><code>dbWriteTable</code> — запись таблицы в базу данных;</li>
+<li><code>dbReadTable</code> — загрузка таблицы из базы данных;</li>
+<li><code>dbGetQuery</code> — загрузка результата выполнения запроса;</li>
+<li><code>dbSendQuery</code> — отправка запроса к базе данных;</li>
+<li><code>dbFetch</code> — извлечение элементов из набора результатов;</li>
+<li><code>dbExecute</code> — выполнение запросов на обновление / удаление / вставку данных в таблицы;</li>
+<li><code>dbGetInfo</code> — запрос информацию о результате запроса или подключении;</li>
+<li><code>dbListFields</code> — запрос списка полей таблицы;</li>
+<li><code>dbListTables</code> — запрос списка таблиц базы данных;</li>
+<li><code>dbExistsTable</code> — проверка наличия таблицы в базе данных;</li>
+<li><code>dbRemoveTable</code> — удаление таблицы из базы данных;</li>
+<li><code>dbDisconnect</code> — разрыв отсоединения с базы данных.</li>
+</ul>
+<h3 id="_3">Подключение к базам данных</h3>
+<p>Для взаимодействия с базами данных предварительно к ним необходимо подключиться. В зависимости от СУБД с которой вы планируете работать вам потребуется дополнительный пакет, ниже перечень наиболее часто используемых.</p>
+<ul>
+<li><code>odbc</code> — Драйвер для подключения через ODBC интерфейс;</li>
+<li><code>RSQLite</code> — Драйвер к SQLite;</li>
+<li><code>RMySQL</code> / <code>RMariaDB</code> — Драйвер к СУБД MySQL и MariaDB;</li>
+<li><code>RPostgreSQL</code> — Драйвер к PosrtgreSQL;</li>
+<li><code>bigrquery</code> — Драйвер к Google BigQuery;</li>
+<li><code>RClickhouse</code> / <code>clickhouse</code> — Драйвер к ClickHouse;</li>
+<li><code>RMSSQL</code> — Драйвер к Microsoft SQL Server (MS SQL), <em>на момент написания статьи присутствует только на GitHub</em>.</li>
+</ul>
+<p>Пакет <code>DBI</code> поставляется с базовой комплектацией R, но пакеты, которые являются драйверами к базам данных необходимо устанавливать с помощью команды <code>install.packages("название драйвера")</code>.</p>
+<p>Для установки пакетов с GitHub вам также понадобится дополнительный пакет — <code>devtools</code>. Например пакет <code>RMSSQL</code> на данный момент не опубликован в основном репозитории R пакетов, для его установки воспользуйтесь следующим кодом:</p>
+<div class="codehilite"><pre><span></span><code>install.packages(&quot;devtools&quot;)
+devtools::install_github(&quot;bescoto/RMSSQL&quot;)
+</code></pre></div>
+
+<h4 id="microsoft-sql-server-odbc">Пример подключения к Microsoft SQL Server с помощью пакета odbc</h4>
+<p>Перед использованием любого пакета в R сессии его предварительно необходимо подключить с помощью функции <code>library("название пакета")</code>.</p>
+<p>Я неспроста выбрал Microsoft SQL Server в качестве основной СУБД на которой будет приведена большая часть примеров этой статьи. Дело в том, что это достаточно популярная база данных, но при этом она до сих пор не имеет драйвера для подключения из R опубликованного на CRAN.</p>
+<p>Но к счастью SQL Server, как и практически любая другая база имеет <a target="_blank" rel="noopener" href="https://ru.wikipedia.org/wiki/ODBC">ODBC</a> (англ. Open Database Connectivity) интерфейс для подключения. Для подключения к СУБД через ODBC интерфейс в R есть ряд пакетов. Первым мы рассмотрим подключение через пакет <code>odbc</code>.<br />
+<strong>Простое подключение к БД через odbc интерфейс</strong></p>
+<p>В функцию <code>dbConnect()</code> вам необходимо первым аргументом <em>drv</em> передать функцию, которая является драйвером для подключения к СУБД (<code>odbc()</code>). Такие функции обычно называются также, как и СУБД, и поставляются с пакетами которые являются драйверами для <code>DBI</code>.</p>
+<p>Далее необходимо перечислить параметры подключения. Для подключения к MS SQL через ODBC необходимо задать следующие параметры:</p>
+<ul>
+<li>Driver — Название ODBC драйвера;</li>
+<li>Server — IP адрес SQL сервера;</li>
+<li>Database — Название базы данных к которой необходимо подключиться;</li>
+<li>UID — Имя пользователя базы данных;</li>
+<li>PWD — Пароль;</li>
+<li>Port — Порт для подключения, у SQL Server по умолчанию порт 1433.</li>
+</ul>
+<p>ODBC драйвер для подключения к Microsoft SQL Server включен в комплектацию Windows, но он может иметь и другое название. Посмотреть список установленных драйверов можно в Администраторе источника данных ODBC. Запустить администратор источника данных в Windows 10 можно по следующему пути:</p>
+<ul>
+<li>32-разрядной версии: <code>%systemdrive%\Windows\SysWoW64\Odbcad32.exe</code></li>
+<li>64-разрядной версии: <code>%systemdrive%\Windows\System32\Odbcad32.exe</code></li>
+</ul>
+<p><img loading="lazy" decoding="async" alt="" width="592" height="439" src="../images/vzaimodeystvie-r-s-bazami-dannyh-na-pri-c6c816934a70e2386a45-9defbd4b.webp" /></p>
+<p>Получить список всех установленных на вашем ПК драйверов также можно с помощью функции <code>odbcListDrivers()</code>.</p>
+<div class="codehilite"><pre><span></span><code>   name                                  attribute        value                                   
+   &lt;chr&gt;                                 &lt;chr&gt;            &lt;chr&gt;                                   
+ 1 SQL Server                            APILevel         2                                       
+ 2 SQL Server                            ConnectFunctions YYY                                     
+ 3 SQL Server                            CPTimeout        60                                      
+ 4 SQL Server                            DriverODBCVer    03.50                                   
+ 5 SQL Server                            FileUsage        0                                       
+ 6 SQL Server                            SQLLevel         1                                       
+ 7 SQL Server                            UsageCount       1                                       
+ 8 MySQL ODBC 5.3 ANSI Driver            UsageCount       1                                       
+ 9 MySQL ODBC 5.3 Unicode Driver         UsageCount       1                                       
+10 Simba ODBC Driver for Google BigQuery Description      Simba ODBC Driver for Google BigQuery2.0
+# ... with 50 more rows
+</code></pre></div>
+
+<p>Скачать ODBC драйвера для других СУБД можно по следующим ссылкам:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://dev.mysql.com/downloads/connector/odbc/">MySQL</a></li>
+<li><a target="_blank" rel="noopener" href="https://odbc.postgresql.org/">PostgreSQL</a></li>
+<li><a target="_blank" rel="noopener" href="https://cloud.google.com/bigquery/providers/simba-drivers/">Google BigQuery</a></li>
+</ul>
+<p>Для различных СУБД название параметров для подключения могут быть другими, например:</p>
+<ul>
+<li>PostgreSQL / MySQL / MariaDB — user, password, host, port, dbname;</li>
+<li>GoogleBigQuery — project, dataset;</li>
+<li>ClickHouse — user, password, db, port, host;</li>
+</ul>
+<p>С помощью администратора источника данных ODBC вы можете запустить мастер для создания ODBC источника данных. Для этого достаточно открыть администратор, перейти на вкладку “Пользовательский DSN” и нажать кнопку “Добавить…”.</p>
+<p><img loading="lazy" decoding="async" alt="" width="462" height="352" src="../images/vzaimodeystvie-r-s-bazami-dannyh-na-pri-9aee92ba30bdc8de8116-976f92f3.webp" /></p>
+<p>При создании источника данных используя администратор вы присваиваете ему имя, DSN (Data Source Name).</p>
+<p><img loading="lazy" decoding="async" alt="" width="506" height="360" src="../images/vzaimodeystvie-r-s-bazami-dannyh-na-pri-b03a0ca7c90fa0d5bddc-696ac551.webp" /></p>
+<p>В примере выше мы создали источник данных с DSN “my_test_source”. Теперь мы можем использовать этот источник для подключения к Microsoft SQL Server, и не указывать в коде остальные параметры подключения.<br />
+<strong>Подключение к БД через odbc интерфейс с использованием DSN</strong></p>
+<p>Посмотреть имена всех созданных на вашем ПК источников данных ODBC можно с помощью функции <code>odbcListDataSources()</code>.</p>
+<div class="codehilite"><pre><span></span><code>   name            description                          
+   &lt;chr&gt;           &lt;chr&gt;                                
+ 1 BQ              Simba ODBC Driver for Google BigQuery
+ 2 BQ_main         Simba ODBC Driver for Google BigQuery
+ 3 BQ ODBC         Simba ODBC Driver for Google BigQuery
+ 4 OLX             Simba ODBC Driver for Google BigQuery
+ 5 Multicharts     Simba ODBC Driver for Google BigQuery
+ 6 PostgreSQL35W   PostgreSQL Unicode(x64)              
+ 7 hillel_bq       Simba ODBC Driver for Google BigQuery
+ 8 blog_bq         Simba ODBC Driver for Google BigQuery
+ 9 MyClientMSSQL   SQL Server                           
+10 local_mssql     SQL Server                           
+11 MSSQL_localhost SQL Server                           
+12 my_test_source  SQL Server                           
+13 Google BigQuery Simba ODBC Driver for Google BigQuery
+</code></pre></div>
+
+<h3 id="microsoft-sql-server-rmssql">Пример подключения к Microsoft SQL Server с помощью пакета RMSSQL</h3>
+<p><code>RMSSQL</code> не опубликован на CRAN, поэтому установить его можно с GitHub с помощью пакета <code>devtools</code>.</p>
+<div class="codehilite"><pre><span></span><code>install.packages(&quot;devtools&quot;)
+devtools::install_github(&quot;bescoto/RMSSQL&quot;)
+</code></pre></div>
+
+<p><strong>Пример подключения с помощью DBI драйвера RMSSQL</strong></p>
+<p>В большинстве случаев, используя для работы с базами данных пакет <code>DBI</code>, вы будете подключаться именно таким способом. Т.е. устанавливать один из требуемых пакетов — драйверов, передавая в качестве значения аргумента <em>drv</em> функции <code>dbConnect</code>, функцию — драйвер для подключения к нужной вам СУБД.<br />
+<strong>Пример подключения к MySQL, PostgreSQL, SQLite и BigQuery</strong></p>
+<h3 id="r">Как скрыть пароли от базы данных в R скриптах</h3>
+<p>Выше я привёл несколько примеров которые можно использовать для подключения к любой базе данных но в них есть один минус, в таком виде все доступы к базам данных, включая пароли, хранятся в виде текста в самих скриптах.</p>
+<p>Если все ваши скрипты развёрнуты и запускаются исключительно локально на вашем ПК, и он при этом защищён паролем, то скорее всего никакой проблемы в этом не будет. Но если вы совместно с кем то работаете на одном сервере то хранение паролей от баз данных в тексте ваших скриптов не лучшее решение.</p>
+<p>В любой операционной системе есть утилита для управления учётными данными. Например, в Windows это диспетчер учетных данных (Credential Manager). Добавить в это хранилище пароль который вы используете для подключения к базе данных можно через пакет <code>keyring</code>. Пакет кроссплатформенный и приведённый пример будет работать в любой операционной системе, как минимум на Windows, MacOS и Linux.</p>
+<div class="codehilite"><pre><span></span><code># install.packages(&quot;keyring&quot;)
+
+# подключаем пакет
+library(keyring)
+library(RMSSQL)
+
+# создаём ключ
+key_set_with_value(service = &quot;mssql&quot;, 
+                   username = &quot;my_username&quot;,
+                   password = &quot;my_password&quot;)
+
+# подключение через RMSSQL
+con &lt;- dbConnect(MSSQLServer(), 
+                 host     = &#39;localhost&#39;, 
+                 user     = &#39;my_username&#39;, 
+                 password = key_get(&quot;mssql&quot;, &quot;my_username&quot;), 
+                 dbname   = &quot;mybase&quot;)
+</code></pre></div>
+
+<p>Т.е. с помощью функции <code>key_set_with_value()</code> вы добавляете пароль в хранилище учётных данных, а с помощью <code>key_get()</code> запрашиваете его, при этом запросить пароль может только тот пользователь который добавил его в хранилище. С помощью <code>keyring</code> можно хранить пароли не только от баз данных, но и от любых сервисов, а так же авторизационные токены при работе с API.</p>
+<h3 id="_4">Создание таблиц и запись в базу данных</h3>
+<p>Запись в базу данных осуществляется функцией <code>dbWriteTable()</code>.</p>
+<p>Аргументы функции <code>dbWriteTable()</code>:</p>
+<p><em>Жирным шрифтом выделены обязательные аргументы, курсивом — не обязательные</em></p>
+<ul>
+<li><strong>conn</strong> — объект подключения к СУБД, созданный с помощью функции <code>dbConnect</code>;</li>
+<li><strong>name</strong> — название таблицы в СУБД, в которую будут записаны данные;</li>
+<li><strong>value</strong> — таблица (объект класса data.frame / data.table / tibble_frame) в R, данные из которого будут записаны в СУБД;</li>
+<li><em>row.names</em> — Добавляет в таблицу столбец row_names, с номерами строк, <em>по умолчанию имеет значение FALSE</em>.</li>
+<li><em>overwrite</em> — Перезаписывать таблицу, если таблица с именем указанным в аргументе <em>name</em> уже присутвует в СУБД, <em>по умолчанию имеет значение FALSE</em>;</li>
+<li><em>append</em> — Дописывать данные, если таблица с именем указанным в аргументе <em>name</em> уже присутвует в СУБД, <em>по умолчанию имеет значение FALSE</em>;</li>
+<li><em>field.types</em> — Принимает на вход именованный вектор, и задаёт тип данных в каждом поле при записи в СУБД, <em>по умолчанию имеет значение NULL</em>;</li>
+<li><em>temporary</em> — Позволяет создавать временные таблицы в СУБД, которые будут доступны до момента разрыва соединения с базой, <em>по умолчанию имеет значение FALSE</em>.</li>
+</ul>
+<p><strong>Пример записи данных в СУБД через DBI</strong></p>
+<p>Для просмотра таблиц в базе данных служит функция <code>dbListTables()</code>, для удаления таблиц <code>dbRemoveTable()</code><br />
+<strong>Пример запроса списка таблиц и удаления таблицы из СУБД</strong></p>
+<h3 id="_5">Чтение данных из СУБД</h3>
+<p>С помощью <code>DBI</code> вы можете запрашивать либо таблицы целиком, либо результат выполнения вашего SQL запроса. Для выполнения этих операций используются функции <code>dbReadTable()</code> и <code>dbGetQuery()</code>.<br />
+<strong>Пример запроса таблицы iris из СУБД</strong><br />
+<strong>Пример загрузки результата выполнения SQL из СУБД</strong></p>
+<h3 id="dml">Манипулирование данными в СУБД (DML)</h3>
+<p>Рассмотренная выше функция <code>dbGetQuery()</code> используется исключительно для запросов на выборку данных (SELECT).</p>
+<p>Для операций манипуляций с данными, таких как UPDATE, INSERT, DELETE, в <code>DBI</code> существует функция <code>dbExecute()</code>.<br />
+<strong>Пример кода для манипуляции данными в СУБД</strong></p>
+<h3 id="_6">Транзакции в СУБД</h3>
+<blockquote>
+<p>Транзакция это последовательное выполнение операций чтения и записи. Окончанием транзакции может быть либо сохранение изменений (фиксация, commit) либо отмена изменений (откат, rollback). Применительно к БД транзакция это нескольких запросов, которые трактуются как единый запрос.</p>
+</blockquote>
+<p><em><a target="_blank" rel="noopener" href="https://habr.com/ru/post/446662/">Цитата из статьи “Транзакции и механизмы их контроля”</a></em></p>
+<p>Транзакция инкапсулирует несколько операторов SQL в элементарную единицу. В <code>DBI</code> начало транзакции инициируется с помощью <code>dbBegin()</code> и далее либо подтверждается с помощью <code>dbCommit()</code>, либо отменяется с помощью <code>dbRollback()</code>. В любом случае СУБД гарантирует, что: либо все, либо ни одно из утверждений не будут применены к данным.</p>
+<p>Для примера, давайте в ходе транзакции добавим в таблицу iris 51 строку, далее изменим значение <em>Sepal.Width</em> в 5 строке, и удалим 43 строку из таблицы.<br />
+<strong>Пример кода проведения транзакции</strong><br />
+<strong>Пример кода отмены транзакции</strong></p>
+<h1 id="rodbc">Пакет RODBC</h1>
+<p>Пакет <code>RODBC</code> предоставляет автономный интерфейс для подключения и работы с СУБД через ODBC интерфейс.</p>
+<p><code>RODBC</code> не совместим с <code>DBI</code>, т.е. вы не можете использовать объект подключения созданный с помощью <code>RODBC</code> в функциях предоставляемых пакетом <code>DBI</code>.</p>
+<h3 id="rodbc_1">Основные функции пакета RODBC</h3>
+<ul>
+<li><code>odbcConnect</code> — Подключение к СУБД через DSN;</li>
+<li><code>odbcDriverConnect</code> — Подключение к базе через строку подключения;</li>
+<li><code>sqlQuery</code> — Отправка запроса в СУБД, и получение результата его выполнения. Поддерживает запросы любого типа: SELECT, UPDATE, INSERT, DELETE.</li>
+<li><code>sqlFetch</code> — Получить целиком таблицу из СУБД;</li>
+<li><code>sqlTables</code> — Получить список таблиц в базе.</li>
+<li><code>sqlSave</code> — Создание новой таблицы в базе данных, или добавление новых данных в уже существующую таблицу;</li>
+<li><code>sqlUpdate</code> — Обновление данных в таблице которая уже существует в СУБД;</li>
+<li><code>sqlDrop</code> — Удаление таблицы в СУБД;</li>
+<li><code>odbcClose</code> — Завершение соединения с СУБД.</li>
+</ul>
+<h3 id="rodbc_2">Пример работы с RODBC</h3>
+<p>С моей точки зрения <code>RODBC</code> менее функционален чем <code>DBI</code>, но в нём есть все необходимые функции для работы с СУБД.<br />
+<strong>Пример взаимодействия с СУБД через RODBC</strong></p>
+<h1 id="_7">Транзакционность</h1>
+<p>По умолчанию транзакционность в <code>RODBC</code> выключена. Управление транзакциями осуществляется двумя функциями.</p>
+<ul>
+<li><code>odbcSetAutoCommit</code> — Переключение между обычным и транзакционным режимом работы с СУБД;</li>
+<li><code>odbcEndTran</code> — Подтверждение или отмена транзакции.</li>
+</ul>
+<p>Включение и отключение транзакционного режима осуществляется функцией <code>odbcSetAutoCommit</code> с помощью аргумента <em>autoCommit</em>.<br />
+<strong>Примре работы в транзакционном режиме в RODBC</strong></p>
+<h1 id="_8">Заключение</h1>
+<p>Два описанных в статье метода работы с базами данных на языке R, <code>DBI</code> и <code>RODBC</code>, достаточно универсальны, и будут работать практически с любой СУБД.</p>
+<p>Единственная разница в работе между различными СУБД заключается в процессе подключения. Для большинства популярных СУБД существуют отдельные пакеты которые являются драйверами. Для остальных СУБД необходимо настраивать подключение через ODBC интерфейс используя пакеты <code>odbc</code> или <code>RODBC</code>. Все остальные манипуляции, вне зависимости от выбранной вами СУБД, будут неизменны. Исключением является отправка SQL запросов, в зависимости от SQL диалекта который поддерживается СУБД с которой вы работаете.</p>
+<p><strong>P.S.</strong><br />
+Если вы дочитали стататью, то наверняка интересуетесь языком R, в таком случае думаю вам будет интересен мой <a target="_blank" rel="noopener" href="https://t.me/R4marketing">телеграм</a> и <a target="_blank" rel="noopener" href="https://www.youtube.com/R4marketing/?sub_confirmation=1">youtube</a> каналы, большая часть контента которых посвящена языку R. Подписывайтесь.</p></div>
+                    
+                    <div class="b-tags"><a class="b-chip" href="../?tag=bazy-dannyh#posts">Базы данных</a><a class="b-chip" href="../?tag=r#posts">R</a></div>
+                </div>
+            </article>
+            <aside class="b-toc" aria-label="Contents"><div class="b-toc-title"><span class="ru-text">Содержание</span><span class="ua-text">Зміст</span><span class="en-text">Contents</span></div><ul><li><a href="#dbi_1">Список основных функций DBI</a></li><li><a href="#_3">Подключение к базам данных</a></li><li><a href="#microsoft-sql-server-rmssql">Пример подключения к Microsoft SQL Server с помощью пакета RMSSQL</a></li><li><a href="#r">Как скрыть пароли от базы данных в R скриптах</a></li><li><a href="#_4">Создание таблиц и запись в базу данных</a></li><li><a href="#_5">Чтение данных из СУБД</a></li><li><a href="#dml">Манипулирование данными в СУБД (DML)</a></li><li><a href="#_6">Транзакции в СУБД</a></li><li><a href="#rodbc_1">Основные функции пакета RODBC</a></li><li><a href="#rodbc_2">Пример работы с RODBC</a></li></ul></aside>
+        </div>
+        <section class="b-related">
+            <h2 class="outfit-font"><span class="ru-text">Читайте также</span><span class="ua-text">Читайте також</span><span class="en-text">Related posts</span></h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="../oop-v-yazyke-r-chast-1-s3-klassy/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="0">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/oop-v-yazyke-r-chast-1-s3-klassy-6c579c992140a44ceb85c035916-d68f72e9.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">февр. 2020</span><span class="ua-text">лют. 2020</span><span class="en-text">Feb 2020</span></div><div class="absolute top-3 right-3 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-amber-500/20 text-amber-200 border border-amber-500/30" title=""><i class="fa-regular fa-clock mr-1"></i>2020</div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">10 мин чтения</span><span class="ua-text">10 хв читання</span><span class="en-text">10 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">ООП в языке R (часть 1): S3 классы</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">R — это объектно ориентированный язык. В нём абсолютно всё является объектом, начиная от функций и заканчивая таблицами. В свою очередь, каждый объект в R относится к какому-либо классу.…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">ООП</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">R</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a>
+                <a href="../kak-napisat-svoy-mcp-server-na-yazyke-r/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="60">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/kak-napisat-svoy-mcp-server-na-yazyke-r-b2ad6c115892d005d893-7e8c5964.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">дек. 2025</span><span class="ua-text">груд. 2025</span><span class="en-text">Dec 2025</span></div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">7 мин чтения</span><span class="ua-text">7 хв читання</span><span class="en-text">7 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Как написать свой MCP сервер на языке R</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">Ранее я уже рассказывал про разработку AI чатов на языке R. Теперь сделаем шаг дальше. В этой статье мы разберем, как научить модель работать с вашими функциями и сервисами через MCP…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">AI</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">LLM</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a>
+                <a href="../kak-my-vnedrili-llm-v-rabochie-protsessy-analitikov-na-r-i-sdelali-eto/" class="bento-glass group flex flex-col p-2 rounded-3xl" data-aos="fade-up" data-aos-delay="120">
+                    <div class="bento-content flex flex-col h-full">
+                    <div class="cover h-44 rounded-2xl"><div class="cover-fallback"><i class="fa-solid fa-feather-pointed text-5xl"></i></div><img src="../images/covers/1669.webp" alt="" loading="lazy" width="640" height="360" onerror="this.remove()"><div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent"></div><div class="absolute top-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300"><span class="ru-text">май 2025</span><span class="ua-text">трав. 2025</span><span class="en-text">May 2025</span></div></div>
+                    <div class="px-3 pt-4 pb-3 flex flex-col flex-1">
+                        <div class="text-xs text-slate-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-clock text-purple-400" aria-hidden="true"></i><span class="ru-text">12 мин чтения</span><span class="ua-text">12 хв читання</span><span class="en-text">12 min read</span><span class="b-lang" title="Русский">RU</span></div>
+                        <h3 class="font-bold text-[17px] leading-snug text-slate-100 group-hover:text-purple-300 transition-colors outfit-font line-clamp-3 mb-2">Как мы внедрили LLM в рабочие процессы аналитиков на R — и сделали это бесплатно</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 flex-1">В этой статье расскажу, как мы в команде аналитиков начали использовать большие языковые модели (LLM) в повседневных рабочих инструментах. Всё построено на R, и покажу на практике, как…</p>
+                        <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">AI</span> <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-slate-400">ChatGPT</span></div>
+                            <i class="fa-solid fa-arrow-right text-xs text-slate-500 group-hover:text-purple-300 transition-colors shrink-0" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    </div>
+                </a></div>
+        </section>
+        <a href="../" class="b-back"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i><span class="ru-text">Ко всем материалам</span><span class="ua-text">До всіх матеріалів</span><span class="en-text">All posts</span></a>
+    </main>
+
+    <section class="px-6 max-w-7xl mx-auto pb-24 relative z-10">
+        <div class="grid md:grid-cols-2 gap-6" data-aos="fade-up">
+            <a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(59, 130, 246, 0.1));">
+                <div class="bento-content w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center text-blue-400 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-telegram"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">Telegram-канал R4marketing</span><span class="ua-text">Telegram-канал R4marketing</span><span class="en-text">R4marketing on Telegram</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Новые статьи, видео и заметки по R — первыми.</span><span class="ua-text">Нові статті, відео та нотатки з R — першими.</span><span class="en-text">New articles, videos and R notes — first.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-blue-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+            <a href="https://www.youtube.com/R4marketing/?sub_confirmation=1" target="_blank" rel="noopener" class="bento-glass p-8 rounded-[2rem] flex items-center gap-6 group" style="background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(239, 68, 68, 0.1));">
+                <div class="bento-content w-16 h-16 bg-red-500/20 rounded-2xl flex items-center justify-center text-red-500 text-3xl shrink-0 group-hover:scale-110 transition-transform"><i class="fa-brands fa-youtube"></i></div>
+                <div class="bento-content flex-1">
+                    <h3 class="text-xl font-bold text-white mb-1 outfit-font"><span class="ru-text">YouTube-канал R4marketing</span><span class="ua-text">YouTube-канал R4marketing</span><span class="en-text">R4marketing on YouTube</span></h3>
+                    <p class="text-slate-400 text-sm"><span class="ru-text">Видеоуроки по R, аналитике и AI-инструментам.</span><span class="ua-text">Відеоуроки з R, аналітики та AI-інструментів.</span><span class="en-text">Video lessons on R, analytics and AI tools.</span></p>
+                </div>
+                <i class="bento-content fa-solid fa-arrow-right text-red-400 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/5 bg-slate-950/80 backdrop-blur-md pt-16 pb-8 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
+                <div class="sm:col-span-2 lg:col-span-4">
+                    <a href="../../" class="inline-flex items-center gap-3 group mb-5">
+                        <img src="../../logo.jpg" alt="Alexey Seleznev" class="w-10 h-10 rounded-xl object-cover border border-white/10 group-hover:border-purple-500/50 transition-colors">
+                        <span class="text-lg font-black tracking-tight uppercase outfit-font text-white">ALEXEY-SELEZNEV<span class="text-purple-500 lowercase">.pro</span></span>
+                    </a>
+                    <p class="text-sm text-slate-400 leading-relaxed max-w-sm mb-6"><span class="ru-text">Head of Analytics в Netpeak Group. Автор open source R-пакетов, бесплатных курсов по R и проекта R4marketing.</span><span class="ua-text">Head of Analytics у Netpeak Group. Автор open source R-пакетів, безкоштовних курсів з R та проєкту R4marketing.</span><span class="en-text">Head of Analytics at Netpeak Group. Author of open source R packages, free R courses and the R4marketing project.</span></p>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="https://t.me/R4marketing" target="_blank" rel="noopener" aria-label="Telegram R4marketing" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-400 hover:border-blue-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-telegram"></i></a>
+                        <a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" aria-label="YouTube R4marketing" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-red-500 hover:border-red-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="https://github.com/selesnow" target="_blank" rel="noopener" aria-label="GitHub" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-white hover:border-white/30 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://linkedin.com/in/selesnow" target="_blank" rel="noopener" aria-label="LinkedIn" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-500 hover:border-blue-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://facebook.com/selesnow" target="_blank" rel="noopener" aria-label="Facebook" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-600/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/alexey.selesnow" target="_blank" rel="noopener" aria-label="Instagram" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-pink-500 hover:border-pink-500/40 transition-all hover:-translate-y-0.5"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://habr.com/ru/users/selesnow/" target="_blank" rel="noopener" aria-label="Habr" class="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-teal-400 hover:border-teal-400/40 transition-all hover:-translate-y-0.5"><i class="fa-solid fa-h"></i></a>
+                    </div>
+                </div>
+
+                <nav class="lg:col-span-2" aria-label="Site map">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">Сайт</span><span class="ua-text">Сайт</span><span class="en-text">Site</span></h3>
+                    <ul class="space-y-3">
+                        <li><a href="../../" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-house w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Главная</span><span class="ua-text">Головна</span><span class="en-text">Home</span></a></li>
+                        <li><a href="../../opensource/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-code-branch w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Open Source</span><span class="ua-text">Open Source</span><span class="en-text">Open Source</span></a></li>
+                        <li><a href="../../courses/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-graduation-cap w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Курсы</span><span class="ua-text">Курси</span><span class="en-text">Courses</span></a></li>
+                        <li><a href="../../videos/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-circle-play w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Видеоуроки</span><span class="ua-text">Відеоуроки</span><span class="en-text">Video Lessons</span></a></li>
+                        <li><a href="../../talks/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-microphone-lines w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Доклады и вебинары</span><span class="ua-text">Доповіді та вебінари</span><span class="en-text">Talks & Webinars</span></a></li>
+                        <li><a href="../../articles/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-pen-nib w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Статьи</span><span class="ua-text">Статті</span><span class="en-text">Articles</span></a></li>
+                        <li><a href="../../interviews/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-regular fa-newspaper w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Интервью</span><span class="ua-text">Інтерв'ю</span><span class="en-text">Interviews</span></a></li>
+                        <li><a href="../../blog/" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-feather-pointed w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Блог</span><span class="ua-text">Блог</span><span class="en-text">Blog</span></a></li>
+                    </ul>
+                </nav>
+
+                <div class="lg:col-span-3">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">R4marketing и публикации</span><span class="ua-text">R4marketing і публікації</span><span class="en-text">R4marketing & writing</span></h3>
+                    <ul class="space-y-3">
+                        <li><a href="https://t.me/R4marketing" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-telegram w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Telegram-канал R4marketing</span><span class="ua-text">Telegram-канал R4marketing</span><span class="en-text">R4marketing Telegram</span></a></li>
+                        <li><a href="https://www.youtube.com/R4marketing" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-youtube w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">YouTube-канал R4marketing</span><span class="ua-text">YouTube-канал R4marketing</span><span class="en-text">R4marketing YouTube</span></a></li>
+                        <li><a href="https://alexeyseleznev.wordpress.com/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-pen-nib w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Личный блог</span><span class="ua-text">Особистий блог</span><span class="en-text">Personal blog</span></a></li>
+                        <li><a href="https://habr.com/ru/users/selesnow/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-h w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Профиль на Хабре</span><span class="ua-text">Профіль на Хабрі</span><span class="en-text">Habr profile</span></a></li>
+                        <li><a href="https://alexey-seleznev.pro/publications/" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-solid fa-layer-group w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">Архив публикаций</span><span class="ua-text">Архів публікацій</span><span class="en-text">Publications archive</span></a></li>
+                        <li><a href="https://github.com/selesnow" target="_blank" rel="noopener" class="flex items-center gap-2.5 text-sm text-slate-400 hover:text-white transition-colors group/link"><i class="fa-brands fa-github w-4 text-center text-xs text-slate-600 group-hover/link:text-purple-400 transition-colors"></i><span class="ru-text">GitHub</span><span class="ua-text">GitHub</span><span class="en-text">GitHub</span></a></li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-3">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 outfit-font"><span class="ru-text">Контакты</span><span class="ua-text">Контакти</span><span class="en-text">Contacts</span></h3>
+                    <ul class="space-y-4">
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">Email</div><a href="mailto:me@alexey-seleznev.pro" class="text-sm text-slate-300 hover:text-purple-300 transition-colors break-all">me@alexey-seleznev.pro</a></li>
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">Telegram</div><a href="https://t.me/AlexeySeleznev" target="_blank" rel="noopener" class="text-sm text-slate-300 hover:text-blue-300 transition-colors break-all">@AlexeySeleznev</a></li>
+                        <li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">LinkedIn</div><a href="https://linkedin.com/in/selesnow" target="_blank" rel="noopener" class="text-sm text-slate-300 hover:text-blue-300 transition-colors break-all">linkedin.com/in/selesnow</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-14 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+                <p>© 2026 Alexey Seleznev. <span class="ru-text">Все права защищены.</span><span class="ua-text">Усі права захищені.</span><span class="en-text">All rights reserved.</span></p>
+                <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="inline-flex items-center gap-2 font-semibold hover:text-white transition-colors group"><span class="ru-text">Наверх</span><span class="ua-text">Нагору</span><span class="en-text">Back to top</span><span class="w-7 h-7 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-purple-500 group-hover:border-purple-500 transition-all"><i class="fa-solid fa-arrow-up text-[10px]"></i></span></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script src="../../assets/site.js"></script>
+
+    <script>
+    (function () {
+        // кнопка «Копировать» у блоков кода
+        document.querySelectorAll('.b-prose .codehilite').forEach(box => {
+            const btn = document.createElement('button');
+            btn.type = 'button'; btn.className = 'b-copy'; btn.setAttribute('aria-label', 'Copy code');
+            btn.innerHTML = '<i class="fa-regular fa-copy" aria-hidden="true"></i>';
+            btn.addEventListener('click', () => {
+                navigator.clipboard.writeText(box.querySelector('pre').innerText).then(() => {
+                    btn.innerHTML = '<i class="fa-solid fa-check" aria-hidden="true"></i>';
+                    setTimeout(() => btn.innerHTML = '<i class="fa-regular fa-copy" aria-hidden="true"></i>', 1500);
+                });
+            });
+            box.appendChild(btn);
+        });
+        // подсветка текущего раздела в оглавлении
+        const links = Array.from(document.querySelectorAll('.b-toc a'));
+        if (links.length && 'IntersectionObserver' in window) {
+            const map = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+            const io = new IntersectionObserver(es => es.forEach(e => {
+                if (e.isIntersecting) { links.forEach(l => l.classList.remove('active')); const a = map.get(e.target.id); if (a) a.classList.add('active'); }
+            }), { rootMargin: '-80px 0px -70% 0px' });
+            map.forEach((_, id) => { const el = document.getElementById(id); if (el) io.observe(el); });
+        }
+    })();
+    </script>
+</body>
+</html>
