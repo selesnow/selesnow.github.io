@@ -73,6 +73,7 @@ PAGES = [
     ('talks', 'fa-solid fa-microphone-lines', ('Доклады и вебинары', 'Доповіді та вебінари', 'Talks & Webinars')),
     ('articles', 'fa-solid fa-pen-nib', ('Статьи', 'Статті', 'Articles')),
     ('interviews', 'fa-regular fa-newspaper', ('Интервью', "Інтерв'ю", 'Interviews')),
+    ('blog', 'fa-solid fa-feather-pointed', ('Блог', 'Блог', 'Blog')),
 ]
 
 
@@ -1022,6 +1023,13 @@ def build_interviews():
         via = ''
         if it.get('via') == 'blog':
             via = f'<div class="absolute top-4 right-4 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-purple-500/20 text-purple-200 border border-purple-500/30">{T("копия в блоге", "копія в блозі", "blog copy")}</div>'
+        elif it.get('via') == 'archive':
+            via = f'<div class="absolute top-4 right-4 text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-md bg-blue-500/20 text-blue-200 border border-blue-500/30">{T("из архива", "з архіву", "from archive")}</div>'
+        # internal — материал лежит на этом же сайте (блог): открываем в той же вкладке и не считаем исходящим кликом
+        internal = bool(it.get('internal'))
+        target_attrs = '' if internal else 'target="_blank" rel="noopener"'
+        ga_event = 'content_internal_click' if internal else 'content_outbound_click'
+        arrow = 'fa-arrow-right' if internal else 'fa-arrow-up-right-from-square'
         extra = f'''<div class="absolute top-4 left-4 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg backdrop-blur-md bg-slate-950/80 border border-white/10 text-purple-300">{month_label(y, m)}</div>{via}
                         <div class="absolute bottom-4 left-4 flex items-center gap-2 text-sm font-bold text-white outfit-font"><span class="w-2 h-2 rounded-full bg-purple-400"></span>{outlet}</div>'''
         quote = ''
@@ -1032,7 +1040,7 @@ def build_interviews():
                         </blockquote>'''
         search = ' '.join([it['title'][l] for l in LANGS] + [it['outlet'], it['desc']['ru']]).lower()
         return f'''
-            <a href="{esc(url(it['url']))}" target="_blank" rel="noopener" data-ga-event="content_outbound_click" data-ga-content-type="interview" data-ga-content-title="{esc(it['title']['ru'])}" data-ga-platform="{esc(it['outlet'])}" data-ga-link-url="{esc(url(it['url']))}" class="bento-glass group flex flex-col p-3 rounded-[2rem]" data-filter-item data-kind="{it['kind']}" data-search="{esc(search)}" data-aos="fade-up" data-aos-delay="{delay}">
+            <a href="{esc(url(it['url']))}" {target_attrs} data-ga-event="{ga_event}" data-ga-content-type="interview" data-ga-content-title="{esc(it['title']['ru'])}" data-ga-platform="{esc(it['outlet'])}" data-ga-link-url="{esc(url(it['url']))}" class="bento-glass group flex flex-col p-3 rounded-[2rem]" data-filter-item data-kind="{it['kind']}" data-search="{esc(search)}" data-aos="fade-up" data-aos-delay="{delay}">
                 <div class="bento-content flex flex-col h-full">
                     {cover(it['img'], 'fa-regular fa-newspaper', 'h-52', extra)}
                     <div class="px-3 pt-5 pb-3 flex flex-col flex-1">
@@ -1043,7 +1051,7 @@ def build_interviews():
                         <div class="mt-auto pt-5">
                             <div class="pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-purple-300 transition-colors">
                                 <span class="font-semibold">{T('Читать полностью', 'Читати повністю', 'Read in full')}</span>
-                                <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                                <i class="fa-solid {arrow} text-xs"></i>
                             </div>
                         </div>
                     </div>
@@ -1302,7 +1310,7 @@ OPENSOURCE_JS = '''
         }
         const cards = Array.from(document.querySelectorAll('[data-pkg]'));
         const set = (name, cls, value) => document.querySelectorAll(`[data-pkg="${name}"] ${cls}`).forEach(el => { el.textContent = fmt(value); });
-        const setTotal = sum => { const t = document.getElementById('total-downloads'); if (t && sum > 0) t.textContent = Math.floor(sum / 1000) + 'k+'; };
+        const setTotal = sum => { const t = document.getElementById('total-downloads'); if (t && sum > 0) t.textContent = Math.floor(sum / 100000) * 100 + 'k+'; };
 
         function fromStatsFile(d) {
             Object.entries(d.packages || {}).forEach(([name, s]) => {
@@ -1492,7 +1500,7 @@ def build_opensource():
             </div>
         </div>'''
 
-    os_desc = f'{len(pkgs)} open source {plural_ru(len(pkgs), "R-пакет", "R-пакета", "R-пакетов")} Алексея Селезнёва для работы с API Google Ads, Facebook, TikTok, LinkedIn, Apple Ads, YouTube, TGStat, AppsFlyer и других сервисов. Более {total_dl // 1000}k скачиваний с CRAN.'
+    os_desc = f'{len(pkgs)} open source {plural_ru(len(pkgs), "R-пакет", "R-пакета", "R-пакетов")} Алексея Селезнёва для работы с API Google Ads, Facebook, TikTok, LinkedIn, Apple Ads, YouTube, TGStat, AppsFlyer и других сервисов. Более {total_dl // 100000 * 100}k скачиваний с CRAN.'
     page = head('opensource', 'Open Source R-пакеты | Алексей Селезнёв', os_desc,
                 jsonld=page_jsonld('opensource', 'Open Source R-пакеты', os_desc, package_items(pkgs)))
     page += nav('opensource')
@@ -1502,7 +1510,7 @@ def build_opensource():
                    'З 2016 року розробляю пакети мовою R, які спрощують збір даних з рекламних, аналітичних і CRM-платформ. З ними фахівці без глибоких навичок програмування автоматизують звітність і будують маркетингову аналітику. Більшість пакетів опубліковані на CRAN, у багатьох є документація та відеоуроки.',
                    'Since 2016 I have been building R packages that simplify collecting data from ad, analytics and CRM platforms, so specialists without deep coding skills can automate reporting and build marketing analytics. Most are published on CRAN, and many come with docs and video lessons.'),
                  [(str(len(pkgs)), T('R-пакет', 'R-пакет', 'R packages')), (str(on_cran), T('Опубликованы на CRAN', 'Опубліковані на CRAN', 'Published on CRAN')),
-                  (f'<span id="total-downloads">{total_dl // 1000}k+</span>', T('Скачиваний с CRAN', 'Завантажень з CRAN', 'CRAN downloads')),
+                  (f'<span id="total-downloads">{total_dl // 100000 * 100}k+</span>', T('Скачиваний с CRAN', 'Завантажень з CRAN', 'CRAN downloads')),
                   ('2016', T('Первый пакет', 'Перший пакет', 'First package'))], photo='opensource')
     page += f'''
     <!-- PACKAGES -->
@@ -1543,6 +1551,7 @@ PAGE_BLURBS = {
     'talks': ('Доклады с конференций, вебинары и воркшопы', 'Доповіді з конференцій, вебінари та воркшопи', 'Conference talks, webinars and workshops'),
     'articles': ('Статьи и туториалы с 2015 года', 'Статті та туторіали з 2015 року', 'Articles and tutorials since 2015'),
     'interviews': ('Интервью, экспертные опросы и комментарии', "Інтерв'ю, експертні опитування та коментарі", 'Interviews, expert surveys and comments'),
+    'blog': ('Заметки об R, аналитике и AI-инструментах', 'Нотатки про R, аналітику та AI-інструменти', 'Notes on R, analytics and AI tools'),
 }
 
 

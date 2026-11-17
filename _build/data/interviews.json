@@ -1,5 +1,29 @@
 [
  {
+  "date": "2020-08",
+  "outlet": "JMS University",
+  "url": "/blog/yazyk-r-dlya-analitikov-i-internet-marketologov/",
+  "via": "archive",
+  "internal": true,
+  "img": "",
+  "kind": "interview",
+  "title": {
+   "ru": "Язык R для аналитиков и интернет-маркетологов",
+   "ua": "Мова R для аналітиків та інтернет-маркетологів",
+   "en": "R for analysts and internet marketers"
+  },
+  "desc": {
+   "ru": "Где применяют язык R, чем он лучше Excel и в чём уступает Python, какой уровень нужен аналитику и с чего начинать учиться. Оригинал на JMS University больше недоступен — интервью восстановлено из архива.",
+   "ua": "Де застосовують мову R, чим вона краща за Excel і в чому поступається Python, який рівень потрібен аналітику та з чого починати вчитися. Оригінал на JMS University більше недоступний — інтерв’ю відновлено з архіву.",
+   "en": "Where R is used, how it beats Excel and where Python is stronger, what level an analyst needs and where to start learning. The original on JMS University is gone — the interview is restored from the web archive."
+  },
+  "quote": {
+   "ru": "Программирование даст маркетологу преимущество на рынке труда, так как он многие задачи сможет решать самостоятельно.",
+   "ua": "Програмування дасть маркетологу перевагу на ринку праці, адже він зможе вирішувати багато завдань самостійно.",
+   "en": "Programming gives a marketer an edge in the job market: they can solve many tasks on their own."
+  }
+ },
+ {
   "date": "2020-04",
   "outlet": "Netpeak Journal",
   "url": "https://alexeyseleznev.wordpress.com/2026/10/25/как-создать-личный-бренд-в-компании/",
@@ -203,6 +227,30 @@
    "ru": "Эксперты рынка — о ценах на рекламу в Google, росте его доли и перераспределении рекламных бюджетов.",
    "ua": "Експерти ринку — про ціни на рекламу в Google, зростання його частки та перерозподіл рекламних бюджетів.",
    "en": "Market experts on Google ad prices, its growing share and how budgets were redistributed."
+  }
+ },
+ {
+  "date": "2016-12",
+  "outlet": "Netpeak Blog",
+  "url": "/blog/chto-delayut-internet-marketologi-pod-novyi-god/",
+  "via": "archive",
+  "internal": true,
+  "img": "",
+  "kind": "survey",
+  "title": {
+   "ru": "Что делают интернет-маркетологи под Новый год?",
+   "ua": "Що роблять інтернет-маркетологи на Новий рік?",
+   "en": "What do internet marketers do around New Year?"
+  },
+  "desc": {
+   "ru": "Экспертный опрос блога Netpeak: как провести последнюю неделю декабря и первую неделю января, чтобы год прошёл максимально эффективно. Ответ руководителя отдела аналитики — про план-факт анализ, итоги экспериментов и тренды стоимости клика. Оригинал недоступен — восстановлено из архива.",
+   "ua": "Експертне опитування блогу Netpeak: як провести останній тиждень грудня й перший тиждень січня, щоб рік минув максимально ефективно. Відповідь керівника відділу аналітики — про план-факт аналіз, підсумки експериментів і тренди вартості кліку. Оригінал недоступний — відновлено з архіву.",
+   "en": "An expert survey in the Netpeak blog: how to spend the last week of December and the first week of January so that the year goes as effectively as possible. The head of analytics answers with plan-vs-actual analysis, experiment results and click-cost trends. The original is gone — restored from the web archive."
+  },
+  "quote": {
+   "ru": "Завершение года для аналитика — время подведения итогов и построения прогнозов.",
+   "ua": "Завершення року для аналітика — час підбиття підсумків і побудови прогнозів.",
+   "en": "For an analyst, the end of the year is the time to take stock and build forecasts."
   }
  }
 ]
