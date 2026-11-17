@@ -1,5 +1,7 @@
 # Зависимости сборки блога (_build/blog.py). Ставятся в ночном workflow: pip install -r _build/requirements.txt
-markdown>=3.5      # Markdown → HTML
+# Локально тоже: pip install -r _build/requirements.txt — иначе страницы с кодом соберутся чуть иначе, чем на сервере
+# (у Pygments и Markdown разные версии по-разному записывают кавычки и разметку в блоках кода) и будут «бегать» в git.
+markdown==3.11.3   # Markdown → HTML (версия закреплена: влияет на вид страниц)
+pygments==2.21.0   # подсветка кода (версия закреплена: влияет на вид страниц и на blog/blog.css)
 pyyaml>=6          # YAML-шапка статей
-pygments>=2.17     # подсветка кода
 pillow>=10         # оптимизация новых картинок (PNG/JPG → WebP) и размеры для width/height

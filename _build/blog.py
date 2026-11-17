@@ -620,7 +620,7 @@ def update_sitemap(posts):
     path = ROOT / 'sitemap.xml'
     raw = path.read_bytes().decode('utf-8')
     crlf = '\r\n' in raw
-    raw = re.sub(r'[ \t]*<url>\s*<loc>[^<]*/blog/[^<]*</loc>.*?</url>\s*', '', raw, flags=re.S)
+    raw = re.sub(r'[ \t]*<url>\s*<loc>[^<]*/blog/[^<]*</loc>.*?</url>[ \t]*(?:\r?\n)?', '', raw, flags=re.S)   # только сама запись и её перевод строки
 
     def url(loc, last, freq, prio):
         return f'  <url>\n    <loc>{loc}</loc>\n    <lastmod>{last}</lastmod>\n    <changefreq>{freq}</changefreq>\n    <priority>{prio}</priority>\n  </url>\n'
@@ -630,14 +630,32 @@ def update_sitemap(posts):
         block += url(f'{B.SITE}/blog/{p["slug"]}/', p['date'], 'yearly', '0.6')
     if crlf:
         raw = raw.replace('\r\n', '\n')
-    raw = raw.replace('</urlset>', block + '</urlset>')
+    # блок блога стоит перед блоком курса (если он есть), иначе в конце: порядок не зависит от того, запускается весь build.py или только блог
+    course = re.search(r'[ \t]*<url>\s*<loc>[^<]*/r_for_marketing_course/', raw)
+    pos = course.start() if course else raw.index('</urlset>')
+    raw = raw[:pos] + block + raw[pos:]
     path.write_bytes((raw.replace('\n', '\r\n') if crlf else raw).encode('utf-8'))
+
+
+def _check_versions():
+    """Предупреждает, если версии Markdown/Pygments отличаются от закреплённых в requirements.txt: тогда страницы с кодом
+    соберутся иначе, чем на сервере (кавычки в блоках кода, CSS подсветки), и git покажет «лишние» изменения."""
+    try:
+        from importlib.metadata import version
+        pins = re.findall(r'(?m)^([A-Za-z0-9_.-]+)==([^\s#]+)', (HERE / 'requirements.txt').read_text(encoding='utf-8'))
+        off = [f'{name} {version(name)} (нужно {want})' for name, want in pins if version(name) != want]
+    except Exception:
+        return
+    if off:
+        print('  ВНИМАНИЕ: версии отличаются от закреплённых — ' + ', '.join(off) +
+              '. Выполните: pip install -r _build/requirements.txt (иначе blog/ пересоберётся не так, как на сервере)')
 
 
 def build_blog(b):
     """Точка входа для _build/build.py: b — модуль build (шаблоны сайта)."""
     global B, T, esc
     B, T, esc = b, b.T, b.esc
+    _check_versions()
     posts = load_posts()
     norm = normalize(posts)
     OUT.mkdir(exist_ok=True)
