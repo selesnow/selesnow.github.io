@@ -217,7 +217,7 @@ suppressPackageStartupMessages({
 # Создание R функций
 
 # 1) Создать демо‑таблицу ------------------------------------------------------
-.gs_init_demo &lt;- function(title = &quot;MCP Demo Contacts&quot;) {
+.gs_init_demo &lt;- function(title = "MCP Demo Contacts") {
   .gs4_auth_once()
   df0 &lt;- tibble(name = character(), email = character(), city = character())
   ss &lt;- gs4_create(name = title, sheets = list(contacts = df0))
@@ -227,22 +227,22 @@ suppressPackageStartupMessages({
     list(
       spreadsheet_url = meta$spreadsheet_url,
       spreadsheet_id = as_sheets_id(ss)$spreadsheet_id,
-      worksheet = &quot;contacts&quot;
+      worksheet = "contacts"
     )
   )
   )
 }
 
 # 2) Прочитать верхние n строк -------------------------------------------------
-.gs_read &lt;- function(sheet, worksheet = &quot;contacts&quot;, range = NULL, n_max = 5) {
-  googlesheets4::gs4_auth(path = Sys.getenv(&quot;GOOGLE_SERVICE_ACCOUNT_JSON&quot;, unset = &quot;&quot;))
+.gs_read &lt;- function(sheet, worksheet = "contacts", range = NULL, n_max = 5) {
+  googlesheets4::gs4_auth(path = Sys.getenv("GOOGLE_SERVICE_ACCOUNT_JSON", unset = ""))
   res &lt;- suppressMessages(googlesheets4::read_sheet(sheet, sheet = worksheet, range = range, n_max = n_max))
   return(jsonlite::toJSON(res, pretty = TRUE, auto_unbox = TRUE))
 }
 
 # 3) Добавить одину строку -----------------------------------------------------
-.gs_append_contact &lt;- function(sheet, worksheet = &quot;data&quot;, name, position = NA, rate) {
-  googlesheets4::gs4_auth(path = Sys.getenv(&quot;GOOGLE_SERVICE_ACCOUNT_JSON&quot;, unset = &quot;&quot;))
+.gs_append_contact &lt;- function(sheet, worksheet = "data", name, position = NA, rate) {
+  googlesheets4::gs4_auth(path = Sys.getenv("GOOGLE_SERVICE_ACCOUNT_JSON", unset = ""))
   df &lt;- tibble(name = name, position = position, rate = rate)
   googlesheets4::sheet_append(ss = sheet, data = df, sheet = worksheet)
   return(jsonlite::toJSON(list(ok = TRUE, appended = nrow(df)), pretty = TRUE, auto_unbox = TRUE))
@@ -250,76 +250,76 @@ suppressPackageStartupMessages({
 
 # 4) Прочитать метаданные таблицы ----------------------------------------------
 .gs_info &lt;- function(sheet) {
-  googlesheets4::gs4_auth(path = Sys.getenv(&quot;GOOGLE_SERVICE_ACCOUNT_JSON&quot;, unset = &quot;&quot;))
+  googlesheets4::gs4_auth(path = Sys.getenv("GOOGLE_SERVICE_ACCOUNT_JSON", unset = ""))
   res &lt;- suppressMessages(googlesheets4::gs4_get(sheet))
   return(jsonlite::toJSON(res, pretty = TRUE, auto_unbox = TRUE))
 }
 
 # 5) Проверка значений переменной среды ----------------------------------------
 .gs_show_env &lt;- function(env) {
-  message(&quot;Переменная среды: &quot;, Sys.getenv(env, unset = &quot;&quot;))
-  return(jsonlite::toJSON(Sys.getenv(env, unset = &quot;&quot;), pretty = TRUE, auto_unbox = TRUE))
+  message("Переменная среды: ", Sys.getenv(env, unset = ""))
+  return(jsonlite::toJSON(Sys.getenv(env, unset = ""), pretty = TRUE, auto_unbox = TRUE))
 }
 
 # Описания инструментов (ellmer 0.3.0) -----------------------------------------
 
 Tool_gs_init &lt;- tool(
   .gs_init_demo,
-  name = &quot;gs_init&quot;,
-  description = &quot;Create an empty Google Sheet with a &#39;contacts&#39; worksheet (name, email, city). Returns spreadsheet metadata.&quot;,
+  name = "gs_init",
+  description = "Create an empty Google Sheet with a 'contacts' worksheet (name, email, city). Returns spreadsheet metadata.",
   arguments = list(
-    title = type_string(&quot;Spreadsheet title&quot;, required = FALSE)
+    title = type_string("Spreadsheet title", required = FALSE)
   )
 )
 
 Tool_gs_read &lt;- tool(
   .gs_read,
-  name = &quot;gs_read&quot;,
-  description = &quot;Read a small preview from a Google Sheet. Useful for head/preview, not full export.&quot;,
+  name = "gs_read",
+  description = "Read a small preview from a Google Sheet. Useful for head/preview, not full export.",
   arguments = list(
-    sheet = type_string(&quot;Google Sheet URL or ID&quot;),
-    worksheet = type_string(&quot;Worksheet name&quot;, required = FALSE),
-    range = type_string(&quot;A1 range like &#39;A1:D20&#39;&quot;, required = FALSE),
-    n_max = type_integer(&quot;How many rows to return&quot;, required = FALSE)
+    sheet = type_string("Google Sheet URL or ID"),
+    worksheet = type_string("Worksheet name", required = FALSE),
+    range = type_string("A1 range like 'A1:D20'", required = FALSE),
+    n_max = type_integer("How many rows to return", required = FALSE)
   )
 )
 
 Tool_gs_append_contact &lt;- tool(
   .gs_append_contact,
-  name = &quot;gs_append_contact&quot;,
-  description = &quot;Append a single contact row (name, email, optional city) to the Google Sheet.&quot;,
+  name = "gs_append_contact",
+  description = "Append a single contact row (name, email, optional city) to the Google Sheet.",
   arguments = list(
-    sheet = type_string(&quot;Google Sheet URL or ID&quot;),
-    worksheet = type_string(&quot;Worksheet name&quot;),
-    name      = type_string(&quot;Employee name&quot;),
-    position  = type_string(&quot;Employee job title&quot;, required = FALSE),
-    rate      = type_string(&quot;Employee salary&quot;)
+    sheet = type_string("Google Sheet URL or ID"),
+    worksheet = type_string("Worksheet name"),
+    name      = type_string("Employee name"),
+    position  = type_string("Employee job title", required = FALSE),
+    rate      = type_string("Employee salary")
   )
 )
 
 Tool_gs_info &lt;- tool(
   .gs_info,
-  name = &quot;gs_info&quot;,
-  description = &quot;Read a google sheet metadata info.&quot;,
+  name = "gs_info",
+  description = "Read a google sheet metadata info.",
   arguments = list(
-    sheet = type_string(&quot;Google Sheet URL or ID&quot;)
+    sheet = type_string("Google Sheet URL or ID")
   )
 )
 
 Tool_show_env &lt;- tool(
   .gs_show_env,
-  name = &quot;gs_show_env&quot;,
-  description = &quot;Show environtmen variable for debug.&quot;,
+  name = "gs_show_env",
+  description = "Show environtmen variable for debug.",
   arguments = list(
-    env = type_string(&quot;Environ variables name&quot;)
+    env = type_string("Environ variables name")
   )
 )
 
 msum &lt;- function(x) sum(x)
 Tool_sum &lt;- tool(
   msum,
-  name = &quot;sum&quot;,
-  description = &quot;Sum of Vector Elements&quot;,
+  name = "sum",
+  description = "Sum of Vector Elements",
   arguments = list(
     x = type_array(type_integer())
   )
@@ -328,8 +328,8 @@ Tool_sum &lt;- tool(
 mmax &lt;- function(x) max(x)
 Tool_max &lt;- tool(
   mmax,
-  name = &quot;max&quot;,
-  description = &quot;Max value of Vector Elements&quot;,
+  name = "max",
+  description = "Max value of Vector Elements",
   arguments = list(
     x = type_array(type_integer())
   )
@@ -385,13 +385,13 @@ list(
 </ul>
 <p>Для того, чтобы подключить MCP сервер к какому либо клиенту, будь то <code>ellmer</code> или Claude Desktop, необходимо прописать его конфиг в виде json файла:</p>
 <div class="codehilite"><pre><span></span><code>{
-  &quot;mcpServers&quot;: {
-    &quot;r-gsheets&quot;: {
-      &quot;command&quot;: &quot;Rscript&quot;,
-      &quot;args&quot;: [&quot;-e&quot;, &quot;mcptools::mcp_server(tools=&#39;G:/GS_MCP/gs-tools.R&#39;)&quot;],
-      &quot;env&quot;: {
-        &quot;GOOGLE_SERVICE_ACCOUNT_JSON&quot;: &quot;G:/GS_MCP/service.json&quot;,
-        &quot;R_LIBS_USER&quot;: &quot;C:/Users/User/AppData/Local/R/win-library/4.4&quot;
+  "mcpServers": {
+    "r-gsheets": {
+      "command": "Rscript",
+      "args": ["-e", "mcptools::mcp_server(tools='G:/GS_MCP/gs-tools.R')"],
+      "env": {
+        "GOOGLE_SERVICE_ACCOUNT_JSON": "G:/GS_MCP/service.json",
+        "R_LIBS_USER": "C:/Users/User/AppData/Local/R/win-library/4.4"
       }
     }
   }
@@ -418,25 +418,25 @@ list(
 library(ellmer)
 
 # Создаём объект чата
-chat &lt;- chat_google_gemini(system_prompt = &#39;Ты помошник по работе с google таблицами&#39;)
+chat &lt;- chat_google_gemini(system_prompt = 'Ты помошник по работе с google таблицами')
 
 # Подключаем MCP сервер
-chat$set_tools(mcp_tools(config = &quot;G:\GS_MCP\gs-tools.json&quot;))
+chat$set_tools(mcp_tools(config = "G:\GS_MCP\gs-tools.json"))
 
 # Используем инструменты из MCP сервера
-chat$chat(&#39;Привет, скажи какой список инструментов у тебя есть?&#39;)
+chat$chat('Привет, скажи какой список инструментов у тебя есть?')
 
 # Проверяем что переменные окружения успешно считались из конфига MCP сервера
-chat$chat(&#39;Покажи мне значение переменной среды GOOGLE_SERVICE_ACCOUNT_JSON&#39;)
+chat$chat('Покажи мне значение переменной среды GOOGLE_SERVICE_ACCOUNT_JSON')
 
 # Читаем Google таблицу
-chat$chat(&quot;Посмотри какие метаданные есть в таблице 1MARmNaTbn0OhIoHM7EsNa7hh48VPUpxQN5B1gGYFSD0&quot;)
-chat$chat(&quot;Теперь у той же таблицы с ключём 1MARmNaTbn0OhIoHM7EsNa7hh48VPUpxQN5B1gGYFSD0 прочитай данные с листа data, что там?&quot;)
-chat$chat(&quot;Хорошо, а можешь теперь посчитать общую сумму зарплат из поля rate?&quot;)
-chat$chat(&quot;У кого из сотрудников в таблице самая высокая зарплата?&quot;)
+chat$chat("Посмотри какие метаданные есть в таблице 1MARmNaTbn0OhIoHM7EsNa7hh48VPUpxQN5B1gGYFSD0")
+chat$chat("Теперь у той же таблицы с ключём 1MARmNaTbn0OhIoHM7EsNa7hh48VPUpxQN5B1gGYFSD0 прочитай данные с листа data, что там?")
+chat$chat("Хорошо, а можешь теперь посчитать общую сумму зарплат из поля rate?")
+chat$chat("У кого из сотрудников в таблице самая высокая зарплата?")
 
 # Запись данных
-chat$chat(&quot;А теперь запиши в эту же таблицу новую строку, имя Erik, должность CFO, оклад 4250&quot;)
+chat$chat("А теперь запиши в эту же таблицу новую строку, имя Erik, должность CFO, оклад 4250")
 </code></pre></div>
 
 <p>Т.е. в этом примере мы:</p>
@@ -453,8 +453,8 @@ library(mcptools)
 
 ui &lt;- bslib::page_fillable(
   chat_ui(
-    id = &quot;chat&quot;,
-    messages = &quot;Привет, я могу помочь в работе с Google Таблицами, что надо сделать?&quot;
+    id = "chat",
+    messages = "Привет, я могу помочь в работе с Google Таблицами, что надо сделать?"
   ),
   fillable_mobile = TRUE
 )
@@ -463,15 +463,15 @@ server &lt;- function(input, output, session) {
 
   # Создаём объект чата
   chat &lt;- ellmer::chat_google_gemini(
-    system_prompt = &#39;Ты помошник по работе с google таблицами&#39;
+    system_prompt = 'Ты помошник по работе с google таблицами'
   )
 
   # Подключаем MCP сервер
-  chat$set_tools(mcp_tools(config = r&quot;(G:\GS_MCP\gs-tools.json)&quot;))
+  chat$set_tools(mcp_tools(config = r"(G:\GS_MCP\gs-tools.json)"))
 
   observeEvent(input$chat_user_input, {
     stream &lt;- chat$stream_async(input$chat_user_input)
-    chat_append(&quot;chat&quot;, stream)
+    chat_append("chat", stream)
   })
 }
 

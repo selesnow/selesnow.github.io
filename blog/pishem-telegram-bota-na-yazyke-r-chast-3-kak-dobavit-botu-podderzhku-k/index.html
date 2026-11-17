@@ -206,16 +206,16 @@
 <h1 id="reply">Reply клавиатура</h1>
 <p>Как я уже писал выше, это основная клавиатура управления ботом.<br />
 <strong>Пример создания Reply клавиатуры из официальной справки</strong></p>
-<div class="codehilite"><pre><span></span><code>bot &lt;- Bot(token = &quot;TOKEN&quot;)
-chat_id &lt;- &quot;CHAT_ID&quot;
+<div class="codehilite"><pre><span></span><code>bot &lt;- Bot(token = "TOKEN")
+chat_id &lt;- "CHAT_ID"
 
 # Create Custom Keyboard
-text &lt;- &quot;Aren&#39;t those custom keyboards cool?&quot;
+text &lt;- "Aren't those custom keyboards cool?"
 RKM &lt;- ReplyKeyboardMarkup(
   keyboard = list(
-    list(KeyboardButton(&quot;Yes, they certainly are!&quot;)),
-    list(KeyboardButton(&quot;I&#39;m not quite sure&quot;)),
-    list(KeyboardButton(&quot;No...&quot;))
+    list(KeyboardButton("Yes, they certainly are!")),
+    list(KeyboardButton("I'm not quite sure")),
+    list(KeyboardButton("No..."))
   ),
   resize_keyboard = FALSE,
   one_time_keyboard = TRUE
@@ -238,7 +238,7 @@ bot$sendMessage(chat_id, text, reply_markup = RKM)
 <div class="codehilite"><pre><span></span><code>library(telegram.bot)
 
 # создаём экземпляр класса Updater
-updater &lt;- Updater(&#39;ТОКЕН ВАШЕГО БОТА&#39;)
+updater &lt;- Updater('ТОКЕН ВАШЕГО БОТА')
 
 # создаём методы
 ## метод для запуска клавиатуры
@@ -247,9 +247,9 @@ start &lt;- function(bot, update) {
   # создаём клавиатуру
   RKM &lt;- ReplyKeyboardMarkup(
     keyboard = list(
-      list(KeyboardButton(&quot;Чат ID&quot;)),
-      list(KeyboardButton(&quot;Моё имя&quot;)),
-      list(KeyboardButton(&quot;Мой логин&quot;))
+      list(KeyboardButton("Чат ID")),
+      list(KeyboardButton("Моё имя")),
+      list(KeyboardButton("Мой логин"))
     ),
     resize_keyboard = FALSE,
     one_time_keyboard = TRUE
@@ -257,7 +257,7 @@ start &lt;- function(bot, update) {
 
   # отправляем клавиатуру
   bot$sendMessage(update$message$chat_id,
-                  text = &#39;Выберите команду&#39;, 
+                  text = 'Выберите команду', 
                   reply_markup = RKM)
 
 }
@@ -266,8 +266,8 @@ start &lt;- function(bot, update) {
 chat_id &lt;- function(bot, update) {
 
   bot$sendMessage(update$message$chat_id, 
-                  text = paste0(&quot;Чат id этого диалога: &quot;, update$message$chat_id),
-                  parse_mode = &quot;Markdown&quot;)
+                  text = paste0("Чат id этого диалога: ", update$message$chat_id),
+                  parse_mode = "Markdown")
 
 }
 
@@ -275,8 +275,8 @@ chat_id &lt;- function(bot, update) {
 my_name &lt;- function(bot, update) {
 
   bot$sendMessage(update$message$chat_id, 
-                  text = paste0(&quot;Вас зовут &quot;, update$message$from$first_name),
-                  parse_mode = &quot;Markdown&quot;)
+                  text = paste0("Вас зовут ", update$message$from$first_name),
+                  parse_mode = "Markdown")
 
 }
 
@@ -284,8 +284,8 @@ my_name &lt;- function(bot, update) {
 my_username &lt;- function(bot, update) {
 
   bot$sendMessage(update$message$chat_id, 
-                  text = paste0(&quot;Ваш логин &quot;, update$message$from$username),
-                  parse_mode = &quot;Markdown&quot;)
+                  text = paste0("Ваш логин ", update$message$from$username),
+                  parse_mode = "Markdown")
 
 }
 
@@ -294,7 +294,7 @@ my_username &lt;- function(bot, update) {
 MessageFilters$chat_id &lt;- BaseFilter(function(message) {
 
   # проверяем текст сообщения
-  message$text == &quot;Чат ID&quot;
+  message$text == "Чат ID"
 
 }
 )
@@ -303,7 +303,7 @@ MessageFilters$chat_id &lt;- BaseFilter(function(message) {
 MessageFilters$name &lt;- BaseFilter(function(message) {
 
   # проверяем текст сообщения
-  message$text == &quot;Моё имя&quot;
+  message$text == "Моё имя"
 
 }
 )
@@ -312,11 +312,11 @@ MessageFilters$name &lt;- BaseFilter(function(message) {
 MessageFilters$username &lt;- BaseFilter(function(message) {
 
   # проверяем текст сообщения
-  message$text == &quot;Мой логин&quot;
+  message$text == "Мой логин"
 )
 
 # создаём обработчики
-h_start    &lt;- CommandHandler(&#39;start&#39;, start)
+h_start    &lt;- CommandHandler('start', start)
 h_chat_id  &lt;- MessageHandler(chat_id, filters = MessageFilters$chat_id)
 h_name     &lt;- MessageHandler(my_name, filters = MessageFilters$name)
 h_username &lt;- MessageHandler(my_username, filters = MessageFilters$username)
@@ -353,7 +353,7 @@ updater$start_polling()
 </ul>
 <p>И создали 4 обработчика, которые по заданным командам и фильтрам будут выполнять указанные методы.</p>
 <div class="codehilite"><pre><span></span><code># создаём обработчики
-h_start    &lt;- CommandHandler(&#39;start&#39;, start)
+h_start    &lt;- CommandHandler('start', start)
 h_chat_id  &lt;- MessageHandler(chat_id, filters = MessageFilters$chat_id)
 h_name     &lt;- MessageHandler(my_name, filters = MessageFilters$name)
 h_username &lt;- MessageHandler(my_username, filters = MessageFilters$username)
@@ -362,9 +362,9 @@ h_username &lt;- MessageHandler(my_username, filters = MessageFilters$username)
 <p>Сама клавиатура создаётся внутри метода <code>start()</code> командой <code>ReplyKeyboardMarkup()</code>.</p>
 <div class="codehilite"><pre><span></span><code>RKM &lt;- ReplyKeyboardMarkup(
     keyboard = list(
-      list(KeyboardButton(&quot;Чат ID&quot;)),
-      list(KeyboardButton(&quot;Моё имя&quot;)),
-      list(KeyboardButton(&quot;Мой логин&quot;))
+      list(KeyboardButton("Чат ID")),
+      list(KeyboardButton("Моё имя")),
+      list(KeyboardButton("Мой логин"))
     ),
     resize_keyboard = FALSE,
     one_time_keyboard = TRUE
@@ -375,9 +375,9 @@ h_username &lt;- MessageHandler(my_username, filters = MessageFilters$username)
 <div class="codehilite"><pre><span></span><code>RKM &lt;- ReplyKeyboardMarkup(
     keyboard = list(
       list(
-          KeyboardButton(&quot;Чат ID&quot;),
-          KeyboardButton(&quot;Моё имя&quot;),
-          KeyboardButton(&quot;Мой логин&quot;)
+          KeyboardButton("Чат ID"),
+          KeyboardButton("Моё имя"),
+          KeyboardButton("Мой логин")
      )
     ),
     resize_keyboard = FALSE,
@@ -388,7 +388,7 @@ h_username &lt;- MessageHandler(my_username, filters = MessageFilters$username)
 <p><img loading="lazy" decoding="async" alt="" width="977" height="705" src="../images/pishem-telegram-bota-na-yazyke-r-chast-3-kak-dobav-65127916c-c925cff0.webp" /></p>
 <p>Отправляется клавиатура в чат методом <code>sendMessage()</code>, в аргументе <code>reply_markup</code>.</p>
 <div class="codehilite"><pre><span></span><code>  bot$sendMessage(update$message$chat_id,
-                  text = &#39;Выберите команду&#39;, 
+                  text = 'Выберите команду', 
                   reply_markup = RKM)
 </code></pre></div>
 
@@ -400,11 +400,11 @@ h_username &lt;- MessageHandler(my_username, filters = MessageFilters$username)
 <p>Код построения Inline клавиатуры который приводится в официальной справке пакета <code>telegram.bot</code>.<br />
 <strong>Код построения Inline клавиатуры из официальной справки</strong></p>
 <div class="codehilite"><pre><span></span><code># Initialize bot
-bot &lt;- Bot(token = &quot;TOKEN&quot;)
-chat_id &lt;- &quot;CHAT_ID&quot;
+bot &lt;- Bot(token = "TOKEN")
+chat_id &lt;- "CHAT_ID"
 
 # Create Inline Keyboard
-text &lt;- &quot;Could you type their phone number, please?&quot;
+text &lt;- "Could you type their phone number, please?"
 IKM &lt;- InlineKeyboardMarkup(
   inline_keyboard = list(
     list(
@@ -423,9 +423,9 @@ IKM &lt;- InlineKeyboardMarkup(
       InlineKeyboardButton(9)
     ),
     list(
-      InlineKeyboardButton(&quot;*&quot;),
+      InlineKeyboardButton("*"),
       InlineKeyboardButton(0),
-      InlineKeyboardButton(&quot;#&quot;)
+      InlineKeyboardButton("#")
     )
   )
 )
@@ -444,7 +444,7 @@ bot$sendMessage(chat_id, text, reply_markup = IKM)
 <div class="codehilite"><pre><span></span><code>library(telegram.bot)
 
 # создаём экземпляр класса Updater
-updater &lt;- Updater(&#39;ТОКЕН ВАШЕГО БОТА&#39;)
+updater &lt;- Updater('ТОКЕН ВАШЕГО БОТА')
 
 # метод для отправки InLine клавиатуры
 test &lt;- function(bot, update) {
@@ -453,15 +453,15 @@ test &lt;- function(bot, update) {
   IKM &lt;- InlineKeyboardMarkup(
     inline_keyboard = list(
       list(
-        InlineKeyboardButton(&quot;Да&quot;, callback_data = &#39;yes&#39;),
-        InlineKeyboardButton(&quot;Нет&quot;, callback_data = &#39;no&#39;)
+        InlineKeyboardButton("Да", callback_data = 'yes'),
+        InlineKeyboardButton("Нет", callback_data = 'no')
       )
     )
   )
 
   # Отправляем клавиатуру в чат
   bot$sendMessage(update$message$chat_id, 
-                  text = &quot;Вы болете коронавирусом?&quot;, 
+                  text = "Вы болете коронавирусом?", 
                   reply_markup = IKM)
 }
 
@@ -475,13 +475,13 @@ answer_cb &lt;- function(bot, update) {
   uname &lt;- update$effective_user()$first_name
 
   # обработка результата
-  if ( data == &#39;no&#39; ) {
+  if ( data == 'no' ) {
 
-    msg &lt;- paste0(uname, &quot;, поздравляю, ваш тест на covid-19 отрицательный.&quot;)
+    msg &lt;- paste0(uname, ", поздравляю, ваш тест на covid-19 отрицательный.")
 
   } else {
 
-    msg &lt;- paste0(uname, &quot;, к сожалени ваш тест на covid-19 положительный.&quot;)
+    msg &lt;- paste0(uname, ", к сожалени ваш тест на covid-19 положительный.")
 
   }
 
@@ -494,7 +494,7 @@ answer_cb &lt;- function(bot, update) {
 }
 
 # создаём обработчики
-inline_h      &lt;- CommandHandler(&#39;test&#39;, test)
+inline_h      &lt;- CommandHandler('test', test)
 query_handler &lt;- CallbackQueryHandler(answer_cb)
 
 # добавляем обработчики в диспетчер
@@ -525,7 +525,7 @@ updater$start_polling()
 <div class="codehilite"><pre><span></span><code>library(telegram.bot)
 
 # создаём экземпляр класса Updater
-updater &lt;- Updater(&#39;ТОКЕН ВАШЕГО БОТА&#39;)
+updater &lt;- Updater('ТОКЕН ВАШЕГО БОТА')
 
 # метод для отправки InLine клавиатуры
 test &lt;- function(bot, update) {  
@@ -534,15 +534,15 @@ test &lt;- function(bot, update) {
   IKM &lt;- InlineKeyboardMarkup(
     inline_keyboard = list(
       list(
-        InlineKeyboardButton(&quot;Да&quot;, callback_data = &#39;yes&#39;),
-        InlineKeyboardButton(&quot;Нет&quot;, callback_data = &#39;no&#39;)
+        InlineKeyboardButton("Да", callback_data = 'yes'),
+        InlineKeyboardButton("Нет", callback_data = 'no')
       )
     )
   )
 
   # Отправляем клавиатуру в чат
   bot$sendMessage(update$message$chat_id, 
-                  text = &quot;Вы болете коронавирусом?&quot;, 
+                  text = "Вы болете коронавирусом?", 
                   reply_markup = IKM)
 }
 
@@ -553,7 +553,7 @@ answer_cb_yes &lt;- function(bot, update) {
   uname &lt;- update$effective_user()$first_name
 
   # обработка результата
-  msg &lt;- paste0(uname, &quot;, к сожалени ваш текст на covid-19 положительный.&quot;)
+  msg &lt;- paste0(uname, ", к сожалени ваш текст на covid-19 положительный.")
 
   # Отправка сообщения
   bot$sendMessage(chat_id = update$from_chat_id(),
@@ -569,7 +569,7 @@ answer_cb_no &lt;- function(bot, update) {
   # получаем имя пользователя, нажавшего кнопку
   uname &lt;- update$effective_user()$first_name
 
-  msg &lt;- paste0(uname, &quot;, поздравляю, ваш текст на covid-19 отрицательный.&quot;)
+  msg &lt;- paste0(uname, ", поздравляю, ваш текст на covid-19 отрицательный.")
 
   # Отправка сообщения
   bot$sendMessage(chat_id = update$from_chat_id(),
@@ -580,9 +580,9 @@ answer_cb_no &lt;- function(bot, update) {
 }
 
 # создаём обработчики
-inline_h          &lt;- CommandHandler(&#39;test&#39;, test)
-query_handler_yes &lt;- CallbackQueryHandler(answer_cb_yes, pattern = &#39;yes&#39;)
-query_handler_no  &lt;- CallbackQueryHandler(answer_cb_no, pattern = &#39;no&#39;)
+inline_h          &lt;- CommandHandler('test', test)
+query_handler_yes &lt;- CallbackQueryHandler(answer_cb_yes, pattern = 'yes')
+query_handler_no  &lt;- CallbackQueryHandler(answer_cb_no, pattern = 'no')
 
 # добавляем обработчики в диспетчер
 updater &lt;- updater + 
@@ -598,8 +598,8 @@ updater$start_polling()
 <p>Запустите приведённый выше пример кода, предварительно заменив ‘ТОКЕН ВАШЕГО БОТА’ на реальный токен, который вы получили при создании бота через <em>BotFather</em> (о создании бота я рассказывал в <a target="_blank" rel="noopener" href="https://habr.com/ru/post/511222/#sozdanie-telegram-bota">первой статье</a>).</p>
 </blockquote>
 <p>Теперь мы написали 2 отдельных метода, т.е. по одному методу, под нажатие каждой кнопки, и использовали аргумент <code>pattern</code>, при создании их обработчиков:</p>
-<div class="codehilite"><pre><span></span><code>query_handler_yes &lt;- CallbackQueryHandler(answer_cb_yes, pattern = &#39;yes&#39;)
-query_handler_no  &lt;- CallbackQueryHandler(answer_cb_no, pattern = &#39;no&#39;)
+<div class="codehilite"><pre><span></span><code>query_handler_yes &lt;- CallbackQueryHandler(answer_cb_yes, pattern = 'yes')
+query_handler_no  &lt;- CallbackQueryHandler(answer_cb_no, pattern = 'no')
 </code></pre></div>
 
 <p>Заканчивается код метода <em>answer_cb</em> командой <code>bot$answerCallbackQuery(callback_query_id = update$callback_query$id)</code>, которая сообщает боту, что данные с inline клавиатуры получены.</p>
@@ -617,7 +617,7 @@ library(httr)
 library(stringr)
 
 # создаём экземпляр класса Updater
-updater &lt;- Updater(&#39;ТОКЕН ВАШЕГО БОТА&#39;)
+updater &lt;- Updater('ТОКЕН ВАШЕГО БОТА')
 
 # создаём методы
 ## метод для запуска основной клавиатуры
@@ -627,7 +627,7 @@ start &lt;- function(bot, update) {
   RKM &lt;- ReplyKeyboardMarkup(
     keyboard = list(
       list(
-        KeyboardButton(&quot;Погода&quot;)
+        KeyboardButton("Погода")
       )
     ),
     resize_keyboard = TRUE,
@@ -636,7 +636,7 @@ start &lt;- function(bot, update) {
 
   # отправляем клавиатуру
   bot$sendMessage(update$message$chat_id,
-                  text = &#39;Выберите команду&#39;, 
+                  text = 'Выберите команду', 
                   reply_markup = RKM)
 
 }
@@ -647,31 +647,31 @@ weather &lt;- function(bot, update) {
   IKM &lt;- InlineKeyboardMarkup(
     inline_keyboard = list(
       list(
-        InlineKeyboardButton(text = &#39;Москва&#39;, callback_data = &#39;New York,us&#39;),
-        InlineKeyboardButton(text = &#39;Санкт-Петербург&#39;, callback_data = &#39;Saint Petersburg&#39;),
-        InlineKeyboardButton(text = &#39;Нью-Йорк&#39;, callback_data = &#39;New York&#39;)
+        InlineKeyboardButton(text = 'Москва', callback_data = 'New York,us'),
+        InlineKeyboardButton(text = 'Санкт-Петербург', callback_data = 'Saint Petersburg'),
+        InlineKeyboardButton(text = 'Нью-Йорк', callback_data = 'New York')
       ),
       list(
-        InlineKeyboardButton(text = &#39;Екатеринбург&#39;, callback_data = &#39;Yekaterinburg,ru&#39;),
-        InlineKeyboardButton(text = &#39;Берлин&#39;, callback_data = &#39;Berlin,de&#39;),
-        InlineKeyboardButton(text = &#39;Париж&#39;, callback_data = &#39;Paris,fr&#39;)
+        InlineKeyboardButton(text = 'Екатеринбург', callback_data = 'Yekaterinburg,ru'),
+        InlineKeyboardButton(text = 'Берлин', callback_data = 'Berlin,de'),
+        InlineKeyboardButton(text = 'Париж', callback_data = 'Paris,fr')
       ),
       list(
-        InlineKeyboardButton(text = &#39;Рим&#39;, callback_data = &#39;Rome,it&#39;),
-        InlineKeyboardButton(text = &#39;Одесса&#39;, callback_data = &#39;Odessa,ua&#39;),
-        InlineKeyboardButton(text = &#39;Киев&#39;, callback_data = &#39;Kyiv,fr&#39;)
+        InlineKeyboardButton(text = 'Рим', callback_data = 'Rome,it'),
+        InlineKeyboardButton(text = 'Одесса', callback_data = 'Odessa,ua'),
+        InlineKeyboardButton(text = 'Киев', callback_data = 'Kyiv,fr')
       ),
       list(
-        InlineKeyboardButton(text = &#39;Токио&#39;, callback_data = &#39;Tokyo&#39;),
-        InlineKeyboardButton(text = &#39;Амстердам&#39;, callback_data = &#39;Amsterdam,nl&#39;),
-        InlineKeyboardButton(text = &#39;Вашингтон&#39;, callback_data = &#39;Washington,us&#39;)
+        InlineKeyboardButton(text = 'Токио', callback_data = 'Tokyo'),
+        InlineKeyboardButton(text = 'Амстердам', callback_data = 'Amsterdam,nl'),
+        InlineKeyboardButton(text = 'Вашингтон', callback_data = 'Washington,us')
       )
     )
   )
 
   # Send Inline Keyboard
   bot$sendMessage(chat_id = update$message$chat_id, 
-                  text = &quot;Выберите город&quot;, 
+                  text = "Выберите город", 
                   reply_markup = IKM)
 }
 
@@ -682,20 +682,20 @@ answer_cb &lt;- function(bot, update) {
   city &lt;- update$callback_query$data
 
   # отправляем запрос
-  ans &lt;- GET(&#39;https://api.openweathermap.org/data/2.5/weather&#39;, 
+  ans &lt;- GET('https://api.openweathermap.org/data/2.5/weather', 
              query = list(q     = city,
-                          lang  = &#39;ru&#39;,
-                          units = &#39;metric&#39;,
-                          appid = &#39;4776568ccea136ffe4cda9f1969af340&#39;)) 
+                          lang  = 'ru',
+                          units = 'metric',
+                          appid = '4776568ccea136ffe4cda9f1969af340')) 
 
   # парсим ответ
   result &lt;- content(ans)
 
   # формируем сообщение
-  msg &lt;- str_glue(&quot;{result$name} погода:\n&quot;,
-                  &quot;Текущая температура: {result$main$temp}\n&quot;,
-                  &quot;Скорость ветра: {result$wind$speed}\n&quot;,
-                  &quot;Описание: {result$weather[[1]]$description}&quot;)
+  msg &lt;- str_glue("{result$name} погода:\n",
+                  "Текущая температура: {result$main$temp}\n",
+                  "Скорость ветра: {result$wind$speed}\n",
+                  "Описание: {result$weather[[1]]$description}")
 
   # отправляем информацию о погоде
   bot$sendMessage(chat_id = update$from_chat_id(),
@@ -709,13 +709,13 @@ answer_cb &lt;- function(bot, update) {
 MessageFilters$weather &lt;- BaseFilter(function(message) {
 
   # проверяем текст сообщения
-  message$text == &quot;Погода&quot;
+  message$text == "Погода"
 
 }
 )
 
 # создаём обработчики
-h_start         &lt;- CommandHandler(&#39;start&#39;, start)
+h_start         &lt;- CommandHandler('start', start)
 h_weather       &lt;- MessageHandler(weather, filters = MessageFilters$weather)
 h_query_handler &lt;- CallbackQueryHandler(answer_cb)
 
@@ -749,7 +749,7 @@ updater$start_polling()
 MessageFilters$weather &lt;- BaseFilter(function(message) {
 
   # проверяем текст сообщения
-  message$text == &quot;Погода&quot;
+  message$text == "Погода"
 
 }
 )
@@ -763,8 +763,8 @@ MessageFilters$weather &lt;- BaseFilter(function(message) {
 <p>Логика данного бота схожа с предыдущим, изначально мы запускаем основную клавиатуру командой <code>/start</code>. Далее бот даёт нам на выбор список из 6 хабов, мы выбираем интересующий нас хаб, и получаем 5 самых свежих публикаций из выбранного Хаба.</p>
 <p>Как вы понимаете, в данном случае нам необходимо получить список статей, и для этого мы будем использовать специальный пакет <code>habR</code>, который позволяет запрашивать из хабры статьи и некоторую статистику по ним в R.</p>
 <p>Установить пакет <code>habR</code> можно только из github, для чего вам понадобится дополнительный пакет <code>devtools</code>. Для установки воспользуйтесь приведённым ниже кодом.</p>
-<div class="codehilite"><pre><span></span><code>install.packages(&#39;devtools&#39;)
-devtools::install_github(&#39;selesnow/habR&#39;)
+<div class="codehilite"><pre><span></span><code>install.packages('devtools')
+devtools::install_github('selesnow/habR')
 </code></pre></div>
 
 <p>Теперь рассмотрим код построения описанного выше бота:<br />
@@ -773,7 +773,7 @@ devtools::install_github(&#39;selesnow/habR&#39;)
 library(habR)
 
 # создаём экземпляр класса Updater
-updater &lt;- Updater(&#39;ТОКЕН ВАШЕГО БОТА&#39;)
+updater &lt;- Updater('ТОКЕН ВАШЕГО БОТА')
 
 # создаём методы
 ## метод для запуска основной клавиатуры
@@ -783,7 +783,7 @@ start &lt;- function(bot, update) {
   RKM &lt;- ReplyKeyboardMarkup(
     keyboard = list(
       list(
-        KeyboardButton(&quot;Список статей&quot;)
+        KeyboardButton("Список статей")
       )
     ),
     resize_keyboard = TRUE,
@@ -792,7 +792,7 @@ start &lt;- function(bot, update) {
 
   # отправляем клавиатуру
   bot$sendMessage(update$message$chat_id,
-                  text = &#39;Выберите команду&#39;, 
+                  text = 'Выберите команду', 
                   reply_markup = RKM)
 
 }
@@ -803,21 +803,21 @@ habs &lt;- function(bot, update) {
   IKM &lt;- InlineKeyboardMarkup(
     inline_keyboard = list(
       list(
-        InlineKeyboardButton(text = &#39;R&#39;, callback_data = &#39;R&#39;),
-        InlineKeyboardButton(text = &#39;Data Mining&#39;, callback_data = &#39;data_mining&#39;),
-        InlineKeyboardButton(text = &#39;Data Engineering&#39;, callback_data = &#39;data_engineering&#39;)
+        InlineKeyboardButton(text = 'R', callback_data = 'R'),
+        InlineKeyboardButton(text = 'Data Mining', callback_data = 'data_mining'),
+        InlineKeyboardButton(text = 'Data Engineering', callback_data = 'data_engineering')
       ),
       list(
-        InlineKeyboardButton(text = &#39;Big Data&#39;, callback_data = &#39;bigdata&#39;),
-        InlineKeyboardButton(text = &#39;Python&#39;, callback_data = &#39;python&#39;),
-        InlineKeyboardButton(text = &#39;Визуализация данных&#39;, callback_data = &#39;data_visualization&#39;)
+        InlineKeyboardButton(text = 'Big Data', callback_data = 'bigdata'),
+        InlineKeyboardButton(text = 'Python', callback_data = 'python'),
+        InlineKeyboardButton(text = 'Визуализация данных', callback_data = 'data_visualization')
       )
     )
   )
 
   # Send Inline Keyboard
   bot$sendMessage(chat_id = update$message$chat_id, 
-                  text = &quot;Выберите Хаб&quot;, 
+                  text = "Выберите Хаб", 
                   reply_markup = IKM)
 }
 
@@ -829,11 +829,11 @@ answer_cb &lt;- function(bot, update) {
 
   # сообщение о том, что данные по кнопке получены
   bot$answerCallbackQuery(callback_query_id = update$callback_query$id, 
-                          text = &#39;Подождите несколько минут, запрос обрабатывается&#39;) 
+                          text = 'Подождите несколько минут, запрос обрабатывается') 
 
   # сообщение о том, что надо подождать пока бот получит данные
   mid &lt;- bot$sendMessage(chat_id = update$from_chat_id(),
-                         text    = &quot;Подождите несколько минут пока, я соберу данные по выбранному Хабу&quot;)
+                         text    = "Подождите несколько минут пока, я соберу данные по выбранному Хабу")
 
   # парсим Хабр
   posts &lt;- head(habr_hub_posts(hub, 1), 5)
@@ -851,7 +851,7 @@ answer_cb &lt;- function(bot, update) {
 
   # отправляем информацию о погоде
   bot$sendMessage(chat_id = update$from_chat_id(),
-                  text    = paste0(&quot;5 наиболее свежих статей из Хаба &quot;, hub),
+                  text    = paste0("5 наиболее свежих статей из Хаба ", hub),
                   reply_markup = IKM)
 
 }
@@ -861,13 +861,13 @@ answer_cb &lt;- function(bot, update) {
 MessageFilters$hubs &lt;- BaseFilter(function(message) {
 
   # проверяем текст сообщения
-  message$text == &quot;Список статей&quot;
+  message$text == "Список статей"
 
 }
 )
 
 # создаём обработчики
-h_start         &lt;- CommandHandler(&#39;start&#39;, start)
+h_start         &lt;- CommandHandler('start', start)
 h_hubs          &lt;- MessageHandler(habs, filters = MessageFilters$hubs)
 h_query_handler &lt;- CallbackQueryHandler(answer_cb)
 
@@ -893,21 +893,21 @@ habs &lt;- function(bot, update) {
   IKM &lt;- InlineKeyboardMarkup(
     inline_keyboard = list(
       list(
-        InlineKeyboardButton(text = &#39;R&#39;, callback_data = &#39;r&#39;),
-        InlineKeyboardButton(text = &#39;Data Mining&#39;, callback_data = &#39;data_mining&#39;),
-        InlineKeyboardButton(text = &#39;Data Engineering&#39;, callback_data = &#39;data_engineering&#39;)
+        InlineKeyboardButton(text = 'R', callback_data = 'r'),
+        InlineKeyboardButton(text = 'Data Mining', callback_data = 'data_mining'),
+        InlineKeyboardButton(text = 'Data Engineering', callback_data = 'data_engineering')
       ),
       list(
-        InlineKeyboardButton(text = &#39;Big Data&#39;, callback_data = &#39;bigdata&#39;),
-        InlineKeyboardButton(text = &#39;Python&#39;, callback_data = &#39;python&#39;),
-        InlineKeyboardButton(text = &#39;Визуализация данных&#39;, callback_data = &#39;data_visualization&#39;)
+        InlineKeyboardButton(text = 'Big Data', callback_data = 'bigdata'),
+        InlineKeyboardButton(text = 'Python', callback_data = 'python'),
+        InlineKeyboardButton(text = 'Визуализация данных', callback_data = 'data_visualization')
       )
     )
   )
 
   # Send Inline Keyboard
   bot$sendMessage(chat_id = update$message$chat_id, 
-                  text = &quot;Выберите Хаб&quot;, 
+                  text = "Выберите Хаб", 
                   reply_markup = IKM)
 }
 </code></pre></div>
@@ -936,7 +936,7 @@ habs &lt;- function(bot, update) {
                     <div class="b-tags"><a class="b-chip" href="../?tag=api#posts">API</a><a class="b-chip" href="../?tag=telegram#posts">Telegram</a><a class="b-chip" href="../?tag=r#posts">R</a></div>
                 </div>
             </article>
-            <aside class="b-toc" aria-label="Contents"><div class="b-toc-title"><span class="ru-text">Содержание</span><span class="ua-text">Зміст</span><span class="en-text">Contents</span></div><ul><li><a href="#inline_1">Пример простейшего бота с поддержкой InLine кнопок</a></li><li><a href="#_3">Пример бота, который сообщает текущую погоду по выбранному городу</a></li><li><a href="#-habrcom">Пример бота, который выводит список самых свежих статей со ссылками по-указанному Хабу из habr.com.</a></li></ul></aside>
+            <aside class="b-toc" aria-label="Contents"><div class="b-toc-title"><span class="ru-text">Содержание</span><span class="ua-text">Зміст</span><span class="en-text">Contents</span></div><ul><li><a href="#inline_1">Пример простейшего бота с поддержкой InLine кнопок</a></li><li><a href="#_3">Пример бота, который сообщает текущую погоду по выбранному городу</a></li><li><a href="#-habrcom">Пример бота, который выводит список самых свежих статей со ссылками по-указанному Хабу из habr.com.</a></li></ul></aside>
         </div>
         <section class="b-related">
             <h2 class="outfit-font"><span class="ru-text">Читайте также</span><span class="ua-text">Читайте також</span><span class="en-text">Related posts</span></h2>

@@ -185,15 +185,15 @@
 <h2 id="rga">Установка пакета RGA</h2>
 <p>Установить пакет RGA можно как из основного репозитория CRAN, так и непосредственно из репозитория автора пакета Артема Клевцова на <a target="_blank" rel="noopener" href="https://github.com/artemklevtsov/RGA">GitHub</a>.</p>
 <p>Для установки пакета из репозитория CRAN воспользуйтесь командой:</p>
-<div class="codehilite"><pre><span></span><code>install.packages(&quot;RGA&quot;)
+<div class="codehilite"><pre><span></span><code>install.packages("RGA")
 </code></pre></div>
 
 <p>Для установки пакета из GitHub предварительно установите пакет devtools. Затем с помощью команды install_github установите актуальную версию пакета.</p>
-<div class="codehilite"><pre><span></span><code>install_github(&quot;RGA&quot;)
+<div class="codehilite"><pre><span></span><code>install_github("RGA")
 </code></pre></div>
 
 <p>После установки подключите пакет RGA с помощью команды:</p>
-<div class="codehilite"><pre><span></span><code>library(&quot;RGA&quot;)
+<div class="codehilite"><pre><span></span><code>library("RGA")
 </code></pre></div>
 
 <h2 id="google-analytics">Аутентификация в Google Analytics</h2>
@@ -222,7 +222,7 @@
 <p>Чтобы пройти процесс аутентификации с помощью функции <em>authorize</em>, укажите в качестве ее аргументов полученные учетные данные.</p>
 <p><em>client.id — ваш идентификатор клиента.</em></p>
 <p><em>client.secret — ваш секрет клиента.</em></p>
-<div class="codehilite"><pre><span></span><code>rga_auth &lt;- authorize(client.id = &quot;Ваш идентификатор клиента&quot;, client.secret = &quot;Ваш секрет клиента&quot;)
+<div class="codehilite"><pre><span></span><code>rga_auth &lt;- authorize(client.id = "Ваш идентификатор клиента", client.secret = "Ваш секрет клиента")
 </code></pre></div>
 
 <p><img loading="lazy" decoding="async" alt="Как пройти процесс аутентификации в Google Analytics с помощью функции authorize в R" width="1071" height="157" src="../images/kak-poluchit-dannye-iz-google-analytics-v-r-i-zagruzit-a-002-e0eeffa7.webp" /></p>
@@ -398,7 +398,7 @@
 - <strong><em>token</em></strong> — аргумент, в который необходимо передать объект с содержанием учетных данных. В нашем примере это объект <em>rga_auth</em>.</p>
 <h3 id="google-analytics-core-api">Пример получения данных из Google Analytics Core API:</h3>
 <p>Ниже я приведу пример запроса, который вернет данные в разрезе дат и каналов по таким показателям:</p>
-<div class="codehilite"><pre><span></span><code>dimensions  = &quot;ga:date, ga:medium&quot;
+<div class="codehilite"><pre><span></span><code>dimensions  = "ga:date, ga:medium"
 </code></pre></div>
 
 <ul>
@@ -410,20 +410,20 @@
 <li>общее количество просмотренных страниц (<em>metrics = “ga:sessions,ga:transactions,ga:transactionRevenue,ga:bounces,ga:sessionDuration,ga:pageviews”</em>).</li>
 </ul>
 <p>В запросе мы обращаемся к динамическому сегменту на уровне сеансов, которые были совершены по CPC каналу:</p>
-<div class="codehilite"><pre><span></span><code>(segment = &quot;sessions::condition::ga:medium==cpc&quot;)
+<div class="codehilite"><pre><span></span><code>(segment = "sessions::condition::ga:medium==cpc")
 </code></pre></div>
 
 <p>В нашем примере мы взяли условный диапазон дат за последние 15 дней, (<em>start.date    = “15daysAgo”, end.date  = “yesterday”).</em></p>
 <p>Для обхода семплирования разбиваем запрос по дням (<em>fetch.by = “day”</em>).</p>
 <p>При этом устанавливаем минимальный уровень семплирования с помощью аргумента <em>samplingLevel = “HIGHER_PRECISION”.</em></p>
-<div class="codehilite"><pre><span></span><code>gaData &lt;- get_ga(profileId = &quot;ga:1111111111&quot;,
-                start.date    = &quot;15daysAgo&quot;,
-                end.date      = &quot;yesterday&quot;,
-                dimensions  = &quot;ga:date, ga:medium&quot;,
-                metrics     = &quot;ga:sessions,ga:transactions,ga:transactionRevenue,ga:bounces,ga:sessionDuration,ga:pageviews&quot;,
-                segment     = &quot;sessions::condition::ga:medium==cpc&quot;,
-                fetch.by      = &quot;day&quot;,
-                samplingLevel =  &quot;HIGHER_PRECISION&quot;,
+<div class="codehilite"><pre><span></span><code>gaData &lt;- get_ga(profileId = "ga:1111111111",
+                start.date    = "15daysAgo",
+                end.date      = "yesterday",
+                dimensions  = "ga:date, ga:medium",
+                metrics     = "ga:sessions,ga:transactions,ga:transactionRevenue,ga:bounces,ga:sessionDuration,ga:pageviews",
+                segment     = "sessions::condition::ga:medium==cpc",
+                fetch.by      = "day",
+                samplingLevel =  "HIGHER_PRECISION",
                 max.results   = 10000,
                 token = rga_auth)
 </code></pre></div>
@@ -458,13 +458,13 @@ Multi-Channel Funnels Reporting API позволяет запрашивать д
 <p>Диапазон дат, как и в примере выше, мы взяли относительный — за прошедшие 15 дней (<em>start.date = “15daysAgo”, end.date = “yesterday”</em>).</p>
 <p>Для обхода семплирования данных мы разбиваем запрос по дням (<em>fetch.by = “day”</em>).</p>
 <p>Также для снижения вероятности семплирования в рамках дня мы указали в запросе приоритет на высокую точность данных (<em>samplingLevel =  “HIGHER_PRECISION”</em>).</p>
-<div class="codehilite"><pre><span></span><code>mcfData &lt;- get_mcf(profileId     = &quot;ga:111111111&quot;,
-                  start.date    = &quot;15daysAgo&quot;,
-                  end.date      = &quot;yesterday&quot;,
-                  dimensions    = &quot;mcf:conversionDate, mcf:mediumPath&quot;,
-                  metrics       = &quot;mcf:assistedConversions&quot;,
-                  fetch.by      = &quot;day&quot;,
-                  samplingLevel =  &quot;HIGHER_PRECISION&quot;,
+<div class="codehilite"><pre><span></span><code>mcfData &lt;- get_mcf(profileId     = "ga:111111111",
+                  start.date    = "15daysAgo",
+                  end.date      = "yesterday",
+                  dimensions    = "mcf:conversionDate, mcf:mediumPath",
+                  metrics       = "mcf:assistedConversions",
+                  fetch.by      = "day",
+                  samplingLevel =  "HIGHER_PRECISION",
                   max.results   = 10000,
                   token = rga_auth)
 </code></pre></div>
@@ -492,10 +492,10 @@ Multi-Channel Funnels Reporting API позволяет запрашивать д
 <h3 id="google-analytics-multi-channel-funnels-reporting-api_1">Пример получения данных из Google Analytics Multi-Channel Funnels Reporting API</h3>
 <p>Ниже представлен пример кода с помощью которого можно получить к-во активных пользователей на сайте в текущей момент (<em>metrics = “rt:activeUsers”</em>), в разрезе источника, канала и страны (<em>“rt:source, rt:medium, rt:country”</em>).</p>
 <p>Запрос вернёт данные отсортированные в порядке убывания по количеству активных пользователей (<em>sort = “-rt:activeUsers”</em>).</p>
-<div class="codehilite"><pre><span></span><code>realtimeData &lt;- get_realtime(profileId     = &quot;ga:111111111&quot;,
-                            dimensions    = &quot;rt:source, rt:medium, rt:country&quot;,
-                            metrics       = &quot;rt:activeUsers&quot;,
-                            sort          = &quot;-rt:activeUsers&quot;,
+<div class="codehilite"><pre><span></span><code>realtimeData &lt;- get_realtime(profileId     = "ga:111111111",
+                            dimensions    = "rt:source, rt:medium, rt:country",
+                            metrics       = "rt:activeUsers",
+                            sort          = "-rt:activeUsers",
                             max.results   = 10000,
                             token = rga_auth)
 </code></pre></div>
@@ -535,7 +535,7 @@ Multi-Channel Funnels Reporting API позволяет запрашивать д
                     <div class="b-tags"><a class="b-chip" href="../?tag=api#posts">API</a><a class="b-chip" href="../?tag=veb-analitika#posts">Веб-аналитика</a><a class="b-chip" href="../?tag=google-analytics#posts">Google Analytics</a><a class="b-chip" href="../?tag=r#posts">R</a></div>
                 </div>
             </article>
-            <aside class="b-toc" aria-label="Contents"><div class="b-toc-title"><span class="ru-text">Содержание</span><span class="ua-text">Зміст</span><span class="en-text">Contents</span></div><ul><li><a href="#rga-google-analytics-api">Преимущества пакета RGA для работы с Google Analytics API</a></li><li><a href="#rga">Установка пакета RGA</a></li><li><a href="#google-analytics">Аутентификация в Google Analytics</a></li><li><a href="#google-analytics-r">Как получить список доступных Google Analytics аккаунтов, ресурсов и представлений с их различными свойствами, настройками и параметрами в R</a></li><li><a href="#core-api-google-analytics-r">Как получить данные из Core API Google Analytics в R</a><ul><li><a href="#get_ga">Аргументы функции get95ga:</a></li><li><a href="#ganame-operator-expression">Синтаксис фильтра:ga:name operator expression</a></li><li><a href="#google-analytics-core-api">Пример получения данных из Google Analytics Core API:</a></li></ul></li><li><a href="#multi-channel-funnels-reporting-api-r">Как получить данные из Multi-Channel Funnels Reporting API в R</a><ul><li><a href="#google-analytics-multi-channel-funnels-reporting-api">Пример получения данных из Google Analytics Multi-Channel Funnels Reporting API:</a></li></ul></li><li><a href="#real-time-reporting-api-r">Как получить данные из Real Time Reporting API в R</a><ul><li><a href="#google-analytics-multi-channel-funnels-reporting-api_1">Пример получения данных из Google Analytics Multi-Channel Funnels Reporting API</a></li></ul></li><li><a href="#api-google-analytics-power-bi">Как загрузить данные из любых API сервисов Google Analytics в Power BI</a><ul><li><a href="#power-bi-realtime-api-google-analytics">Пример дашборда, построенного в Power BI на основе данных из RealTime API Google Analytics</a></li></ul></li><li><a href="#_1">Выводы</a></li></ul></aside>
+            <aside class="b-toc" aria-label="Contents"><div class="b-toc-title"><span class="ru-text">Содержание</span><span class="ua-text">Зміст</span><span class="en-text">Contents</span></div><ul><li><a href="#rga-google-analytics-api">Преимущества пакета RGA для работы с Google Analytics API</a></li><li><a href="#rga">Установка пакета RGA</a></li><li><a href="#google-analytics">Аутентификация в Google Analytics</a></li><li><a href="#google-analytics-r">Как получить список доступных Google Analytics аккаунтов, ресурсов и представлений с их различными свойствами, настройками и параметрами в R</a></li><li><a href="#core-api-google-analytics-r">Как получить данные из Core API Google Analytics в R</a><ul><li><a href="#get_ga">Аргументы функции get_ga:</a></li><li><a href="#ganame-operator-expression">Синтаксис фильтра:ga:name operator expression</a></li><li><a href="#google-analytics-core-api">Пример получения данных из Google Analytics Core API:</a></li></ul></li><li><a href="#multi-channel-funnels-reporting-api-r">Как получить данные из Multi-Channel Funnels Reporting API в R</a><ul><li><a href="#google-analytics-multi-channel-funnels-reporting-api">Пример получения данных из Google Analytics Multi-Channel Funnels Reporting API:</a></li></ul></li><li><a href="#real-time-reporting-api-r">Как получить данные из Real Time Reporting API в R</a><ul><li><a href="#google-analytics-multi-channel-funnels-reporting-api_1">Пример получения данных из Google Analytics Multi-Channel Funnels Reporting API</a></li></ul></li><li><a href="#api-google-analytics-power-bi">Как загрузить данные из любых API сервисов Google Analytics в Power BI</a><ul><li><a href="#power-bi-realtime-api-google-analytics">Пример дашборда, построенного в Power BI на основе данных из RealTime API Google Analytics</a></li></ul></li><li><a href="#_1">Выводы</a></li></ul></aside>
         </div>
         <section class="b-related">
             <h2 class="outfit-font"><span class="ru-text">Читайте также</span><span class="ua-text">Читайте також</span><span class="en-text">Related posts</span></h2>

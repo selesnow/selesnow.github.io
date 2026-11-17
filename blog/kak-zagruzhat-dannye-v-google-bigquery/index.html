@@ -235,7 +235,7 @@
 </table></div>
 <p><strong>2.4. Options</strong> — последний блок, который необходимо заполнить перед загрузкой данных. В поле «Field delimiter» указываем разделитель полей для CSV файла. В нашем случае это точка с запятой, в связи с чем мы устанавливаем переключатель в режим «Other» и в текстовом поле вводим «;».</p>
 <p>В поле «Header rows to skip» вписываем количество строк, содержащих заголовки данных, чтобы эти строки игнорировались при импорте. С помощью поля «Number of errors allowed» мы задаем максимально допустимое количество ошибок при загрузке. Если установить в этом поле 0, то при первой же ошибке в загружаемых данных (к примеру, при несоответствии загружаемых данных типу поля), процедура загрузки будет остановлена. Галочку «Allow Quoted Newlines» надо ставить в случае, если в загружаемом CSV файле встречаются текстовые поля, значение которых переходит на следующую строку, например:</p>
-<div class="codehilite"><pre><span></span><code>1,2,&quot;this is my string&quot;,4,5 1,2,&quot;another string&quot;,4,5
+<div class="codehilite"><pre><span></span><code>1,2,"this is my string",4,5 1,2,"another string",4,5
 </code></pre></div>
 
 <p>В данном случае нам требуется загрузить из CSV файла две строки, но, как видим, второе поле первой строки разделено переносом на новую строку. Чтобы при импорте этот перенос игнорировался, установите галочку «Allow Quoted Newlines». Опция «Allow jarred rows» доступна только для CSV файлов. Если вы установите эту галочку, отсутствующие записи в необязательных столбцах будут обрабатываться как нулевые, если не установите — такие записи будут считаться ошибочными, и если ошибочных записей много, импорт будет остановлен. Галочка в поле «Ignore unknown value» позволяет во время загрузки игнорировать значения, которые не соответствуют структуре данных, описанной на вкладке «Specify schema».</p>
@@ -253,20 +253,20 @@
 </ol>
 <p><img loading="lazy" decoding="async" alt="Задаем имя новой таблицы «load_data_from_json»" width="627" height="567" src="../images/kak-zagruzhat-dannye-v-google-bigquery-zadaem-imya-novoy-tab-60f39433.webp" /></p>
 <p>1.2. В блоке «Source data» выбираем скачанный ранее файл. Для этого в выпадающем списке «File format» выбираем JSON, нажимаем кнопку «Choose file» и выбираем нужный файл. 1.3. Структуру таблицы в блоке «Schema» можно описать в JSON формате. Для этого нажимаем «Edit as text» и вставляем следующий текст:</p>
-<div class="codehilite"><pre><span></span><code>{ &quot;name&quot;: &quot;kind&quot;, &quot;mode&quot;: &quot;nullable&quot;, &quot;type&quot;: &quot;string&quot; },
-{ &quot;name&quot;: &quot;fullName&quot;, &quot;type&quot;: &quot;string&quot;, &quot;mode&quot;: &quot;required&quot; },
-{ &quot;name&quot;: &quot;age&quot;, &quot;type&quot;: &quot;integer&quot;, &quot;mode&quot;: &quot;nullable&quot; },
-{ &quot;name&quot;: &quot;gender&quot;, &quot;type&quot;: &quot;string&quot;, &quot;mode&quot;: &quot;nullable&quot; },
-{ &quot;name&quot;: &quot;phoneNumber&quot;, &quot;type&quot;: &quot;record&quot;, &quot;mode&quot;: &quot;nullable&quot;, &quot;fields&quot;:
-[ { &quot;name&quot;: &quot;areaCode&quot;, &quot;type&quot;: &quot;integer&quot;, &quot;mode&quot;: &quot;nullable&quot; },
-{ &quot;name&quot;: &quot;number&quot;, &quot;type&quot;: &quot;integer&quot;, &quot;mode&quot;: &quot;nullable&quot; } ] },
-{ &quot;name&quot;: &quot;children&quot;, &quot;type&quot;: &quot;record&quot;, &quot;mode&quot;: &quot;repeated&quot;, &quot;fields&quot;:
-[ { &quot;name&quot;: &quot;name&quot;, &quot;type&quot;: &quot;string&quot;, &quot;mode&quot;: &quot;nullable&quot; },
-{ &quot;name&quot;: &quot;gender&quot;, &quot;type&quot;: &quot;string&quot;, &quot;mode&quot;: &quot;nullable&quot; },
-{ &quot;name&quot;: &quot;age&quot;, &quot;type&quot;: &quot;integer&quot;, &quot;mode&quot;: &quot;nullable&quot; } ] },
-{ &quot;name&quot;: &quot;citiesLived&quot;, &quot;type&quot;: &quot;record&quot;, &quot;mode&quot;: &quot;repeated&quot;, &quot;fields&quot;:
-[ { &quot;name&quot;: &quot;place&quot;, &quot;type&quot;: &quot;string&quot;, &quot;mode&quot;: &quot;nullable&quot; },
-{ &quot;name&quot;: &quot;yearsLived&quot;, &quot;type&quot;: &quot;integer&quot;, &quot;mode&quot;: &quot;repeated&quot; } ]
+<div class="codehilite"><pre><span></span><code>{ "name": "kind", "mode": "nullable", "type": "string" },
+{ "name": "fullName", "type": "string", "mode": "required" },
+{ "name": "age", "type": "integer", "mode": "nullable" },
+{ "name": "gender", "type": "string", "mode": "nullable" },
+{ "name": "phoneNumber", "type": "record", "mode": "nullable", "fields":
+[ { "name": "areaCode", "type": "integer", "mode": "nullable" },
+{ "name": "number", "type": "integer", "mode": "nullable" } ] },
+{ "name": "children", "type": "record", "mode": "repeated", "fields":
+[ { "name": "name", "type": "string", "mode": "nullable" },
+{ "name": "gender", "type": "string", "mode": "nullable" },
+{ "name": "age", "type": "integer", "mode": "nullable" } ] },
+{ "name": "citiesLived", "type": "record", "mode": "repeated", "fields":
+[ { "name": "place", "type": "string", "mode": "nullable" },
+{ "name": "yearsLived", "type": "integer", "mode": "repeated" } ]
 } ]
 </code></pre></div>
 

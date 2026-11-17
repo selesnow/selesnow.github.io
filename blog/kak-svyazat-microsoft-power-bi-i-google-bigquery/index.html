@@ -238,8 +238,8 @@
 <p>1.5. Далее подключаем пакет «bigrquery», установленный ранее с помощью «library(bigrquery)».</p>
 <h3 id="2-bigquery">2. Предоставьте доступ к данным BigQuery</h3>
 <p>2.1. Для прохождения первой аутентификации запустите запрос к любой таблице BigQuery из консоли. Для этого воспользуйтесь следующим кодом:</p>
-<div class="codehilite"><pre><span></span><code>projectID &lt;- &quot;XXXXXXX&quot;  #Название проекта, получить его можно из URL
-dataSetID &lt;- &quot;XXXXXXX&quot; #Название набора данных, смотреть в интерфейсе BigQuery
+<div class="codehilite"><pre><span></span><code>projectID &lt;- "XXXXXXX"  #Название проекта, получить его можно из URL
+dataSetID &lt;- "XXXXXXX" #Название набора данных, смотреть в интерфейсе BigQuery
 tableID
 </code></pre></div>
 
@@ -258,10 +258,10 @@ tableID
 <p><img loading="lazy" decoding="async" alt="Нажмите кнопку для получения данных" width="615" height="667" src="../images/kak-svyazat-microsoft-power-bi-i-google-bigquery-nazmite-kno-f50a2cca.webp" /></p>
 <p>3.2. Далее появится диалоговое окно «Выполнение сценария R». Подставьте в следующий код свои значения ID проекта, набора данных и <a target="_blank" rel="noopener" href="https://netpeak.net/ru/blog/kak-obrabatyvat-dannie-iz-mnozhestva-tablits-v-google-bigquery/">таблицы</a> и введите его в диалоговое окно.</p>
 <div class="codehilite"><pre><span></span><code>library(bigrquery)
-setwd(&quot;C:/BQ_Integration&quot;)
-projectID &lt;- &quot;XXXXXXX&quot;
-dataSetID &lt;- &quot;XXXXXXXXX&quot;
-tableID &lt;- &quot;XXXXXXXX&quot;
+setwd("C:/BQ_Integration")
+projectID &lt;- "XXXXXXX"
+dataSetID &lt;- "XXXXXXXXX"
+tableID &lt;- "XXXXXXXX"
 
 qry
 </code></pre></div>

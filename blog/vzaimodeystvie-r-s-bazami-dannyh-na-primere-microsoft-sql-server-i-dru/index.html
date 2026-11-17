@@ -244,8 +244,8 @@
 </ul>
 <p>Пакет <code>DBI</code> поставляется с базовой комплектацией R, но пакеты, которые являются драйверами к базам данных необходимо устанавливать с помощью команды <code>install.packages("название драйвера")</code>.</p>
 <p>Для установки пакетов с GitHub вам также понадобится дополнительный пакет — <code>devtools</code>. Например пакет <code>RMSSQL</code> на данный момент не опубликован в основном репозитории R пакетов, для его установки воспользуйтесь следующим кодом:</p>
-<div class="codehilite"><pre><span></span><code>install.packages(&quot;devtools&quot;)
-devtools::install_github(&quot;bescoto/RMSSQL&quot;)
+<div class="codehilite"><pre><span></span><code>install.packages("devtools")
+devtools::install_github("bescoto/RMSSQL")
 </code></pre></div>
 
 <h4 id="microsoft-sql-server-odbc">Пример подключения к Microsoft SQL Server с помощью пакета odbc</h4>
@@ -323,8 +323,8 @@ devtools::install_github(&quot;bescoto/RMSSQL&quot;)
 
 <h3 id="microsoft-sql-server-rmssql">Пример подключения к Microsoft SQL Server с помощью пакета RMSSQL</h3>
 <p><code>RMSSQL</code> не опубликован на CRAN, поэтому установить его можно с GitHub с помощью пакета <code>devtools</code>.</p>
-<div class="codehilite"><pre><span></span><code>install.packages(&quot;devtools&quot;)
-devtools::install_github(&quot;bescoto/RMSSQL&quot;)
+<div class="codehilite"><pre><span></span><code>install.packages("devtools")
+devtools::install_github("bescoto/RMSSQL")
 </code></pre></div>
 
 <p><strong>Пример подключения с помощью DBI драйвера RMSSQL</strong></p>
@@ -334,23 +334,23 @@ devtools::install_github(&quot;bescoto/RMSSQL&quot;)
 <p>Выше я привёл несколько примеров которые можно использовать для подключения к любой базе данных но в них есть один минус, в таком виде все доступы к базам данных, включая пароли, хранятся в виде текста в самих скриптах.</p>
 <p>Если все ваши скрипты развёрнуты и запускаются исключительно локально на вашем ПК, и он при этом защищён паролем, то скорее всего никакой проблемы в этом не будет. Но если вы совместно с кем то работаете на одном сервере то хранение паролей от баз данных в тексте ваших скриптов не лучшее решение.</p>
 <p>В любой операционной системе есть утилита для управления учётными данными. Например, в Windows это диспетчер учетных данных (Credential Manager). Добавить в это хранилище пароль который вы используете для подключения к базе данных можно через пакет <code>keyring</code>. Пакет кроссплатформенный и приведённый пример будет работать в любой операционной системе, как минимум на Windows, MacOS и Linux.</p>
-<div class="codehilite"><pre><span></span><code># install.packages(&quot;keyring&quot;)
+<div class="codehilite"><pre><span></span><code># install.packages("keyring")
 
 # подключаем пакет
 library(keyring)
 library(RMSSQL)
 
 # создаём ключ
-key_set_with_value(service = &quot;mssql&quot;, 
-                   username = &quot;my_username&quot;,
-                   password = &quot;my_password&quot;)
+key_set_with_value(service = "mssql", 
+                   username = "my_username",
+                   password = "my_password")
 
 # подключение через RMSSQL
 con &lt;- dbConnect(MSSQLServer(), 
-                 host     = &#39;localhost&#39;, 
-                 user     = &#39;my_username&#39;, 
-                 password = key_get(&quot;mssql&quot;, &quot;my_username&quot;), 
-                 dbname   = &quot;mybase&quot;)
+                 host     = 'localhost', 
+                 user     = 'my_username', 
+                 password = key_get("mssql", "my_username"), 
+                 dbname   = "mybase")
 </code></pre></div>
 
 <p>Т.е. с помощью функции <code>key_set_with_value()</code> вы добавляете пароль в хранилище учётных данных, а с помощью <code>key_get()</code> запрашиваете его, при этом запросить пароль может только тот пользователь который добавил его в хранилище. С помощью <code>keyring</code> можно хранить пароли не только от баз данных, но и от любых сервисов, а так же авторизационные токены при работе с API.</p>

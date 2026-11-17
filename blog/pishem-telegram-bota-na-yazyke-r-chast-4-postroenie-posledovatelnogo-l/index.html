@@ -299,13 +299,13 @@ library(RSQLite) # драйвер для подключения к SQLite
 
 # директория проекта
 
-setwd(Sys.getenv(&#39;TG_BOT_PATH&#39;))
+setwd(Sys.getenv('TG_BOT_PATH'))
 
 
 
 # чтение конфига
 
-cfg &lt;- read.config(&#39;config.cfg&#39;)
+cfg &lt;- read.config('config.cfg')
 
 
 
@@ -317,9 +317,9 @@ con &lt;- dbConnect(SQLite(), cfg$db_settings$db_path)
 
 # Создание таблиц в базе
 
-dbExecute(con, statement = read_file(&#39;create_db_data.sql&#39;))
+dbExecute(con, statement = read_file('create_db_data.sql'))
 
-dbExecute(con, statement = read_file(&#39;create_db_state.sql&#39;))
+dbExecute(con, statement = read_file('create_db_state.sql'))
 </code></pre></div>
 
 <h2 id="_8">Пишем функции для работы с базой данных</h2>
@@ -341,7 +341,7 @@ get_state &lt;- function(chat_id) {
 
 
 
-  chat_state &lt;- dbGetQuery(con, str_interp(&quot;SELECT state FROM chat_state WHERE chat_id == ${chat_id}&quot;))$state
+  chat_state &lt;- dbGetQuery(con, str_interp("SELECT state FROM chat_state WHERE chat_id == ${chat_id}"))$state
 
 
 
@@ -369,17 +369,17 @@ set_state &lt;- function(chat_id, state) {
 
   dbExecute(con, 
 
-            str_interp(&quot;
+            str_interp("
 
             INSERT INTO chat_state (chat_id, state)
 
-                VALUES(${chat_id}, &#39;${state}&#39;) 
+                VALUES(${chat_id}, '${state}') 
 
                 ON CONFLICT(chat_id) 
 
-                DO UPDATE SET state=&#39;${state}&#39;;
+                DO UPDATE SET state='${state}';
 
-            &quot;)
+            ")
 
   )
 
@@ -407,17 +407,17 @@ set_chat_data &lt;- function(chat_id, field, value) {
 
   dbExecute(con, 
 
-            str_interp(&quot;
+            str_interp("
 
             INSERT INTO chat_data (chat_id, ${field})
 
-                VALUES(${chat_id}, &#39;${value}&#39;) 
+                VALUES(${chat_id}, '${value}') 
 
                 ON CONFLICT(chat_id) 
 
-                DO UPDATE SET ${field}=&#39;${value}&#39;;
+                DO UPDATE SET ${field}='${value}';
 
-            &quot;)
+            ")
 
   )
 
@@ -445,7 +445,7 @@ get_chat_data &lt;- function(chat_id, field) {
 
   data &lt;- dbGetQuery(con, 
 
-                     str_interp(&quot;
+                     str_interp("
 
             SELECT ${field}
 
@@ -453,7 +453,7 @@ get_chat_data &lt;- function(chat_id, field) {
 
             WHERE chat_id = ${chat_id};
 
-            &quot;)
+            ")
 
   )
 
@@ -481,11 +481,11 @@ get_chat_data &lt;- function(chat_id, field) {
 <p>Синтаксис UPSERT операции выглядит следующим образом:</p>
 <div class="codehilite"><pre><span></span><code>INSERT INTO chat_data (chat_id, ${field})
 
-VALUES(${chat_id}, &#39;${value}&#39;) 
+VALUES(${chat_id}, '${value}') 
 
 ON CONFLICT(chat_id) 
 
-DO UPDATE SET ${field}=&#39;${value}&#39;;
+DO UPDATE SET ${field}='${value}';
 </code></pre></div>
 
 <p>Т.е. в наших таблицах поле <em>chat_id</em> имеет ограничение по уникальности и является первичным ключом таблиц. Изначально мы пробуем добавить информацию в таблицу, и получаем ошибку если данные по текущему чату уже присутствуют, в таком случае мы просто обновляем информацию по данному чату.</p>
@@ -512,13 +512,13 @@ start &lt;- function(bot, update) {
 
   bot$sendMessage(update$message$chat_id, 
 
-                  text = &quot;Введи своё имя&quot;)
+                  text = "Введи своё имя")
 
 
 
   # переключаем состояние диалога в режим ожидания ввода имени
 
-  set_state(chat_id = update$message$chat_id, state = &#39;wait_name&#39;)
+  set_state(chat_id = update$message$chat_id, state = 'wait_name')
 
 
 
@@ -554,7 +554,7 @@ reset &lt;- function(bot, update) {
 
 
 
-  set_state(chat_id = update$message$chat_id, state = &#39;start&#39;)
+  set_state(chat_id = update$message$chat_id, state = 'start')
 
 
 
@@ -576,7 +576,7 @@ enter_name &lt;- function(bot, update) {
 
   bot$sendMessage(update$message$chat_id, 
 
-                  text = paste0(uname, &quot;, приятно познакомится, я бот!&quot;))
+                  text = paste0(uname, ", приятно познакомится, я бот!"))
 
 
 
@@ -584,7 +584,7 @@ enter_name &lt;- function(bot, update) {
 
   #username &lt;&lt;- uname
 
-  set_chat_data(update$message$chat_id, &#39;name&#39;, uname) 
+  set_chat_data(update$message$chat_id, 'name', uname) 
 
 
 
@@ -592,13 +592,13 @@ enter_name &lt;- function(bot, update) {
 
   bot$sendMessage(update$message$chat_id, 
 
-                  text = &quot;Сколько тебе лет?&quot;)
+                  text = "Сколько тебе лет?")
 
 
 
   # Меняем состояние на ожидание ввода имени
 
-  set_state(chat_id = update$message$chat_id, state = &#39;wait_age&#39;)
+  set_state(chat_id = update$message$chat_id, state = 'wait_age')
 
 
 
@@ -626,7 +626,7 @@ enter_age &lt;- function(bot, update) {
 
     bot$sendMessage(update$message$chat_id, 
 
-                    text = &quot;Ты ввёл некорректные данные, введи число&quot;)
+                    text = "Ты ввёл некорректные данные, введи число")
 
 
 
@@ -638,7 +638,7 @@ enter_age &lt;- function(bot, update) {
 
     bot$sendMessage(update$message$chat_id, 
 
-                    text = &quot;ОК, возраст принят&quot;)
+                    text = "ОК, возраст принят")
 
 
 
@@ -646,27 +646,27 @@ enter_age &lt;- function(bot, update) {
 
     #userage &lt;&lt;- uage
 
-    set_chat_data(update$message$chat_id, &#39;age&#39;, uage) 
+    set_chat_data(update$message$chat_id, 'age', uage) 
 
 
 
     # сообщаем какие данные были собраны
 
-    username &lt;- get_chat_data(update$message$chat_id, &#39;name&#39;)
+    username &lt;- get_chat_data(update$message$chat_id, 'name')
 
-    userage  &lt;- get_chat_data(update$message$chat_id, &#39;age&#39;)
+    userage  &lt;- get_chat_data(update$message$chat_id, 'age')
 
 
 
     bot$sendMessage(update$message$chat_id, 
 
-                    text = paste0(&quot;Тебя зовут &quot;, username, &quot; и тебе &quot;, userage, &quot; лет. Будем знакомы&quot;))
+                    text = paste0("Тебя зовут ", username, " и тебе ", userage, " лет. Будем знакомы"))
 
 
 
     # возвращаем диалог в исходное состояние
 
-    set_state(chat_id = update$message$chat_id, state = &#39;start&#39;)
+    set_state(chat_id = update$message$chat_id, state = 'start')
 
   }
 
@@ -701,7 +701,7 @@ enter_age &lt;- function(bot, update) {
 
 MessageFilters$wait_name &lt;- BaseFilter(function(message) {
 
-  get_state( message$chat_id )  == &quot;wait_name&quot;
+  get_state( message$chat_id )  == "wait_name"
 
 }
 
@@ -713,7 +713,7 @@ MessageFilters$wait_name &lt;- BaseFilter(function(message) {
 
 MessageFilters$wait_age &lt;- BaseFilter(function(message) {
 
-  get_state( message$chat_id )   == &quot;wait_age&quot;
+  get_state( message$chat_id )   == "wait_age"
 
 }
 
@@ -732,11 +732,11 @@ MessageFilters$wait_age &lt;- BaseFilter(function(message) {
 
 # command handlers
 
-start_h &lt;- CommandHandler(&#39;start&#39;, start)
+start_h &lt;- CommandHandler('start', start)
 
-state_h &lt;- CommandHandler(&#39;state&#39;, state)
+state_h &lt;- CommandHandler('state', state)
 
-reset_h &lt;- CommandHandler(&#39;reset&#39;, reset)
+reset_h &lt;- CommandHandler('reset', reset)
 
 
 
@@ -769,13 +769,13 @@ library(configr)
 
 # переходим в папку проекта
 
-setwd(Sys.getenv(&#39;TG_BOT_PATH&#39;))
+setwd(Sys.getenv('TG_BOT_PATH'))
 
 
 
 # читаем конфиг
 
-cfg &lt;- read.config(&#39;config.cfg&#39;)
+cfg &lt;- read.config('config.cfg')
 
 
 
@@ -787,13 +787,13 @@ updater &lt;- Updater(cfg$bot_settings$bot_token)
 
 # Загрузка компонентов бота
 
-source(&#39;db_bot_function.R&#39;) # функции для работы с БД
+source('db_bot_function.R') # функции для работы с БД
 
-source(&#39;bot_methods.R&#39;)     # методы бота
+source('bot_methods.R')     # методы бота
 
-source(&#39;message_filters.R&#39;) # фильтры сообщений
+source('message_filters.R') # фильтры сообщений
 
-source(&#39;handlers.R&#39;) # обработчики сообщений
+source('handlers.R') # обработчики сообщений
 
 
 

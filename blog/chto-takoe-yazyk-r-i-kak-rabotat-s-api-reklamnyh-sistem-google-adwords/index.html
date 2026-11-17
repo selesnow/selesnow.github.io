@@ -286,24 +286,24 @@ library(RAdwords)
 
 #Аутентификация
 adwords_auth &lt;- doAuth()
-account_id   &lt;- &quot;000-000-0000&quot; #ID вашего рекламного аккаунта AdWords
+account_id   &lt;- "000-000-0000" #ID вашего рекламного аккаунта AdWords
 
 #Подготовка запроса
 #Берём данные за предыдущие 30 дней
 #Функция format.Date преобзаует дату из стандартного формата 2017-01-01 в 20170101
-body &lt;- statement(select=c(&#39;Date&#39;,
-                           &#39;CampaignName&#39;,
-                           &#39;CampaignId&#39;,
-                           &#39;AccountCurrencyCode&#39;,
-                           &#39;Impressions&#39;,
-                           &#39;VideoViews&#39;,
-                           &#39;Clicks&#39;,
-                           &#39;Interactions&#39;,
-                           &#39;AllConversions&#39;,
-                           &#39;Cost&#39;),
-                  report=&quot;CAMPAIGN_PERFORMANCE_REPORT&quot;,
-                  start=format.Date(Sys.Date() - 31, &quot;%Y%m%d&quot;),
-                  end=format.Date(Sys.Date() - 1, &quot;%Y%m%d&quot;))
+body &lt;- statement(select=c('Date',
+                           'CampaignName',
+                           'CampaignId',
+                           'AccountCurrencyCode',
+                           'Impressions',
+                           'VideoViews',
+                           'Clicks',
+                           'Interactions',
+                           'AllConversions',
+                           'Cost'),
+                  report="CAMPAIGN_PERFORMANCE_REPORT",
+                  start=format.Date(Sys.Date() - 31, "%Y%m%d"),
+                  end=format.Date(Sys.Date() - 1, "%Y%m%d"))
 
 #Запрашиваем данные
 AdwData &lt;- getData(clientCustomerId = account_id,
@@ -408,7 +408,7 @@ AdwData &lt;- getData(clientCustomerId = account_id,
 <h2 id="1">Пример #1: Загрузка статистики по кампаниям в разрезе дат.</h2>
 <p>Для начала рассмотрим простейший пример кода, с помощью которого можно загрузить основную статистику по рекламным кампаниям в разрезе дней.</p>
 <div class="codehilite"><pre><span></span><code>#Подключаем пакет
-library(&quot;ryandexdirect&quot;)
+library("ryandexdirect")
 
 #Получаем токен разработчика
 tok &lt;- yadirGetToken()
@@ -417,14 +417,14 @@ tok &lt;- yadirGetToken()
 my_login &lt;- “MYLOGIN”
 
 #Запрашиваем статистику
-data &lt;- yadirGetReport(ReportType = &quot;CAMPAIGN_PERFORMANCE_REPORT&quot;,
-                       DateRangeType = &quot;LAST_30_DAYS&quot;,
-                       FieldNames = c(&quot;Date&quot;,
-                                      &quot;CampaignName&quot;,
-                                      &quot;CampaignId&quot;,
-                                      &quot;Impressions&quot;,
-                                      &quot;Clicks&quot;,
-                                      &quot;Cost&quot;),
+data &lt;- yadirGetReport(ReportType = "CAMPAIGN_PERFORMANCE_REPORT",
+                       DateRangeType = "LAST_30_DAYS",
+                       FieldNames = c("Date",
+                                      "CampaignName",
+                                      "CampaignId",
+                                      "Impressions",
+                                      "Clicks",
+                                      "Cost"),
                        Login = my_login,
                        Token = tok )
 </code></pre></div>
@@ -458,16 +458,16 @@ data &lt;- yadirGetReport(ReportType = &quot;CAMPAIGN_PERFORMANCE_REPORT&quot;,
 <p>Дело в том, что поле LocationOfPresenceName, содержит максимально точное название географического места нахождения пользователя (села, города или области). И если мы, к примеру, хотим посмотреть данные в разрезе областей, а не городов, то необходимо загрузить справочник регионов и привести его к нужному виду с помощью рекурсивного сканирования справочника.</p>
 <p>Выполним приведенный ниже код.</p>
 <div class="codehilite"><pre><span></span><code>#Подключаем пакет
-library(&quot;ryandexdirect&quot;)
+library("ryandexdirect")
 
 #Получаем токен разработчика
 tok &lt;- yadirGetToken()
 
 #Вводим переменную содержащую логин пользователя, замените MYLOGIN на ваш логин в Яндексе
-my_login &lt;- &quot;MYLOGIN&quot;
+my_login &lt;- "MYLOGIN"
 
 #Получаем географический справочник
-geo_dict &lt;- yadirGetDictionary(DictionaryName = &quot;GeoRegions&quot;, Language = &quot;en&quot;, login = my_login, token = tok )
+geo_dict &lt;- yadirGetDictionary(DictionaryName = "GeoRegions", Language = "en", login = my_login, token = tok )
 
 #Добавляем поле с идентификатором страны
 geo_dict$CountryID &lt;- NA
@@ -476,13 +476,13 @@ geo_dict$CountryID &lt;- NA
 #Запускаем цикл по каждому элементу справочника
 for(gd in 1:nrow(geo_dict)){
   #Проверяем, если текущий элемент является страной то в поле ID страны устанавливаем ID этого же элемента, иначе устанавливаем ID родительского элемента
-  if(geo_dict$GeoRegionType[gd] == &quot;Country&quot;){
+  if(geo_dict$GeoRegionType[gd] == "Country"){
     geo_dict$CountryID[gd] &lt;- geo_dict$GeoRegionId[gd]
   }else{
     geo_dict$CountryID[gd] &lt;- geo_dict$ParentId[gd]}
 
   #Проверяем тип родительского региона, если он ниже страны то присваиваем в ID страны ID региона который является родительским для родительского региона начальной строки, повторяем до тех пор пока не найдём страну
-  while(geo_dict$GeoRegionType[geo_dict$GeoRegionId == geo_dict$CountryID[gd]] %in% c(&quot;Administrative area&quot;, &quot;District&quot;, &quot;City&quot;, &quot;City district&quot;, &quot;Village&quot;)){
+  while(geo_dict$GeoRegionType[geo_dict$GeoRegionId == geo_dict$CountryID[gd]] %in% c("Administrative area", "District", "City", "City district", "Village")){
 
     geo_dict$CountryID[gd] &lt;- geo_dict$ParentId[geo_dict$GeoRegionId == geo_dict$CountryID[gd]]
 
@@ -490,8 +490,8 @@ for(gd in 1:nrow(geo_dict)){
 }
 
 #Отделяем справочник областей
-geo_dict &lt;- merge(geo_dict, subset(geo_dict, select = c(&quot;GeoRegionId&quot;,&quot;GeoRegionName&quot;)),by.x = &quot;CountryID&quot;, by.y = &quot;GeoRegionId&quot;, all.x = T)
-names(geo_dict) &lt;- c(&quot;CountryID&quot;, &quot;GeoRegionId&quot;, &quot;ParentId&quot;, &quot;GeoRegionType&quot;, &quot;GeoRegionName&quot;, &quot;CountryName&quot;)
+geo_dict &lt;- merge(geo_dict, subset(geo_dict, select = c("GeoRegionId","GeoRegionName")),by.x = "CountryID", by.y = "GeoRegionId", all.x = T)
+names(geo_dict) &lt;- c("CountryID", "GeoRegionId", "ParentId", "GeoRegionType", "GeoRegionName", "CountryName")
 
 #Добавляем поле с идентификатором области
 geo_dict$AreaID &lt;- NA
@@ -500,13 +500,13 @@ geo_dict$AreaID &lt;- NA
 #Запускаем цикл по каждому элементу справочника
 for(gd in 1:nrow(geo_dict)){
   #Проверяем если текущий элемент является областью то в поле ID страны устанавливаем ID этого же элемента, иначе устанавливаем ID родительского элемента
-  if(geo_dict$GeoRegionType[gd] == &quot;Administrative area&quot;){
+  if(geo_dict$GeoRegionType[gd] == "Administrative area"){
     geo_dict$AreaID[gd] &lt;- geo_dict$GeoRegionId[gd]
   }else{
     geo_dict$AreaID[gd] &lt;- geo_dict$ParentId[gd]}
 
   #Проверяем тип родительского региона, если он ниже области то присваиваем в ID области ID региона который является родительским для родительского региона начальной строки, повторяем до тех пор пока не найдём область
-  while(geo_dict$GeoRegionType[geo_dict$GeoRegionId == geo_dict$AreaID[gd]] %in% c(&quot;District&quot;, &quot;City&quot;, &quot;City district&quot;, &quot;Village&quot;)){
+  while(geo_dict$GeoRegionType[geo_dict$GeoRegionId == geo_dict$AreaID[gd]] %in% c("District", "City", "City district", "Village")){
 
     geo_dict$AreaID[gd] &lt;- geo_dict$ParentId[geo_dict$GeoRegionId == geo_dict$AreaID[gd]]
 
@@ -514,26 +514,26 @@ for(gd in 1:nrow(geo_dict)){
 }
 
 #Отделяем справочник областей
-geo_dict &lt;- merge(geo_dict, subset(geo_dict, select = c(&quot;GeoRegionId&quot;,&quot;GeoRegionName&quot;)),by.x = &quot;AreaID&quot;, by.y = &quot;GeoRegionId&quot;, all.x = T)
-names(geo_dict) &lt;- c(&quot;AreaID&quot;,&quot;CountryID&quot;, &quot;GeoRegionId&quot;, &quot;ParentId&quot;, &quot;GeoRegionType&quot;, &quot;GeoRegionName&quot;, &quot;CountryName&quot;, &quot;AreaName&quot;)
+geo_dict &lt;- merge(geo_dict, subset(geo_dict, select = c("GeoRegionId","GeoRegionName")),by.x = "AreaID", by.y = "GeoRegionId", all.x = T)
+names(geo_dict) &lt;- c("AreaID","CountryID", "GeoRegionId", "ParentId", "GeoRegionType", "GeoRegionName", "CountryName", "AreaName")
 
 #Запрашиваем статистику из Report сервиса
-stat &lt;- yadirGetReport(ReportType = &quot;CUSTOM_REPORT&quot;,
-                       DateRangeType = &quot;CUSTOM_DATE&quot;,
-                       DateFrom = &quot;2018-01-01&quot;,
-                       DateTo = &quot;2018-01-31&quot;,
-                       FieldNames = c(&quot;LocationOfPresenceId&quot;,
-                                      &quot;Impressions&quot;,
-                                      &quot;Clicks&quot;,
-                                      &quot;Cost&quot;),
+stat &lt;- yadirGetReport(ReportType = "CUSTOM_REPORT",
+                       DateRangeType = "CUSTOM_DATE",
+                       DateFrom = "2018-01-01",
+                       DateTo = "2018-01-31",
+                       FieldNames = c("LocationOfPresenceId",
+                                      "Impressions",
+                                      "Clicks",
+                                      "Cost"),
                        FilterList = NULL,
-                       IncludeVAT = &quot;YES&quot;,
-                       IncludeDiscount = &quot;NO&quot;,
+                       IncludeVAT = "YES",
+                       IncludeDiscount = "NO",
                        Login =my_login,
                        Token = tok)
 
 #Соединяем данные статистики со справочником регионов
-stat &lt;- merge(stat, geo_dict, by.x = &quot;LocationOfPresenceId&quot;, by.y = &quot;GeoRegionId&quot;, all.x = T)
+stat &lt;- merge(stat, geo_dict, by.x = "LocationOfPresenceId", by.y = "GeoRegionId", all.x = T)
 </code></pre></div>
 
 <p><a target="_blank" rel="noopener" href="https://github.com/selesnow/publications/blob/master/code_example/owox_how_work_with_google_adwords_and_yandex_direct_api_in_r/3_direct_example_2.R">Открыть пример кода на GitHub</a></p>
@@ -581,7 +581,7 @@ stat &lt;- merge(stat, geo_dict, by.x = &quot;LocationOfPresenceId&quot;, by.y =
                     <div class="b-tags"><a class="b-chip" href="../?tag=api#posts">API</a><a class="b-chip" href="../?tag=r#posts">R</a><a class="b-chip" href="../?tag=google-ads#posts">Google Ads</a><a class="b-chip" href="../?tag=yandeks-direkt#posts">Яндекс Директ</a></div>
                 </div>
             </article>
-            <aside class="b-toc" aria-label="Contents"><div class="b-toc-title"><span class="ru-text">Содержание</span><span class="ua-text">Зміст</span><span class="en-text">Contents</span></div><ul><li><a href="#_1">Содержание статьи:</a></li><li><a href="#r">Что такое язык R</a></li><li><a href="#r-1-r-10">Как я открыл для себя R или от 1С до R за 10 лет</a></li><li><a href="#_2">Глоссарий — немного терминологии</a></li><li><a href="#_3">Листинг примеров кода из статьи</a></li><li><a href="#r_1">Установка языка R</a></li><li><a href="#r_2">Что такое пакеты в R</a></li><li><a href="#r_3">Установка и подключения пакетов на языке R</a></li><li><a href="#_4">Получение подробной справки по работе с функциями пакета</a></li><li><a href="#r_4">R пакеты для работы с рекламными системами</a></li><li><a href="#radwords-api-google-adwords">RAdwords — пакет, позволяющий работать с API Google AdWords</a></li><li><a href="#api-adwords">Принцип работы с API AdWords</a></li><li><a href="#radwords">Что требуется для работы с RAdwords</a></li><li><a href="#radwords_1">Основные функции пакета RAdwords</a></li><li><a href="#google-adwords-radwords">Пример кода для получения данных из Google AdWords с помощью RAdwords</a></li><li><a href="#radwords_2">Еще несколько примеров работы с RAdwords</a></li><li><a href="#ryandexdirect-api">ryandexdirect — пакет позволяющий работать с API Яндекс. Директ и Яндекс. Метрикой</a></li><li><a href="#api">Принцип работы с API Яндекс. Директ</a></li><li><a href="#ryandexdirect">Основные функции пакета ryandexdirect</a></li><li><a href="#ryandexdirect_1">Пример кода для получения статистики из Яндекс. Директ с помощью ryandexdirect.</a></li><li><a href="#1">Пример #1: Загрузка статистики по кампаниям в разрезе дат.</a></li><li><a href="#2">Пример #2: Загрузка статистики из рекламного аккаунта в разрезе стран и регионов.</a></li><li><a href="#ryandexdirect_2">Еще несколько примеров работы с ryandexdirect</a></li><li><a href="#_5">Выводы</a></li></ul></aside>
+            <aside class="b-toc" aria-label="Contents"><div class="b-toc-title"><span class="ru-text">Содержание</span><span class="ua-text">Зміст</span><span class="en-text">Contents</span></div><ul><li><a href="#_1">Содержание статьи:</a></li><li><a href="#r">Что такое язык R</a></li><li><a href="#r-1-r-10">Как я открыл для себя R или от 1С до R за 10 лет</a></li><li><a href="#_2">Глоссарий — немного терминологии</a></li><li><a href="#_3">Листинг примеров кода из статьи</a></li><li><a href="#r_1">Установка языка R</a></li><li><a href="#r_2">Что такое пакеты в R</a></li><li><a href="#r_3">Установка и подключения пакетов на языке R</a></li><li><a href="#_4">Получение подробной справки по работе с функциями пакета</a></li><li><a href="#r_4">R пакеты для работы с рекламными системами</a></li><li><a href="#radwords-api-google-adwords">RAdwords — пакет, позволяющий работать с API Google AdWords</a></li><li><a href="#api-adwords">Принцип работы с API AdWords</a></li><li><a href="#radwords">Что требуется для работы с RAdwords</a></li><li><a href="#radwords_1">Основные функции пакета RAdwords</a></li><li><a href="#google-adwords-radwords">Пример кода для получения данных из Google AdWords с помощью RAdwords</a></li><li><a href="#radwords_2">Еще несколько примеров работы с RAdwords</a></li><li><a href="#ryandexdirect-api">ryandexdirect — пакет позволяющий работать с API Яндекс. Директ и Яндекс. Метрикой</a></li><li><a href="#api">Принцип работы с API Яндекс. Директ</a></li><li><a href="#ryandexdirect">Основные функции пакета ryandexdirect</a></li><li><a href="#ryandexdirect_1">Пример кода для получения статистики из Яндекс. Директ с помощью ryandexdirect.</a></li><li><a href="#1">Пример #1: Загрузка статистики по кампаниям в разрезе дат.</a></li><li><a href="#2">Пример #2: Загрузка статистики из рекламного аккаунта в разрезе стран и регионов.</a></li><li><a href="#ryandexdirect_2">Еще несколько примеров работы с ryandexdirect</a></li><li><a href="#_5">Выводы</a></li></ul></aside>
         </div>
         <section class="b-related">
             <h2 class="outfit-font"><span class="ru-text">Читайте также</span><span class="ua-text">Читайте також</span><span class="en-text">Related posts</span></h2>

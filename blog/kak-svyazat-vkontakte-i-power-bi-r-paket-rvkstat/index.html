@@ -192,8 +192,8 @@
 <p><img loading="lazy" decoding="async" alt="Доверенные редирект URL" width="977" height="793" src="../images/kak-perenesti-dannye-iz-vkontakte-v-power-bi-doverennye-redi-6ba2ae54.webp" /></p>
 <h2 id="rvkstat">Устанавливаем пакет rvkstat</h2>
 <p>Пакет rvkstat является R-клиентом для работы с API ВКонтакте. Его можно установить из <a target="_blank" rel="noopener" href="https://github.com/selesnow">моего репозитория на GitHub</a> с помощью приведенного ниже кода в R.</p>
-<div class="codehilite"><pre><span></span><code>if(!&quot;devtools&quot; %in% installed.packages()[,1]){install.packages(&quot;devtools&quot;)}
-devtools::install_github(&#39;selesnow/rvkstat&#39;)
+<div class="codehilite"><pre><span></span><code>if(!"devtools" %in% installed.packages()[,1]){install.packages("devtools")}
+devtools::install_github('selesnow/rvkstat')
 </code></pre></div>
 
 <p>Если на данном этапе вы всё сделали правильно, в R-консоли увидите сообщение о том, что пакет rvkstat успешно установлен:</p>
@@ -231,10 +231,10 @@ camp &lt;- vkGetAdCampaigns(account_id = &lt;id вашего рекламног�
 
 ##Получаем статистику по рекламным кампаниям по дням
 vk_stat_by_campaign &lt;- vkGetAdStatistics(account_id = &lt;id вашего рекламного кабинета&gt;,
-                                        ids_type = &quot;campaign&quot;,
+                                        ids_type = "campaign",
                                         ids = camp$id ,
-                                        period = &quot;day&quot;,
-                                        date_from = &quot;2010-01-01&quot;,
+                                        period = "day",
+                                        date_from = "2010-01-01",
                                         date_to =Sys.Date(),
                                         access_token = &lt;токен разработчика, полученный на прошлом шаге&gt;)
 </code></pre></div>
@@ -255,10 +255,10 @@ library(rvkstat)
 ads &lt;- vkGetAds(account_id = account_id, access_token = my_tok$access_token)
 ## Получаем статистику по объявлениям
 vk_stat_by_ads &lt;- vkGetAdStatistics(account_id = 1,
-                                   ids_type = &quot;ad&quot;,
+                                   ids_type = "ad",
                                    ids = ads$id ,
-                                   period = &quot;month&quot;,
-                                   date_from = &quot;2010-01-01&quot;,
+                                   period = "month",
+                                   date_from = "2010-01-01",
                                    date_to =Sys.Date(),
                                    access_token = &lt;токен разработчика полученный на прошлом шаге&gt;))
 </code></pre></div>
@@ -281,7 +281,7 @@ vk_stat_by_ads &lt;- vkGetAdStatistics(account_id = 1,
 <li><a target="_blank" rel="noopener" href="https://github.com/selesnow/rvkstat/blob/master/README.md#%D0%9F%D0%BE%D0%BB%D1%83%D1%87%D0%B8%D1%82%D1%8C-%D0%BF%D0%BE%D0%B4%D1%80%D0%BE%D0%B1%D0%BD%D1%83%D1%8E-%D1%81%D1%82%D0%B0%D1%82%D0%B8%D1%81%D1%82%D0%B8%D0%BA%D1%83-%D0%BF%D0%BE-%D0%BE%D1%85%D0%B2%D0%B0%D1%82%D1%83-%D1%80%D0%B5%D0%BA%D0%BB%D0%B0%D0%BC%D0%BD%D1%8B%D1%85-%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B5%D0%B9-%D0%B8%D0%B7-%D0%BE%D0%B1%D1%8A%D1%8F%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B9-%D0%B8-%D0%BA%D0%B0%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D0%B9-%D0%B4%D0%BB%D1%8F-%D0%BF%D1%80%D0%BE%D0%B4%D0%B2%D0%B8%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B5%D0%B9-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D1%81%D1%82%D0%B2%D0%B0">vkGetAdPostsReach</a> — подробная статистика по охвату рекламных записей из объявлений и кампаний для продвижения записей сообщества.</li>
 </ul>
 <p>Подробную справку с примерами кода и полным описанием полей, которые будут загружены в результате работы функции в пакете rvkstat, можно получить с помощью команды help в R-консоли:</p>
-<div class="codehilite"><pre><span></span><code>help(&quot;vkGetAdStatistics&quot;)
+<div class="codehilite"><pre><span></span><code>help("vkGetAdStatistics")
 </code></pre></div>
 
 <p>Полный список функций можно получить с помощью команды <em>help(package  = “rvkstat”)</em>, либо перейдя в ReadMe репозитория пакета по <a target="_blank" rel="noopener" href="https://selesnow.github.io/rvkstat/">ссылке</a>.</p>

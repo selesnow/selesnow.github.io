@@ -256,9 +256,9 @@ library(telegram.bot)
 
 # Функция для получения курса валют
 get_exchange_rate &lt;- function(api_key, currency) {
-  url &lt;- paste0(&quot;https://api.exchangerate-api.com/v4/latest/USD?apikey=&quot;, api_key)
+  url &lt;- paste0("https://api.exchangerate-api.com/v4/latest/USD?apikey=", api_key)
   response &lt;- GET(url)
-  data &lt;- fromJSON(content(response, &quot;text&quot;))
+  data &lt;- fromJSON(content(response, "text"))
   return(data$rates[[currency]])
 }
 
@@ -269,14 +269,14 @@ send_telegram_message &lt;- function(bot_token, chat_id, message) {
 }
 
 # Получение переменных среды
-api_key   &lt;- Sys.getenv(&quot;EXCHANGE_RATE_API_KEY&quot;)
-bot_token &lt;- Sys.getenv(&quot;TELEGRAM_BOT_TOKEN&quot;)
-chat_id   &lt;- Sys.getenv(&quot;TELEGRAM_CHAT_ID&quot;)
-currency  &lt;- &quot;EUR&quot;
+api_key   &lt;- Sys.getenv("EXCHANGE_RATE_API_KEY")
+bot_token &lt;- Sys.getenv("TELEGRAM_BOT_TOKEN")
+chat_id   &lt;- Sys.getenv("TELEGRAM_CHAT_ID")
+currency  &lt;- "EUR"
 
 # Получение курса валют и отправка сообщения
 exchange_rate &lt;- get_exchange_rate(api_key, currency)
-message &lt;- paste(&quot;Курс&quot;, currency, &quot;к USD:&quot;, exchange_rate)
+message &lt;- paste("Курс", currency, "к USD:", exchange_rate)
 send_telegram_message(bot_token, chat_id, message)
 </code></pre></div>
 
@@ -290,8 +290,8 @@ send_telegram_message(bot_token, chat_id, message)
 
 on:
   schedule:
-    - cron: &#39;0 10 * * *&#39;  # Ежедневно в 10:00 UTC
-    - cron: &#39;51 17 * * *&#39;  # Ежедневно в 19:00 по Каирскому времени
+    - cron: '0 10 * * *'  # Ежедневно в 10:00 UTC
+    - cron: '51 17 * * *'  # Ежедневно в 19:00 по Каирскому времени
   workflow_dispatch:
 
 jobs:
@@ -305,7 +305,7 @@ jobs:
     - name: Set timezone to Cairo
       uses: szenius/set-timezone@v2.0
       with:
-        timezoneLinux: &quot;Africa/Cairo&quot;
+        timezoneLinux: "Africa/Cairo"
 
     - name: Log current time
       run: date
@@ -313,7 +313,7 @@ jobs:
     - name: Set up R
       uses: r-lib/actions/setup-r@v2
       with:
-        r-version: &#39;4.0.3&#39;
+        r-version: '4.0.3'
 
     - name: Install Linux package
       run: |
@@ -321,7 +321,7 @@ jobs:
 
     - name: Install R packages
       run: |
-        Rscript -e &#39;install.packages(c(&quot;curl&quot;, &quot;httr&quot;, &quot;jsonlite&quot;, &quot;telegram.bot&quot;), repos=&quot;https://cran.rstudio.com/&quot;)&#39;
+        Rscript -e 'install.packages(c("curl", "httr", "jsonlite", "telegram.bot"), repos="https://cran.rstudio.com/")'
 
     - name: Run R script
       env:
@@ -339,8 +339,8 @@ jobs:
 <p>Задаёт название рабочего процесса</p>
 <div class="codehilite"><pre><span></span><code>on:
   schedule:
-    - cron: &#39;0 10 * * *&#39;  # Ежедневно в 10:00 UTC
-    - cron: &#39;51 17 * * *&#39;  # Ежедневно в 19:00 по Каирскому времени
+    - cron: '0 10 * * *'  # Ежедневно в 10:00 UTC
+    - cron: '51 17 * * *'  # Ежедневно в 19:00 по Каирскому времени
   workflow_dispatch:
 </code></pre></div>
 
@@ -377,7 +377,7 @@ jobs:
 <div class="codehilite"><pre><span></span><code>- name: Set up R
       uses: r-lib/actions/setup-r@v2
       with:
-        r-version: &#39;4.0.3&#39;
+        r-version: '4.0.3'
 </code></pre></div>
 
 <p>Устанавливает указанную версию R.</p>
@@ -389,7 +389,7 @@ jobs:
 <p>Устанавливает на Linux специальный программный пакет, необходимый для установки R пакета httr и telegram.bot.</p>
 <div class="codehilite"><pre><span></span><code>- name: Install R packages
       run: |
-        Rscript -e &#39;install.packages(c(&quot;httr&quot;, &quot;jsonlite&quot;, &quot;telegram.bot&quot;), repos=&quot;https://cran.rstudio.com/&quot;)&#39;
+        Rscript -e 'install.packages(c("httr", "jsonlite", "telegram.bot"), repos="https://cran.rstudio.com/")'
 </code></pre></div>
 
 <p>Устанавливает на виртуальную машину необходимые пакеты.</p>

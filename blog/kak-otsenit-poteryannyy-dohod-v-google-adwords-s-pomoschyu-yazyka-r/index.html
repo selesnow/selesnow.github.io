@@ -216,15 +216,15 @@
 <h3 id="1-r">1. Подключаем необходимые пакеты R</h3>
 <p>Открываем RStudio и вставляем следующую часть R-скрипта в область «Source».</p>
 <div class="codehilite"><pre><span></span><code>#1. Установка и подключение требуемых пакетов
-install.packages(&quot;curl&quot;)
-require(&quot;curl&quot;)
-install.packages(&quot;bitops&quot;)
-require(&quot;bitops&quot;)
-install.packages(&quot;devtools&quot;)
-require(&quot;devtools&quot;)
-install.packages(&quot;RGoogleAnalytics&quot;)
+install.packages("curl")
+require("curl")
+install.packages("bitops")
+require("bitops")
+install.packages("devtools")
+require("devtools")
+install.packages("RGoogleAnalytics")
 require(RGoogleAnalytics)
-install_github(&#39;jburkhardt/RAdwords&#39;)
+install_github('jburkhardt/RAdwords')
 require(RAdwords)
 </code></pre></div>
 
@@ -234,18 +234,18 @@ require(RAdwords)
 <h3 id="2">2. Устанавливаем переменные</h3>
 <p>Теперь стоит задать все переменные, которые понадобятся для дальнейшей работы скрипта. Вставьте представленный ниже код после первого фрагмента кода, который мы добавили для установки требуемых пакетов.</p>
 <div class="codehilite"><pre><span></span><code>#2. Объявление переменных
-clienid &lt;- &quot;150487456763-XXXXXXXXXXXXXXX.apps.googleusercontent.com&quot; #Client ID из google console
-secret &lt;- &quot;TUXXXXXXXXXXXX_TknUI&quot; #Client secret из google console
-ga_view &lt;- &quot;ga:XXXXXXXX&quot; #ID представления из Google Analytics
-adwords_id &lt;- &quot;XXX-XXX-XXXX&quot; #ID аккаунта Google AdWords
+clienid &lt;- "150487456763-XXXXXXXXXXXXXXX.apps.googleusercontent.com" #Client ID из google console
+secret &lt;- "TUXXXXXXXXXXXX_TknUI" #Client secret из google console
+ga_view &lt;- "ga:XXXXXXXX" #ID представления из Google Analytics
+adwords_id &lt;- "XXX-XXX-XXXX" #ID аккаунта Google AdWords
 
 #Период, за который необходимо определить объём потерянного дохода
-start_period  &lt;- c(day = &quot;01&quot;,
-                   month = &quot;01&quot;,
-                   year = &quot;2016&quot;)
-end_period    &lt;- c(day = &quot;20&quot;,
-                   month = &quot;03&quot;,
-                   year = &quot;2016&quot;)
+start_period  &lt;- c(day = "01",
+                   month = "01",
+                   year = "2016")
+end_period    &lt;- c(day = "20",
+                   month = "03",
+                   year = "2016")
 </code></pre></div>
 
 <p>Эту часть скрипта придётся немного доработать, заполнив переменные нужными значениями. 2.1. Для переменной <strong>«clienid»</strong> введите id клиента, полученное в консоли разработчика. 2.2. Переменной <strong>«secret»</strong> соответственно необходимо присвоить показатель Client Secret из предыдущего пункта. 2.3. Переменной <strong>«ga_view»</strong> нужно присвоить ID представления в Google Analytics. Для этого в интерфейсе Google Analytics перейдите в меню «Администратор», после чего в области «Представление» нажмите «Настройки представления».</p>
@@ -288,11 +288,11 @@ adwords_auth &lt;- doAuth(F)
 <div class="codehilite"><pre><span></span><code>#4.Запрос данных из сервисов.
 #4.1. Получение данных из Google Analytics
 #4.1.1. Описание запроса к Google Analytics
-query.list &lt;- Init(start.date = paste(start_period[&quot;year&quot;],start_period[&quot;month&quot;],start_period[&quot;day&quot;],sep = &quot;-&quot;),
-                   end.date = paste(end_period[&quot;year&quot;],end_period[&quot;month&quot;],end_period[&quot;day&quot;],sep = &quot;-&quot;),
-                   dimensions = &quot;ga:adwordsCampaignID, ga:campaign&quot;,
-                   metrics = &quot;ga:transactions,ga:transactionRevenue&quot;,
-                   filters = &quot;ga:medium==cpc, ga:source==google&quot;,
+query.list &lt;- Init(start.date = paste(start_period["year"],start_period["month"],start_period["day"],sep = "-"),
+                   end.date = paste(end_period["year"],end_period["month"],end_period["day"],sep = "-"),
+                   dimensions = "ga:adwordsCampaignID, ga:campaign",
+                   metrics = "ga:transactions,ga:transactionRevenue",
+                   filters = "ga:medium==cpc, ga:source==google",
                    table.id = ga_view)
 
 #4.1.2. Создание объекта API запроса к Google Analytics
@@ -303,29 +303,29 @@ gaData &lt;- GetReportData(ga.query, ga_auth, split_daywise = FALSE, paginate_qu
 
 #4.2. Получение данных из Google AdWords
 #4.2.1. Описание API запроса к Google AdWords.
-body &lt;- statement(select=c(&#39;CampaignId&#39;,
-                           &#39;Impressions&#39;,
-                           &#39;Clicks&#39;,
-                           &#39;Cost&#39;,
-                           &#39;Ctr&#39;,
-                           &#39;SearchBudgetLostImpressionShare&#39;,
-                           &#39;SearchRankLostImpressionShare  &#39;,
-                           &#39;ContentBudgetLostImpressionShare&#39;,
-                           &#39;ContentRankLostImpressionShare&#39;),
-                  report=&quot;CAMPAIGN_PERFORMANCE_REPORT&quot;,
-                  start=paste0(start_period[&quot;year&quot;],start_period[&quot;month&quot;],start_period[&quot;day&quot;]),
-                  end=paste0(end_period[&quot;year&quot;],end_period[&quot;month&quot;],end_period[&quot;day&quot;]))
+body &lt;- statement(select=c('CampaignId',
+                           'Impressions',
+                           'Clicks',
+                           'Cost',
+                           'Ctr',
+                           'SearchBudgetLostImpressionShare',
+                           'SearchRankLostImpressionShare  ',
+                           'ContentBudgetLostImpressionShare',
+                           'ContentRankLostImpressionShare'),
+                  report="CAMPAIGN_PERFORMANCE_REPORT",
+                  start=paste0(start_period["year"],start_period["month"],start_period["day"]),
+                  end=paste0(end_period["year"],end_period["month"],end_period["day"]))
 
 #4.2.2. Отправка запроса в Google AdWords
 adwordsData &lt;- getData(clientCustomerId = adwords_id,
                 google_auth = adwords_auth,
                 statement = body,
                 transformation = T,
-                apiVersion = &quot;201605&quot;)
+                apiVersion = "201605")
 
 #5. Подготовка итоговой таблицы.
 #5.1. Соединяем данные из Google Analytics и Google AdWords в одну таблицу
-totalData &lt;- merge(gaData, adwordsData, by.x = &quot;adwordsCampaignID&quot;, by.y = &quot;CampaignID&quot;, all.x = TRUE)
+totalData &lt;- merge(gaData, adwordsData, by.x = "adwordsCampaignID", by.y = "CampaignID", all.x = TRUE)
 
 #5.2. Заменяем пропущенные значения нулями
 for (i in 1:length(totalData)){
@@ -349,11 +349,11 @@ totalData$lostRevenueByRank             &lt;- ifelse(is.nan(round(totalData$lost
 totalData$lostRevenue                   &lt;- ifelse(is.nan(totalData$lostRevenueByBudget + totalData$lostRevenueByRank),0,totalData$lostRevenueByBudget + totalData$lostRevenueByRank)
 
 #6. Выгрузка рассчитаной таблицы в csv файл
-write.table(totalData, file=&#39;lostRevenue.csv&#39;, sep = &quot;;&quot;, dec = &quot;,&quot;, row.names = FALSE)
+write.table(totalData, file='lostRevenue.csv', sep = ";", dec = ",", row.names = FALSE)
 
 #7. Визуализация в виде круговой лиаграммы
-lost_revenue &lt;- c(&#39;полученный доход&#39; = sum(totalData$transactionRevenue), &#39;потерянный по бюджету&#39; = sum(totalData$lostRevenueByBudget), &#39;потерянный по рейтингу&#39; = sum(totalData$lostRevenueByRank))
-pie(lost_revenue,col = c(&quot;green&quot;, &quot;red&quot;, &quot;firebrick&quot;))
+lost_revenue &lt;- c('полученный доход' = sum(totalData$transactionRevenue), 'потерянный по бюджету' = sum(totalData$lostRevenueByBudget), 'потерянный по рейтингу' = sum(totalData$lostRevenueByRank))
+pie(lost_revenue,col = c("green", "red", "firebrick"))
 </code></pre></div>
 
 <p>Скрипт оценки потерянного дохода готов. В нижнем правом углу RStudio появится диаграмма, оценивающая общие потери дохода. Также на ней отдельно видно потери, связанные с низким рейтингом или нехваткой бюджета.</p>
@@ -394,25 +394,25 @@ pie(lost_revenue,col = c(&quot;green&quot;, &quot;red&quot;, &quot;firebrick&quo
 <h2 id="_3">Как визуализировать полученную информацию?</h2>
 <h3 id="1-r_1">1. Строим диаграмму с помощью языка R</h3>
 <p>Возможности визуализации в R достаточно обширны, но для того, чтобы ими овладеть, придется потратить достаточно много времени. Один из вариантов визуализации в R построить диаграмму с помощью пакета ggplot2. 1.1. Устанавливаем и подключаем пакет:</p>
-<div class="codehilite"><pre><span></span><code>install.packages(&quot;ggplot2&quot;)
-require(&quot;ggplot2&quot;)
+<div class="codehilite"><pre><span></span><code>install.packages("ggplot2")
+require("ggplot2")
 </code></pre></div>
 
 <p>1.2. Формируем дата фрейм на основе которого будем строить гистограмму.</p>
 <div class="codehilite"><pre><span></span><code>#Формируем данные для гистограммы
-HistData &lt;- rbind(data.frame(subset(totalData, select = c(&quot;Campaign&quot;, &quot;transactionRevenue&quot;)), Type = &quot;GottenRevenue&quot;),
-                  setNames(data.frame(subset(totalData, select = c(&quot;Campaign&quot;, &quot;lostRevenueByBudget&quot;)), Type = &quot;LostByBudget&quot;), c(&quot;Campaign&quot;, &quot;transactionRevenue&quot;,&quot;Type&quot;)),
-                  setNames(data.frame(subset(totalData, select = c(&quot;Campaign&quot;, &quot;lostRevenueByRank&quot;)), Type = &quot;LostByRank&quot;), c(&quot;Campaign&quot;, &quot;transactionRevenue&quot;,&quot;Type&quot;)))
+HistData &lt;- rbind(data.frame(subset(totalData, select = c("Campaign", "transactionRevenue")), Type = "GottenRevenue"),
+                  setNames(data.frame(subset(totalData, select = c("Campaign", "lostRevenueByBudget")), Type = "LostByBudget"), c("Campaign", "transactionRevenue","Type")),
+                  setNames(data.frame(subset(totalData, select = c("Campaign", "lostRevenueByRank")), Type = "LostByRank"), c("Campaign", "transactionRevenue","Type")))
 HistData &lt;- HistData[!is.nan(HistData$transactionRevenue),]
 </code></pre></div>
 
 <p>;1.3. Строим столбчатую диаграмму на основе полученных данных в R.</p>
 <div class="codehilite"><pre><span></span><code>#Строим гистограмму на основе пакета ggplot2
 ggplot(HistData, aes(x = Campaign, y = transactionRevenue, fill = Type))+
-geom_bar(stat = &quot;identity&quot;, position = &quot;fill&quot;)+
-scale_fill_manual(values=c(&quot;forestgreen&quot;, &quot;firebrick1&quot;, &quot;tan1&quot;))+
+geom_bar(stat = "identity", position = "fill")+
+scale_fill_manual(values=c("forestgreen", "firebrick1", "tan1"))+
 theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 7))+
-ggtitle(&quot;Lost Conversion rate&quot;)
+ggtitle("Lost Conversion rate")
 </code></pre></div>
 
 <p><img loading="lazy" decoding="async" alt="Строим диаграмму с помощью языка R" width="710" height="491" src="../images/kak-otsenit-poteryannyy-dohod-v-google-adwords-s-po-stroim-d-1549ee03.webp" /></p>
@@ -422,19 +422,19 @@ ggtitle(&quot;Lost Conversion rate&quot;)
 </code></pre></div>
 
 <p>;Немного изменив одну строку скрипта, можно самостоятельно указать путь, куда планируете сохранить CSV-файл. Для сохранения в папку по умолчанию строка выглядит так:</p>
-<div class="codehilite"><pre><span></span><code>write.table(totalData, file=&#39;lostRevenue.csv&#39;, sep = &quot;;&quot;,dec = &quot;,&quot;, row.names = FALSE)
+<div class="codehilite"><pre><span></span><code>write.table(totalData, file='lostRevenue.csv', sep = ";",dec = ",", row.names = FALSE)
 </code></pre></div>
 
 <p>Для того, чтобы изменить папку назначения к примеру в папку Data на диске C пропишите путь перед названием файла. Хочу заметить, что папка должна быть создана перед запуском скрипта.</p>
-<div class="codehilite"><pre><span></span><code>write.table(totalData, file=&#39;c:/Data/lostRevenue.csv&#39;, sep = &quot;;&quot;,dec = &quot;,&quot;, row.names = FALSE)
+<div class="codehilite"><pre><span></span><code>write.table(totalData, file='c:/Data/lostRevenue.csv', sep = ";",dec = ",", row.names = FALSE)
 </code></pre></div>
 
 <p>Если в системе по умолчанию установлены региональные настройки США, а не СНГ, можете изменить разделитель между полями и целой или дробной частью скрипта с помощью параметров «sep» и «dec». Соответственно для американских региональных настроек следует изменить строку следующим образом.</p>
-<div class="codehilite"><pre><span></span><code>write.table(totalData, file=&#39;c:/Data/lostRevenue.csv&#39;, sep = &quot;,&quot;,dec = &quot;.&quot;, row.names = FALSE)
+<div class="codehilite"><pre><span></span><code>write.table(totalData, file='c:/Data/lostRevenue.csv', sep = ",",dec = ".", row.names = FALSE)
 </code></pre></div>
 
 <p>Либо просто опустить параметры «sep» и «dec», так как по умолчанию они принимают американский формат CSV.</p>
-<div class="codehilite"><pre><span></span><code>write.table(totalData, file=&#39;c:/Data/lostRevenue.csv&#39;, row.names = FALSE)
+<div class="codehilite"><pre><span></span><code>write.table(totalData, file='c:/Data/lostRevenue.csv', row.names = FALSE)
 </code></pre></div>
 
 <p>2.2. Описание полей CSV-файла.</p>

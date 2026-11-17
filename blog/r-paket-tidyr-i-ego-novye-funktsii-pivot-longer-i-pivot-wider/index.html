@@ -238,7 +238,7 @@
 <div class="codehilite"><pre><span></span><code># example
 library(dplyr)
 stocks &lt;- data.frame(
-  time = as.Date(&#39;2009-01-01&#39;) + 0:9,
+  time = as.Date('2009-01-01') + 0:9,
   X = rnorm(10, 0, 1),
   Y = rnorm(10, 0, 2),
   Z = rnorm(10, 0, 4)
@@ -251,8 +251,8 @@ stocks_gather &lt;- stocks %&gt;% gather(key   = stock,
 
 # new
 stocks_long   &lt;- stocks %&gt;% pivot_longer(cols      = -time, 
-                                       names_to  = &quot;stock&quot;, 
-                                       values_to = &quot;price&quot;)
+                                       names_to  = "stock", 
+                                       values_to = "price")
 </code></pre></div>
 
 <p>Преобразование длинного формата к широкому.<br />
@@ -262,8 +262,8 @@ stocks_spread &lt;- stocks_gather %&gt;% spread(key = stock,
                                           value = price) 
 
 # new 
-stock_wide    &lt;- stocks_long %&gt;% pivot_wider(names_from  = &quot;stock&quot;,
-                                            values_from = &quot;price&quot;)
+stock_wide    &lt;- stocks_long %&gt;% pivot_wider(names_from  = "stock",
+                                            values_from = "price")
 </code></pre></div>
 
 <p>Т.к. в приведённых выше примерах работы с <code>pivot_longer()</code> и <code>pivot_wider()</code>, в исходной таблице <em>stocks</em> нет столбцов перечисленных в аргументах <em>names_to</em> и <em>values_to</em> их имена необходимо указывать в кавычках.</p>
@@ -297,16 +297,16 @@ library(readr)
 #&gt;  9 Jehovah…      20        27        24        24        21        30
 #&gt; 10 Jewish        19        19        25        25        30        95
 #&gt; # … with 8 more rows, and 4 more variables: `$75-100k` &lt;dbl&gt;,
-#&gt; #   `$100-150k` &lt;dbl&gt;, `&gt;150k` &lt;dbl&gt;, `Don&#39;t know/refused` &lt;dbl&gt;
+#&gt; #   `$100-150k` &lt;dbl&gt;, `&gt;150k` &lt;dbl&gt;, `Don't know/refused` &lt;dbl&gt;
 </code></pre></div>
 
 <p>Эта таблица содержит данные о религии респондентов в строках, а уровень дохода разбросан по именам столбцов. Количество респондентов из каждой категории хранится в значениях ячеек на пересечении религии и уровня дохода. Чтобы привести таблицу к аккуратному, правильному формату, достаточно использовать <code>pivot_longer()</code>:</p>
 <div class="codehilite"><pre><span></span><code>pew %&gt;% 
-  pivot_longer(cols = -religion, names_to = &quot;income&quot;, values_to = &quot;count&quot;)
+  pivot_longer(cols = -religion, names_to = "income", values_to = "count")
 </code></pre></div>
 
 <div class="codehilite"><pre><span></span><code>pew %&gt;% 
-  pivot_longer(cols = -religion, names_to = &quot;income&quot;, values_to = &quot;count&quot;)
+  pivot_longer(cols = -religion, names_to = "income", values_to = "count")
 #&gt; # A tibble: 180 x 3
 #&gt;    religion income             count
 #&gt;    &lt;chr&gt;    &lt;chr&gt;              &lt;dbl&gt;
@@ -319,7 +319,7 @@ library(readr)
 #&gt;  7 Agnostic $75-100k             122
 #&gt;  8 Agnostic $100-150k            109
 #&gt;  9 Agnostic &gt;150k                 84
-#&gt; 10 Agnostic Don&#39;t know/refused    96
+#&gt; 10 Agnostic Don't know/refused    96
 #&gt; # … with 170 more rows
 </code></pre></div>
 
@@ -361,7 +361,7 @@ library(readr)
 
 <p>Построим его спецификацию.</p>
 <div class="codehilite"><pre><span></span><code>spec &lt;- who %&gt;%
-  pivot_longer_spec(new_sp_m014:newrel_f65, values_to = &quot;count&quot;)
+  pivot_longer_spec(new_sp_m014:newrel_f65, values_to = "count")
 </code></pre></div>
 
 <div class="codehilite"><pre><span></span><code>#&gt; # A tibble: 56 x 3
@@ -390,7 +390,7 @@ library(readr)
 </ul>
 <p>Мы можем разделить эти столбцы с помощью функции <code>extract()</code>, используя регулярное выражение.</p>
 <div class="codehilite"><pre><span></span><code>spec &lt;- spec %&gt;%
-        extract(name, c(&quot;diagnosis&quot;, &quot;gender&quot;, &quot;age&quot;), &quot;new_?(.*)_(.)(.*)&quot;)
+        extract(name, c("diagnosis", "gender", "age"), "new_?(.*)_(.)(.*)")
 </code></pre></div>
 
 <div class="codehilite"><pre><span></span><code>#&gt; # A tibble: 56 x 5
@@ -413,7 +413,7 @@ library(readr)
 <p>Пол и возраст (столбцы <em>gender</em> и <em>age</em>) имеют фиксированные и известные значения, поэтому рекомендуется преобразовывать эти столбцы в факторы:</p>
 <div class="codehilite"><pre><span></span><code>spec &lt;-  spec %&gt;%
             mutate(
-              gender = factor(gender, levels = c(&quot;f&quot;, &quot;m&quot;)),
+              gender = factor(gender, levels = c("f", "m")),
               age = factor(age, levels = unique(age), ordered = TRUE)
             )
 </code></pre></div>
@@ -445,13 +445,13 @@ library(readr)
 <p>Давайте создадим тренировачный датафрейм.</p>
 <div class="codehilite"><pre><span></span><code>family &lt;- tibble::tribble(
   ~family,  ~dob_child1,  ~dob_child2, ~gender_child1, ~gender_child2,
-       1L, &quot;1998-11-26&quot;, &quot;2000-01-29&quot;,             1L,             2L,
-       2L, &quot;1996-06-22&quot;,           NA,             2L,             NA,
-       3L, &quot;2002-07-11&quot;, &quot;2004-04-05&quot;,             2L,             2L,
-       4L, &quot;2004-10-10&quot;, &quot;2009-08-27&quot;,             1L,             1L,
-       5L, &quot;2000-12-05&quot;, &quot;2005-02-28&quot;,             2L,             1L,
+       1L, "1998-11-26", "2000-01-29",             1L,             2L,
+       2L, "1996-06-22",           NA,             2L,             NA,
+       3L, "2002-07-11", "2004-04-05",             2L,             2L,
+       4L, "2004-10-10", "2009-08-27",             1L,             1L,
+       5L, "2000-12-05", "2005-02-28",             2L,             1L,
 )
-family &lt;- family %&gt;% mutate_at(vars(starts_with(&quot;dob&quot;)), parse_date)
+family &lt;- family %&gt;% mutate_at(vars(starts_with("dob")), parse_date)
 </code></pre></div>
 
 <div class="codehilite"><pre><span></span><code>#&gt; # A tibble: 5 x 5
@@ -468,7 +468,7 @@ family &lt;- family %&gt;% mutate_at(vars(starts_with(&quot;dob&quot;)), parse_d
 <p>Обратите внимание, что у нас есть две переменные с информацией о каждом ребенке: его пол и дата рождения (столбцы с префиксом <em>dop</em> содержат дату рождения, столбцы с префиксом <em>gender</em> содержат пол ребёнка). В ожидаемом результате они должны идти в отдельных столбцах. Мы можем сделать это, генерируя спецификацию, в которой столбец <code>.value</code> будет иметь два разных значения.</p>
 <div class="codehilite"><pre><span></span><code>spec &lt;- family %&gt;%
   pivot_longer_spec(-family) %&gt;%
-  separate(col = name, into = c(&quot;.value&quot;, &quot;child&quot;))%&gt;%
+  separate(col = name, into = c(".value", "child"))%&gt;%
   mutate(child = parse_number(child))
 </code></pre></div>
 
@@ -577,11 +577,11 @@ family &lt;- family %&gt;% mutate_at(vars(starts_with(&quot;dob&quot;)), parse_d
 <h3 id="_9">Генерация имени столбца из нескольких исходных переменных</h3>
 <p>Представьте, что у нас есть таблица, содержащая комбинацию продукта, страны и года. Для генерации тестового дата фрейма можно выполнить следующий код:</p>
 <div class="codehilite"><pre><span></span><code>df &lt;- expand_grid(
-  product = c(&quot;A&quot;, &quot;B&quot;), 
-  country = c(&quot;AI&quot;, &quot;EI&quot;), 
+  product = c("A", "B"), 
+  country = c("AI", "EI"), 
   year = 2000:2014
 ) %&gt;%
-  filter((product == &quot;A&quot; &amp; country == &quot;AI&quot;) | product == &quot;B&quot;) %&gt;% 
+  filter((product == "A" &amp; country == "AI") | product == "B") %&gt;% 
   mutate(value = rnorm(nrow(.)))
 </code></pre></div>
 
@@ -603,7 +603,7 @@ family &lt;- family %&gt;% mutate_at(vars(starts_with(&quot;dob&quot;)), parse_d
 
 <p>Наша задача расширить дата фрейм так, что бы один столбец содержал данные по каждой комбинации продукта и страны. Для этого достаточно передать в аргумент <em>names_from</em> вектор, содержащий названия объединяемых полей.</p>
 <div class="codehilite"><pre><span></span><code>df %&gt;% pivot_wider(names_from = c(product, country),
-                 values_from = &quot;value&quot;)
+                 values_from = "value")
 </code></pre></div>
 
 <div class="codehilite"><pre><span></span><code>#&gt; # A tibble: 15 x 4
@@ -625,8 +625,8 @@ family &lt;- family %&gt;% mutate_at(vars(starts_with(&quot;dob&quot;)), parse_d
 <p>Вы так же можете применять спецификации к функции <code>pivot_wider()</code>. Но при подаче в <code>pivot_wider()</code>спецификация выполняет преобразование, противоположное <code>pivot_longer()</code>: создаются столбцы, указанные в <em>.name</em>, используя значения из <em>.value</em> и других столбцов.</p>
 <p>Для этого набора данных вы можете сгенерировать пользовательскую спецификацию, если хотите, чтобы каждая возможная комбинация страны и продукта имела собственный столбец, а не только те, которые присутствуют в данных:</p>
 <div class="codehilite"><pre><span></span><code>spec &lt;- df %&gt;% 
-  expand(product, country, .value = &quot;value&quot;) %&gt;% 
-  unite(&quot;.name&quot;, product, country, remove = FALSE)
+  expand(product, country, .value = "value") %&gt;% 
+  unite(".name", product, country, remove = FALSE)
 </code></pre></div>
 
 <div class="codehilite"><pre><span></span><code>#&gt; # A tibble: 4 x 4
@@ -674,9 +674,9 @@ family &lt;- family %&gt;% mutate_at(vars(starts_with(&quot;dob&quot;)), parse_d
 
 <p>В том виде, в котором хранятся данные в датасете <em>us_rent_income</em> работать с ними крайне неудобно, поэтому мы хотели бы создать набор данных со столбцами: <em>rent</em>, <em>rent_moe</em>, <em>come</em>, <em>income_moe</em>. Существует множество способов создания этой спецификации, но главное в том, что нам нужно сгенерировать каждую комбинацию значений переменной и <em>estimate/moe</em>, а затем сгенерировать имя столбца.</p>
 <div class="codehilite"><pre><span></span><code>  spec &lt;- us_rent_income %&gt;% 
-    expand(variable, .value = c(&quot;estimate&quot;, &quot;moe&quot;)) %&gt;% 
+    expand(variable, .value = c("estimate", "moe")) %&gt;% 
     mutate(
-      .name = paste0(variable, ifelse(.value == &quot;moe&quot;, &quot;_moe&quot;, &quot;&quot;))
+      .name = paste0(variable, ifelse(.value == "moe", "_moe", ""))
     )
 </code></pre></div>
 
@@ -731,7 +731,7 @@ family &lt;- family %&gt;% mutate_at(vars(starts_with(&quot;dob&quot;)), parse_d
 <p>Наша цель состоит в том, чтобы создать аккуратный набор данных, где каждая переменная находится в отдельном столбце. Пока неясно, какие именно шаги необходимы, но мы начнём с самой очевидной проблемы: год распределен по нескольким столбцам.</p>
 <p>Для того, что бы это исправить необходимо использовать функцию <code>pivot_longer()</code>.</p>
 <div class="codehilite"><pre><span></span><code>pop2 &lt;- world_bank_pop %&gt;% 
-  pivot_longer(`2000`:`2017`, names_to = &quot;year&quot;)
+  pivot_longer(`2000`:`2017`, names_to = "year")
 </code></pre></div>
 
 <div class="codehilite"><pre><span></span><code>#&gt; # A tibble: 19,008 x 4
@@ -763,7 +763,7 @@ family &lt;- family %&gt;% mutate_at(vars(starts_with(&quot;dob&quot;)), parse_d
 
 <p>Где SP.POP.GROW — прирост населения, SP.POP.TOTL — общая численность населения, а SP.URB. * тоже самое, но только для городской местности. Давайте разделим эти значения на две переменные: area — местность (total или urban) и переменную содержащую фактические данные (population или growth):</p>
 <div class="codehilite"><pre><span></span><code>pop3 &lt;- pop2 %&gt;% 
-  separate(indicator, c(NA, &quot;area&quot;, &quot;variable&quot;))
+  separate(indicator, c(NA, "area", "variable"))
 </code></pre></div>
 
 <div class="codehilite"><pre><span></span><code>#&gt; # A tibble: 19,008 x 5
@@ -807,19 +807,19 @@ family &lt;- family %&gt;% mutate_at(vars(starts_with(&quot;dob&quot;)), parse_d
 <p>Последний пример, представьте, что у вас есть список контактов, который вы скопировали и вставили с веб-сайта:</p>
 <div class="codehilite"><pre><span></span><code>contacts &lt;- tribble(
   ~field, ~value,
-  &quot;name&quot;, &quot;Jiena McLellan&quot;,
-  &quot;company&quot;, &quot;Toyota&quot;, 
-  &quot;name&quot;, &quot;John Smith&quot;, 
-  &quot;company&quot;, &quot;google&quot;, 
-  &quot;email&quot;, &quot;john@google.com&quot;,
-  &quot;name&quot;, &quot;Huxley Ratcliffe&quot;
+  "name", "Jiena McLellan",
+  "company", "Toyota", 
+  "name", "John Smith", 
+  "company", "google", 
+  "email", "john@google.com",
+  "name", "Huxley Ratcliffe"
 )
 </code></pre></div>
 
 <p>Привести этот список к табличному виду достаточно сложно, потому что нет переменной, которая бы идентифицировала, какие данные принадлежат какому контакту. Мы можем исправить это, заметив, что данные по каждому новому контакту начинаются с имени (“name”), поэтому мы можем создать уникальный идентификатор, и увеличивать его на единицу каждый раз, когда в столбце field встречается значение “name”:</p>
 <div class="codehilite"><pre><span></span><code>contacts &lt;- contacts %&gt;% 
   mutate(
-    person_id = cumsum(field == &quot;name&quot;)
+    person_id = cumsum(field == "name")
   )
 contacts
 </code></pre></div>

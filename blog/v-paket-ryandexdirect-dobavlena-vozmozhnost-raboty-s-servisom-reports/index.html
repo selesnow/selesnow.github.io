@@ -184,11 +184,11 @@
 <p>В связи с чем в пакет ryandexdirect была добавлена функция <a target="_blank" rel="noopener" href="https://github.com/selesnow/ryandexdirect/blob/master/README.md#yadirgetreportreporttype--campaign_performance_report-daterangetype--last_month-datefrom--null-dateto--null-fieldnames--ccampaignnameimpressionsclickscost-filterlist--null-includevat--no-includediscount--no-login--null-token--null">yadirGetReport</a> для работы с этим сервисом.</p>
 <h4 id="yadirgetreport">Пример работы с функцией <a target="_blank" rel="noopener" href="https://github.com/selesnow/ryandexdirect/blob/master/README.md#yadirgetreportreporttype--campaign_performance_report-daterangetype--last_month-datefrom--null-dateto--null-fieldnames--ccampaignnameimpressionsclickscost-filterlist--null-includevat--no-includediscount--no-login--null-token--null">yadirGetReport</a></h4>
 <div class="codehilite"><pre><span></span><code> library(ryandexdirect)
- myToken My_report DateRangeType = &quot;CUSTOM_DATE&quot;,
- DateFrom = &#39;2017-01-01&#39;,
- DateTo = &#39;2017-01-31&#39;,
- FieldNames = c(&quot;CampaignName&quot;,&quot;Impressions&quot;,&quot;Clicks&quot;),
- FilterList = c(&quot;Clicks GREATER_THAN 49&quot;,&quot;Impressions LESS_THAN 1001&quot;),
+ myToken My_report DateRangeType = "CUSTOM_DATE",
+ DateFrom = '2017-01-01',
+ DateTo = '2017-01-31',
+ FieldNames = c("CampaignName","Impressions","Clicks"),
+ FilterList = c("Clicks GREATER_THAN 49","Impressions LESS_THAN 1001"),
  Login = &lt;YourLogin&gt;,
  Token = myToken)
 </code></pre></div>
@@ -199,7 +199,7 @@
 <p>В пакет ryandexdirect добавлена функция <a target="_blank" rel="noopener" href="https://github.com/selesnow/ryandexdirect/blob/master/README.md#yadirgetdictionarydictionaryname--georegions-language--ru-login--null-token--null">yadirGetDictionary</a> с помощью которой можно получить любой доступный в 5 версии API Директа справочник.</p>
 <h4 id="yadirgetdictionary-api-v5">Пример работы с функцией yadirGetDictionary для загрузки справочников из API v.5. Яндекс Директ.</h4>
 <div class="codehilite"><pre><span></span><code>library(ryandexdirect)
- myToken  Regions  Language = &quot;ru&quot;,
+ myToken  Regions  Language = "ru",
  login = &lt;YourLogin&gt;,
  token = myToken
 </code></pre></div>

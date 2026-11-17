@@ -194,39 +194,39 @@ WHEN NOT MATCHED THEN
 <div class="codehilite"><pre><span></span><code>DECLARE fields STRING;
 DECLARE updates STRING;
 EXECUTE IMMEDIATE (
-     &quot;SELECT STRING_AGG(column_name) FROM `project.merge_example`.INFORMATION_SCHEMA.COLUMNS WHERE table_name = &#39;table_data&#39;&quot;
+     "SELECT STRING_AGG(column_name) FROM `project.merge_example`.INFORMATION_SCHEMA.COLUMNS WHERE table_name = 'table_data'"
   ) INTO fields;
 EXECUTE IMMEDIATE (
-    &quot;&quot;&quot;WITH t AS (SELECT column_name FROM `project.merge_example`.INFORMATION_SCHEMA.COLUMNS WHERE table_name = &#39;table_data&#39;)
-       SELECT STRING_AGG(&quot;t.&quot;||column_name ||&quot; = &quot;|| &quot;s.&quot;||column_name) from t join t as s using(column_name)&quot;&quot;&quot;
+    """WITH t AS (SELECT column_name FROM `project.merge_example`.INFORMATION_SCHEMA.COLUMNS WHERE table_name = 'table_data')
+       SELECT STRING_AGG("t."||column_name ||" = "|| "s."||column_name) from t join t as s using(column_name)"""
   ) INTO updates;
-EXECUTE IMMEDIATE &quot;&quot;&quot;
+EXECUTE IMMEDIATE """
   MERGE `project.merge_example.table_data` T
   USING `project.merge_example.table_changes` S
     ON T.id = S.id
   WHEN MATCHED THEN 
-    UPDATE SET &quot;&quot;&quot;||updates||&quot;&quot;&quot;
+    UPDATE SET """||updates||"""
   WHEN NOT MATCHED THEN
-    INSERT (&quot;&quot;&quot;||fields||&quot;&quot;&quot;) VALUES (&quot;&quot;&quot;||fields||&quot;&quot;&quot;)&quot;&quot;&quot;
+    INSERT ("""||fields||""") VALUES ("""||fields||""")"""
 </code></pre></div>
 
 <p><strong>Давайте разберём этот запрос:</strong></p>
 <p><strong>DECLARE</strong> создает переменные, которые мы позже заполняем значениями.</p>
 <p><strong>EXECUTE IMMEDIATE позволяет нам динамически создавать SQL запрос и записывать</strong> результат в объявленную переменную.</p>
 <p>Чтобы получить разделенную запятыми <strong>строку полей</strong> в нашей таблице, мы запрашиваем метаданные набора данных:</p>
-<div class="codehilite"><pre><span></span><code>SELECT STRING_AGG(column_name) FROM `project.merge_example`.INFORMATION_SCHEMA.COLUMNS WHERE table_name = &#39;table_data&#39;
+<div class="codehilite"><pre><span></span><code>SELECT STRING_AGG(column_name) FROM `project.merge_example`.INFORMATION_SCHEMA.COLUMNS WHERE table_name = 'table_data'
 </code></pre></div>
 
 <p><strong>Чтобы получить строку со списком полей,</strong> разделенных запятыми, для обновления, то есть <code>SET t.value1 = s.value1, t.value2 = s.value2</code> мы снова запрашиваем метаданные и добавляем некоторые конкатенации в функцию <code>STRING_AGG:SELECT STRING_AGG(“t.”||column_name ||” = “|| “s.”||column_name) from t join t as s using(column_name)</code>.</p>
 <p>Наконец, мы создаем оператор UPSERT, <strong>динамически заполняющий столбцы</strong> для обновления и значения для вставки из переменных, объявленных выше:</p>
-<div class="codehilite"><pre><span></span><code>EXECUTE IMMEDIATE &quot;&quot;&quot;
+<div class="codehilite"><pre><span></span><code>EXECUTE IMMEDIATE """
   MERGE `project.merge_example.table_data` T
   USING `project.merge_example.table_changes` S
     ON T.id = S.id
   WHEN MATCHED THEN 
-    UPDATE SET &quot;&quot;&quot;||updates||&quot;&quot;&quot;
+    UPDATE SET """||updates||"""
   WHEN NOT MATCHED THEN
-    INSERT (&quot;&quot;&quot;||fields||&quot;&quot;&quot;) VALUES (&quot;&quot;&quot;||fields||&quot;&quot;&quot;)&quot;&quot;&quot;
+    INSERT ("""||fields||""") VALUES ("""||fields||""")"""
 </code></pre></div>
 
 <p>Чтобы сделать этот пример еще более универсальным, мы можем завернуть описанный выше динамический запрос в <strong>ХРАНИМУЮ ПРОЦЕДУРУ</strong>, которая будет принимать имена таблиц в качестве аргументов и выполнять наш код UPSERT.</p>
@@ -235,18 +235,18 @@ EXECUTE IMMEDIATE &quot;&quot;&quot;
 BEGIN
 DECLARE fields STRING;
 DECLARE updates STRING;EXECUTE IMMEDIATE (
-     &quot;SELECT STRING_AGG(column_name) FROM `&quot;||project_dataset||&quot;`.INFORMATION_SCHEMA.COLUMNS WHERE table_name = &#39;&quot;||table_data||&quot;&#39;&quot;
+     "SELECT STRING_AGG(column_name) FROM `"||project_dataset||"`.INFORMATION_SCHEMA.COLUMNS WHERE table_name = '"||table_data||"'"
   ) INTO fields;EXECUTE IMMEDIATE (
-    &quot;&quot;&quot;WITH t AS (SELECT column_name FROM `&quot;&quot;&quot;||project_dataset||&quot;&quot;&quot;`.INFORMATION_SCHEMA.COLUMNS WHERE table_name = &#39;&quot;&quot;&quot;||table_data||&quot;&quot;&quot;&#39;)
-       SELECT STRING_AGG(&quot;t.&quot;||column_name ||&quot; = &quot;|| &quot;s.&quot;||column_name) from t join t as s using(column_name)&quot;&quot;&quot;
-  ) INTO updates;EXECUTE IMMEDIATE &quot;&quot;&quot;
-  MERGE `&quot;&quot;&quot;||project_dataset||&quot;&quot;&quot;.&quot;&quot;&quot;||table_data||&quot;&quot;&quot;` T
-  USING `&quot;&quot;&quot;||project_dataset||&quot;&quot;&quot;.&quot;&quot;&quot;||table_changes||&quot;&quot;&quot;` S
+    """WITH t AS (SELECT column_name FROM `"""||project_dataset||"""`.INFORMATION_SCHEMA.COLUMNS WHERE table_name = '"""||table_data||"""')
+       SELECT STRING_AGG("t."||column_name ||" = "|| "s."||column_name) from t join t as s using(column_name)"""
+  ) INTO updates;EXECUTE IMMEDIATE """
+  MERGE `"""||project_dataset||"""."""||table_data||"""` T
+  USING `"""||project_dataset||"""."""||table_changes||"""` S
     ON T.id = S.id
   WHEN MATCHED THEN 
-    UPDATE SET &quot;&quot;&quot;||updates||&quot;&quot;&quot;
+    UPDATE SET """||updates||"""
   WHEN NOT MATCHED THEN
-    INSERT (&quot;&quot;&quot;||fields||&quot;&quot;&quot;) VALUES (&quot;&quot;&quot;||fields||&quot;&quot;&quot;)&quot;&quot;&quot;;
+    INSERT ("""||fields||""") VALUES ("""||fields||""")""";
 END;
 </code></pre></div>
 

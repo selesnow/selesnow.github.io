@@ -209,7 +209,7 @@
 <p>Для начала нам необходимо создать бота. Делается это с помощью специального бота <strong>BotFather</strong>, переходим по <a target="_blank" rel="noopener" href="https://t.me/BotFather">ссылке</a> и пишем боту <code>/start</code>.</p>
 <p>После чего вы получите сообщение со списком команд:<br />
 <strong>Сообщение от BotFather</strong></p>
-<div class="codehilite"><pre><span></span><code>I can help you create and manage Telegram bots. If you&#39;re new to the Bot API, please see the manual (https://core.telegram.org/bots).
+<div class="codehilite"><pre><span></span><code>I can help you create and manage Telegram bots. If you're new to the Bot API, please see the manual (https://core.telegram.org/bots).
 
 You can control me by sending these commands:
 
@@ -217,7 +217,7 @@ You can control me by sending these commands:
 /mybots - edit your bots [beta]
 
 Edit Bots
-/setname - change a bot&#39;s name
+/setname - change a bot's name
 /setdescription - change bot description
 /setabouttext - change bot about info
 /setuserpic - change bot profile photo
@@ -250,7 +250,7 @@ Alexey Seleznev, [25.07.20 09:40]
 My Test Bot
 
 BotFather, [25.07.20 09:40]
-Good. Now let&#39;s choose a username for your bot. It must end in `bot`. Like this, for example: TetrisBot or tetris_bot.
+Good. Now let's choose a username for your bot. It must end in `bot`. Like this, for example: TetrisBot or tetris_bot.
 
 Alexey Seleznev, [25.07.20 09:40]
 @my_test_bot
@@ -258,7 +258,7 @@ Alexey Seleznev, [25.07.20 09:40]
 
 <p>Имя вы можете ввести произвольное, а логин должен заканчиваться на <code>bot</code>.</p>
 <p>Если вы всё сделали правильно, то получите следующее сообщение:</p>
-<div class="codehilite"><pre><span></span><code>Done! Congratulations on your new bot. You will find it at t.me/my_test_bot. You can now add a description, about section and profile picture for your bot, see /help for a list of commands. By the way, when you&#39;ve finished creating your cool bot, ping our Bot Support if you want a better username for it. Just make sure the bot is fully operational before you do this.
+<div class="codehilite"><pre><span></span><code>Done! Congratulations on your new bot. You will find it at t.me/my_test_bot. You can now add a description, about section and profile picture for your bot, see /help for a list of commands. By the way, when you've finished creating your cool bot, ping our Bot Support if you want a better username for it. Just make sure the bot is fully operational before you do this.
 
 Use this token to access the HTTP API:
 123456789:abcdefghijklmnopqrstuvwxyz
@@ -284,7 +284,7 @@ For a description of the Bot API, see this page: https://core.telegram.org/bots/
 <div class="codehilite"><pre><span></span><code>library(telegram.bot)
 
 # создаём экземпляр бота
-bot &lt;- Bot(token = &quot;123456789:abcdefghijklmnopqrstuvwxyz&quot;)
+bot &lt;- Bot(token = "123456789:abcdefghijklmnopqrstuvwxyz")
 
 # Запрашиваем информацию о боте
 print(bot$getMe())
@@ -305,7 +305,7 @@ chat_id &lt;- updates[[1L]]$from_chat_id()
 </code></pre></div>
 
 <p>Далее вы можете использовать сохранённый в переменной среды токен с помощью функции <code>bot_token()</code>, т.е. вот так:</p>
-<div class="codehilite"><pre><span></span><code>bot &lt;- Bot(token = bot_token(&quot;My Test Bot&quot;))
+<div class="codehilite"><pre><span></span><code>bot &lt;- Bot(token = bot_token("My Test Bot"))
 </code></pre></div>
 
 <p>Метод <code>getUpdates()</code>позволяет нам получить обновления бота, т.е. сообщения которые были ему отправлены. Метод <code>from_chat_id()</code>, позволяет получить идентификатор чата, из которого было отправлено сообщение. Этот идентификатор нам нужен для отправки сообщений от бота.</p>
@@ -320,23 +320,23 @@ $is_bot
 [1] FALSE
 
 $first_name
-[1] &quot;Alexey&quot;
+[1] "Alexey"
 
 $last_name
-[1] &quot;Seleznev&quot;
+[1] "Seleznev"
 
 $username
-[1] &quot;AlexeySeleznev&quot;
+[1] "AlexeySeleznev"
 
 $language_code
-[1] &quot;ru&quot;
+[1] "ru"
 </code></pre></div>
 
 <p>Итак, на данном этапе у нас уже есть всё, что необходимо для отправки сообщения от бота в телеграм. Воспользуемся методом <code>sendMessage()</code>, в который необходимо передать идентификатор чата, текст сообщения, и тип разметки текста сообщения. Тип разметки может быть Markdown или HTML и устанавливается аргументом <code>parse_mode</code>.</p>
 <div class="codehilite"><pre><span></span><code># Отправка сообщения
 bot$sendMessage(chat_id,
-                text = &quot;Привет, *жирный текст* _курсив_&quot;,
-                parse_mode = &quot;Markdown&quot;
+                text = "Привет, *жирный текст* _курсив_",
+                parse_mode = "Markdown"
 )
 </code></pre></div>
 
@@ -354,10 +354,10 @@ bot$sendMessage(chat_id,
 <li>результат: <code>моноширинный шрифт</code></li>
 </ul>
 <p><strong>Основы форматирования HTML разметки:</strong><br />
-В HTML вы заворачиваете часть текста, которую надо выделать, в теги, пример <code>&lt;тег&gt;текст&lt;!--тег--&gt;</code>.</p>
+В HTML вы заворачиваете часть текста, которую надо выделать, в теги, пример <code>&lt;тег&gt;текст&lt;/тег&gt;</code>.</p>
 <ul>
 <li>&lt;тег&gt; — открывающий тег</li>
-<li><!--тег--> — закрывающий тег</li>
+<li>&lt;/тег&gt; — закрывающий тег</li>
 </ul>
 <p><strong>Теги HTML разметки</strong></p>
 <ul>
@@ -374,32 +374,32 @@ bot$sendMessage(chat_id,
 <p>Помимо текста вы можете отправлять и другой контент используя специальные методы:</p>
 <div class="codehilite"><pre><span></span><code># Отправить изображение
 bot$sendPhoto(chat_id,
-  photo = &quot;https://telegram.org/img/t_logo.png&quot;
+  photo = "https://telegram.org/img/t_logo.png"
 )
 
 # Отправка голосового сообщения
 bot$sendAudio(chat_id,
-  audio = &quot;http://www.largesound.com/ashborytour/sound/brobob.mp3&quot;
+  audio = "http://www.largesound.com/ashborytour/sound/brobob.mp3"
 )
 
 # Отправить документ
 bot$sendDocument(chat_id,
-  document = &quot;https://github.com/ebeneditos/telegram.bot/raw/gh-pages/docs/telegram.bot.pdf&quot;
+  document = "https://github.com/ebeneditos/telegram.bot/raw/gh-pages/docs/telegram.bot.pdf"
 )
 
 # Отправить стикер
 bot$sendSticker(chat_id,
-  sticker = &quot;https://www.gstatic.com/webp/gallery/1.webp&quot;
+  sticker = "https://www.gstatic.com/webp/gallery/1.webp"
 )
 
 # Отправить видео
 bot$sendVideo(chat_id,
-  video = &quot;http://techslides.com/demos/sample-videos/small.mp4&quot;
+  video = "http://techslides.com/demos/sample-videos/small.mp4"
 )
 
 # Отправить gif анимацию
 bot$sendAnimation(chat_id,
-  animation = &quot;https://media.giphy.com/media/sIIhZliB2McAo/giphy.gif&quot;
+  animation = "https://media.giphy.com/media/sIIhZliB2McAo/giphy.gif"
 )
 
 # Отправить локацию
@@ -410,7 +410,7 @@ bot$sendLocation(chat_id,
 
 # Имитация действия в чате
 bot$sendChatAction(chat_id,
-  action = &quot;typing&quot;
+  action = "typing"
 )
 </code></pre></div>
 
@@ -423,13 +423,13 @@ library(tidyr)
 library(stringr)
 
 # функция для перевода data.frame в telegram таблицу 
-to_tg_table &lt;- function( table, align = NULL, indents = 3, parse_mode = &#39;Markdown&#39; ) {
+to_tg_table &lt;- function( table, align = NULL, indents = 3, parse_mode = 'Markdown' ) {
 
   # если выравнивание не задано то выравниваем по левому краю
   if ( is.null(align) ) {
 
     col_num &lt;- length(table)
-    align   &lt;- str_c( rep(&#39;l&#39;, col_num), collapse = &#39;&#39; )
+    align   &lt;- str_c( rep('l', col_num), collapse = '' )
 
   }
 
@@ -445,10 +445,10 @@ to_tg_table &lt;- function( table, align = NULL, indents = 3, parse_mode = &#39;
          function(x) { 
            letter &lt;- substr(align, x, x)
            switch (letter,
-                   &#39;l&#39; = &#39;right&#39;,
-                   &#39;r&#39; = &#39;left&#39;,
-                   &#39;c&#39; = &#39;both&#39;,
-                   &#39;left&#39;
+                   'l' = 'right',
+                   'r' = 'left',
+                   'c' = 'both',
+                   'left'
            )
   })
 
@@ -467,32 +467,32 @@ to_tg_table &lt;- function( table, align = NULL, indents = 3, parse_mode = &#39;
                     side   = side)
 
   # объединяем названия столбцов
-  str_names &lt;- str_c(t_names, collapse = &#39;&#39;)
+  str_names &lt;- str_c(t_names, collapse = '')
 
   # аргументы для фукнции str_pad
   rules &lt;- list(string = table, width = max_length + indents, side = side)
 
   # поочереди переводим каждый столбец к нужному виду
   t_str &lt;-   pmap_df( rules, str_pad )%&gt;%
-              unite(&quot;data&quot;, everything(), remove = TRUE, sep = &#39;&#39;) %&gt;%
+              unite("data", everything(), remove = TRUE, sep = '') %&gt;%
               unlist(data) %&gt;%
-              str_c(collapse = &#39;\n&#39;) 
+              str_c(collapse = '\n') 
 
   # если таблица занимает более 4096 символов обрезаем её
   if ( nchar(t_str) &gt;= 4021 ) {
 
-    warning(&#39;Таблица составляет более 4096 символов!&#39;)
+    warning('Таблица составляет более 4096 символов!')
     t_str &lt;- substr(t_str, 1, 4021)
 
   }
 
   # символы выделения блока кода согласно выбранной разметке
   code_block &lt;- switch(parse_mode, 
-                       &#39;Markdown&#39; = c(&#39;```&#39;, &#39;```&#39;),
-                       &#39;HTML&#39; = c(&#39;`&#39;, &#39;`&#39;))
+                       'Markdown' = c('```', '```'),
+                       'HTML' = c('`', '`'))
 
   # переводим в code
-  res &lt;- str_c(code_block[1], str_names, t_str, code_block[2], sep = &#39;\n&#39;)
+  res &lt;- str_c(code_block[1], str_names, t_str, code_block[2], sep = '\n')
 
   return(res)
 }
@@ -505,7 +505,7 @@ tg_table &lt;- to_tg_table( head(iris, 15) )
 # отправляем таблицу в telegram
 bot$sendMessage(194336771, 
                 tg_table,
-                &quot;Markdown&quot;)
+                "Markdown")
 </code></pre></div>
 
 <p>В telegram это буедет выглядеть так:<br />
@@ -522,12 +522,12 @@ bot$sendMessage(194336771,
 <p>Пример с выравниванием столбцов:</p>
 <div class="codehilite"><pre><span></span><code># преобразуем таблицу iris 
 tg_table &lt;- to_tg_table( head(iris, 15), 
-                         align = &#39;llccr&#39;)
+                         align = 'llccr')
 
 # отправляем таблицу в telegram
 bot$sendMessage(194336771, 
                 tg_table,
-                &quot;Markdown&quot;)
+                "Markdown")
 </code></pre></div>
 
 <p><img loading="lazy" decoding="async" alt="" width="1095" height="753" src="../images/create_telegram_bot_using_r_1-d7e03681be7eeb06d52cecef1d791657.webp" /></p>
@@ -538,7 +538,7 @@ bot$sendMessage(194336771,
 <p>Из таблицы нас интересует поле <strong>Unicode</strong>. Скопиройте код нужного вам смайла, и замените <code>U+</code> на <code>\U000</code>. Т.е. если вам необходимо отправить смайл, код котого в <a target="_blank" rel="noopener" href="https://apps.timwhitlock.info/emoji/tables/unicode">таблице</a> <code>U+1F601</code>, то в коде на R вам необходимо добавить его в текст сообщения вот так — <code>\U0001F601</code>.</p>
 <p>Пример:</p>
 <div class="codehilite"><pre><span></span><code>bot$sendMessage(chat_id, 
-                &#39;Сообщение со смайлом \U0001F601 код которого в таблице U+1F601&#39;)
+                'Сообщение со смайлом \U0001F601 код которого в таблице U+1F601')
 </code></pre></div>
 
 <p>Результат:<br />
@@ -546,7 +546,7 @@ bot$sendMessage(194336771,
 <h1 id="windows">Проверка планировщика задач Windows, и отправка уведомления о задачах, работа которых была завершена аварийно</h1>
 <p>Для работы с планировщиком заданий Windows вам необходимо установить пакет <code>taskscheduleR</code>, и для удобства работы с данными установим пакет <code>dplyr</code>.</p>
 <div class="codehilite"><pre><span></span><code># Установка пакетов
-install.packages(c(&#39;taskscheduleR&#39;, &#39;dplyr&#39;))
+install.packages(c('taskscheduleR', 'dplyr'))
 # Подключение пакетов
 library(taskscheduleR)
 library(dplyr)
@@ -555,13 +555,13 @@ library(dplyr)
 <p>Далее с помощью функции <code>taskscheduler_ls()</code> мы запрашиваем информацию о задачах из нашего планировщика. С помощью функции <code>filter()</code> из пакета <code>dplyr</code> мы убираем из списка задач те, которые были успешно выполненны и имеют статус последнего результата 0, и те, которые ещё ни разу не запускались и имеют статус 267011, выключенные задачи, и задачи которые выполняются в данный момент.</p>
 <div class="codehilite"><pre><span></span><code># запрашиваем список задач
 task &lt;- task &lt;- taskscheduler_ls() %&gt;%
-        filter(! `Last Result`  %in% c(&quot;0&quot;, &quot;267011&quot;) &amp; 
-               `Scheduled Task State` == &quot;Enabled&quot; &amp; 
-               Status != &quot;Running&quot;) %&gt;%
+        filter(! `Last Result`  %in% c("0", "267011") &amp; 
+               `Scheduled Task State` == "Enabled" &amp; 
+               Status != "Running") %&gt;%
         select(TaskName) %&gt;%
         unique() %&gt;%
         unlist() %&gt;%
-        paste0(., collapse = &quot;\n&quot;)
+        paste0(., collapse = "\n")
 </code></pre></div>
 
 <p>В объекте <code>task</code> у нас теперь список задач, работа которых завершилась ошибкой, этот список нам надо отправить в Telegram.</p>
@@ -576,7 +576,7 @@ task &lt;- task &lt;- taskscheduler_ls() %&gt;%
 <p>Всё что нам остаётся — отправить этот результат в телеграм.</p>
 <div class="codehilite"><pre><span></span><code>bot$sendMessage(chat_id,
                 text = task,
-                parse_mode = &quot;Markdown&quot;
+                parse_mode = "Markdown"
 )
 </code></pre></div>
 
@@ -588,27 +588,27 @@ library(taskscheduleR)
 library(dplyr)
 
 # инициализируем бота
-bot &lt;- Bot(token = &quot;123456789:abcdefghijklmnopqrstuvwxyz&quot;)
+bot &lt;- Bot(token = "123456789:abcdefghijklmnopqrstuvwxyz")
 
 # идентификатор чата
 chat_id &lt;- 123456789
 
 # запрашиваем список задач
 task &lt;- taskscheduler_ls() %&gt;%
-        filter(! `Last Result`  %in% c(&quot;0&quot;, &quot;267011&quot;)  &amp;
-               `Scheduled Task State` == &quot;Enabled&quot; &amp; 
-               Status != &quot;Running&quot;) %&gt;%
+        filter(! `Last Result`  %in% c("0", "267011")  &amp;
+               `Scheduled Task State` == "Enabled" &amp; 
+               Status != "Running") %&gt;%
         select(TaskName) %&gt;%
         unique() %&gt;%
         unlist() %&gt;%
-        paste0(., collapse = &quot;\n&quot;)
+        paste0(., collapse = "\n")
 
 # если есть проблемные задачи отправляем сообщение
-if ( task != &quot;&quot; ) {
+if ( task != "" ) {
 
   bot$sendMessage(chat_id,
                   text = task,
-                  parse_mode = &quot;Markdown&quot;
+                  parse_mode = "Markdown"
   )
 
 }
@@ -621,14 +621,14 @@ if ( task != &quot;&quot; ) {
 <div class="codehilite"><pre><span></span><code>[telegram_bot]
 ;настройки телеграм бота и чата, в который будут приходить уведомления
 chat_id=12345678
-bot_token=123456789:abcdefghijklmnopqrstuvwxyz&quot;
+bot_token=123456789:abcdefghijklmnopqrstuvwxyz"
 </code></pre></div>
 
 <p><strong>Пример чтения переменных из конфига в R</strong></p>
 <div class="codehilite"><pre><span></span><code>library(configr)
 
 # чтение конфина
-config &lt;- read.config(&#39;C:/путь_к_конфигу/config.cfg&#39;, rcmd.parse = TRUE)
+config &lt;- read.config('C:/путь_к_конфигу/config.cfg', rcmd.parse = TRUE)
 
 bot_token &lt;- config$telegram_bot$bot_token
 chat_id     &lt;- config$telegram_bot$chat_id

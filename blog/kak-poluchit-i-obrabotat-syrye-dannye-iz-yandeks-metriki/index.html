@@ -193,10 +193,10 @@
 <ol start="2">
 <li>Скопируйте код пакета ryandexdirect в консоль R:</li>
 </ol>
-<div class="codehilite"><pre><span></span><code>if(!&quot;bitops&quot; %in% installed.packages()[,1]){install.packages(&quot;bitops&quot;)}
-if(!&quot;devtools&quot; %in% installed.packages()[,1]){install.packages(&quot;devtools&quot;)}
+<div class="codehilite"><pre><span></span><code>if(!"bitops" %in% installed.packages()[,1]){install.packages("bitops")}
+if(!"devtools" %in% installed.packages()[,1]){install.packages("devtools")}
 library(devtools)
-install_github(&#39;selesnow/ryandexdirect&#39;)
+install_github('selesnow/ryandexdirect')
 library(ryandexdirect)
 </code></pre></div>
 
@@ -227,11 +227,11 @@ library(ryandexdirect)
 </ul>
 <p>Смотрите в справке список доступных полей для источника записей <a target="_blank" rel="noopener" href="https://tech.yandex.ru/metrika/doc/api2/logs/fields/visits-docpage/">«visits»</a> и <a target="_blank" rel="noopener" href="https://tech.yandex.ru/metrika/doc/api2/logs/fields/hits-docpage/">«hits»</a>.</p>
 <p>Подставьте ваши значения аргументов и запустите код ниже в консоли R:</p>
-<div class="codehilite"><pre><span></span><code>rawmetrikdata &lt;- yadirGetLogsData(counter = &quot;00000&quot;,
-                                 date_from = &quot;2016-12-01&quot;,
-                                 date_to = &quot;2016-12-20&quot;,
-                                 fields = &quot;ym:s:visitID,ym:s:date,ym:s:bounce,ym:s:clientID,ym:s:lastTrafficSource,ym:s:lastAdvEngine,ym:s:regionCity&quot;,
-                                 source = &quot;visits&quot;,
+<div class="codehilite"><pre><span></span><code>rawmetrikdata &lt;- yadirGetLogsData(counter = "00000",
+                                 date_from = "2016-12-01",
+                                 date_to = "2016-12-20",
+                                 fields = "ym:s:visitID,ym:s:date,ym:s:bounce,ym:s:clientID,ym:s:lastTrafficSource,ym:s:lastAdvEngine,ym:s:regionCity",
+                                 source = "visits",
                                  token = my_token)
 </code></pre></div>
 
@@ -260,7 +260,7 @@ Data load successful!
 <h2 id="r_1">Как выгрузить данные из R в таблицу или базу данных?</h2>
 <h3 id="1-csv-">1. В CSV-таблицу</h3>
 <p>Если вы предпочитаете работать со статистикой в редакторе таблиц, например Excel, выгрузите полученные данные в CSV-файл. Для этого вставьте и запустите код в R-консоли:</p>
-<div class="codehilite"><pre><span></span><code>write.table(rawmetrikdata, &quot;rawdata.csv&quot;, sep = &quot;;&quot;, dec = &quot;,&quot;, row.names = FALSE)
+<div class="codehilite"><pre><span></span><code>write.table(rawmetrikdata, "rawdata.csv", sep = ";", dec = ",", row.names = FALSE)
 </code></pre></div>
 
 <p>В рабочей директории появится файл «rawdata.csv» с нужными данными. Чтобы узнать расположение рабочей директории, запустите в консоли R этот код:</p>
@@ -270,9 +270,9 @@ Data load successful!
 <h3 id="2-mysql">2. В базу данных MySQL</h3>
 <p>Рассмотрим, как импортировать статистику в базу данных на примере популярной СУБД MySQL.</p>
 <p>В представленном коде подставьте значения вашей базы данных в значения параметров «dbname», «user» «password»,«host» (указаны после знака «=»).</p>
-<div class="codehilite"><pre><span></span><code>if(!&quot;RMySQL&quot; %in% installed.packages()[,1]){install.packages(&quot;RMySQL&quot;)} library(RMySQL)
-conMySQL &lt;- dbConnect(MySQL(), dbname = &quot;MySchema&quot;, user = &quot;root&quot;, password = &quot;password&quot;, host = &quot;localhost&quot;)
-dbWriteTable(conMySQL, &quot;raw_data&quot;, rawmetrikdata, row.names = FALSE, append = TRUE)
+<div class="codehilite"><pre><span></span><code>if(!"RMySQL" %in% installed.packages()[,1]){install.packages("RMySQL")} library(RMySQL)
+conMySQL &lt;- dbConnect(MySQL(), dbname = "MySchema", user = "root", password = "password", host = "localhost")
+dbWriteTable(conMySQL, "raw_data", rawmetrikdata, row.names = FALSE, append = TRUE)
 dbDisconnect(conMySQL)
 </code></pre></div>
 
@@ -289,11 +289,11 @@ dbDisconnect(conMySQL)
 <p><img loading="lazy" decoding="async" alt="Как визуализировать сырые данные в Microsoft Power BI" width="953" height="710" src="../images/kak-poluchit-i-obrabotat-syrye-danny-kak-vizualizirovat-syry-8f8e1686.webp" /><br />
 1.2. Укажите ваши значения в аргументах функции:</p>
 <div class="codehilite"><pre><span></span><code>library(ryandexdirect)
-rawmetrikdata &lt;- yadirGetLogsData(counter = &quot;00000&quot;,
-                                 date_from = &quot;2016-12-01&quot;,
-                                 date_to = &quot;2016-12-20&quot;,
-                                 fields = &quot;ym:s:visitID,ym:s:date,ym:s:bounce,ym:s:clientID,ym:s:lastTrafficSource,ym:s:lastAdvEngine,ym:s:regionCity&quot;,
-                                 source = &quot;visits&quot;,
+rawmetrikdata &lt;- yadirGetLogsData(counter = "00000",
+                                 date_from = "2016-12-01",
+                                 date_to = "2016-12-20",
+                                 fields = "ym:s:visitID,ym:s:date,ym:s:bounce,ym:s:clientID,ym:s:lastTrafficSource,ym:s:lastAdvEngine,ym:s:regionCity",
+                                 source = "visits",
                                  token = my_token)
 </code></pre></div>
 
@@ -335,7 +335,7 @@ rawmetrikdata &lt;- yadirGetLogsData(counter = &quot;00000&quot;,
                     <div class="b-tags"><a class="b-chip" href="../?tag=api#posts">API</a><a class="b-chip" href="../?tag=yandeks-metrika#posts">Яндекс Метрика</a><a class="b-chip" href="../?tag=bi#posts">BI</a><a class="b-chip" href="../?tag=avtomatizatsiya#posts">Автоматизация</a><a class="b-chip" href="../?tag=veb-analitika#posts">Веб-аналитика</a><a class="b-chip" href="../?tag=import-dannyh#posts">Импорт данных</a><a class="b-chip" href="../?tag=power-bi#posts">Power BI</a><a class="b-chip" href="../?tag=r#posts">R</a></div>
                 </div>
             </article>
-            <aside class="b-toc" aria-label="Contents"><div class="b-toc-title"><span class="ru-text">Содержание</span><span class="ua-text">Зміст</span><span class="en-text">Contents</span></div><ul><li><a href="#r">Как выгрузить сырые данные с помощью языка R?</a></li><li><a href="#r_1">Как выгрузить данные из R в таблицу или базу данных?</a><ul><li><a href="#1-csv-">1. В CSV-таблицу</a></li><li><a href="#2-mysql">2. В базу данных MySQL</a></li></ul></li><li><a href="#microsoft-power-bi">Как импортировать сырые данные в Microsoft Power BI?</a><ul><li><a href="#1-r">1. С помощью сценария на языке R</a></li><li><a href="#2-power-bi">2. С помощью файла Power BI с коннектором к Яндекс. Метрике</a></li></ul></li><li><a href="#_1">Выводы</a></li></ul></aside>
+            <aside class="b-toc" aria-label="Contents"><div class="b-toc-title"><span class="ru-text">Содержание</span><span class="ua-text">Зміст</span><span class="en-text">Contents</span></div><ul><li><a href="#r">Как выгрузить сырые данные с помощью языка R?</a></li><li><a href="#r_1">Как выгрузить данные из R в таблицу или базу данных?</a><ul><li><a href="#1-csv-">1. В CSV-таблицу</a></li><li><a href="#2-mysql">2. В базу данных MySQL</a></li></ul></li><li><a href="#microsoft-power-bi">Как импортировать сырые данные в Microsoft Power BI?</a><ul><li><a href="#1-r">1. С помощью сценария на языке R</a></li><li><a href="#2-power-bi">2. С помощью файла Power BI с коннектором к Яндекс. Метрике</a></li></ul></li><li><a href="#_1">Выводы</a></li></ul></aside>
         </div>
         <section class="b-related">
             <h2 class="outfit-font"><span class="ru-text">Читайте также</span><span class="ua-text">Читайте також</span><span class="en-text">Related posts</span></h2>

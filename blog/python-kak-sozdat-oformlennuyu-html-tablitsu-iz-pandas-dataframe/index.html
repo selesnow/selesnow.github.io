@@ -182,7 +182,7 @@
 <p>Для начала давайте создадим тестовый DataFrame, и воспользуемся стандартным методом, для конвертации его в HTML таблицу.</p>
 <div class="codehilite"><pre><span></span><code>import pandas as pd
 
-data = {&#39;name&#39;: [&#39;Alex&#39;, &#39;Nick&#39;, &#39;John&#39;, &#39;Tom&#39;], &#39;val&#39;: [1024, 789, 1002, 987]}
+data = {'name': ['Alex', 'Nick', 'John', 'Tom'], 'val': [1024, 789, 1002, 987]}
 df = pd.DataFrame.from_dict(data)
 
 df.to_html()
@@ -222,19 +222,19 @@ df.to_html()
 
 <p>Сохраняем этот CSS код в файл df_style.css, в нашей рабочей директории.</p>
 <p>Далее создаём каркас HTML страницы, в которую добавим наш DataFrame с применёнными CSS стилями.</p>
-<div class="codehilite"><pre><span></span><code>html_string = &#39;&#39;&#39;
+<div class="codehilite"><pre><span></span><code>html_string = '''
 &lt;html&gt;
   &lt;head&gt;&lt;title&gt;HTML Pandas Dataframe with CSS&lt;/title&gt;&lt;/head&gt;
-  &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;df_style.css&quot;/&gt;
+  &lt;link rel="stylesheet" type="text/css" href="df_style.css"/&gt;
   &lt;body&gt;
     {table}
   &lt;/body&gt;
 &lt;/html&gt;
-&#39;&#39;&#39;
+'''
 </code></pre></div>
 
 <p>Далее применяем к нашему DataFrame метод <code>to_html()</code> используя аргумент <code>classes</code>, и с помощью <code>format()</code> внедряем полученную HTML таблиц в созданный ранее каркас.</p>
-<div class="codehilite"><pre><span></span><code>html_string.format(table=df.to_html(classes=&#39;mystyle&#39;))
+<div class="codehilite"><pre><span></span><code>html_string.format(table=df.to_html(classes='mystyle'))
 </code></pre></div>
 
 <p>На выходе получим вот такую таблицу HTML таблицу:</p>
@@ -248,7 +248,7 @@ df.to_html()
 </code></pre></div>
 
 <p>Далее возвращаемся в python, и используем метод <code>build_table()</code> для создания HTML таблицы.</p>
-<div class="codehilite"><pre><span></span><code>pretty_html_table.build_table(df, &#39;blue_light&#39;)
+<div class="codehilite"><pre><span></span><code>pretty_html_table.build_table(df, 'blue_light')
 </code></pre></div>
 
 <p>В результате получим вот такую HTML таблицу:</p>
@@ -343,25 +343,25 @@ from email.mime.multipart import MIMEMultipart  # создаём сообщен�
 from email.mime.text import MIMEText            # вёрстка письма
 
 # создаём таблицу
-data = {&#39;name&#39;: [&#39;Alex&#39;, &#39;Nick&#39;, &#39;John&#39;, &#39;Tom&#39;], &#39;val&#39;: [1024, 789, 1002, 987]}
+data = {'name': ['Alex', 'Nick', 'John', 'Tom'], 'val': [1024, 789, 1002, 987]}
 df = pd.DataFrame.from_dict(data)
 
 # оформляем таблицу
-html_table = pretty_html_table.build_table(df, &#39;blue_light&#39;)
+html_table = pretty_html_table.build_table(df, 'blue_light')
 
 # подключаемся к SMTP серверу
-server = smtplib.SMTP(&#39;smtp.gmail.com&#39;)
-server.login(&#39;email_login&#39;, &#39;email_password&#39;)
+server = smtplib.SMTP('smtp.gmail.com')
+server.login('email_login', 'email_password')
 
 # создаём письмо
-msg = MIMEMultipart(&#39;mixed&#39;)
-msg[&#39;Subject&#39;] = &#39;Письмо с текстом и таблицей&#39;
-msg[&#39;From&#39;] = &#39;your_email@email.com&#39;
-msg[&#39;To&#39;] = &#39;recipient@email.com&#39;
+msg = MIMEMultipart('mixed')
+msg['Subject'] = 'Письмо с текстом и таблицей'
+msg['From'] = 'your_email@email.com'
+msg['To'] = 'recipient@email.com'
 
 #добавляем в письмо текст и таблицу
-main_table = MIMEText(&#39;&lt;h3&gt;Ниже наша тестовая таблица&lt;/h3&gt;&#39;, &#39;html&#39;)
-html_table = MIMEText(html_table, &#39;html&#39;)
+main_table = MIMEText('&lt;h3&gt;Ниже наша тестовая таблица&lt;/h3&gt;', 'html')
+html_table = MIMEText(html_table, 'html')
 
 msg.attach(main_table)
 msg.attach(html_table)

@@ -205,7 +205,7 @@
 </ul>
 <h2 id="hello-world-query-select">Hello World для функции Query (Select)</h2>
 <p>Перейдем на лист Level_1 и посмотрим формулу в ячейке A1.</p>
-<div class="codehilite"><pre><span></span><code>=query(DB!A1:L1143;&quot;select * limit 100&quot;)
+<div class="codehilite"><pre><span></span><code>=query(DB!A1:L1143;"select * limit 100")
 </code></pre></div>
 
 <p>Часть формулы «<em>DB!A1:L1143»</em> отвечает за базу данных, с которой мы будем делать выборку. Вторая часть «<em>select * limit 100</em>» содержит непосредственно текст запроса. Символ «*» в данном случае означает возвращение всех полей, содержащихся в базе данных. С помощью «<em>limit 100</em>» мы ограничиваем вывод данных в 100 строк максимум. Это пример самого простого запроса. Мы выбрали 100 первых строк из базы данных. Это своего рода «Hello world» для функции Query.</p>
@@ -225,20 +225,20 @@
 
 <p>Далее в запросе идет кляуза <strong>Where</strong>. При написании запроса кляузы обязательно должны располагаться в таком порядке, в котором были описаны в первом разделе этой статьи. После объявления <strong>Where</strong>нам необходимо перечислить условия фильтрации. В данном случае мы фильтруем данные по названию кампании (Campaign) и дате (Date). Мы используем несколько условий фильтрации. В тексте запроса между всеми условиями должен стоять логический оператор OR или AND. Фильтрация по датам немного отличается от фильтрации по числовым и текстовым значениям, для ее применения необходимо использовать оператор Date. Часть запроса, отвечающая за фильтрацию данных, будет выглядеть так:</p>
 <div class="codehilite"><pre><span></span><code>WHERE
-(A &amp;gt;= date&#39;2015-10-22&#39;
-AND A &amp;lt;= date&#39;2015-10-25&#39;)
-AND (B = &#39;Campaign_1&#39;
-OR B = &#39;Campaign_2&#39;)
+(A &amp;gt;= date'2015-10-22'
+AND A &amp;lt;= date'2015-10-25')
+AND (B = 'Campaign_1'
+OR B = 'Campaign_2')
 </code></pre></div>
 
 <p>Мы разбили с помощью скобок фильтрацию данных на две логических части: первая фильтрует по датам, вторая — по названию кампании. На данном этапе формула, описывающая данные, которые необходимо выбрать, и условия фильтрации данных, выглядит так:</p>
-<div class="codehilite"><pre><span></span><code>=query(DB!A1:L1143;&quot;
+<div class="codehilite"><pre><span></span><code>=query(DB!A1:L1143;"
 Select A, B, G
 WHERE
-(A &amp;gt;= date&#39;2015-10-22&#39;
-AND A &amp;lt;= date&#39;2015-10-25&#39;)
-AND (B = &#39;Campaign_1&#39;
-OR B = &#39;Campaign_2&#39;)&quot;)
+(A &amp;gt;= date'2015-10-22'
+AND A &amp;lt;= date'2015-10-25')
+AND (B = 'Campaign_1'
+OR B = 'Campaign_2')")
 </code></pre></div>
 
 <p>Вы можете скопировать ее и вставить, например, на новый лист документа, который используется в качестве примера в этом посте, и получите следующий результат:</p>
@@ -257,13 +257,13 @@ OR B = &#39;Campaign_2&#39;)&quot;)
 </code></pre></div>
 
 <p>Соответственно, окончательный результат формулы на листе Level_2, решающий нужную нам задачу, выглядит так:</p>
-<div class="codehilite"><pre><span></span><code>=query(DB!A1:L1143;&quot;
+<div class="codehilite"><pre><span></span><code>=query(DB!A1:L1143;"
 SELECT A, B, G
-WHERE (A &amp;gt;= date&#39;2015-10-22&#39;
-AND A &amp;lt;= date&#39;2015-10-25&#39;)
-AND (B = &#39;Campaign_1&#39;
-OR B = &#39;Campaign_2&#39;)
-ORDER BY G DESC&quot;)
+WHERE (A &amp;gt;= date'2015-10-22'
+AND A &amp;lt;= date'2015-10-25')
+AND (B = 'Campaign_1'
+OR B = 'Campaign_2')
+ORDER BY G DESC")
 </code></pre></div>
 
 <p>Теперь вы умеете с помощью простейшего SQL синтаксиса и функции QUERY фильтровать и сортировать данные.</p>
@@ -340,7 +340,7 @@ sum(G)
 </code></pre></div>
 
 <p>В кляузе достаточно указать только столбец B, содержащий информацию о названии кампании. Потому что он единственный, к которому мы не применили никакой агрегирующей функции. Наша формула:</p>
-<div class="codehilite"><pre><span></span><code>=query(DB!A1:L1143;&quot;
+<div class="codehilite"><pre><span></span><code>=query(DB!A1:L1143;"
 SELECT
 B,
 avg(G),
@@ -348,7 +348,7 @@ max(G),
 min(G),
 count(G),
 sum(G)
-GROUP BY B&quot;)
+GROUP BY B")
 </code></pre></div>
 
 <p>Получим следующий результат:</p>
@@ -360,16 +360,16 @@ GROUP BY B&quot;)
 
 <p>Чтобы переименовать столбцы в таблице, которую возвращает запрос, необходимо добавить описание кляузы <strong>Label</strong>. Синтаксис достаточно прост: сначала указываете выводимый столбец или функцию, которая будет возвращать значения в результирующую таблицу, и далее в одинарных кавычках указываете нужное название.</p>
 <p>Это будет выглядеть так:</p>
-<div class="codehilite"><pre><span></span><code>B &#39;Кампания&#39;,
-avg(G) &#39;Среднее&#39;,
-max(G) &#39;Максимальное&#39;,
-min(G) &#39;Минимальное&#39;,
-count(G) &#39;Количество&#39;,
-sum(G) &#39;Общая сумма&#39;
+<div class="codehilite"><pre><span></span><code>B 'Кампания',
+avg(G) 'Среднее',
+max(G) 'Максимальное',
+min(G) 'Минимальное',
+count(G) 'Количество',
+sum(G) 'Общая сумма'
 </code></pre></div>
 
 <p>Преобразованная формула:</p>
-<div class="codehilite"><pre><span></span><code>=query(DB!A1:L1143;&quot;
+<div class="codehilite"><pre><span></span><code>=query(DB!A1:L1143;"
 SELECT
 B,
 avg(G),
@@ -382,12 +382,12 @@ GROUP BY B
 ORDER BY B
 
 LABEL
-B &#39;Кампания&#39;,
-avg(G) &#39;Среднее&#39;,
-max(G) &#39;Максимальное&#39;,
-min(G) &#39;Минимальное&#39;,
-count(G) &#39;Количество&#39;,
-sum(G) &#39;Общая сумма&#39;&quot;)
+B 'Кампания',
+avg(G) 'Среднее',
+max(G) 'Максимальное',
+min(G) 'Минимальное',
+count(G) 'Количество',
+sum(G) 'Общая сумма'")
 </code></pre></div>
 
 <p>А результат, возвращаемый формулой, выглядит так:</p>
@@ -400,7 +400,7 @@ sum(G) &#39;Общая сумма&#39;&quot;)
 
 <p>Соответственно, окончательная формула на листе Level_3 выглядит так:</p>
 <div class="codehilite"><pre><span></span><code>=query(DB!A1:L1143;
-&quot;SELECT
+"SELECT
 B,
 avg(G),
 max(G),
@@ -412,15 +412,15 @@ GROUP BY B
 ORDER BY B
 
 LABEL
-B &#39;Кампания&#39;,
-avg(G) &#39;Среднее&#39;,
-max(G) &#39;Максимальное&#39;,
-min(G) &#39;Минимальное&#39;,
-count(G) &#39;Количество&#39;,
-sum(G) &#39;Общая сумма&#39;
+B 'Кампания',
+avg(G) 'Среднее',
+max(G) 'Максимальное',
+min(G) 'Минимальное',
+count(G) 'Количество',
+sum(G) 'Общая сумма'
 
 FORMAT
-avg(G) &#39;0.00&#39;&quot;)
+avg(G) '0.00'")
 </code></pre></div>
 
 <p>В результате:</p>
@@ -560,14 +560,14 @@ avg(G) &#39;0.00&#39;&quot;)
 <p><img loading="lazy" decoding="async" alt="Запрос возвращает результат" width="656" height="253" src="../images/vsemoguschaya-funktsiya-query-podrobnoe-ruko-zapros-vozvrash-28504f98.webp" /></p>
 <p>Нам остается только добавить последние штрихи: изменить названия столбцов и формат чисел с помощью пунктов LABEL и FORMAT.</p>
 <p>Окончательная формула на листе Level_4:</p>
-<div class="codehilite"><pre><span></span><code>=query(DB!A1:L1143;&quot;
+<div class="codehilite"><pre><span></span><code>=query(DB!A1:L1143;"
 SELECT dayOfWeek(A), sum(H)/sum(G)
 GROUP BY dayOfWeek(A)
 PIVOT E
 LABEL
-dayOfWeek(A) &#39;День недели&#39;,
-sum(H)/sum(G)&#39;&#39;
-FORMAT sum(H)/sum(G) &#39;0.00%&#39;&quot;)
+dayOfWeek(A) 'День недели',
+sum(H)/sum(G)''
+FORMAT sum(H)/sum(G) '0.00%'")
 </code></pre></div>
 
 <p>Получаем отчет:</p>
@@ -634,20 +634,20 @@ FORMAT sum(H)/sum(G) &#39;0.00%&#39;&quot;)
 GROUP BY dayOfWeek(Col1)
 PIVOT Col5
 LABEL
-dayOfWeek(Col1) &#39;День недели&#39;,
-sum(Col8)/sum(Col7) &#39;&#39;
-FORMAT sum(Col8)/sum(Col7) &#39;0.00%&#39;
+dayOfWeek(Col1) 'День недели',
+sum(Col8)/sum(Col7) ''
+FORMAT sum(Col8)/sum(Col7) '0.00%'
 </code></pre></div>
 
 <p>Как видите, текст запроса практически не изменился, но вместо столбца A мы теперь указываем Col1, вместо столбца E — Col5, вместо G — Col7 и вместо H, соответственно, Col8. Получаем формулу:</p>
-<div class="codehilite"><pre><span></span><code>=query(IMPORTRANGE(&quot;1aBytZCYsZF0-3RozYviSrMqVLtqtb49yxY9KBgT4pVo&quot;;&quot;DB_Transfer!A1:L1143&quot;);&quot;
+<div class="codehilite"><pre><span></span><code>=query(IMPORTRANGE("1aBytZCYsZF0-3RozYviSrMqVLtqtb49yxY9KBgT4pVo";"DB_Transfer!A1:L1143");"
 SELECT dayOfWeek(Col1), sum(Col8)/sum(Col7)
 GROUP BY dayOfWeek(Col1)
 PIVOT Col5
 LABEL
-dayOfWeek(Col1) &#39;День недели&#39;,
-sum(Col8)/sum(Col7) &#39;&#39;
-FORMAT sum(Col8)/sum(Col7) &#39;0.00%&#39;&quot;)
+dayOfWeek(Col1) 'День недели',
+sum(Col8)/sum(Col7) ''
+FORMAT sum(Col8)/sum(Col7) '0.00%'")
 </code></pre></div>
 
 <p>В качестве первого аргумента функции Query выступает функция ImportRange с ссылкой на ключ нужной Google таблицы, которую вы можете скопировать из URL Google Таблицы, и ссылки на диапазон, включающий название листа, а также первой и последней ячейки нужного диапазона.</p>
@@ -666,7 +666,7 @@ FORMAT sum(Col8)/sum(Col7) &#39;0.00%&#39;&quot;)
 <li><strong>точка с запятой «;»</strong> используется для перехода на следующую строку. Возьмем {1;A}. Этот массив будет состоять из одного столбца и двух строк, в первой строке будет содержаться значение 1, во второй строке буква «A».</li>
 </ul>
 <p>Таким образом вы можете два и более диапазона описать в одном массиве, например:</p>
-<div class="codehilite"><pre><span></span><code>=query({Table1!A1:B5; Table2!A1:B5; Table3!A1:B5};&quot;SELECT * WHERE Col2 &gt; 4&quot;)
+<div class="codehilite"><pre><span></span><code>=query({Table1!A1:B5; Table2!A1:B5; Table3!A1:B5};"SELECT * WHERE Col2 &gt; 4")
 </code></pre></div>
 
 <p>В данном случае мы обращаемся с запросом к трём диапазонам данных, находящимся на разных листах, объединив их с помощью «;» в массив так, что вторая таблица является продолжением первой, а третья таблица — продолжением второй.</p>
@@ -684,13 +684,13 @@ FORMAT sum(Col8)/sum(Col7) &#39;0.00%&#39;&quot;)
 <p>Во время изменения каких-либо параметров отчет под конструктором будет изменяться динамически.</p>
 <p><img loading="lazy" decoding="async" alt="Под конструктором динамически будет изменяться отчет в соответствии с указанными параметрами" width="396" height="344" src="../images/vsemoguschaya-funktsiya-query-podrobnoe-ruko-pod-konstruktor-d00ca0df.webp" /></p>
 <p>Формула, которая изменяет запрос в зависимости от настроенных параметров, выглядит так:</p>
-<div class="codehilite"><pre><span></span><code>=query(DB!A1:L1143;&quot;
-Select &quot;&amp;amp;join(&quot;,&quot;;filter(C7:C11;B7:B11=&quot;Да&quot;))&amp;amp;&quot;
+<div class="codehilite"><pre><span></span><code>=query(DB!A1:L1143;"
+Select "&amp;amp;join(",";filter(C7:C11;B7:B11="Да"))&amp;amp;"
 WHERE
-(A &amp;gt;= date&#39;&quot;&amp;amp;C2&amp;amp;&quot;-&quot;&amp;amp;D2&amp;amp;&quot;-&quot;&amp;amp;E2&amp;amp;&quot;&#39;
-AND A &amp;lt;= date&#39;&quot;&amp;amp;C3&amp;amp;&quot;-&quot;&amp;amp;D3&amp;amp;&quot;-&quot;&amp;amp;E3&amp;amp;&quot;&#39;)
-GROUP BY &quot;&amp;amp;join(&quot;,&quot;;filter(C7:C11;B7:B11=&quot;Да&quot;;D7:D11=&quot;Измерение&quot;))&amp;amp;&quot;
-LABEL &quot;&amp;amp;join(&quot;,&quot;;filter(E7:E11;B7:B11=&quot;Да&quot;)))
+(A &amp;gt;= date'"&amp;amp;C2&amp;amp;"-"&amp;amp;D2&amp;amp;"-"&amp;amp;E2&amp;amp;"'
+AND A &amp;lt;= date'"&amp;amp;C3&amp;amp;"-"&amp;amp;D3&amp;amp;"-"&amp;amp;E3&amp;amp;"')
+GROUP BY "&amp;amp;join(",";filter(C7:C11;B7:B11="Да";D7:D11="Измерение"))&amp;amp;"
+LABEL "&amp;amp;join(",";filter(E7:E11;B7:B11="Да")))
 </code></pre></div>
 
 <p>На самом деле функция Query может разрастаться до размеров программы и динамически изменять выводимую информацию в зависимости от указанных на рабочем листе данных.</p>

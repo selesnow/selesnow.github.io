@@ -217,16 +217,16 @@ library(repurrrsive)
 <p>Это кажется немного нелогичным: зачем приводить список <em>gh_users</em>, к более сложной структуре данных? Но у дата фрейма есть большое преимущество: он объединяет несколько векторов, так что все отслеживается в одном объекте.</p>
 <p>Каждый элемент объекта <code>users</code> представляет собой именованный список, в котором каждый элемент представляет столбец.</p>
 <div class="codehilite"><pre><span></span><code>names(users$user[[1]])
-#&gt;  [1] &quot;login&quot;               &quot;id&quot;                  &quot;avatar_url&quot;         
-#&gt;  [4] &quot;gravatar_id&quot;         &quot;url&quot;                 &quot;html_url&quot;           
-#&gt;  [7] &quot;followers_url&quot;       &quot;following_url&quot;       &quot;gists_url&quot;          
-#&gt; [10] &quot;starred_url&quot;         &quot;subscriptions_url&quot;   &quot;organizations_url&quot;  
-#&gt; [13] &quot;repos_url&quot;           &quot;events_url&quot;          &quot;received_events_url&quot;
-#&gt; [16] &quot;type&quot;                &quot;site_admin&quot;          &quot;name&quot;               
-#&gt; [19] &quot;company&quot;             &quot;blog&quot;                &quot;location&quot;           
-#&gt; [22] &quot;email&quot;               &quot;hireable&quot;            &quot;bio&quot;                
-#&gt; [25] &quot;public_repos&quot;        &quot;public_gists&quot;        &quot;followers&quot;          
-#&gt; [28] &quot;following&quot;           &quot;created_at&quot;          &quot;updated_at&quot;
+#&gt;  [1] "login"               "id"                  "avatar_url"         
+#&gt;  [4] "gravatar_id"         "url"                 "html_url"           
+#&gt;  [7] "followers_url"       "following_url"       "gists_url"          
+#&gt; [10] "starred_url"         "subscriptions_url"   "organizations_url"  
+#&gt; [13] "repos_url"           "events_url"          "received_events_url"
+#&gt; [16] "type"                "site_admin"          "name"               
+#&gt; [19] "company"             "blog"                "location"           
+#&gt; [22] "email"               "hireable"            "bio"                
+#&gt; [25] "public_repos"        "public_gists"        "followers"          
+#&gt; [28] "following"           "created_at"          "updated_at"
 </code></pre></div>
 
 <p>Есть два способа превратить компоненты списка в столбцы. <code>unnest_wider()</code> берет каждый компонент и создает новый столбец:</p>
@@ -234,12 +234,12 @@ library(repurrrsive)
 #&gt; # A tibble: 6 x 30
 #&gt;   login     id avatar_url gravatar_id url   html_url followers_url
 #&gt;   &lt;chr&gt;  &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;        
-#&gt; 1 gabo… 6.60e5 https://a… &quot;&quot;          http… https:/… https://api.…
-#&gt; 2 jenn… 5.99e5 https://a… &quot;&quot;          http… https:/… https://api.…
-#&gt; 3 jtle… 1.57e6 https://a… &quot;&quot;          http… https:/… https://api.…
-#&gt; 4 juli… 1.25e7 https://a… &quot;&quot;          http… https:/… https://api.…
-#&gt; 5 leep… 3.51e6 https://a… &quot;&quot;          http… https:/… https://api.…
-#&gt; 6 masa… 8.36e6 https://a… &quot;&quot;          http… https:/… https://api.…
+#&gt; 1 gabo… 6.60e5 https://a… ""          http… https:/… https://api.…
+#&gt; 2 jenn… 5.99e5 https://a… ""          http… https:/… https://api.…
+#&gt; 3 jtle… 1.57e6 https://a… ""          http… https:/… https://api.…
+#&gt; 4 juli… 1.25e7 https://a… ""          http… https:/… https://api.…
+#&gt; 5 leep… 3.51e6 https://a… ""          http… https:/… https://api.…
+#&gt; 6 masa… 8.36e6 https://a… ""          http… https:/… https://api.…
 #&gt; # … with 23 more variables: following_url &lt;chr&gt;, gists_url &lt;chr&gt;,
 #&gt; #   starred_url &lt;chr&gt;, subscriptions_url &lt;chr&gt;, organizations_url &lt;chr&gt;,
 #&gt; #   repos_url &lt;chr&gt;, events_url &lt;chr&gt;, received_events_url &lt;chr&gt;,
@@ -251,9 +251,9 @@ library(repurrrsive)
 
 <p>В этом случае мы получили таблицу состоящую из 30 столбцов, и большинство из них нам не понадобятся, поэтому мы можем вместо <code>unnest_wider()</code> использовать <code>hoist()</code>. <code>hoist()</code> позволяет нам извлекать выбранные компоненты, используя тот же синтаксис, что и <code>purrr::pluck()</code>:</p>
 <div class="codehilite"><pre><span></span><code>users %&gt;% hoist(user, 
-  followers = &quot;followers&quot;, 
-  login = &quot;login&quot;, 
-  url = &quot;html_url&quot;
+  followers = "followers", 
+  login = "login", 
+  url = "html_url"
 )
 #&gt; # A tibble: 6 x 4
 #&gt;   followers login       url                            user             
@@ -303,10 +303,10 @@ repos
 
 <p>Теперь мы можем использовать <code>unnest_wider()</code> или <code>hoist()</code> :</p>
 <div class="codehilite"><pre><span></span><code>repos %&gt;% hoist(repo, 
-  login = c(&quot;owner&quot;, &quot;login&quot;), 
-  name = &quot;name&quot;,
-  homepage = &quot;homepage&quot;,
-  watchers = &quot;watchers_count&quot;
+  login = c("owner", "login"), 
+  name = "name",
+  homepage = "homepage",
+  watchers = "watchers_count"
 )
 #&gt; # A tibble: 176 x 5
 #&gt;    login       name        homepage watchers repo             
@@ -316,7 +316,7 @@ repos
 #&gt;  3 gaborcsardi ask         &lt;NA&gt;            5 &lt;named list [65]&gt;
 #&gt;  4 gaborcsardi baseimports &lt;NA&gt;            0 &lt;named list [65]&gt;
 #&gt;  5 gaborcsardi citest      &lt;NA&gt;            0 &lt;named list [65]&gt;
-#&gt;  6 gaborcsardi clisymbols  &quot;&quot;             18 &lt;named list [65]&gt;
+#&gt;  6 gaborcsardi clisymbols  ""             18 &lt;named list [65]&gt;
 #&gt;  7 gaborcsardi cmaker      &lt;NA&gt;            0 &lt;named list [65]&gt;
 #&gt;  8 gaborcsardi cmark       &lt;NA&gt;            0 &lt;named list [65]&gt;
 #&gt;  9 gaborcsardi conditions  &lt;NA&gt;            0 &lt;named list [65]&gt;
@@ -326,21 +326,21 @@ repos
 
 <p>Обратите внимание на использование <code>c("owner", "login")</code>: это позволяет нам получить значение второго уровня из вложенного списка <code>owner</code>. Альтернативный подход состоит в том, чтобы получить весь список <code>owner</code> и затем с помощью функции <code>unnest_wider()</code> поместить каждый его элемент в столбец:</p>
 <div class="codehilite"><pre><span></span><code>repos %&gt;% 
-  hoist(repo, owner = &quot;owner&quot;) %&gt;% 
+  hoist(repo, owner = "owner") %&gt;% 
   unnest_wider(owner)
 #&gt; # A tibble: 176 x 18
 #&gt;    login     id avatar_url gravatar_id url   html_url followers_url
 #&gt;    &lt;chr&gt;  &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;        
-#&gt;  1 gabo… 660288 https://a… &quot;&quot;          http… https:/… https://api.…
-#&gt;  2 gabo… 660288 https://a… &quot;&quot;          http… https:/… https://api.…
-#&gt;  3 gabo… 660288 https://a… &quot;&quot;          http… https:/… https://api.…
-#&gt;  4 gabo… 660288 https://a… &quot;&quot;          http… https:/… https://api.…
-#&gt;  5 gabo… 660288 https://a… &quot;&quot;          http… https:/… https://api.…
-#&gt;  6 gabo… 660288 https://a… &quot;&quot;          http… https:/… https://api.…
-#&gt;  7 gabo… 660288 https://a… &quot;&quot;          http… https:/… https://api.…
-#&gt;  8 gabo… 660288 https://a… &quot;&quot;          http… https:/… https://api.…
-#&gt;  9 gabo… 660288 https://a… &quot;&quot;          http… https:/… https://api.…
-#&gt; 10 gabo… 660288 https://a… &quot;&quot;          http… https:/… https://api.…
+#&gt;  1 gabo… 660288 https://a… ""          http… https:/… https://api.…
+#&gt;  2 gabo… 660288 https://a… ""          http… https:/… https://api.…
+#&gt;  3 gabo… 660288 https://a… ""          http… https:/… https://api.…
+#&gt;  4 gabo… 660288 https://a… ""          http… https:/… https://api.…
+#&gt;  5 gabo… 660288 https://a… ""          http… https:/… https://api.…
+#&gt;  6 gabo… 660288 https://a… ""          http… https:/… https://api.…
+#&gt;  7 gabo… 660288 https://a… ""          http… https:/… https://api.…
+#&gt;  8 gabo… 660288 https://a… ""          http… https:/… https://api.…
+#&gt;  9 gabo… 660288 https://a… ""          http… https:/… https://api.…
+#&gt; 10 gabo… 660288 https://a… ""          http… https:/… https://api.…
 #&gt; # … with 166 more rows, and 11 more variables: following_url &lt;chr&gt;,
 #&gt; #   gists_url &lt;chr&gt;, starred_url &lt;chr&gt;, subscriptions_url &lt;chr&gt;,
 #&gt; #   organizations_url &lt;chr&gt;, repos_url &lt;chr&gt;, events_url &lt;chr&gt;,
@@ -412,16 +412,16 @@ chars2
 #&gt; # A tibble: 30 x 18
 #&gt;    url      id name  gender culture born  died  alive titles aliases father
 #&gt;    &lt;chr&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;lgl&gt; &lt;list&gt; &lt;list&gt;  &lt;chr&gt; 
-#&gt;  1 http…  1022 Theo… Male   Ironbo… In 2… &quot;&quot;    TRUE  &lt;chr … &lt;chr [… &quot;&quot;    
-#&gt;  2 http…  1052 Tyri… Male   &quot;&quot;      In 2… &quot;&quot;    TRUE  &lt;chr … &lt;chr [… &quot;&quot;    
-#&gt;  3 http…  1074 Vict… Male   Ironbo… In 2… &quot;&quot;    TRUE  &lt;chr … &lt;chr [… &quot;&quot;    
-#&gt;  4 http…  1109 Will  Male   &quot;&quot;      &quot;&quot;    In 2… FALSE &lt;chr … &lt;chr [… &quot;&quot;    
-#&gt;  5 http…  1166 Areo… Male   Norvos… In 2… &quot;&quot;    TRUE  &lt;chr … &lt;chr [… &quot;&quot;    
-#&gt;  6 http…  1267 Chett Male   &quot;&quot;      At H… In 2… FALSE &lt;chr … &lt;chr [… &quot;&quot;    
-#&gt;  7 http…  1295 Cres… Male   &quot;&quot;      In 2… In 2… FALSE &lt;chr … &lt;chr [… &quot;&quot;    
-#&gt;  8 http…   130 Aria… Female Dornish In 2… &quot;&quot;    TRUE  &lt;chr … &lt;chr [… &quot;&quot;    
-#&gt;  9 http…  1303 Daen… Female Valyri… In 2… &quot;&quot;    TRUE  &lt;chr … &lt;chr [… &quot;&quot;    
-#&gt; 10 http…  1319 Davo… Male   Wester… In 2… &quot;&quot;    TRUE  &lt;chr … &lt;chr [… &quot;&quot;    
+#&gt;  1 http…  1022 Theo… Male   Ironbo… In 2… ""    TRUE  &lt;chr … &lt;chr [… ""    
+#&gt;  2 http…  1052 Tyri… Male   ""      In 2… ""    TRUE  &lt;chr … &lt;chr [… ""    
+#&gt;  3 http…  1074 Vict… Male   Ironbo… In 2… ""    TRUE  &lt;chr … &lt;chr [… ""    
+#&gt;  4 http…  1109 Will  Male   ""      ""    In 2… FALSE &lt;chr … &lt;chr [… ""    
+#&gt;  5 http…  1166 Areo… Male   Norvos… In 2… ""    TRUE  &lt;chr … &lt;chr [… ""    
+#&gt;  6 http…  1267 Chett Male   ""      At H… In 2… FALSE &lt;chr … &lt;chr [… ""    
+#&gt;  7 http…  1295 Cres… Male   ""      In 2… In 2… FALSE &lt;chr … &lt;chr [… ""    
+#&gt;  8 http…   130 Aria… Female Dornish In 2… ""    TRUE  &lt;chr … &lt;chr [… ""    
+#&gt;  9 http…  1303 Daen… Female Valyri… In 2… ""    TRUE  &lt;chr … &lt;chr [… ""    
+#&gt; 10 http…  1319 Davo… Male   Wester… In 2… ""    TRUE  &lt;chr … &lt;chr [… ""    
 #&gt; # … with 20 more rows, and 7 more variables: mother &lt;chr&gt;, spouse &lt;chr&gt;,
 #&gt; #   allegiances &lt;list&gt;, books &lt;list&gt;, povBooks &lt;list&gt;, tvSeries &lt;list&gt;,
 #&gt; #   playedBy &lt;list&gt;
@@ -448,7 +448,7 @@ chars2
 <p>Ваши дальнейшие действия зависят от целей анализа. Возможно, вам необходимо поместить в строки информацию по каждой книге и сериале, в котором появляется персонаж:</p>
 <div class="codehilite"><pre><span></span><code>chars2 %&gt;% 
   select(name, books, tvSeries) %&gt;% 
-  pivot_longer(c(books, tvSeries), names_to = &quot;media&quot;, values_to = &quot;value&quot;) %&gt;% 
+  pivot_longer(c(books, tvSeries), names_to = "media", values_to = "value") %&gt;% 
   unnest_longer(value)
 #&gt; # A tibble: 180 x 3
 #&gt;    name             media    value            
@@ -480,9 +480,9 @@ chars2
 #&gt;  5 Tyrion Lannister  Master of Coin (former)                             
 #&gt;  6 Victarion Greyjoy Lord Captain of the Iron Fleet                      
 #&gt;  7 Victarion Greyjoy Master of the Iron Victory                          
-#&gt;  8 Will              &quot;&quot;                                                  
+#&gt;  8 Will              ""                                                  
 #&gt;  9 Areo Hotah        Captain of the Guard at Sunspear                    
-#&gt; 10 Chett             &quot;&quot;                                                  
+#&gt; 10 Chett             ""                                                  
 #&gt; # … with 50 more rows
 </code></pre></div>
 
@@ -504,60 +504,60 @@ chars2
 #&gt;  5 Tyrion Lannister  Master of Coin (former)                             
 #&gt;  6 Victarion Greyjoy Lord Captain of the Iron Fleet                      
 #&gt;  7 Victarion Greyjoy Master of the Iron Victory                          
-#&gt;  8 Will              &quot;&quot;                                                  
+#&gt;  8 Will              ""                                                  
 #&gt;  9 Areo Hotah        Captain of the Guard at Sunspear                    
-#&gt; 10 Chett             &quot;&quot;                                                  
+#&gt; 10 Chett             ""                                                  
 #&gt; # … with 50 more rows
 </code></pre></div>
 
 <h1 id="google">Геокодирование с помощью Google</h1>
 <p>Далее мы рассмотрим более сложную структуру данных, получаемых от службы геокодирования Google. Кэширование учётных данных противоречит условиям работы с API Google maps, поэтому я сначала напишу простую оболочку к API. Которая основана на хранении ключа API Google карт в переменной среды; если в переменных среды у вас не сохранён ключ для работы с API Google Maps, фрагменты кода представленные в этом разделе выполняться не будут.</p>
-<div class="codehilite"><pre><span></span><code>has_key &lt;- !identical(Sys.getenv(&quot;GOOGLE_MAPS_API_KEY&quot;), &quot;&quot;)
+<div class="codehilite"><pre><span></span><code>has_key &lt;- !identical(Sys.getenv("GOOGLE_MAPS_API_KEY"), "")
 if (!has_key) {
-  message(&quot;No Google Maps API key found; code chunks will not be run&quot;)
+  message("No Google Maps API key found; code chunks will not be run")
 }
 
 # https://developers.google.com/maps/documentation/geocoding
-geocode &lt;- function(address, api_key = Sys.getenv(&quot;GOOGLE_MAPS_API_KEY&quot;)) {
-  url &lt;- &quot;https://maps.googleapis.com/maps/api/geocode/json&quot;
-  url &lt;- paste0(url, &quot;?address=&quot;, URLencode(address), &quot;&amp;key=&quot;, api_key)
+geocode &lt;- function(address, api_key = Sys.getenv("GOOGLE_MAPS_API_KEY")) {
+  url &lt;- "https://maps.googleapis.com/maps/api/geocode/json"
+  url &lt;- paste0(url, "?address=", URLencode(address), "&amp;key=", api_key)
 
   jsonlite::read_json(url)
 }
 </code></pre></div>
 
 <p>Список, который возвращает эта функция, довольно сложен:</p>
-<div class="codehilite"><pre><span></span><code>houston &lt;- geocode(&quot;Houston TX&quot;)
+<div class="codehilite"><pre><span></span><code>houston &lt;- geocode("Houston TX")
 str(houston)
 #&gt; List of 2
 #&gt;  $ results:List of 1
 #&gt;   ..$ :List of 5
 #&gt;   .. ..$ address_components:List of 4
 #&gt;   .. .. ..$ :List of 3
-#&gt;   .. .. .. ..$ long_name : chr &quot;Houston&quot;
-#&gt;   .. .. .. ..$ short_name: chr &quot;Houston&quot;
+#&gt;   .. .. .. ..$ long_name : chr "Houston"
+#&gt;   .. .. .. ..$ short_name: chr "Houston"
 #&gt;   .. .. .. ..$ types     :List of 2
-#&gt;   .. .. .. .. ..$ : chr &quot;locality&quot;
-#&gt;   .. .. .. .. ..$ : chr &quot;political&quot;
+#&gt;   .. .. .. .. ..$ : chr "locality"
+#&gt;   .. .. .. .. ..$ : chr "political"
 #&gt;   .. .. ..$ :List of 3
-#&gt;   .. .. .. ..$ long_name : chr &quot;Harris County&quot;
-#&gt;   .. .. .. ..$ short_name: chr &quot;Harris County&quot;
+#&gt;   .. .. .. ..$ long_name : chr "Harris County"
+#&gt;   .. .. .. ..$ short_name: chr "Harris County"
 #&gt;   .. .. .. ..$ types     :List of 2
-#&gt;   .. .. .. .. ..$ : chr &quot;administrative_area_level_2&quot;
-#&gt;   .. .. .. .. ..$ : chr &quot;political&quot;
+#&gt;   .. .. .. .. ..$ : chr "administrative_area_level_2"
+#&gt;   .. .. .. .. ..$ : chr "political"
 #&gt;   .. .. ..$ :List of 3
-#&gt;   .. .. .. ..$ long_name : chr &quot;Texas&quot;
-#&gt;   .. .. .. ..$ short_name: chr &quot;TX&quot;
+#&gt;   .. .. .. ..$ long_name : chr "Texas"
+#&gt;   .. .. .. ..$ short_name: chr "TX"
 #&gt;   .. .. .. ..$ types     :List of 2
-#&gt;   .. .. .. .. ..$ : chr &quot;administrative_area_level_1&quot;
-#&gt;   .. .. .. .. ..$ : chr &quot;political&quot;
+#&gt;   .. .. .. .. ..$ : chr "administrative_area_level_1"
+#&gt;   .. .. .. .. ..$ : chr "political"
 #&gt;   .. .. ..$ :List of 3
-#&gt;   .. .. .. ..$ long_name : chr &quot;United States&quot;
-#&gt;   .. .. .. ..$ short_name: chr &quot;US&quot;
+#&gt;   .. .. .. ..$ long_name : chr "United States"
+#&gt;   .. .. .. ..$ short_name: chr "US"
 #&gt;   .. .. .. ..$ types     :List of 2
-#&gt;   .. .. .. .. ..$ : chr &quot;country&quot;
-#&gt;   .. .. .. .. ..$ : chr &quot;political&quot;
-#&gt;   .. ..$ formatted_address : chr &quot;Houston, TX, USA&quot;
+#&gt;   .. .. .. .. ..$ : chr "country"
+#&gt;   .. .. .. .. ..$ : chr "political"
+#&gt;   .. ..$ formatted_address : chr "Houston, TX, USA"
 #&gt;   .. ..$ geometry          :List of 4
 #&gt;   .. .. ..$ bounds       :List of 2
 #&gt;   .. .. .. ..$ northeast:List of 2
@@ -569,7 +569,7 @@ str(houston)
 #&gt;   .. .. ..$ location     :List of 2
 #&gt;   .. .. .. ..$ lat: num 29.8
 #&gt;   .. .. .. ..$ lng: num -95.4
-#&gt;   .. .. ..$ location_type: chr &quot;APPROXIMATE&quot;
+#&gt;   .. .. ..$ location_type: chr "APPROXIMATE"
 #&gt;   .. .. ..$ viewport     :List of 2
 #&gt;   .. .. .. ..$ northeast:List of 2
 #&gt;   .. .. .. .. ..$ lat: num 30.1
@@ -577,15 +577,15 @@ str(houston)
 #&gt;   .. .. .. ..$ southwest:List of 2
 #&gt;   .. .. .. .. ..$ lat: num 29.5
 #&gt;   .. .. .. .. ..$ lng: num -95.8
-#&gt;   .. ..$ place_id          : chr &quot;ChIJAYWNSLS4QIYROwVl894CDco&quot;
+#&gt;   .. ..$ place_id          : chr "ChIJAYWNSLS4QIYROwVl894CDco"
 #&gt;   .. ..$ types             :List of 2
-#&gt;   .. .. ..$ : chr &quot;locality&quot;
-#&gt;   .. .. ..$ : chr &quot;political&quot;
-#&gt;  $ status : chr &quot;OK&quot;
+#&gt;   .. .. ..$ : chr "locality"
+#&gt;   .. .. ..$ : chr "political"
+#&gt;  $ status : chr "OK"
 </code></pre></div>
 
 <p>К счастью, мы можем пошагово решить проблему преобразования этих данных в табличный вид с помощью функций <code>tidyr</code>. Чтобы сделать задачу немного сложнее и реалистичнее, я начну с геокодирования нескольких городов:</p>
-<div class="codehilite"><pre><span></span><code>  city &lt;-   c ( &quot;Houston&quot; , &quot;LA&quot; , &quot;New York&quot; , &quot;Chicago&quot; , &quot;Springfield&quot; )  city_geo &lt;-   purrr::map (city, geocode)
+<div class="codehilite"><pre><span></span><code>  city &lt;-   c ( "Houston" , "LA" , "New York" , "Chicago" , "Springfield" )  city_geo &lt;-   purrr::map (city, geocode)
 </code></pre></div>
 
 <p>Полученный результат я преобразую в <code>tibble</code>, для удобства добавлю столбец с соответствующим названием города.</p>
@@ -726,8 +726,8 @@ loc
 <p>Или использовать <code>hoist()</code> для многоуровневого погружения, чтобы перейти непосредственно к <code>lat</code> и <code>lng</code>.</p>
 <div class="codehilite"><pre><span></span><code>loc %&gt;%
   hoist(json,
-    lat = list(&quot;results&quot;, 1, &quot;geometry&quot;, &quot;location&quot;, &quot;lat&quot;),
-    lng = list(&quot;results&quot;, 1, &quot;geometry&quot;, &quot;location&quot;, &quot;lng&quot;)
+    lat = list("results", 1, "geometry", "location", "lat"),
+    lng = list("results", 1, "geometry", "location", "lng")
   )
 #&gt; # A tibble: 5 x 4
 #&gt;   city          lat    lng json            
@@ -743,7 +743,7 @@ loc
 <p>В завершении мы рассмотрим самую сложную конструкцию — дискографию Шарлы Гельфанд. Как и в приведённых выше примерах, мы начинаем с конвертации списка в дата фрейм с одним столбцом, а затем расширим его, чтобы каждый компонент был отдельным столбцом. Также я преобразую столбец <code>date_added</code> в соответствующий формат даты и времени в R.</p>
 <div class="codehilite"><pre><span></span><code>discs &lt;- tibble(disc = discog) %&gt;% 
   unnest_wider(disc) %&gt;% 
-  mutate(date_added = as.POSIXct(strptime(date_added, &quot;%Y-%m-%dT%H:%M:%S&quot;))) 
+  mutate(date_added = as.POSIXct(strptime(date_added, "%Y-%m-%dT%H:%M:%S"))) 
 discs
 #&gt; # A tibble: 155 x 5
 #&gt;    instance_id date_added          basic_information       id rating
@@ -768,7 +768,7 @@ discs
 </code></pre></div>
 
 <p>К сожалению мы получим ошибку, т.к. внутри списка <code>basic_information</code> есть одноимённый столбец <code>basic_information</code>. При возникновении подобной ошибки, для того, что бы быстро определить её причину можно использовать <code>names_repair = "unique"</code>:</p>
-<div class="codehilite"><pre><span></span><code>discs %&gt;% unnest_wider(basic_information, names_repair = &quot;unique&quot;)
+<div class="codehilite"><pre><span></span><code>discs %&gt;% unnest_wider(basic_information, names_repair = "unique")
 #&gt; New names:
 #&gt; * id -&gt; id...6
 #&gt; * id -&gt; id...14
@@ -783,7 +783,7 @@ discs
 #&gt;  6   351052065 2019-02-01 20:40:53 &lt;list…  2019 &lt;list … 1.31e7 http… Tash…
 #&gt;  7   350315345 2019-01-29 15:48:37 &lt;list…  2014 &lt;list … 7.11e6 http… Demo 
 #&gt;  8   350315103 2019-01-29 15:47:22 &lt;list…  2015 &lt;list … 1.05e7 http… Let …
-#&gt;  9   350314507 2019-01-29 15:44:08 &lt;list…  2017 &lt;list … 1.13e7 &quot;&quot;    Sub …
+#&gt;  9   350314507 2019-01-29 15:44:08 &lt;list…  2017 &lt;list … 1.13e7 ""    Sub …
 #&gt; 10   350314047 2019-01-29 15:41:35 &lt;list…  2017 &lt;list … 1.17e7 http… Demo 
 #&gt; # … with 145 more rows, and 7 more variables: formats &lt;list&gt;,
 #&gt; #   cover_image &lt;chr&gt;, resource_url &lt;chr&gt;, master_id &lt;int&gt;,
@@ -805,7 +805,7 @@ discs
 #&gt;  6   351052065 2019-02-01 20:40:53 &lt;list…  2019 &lt;list … 1.31e7 http… Tash…
 #&gt;  7   350315345 2019-01-29 15:48:37 &lt;list…  2014 &lt;list … 7.11e6 http… Demo 
 #&gt;  8   350315103 2019-01-29 15:47:22 &lt;list…  2015 &lt;list … 1.05e7 http… Let …
-#&gt;  9   350314507 2019-01-29 15:44:08 &lt;list…  2017 &lt;list … 1.13e7 &quot;&quot;    Sub …
+#&gt;  9   350314507 2019-01-29 15:44:08 &lt;list…  2017 &lt;list … 1.13e7 ""    Sub …
 #&gt; 10   350314047 2019-01-29 15:41:35 &lt;list…  2017 &lt;list … 1.17e7 http… Demo 
 #&gt; # … with 145 more rows, and 6 more variables: formats &lt;list&gt;,
 #&gt; #   cover_image &lt;chr&gt;, resource_url &lt;chr&gt;, master_id &lt;int&gt;,
@@ -815,10 +815,10 @@ discs
 <p>В качестве альтернативы, мы могли бы использовать <code>hoist()</code>:</p>
 <div class="codehilite"><pre><span></span><code>discs %&gt;% 
   hoist(basic_information,
-    title = &quot;title&quot;,
-    year = &quot;year&quot;,
-    label = list(&quot;labels&quot;, 1, &quot;name&quot;),
-    artist = list(&quot;artists&quot;, 1, &quot;name&quot;)
+    title = "title",
+    year = "year",
+    label = list("labels", 1, "name"),
+    artist = list("artists", 1, "name")
   )
 #&gt; # A tibble: 155 x 9
 #&gt;    instance_id date_added          title  year label artist
@@ -840,27 +840,27 @@ discs
 <p>Здесь я быстро извлекаю имя первого лейбла и исполнителя по индексу, погрузившись во вложенный список.</p>
 <p>Более систематический подход заключается в создании отдельных таблиц для исполнителя и лейбла:</p>
 <div class="codehilite"><pre><span></span><code>discs %&gt;% 
-  hoist(basic_information, artist = &quot;artists&quot;) %&gt;% 
+  hoist(basic_information, artist = "artists") %&gt;% 
   select(disc_id = id, artist) %&gt;% 
   unnest_longer(artist) %&gt;% 
   unnest_wider(artist)
 #&gt; # A tibble: 167 x 8
 #&gt;     disc_id join  name        anv   tracks role  resource_url            id
 #&gt;       &lt;int&gt; &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                &lt;int&gt;
-#&gt;  1  7496378 &quot;&quot;    Mollot      &quot;&quot;    &quot;&quot;     &quot;&quot;    https://api.discog… 4.62e6
-#&gt;  2  4490852 &quot;&quot;    Una Bèstia… &quot;&quot;    &quot;&quot;     &quot;&quot;    https://api.discog… 3.19e6
-#&gt;  3  9827276 &quot;&quot;    S.H.I.T. (… &quot;&quot;    &quot;&quot;     &quot;&quot;    https://api.discog… 2.77e6
-#&gt;  4  9769203 &quot;&quot;    Rata Negra  &quot;&quot;    &quot;&quot;     &quot;&quot;    https://api.discog… 4.28e6
-#&gt;  5  7237138 &quot;&quot;    Ivy (18)    &quot;&quot;    &quot;&quot;     &quot;&quot;    https://api.discog… 3.60e6
-#&gt;  6 13117042 &quot;&quot;    Tashme      &quot;&quot;    &quot;&quot;     &quot;&quot;    https://api.discog… 5.21e6
-#&gt;  7  7113575 &quot;&quot;    Desgraciad… &quot;&quot;    &quot;&quot;     &quot;&quot;    https://api.discog… 4.45e6
-#&gt;  8 10540713 &quot;&quot;    Phantom He… &quot;&quot;    &quot;&quot;     &quot;&quot;    https://api.discog… 4.27e6
-#&gt;  9 11260950 &quot;&quot;    Sub Space … &quot;&quot;    &quot;&quot;     &quot;&quot;    https://api.discog… 5.69e6
-#&gt; 10 11726853 &quot;&quot;    Small Man … &quot;&quot;    &quot;&quot;     &quot;&quot;    https://api.discog… 6.37e6
+#&gt;  1  7496378 ""    Mollot      ""    ""     ""    https://api.discog… 4.62e6
+#&gt;  2  4490852 ""    Una Bèstia… ""    ""     ""    https://api.discog… 3.19e6
+#&gt;  3  9827276 ""    S.H.I.T. (… ""    ""     ""    https://api.discog… 2.77e6
+#&gt;  4  9769203 ""    Rata Negra  ""    ""     ""    https://api.discog… 4.28e6
+#&gt;  5  7237138 ""    Ivy (18)    ""    ""     ""    https://api.discog… 3.60e6
+#&gt;  6 13117042 ""    Tashme      ""    ""     ""    https://api.discog… 5.21e6
+#&gt;  7  7113575 ""    Desgraciad… ""    ""     ""    https://api.discog… 4.45e6
+#&gt;  8 10540713 ""    Phantom He… ""    ""     ""    https://api.discog… 4.27e6
+#&gt;  9 11260950 ""    Sub Space … ""    ""     ""    https://api.discog… 5.69e6
+#&gt; 10 11726853 ""    Small Man … ""    ""     ""    https://api.discog… 6.37e6
 #&gt; # … with 157 more rows
 
 discs %&gt;% 
-  hoist(basic_information, format = &quot;formats&quot;) %&gt;% 
+  hoist(basic_information, format = "formats") %&gt;% 
   select(disc_id = id, format) %&gt;% 
   unnest_longer(format) %&gt;% 
   unnest_wider(format) %&gt;% 
@@ -870,14 +870,14 @@ discs %&gt;%
 #&gt;       &lt;int&gt; &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;
 #&gt;  1  7496378 Numbered     Black Cassette 1    
 #&gt;  2  4490852 LP           &lt;NA&gt;  Vinyl    1    
-#&gt;  3  9827276 &quot;7\&quot;&quot;        &lt;NA&gt;  Vinyl    1    
+#&gt;  3  9827276 "7\""        &lt;NA&gt;  Vinyl    1    
 #&gt;  4  9827276 45 RPM       &lt;NA&gt;  Vinyl    1    
 #&gt;  5  9827276 EP           &lt;NA&gt;  Vinyl    1    
 #&gt;  6  9769203 LP           &lt;NA&gt;  Vinyl    1    
 #&gt;  7  9769203 Album        &lt;NA&gt;  Vinyl    1    
-#&gt;  8  7237138 &quot;7\&quot;&quot;        &lt;NA&gt;  Vinyl    1    
+#&gt;  8  7237138 "7\""        &lt;NA&gt;  Vinyl    1    
 #&gt;  9  7237138 45 RPM       &lt;NA&gt;  Vinyl    1    
-#&gt; 10 13117042 &quot;7\&quot;&quot;        &lt;NA&gt;  Vinyl    1    
+#&gt; 10 13117042 "7\""        &lt;NA&gt;  Vinyl    1    
 #&gt; # … with 270 more rows
 </code></pre></div>
 

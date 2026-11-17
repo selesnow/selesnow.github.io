@@ -197,7 +197,7 @@
 <ol start="5">
 <li>Например, возьмем американский сервер, который из третьей строки списка IP 104.37.212.5, порт 3128. В код R необходимо направить интернет-соединение через прокси-сервер, для этого добавляем в код строку:</li>
 </ol>
-<div class="codehilite"><pre><span></span><code>Sys.setenv(https_proxy=&quot;http://104.37.212.5:3128&quot;)
+<div class="codehilite"><pre><span></span><code>Sys.setenv(https_proxy="http://104.37.212.5:3128")
 </code></pre></div>
 
 <ol start="6">
@@ -208,31 +208,31 @@
 <p>Добавляем строку для отключения интернет-соединения от прокси-сервера:</p>
 </li>
 </ol>
-<div class="codehilite"><pre><span></span><code>Sys.unsetenv(&quot;https_proxy&quot;)
+<div class="codehilite"><pre><span></span><code>Sys.unsetenv("https_proxy")
 </code></pre></div>
 
 <ol start="8">
 <li>Если прокси-сервер требует прохождения аутентификации, можете указать имя пользователя и пароль:</li>
 </ol>
-<div class="codehilite"><pre><span></span><code>Sys.setenv(https_proxy=&quot;http://user:password@proxy_server:port&quot;)
+<div class="codehilite"><pre><span></span><code>Sys.setenv(https_proxy="http://user:password@proxy_server:port")
 </code></pre></div>
 
 <ol start="9">
 <li>Проверьте, установлена ли настройка соединения — введите в R консоль команду:</li>
 </ol>
-<div class="codehilite"><pre><span></span><code>Sys.getenv(&quot;https_proxy&quot;)
+<div class="codehilite"><pre><span></span><code>Sys.getenv("https_proxy")
 </code></pre></div>
 
 <p>В ответ на эту команду в консоли появится запись:</p>
-<div class="codehilite"><pre><span></span><code>[1] &quot;http://104.37.212.5:3128&quot;
+<div class="codehilite"><pre><span></span><code>[1] "http://104.37.212.5:3128"
 </code></pre></div>
 
 <p>Это значит, что соединение через прокси установлено успешно.</p>
 <h3 id="api-">Обращение к API Яндекс. Директ через прокси-сервер</h3>
 <p>Перед использованием приведенного ниже кода необходимо установить пакеты devtools и ryandexditrect:</p>
-<div class="codehilite"><pre><span></span><code>install.packages(&quot;devtools&quot;)
+<div class="codehilite"><pre><span></span><code>install.packages("devtools")
 library(devtools)
-install_github(&#39;selesnow/ryandexdirect&#39;)
+install_github('selesnow/ryandexdirect')
 </code></pre></div>
 
 <p>Для получения API токена необходимо установить одно из расширений для браузера, которое позволяет обойти блокировку сайтов. Можете установить <a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/proxy-for-chrome/iilpibhiihokecnbdkaminemnmecjfed?hl=ru">Proxy for Chrome</a>, например.</p>
@@ -244,18 +244,18 @@ library(ryandexdirect)
 myToken &lt;- yadirGetToken()
 
 #Направляем интернет-соединение через прокси-сервер, IP и порт которого мы получили на предыдущем шаге
-Sys.setenv(https_proxy=&quot;http://104.37.212.5:3128&quot;)
+Sys.setenv(https_proxy="http://104.37.212.5:3128")
 
 #Обращаемся к API Яндекс.Директ
-My_report &lt;- yadirGetReport(ReportType = &quot;CAMPAIGN_PERFORMANCE_REPORT&quot;, 
-                           DateRangeType = &quot;CUSTOM_DATE&quot;, 
-                           DateFrom = &#39;2017-01-01&#39;, 
-                           DateTo = &#39;2017-01-31&#39;, 
+My_report &lt;- yadirGetReport(ReportType = "CAMPAIGN_PERFORMANCE_REPORT", 
+                           DateRangeType = "CUSTOM_DATE", 
+                           DateFrom = '2017-01-01', 
+                           DateTo = '2017-01-31', 
                            Login = &lt;YourLogin&gt;, 
                            Token = myToken)
 
 #Отключаемся от прокси-сервера
-Sys.unsetenv(&quot;https_proxy&quot;)
+Sys.unsetenv("https_proxy")
 </code></pre></div>
 
 <h2 id="ip-">Как автоматизировать получение IP и порта прокси-сервера?</h2>
@@ -263,8 +263,8 @@ Sys.unsetenv(&quot;https_proxy&quot;)
 <p>Дело в том, что сервис GimmeProxy API предоставляет возможность загрузки IP адреса и порта с помощью API.</p>
 <p>Во-первых, необходимо установить пакеты RCurl и jsonlite:</p>
 <div class="codehilite"><pre><span></span><code>#Установка пакетов
-if(!&quot;RCurl&quot; %in% installed.packages()[,1]){install.packages(&quot;RCurl&quot;)}
-if(!&quot;jsonlite&quot; %in% installed.packages()[,1]){install.packages(&quot;jsonlite&quot;)}
+if(!"RCurl" %in% installed.packages()[,1]){install.packages("RCurl")}
+if(!"jsonlite" %in% installed.packages()[,1]){install.packages("jsonlite")}
 
 #Подключаем пакеты
 library(RCurl)
@@ -272,7 +272,7 @@ library(jsonlite)
 library(ryandexdirect)
 
 #Запрашиваем IP-адрес и порт
-proxy_list_raw &lt;- getURL(&quot;https://gimmeproxy.com/api/getProxy?supportsHttps=true&amp;port=3128&quot;)
+proxy_list_raw &lt;- getURL("https://gimmeproxy.com/api/getProxy?supportsHttps=true&amp;port=3128")
 
 #Сохраняем IP-адрес и порт в переменную для использования в коде
 proxy_ip_port &lt;- fromJSON(proxy_list_raw)$ipPort
@@ -284,16 +284,16 @@ Sys.setenv(https_proxy=proxy_ip_port)
 myToken &lt;- yadirGetToken()
 
 #Обращаемся к API Яндекс.Директ
-My_report &lt;- yadirGetReport(ReportType = &quot;CAMPAIGN_PERFORMANCE_REPORT&quot;, 
-                           DateRangeType = &quot;CUSTOM_DATE&quot;, 
-                           DateFrom = &#39;2017-01-01&#39;, 
-                           DateTo = &#39;2017-01-31&#39;, 
-                           FieldNames = c(&quot;CampaignName&quot;,&quot;Impressions&quot;,&quot;Clicks&quot;), 
+My_report &lt;- yadirGetReport(ReportType = "CAMPAIGN_PERFORMANCE_REPORT", 
+                           DateRangeType = "CUSTOM_DATE", 
+                           DateFrom = '2017-01-01', 
+                           DateTo = '2017-01-31', 
+                           FieldNames = c("CampaignName","Impressions","Clicks"), 
                            Login = &lt;YourLogin&gt;, 
                            Token = myToken)
 
 #Отключаемся от прокси-сервера
-Sys.unsetenv(&quot;https_proxy&quot;)
+Sys.unsetenv("https_proxy")
 </code></pre></div>
 
 <p>Вначале по API мы запрашиваем IP-адрес и порт прокси-сервера с помощью функции <em>getURL</em> из пакета Curl, далее конвертируем её в объект-лист с помощью функции <em>fromJSON,</em> доступной в пакете jsonlite, и, наконец, сохраняем IP-адрес и порт в переменную <em>proxy_ip_port</em>. Затем эту переменную используем в коде в качестве аргумента функции <em>Sys.setenv</em>.</p>
@@ -305,9 +305,9 @@ Sys.unsetenv(&quot;https_proxy&quot;)
 <p>На  данный момент пакет содержит всего одну функцию getProxy. Функция использует два бесплатных API-сервиса: gimmeproxy.com и getproxylist.com, обращаясь к ним за IP и портом публично доступных и бесплатных прокси-серверов.</p>
 <h3 id="getproxy">Установка пакета getProxy</h3>
 <p>Установите пакет из репозитория GitHub:</p>
-<div class="codehilite"><pre><span></span><code>if(!&quot;devtools&quot; %in% installed.packages()[,1]){install.packages(&quot;devtools&quot;)}
+<div class="codehilite"><pre><span></span><code>if(!"devtools" %in% installed.packages()[,1]){install.packages("devtools")}
 library(devtools)
-install_github(&quot;selesnow/getProxy&quot;)
+install_github("selesnow/getProxy")
 </code></pre></div>
 
 <h3 id="getproxy_1">Аргументы функции getProxy</h3>
@@ -321,15 +321,15 @@ install_github(&quot;selesnow/getProxy&quot;)
 </ul>
 <h3 id="getproxy_2">Пример использования функции getProxy</h3>
 <p>Чтобы автоматизировать процесс получения IP-адреса и порта прокси-сервера и сохранения его в объект без перенаправления интернет-соединения, достаточно в аргументе <em>action</em> установить значение <em>get</em>.</p>
-<div class="codehilite"><pre><span></span><code>prox_ip_and_port &lt;- getProxy(port = &quot;3128&quot;, country = &quot;RU&quot;, action = &quot;get&quot;)
+<div class="codehilite"><pre><span></span><code>prox_ip_and_port &lt;- getProxy(port = "3128", country = "RU", action = "get")
 </code></pre></div>
 
 <p>Если хотите получить IP-адрес и порт прокси-сервера, а также одновременно применить полученные настройки, в аргумент <em>action</em> передайте значение <em>start</em>.</p>
-<div class="codehilite"><pre><span></span><code>prox_ip_and_port &lt;- getProxy(port = &quot;3128&quot;, country = &quot;RU&quot;, supportsHttps = TRUE, action = &quot;start&quot;)
+<div class="codehilite"><pre><span></span><code>prox_ip_and_port &lt;- getProxy(port = "3128", country = "RU", supportsHttps = TRUE, action = "start")
 </code></pre></div>
 
 <p>Если необходимо отключиться от прокси-сервера, достаточно передать в аргумент <em>action</em> значение <em>stop</em>.</p>
-<div class="codehilite"><pre><span></span><code>getProxy(action = &quot;stop&quot;)
+<div class="codehilite"><pre><span></span><code>getProxy(action = "stop")
 </code></pre></div>
 
 <h3 id="api-getproxy">Пример обращения к API Яндекс. Директ через прокси-сервер с помощью пакета getProxy</h3>
@@ -339,22 +339,22 @@ library(ryandexdirect)
 library(getProxy)
 
 #Запрашиваем IP-адрес и порт и применяем полученные настройки
-getProxy(port = &quot;3128&quot;, country = &quot;RU&quot;, supportsHttps = TRUE, action = &quot;start&quot;)
+getProxy(port = "3128", country = "RU", supportsHttps = TRUE, action = "start")
 
 #Получаем API токен
 myToken &lt;- yadirGetToken()
 
 #Обращаемся к API Яндекс.Директ
-My_report &lt;- yadirGetReport(ReportType = &quot;CAMPAIGN_PERFORMANCE_REPORT&quot;, 
-                           DateRangeType = &quot;CUSTOM_DATE&quot;, 
-                           DateFrom = &#39;2017-01-01&#39;, 
-                           DateTo = &#39;2017-01-31&#39;, 
-                           FieldNames = c(&quot;CampaignName&quot;,&quot;Impressions&quot;,&quot;Clicks&quot;), 
+My_report &lt;- yadirGetReport(ReportType = "CAMPAIGN_PERFORMANCE_REPORT", 
+                           DateRangeType = "CUSTOM_DATE", 
+                           DateFrom = '2017-01-01', 
+                           DateTo = '2017-01-31', 
+                           FieldNames = c("CampaignName","Impressions","Clicks"), 
                            Login = &lt;YourLogin&gt;, 
                            Token = myToken)
 
 #Отключаемся от прокси-сервера
-getProxy(action = &quot;stop&quot;)
+getProxy(action = "stop")
 </code></pre></div>
 
 <p>Этот код при каждом запуске будет автоматически запрашивать настройки доступного прокси-сервера и применять их.</p>

@@ -260,14 +260,14 @@
 <p>Для работы с API Google Таблиц, как я уже писал выше, мы будем использовать пакет <code>googlesheets4</code>, написанный Дженни Брайан из RStudio.</p>
 <p>Установить его можно как из CRAN, так и из GitHub.</p>
 <p>Устновка из CRAN:</p>
-<div class="codehilite"><pre><span></span><code>install.packages(&#39;googlesheets4&#39;)
+<div class="codehilite"><pre><span></span><code>install.packages('googlesheets4')
 </code></pre></div>
 
 <p>Установка из GitHub:</p>
 <div class="codehilite"><pre><span></span><code># установка пакета devtools
-if ( !require(devtools) ) install.packages(&quot;devtools&quot;)
+if ( !require(devtools) ) install.packages("devtools")
 # установка пакета googlesheets4
-devtools::install_github(&quot;tidyverse/googlesheets4&quot;)
+devtools::install_github("tidyverse/googlesheets4")
 
 # подключаем пакет
 library(googlesheets4)
@@ -309,10 +309,10 @@ library(googlesheets4)
 library(googlesheets4)
 
 # указываем путь к JSON файлу, который ранее скачали
-gs4_auth_configure(path = &quot;C:/path/to/app_credential.json&quot;)
+gs4_auth_configure(path = "C:/path/to/app_credential.json")
 
 # проходим авторизацию
-gs4_auth(email = &quot;your_email@gmail.com&quot;)
+gs4_auth(email = "your_email@gmail.com")
 </code></pre></div>
 
 <p><strong>Проходим авторизацию указав в коде ID и Секрет приложения:</strong></p>
@@ -320,12 +320,12 @@ gs4_auth(email = &quot;your_email@gmail.com&quot;)
 library(googlesheets4)
 
 # указываем путь к JSON файлу, который ранее скачали
-httr::oauth_app(appname = &quot;app_name&quot;, 
-                  key    = &quot;00000000-abcdefghk.apps.googleusercontent.com&quot;, 
-                  secret = &quot;qwertyuiopasdf&quot;)
+httr::oauth_app(appname = "app_name", 
+                  key    = "00000000-abcdefghk.apps.googleusercontent.com", 
+                  secret = "qwertyuiopasdf")
 
 # проходим авторизацию
-gs4_auth(email = &quot;your_email@gmail.com&quot;)
+gs4_auth(email = "your_email@gmail.com")
 </code></pre></div>
 
 <p>После запуска функции <code>gs4_auth()</code>, в приведённых выше примерах кода, вы будете перенаправлены в браузер. Там вы подтверждаете разрешение на доступ к данным и возвращаетесь в RStudio для продолжения работы.</p>
@@ -355,7 +355,7 @@ gs4_auth(email = &quot;your_email@gmail.com&quot;)
 library(googlesheets4)
 
 # проходим авторизацию через сервисный аккаунт
-gs4_auth(path = &quot;C:/path/to/service_credential.json&quot;)
+gs4_auth(path = "C:/path/to/service_credential.json")
 </code></pre></div>
 
 <p>При авторизации через сервисный аккаунт вам не понадобится подтверждать доступ к данным через браузер, но ещё раз напомню, что вам надо отдельно расшаривать доступ сервисному аккаунту к каждой Google Таблице, с которой вам необходимо работать по API.</p>
@@ -407,17 +407,17 @@ gs4_auth(path = &quot;C:/path/to/service_credential.json&quot;)
 library(googlesheets4)
 
 # проходим авторизацию одним из описанных способов
-gs4_auth(email = &quot;your_mail@gmail.com&quot;)
+gs4_auth(email = "your_mail@gmail.com")
 
 # подключаемся к тестовому доксу
-my_dox &lt;- as_sheets_id(&quot;1hP1OwJuSHfvrTZvZUgEHDwcPPVlDMwPwCqCQPs64OSE&quot;)
+my_dox &lt;- as_sheets_id("1hP1OwJuSHfvrTZvZUgEHDwcPPVlDMwPwCqCQPs64OSE")
 # считываем данные с листа test_data
-data   &lt;- range_read(my_dox, sheet = &quot;test_data&quot;)
+data   &lt;- range_read(my_dox, sheet = "test_data")
 </code></pre></div>
 
 <p>Процесс подключения и чтения данных можно записать более компактно используя пайплайны.</p>
-<div class="codehilite"><pre><span></span><code>data &lt;- as_sheets_id(&quot;1hP1OwJuSHfvrTZvZUgEHDwcPPVlDMwPwCqCQPs64OSE&quot;) %&gt;%
-        range_read(&quot;test_data&quot;)
+<div class="codehilite"><pre><span></span><code>data &lt;- as_sheets_id("1hP1OwJuSHfvrTZvZUgEHDwcPPVlDMwPwCqCQPs64OSE") %&gt;%
+        range_read("test_data")
 </code></pre></div>
 
 <h2 id="google-api">Создание Google Таблиц с помощью API</h2>
@@ -433,11 +433,11 @@ data   &lt;- range_read(my_dox, sheet = &quot;test_data&quot;)
 library(googlesheets4)
 
 # проходим авторизацию одним из описанных способов
-gs4_auth(email = &quot;your_email@gmail.com&quot;)
+gs4_auth(email = "your_email@gmail.com")
 
 # создаём Google Таблицу
-ss &lt;- gs4_create(name = &quot;my_new_dox&quot;, 
-                    locale = &quot;ru_RU&quot;,
+ss &lt;- gs4_create(name = "my_new_dox", 
+                    locale = "ru_RU",
                     sheets = list(mtcars = mtcars,
                                   iris   = head(iris)))
 
@@ -452,11 +452,11 @@ gs4_browse(ss)
 <p><strong>Пример кода для создания нового листа с данными</strong></p>
 <div class="codehilite"><pre><span></span><code># создаём новый лист с данными
 sheet_write(ToothGrowth, ss, 
-             sheet = &quot;tooth_growth&quot;)
+             sheet = "tooth_growth")
 </code></pre></div>
 
-<div class="codehilite"><pre><span></span><code>Writing to &#39;my_new_dox&#39;
-Writing to sheet &quot;tooth_growth&quot;
+<div class="codehilite"><pre><span></span><code>Writing to 'my_new_dox'
+Writing to sheet "tooth_growth"
 </code></pre></div>
 
 <p>Функция <code>sheet_write()</code> имеет 3 основных аргумента:</p>
@@ -477,17 +477,17 @@ Writing to sheet &quot;tooth_growth&quot;
 <p><strong>Пример кода для добавления строк на существующий лист</strong></p>
 <div class="codehilite"><pre><span></span><code># дописываем строки на лист iris
 sheet_append(data = iris[7:150,], ss, 
-              sheet = &quot;iris&quot;)
+              sheet = "iris")
 </code></pre></div>
 
-<div class="codehilite"><pre><span></span><code>Writing to &#39;my_new_dox&#39;
-Appending 144 row(s) to &#39;iris&#39;
+<div class="codehilite"><pre><span></span><code>Writing to 'my_new_dox'
+Appending 144 row(s) to 'iris'
 </code></pre></div>
 
 <h2 id="google-google">Перемещение Google Таблиц между папаками Google Диска</h2>
 <p>Ещё одна операция которая может вам пригодиться, но в данном случае помимо <code>googlesheets4</code> вам понадобится пакет <code>googledrive</code>.</p>
 <p><strong>Установка googledrive</strong></p>
-<div class="codehilite"><pre><span></span><code>install.packages(&quot;googledrive&quot;)
+<div class="codehilite"><pre><span></span><code>install.packages("googledrive")
 </code></pre></div>
 
 <p>Переместить созданную ранее Google Таблицу можно с помощью функции <code>drive_mv()</code>. Но предварительно необходимо пройти автооризацию с помощью функции <code>drive_auth()</code>.</p>
@@ -501,22 +501,22 @@ library(googledrive)
 
 # авторизация
 ## можно либо дважды пройти авторизацию, отдельно под каждым пакетом
-## gs4_auth(email = &quot;your_email@gmail.com&quot;)
-## drive_auth(email = &quot;your_email@gmail.com&quot;)
+## gs4_auth(email = "your_email@gmail.com")
+## drive_auth(email = "your_email@gmail.com")
 
 ## либо пройти авторизацию с помощью google drive, и передать полученный токен для дальнейшего использования в google sheets
-drive_auth(email = &quot;your_email@gmail.com&quot;)
+drive_auth(email = "your_email@gmail.com")
 gs4_auth(token = drive_token())
 
 # Инициируем подключение к таблице и папке
 ## Подключаемся к таблице которую требуется переместить
-ss     &lt;- as_sheets_id(&quot;1BNrYUajVSR3wuGySY0ybXrqH3-Jjq-eIS5_f_a6kt_c&quot;)
+ss     &lt;- as_sheets_id("1BNrYUajVSR3wuGySY0ybXrqH3-Jjq-eIS5_f_a6kt_c")
 
 ## Подключаемся к папке в которую надо перенести Google таблицу
-folder &lt;- as_id(&quot;1x94xChfZwSCPFzHvWqwk6HyF85_ASDFW&quot;)
+folder &lt;- as_id("1x94xChfZwSCPFzHvWqwk6HyF85_ASDFW")
 
 # Либо создаём новую папку
-## folder &lt;- drive_mkdir(&quot;my_folder&quot;)
+## folder &lt;- drive_mkdir("my_folder")
 
 # Переносим Google Таблицу в нужную директорию
 drive_mv(file = ss, 

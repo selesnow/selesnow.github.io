@@ -192,8 +192,8 @@ FROM Sales_july_2015, Sales_august_2015, Sales_september_2015
 <p>Таким образом, для BigQuery три таблицы при выполнении запроса будут равносильны одной целой таблице о продажах за третий квартал. Важно, чтобы таблицы, которые вы перечисляете через запятую, имели одинаковую структуру данных. Когда в вашем наборе данных всего пять таблиц, вполне можно обойтись описанным выше функционалом. Если же ваши таблицы разделены, например, по дням, то таких таблиц у вас со временем будет сотни, а через пару лет — тысячи. И каждый раз перечислять их через запятую вручную будет уже не так просто. Функции подстановки таблиц (Table wildcard functions) работают по такому же принципу. Используя их, достаточно обозначить диапазон таблиц вместо перечисления всех таблиц через запятую. Рассмотрим три доступные в Google BigQuery функции подстановки таблиц с примерами их использования.</p>
 <h2 id="1-table_date_range">1. Функция TABLE_DATE_RANGE (префикс, начальная дата, конечная дата)</h2>
 <p>Функция дает возможность обратиться к ряду таблиц, разделенных по дням, задав диапазон дат. Для названия таблицы, в которой описывается, как использовать данную функцию, нужно использовать формат <em>префикс/дата</em>, при этом дата должна быть записана в формате ГГГГММДД. При определении начальной и конечной даты вы можете использовать функции даты и времени, например:</p>
-<div class="codehilite"><pre><span></span><code>TIMESTAMP(&#39;2012-10-01 02:03:04&#39;)
-DATE_ADD(CURRENT_TIMESTAMP(), -7, &#39;DAY&#39;)
+<div class="codehilite"><pre><span></span><code>TIMESTAMP('2012-10-01 02:03:04')
+DATE_ADD(CURRENT_TIMESTAMP(), -7, 'DAY')
 </code></pre></div>
 
 <p>Предположим, что в нашем наборе данных есть три таблицы:</p>
@@ -207,8 +207,8 @@ DATE_ADD(CURRENT_TIMESTAMP(), -7, &#39;DAY&#39;)
 name
 FROM
 TABLE_DATE_RANGE(mydata.people,
-TIMESTAMP(&#39;2014-03-25&#39;),
-TIMESTAMP(&#39;2014-03-27&#39;))
+TIMESTAMP('2014-03-25'),
+TIMESTAMP('2014-03-27'))
 WHERE
 age &gt;= 35
 </code></pre></div>
@@ -224,7 +224,7 @@ age &gt;= 35
 name
 FROM
 (TABLE_DATE_RANGE([myproject-1234:mydata.people],
-DATE_ADD(CURRENT_TIMESTAMP(), -2, &#39;DAY&#39;),
+DATE_ADD(CURRENT_TIMESTAMP(), -2, 'DAY'),
 CURRENT_TIMESTAMP()))
 WHERE
 age &gt;= 35
@@ -242,8 +242,8 @@ age &gt;= 35
 name
 FROM
 (TABLE_DATE_RANGE_STRICT(people,
-TIMESTAMP(&#39;2014-03-25&#39;),
-TIMESTAMP(&#39;2014-03-27&#39;)))
+TIMESTAMP('2014-03-25'),
+TIMESTAMP('2014-03-27')))
 WHERE age &gt;= 35
 </code></pre></div>
 
@@ -260,7 +260,7 @@ WHERE age &gt;= 35
 <div class="codehilite"><pre><span></span><code>SELECT
 speed
 FROM (TABLE_QUERY(mydata,
-&#39;table_id CONTAINS &quot;oo&quot; AND length(table_id) &gt;= 4&#39;))
+'table_id CONTAINS "oo" AND length(table_id) &gt;= 4'))
 </code></pre></div>
 
 <p>Запрос обработает данные из таблиц mydata.ooze и mydata.spoon, так как именно эти две таблицы соответсвуют заданному в функции TABLE_QUERY выражению. Пример обращения к таблицам с названиями, соответствующими определенному регулярному выражению. В данном случае название таблицы должно начинаться на «boo» и содержать 3-5 цифр:</p>
@@ -276,7 +276,7 @@ FROM (TABLE_QUERY(mydata,
 speed
 FROM
 TABLE_QUERY([myproject-1234:mydata],
-&#39;REGEXP_MATCH(table_id, r&quot;^boo[d]{3,5}&quot;)&#39;)
+'REGEXP_MATCH(table_id, r"^boo[d]{3,5}")')
 </code></pre></div>
 
 <p>Поскольку названия этих таблиц соответствуют регулярному выражению, которое мы использовали в запросе «^boo[\d]{3,5}», будут обрабатываться данные из таблиц:</p>
@@ -291,7 +291,7 @@ TABLE_QUERY([myproject-1234:mydata],
                     <div class="b-tags"><a class="b-chip" href="../?tag=obrabotka-dannyh#posts">Обработка данных</a><a class="b-chip" href="../?tag=bigquery#posts">BigQuery</a><a class="b-chip" href="../?tag=sql#posts">SQL</a></div>
                 </div>
             </article>
-            <aside class="b-toc" aria-label="Contents"><div class="b-toc-title"><span class="ru-text">Содержание</span><span class="ua-text">Зміст</span><span class="en-text">Contents</span></div><ul><li><a href="#1-table_date_range">1. Функция TABLE95DATE95RANGE (префикс, начальная дата, конечная дата)</a></li><li><a href="#2-table_date_range_strict">2. Функция TABLE95DATE95RANGE95STRICT (префикс, начальная дата, конечная дата)</a></li><li><a href="#3-table_query">3. Функция TABLE95QUERY (набор данных, выражение)</a></li></ul></aside>
+            <aside class="b-toc" aria-label="Contents"><div class="b-toc-title"><span class="ru-text">Содержание</span><span class="ua-text">Зміст</span><span class="en-text">Contents</span></div><ul><li><a href="#1-table_date_range">1. Функция TABLE_DATE_RANGE (префикс, начальная дата, конечная дата)</a></li><li><a href="#2-table_date_range_strict">2. Функция TABLE_DATE_RANGE_STRICT (префикс, начальная дата, конечная дата)</a></li><li><a href="#3-table_query">3. Функция TABLE_QUERY (набор данных, выражение)</a></li></ul></aside>
         </div>
         <section class="b-related">
             <h2 class="outfit-font"><span class="ru-text">Читайте также</span><span class="ua-text">Читайте також</span><span class="en-text">Related posts</span></h2>

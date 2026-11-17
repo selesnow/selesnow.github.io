@@ -218,7 +218,7 @@
 <div class="codehilite"><pre><span></span><code>library(rgoogleads)
 
 # простейший способ авторизации
-gads_auth(&#39;a.seleznev@netpeak.group&#39;)
+gads_auth('a.seleznev@netpeak.group')
 
 # учётные данные кешируются в файл
 gads_auth_cache_path()
@@ -226,10 +226,10 @@ gads_open_auth_cache_folder()
 
 # настройка конфигурации авторизации
 gads_auth_configure(
-  path = &#39;auth/gads.client.json&#39;
+  path = 'auth/gads.client.json'
     )
 
-gads_auth(&#39;a.seleznow@netpeak.group&#39;)
+gads_auth('a.seleznow@netpeak.group')
 
 # иерархия аккаунтов
 top_accounts &lt;- gads_get_accessible_customers()
@@ -246,17 +246,17 @@ account_hie &lt;- gads_get_account_hierarchy()
 
 # ####################################
 # авторизация
-gads_auth(&#39;a.seleznev@netpeak.group&#39;)
+gads_auth('a.seleznev@netpeak.group')
 
 # ####################################
 # установка клиентского и упраляющего аккаунта
-gads_set_login_customer_id(&quot;175-410-7253&quot;)
-gads_set_customer_id(&quot;896-697-8643&quot;)
+gads_set_login_customer_id("175-410-7253")
+gads_set_customer_id("896-697-8643")
 
 # ####################################
 # запрос данных используя текст GAQL запроса
 ## Текст запроса
-campaign_query &lt;- &quot;
+campaign_query &lt;- "
 SELECT 
   campaign.id, 
   campaign.name, 
@@ -266,70 +266,70 @@ SELECT
 FROM campaign 
 WHERE 
   segments.date DURING THIS_MONTH AND metrics.clicks &gt; 0
-&quot;
+"
 
 ## Запрос данных
 campaign_data &lt;- gads_get_report(gaql_query = campaign_query) 
 
 # ####################################
 # метаданные и информация о ресурсах
-resources &lt;- gads_get_metadata(&quot;RESOURCE&quot;)
-metadata  &lt;- gads_get_metadata(&quot;ALL&quot;)
+resources &lt;- gads_get_metadata("RESOURCE")
+metadata  &lt;- gads_get_metadata("ALL")
 
-fields    &lt;- gads_get_fields(&quot;campaign&quot;)
+fields    &lt;- gads_get_fields("campaign")
 
 # ####################################
 # Задаём параметры запроса внутри gads_get_report()
 ## Повторяем используемый ранее запрос, но через параметры функции
 campaign_data_2 &lt;- gads_get_report(
-  resource = &quot;campaign&quot;, 
-  fields   = c(&quot;campaign.id&quot;, 
-               &quot;campaign.name&quot;,
-               &quot;segments.date&quot;, 
-               &quot;metrics.clicks&quot;,
-               &quot;metrics.impressions&quot;), 
-  during = &quot;THIS_MONTH&quot;,
-  where  = &quot;metrics.clicks &gt; 0&quot;) 
+  resource = "campaign", 
+  fields   = c("campaign.id", 
+               "campaign.name",
+               "segments.date", 
+               "metrics.clicks",
+               "metrics.impressions"), 
+  during = "THIS_MONTH",
+  where  = "metrics.clicks &gt; 0") 
 
 # Статичные даты
 campaign_data_3 &lt;- gads_get_report(
-  resource = &quot;campaign&quot;, 
-  fields   = c(&quot;campaign.id&quot;, 
-    &quot;campaign.name&quot;,
-    &quot;segments.date&quot;, 
-    &quot;metrics.clicks&quot;,
-    &quot;metrics.impressions&quot;), 
-  date_from = &quot;2022-04-01&quot;, date_to = &quot;2022-04-19&quot;,
-  where  = &quot;metrics.clicks &gt; 0&quot;) 
+  resource = "campaign", 
+  fields   = c("campaign.id", 
+    "campaign.name",
+    "segments.date", 
+    "metrics.clicks",
+    "metrics.impressions"), 
+  date_from = "2022-04-01", date_to = "2022-04-19",
+  where  = "metrics.clicks &gt; 0") 
 
 # ####################################
 # Использование многопоточности
 ## задаём список клиентских аккаунтов
 client_ids &lt;- c(
-  &quot;896-697-8643&quot;, 
-  &quot;201-949-5809&quot;, 
-  &quot;263-160-7978&quot;, 
-  &quot;793-293-9250&quot;, 
-  &quot;927-254-7535&quot;)
+  "896-697-8643", 
+  "201-949-5809", 
+  "263-160-7978", 
+  "793-293-9250", 
+  "927-254-7535")
 
-gads_set_login_customer_id(&quot;175-410-7253&quot;)
+gads_set_login_customer_id("175-410-7253")
 gads_set_customer_id(client_ids)
 
 ## создаём кластер
 cl &lt;- parallel::makeCluster(4)
 
 ## выполняем запрос в многопоточном режиме
-tictoc::tic(&quot;Loading in parallel&quot;)
+tictoc::tic("Loading in parallel")
 
 multi_account_data &lt;- gads_get_report(
-  resource = &quot;campaign&quot;, 
-  fields   = c(&quot;campaign.id&quot;, 
-    &quot;campaign.name&quot;,
-    &quot;segments.date&quot;, 
-    &quot;metrics.clicks&quot;,
-    &quot;metrics.impressions&quot;), 
-  during = &quot;THIS_MONTH&quot;,
-  where  = &quot;metrics.clicks &gt; 0&quot;, 
+  resource = "campaign", 
+  fields   = c("campaign.id", 
+    "campaign.name",
+    "segments.date", 
+    "metrics.clicks",
+    "metrics.impressions"), 
+  during = "THIS_MONTH",
+  where  = "metrics.clicks &gt; 0", 
   cl     = cl) 
 
 tictoc::toc()
@@ -338,23 +338,23 @@ tictoc::toc()
 parallel::stopCluster(cl)
 
 ## запускаем тот же запрос в последовательном режиме
-tictoc::tic(&quot;Loading in sequences&quot;)
+tictoc::tic("Loading in sequences")
 
 multi_account_data &lt;- gads_get_report(
-  resource = &quot;campaign&quot;, 
-  fields   = c(&quot;campaign.id&quot;, 
-    &quot;campaign.name&quot;,
-    &quot;segments.date&quot;, 
-    &quot;metrics.clicks&quot;,
-    &quot;metrics.impressions&quot;), 
-  during = &quot;THIS_MONTH&quot;,
-  where  = &quot;metrics.clicks &gt; 0&quot;) 
+  resource = "campaign", 
+  fields   = c("campaign.id", 
+    "campaign.name",
+    "segments.date", 
+    "metrics.clicks",
+    "metrics.impressions"), 
+  during = "THIS_MONTH",
+  where  = "metrics.clicks &gt; 0") 
 
 tictoc::toc()
 
 # ####################################
 ## Забираем списки объектов
-gads_set_customer_id(&quot;927-254-7535&quot;)
+gads_set_customer_id("927-254-7535")
 
 campaigns &lt;- gads_get_campaigns()
 ad_groups &lt;- gads_get_ad_groups()
@@ -370,47 +370,47 @@ library(forcats)
 library(ggplot2)
 
 # авторизация
-gads_auth(&#39;a.seleznev@netpeak.group&#39;)
+gads_auth('a.seleznev@netpeak.group')
 
 # аккаунты
 ## управляющий аккаунт
-gads_set_login_customer_id(&#39;175-410-7253&#39;)
+gads_set_login_customer_id('175-410-7253')
 ## рекламный аккаунт
-gads_set_customer_id(&#39;474-944-7568&#39;)
+gads_set_customer_id('474-944-7568')
 
 # запрос данных из Google Ads
 ads_data &lt;- gads_get_report(
-  resource = &#39;keyword_view&#39;, 
-  fields = c(&#39;customer.descriptive_name&#39;, 
-             &#39;ad_group_criterion.criterion_id&#39;, 
-             &#39;ad_group_criterion.final_urls&#39;,
-             &#39;ad_group_criterion.status&#39;,
-             &#39;ad_group.id&#39;, 
-             &#39;ad_group.name&#39;,
-             &#39;ad_group.status&#39;,
-             &#39;campaign.id&#39;,
-             &#39;campaign.name&#39;,
-             &#39;campaign.status&#39;,
-             &#39;metrics.impressions&#39;,
-             &#39;metrics.clicks&#39;,
-             &#39;metrics.cost_micros&#39;,
-             &#39;metrics.ctr&#39;,
-             &#39;metrics.search_top_impression_share&#39;,
-             &#39;ad_group_criterion.quality_info.creative_quality_score&#39;,
-             &#39;ad_group_criterion.quality_info.post_click_quality_score&#39;,
-             &#39;ad_group_criterion.quality_info.search_predicted_ctr&#39;, 
-             &#39;ad_group_criterion.quality_info.quality_score&#39;),
-  where     = c(&#39;metrics.impressions &gt; 0&#39;, 
-                &#39;ad_group_criterion.quality_info.creative_quality_score IN (&quot;ABOVE_AVERAGE&quot;, &quot;AVERAGE&quot;, &quot;BELOW_AVERAGE&quot;)&#39;),
-  during    = &#39;LAST_30_DAYS&#39;
+  resource = 'keyword_view', 
+  fields = c('customer.descriptive_name', 
+             'ad_group_criterion.criterion_id', 
+             'ad_group_criterion.final_urls',
+             'ad_group_criterion.status',
+             'ad_group.id', 
+             'ad_group.name',
+             'ad_group.status',
+             'campaign.id',
+             'campaign.name',
+             'campaign.status',
+             'metrics.impressions',
+             'metrics.clicks',
+             'metrics.cost_micros',
+             'metrics.ctr',
+             'metrics.search_top_impression_share',
+             'ad_group_criterion.quality_info.creative_quality_score',
+             'ad_group_criterion.quality_info.post_click_quality_score',
+             'ad_group_criterion.quality_info.search_predicted_ctr', 
+             'ad_group_criterion.quality_info.quality_score'),
+  where     = c('metrics.impressions &gt; 0', 
+                'ad_group_criterion.quality_info.creative_quality_score IN ("ABOVE_AVERAGE", "AVERAGE", "BELOW_AVERAGE")'),
+  during    = 'LAST_30_DAYS'
 )
 
 # Определяем группу показателя качества для каждого ключевого слова
 ads_data &lt;- mutate(ads_data, 
                    qiality_score_group = case_when(
-                     ad_group_criterion_quality_info_quality_score &lt;= 4           ~ &#39;Low&#39;,
-                     between(ad_group_criterion_quality_info_quality_score, 5, 7) ~ &#39;Middle&#39;,
-                     ad_group_criterion_quality_info_quality_score &gt;= 8           ~ &#39;High&#39;
+                     ad_group_criterion_quality_info_quality_score &lt;= 4           ~ 'Low',
+                     between(ad_group_criterion_quality_info_quality_score, 5, 7) ~ 'Middle',
+                     ad_group_criterion_quality_info_quality_score &gt;= 8           ~ 'High'
                    )
 )
 
@@ -419,89 +419,89 @@ ads_data %&gt;%
   group_by(campaign_name) %&gt;% 
   summarise(avg_qs = mean(ad_group_criterion_quality_info_quality_score, na.rm = TRUE)) %&gt;% 
   ggplot(aes(x = fct_reorder(.f = campaign_name, .x = avg_qs, .fun = median), y = avg_qs, fill = avg_qs)) +  
-  geom_bar(stat = &quot;identity&quot;, position = &quot;dodge&quot;) +
+  geom_bar(stat = "identity", position = "dodge") +
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 9)) + 
   scale_fill_gradient(low = hcl(15,100,75), high = hcl(195,100,75)) +
-  ggtitle(&quot;Average Quality Score by Campaign&quot;) +
-  xlab(&#39;Campaign&#39;) +
-  ylab(&#39;Average Quality Score&#39;)
+  ggtitle("Average Quality Score by Campaign") +
+  xlab('Campaign') +
+  ylab('Average Quality Score')
 
 # Визуализация по группированному показателю качества
 ads_data %&gt;% 
   group_by(campaign_name, qiality_score_group) %&gt;% 
   summarise(keywords_count = n_distinct(ad_group_criterion_criterion_id)) %&gt;% 
   ggplot(aes(x = campaign_name, y = keywords_count,fill = qiality_score_group))+  
-  geom_col(stat = &quot;count&quot;, position = &quot;fill&quot;) +  
-  scale_fill_manual(breaks=c(&quot;High&quot;,&quot;Middle&quot;,&quot;Low&quot;),
-                    values=c(High = &quot;forestgreen&quot;, 
-                             Middle = &quot;tan1&quot; , 
-                             Low = &quot;firebrick1&quot;))+  
+  geom_col(stat = "count", position = "fill") +  
+  scale_fill_manual(breaks=c("High","Middle","Low"),
+                    values=c(High = "forestgreen", 
+                             Middle = "tan1" , 
+                             Low = "firebrick1"))+  
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 9))+  
-  ggtitle(&quot;Number of keywords by Quality Score Group&quot;) +
-  xlab(&#39;Campaign&#39;) +
-  ylab(&#39;Kweywords number&#39;)
+  ggtitle("Number of keywords by Quality Score Group") +
+  xlab('Campaign') +
+  ylab('Kweywords number')
 
 # Визуализация по релевантности объявления
 ggplot(ads_data, aes(x = campaign_name, fill = ad_group_criterion_quality_info_creative_quality_score))+  
-  geom_bar(stat = &quot;count&quot;, position = &quot;fill&quot;)+   
-  scale_fill_manual(values=c(&quot;forestgreen&quot;, &quot;tan1&quot; , &quot;firebrick1&quot;,&quot;grey&quot; ))+  
+  geom_bar(stat = "count", position = "fill")+   
+  scale_fill_manual(values=c("forestgreen", "tan1" , "firebrick1","grey" ))+  
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 9), 
-        legend.position = &#39;bottom&#39;)+  
-  ggtitle(&quot;Landing page experience by Campaign&quot;) +
-  xlab(&#39;Campaign&#39;) +
-  ylab(&#39;Kweywords number&#39;)
+        legend.position = 'bottom')+  
+  ggtitle("Landing page experience by Campaign") +
+  xlab('Campaign') +
+  ylab('Kweywords number')
 
 # Визуализация по качеству целевой страницы
 ggplot(ads_data, aes(x = campaign_name, fill = ad_group_criterion_quality_info_post_click_quality_score))+  
-  geom_bar(stat = &quot;count&quot;, position = &quot;fill&quot;)+   
-  scale_fill_manual(values=c(&quot;forestgreen&quot;, &quot;tan1&quot; , &quot;firebrick1&quot;,&quot;grey&quot; ))+  
+  geom_bar(stat = "count", position = "fill")+   
+  scale_fill_manual(values=c("forestgreen", "tan1" , "firebrick1","grey" ))+  
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 9), 
-        legend.position = &#39;bottom&#39;)+  
-  ggtitle(&quot;AdRelevance by Campaign&quot;) +
-  xlab(&#39;Campaign&#39;) +
-  ylab(&#39;Kweywords number&#39;)
+        legend.position = 'bottom')+  
+  ggtitle("AdRelevance by Campaign") +
+  xlab('Campaign') +
+  ylab('Kweywords number')
 
 # Визуализация по ожидаемому значению CTR
 ggplot(ads_data, aes(x = campaign_name, fill = ad_group_criterion_quality_info_search_predicted_ctr))+  
-  geom_bar(stat = &quot;count&quot;, position = &quot;fill&quot;)+   
-  scale_fill_manual(values=c(&quot;forestgreen&quot;, &quot;tan1&quot; , &quot;firebrick1&quot;,&quot;grey&quot; ))+  
+  geom_bar(stat = "count", position = "fill")+   
+  scale_fill_manual(values=c("forestgreen", "tan1" , "firebrick1","grey" ))+  
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 9), 
-        legend.position = &#39;bottom&#39;)+  
-  ggtitle(&quot;Expected CTR by Campaign&quot;) +
-  xlab(&#39;Campaign&#39;) +
-  ylab(&#39;Kweywords number&#39;)
+        legend.position = 'bottom')+  
+  ggtitle("Expected CTR by Campaign") +
+  xlab('Campaign') +
+  ylab('Kweywords number')
 
 # оценка % показа над результатами поиска
 ads_data %&gt;% 
   group_by(qiality_score_group) %&gt;% 
   mutate(med_impression_share = median(search_top_impression_share)) %&gt;% 
-  ggplot(aes(x = fct_relevel(qiality_score_group, &quot;Low&quot;, &quot;Middle&quot;, &quot;High&quot;), y = search_top_impression_share, fill = med_impression_share))+
-  geom_boxplot(outlier.color = &quot;grey&quot;, outlier.stroke = F) +
+  ggplot(aes(x = fct_relevel(qiality_score_group, "Low", "Middle", "High"), y = search_top_impression_share, fill = med_impression_share))+
+  geom_boxplot(outlier.color = "grey", outlier.stroke = F) +
   scale_fill_gradient(high = hcl(15,100,75), low = hcl(195,100,75)) +
   scale_y_continuous(labels = scales::percent_format()) +
-  theme(legend.position = &#39;none&#39;) +
-  ggtitle(&quot;Search Top Impression Share by Quality Score Group&quot;) +
-  xlab(&#39;Quality Score Group&#39;) +
-  ylab(&#39;Search Top Impression Share, %&#39;)
+  theme(legend.position = 'none') +
+  ggtitle("Search Top Impression Share by Quality Score Group") +
+  xlab('Quality Score Group') +
+  ylab('Search Top Impression Share, %')
 
 # CTR в зависимости от группы показателя качества
 ads_data %&gt;% 
   group_by(qiality_score_group) %&gt;% 
   mutate(med_ctr = median(ctr)) %&gt;% 
-  ggplot(aes(x = fct_relevel(qiality_score_group, &quot;Low&quot;, &quot;Middle&quot;, &quot;High&quot;), y = ctr, fill = med_ctr))+
-  geom_boxplot(outlier.color = &quot;grey&quot;, outlier.stroke = F) +
+  ggplot(aes(x = fct_relevel(qiality_score_group, "Low", "Middle", "High"), y = ctr, fill = med_ctr))+
+  geom_boxplot(outlier.color = "grey", outlier.stroke = F) +
   scale_fill_gradient(high = hcl(15,100,75), low = hcl(195,100,75)) +
   scale_y_continuous(labels = scales::percent_format()) +
-  theme(legend.position = &#39;none&#39;) +
-  ggtitle(&quot;Search Top Impression Share by Quality Score Group&quot;) +
-  xlab(&#39;Quality Score Group&#39;) +
-  ylab(&#39;Search Top Impression Share, %&#39;)
+  theme(legend.position = 'none') +
+  ggtitle("Search Top Impression Share by Quality Score Group") +
+  xlab('Quality Score Group') +
+  ylab('Search Top Impression Share, %')
 </code></pre></div></div>
                     
                     <div class="b-tags"><a class="b-chip" href="../?tag=google-ads#posts">Google Ads</a></div>
                 </div>
             </article>
-            <aside class="b-toc" aria-label="Contents"><div class="b-toc-title"><span class="ru-text">Содержание</span><span class="ua-text">Зміст</span><span class="en-text">Contents</span></div><ul><li><a href="#_1">Видео</a><ul><li><a href="#_2">Тайм коды:</a></li></ul></li><li><a href="#_3">Презентация</a></li><li><a href="#_4">Материалы к воркшопу</a><ul><li><a href="#1-google-ads-authr">Скрипт 1-google-ads-auth.R</a></li><li><a href="#2-google-ads-reportingr">Скрипт 2-google-ads-reporting.R</a></li><li><a href="#3-google_ads_quality_score_analisysr">3-google95ads95quality95score95analisys.R</a></li></ul></li></ul></aside>
+            <aside class="b-toc" aria-label="Contents"><div class="b-toc-title"><span class="ru-text">Содержание</span><span class="ua-text">Зміст</span><span class="en-text">Contents</span></div><ul><li><a href="#_1">Видео</a><ul><li><a href="#_2">Тайм коды:</a></li></ul></li><li><a href="#_3">Презентация</a></li><li><a href="#_4">Материалы к воркшопу</a><ul><li><a href="#1-google-ads-authr">Скрипт 1-google-ads-auth.R</a></li><li><a href="#2-google-ads-reportingr">Скрипт 2-google-ads-reporting.R</a></li><li><a href="#3-google_ads_quality_score_analisysr">3-google_ads_quality_score_analisys.R</a></li></ul></li></ul></aside>
         </div>
         <section class="b-related">
             <h2 class="outfit-font"><span class="ru-text">Читайте также</span><span class="ua-text">Читайте також</span><span class="en-text">Related posts</span></h2>

@@ -206,24 +206,24 @@
 <p>Изначально вам необходимо установить все рассматриваемые в этой статье пакеты, для этого можно воспользоваться приведённым ниже кодом.<br />
 <strong>Код 1: Установка пакетов</strong></p>
 <div class="codehilite"><pre><span></span><code># Установка нужных пакетов
-install.packages(&quot;ryandexdirect&quot;)
-install.packages(&quot;tictoc&quot;)
-install.packages(&quot;rbenchmark&quot;)
-install.packages(&quot;dplyr&quot;)
-install.packages(&quot;purrr&quot;)
-install.packages(&quot;future&quot;)
-install.packages(&quot;promises&quot;)
-install.packages(&quot;furrr&quot;)
-install.packages(&quot;future.apply&quot;)
+install.packages("ryandexdirect")
+install.packages("tictoc")
+install.packages("rbenchmark")
+install.packages("dplyr")
+install.packages("purrr")
+install.packages("future")
+install.packages("promises")
+install.packages("furrr")
+install.packages("future.apply")
 </code></pre></div>
 
 <p>Чтобы вам были доступны функций пакета, его необходимо подключить с помощью команды <code>library</code>. Для удобства я буду отдельно подключать все необходимые пакеты в каждом приведённом примере кода.</p>
 <p>Создаём вектор состоящий из логинов Яндекс. Директ, из которых в последствии мы будем запрашивать ключевые слова:<br />
 <strong>Код 2: Создание вектора логинов</strong></p>
-<div class="codehilite"><pre><span></span><code>logins &lt;- c(&quot;login1&quot;, 
-            &quot;login2&quot;, 
-            &quot;login3&quot;, 
-            &quot;login4&quot;)
+<div class="codehilite"><pre><span></span><code>logins &lt;- c("login1", 
+            "login2", 
+            "login3", 
+            "login4")
 </code></pre></div>
 
 <p>Для работы с API Яндекс. Директ предварительно требуется пройти авторизацию под каждым аккаунтом, для этого можно воспользоваться следующей конструкцией:<br />
@@ -261,7 +261,7 @@ kw.sapply &lt;-
 toc() # время выполнения
 
 # приводим полученный результат к табличному виду
-result.sapply &lt;- do.call(&quot;rbind&quot;, kw.sapply)
+result.sapply &lt;- do.call("rbind", kw.sapply)
 </code></pre></div>
 
 <p>Время выполнения: <code>39.36 sec elapsed</code></p>
@@ -344,10 +344,10 @@ toc() # время выполнения
 <div class="codehilite"><pre><span></span><code>library(purrr)
 
 # создаём вектор соответствующих агентских аккаунтов
-agencies &lt;- c(&quot;agency1&quot;,
+agencies &lt;- c("agency1",
               NA,
-              &quot;agency2&quot;,
-              &quot;agency1&quot;)
+              "agency2",
+              "agency1")
 
 # собираем данные о ключевых словах
 # из рекламных кабинетов разбросанных по разным агентским аккаунтам
@@ -365,10 +365,10 @@ result.pmap2 &lt;- map2_df(.x = logins,
 
 # создаём вектор, содержащий путь к папке где храняться 
 # учётные данные для каждого аккаунта
-TokenPath &lt;- c(&quot;C:\\proj1\\tokens&quot;,
-               &quot;C:\\yandex\\token&quot;,
-               &quot;C:\\yandex\\token&quot;,
-               &quot;C:\\my_yandex_acoount&quot;)
+TokenPath &lt;- c("C:\\proj1\\tokens",
+               "C:\\yandex\\token",
+               "C:\\yandex\\token",
+               "C:\\my_yandex_acoount")
 
 # собираем данные
 pmap.result &lt;- pmap_df(list(Login         = logins,
@@ -397,7 +397,7 @@ library(tictoc)
 # создаём кластер
 cl &lt;- makeCluster(4)
 # экспортируем в кластер нужные объекты
-clusterExport(cl = cl, varlist = &quot;logins&quot;)
+clusterExport(cl = cl, varlist = "logins")
 # задаём команды, которые необходимо выполнить при запуске
 # каждого процесса, а нашем случае это подключения пакета ryandexdirect
 clusterEvalQ(cl = cl, {
@@ -465,8 +465,8 @@ plan(multiprocess)
 # Запускаем процесс загрузки ключевых слов
 # в фоновом режиме
 future.kw &lt;- future({yadirGetKeyWords(Login = logins[4])},
-                    packages = &quot;ryandexdirect&quot;,
-                    globals  = &quot;logins&quot;)
+                    packages = "ryandexdirect",
+                    globals  = "logins")
 
 # Проверка статуса выполнения выражения
 resolved(future.kw)
@@ -483,8 +483,8 @@ future.result.1 &lt;- value(future.kw)
 </ul>
 <p>Весь пакет <code>future</code> основан на выполнении команд в фоновых процессах без блокировки текущего сеанса. Запускать выполнение команд следует одноимённой функцией <code>future</code>, поэтому когда мы запускаем команду:</p>
 <div class="codehilite"><pre><span></span><code>future({yadirGetKeyWords(Login = logins[4])},
-                    packages = &quot;ryandexdirect&quot;,
-                    globals  = &quot;logins&quot;)
+                    packages = "ryandexdirect",
+                    globals  = "logins")
 </code></pre></div>
 
 <p>Наш текущий сеанс работы в R не блокируется, а команда выполняется в запущенной в фоновом режиме, другой R сессии.</p>
@@ -501,17 +501,17 @@ plan(multiprocess)
 # в фоновом режиме
 future.kw &lt;- future({suppressMessages(
                      yadirGetKeyWords(Login = logins[4]))},
-                    packages = &quot;ryandexdirect&quot;,
-                    globals  = &quot;logins&quot;) %...&gt;% # Оператор который ждёт выполнения future, 
+                    packages = "ryandexdirect",
+                    globals  = "logins") %...&gt;% # Оператор который ждёт выполнения future, 
                                                 # и передаёт его результат дальше 
              nrow() %...&gt;%
-             paste(&quot;words loaded&quot;) %...&gt;% 
+             paste("words loaded") %...&gt;% 
              print()
 </code></pre></div>
 
 <p>Пакет <code>promises</code> предоставляет набор конвеерных операторов отлично дополняющих функционал <code>future</code>.</p>
 <p>В примере <strong>Код 11</strong> мы в фоновом режиме запускаем процесс загрузки ключевых слов из одного рекламного аккаунта. Далее конвеерный оператор <code>%...&gt;%</code> без блокировки рабочего сеанса ждёт выполнения <code>future</code>, и выполняет оставшиеся операции. В результате выполнения кода, по завершению работы <code>future</code>, в консоль будет выведено количество ключевых слов из заданного аккаунта:</p>
-<div class="codehilite"><pre><span></span><code>[1] &quot;1855 words loaded&quot;
+<div class="codehilite"><pre><span></span><code>[1] "1855 words loaded"
 </code></pre></div>
 
 <blockquote>
@@ -525,7 +525,7 @@ future.kw &lt;- future({suppressMessages(
 library(tictoc)
 
 # план обработки
-plan(&quot;multisession&quot;, workers = 4)
+plan("multisession", workers = 4)
 
 tic() # запускаем таймер
 futs      &lt;- lapply(logins,     # Объект элементы которого будем перебирать
@@ -533,8 +533,8 @@ futs      &lt;- lapply(logins,     # Объект элементы которо�
                       # Создаём фьючерс
                       future({ yadirGetKeyWords(Login = i) %&gt;%  
                                mutate(login = i) }, 
-                               packages = c(&quot;ryandexdirect&quot;,
-                                            &quot;dplyr&quot;)))
+                               packages = c("ryandexdirect",
+                                            "dplyr")))
 
 completed &lt;- sapply(futs, resolved) # проверка выполненных заданий
 kw        &lt;- lapply(futs, value)    # получения всех результатов
@@ -559,7 +559,7 @@ result.future &lt;- dplyr::bind_rows(kw)
 library(tictoc)
 
 # устанавливаем план обработки
-plan(&quot;multisession&quot;, workers = 4)
+plan("multisession", workers = 4)
 
 tic() # запускам таймер
 kw.future.apply &lt;- future_sapply(logins, # объект который будем перебирать, вектор логинов
@@ -570,8 +570,8 @@ kw.future.apply &lt;- future_sapply(logins, # объект который буд
                      }, 
                      simplify = FALSE, # Упрощённый вывод результата 
                      # подключение пакетов
-                     future.packages = c(&quot;ryandexdirect&quot;,
-                                         &quot;dplyr&quot;),
+                     future.packages = c("ryandexdirect",
+                                         "dplyr"),
                      future.globals  = TRUE
                      )
 toc() # смотрим время работы
@@ -598,8 +598,8 @@ furrr.kw &lt;-
            ~ # сокращение от function(.x)
            yadirGetKeyWords(Login = .x) %&gt;%
            mutate(login = .x), 
-           .options = future_options(packages = c(&quot;ryandexdirect&quot;,
-                                                  &quot;dplyr&quot;),
+           .options = future_options(packages = c("ryandexdirect",
+                                                  "dplyr"),
                                      globals  = c()))
 
 toc() # смотрим время выполнения
@@ -611,8 +611,8 @@ result.furrr &lt;-dplyr::bind_rows(furrr.kw)
 <p><code>furrr</code> предоставляет в параллельном режиме почти весь набор функций из <code>purrr</code>. При этом и синтаксис <code>purrr</code> полностью сохранён, но добавлен ряд аргументов для работы с настройками параллельных процессов.</p>
 <p>Для изменения различных опций каждого узла запущенного кластера служит аргумент <em>.options</em>. Передав в качества значения <em>.options</em> функцию <code>future_options</code> вы можете инициализировать подключение пакетов, и передачу объектов из глобального окружения в узлы кластера.</p>
 <p>В примере <strong>Код 14</strong> мы использовали аргументы <em>packages</em> и <em>globals</em> выполнили эту операцию так:</p>
-<div class="codehilite"><pre><span></span><code>.options = future_options(packages = c(&quot;ryandexdirect&quot;,
-                                       &quot;dplyr&quot;),
+<div class="codehilite"><pre><span></span><code>.options = future_options(packages = c("ryandexdirect",
+                                       "dplyr"),
                                      globals  = c())
 </code></pre></div>
 
@@ -631,10 +631,10 @@ library(tictoc)
 library(rbenchmark)
 
 # вектор логинов
-logins &lt;- c(&quot;login1&quot;, 
-            &quot;login2&quot;, 
-            &quot;login3&quot;, 
-            &quot;login4&quot;)
+logins &lt;- c("login1", 
+            "login2", 
+            "login3", 
+            "login4")
 
 # создаём обёртку для каждого из описанных подходов
 # функции написанные под параллельные вычисления имеют префикс par
@@ -648,29 +648,29 @@ par.furrr &lt;- function(logins) {
                ~            
                  yadirGetKeyWords(Login = .x) %&gt;%
                  mutate(login = .x), 
-               .options = future_options(packages = c(&quot;ryandexdirect&quot;,
-                                                      &quot;dplyr&quot;),
+               .options = future_options(packages = c("ryandexdirect",
+                                                      "dplyr"),
                                          globals  = c()))
 
   result.furrr &lt;-dplyr::bind_rows(furrr.kw)
 }
 
 par.future &lt;- function(logins) {
-  plan(&quot;multisession&quot;, workers = 4)
+  plan("multisession", workers = 4)
 
   futs      &lt;- lapply(logins, 
                       function(i) 
                         future({ yadirGetKeyWords(Login = i) %&gt;%  
                             mutate(login = i) }, 
-                            packages = c(&quot;ryandexdirect&quot;,
-                                         &quot;dplyr&quot;)))
+                            packages = c("ryandexdirect",
+                                         "dplyr")))
   completed &lt;- sapply(futs, resolved) 
   kw        &lt;- lapply(futs, value)
   result.future &lt;- dplyr::bind_rows(kw)
 }
 
 par.future.apply &lt;- function(logins) {
-  plan(&quot;multisession&quot;, workers = 4)
+  plan("multisession", workers = 4)
 
   kw.future.apply &lt;- future_sapply(logins,
                                    function(x) { 
@@ -678,8 +678,8 @@ par.future.apply &lt;- function(logins) {
                                        mutate(login = x)    
                                    }, 
                                    simplify = FALSE, 
-                                   future.packages = c(&quot;ryandexdirect&quot;,
-                                                       &quot;dplyr&quot;),
+                                   future.packages = c("ryandexdirect",
+                                                       "dplyr"),
                                    future.globals  = TRUE
   )
   result.future.apply &lt;- dplyr::bind_rows(kw.future.apply)
@@ -688,7 +688,7 @@ par.future.apply &lt;- function(logins) {
 par.parallel &lt;- function(logins) {
 
   cl &lt;- parallel::makeCluster(4)
-  clusterExport(cl = cl, varlist = &quot;logins&quot;)
+  clusterExport(cl = cl, varlist = "logins")
 
   clusterEvalQ(cl = cl, {
     library(ryandexdirect)
@@ -719,7 +719,7 @@ seq.apply &lt;- function(logins) {
       simplify = FALSE 
     )
 
-  result.sapply &lt;- do.call(&quot;rbind&quot;, kw.sapply)
+  result.sapply &lt;- do.call("rbind", kw.sapply)
 }
 
 seq.purrr &lt;- function(logins) {
@@ -730,7 +730,7 @@ seq.purrr &lt;- function(logins) {
       { yadirGetKeyWords(Login = .x) %&gt;%  
           mutate(login = .x) }
     )
-  result.purrr &lt;- do.call(&quot;rbind&quot;, kw.purrr) 
+  result.purrr &lt;- do.call("rbind", kw.purrr) 
 }
 
 # запускаем тест скорости с помощью пакета rbenchmark
@@ -750,33 +750,33 @@ speed.test &lt;-
                      apply        = seq.apply(logins),
                      purrr        = seq.purrr(logins),
                      replications = c(20),
-                     columns      = c(&#39;test&#39;, 
-                                      &#39;replications&#39;, 
-                                      &#39;elapsed&#39;),
-                     order        = c(&#39;elapsed&#39;, 
-                                      &#39;test&#39;)),
+                     columns      = c('test', 
+                                      'replications', 
+                                      'elapsed'),
+                     order        = c('elapsed', 
+                                      'test')),
            { average = round(elapsed/replications, 2) }) 
       },
-    packages =  c(&quot;dplyr&quot;,
-                  &quot;ryandexdirect&quot;,
-                  &quot;rbenchmark&quot;,
-                  &quot;parallel&quot;,
-                  &quot;purrr&quot;,
-                  &quot;future&quot;,
-                  &quot;promises&quot;,
-                  &quot;furrr&quot;,
-                  &quot;future.apply&quot;),
-    globals  = c(&quot;logins&quot;,
-                 &quot;par.furrr&quot;,
-                 &quot;par.future&quot;,
-                 &quot;par.future.apply&quot;,
-                 &quot;par.parallel&quot;,
-                 &quot;seq.apply&quot;,
-                 &quot;seq.purrr&quot;)) %...&gt;%
+    packages =  c("dplyr",
+                  "ryandexdirect",
+                  "rbenchmark",
+                  "parallel",
+                  "purrr",
+                  "future",
+                  "promises",
+                  "furrr",
+                  "future.apply"),
+    globals  = c("logins",
+                 "par.furrr",
+                 "par.future",
+                 "par.future.apply",
+                 "par.parallel",
+                 "seq.apply",
+                 "seq.purrr")) %...&gt;%
       print() %...T&gt;%
       toc()
 
-message(&quot;My Session is not blocked&quot;)
+message("My Session is not blocked")
 </code></pre></div>
 
 <p>В моём примере тест скорости длился 3370 секунд, т.е. без малого час.</p>
@@ -821,7 +821,7 @@ message(&quot;My Session is not blocked&quot;)
                     <div class="b-tags"><a class="b-chip" href="../?tag=yandeks-direkt#posts">Яндекс Директ</a><a class="b-chip" href="../?tag=parallelnye-vychisleniya#posts">Параллельные вычисления</a><a class="b-chip" href="../?tag=r#posts">R</a><a class="b-chip" href="../?tag=pakety-r#posts">Пакеты R</a></div>
                 </div>
             </article>
-            <aside class="b-toc" aria-label="Contents"><div class="b-toc-title"><span class="ru-text">Содержание</span><span class="ua-text">Зміст</span><span class="en-text">Contents</span></div><ul><li><a href="#sapply">Функция sapply</a></li><li><a href="#purrr">Пакет purrr</a></li><li><a href="#parallel">Пакет parallel</a></li><li><a href="#future">Пакет future</a></li><li><a href="#future_1">Обёртки над future</a></li></ul></aside>
+            <aside class="b-toc" aria-label="Contents"><div class="b-toc-title"><span class="ru-text">Содержание</span><span class="ua-text">Зміст</span><span class="en-text">Contents</span></div><ul><li><a href="#sapply">Функция sapply</a></li><li><a href="#purrr">Пакет purrr</a></li><li><a href="#parallel">Пакет parallel</a></li><li><a href="#future">Пакет future</a></li><li><a href="#future_1">Обёртки над future</a></li></ul></aside>
         </div>
         <section class="b-related">
             <h2 class="outfit-font"><span class="ru-text">Читайте также</span><span class="ua-text">Читайте також</span><span class="en-text">Related posts</span></h2>

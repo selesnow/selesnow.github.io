@@ -314,10 +314,10 @@ obj &lt;- func3(temp_object2 )
 <h3 id="r">Установка пакетов в R</h3>
 <p>Если вы хотя бы раз открывали среду разработки RStudio наверняка вы и так уже знаете как установить нужный пакет в R. Для установки пакетов воспользуйтесь стандартной командой <code>install.packages()</code> запустив её непосредственно в самом R.</p>
 <div class="codehilite"><pre><span></span><code># установка пакетов
-install.packages(&quot;vroom&quot;)
-install.packages(&quot;readr&quot;)
-install.packages(&quot;dplyr&quot;)
-install.packages(&quot;data.table&quot;)
+install.packages("vroom")
+install.packages("readr")
+install.packages("dplyr")
+install.packages("data.table")
 </code></pre></div>
 
 <p>После установки пакеты необходимо подключить, для чего в большистве случаев используется команда <code>library()</code>.</p>
@@ -357,38 +357,38 @@ What does the release of <code>vroom</code> mean for <code>readr</code>? For 
 </blockquote>
 <p>В этой статье мы рассмотрим оба пакета для загрузки данных:<br />
 <strong>Загрузка данных в R: пакет vroom</strong></p>
-<div class="codehilite"><pre><span></span><code># install.packages(&quot;vroom&quot;)
+<div class="codehilite"><pre><span></span><code># install.packages("vroom")
 library(vroom)
 
 # Чтение данных
 ## vroom
-ga_nov  &lt;- vroom(&quot;https://raw.githubusercontent.com/selesnow/publications/master/data_example/r_python_data/ga_nowember.csv&quot;)
-ga_dec  &lt;- vroom(&quot;https://raw.githubusercontent.com/selesnow/publications/master/data_example/r_python_data/ga_december.csv&quot;)
-titanic &lt;- vroom(&quot;https://raw.githubusercontent.com/selesnow/publications/master/data_example/r_python_data/titanic.csv&quot;)
+ga_nov  &lt;- vroom("https://raw.githubusercontent.com/selesnow/publications/master/data_example/r_python_data/ga_nowember.csv")
+ga_dec  &lt;- vroom("https://raw.githubusercontent.com/selesnow/publications/master/data_example/r_python_data/ga_december.csv")
+titanic &lt;- vroom("https://raw.githubusercontent.com/selesnow/publications/master/data_example/r_python_data/titanic.csv")
 </code></pre></div>
 
 <p><strong>Загрузка данных в R: readr</strong></p>
-<div class="codehilite"><pre><span></span><code># install.packages(&quot;readr&quot;)
+<div class="codehilite"><pre><span></span><code># install.packages("readr")
 library(readr)
 
 # Чтение данных
 ## readr
-ga_nov  &lt;- read_tsv(&quot;https://raw.githubusercontent.com/selesnow/publications/master/data_example/r_python_data/ga_nowember.csv&quot;)
-ga_dec  &lt;- read_tsv(&quot;https://raw.githubusercontent.com/selesnow/publications/master/data_example/r_python_data/ga_december.csv&quot;)
-titanic &lt;- read_csv(&quot;https://raw.githubusercontent.com/selesnow/publications/master/data_example/r_python_data/titanic.csv&quot;)
+ga_nov  &lt;- read_tsv("https://raw.githubusercontent.com/selesnow/publications/master/data_example/r_python_data/ga_nowember.csv")
+ga_dec  &lt;- read_tsv("https://raw.githubusercontent.com/selesnow/publications/master/data_example/r_python_data/ga_december.csv")
+titanic &lt;- read_csv("https://raw.githubusercontent.com/selesnow/publications/master/data_example/r_python_data/titanic.csv")
 </code></pre></div>
 
 <p>В пакете <code>vroom</code>, не зависимо от формата данных csv / tsv загрузка осуществляется одноимённой функцией <code>vroom()</code>, в пакете <code>readr</code> мы используем под каждый формат свою функцию <code>read_tsv()</code> и <code>read_csv()</code>.</p>
 <h3 id="r-datatable">Загрузка данных в R: data.table</h3>
 <p>В <code>data.table</code> для загрузки данных присутствует функция <code>fread()</code>.<br />
 <strong>Загрузка данных в R: пакет data.table</strong></p>
-<div class="codehilite"><pre><span></span><code># install.packages(&quot;data.table&quot;)
+<div class="codehilite"><pre><span></span><code># install.packages("data.table")
 library(data.table)
 
 ## data.table
-ga_nov  &lt;- fread(&quot;https://raw.githubusercontent.com/selesnow/publications/master/data_example/r_python_data/ga_nowember.csv&quot;)
-ga_dec  &lt;- fread(&quot;https://raw.githubusercontent.com/selesnow/publications/master/data_example/r_python_data/ga_december.csv&quot;)
-titanic &lt;- fread(&quot;https://raw.githubusercontent.com/selesnow/publications/master/data_example/r_python_data/titanic.csv&quot;)
+ga_nov  &lt;- fread("https://raw.githubusercontent.com/selesnow/publications/master/data_example/r_python_data/ga_nowember.csv")
+ga_dec  &lt;- fread("https://raw.githubusercontent.com/selesnow/publications/master/data_example/r_python_data/ga_december.csv")
+titanic &lt;- fread("https://raw.githubusercontent.com/selesnow/publications/master/data_example/r_python_data/titanic.csv")
 </code></pre></div>
 
 <h3 id="python-pandas">Загрузка данных в Python: pandas</h3>
@@ -404,9 +404,9 @@ titanic &lt;- fread(&quot;https://raw.githubusercontent.com/selesnow/publication
 <strong>Загрузка данных в Python: pandas</strong></p>
 <div class="codehilite"><pre><span></span><code>import pandas as pd
 
-ga_nov  = pd.read_csv(&quot;https://raw.githubusercontent.com/selesnow/publications/master/data_example/russian_text_in_r/ga_nowember.csv&quot;, sep = &quot;\t&quot;)
-ga_dec  = pd.read_csv(&quot;https://raw.githubusercontent.com/selesnow/publications/master/data_example/russian_text_in_r/ga_december.csv&quot;, sep = &quot;\t&quot;)
-titanic = pd.read_csv(&quot;https://raw.githubusercontent.com/selesnow/publications/master/data_example/russian_text_in_r/titanic.csv&quot;)
+ga_nov  = pd.read_csv("https://raw.githubusercontent.com/selesnow/publications/master/data_example/russian_text_in_r/ga_nowember.csv", sep = "\t")
+ga_dec  = pd.read_csv("https://raw.githubusercontent.com/selesnow/publications/master/data_example/russian_text_in_r/ga_december.csv", sep = "\t")
+titanic = pd.read_csv("https://raw.githubusercontent.com/selesnow/publications/master/data_example/russian_text_in_r/titanic.csv")
 </code></pre></div>
 
 <h1 id="_11">Создание датафреймов</h1>
@@ -419,7 +419,7 @@ titanic = pd.read_csv(&quot;https://raw.githubusercontent.com/selesnow/publicati
 <div class="codehilite"><pre><span></span><code>## dplyr
 ### создаём справочник
 gender &lt;- tibble(id = c(1, 2),
-                 gender = c(&quot;female&quot;, &quot;male&quot;))
+                 gender = c("female", "male"))
 </code></pre></div>
 
 <h3 id="r-datatable_1">Создание датафрейма в R: data.table</h3>
@@ -427,15 +427,15 @@ gender &lt;- tibble(id = c(1, 2),
 <div class="codehilite"><pre><span></span><code>## data.table
 ### создаём справочник
 gender &lt;- data.table(id = c(1, 2),
-                    gender = c(&quot;female&quot;, &quot;male&quot;))
+                    gender = c("female", "male"))
 </code></pre></div>
 
 <h3 id="python-pandas_1">Создание датафрейма в Python: pandas</h3>
 <p>В <code>pandas</code> создание фреймов осуществляется в несколько этапов, сперва мы создаём словарь, а потом преобразуем словарь в датафрейм.<br />
 <strong>Создание датафрейма в Python: pandas</strong></p>
 <div class="codehilite"><pre><span></span><code># создаём дата фрейм
-gender_dict = {&#39;id&#39;: [1, 2],
-               &#39;gender&#39;: [&quot;female&quot;, &quot;male&quot;]}
+gender_dict = {'id': [1, 2],
+               'gender': ["female", "male"]}
 # преобразуем словарь в датафрейм
 gender = pd.DataFrame.from_dict(gender_dict)
 </code></pre></div>
@@ -461,7 +461,7 @@ select(ga_nov, date, source, sessions)
 ### исключь по названию столбцов
 select(ga_nov, -medium, -bounces)
 ### выбрать по регулярному выражению, стобцы имена которых заканчиваются на s
-select(ga_nov, matches(&quot;s$&quot;))
+select(ga_nov, matches("s$"))
 ### выбрать по условию, выбираем только целочисленные столбцы
 select_if(ga_nov, is.integer)
 </code></pre></div>
@@ -478,9 +478,9 @@ by — группировка данных<br />
 ### выбрать по названию столбцов
 ga_nov[ , .(date, source, sessions) ]
 ### исключь по названию столбцов
-ga_nov[ , .SD, .SDcols = ! names(ga_nov) %like% &quot;medium|bounces&quot; ]
+ga_nov[ , .SD, .SDcols = ! names(ga_nov) %like% "medium|bounces" ]
 ### выбрать по регулярному выражению
-ga_nov[, .SD, .SDcols = patterns(&quot;s$&quot;)]
+ga_nov[, .SD, .SDcols = patterns("s$")]
 </code></pre></div>
 
 <p>Переменная <code>.SD</code> позволяет вам обратиться ко всем столбцам, а <code>.SDcols</code> отфильтровать нужные столбцы используя регулярные выражения, или другие функции для фильтрации названий нужных вам столбцов.</p>
@@ -489,15 +489,15 @@ ga_nov[, .SD, .SDcols = patterns(&quot;s$&quot;)]
 <p>Для выбора поля по типу данных используйте функцию <code>select_dtypes()</code>, и в аргументы <em>include</em> или <em>exclude</em> передайте список типов данных соответствующие тем, какие поля вам необходимо выбрать.<br />
 <strong>Выбор столбцов в Python: pandas</strong></p>
 <div class="codehilite"><pre><span></span><code># Выбор полей по названию
-ga_nov[[&#39;date&#39;, &#39;source&#39;, &#39;sessions&#39;]]
+ga_nov[['date', 'source', 'sessions']]
 # Исключить по названию
-ga_nov.drop([&#39;medium&#39;, &#39;bounces&#39;], axis=1)
+ga_nov.drop(['medium', 'bounces'], axis=1)
 # Выбрать по регулярному выражению
-ga_nov.filter(regex=&quot;s$&quot;, axis=1)
+ga_nov.filter(regex="s$", axis=1)
 # Выбрать числовые поля
-ga_nov.select_dtypes(include=[&#39;number&#39;])
+ga_nov.select_dtypes(include=['number'])
 # Выбрать текстовые поля
-ga_nov.select_dtypes(include=[&#39;object&#39;])
+ga_nov.select_dtypes(include=['object'])
 </code></pre></div>
 
 <h1 id="_13">Фильтрация строк</h1>
@@ -515,11 +515,11 @@ ga_nov.select_dtypes(include=[&#39;object&#39;])
 <div class="codehilite"><pre><span></span><code># фильтрация строк
 ## dplyr
 ### фильтрация строк по одному условию
-filter(ga_nov, source == &quot;google&quot;)
+filter(ga_nov, source == "google")
 ### фильтр по двум условиям соединённым логическим и
-filter(ga_nov, source == &quot;google&quot; &amp; sessions &gt;= 10)
+filter(ga_nov, source == "google" &amp; sessions &gt;= 10)
 ### фильтр по двум условиям соединённым логическим или
-filter(ga_nov, source == &quot;google&quot; | sessions &gt;= 10)
+filter(ga_nov, source == "google" | sessions &gt;= 10)
 </code></pre></div>
 
 <h3 id="r-datatable_3">Фильтрация строк в R: data.table</h3>
@@ -535,11 +535,11 @@ by — группировка данных</p>
 <strong>Фильтрация строк в R: data.table</strong></p>
 <div class="codehilite"><pre><span></span><code>## data.table
 ### фильтрация строк по одному условию
-ga_nov[source == &quot;google&quot;]
+ga_nov[source == "google"]
 ### фильтр по двум условиям соединённым логическим и
-ga_nov[source == &quot;google&quot; &amp; sessions &gt;= 10]
+ga_nov[source == "google" &amp; sessions &gt;= 10]
 ### фильтр по двум условиям соединённым логическим или
-ga_nov[source == &quot;google&quot; | sessions &gt;= 10]
+ga_nov[source == "google" | sessions &gt;= 10]
 </code></pre></div>
 
 <h3 id="python-pandas_3">Фильтрация строк в Python: pandas</h3>
@@ -549,11 +549,11 @@ ga_nov[source == &quot;google&quot; | sessions &gt;= 10]
 <strong>Фильтрация строк в Python: pandas</strong></p>
 <div class="codehilite"><pre><span></span><code># Фильтрация строк таблицы
 ### фильтрация строк по одному условию
-ga_nov[ ga_nov[&#39;source&#39;] == &quot;google&quot; ]
+ga_nov[ ga_nov['source'] == "google" ]
 ### фильтр по двум условиям соединённым логическим и
-ga_nov[(ga_nov[&#39;source&#39;] == &quot;google&quot;) &amp; (ga_nov[&#39;sessions&#39;] &gt;= 10)]
+ga_nov[(ga_nov['source'] == "google") &amp; (ga_nov['sessions'] &gt;= 10)]
 ### фильтр по двум условиям соединённым логическим или
-ga_nov[(ga_nov[&#39;source&#39;] == &quot;google&quot;) | (ga_nov[&#39;sessions&#39;] &gt;= 10)]
+ga_nov[(ga_nov['source'] == "google") | (ga_nov['sessions'] &gt;= 10)]
 </code></pre></div>
 
 <h1 id="_14">Группировка и агрегация данных</h1>
@@ -607,8 +607,8 @@ titanic[, .(passangers = length(PassengerId),
 <p>Символ <code>\</code> позволяет вам переходить на следующую строку.<br />
 <strong>Группировка и агрегация в Python: pandas</strong></p>
 <div class="codehilite"><pre><span></span><code># группировка и агрегация данных
-titanic.groupby([&quot;Pclass&quot;]).\
-    agg({&#39;PassengerId&#39;: &#39;count&#39;, &#39;Fare&#39;: &#39;mean&#39;}).\
+titanic.groupby(["Pclass"]).\
+    agg({'PassengerId': 'count', 'Fare': 'mean'}).\
         reset_index()
 </code></pre></div>
 
@@ -663,7 +663,7 @@ pd.concat([ga_nov, ga_dec])
 <strong>Горизонтальное объединение таблиц в R: dplyr</strong></p>
 <div class="codehilite"><pre><span></span><code># объединяем таблицы
 left_join(titanic, gender,
-          by = c(&quot;Sex&quot; = &quot;id&quot;))
+          by = c("Sex" = "id"))
 </code></pre></div>
 
 <h3 id="r-datatable_6">Горизонтальное объединение таблиц в R: data.table</h3>
@@ -677,7 +677,7 @@ left_join(titanic, gender,
 </ul>
 <p><strong>Горизонтальное объединение таблиц в R: data.table</strong></p>
 <div class="codehilite"><pre><span></span><code># объединяем таблицы
-merge(titanic, gender, by.x = &quot;Sex&quot;, by.y = &quot;id&quot;, all.x = T)
+merge(titanic, gender, by.x = "Sex", by.y = "id", all.x = T)
 </code></pre></div>
 
 <h3 id="python-pandas_6">Горизонтальное объединение таблиц в Python: pandas</h3>
@@ -690,7 +690,7 @@ merge(titanic, gender, by.x = &quot;Sex&quot;, by.y = &quot;id&quot;, all.x = T)
 </ul>
 <p><strong>Горизонтальное объединение таблиц в Python: pandas</strong></p>
 <div class="codehilite"><pre><span></span><code># объединяем по ключу
-titanic.merge(gender, how = &quot;left&quot;, left_on = &quot;Sex&quot;, right_on = &quot;id&quot;)
+titanic.merge(gender, how = "left", left_on = "Sex", right_on = "id")
 </code></pre></div>
 
 <h1 id="_17">Простейшие оконные функции и вычисляемые столбцы</h1>
@@ -713,7 +713,7 @@ titanic.merge(gender, how = &quot;left&quot;, left_on = &quot;Sex&quot;, right_o
 <p>Алгоритм решения остаётся такой же, как в <code>dplyr</code>, нам необходимо разбить таблицу на окна по полю <em>Pclass</em>. Вывести в новом столбце сумму по соответствующей каждой строке группе, и добавить столбец в котором мы рассчитаем долю стоимости каждого билета в его группе.</p>
 <p>Для добавления новых столбцов в <code>data.table</code> присутствует оператор <code>:=</code>. Ниже приведён пример решения задачи с помощью пакета <code>data.table</code><br />
 <strong>Оконные функции в R: data.table</strong></p>
-<div class="codehilite"><pre><span></span><code>titanic[,c(&quot;Pclass_cost&quot;,&quot;ticket_fare_rate&quot;) := .(sum(Fare), Fare / Pclass_cost), 
+<div class="codehilite"><pre><span></span><code>titanic[,c("Pclass_cost","ticket_fare_rate") := .(sum(Fare), Fare / Pclass_cost), 
         by = Pclass]
 </code></pre></div>
 
@@ -721,8 +721,8 @@ titanic.merge(gender, how = &quot;left&quot;, left_on = &quot;Sex&quot;, right_o
 <p>Один из способов добавить новый столбец в <code>pandas</code> — использовать функцию <code>assign()</code>. Для суммирования стоимости билетов по классу кают, без группировки строк мы будем использовать функцию <code>transform()</code>.</p>
 <p>Ниже пример решения, в котором мы добавляем в таблицу <em>titanic</em> те же 2 столбца.<br />
 <strong>Оконные функции в Python: pandas</strong></p>
-<div class="codehilite"><pre><span></span><code>titanic.assign(Pclass_cost      =  titanic.groupby(&#39;Pclass&#39;).Fare.transform(sum),
-               ticket_fare_rate = lambda x: x[&#39;Fare&#39;] / x[&#39;Pclass_cost&#39;])
+<div class="codehilite"><pre><span></span><code>titanic.assign(Pclass_cost      =  titanic.groupby('Pclass').Fare.transform(sum),
+               ticket_fare_rate = lambda x: x['Fare'] / x['Pclass_cost'])
 </code></pre></div>
 
 <h1 id="_18">Таблица соответствия функций и методов</h1>

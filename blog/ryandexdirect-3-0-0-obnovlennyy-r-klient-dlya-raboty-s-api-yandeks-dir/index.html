@@ -185,9 +185,9 @@
 <p><img loading="lazy" decoding="async" alt="ÐÐ¾ÑÐ¾Ð¶ÐµÐµ Ð¸Ð·Ð¾Ð±ÑÐ°Ð¶ÐµÐ½Ð¸Ðµ" width="504" height="360" src="../images/ryandexdirect-3-0-0-obnovlennyy-r-klient-dlya-raboty-s-api-g-f470b4ec.webp" /></p>
 <h2 id="_1">Обновление пакета</h2>
 <p>Для обновления или установки пакета достаточно запустить приведённый ниже код, при этом будьте внимательны новая версия пакета содержит довольно много изменений, и после обновления вам необходимо будет проверить работоспособность всех скриптов написанных на более ранних версиях ryandexdirect, в связи с чем я рекомендую сначала ознакомится со всеми доработками и только потом обновлять пакет.</p>
-<div class="codehilite"><pre><span></span><code>install.packages(&quot;devtools&quot;)
+<div class="codehilite"><pre><span></span><code>install.packages("devtools")
 
-devtools::install_github(&quot;selesnow/ryandexdirect&quot;)
+devtools::install_github("selesnow/ryandexdirect")
 </code></pre></div>
 
 <h2 id="_2">Авторизация и работа с токенами</h2>
@@ -253,16 +253,16 @@ devtools::install_github(&quot;selesnow/ryandexdirect&quot;)
 <h4 id="_10">Загрузка данных из обычного рекламного аккаунта Яндекс Директ.</h4>
 <p>Перед запуском кода замените значение “yandex_login”, передаваемое в аргумент <em>Login</em> функции <code>yadirGetReport</code> на логин под которым вы авторизуетесь в рекламном аккаунте Яндекс Директ.</p>
 <div class="codehilite"><pre><span></span><code>library(ryandexdirect)
-statistic &lt;- yadirGetReport(ReportType = &quot;ACCOUNT_PERFORMANCE_REPORT&quot;,
-DateRangeType = &quot;CUSTOM_DATE&quot;,
-DateFrom = &quot;2018-01-01&quot;,
-DateTo = &quot;2018-05-10&quot;,
-FieldNames = c(&quot;AdNetworkType&quot;,
-&quot;Impressions&quot;,
-&quot;Clicks&quot;,
-&quot;Cost&quot;),
-Login = &quot;yandex_login&quot;,
-TokenPath = &quot;token_yandex&quot;)
+statistic &lt;- yadirGetReport(ReportType = "ACCOUNT_PERFORMANCE_REPORT",
+DateRangeType = "CUSTOM_DATE",
+DateFrom = "2018-01-01",
+DateTo = "2018-05-10",
+FieldNames = c("AdNetworkType",
+"Impressions",
+"Clicks",
+"Cost"),
+Login = "yandex_login",
+TokenPath = "token_yandex")
 </code></pre></div>
 
 <h4 id="_11">Загрузка данных из агентского рекламного аккаунта Яндекс Директ.</h4>
@@ -271,24 +271,24 @@ library(ryandexdirect)
 
 # Задаём переменную с логином агентского аккаунта
 
-agency_login &lt;- &quot;agency_login&quot;
+agency_login &lt;- "agency_login"
 
 # Загрузка списка клиентов
 clients &lt;- yadirGetClientList(AgencyAccount = agency_login,
-TokenPath = &quot;token_yandex&quot;)
+TokenPath = "token_yandex")
 
 # Загрузка статистики по всем клиентам агентского аккаунта
-agancy_stats &lt;- yadirGetReport(ReportType = &quot;ACCOUNT_PERFORMANCE_REPORT&quot;,
-DateRangeType = &quot;CUSTOM_DATE&quot;,
-DateFrom = &quot;2018-01-01&quot;,
-DateTo = &quot;2018-05-10&quot;,
-FieldNames = c(&quot;AdNetworkType&quot;,
-&quot;Impressions&quot;,
-&quot;Clicks&quot;,
-&quot;Cost&quot;),
+agancy_stats &lt;- yadirGetReport(ReportType = "ACCOUNT_PERFORMANCE_REPORT",
+DateRangeType = "CUSTOM_DATE",
+DateFrom = "2018-01-01",
+DateTo = "2018-05-10",
+FieldNames = c("AdNetworkType",
+"Impressions",
+"Clicks",
+"Cost"),
 Login = clients$Login,
 AgencyAccount = agency_login,
-TokenPath = &quot;token_yandex&quot;)
+TokenPath = "token_yandex")
 </code></pre></div>
 
 <hr />

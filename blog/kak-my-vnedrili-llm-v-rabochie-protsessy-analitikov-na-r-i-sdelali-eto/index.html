@@ -265,7 +265,7 @@
 <li>VLLM: <a target="_blank" rel="noopener" href="https://ellmer.tidyverse.org/reference/chat_vllm.html"><code>chat_vllm()</code></a>.</li>
 </ul>
 <p>Установим пакет ellmer, и создадим объект chat и отправим свой первый запрос:</p>
-<div class="codehilite"><pre><span></span><code>pak::pak(&#39;ellmer&#39;)library(ellmer)# API ключSys.setenv(GOOGLE_API_KEY = &#39;ВАШ API ТОКЕН&#39;)chat &lt;- chat_gemini(  system_prompt =     &#39;Ты специалист по анализу данных, и разработчик на языке R.      В этом чате ты помогаешь генерировать код на языке R.&#39;  )out &lt;- chat$chat(  &#39;Напиши мне функцию, которая по заданному    городу запрашивает текущу погоду из бесплатного API&#39;,   echo = &#39;none&#39;  )
+<div class="codehilite"><pre><span></span><code>pak::pak('ellmer')library(ellmer)# API ключSys.setenv(GOOGLE_API_KEY = 'ВАШ API ТОКЕН')chat &lt;- chat_gemini(  system_prompt =     'Ты специалист по анализу данных, и разработчик на языке R.      В этом чате ты помогаешь генерировать код на языке R.'  )out &lt;- chat$chat(  'Напиши мне функцию, которая по заданному    городу запрашивает текущу погоду из бесплатного API',   echo = 'none'  )
 </code></pre></div>
 
 <p>Все функции-конструкторы чатов имеют общий набор основных аргументов:</p>
@@ -293,7 +293,7 @@
 <li>классифицировать статьи по тематикам</li>
 </ul>
 <p>Да и в целом можно найти огромное количество вариантов применения этой функции. Реализуется она с помощью метода <code>extract_data()</code>, в который вам необходимо передать текст, из которого планируете извлечь структурированные данные, и описание структуры, которую ы хотите извлечь из текста.</p>
-<div class="codehilite"><pre><span></span><code>## описание структурыpersonal_data_str &lt;- type_object(  age  = type_integer(&#39;Возраст в годах, целое число&#39;),  name = type_string(&#39;Имя&#39;),  job  = type_string(&#39;Занимаемая на работе должность&#39;))## извлекаем информациюtext &lt;- &quot;Привет, меня зовут Алексей, мне 40 лет, с 2016 года занимаю должность руководителя отдела аналитики.&quot;personal_data &lt;- chat$extract_data(text, type = personal_data_str)# классификация настроения комментарияtext &lt;- &quot;Купленный товар работает отлично, к нему никаких притензий нет, но обслуживание клиентов было ужасным. Я, вероятно, больше не буду у них покупать.&quot;type_sentiment &lt;- type_object(  &quot;Извлеки оценки настроений заданного текста. Сумма оценок настроений должна быть равна 1.&quot;,  positive_score = type_number(&quot;Положительная оценка, число от 0.0 до 1.0.&quot;),  negative_score = type_number(&quot;Отрицаетльная оценка, число от 0.0 до 1.0.&quot;),  neutral_score = type_number(&quot;Нейтральная оценка, число от 0.0 до 1.0.&quot;))str(chat$extract_data(text, type = type_sentiment))
+<div class="codehilite"><pre><span></span><code>## описание структурыpersonal_data_str &lt;- type_object(  age  = type_integer('Возраст в годах, целое число'),  name = type_string('Имя'),  job  = type_string('Занимаемая на работе должность'))## извлекаем информациюtext &lt;- "Привет, меня зовут Алексей, мне 40 лет, с 2016 года занимаю должность руководителя отдела аналитики."personal_data &lt;- chat$extract_data(text, type = personal_data_str)# классификация настроения комментарияtext &lt;- "Купленный товар работает отлично, к нему никаких притензий нет, но обслуживание клиентов было ужасным. Я, вероятно, больше не буду у них покупать."type_sentiment &lt;- type_object(  "Извлеки оценки настроений заданного текста. Сумма оценок настроений должна быть равна 1.",  positive_score = type_number("Положительная оценка, число от 0.0 до 1.0."),  negative_score = type_number("Отрицаетльная оценка, число от 0.0 до 1.0."),  neutral_score = type_number("Нейтральная оценка, число от 0.0 до 1.0."))str(chat$extract_data(text, type = type_sentiment))
 </code></pre></div>
 
 <p>Т.е. изначально вам необходимо создать объект описания структуры с помощью функции <code>type_object()</code>, внутри которого вы описываете каждый отдельный извлекаемый элемент структуры с помощью других функций семейства <code>type_*()</code>, все типы данных можно условно поделить на 3 категории:</p>
@@ -304,13 +304,13 @@
 </ul>
 <h2 id="_3">Добавляем в чат инструменты</h2>
 <p>Метод <code>register_tool()</code> позволяет вам встраивать в ваш чат дополнительные инструменты, например интеграцию с любыми другими API, или в целом описать любой другой инструментарий посредствам создания обычных R функций, которые вы добавите в чат. Например, ниодна LLM модель не может получить данные в реальном времени, она не знает даже текущего времени, не может дать вам информацию о текущей погоде в каком либо городе. Но вы можете обучить этому свой чат, добавив в него функции:</p>
-<div class="codehilite"><pre><span></span><code>chat &lt;- chat_gemini()chat$chat(&#39;Какое текущее время сейчас по Киеву?&#39;)#&#39; Gets the current time in the given time zone.#&#39;#&#39; @param tz The time zone to get the current time in.#&#39; @return The current time in the given time zone.get_current_time &lt;- function(tz = &quot;UTC&quot;) {  format(Sys.time(), tz = tz, usetz = TRUE)}chat$register_tool(tool(  get_current_time,  &quot;Получить текущее время в указанном часовом поясе.&quot;,  tz = type_string(    &quot;Часовой пояс. По умолчанию `\&quot;UTC\&quot;`.&quot;,    required = FALSE  )))chat$chat(&#39;Какое текущее время сейчас по Киеву?&#39;)
+<div class="codehilite"><pre><span></span><code>chat &lt;- chat_gemini()chat$chat('Какое текущее время сейчас по Киеву?')#' Gets the current time in the given time zone.#'#' @param tz The time zone to get the current time in.#' @return The current time in the given time zone.get_current_time &lt;- function(tz = "UTC") {  format(Sys.time(), tz = tz, usetz = TRUE)}chat$register_tool(tool(  get_current_time,  "Получить текущее время в указанном часовом поясе.",  tz = type_string(    "Часовой пояс. По умолчанию `\"UTC\"`.",    required = FALSE  )))chat$chat('Какое текущее время сейчас по Киеву?')
 </code></pre></div>
 
 <p>В этом примере мы написали функцию <code>get_current_time()</code>, которая получает текущее время по указанному часовому поясу. Далее мы добавили эту функцию в чат с помощью метода <code>register_tool()</code>, и функции <code>tool()</code>, которая позволяет вам дать описание того что передаваемая в чат функция делает, и описать каждый её аргумент.</p>
 <h2 id="shiny">Создаём Shiny интерфейс для чата</h2>
 <p>С функционалом пакета <code>ellmer</code> разобрались, теперь перейдём к тому, как упаковать чат в графический интерфейс. Для этого проoе всего использовать пакет <code>shinychat</code>.</p>
-<div class="codehilite"><pre><span></span><code>library(shiny)library(shinychat)ui &lt;- bslib::page_fluid(  chat_ui(&quot;chat&quot;))server &lt;- function(input, output, session) {  chat &lt;- ellmer::chat_gemini(    system_prompt = &quot;Ты специалист по разработке кода и анализу данных на языке R&quot;    )    observeEvent(input$chat_user_input, {    stream &lt;- chat$stream_async(input$chat_user_input)    chat_append(&quot;chat&quot;, stream)  })}shinyApp(ui, server)
+<div class="codehilite"><pre><span></span><code>library(shiny)library(shinychat)ui &lt;- bslib::page_fluid(  chat_ui("chat"))server &lt;- function(input, output, session) {  chat &lt;- ellmer::chat_gemini(    system_prompt = "Ты специалист по разработке кода и анализу данных на языке R"    )    observeEvent(input$chat_user_input, {    stream &lt;- chat$stream_async(input$chat_user_input)    chat_append("chat", stream)  })}shinyApp(ui, server)
 </code></pre></div>
 
 <p>Представленный выше код Shiny приложения запустит интерфейс для вашего чата.</p>
@@ -327,7 +327,7 @@
 </code></pre></div>
 
 <p>Далее вы передаёте этот .md файл в аргумент <code>system_prompt</code>:</p>
-<div class="codehilite"><pre><span></span><code>chat &lt;- ellmer::chat_gemini(    system_prompt = paste(readLines(here::here(&#39;system_prompt.md&#39;)), collapse = &quot;\n&quot;))
+<div class="codehilite"><pre><span></span><code>chat &lt;- ellmer::chat_gemini(    system_prompt = paste(readLines(here::here('system_prompt.md')), collapse = "\n"))
 </code></pre></div>
 
 <p>После чего ваш чат будет обучен на основе ваших данных, и будет помогать как в генерации кода, так и в исправлении ошибок при запуске созданных ранее скриптов.</p>

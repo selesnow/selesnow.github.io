@@ -206,13 +206,13 @@
 <p>В базовом R присутствует набор функций для работы с датами. Минус базового синтаксиса заключается в том, что регистр имён и аргументов функций очень разрознен, и практически не имеет логической связи. Тем не менее, базовые функции языка надо знать, поэтому начнём мы именно с них.</p>
 <p>Наиболее часто при загрузке данных в R, из csv файлов, или других источников, вы получаете дату в виде текста. Для того, что бы привести этот текст к правильному типу данных используйте функцию <code>as.Date()</code>.</p>
 <div class="codehilite"><pre><span></span><code># создаём текстовый вектор с датами
-my_dates &lt;- c(&quot;2019-09-01&quot;, &quot;2019-09-10&quot;, &quot;2019-09-23&quot;)
+my_dates &lt;- c("2019-09-01", "2019-09-10", "2019-09-23")
 
 # проверяем тип данных
 class(my_dates)
 </code></pre></div>
 
-<div class="codehilite"><pre><span></span><code>#&gt; [1] &quot;character&quot;
+<div class="codehilite"><pre><span></span><code>#&gt; [1] "character"
 </code></pre></div>
 
 <div class="codehilite"><pre><span></span><code># преобразуем текст в дату
@@ -222,12 +222,12 @@ my_dates &lt;- as.Date(my_dates)
 class(my_dates)
 </code></pre></div>
 
-<div class="codehilite"><pre><span></span><code>#&gt; [1] &quot;Date&quot;
+<div class="codehilite"><pre><span></span><code>#&gt; [1] "Date"
 </code></pre></div>
 
 <p>По умолчанию <code>as.Date()</code> принимает дату в двух форматах: <em>ГГГГ-ММ-ДД</em> или <em>ГГГГ/ММ/ДД</em>.<br />
 Если в вашем наборе данных даты представлены в каком либо другом формате, для преобразования можно использовать аргумент <code>format</code>.</p>
-<div class="codehilite"><pre><span></span><code>as.Date(&quot;September 26, 2019&quot;, format = &quot;%B %d, %Y&quot;)
+<div class="codehilite"><pre><span></span><code>as.Date("September 26, 2019", format = "%B %d, %Y")
 </code></pre></div>
 
 <p><em>format</em> принимает в строковом виде операторы обозначающие какой-либо временной интервал и его формат, наиболее часто используемые значения приведены в таблице ниже:</p>
@@ -299,9 +299,9 @@ class(my_dates)
 <p>При описании формата даты важно включать все доп символы из вашей строки, например тире, запятые, точки, пробелы и так далее. В моём примере, “September 26, 2019”, после даты стоит запятая, и в описание формата так же надо ставить запятую:<code>"%B %d, %Y"</code>.</p>
 <p>Бывают ситуации, когда вы получаете дату не только не соответствующую стандартным форматам <em>(ГГГГ-ММ-ДД или ГГГГ/ММ/ДД)</em>, но ещё и на языке, который отличается от установленного в вашей операционной системе по умолчанию. Например, вы загрузили данные, где дата указана вот в таком виде: “Декабрь 15, 2019 г.”. Перед конвертацией этой строки в дату вам необходимо поменять локаль.</p>
 <div class="codehilite"><pre><span></span><code># Меняем локаль
-Sys.setlocale(&quot;LC_TIME&quot;, &quot;Russian&quot;)
+Sys.setlocale("LC_TIME", "Russian")
 # Конвертируем строку в дату
-as.Date(&quot;Декабрь 15, 2019 г.&quot;, format = &quot;%B %d, %Y&quot;)
+as.Date("Декабрь 15, 2019 г.", format = "%B %d, %Y")
 </code></pre></div>
 
 <h3 id="r_1">Извлечение компонентов даты в базовом R</h3>
@@ -320,7 +320,7 @@ current_time &lt;- Sys.time()
 class(current_time)
 </code></pre></div>
 
-<div class="codehilite"><pre><span></span><code># &quot;POSIXct&quot; &quot;POSIXt&quot;
+<div class="codehilite"><pre><span></span><code># "POSIXct" "POSIXt"
 </code></pre></div>
 
 <p>Функция <code>Sys.time()</code> возвращает текущую дату и время в формате <em>POSIXct</em>. Этот формат по смыслу похож на <em>UNIXTIME</em>, и хранит в себе количество секунд с момента начала эры UNIX <em>(полночь (по UTC) с 31 декабря 1969 года на 1 января 1970)</em>.</p>
@@ -352,12 +352,12 @@ current_time_lt$zone  # часовой пояс
 </ul>
 <p>Если ваши данные о дате и времени представлены в <em>UNIXTIME</em>, то для их конвертации в понятную, читаемую дату используйте следующий пример:</p>
 <div class="codehilite"><pre><span></span><code># Конвертируем UNIXTIME в читаемую дату 
-as.POSIXlt(1570084639,  origin = &quot;1970-01-01&quot;)
+as.POSIXlt(1570084639,  origin = "1970-01-01")
 </code></pre></div>
 
 <p>В origin вы можете указать любую временную метку. Например, если в ваших данных дата и время указаны как количество секунд начиная от 15 сентября 2019 года 12:15, то для преобразования их в дату используйте:</p>
 <div class="codehilite"><pre><span></span><code># Конвертируем UNIXTIME в дату учитывая что начало отсчёта 15 сентября 2019 12:15
-as.POSIXlt(1546123,  origin = &quot;2019-09-15 12:15:00&quot;)
+as.POSIXlt(1546123,  origin = "2019-09-15 12:15:00")
 </code></pre></div>
 
 <h1 id="lubridate">Работа с датами с помощью пакета lubridate</h1>
@@ -369,7 +369,7 @@ as.POSIXlt(1546123,  origin = &quot;2019-09-15 12:15:00&quot;)
 </ul>
 <p>Установка дополнительных пакетов в языке R осуществляется стандартной функцией <code>install.packages()</code>.</p>
 <p>Установка пакета <code>lubridate</code>:</p>
-<div class="codehilite"><pre><span></span><code>install.packages(&quot;lubridate&quot;)
+<div class="codehilite"><pre><span></span><code>install.packages("lubridate")
 </code></pre></div>
 
 <h3 id="lubridate_1">Преобразование текста в дату с помощью lubridate</h3>
@@ -396,15 +396,15 @@ now()   # текущая дата и время
 <li><code>yq()</code></li>
 </ul>
 <p>Несколько примеров для преобразования строк в даты:</p>
-<div class="codehilite"><pre><span></span><code>ymd(&quot;2017 jan 21&quot;)
-mdy(&quot;March 20th, 2019&quot;)
-dmy(&quot;1st april of 2018&quot;)
+<div class="codehilite"><pre><span></span><code>ymd("2017 jan 21")
+mdy("March 20th, 2019")
+dmy("1st april of 2018")
 </code></pre></div>
 
 <p>Как видите <code>lubridate</code> значительно более эффективно умеет распознавать описание дат в виде текста, и позволяет вам преобразовывать текст в дату не используя дополнительных операторов для описания формата.</p>
 <h3 id="lubridate_2">Извлечение компонентов дат с помощью пакета lubridate</h3>
 <p>Также с помощью <code>lubridate</code> можно получить любой компонент из даты:</p>
-<div class="codehilite"><pre><span></span><code>dt &lt;- ymd(&quot;2017 jan 21&quot;)
+<div class="codehilite"><pre><span></span><code>dt &lt;- ymd("2017 jan 21")
 
 year(dt)  # год
 month(dt) # месяц
@@ -422,13 +422,13 @@ wday(dt)  # день недели
 <li><code>round_date</code> — округление к ближайшему времени</li>
 </ul>
 <p>Каждая из этих функций имеет аргумент <em>unit</em>, который позволяет вам указать единицу округления: second, minute, hour, day, week, month, bimonth, quarter, season, halfyear, year</p>
-<div class="codehilite"><pre><span></span><code>dt &lt;- ymd(&quot;2017 jan 21&quot;)
+<div class="codehilite"><pre><span></span><code>dt &lt;- ymd("2017 jan 21")
 
-round_date(dt, unit = &quot;month&quot;)    # округлить до месяца
-round_date(dt, unit = &quot;3 month&quot;)  # округлить до 3 месяцев
-round_date(dt, unit = &quot;quarter&quot;)  # округлить до квартала
-round_date(dt, unit = &quot;season&quot;)   # округлить до сезона
-round_date(dt, unit = &quot;halfyear&quot;) # округлить до полугодия
+round_date(dt, unit = "month")    # округлить до месяца
+round_date(dt, unit = "3 month")  # округлить до 3 месяцев
+round_date(dt, unit = "quarter")  # округлить до квартала
+round_date(dt, unit = "season")   # округлить до сезона
+round_date(dt, unit = "halfyear") # округлить до полугодия
 </code></pre></div>
 
 <p>Итак, давайте разберёмся с тем, как получить дату, которая будет через 8 дней после текущей даты и проводить различные другие арифметические вычисления между двумя датами.</p>
@@ -441,7 +441,7 @@ today() - years(2)  # какая дата была 2 года назад
 <h1 id="timeperiodsr">Упрощённая работа с периодами, пакет timeperiodsR.</h1>
 <p><code>timeperiodsR</code> — свежий пакет для работы с датами который был опубликован на CRAN в сентябре 2019 года.</p>
 <p>Установка пакета <code>timeperiodsR</code>:</p>
-<div class="codehilite"><pre><span></span><code>install.packages(&quot;timeperiodsR&quot;)
+<div class="codehilite"><pre><span></span><code>install.packages("timeperiodsR")
 </code></pre></div>
 
 <p>Основное назначение — быстрое определение некоторого временного интервала относительно заданной даты. Например с помощью его функций вы легко можете:</p>
@@ -487,10 +487,10 @@ length(prmonth)
 </code></pre></div>
 
 <p>Также вы можете получить любой из компонентов используя аргумент <em>part</em>, который присутствует в каждой из функций пакета. Возможные значения: start, end, sequence, length.</p>
-<div class="codehilite"><pre><span></span><code>previous_month(part = &quot;start&quot;)    # начало периода
-previous_month(part = &quot;end&quot;)      # конец периода
-previous_month(part = &quot;sequence&quot;) # последовательность дат
-previous_month(part = &quot;length&quot;)   # количество дней в периоде
+<div class="codehilite"><pre><span></span><code>previous_month(part = "start")    # начало периода
+previous_month(part = "end")      # конец периода
+previous_month(part = "sequence") # последовательность дат
+previous_month(part = "length")   # количество дней в периоде
 </code></pre></div>
 
 <p>Итак, давайте рассмотрим все аргументы доступные в функциях пакета <code>timeperiodsR</code>:</p>
@@ -505,7 +505,7 @@ previous_month(part = &quot;length&quot;)   # количество дней в �
 <div class="codehilite"><pre><span></span><code># получить 3 прошлые недели
 # от 6 октября 2019 года
 # начало недели - понедельник
-last_n_weeks(x = &quot;2019-10-06&quot;, 
+last_n_weeks(x = "2019-10-06", 
              n = 3, 
              week_start = 1)
 </code></pre></div>
@@ -520,7 +520,7 @@ last_n_weeks(x = &quot;2019-10-06&quot;,
 <hr />
 <div class="codehilite"><pre><span></span><code># получить месяц отстающий на 4 месяца
 # от 16 сентября 2019 года
-previous_month(x = &quot;2019-09-16&quot;, n = 4)
+previous_month(x = "2019-09-16", n = 4)
 </code></pre></div>
 
 <div class="codehilite"><pre><span></span><code> Time period: from  1 May of 2019, Wednesday to 31 May of 2019, Friday
@@ -535,8 +535,8 @@ previous_month(x = &quot;2019-09-16&quot;, n = 4)
 <li>%right_out% — сравнивает два объекта класса tpr, и возвращает значение из правого, которые отсутствуют в левом.</li>
 <li>%right_in% — сравнивает два объекта класса tpr, и возвращает даты из правого объекта которые присутвуют в левом.</li>
 </ul>
-<div class="codehilite"><pre><span></span><code>period1 &lt;- this_month(&quot;2019-11-07&quot;)
-period2 &lt;- previous_week(&quot;2019-11-07&quot;)
+<div class="codehilite"><pre><span></span><code>period1 &lt;- this_month("2019-11-07")
+period2 &lt;- previous_week("2019-11-07")
 
 period1 %left_in% period2   # получить даты из period1 которые входят в period2
 period1 %left_out% period2  # получить даты из period1 которые не входят в period2

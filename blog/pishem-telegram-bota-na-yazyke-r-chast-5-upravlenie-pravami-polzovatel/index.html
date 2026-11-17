@@ -209,7 +209,7 @@
 <div class="codehilite"><pre><span></span><code>library(telegram.bot)
 
 # создаём экземпляр класса Updater
-updater &lt;- Updater(&#39;ТОКЕН ВАШЕГО БОТА&#39;)
+updater &lt;- Updater('ТОКЕН ВАШЕГО БОТА')
 
 # Пишем метод для приветсвия
 ## команда приветствия
@@ -220,8 +220,8 @@ say_hello &lt;- function(bot, update) {
 
   # Отправка сообщения
   bot$sendMessage(update$message$chat_id, 
-                  text = paste0(&quot;Моё почтение, &quot;, user_name, &quot;!&quot;),
-                  parse_mode = &quot;Markdown&quot;,
+                  text = paste0("Моё почтение, ", user_name, "!"),
+                  parse_mode = "Markdown",
                   reply_to_message_id = update$message$message_id)
 
 }
@@ -234,15 +234,15 @@ what_time &lt;- function(bot, update) {
 
   # Отправка сообщения
   bot$sendMessage(update$message$chat_id, 
-                  text = paste0(&quot;Текущее время, &quot;, cur_time),
-                                parse_mode = &quot;Markdown&quot;,
+                  text = paste0("Текущее время, ", cur_time),
+                                parse_mode = "Markdown",
                                 reply_to_message_id = update$message$message_id)
 
 }
 
 # обработчики
-h_hello &lt;- CommandHandler(&#39;say_hello&#39;, say_hello)
-h_time  &lt;- CommandHandler(&#39;what_time&#39;, what_time)
+h_hello &lt;- CommandHandler('say_hello', say_hello)
+h_time  &lt;- CommandHandler('what_time', what_time)
 
 # добавляем обработчики в диспетчер
 updater &lt;- updater + h_hello + h_time
@@ -272,38 +272,38 @@ $from$is_bot
 [1] FALSE
 
 $from$first_name
-[1] &quot;Alexey&quot;
+[1] "Alexey"
 
 $from$last_name
-[1] &quot;Seleznev&quot;
+[1] "Seleznev"
 
 $from$username
-[1] &quot;AlexeySeleznev&quot;
+[1] "AlexeySeleznev"
 
 $from$language_code
-[1] &quot;ru&quot;
+[1] "ru"
 
 $chat
 $chat$id
 [1] 194336771
 
 $chat$first_name
-[1] &quot;Alexey&quot;
+[1] "Alexey"
 
 $chat$last_name
-[1] &quot;Seleznev&quot;
+[1] "Seleznev"
 
 $chat$username
-[1] &quot;AlexeySeleznev&quot;
+[1] "AlexeySeleznev"
 
 $chat$type
-[1] &quot;private&quot;
+[1] "private"
 
 $date
 [1] 1601295189
 
 $text
-[1] &quot;отправленный пользователем текст&quot;
+[1] "отправленный пользователем текст"
 
 $chat_id
 [1] 194336771
@@ -318,7 +318,7 @@ MessageFilters$admins &lt;- BaseFilter(
   function(message) {
 
     # проверяем от кого отправлено сообщение
-    message$from$username %in% c(&#39;AlexeySeleznev&#39;, &#39;user1&#39;, &#39;user2&#39;)
+    message$from$username %in% c('AlexeySeleznev', 'user1', 'user2')
 
  }
 )
@@ -330,7 +330,7 @@ MessageFilters$say_hello &lt;- BaseFilter(
   function(message) {
 
     # проверяем от кого отправлено сообщение
-    message$text == &#39;/say_hallo&#39;
+    message$text == '/say_hallo'
 
   }
 )
@@ -340,7 +340,7 @@ MessageFilters$what_time &lt;- BaseFilter(
   function(message) {
 
     # проверяем от кого отправлено сообщение
-    message$text == &#39;/what_time&#39;
+    message$text == '/what_time'
 
   }
 )
@@ -356,7 +356,7 @@ h_time  &lt;- MessageHandler(what_time, MessageFilters$admins &amp; MessageFilte
 <div class="codehilite"><pre><span></span><code>library(telegram.bot)
 
 # создаём экземпляр класса Updater
-updater &lt;- Updater(&#39;ТОКЕН ВАШЕГО БОТА&#39;)
+updater &lt;- Updater('ТОКЕН ВАШЕГО БОТА')
 
 # Пишем метод для приветсвия
 ## команда приветствия
@@ -367,8 +367,8 @@ say_hello &lt;- function(bot, update) {
 
   # Отправка сообщения
   bot$sendMessage(update$message$chat_id, 
-                  text = paste0(&quot;Моё почтение, &quot;, user_name, &quot;!&quot;),
-                  parse_mode = &quot;Markdown&quot;,
+                  text = paste0("Моё почтение, ", user_name, "!"),
+                  parse_mode = "Markdown",
                   reply_to_message_id = update$message$message_id)
 
 }
@@ -381,8 +381,8 @@ what_time &lt;- function(bot, update) {
 
   # Отправка сообщения
   bot$sendMessage(update$message$chat_id, 
-                  text = paste0(&quot;Текущее время, &quot;, cur_time),
-                                parse_mode = &quot;Markdown&quot;,
+                  text = paste0("Текущее время, ", cur_time),
+                                parse_mode = "Markdown",
                                 reply_to_message_id = update$message$message_id)
 
 }
@@ -393,7 +393,7 @@ MessageFilters$admins &lt;- BaseFilter(
   function(message) {
 
     # проверяем от кого отправлено сообщение
-    message$from$username %in% c(&#39;AlexeySeleznev&#39;, &#39;user1&#39;, &#39;user2&#39;)
+    message$from$username %in% c('AlexeySeleznev', 'user1', 'user2')
 
  }
 )
@@ -403,7 +403,7 @@ MessageFilters$say_hello &lt;- BaseFilter(
   function(message) {
 
     # проверяем от кого отправлено сообщение
-    message$text == &#39;/say_hallo&#39;
+    message$text == '/say_hallo'
 
   }
 )
@@ -413,7 +413,7 @@ MessageFilters$what_time &lt;- BaseFilter(
   function(message) {
 
     # проверяем от кого отправлено сообщение
-    message$text == &#39;/what_time&#39;
+    message$text == '/what_time'
 
   }
 )
@@ -446,7 +446,7 @@ MessageFilters$say_hello &lt;- BaseFilter(
   function(message) {
 
     # проверяем от кого отправлено сообщение
-    message$text == &#39;/say_hallo&#39;
+    message$text == '/say_hallo'
 
   }
 )
@@ -456,7 +456,7 @@ MessageFilters$what_time &lt;- BaseFilter(
   function(message) {
 
     # проверяем от кого отправлено сообщение
-    message$text == &#39;/what_time&#39;
+    message$text == '/what_time'
 
   }
 )
@@ -486,7 +486,7 @@ bot_check_usernames &lt;-
 <div class="codehilite"><pre><span></span><code>library(telegram.bot)
 
 # создаём экземпляр класса Updater
-updater &lt;- Updater(&#39;ТОКЕН ВАШЕГО БОТА&#39;)
+updater &lt;- Updater('ТОКЕН ВАШЕГО БОТА')
 
 # Пишем метод для приветсвия
 ## команда приветствия
@@ -496,20 +496,20 @@ say_hello &lt;- function(bot, update) {
   user_name &lt;- update$message$from$username
 
   # проверяем разрешено ли использовать данному пользователю этот метод
-  if ( bot_check_usernames(c(&#39;AlexeySeleznev&#39;, &#39;user1&#39;, &#39;user2&#39;), user_name) ) {
+  if ( bot_check_usernames(c('AlexeySeleznev', 'user1', 'user2'), user_name) ) {
 
     # Отправка сообщения
     bot$sendMessage(update$message$chat_id, 
-                    text = paste0(&quot;Моё почтение, &quot;, user_name, &quot;!&quot;),
-                    parse_mode = &quot;Markdown&quot;,
+                    text = paste0("Моё почтение, ", user_name, "!"),
+                    parse_mode = "Markdown",
                     reply_to_message_id = update$message$message_id)
 
   } else {
 
     # Отправка сообщения
     bot$sendMessage(update$message$chat_id, 
-                    text = paste0(&quot;У вас нет прав для использования этого метода!&quot;),
-                    parse_mode = &quot;Markdown&quot;,
+                    text = paste0("У вас нет прав для использования этого метода!"),
+                    parse_mode = "Markdown",
                     reply_to_message_id = update$message$message_id)
 
   }
@@ -520,22 +520,22 @@ say_hello &lt;- function(bot, update) {
 what_time &lt;- function(bot, update) {
 
   # проверяем разрешено ли использовать данному пользователю этот метод
-  if ( bot_check_usernames(c(&#39;user1&#39;, &#39;user2&#39;), update$message$from$username) ) {
+  if ( bot_check_usernames(c('user1', 'user2'), update$message$from$username) ) {
 
     # Запрашиваем текущее время
     cur_time &lt;- as.character(Sys.time())
 
     # Отправка сообщения о том что у пользователя не достаточно прав
     bot$sendMessage(update$message$chat_id, 
-                    text = paste0(&quot;Текущее время, &quot;, cur_time),
-                                  parse_mode = &quot;Markdown&quot;,
+                    text = paste0("Текущее время, ", cur_time),
+                                  parse_mode = "Markdown",
                                   reply_to_message_id = update$message$message_id)
   } else {
 
     # Отправка сообщения о том что у пользователя не достаточно прав
     bot$sendMessage(update$message$chat_id, 
-                    text = paste0(&quot;У вас нет прав для использования этого метода!&quot;),
-                    parse_mode = &quot;Markdown&quot;,
+                    text = paste0("У вас нет прав для использования этого метода!"),
+                    parse_mode = "Markdown",
                     reply_to_message_id = update$message$message_id)
 
   }
@@ -543,8 +543,8 @@ what_time &lt;- function(bot, update) {
 }
 
 # обработчики
-h_hello &lt;- CommandHandler(&#39;say_hello&#39;, say_hello)
-h_time  &lt;- CommandHandler(&#39;what_time&#39;, what_time)
+h_hello &lt;- CommandHandler('say_hello', say_hello)
+h_time  &lt;- CommandHandler('what_time', what_time)
 
 # добавляем обработчики в диспетчер
 updater &lt;- updater + h_hello + h_time
@@ -572,7 +572,7 @@ updater$start_polling()
 <div class="codehilite"><pre><span></span><code>library(telegram.bot)
 
 # создаём экземпляр класса Updater
-updater &lt;- Updater(&#39;ТОКЕН ВАШЕГО БОТА&#39;)
+updater &lt;- Updater('ТОКЕН ВАШЕГО БОТА')
 
 # Пишем метод для приветсвия
 ## команда приветствия
@@ -582,22 +582,22 @@ say_hello &lt;- function(bot, update) {
   user_name &lt;- update$message$from$username
 
   # проверяем разрешено ли использовать данному пользователю этот метод
-  if ( bot_check_usernames(c(&#39;AlexeySeleznev&#39;, &#39;user1&#39;, &#39;user2&#39;), user_name) 
+  if ( bot_check_usernames(c('AlexeySeleznev', 'user1', 'user2'), user_name) 
        &amp;
        bot_check_chat_id(c(194336771, 1, 2), update$message$chat_id)) {
 
     # Отправка сообщения
     bot$sendMessage(update$message$chat_id, 
-                    text = paste0(&quot;Моё почтение, &quot;, user_name, &quot;!&quot;),
-                    parse_mode = &quot;Markdown&quot;,
+                    text = paste0("Моё почтение, ", user_name, "!"),
+                    parse_mode = "Markdown",
                     reply_to_message_id = update$message$message_id)
 
   } else {
 
     # Отправка сообщения
     bot$sendMessage(update$message$chat_id, 
-                    text = paste0(&quot;У вас нет прав для использования этого метода!&quot;),
-                    parse_mode = &quot;Markdown&quot;,
+                    text = paste0("У вас нет прав для использования этого метода!"),
+                    parse_mode = "Markdown",
                     reply_to_message_id = update$message$message_id)
 
   }
@@ -608,7 +608,7 @@ say_hello &lt;- function(bot, update) {
 what_time &lt;- function(bot, update) {
 
   # проверяем разрешено ли использовать данному пользователю этот метод
-  if ( bot_check_usernames(c(&#39;AlexeySeleznev&#39;, &#39;user1&#39;, &#39;user2&#39;), update$message$from$username)
+  if ( bot_check_usernames(c('AlexeySeleznev', 'user1', 'user2'), update$message$from$username)
        &amp;
        bot_check_chat_id(c(194336771, 1, 2), update$message$chat_id)) {
 
@@ -617,15 +617,15 @@ what_time &lt;- function(bot, update) {
 
     # Отправка сообщения о том что у пользователя не достаточно прав
     bot$sendMessage(update$message$chat_id, 
-                    text = paste0(&quot;Текущее время, &quot;, cur_time),
-                                  parse_mode = &quot;Markdown&quot;,
+                    text = paste0("Текущее время, ", cur_time),
+                                  parse_mode = "Markdown",
                                   reply_to_message_id = update$message$message_id)
   } else {
 
     # Отправка сообщения о том что у пользователя не достаточно прав
     bot$sendMessage(update$message$chat_id, 
-                    text = paste0(&quot;У вас нет прав для использования этого метода!&quot;),
-                    parse_mode = &quot;Markdown&quot;,
+                    text = paste0("У вас нет прав для использования этого метода!"),
+                    parse_mode = "Markdown",
                     reply_to_message_id = update$message$message_id)
 
   }
@@ -633,8 +633,8 @@ what_time &lt;- function(bot, update) {
 }
 
 # обработчики
-h_hello &lt;- CommandHandler(&#39;say_hello&#39;, say_hello)
-h_time  &lt;- CommandHandler(&#39;what_time&#39;, what_time)
+h_hello &lt;- CommandHandler('say_hello', say_hello)
+h_time  &lt;- CommandHandler('what_time', what_time)
 
 # добавляем обработчики в диспетчер
 updater &lt;- updater + h_hello + h_time

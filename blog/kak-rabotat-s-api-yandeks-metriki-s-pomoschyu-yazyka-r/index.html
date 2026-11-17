@@ -199,12 +199,12 @@
 <p>Для работы с API Яндекс. Метрики я написал пакет «rym», в контексте R. Пакет — это расширение, которое содержит функции и наборы данных, не доступные в базовой версии R. Cуществует более 10 000 таких пакетов. В основном, репозитории CRAN (Comprehensive R Archive Network), более 80 000 пакетов доступны на GitHub.</p>
 <p>Есть официальная <a target="_blank" rel="noopener" href="https://selesnow.github.io/rym/">русскоязычная документация</a> по работе с пакетом «rym». Также можно найти описание функций <a target="_blank" rel="noopener" href="https://www.rdocumentation.org/packages/rym/">на английском</a>.</p>
 <p>Чтобы установить пакеты из основного репозитория CRAN, необходимо использовать базовую функцию <em>install.packages</em>:</p>
-<div class="codehilite"><pre><span></span><code>install.packages(&quot;rym&quot;)
+<div class="codehilite"><pre><span></span><code>install.packages("rym")
 </code></pre></div>
 
 <p>Также вы можете установить dev-версию пакета из GitHub. Для этого сначала необходимо установить пакет «devtools» и потом с его помощью — «rym». Используйте для этих действий код:</p>
-<div class="codehilite"><pre><span></span><code>install.packages(&quot;devtools&quot;)
-devtools::install_github(&quot;selesnow/rym&quot;)
+<div class="codehilite"><pre><span></span><code>install.packages("devtools")
+devtools::install_github("selesnow/rym")
 </code></pre></div>
 
 <p>Пакет достаточно установить один раз, но подключать нужно каждый раз при запуске нового сеанса работы с R. Для подключения используйте функцию <em>library</em>.</p>
@@ -250,34 +250,34 @@ devtools::install_github(&quot;selesnow/rym&quot;)
 
 # получить список счётчиков
 
-selesnow.counters &lt;- rym_get_counters(login      = &quot;&lt;логин&gt;&quot;,
+selesnow.counters &lt;- rym_get_counters(login      = "&lt;логин&gt;",
 
-                                     token.path = &quot;metrica_token&quot;)
+                                     token.path = "metrica_token")
 # получить список целей
 
 my_goals &lt;- rym_get_goals(counter    = &lt;0000000&gt;,
 
-                         login = &quot;&lt;логин&gt;&quot;,
+                         login = "&lt;логин&gt;",
 
-                         token.path = &quot;metrica_token&quot;)
+                         token.path = "metrica_token")
 # получить список фильров
 
 my_filter &lt;- rym_get_filters(counter    = &lt;0000000&gt;,
 
-                            login = &quot;&lt;логин&gt;&quot;,
+                            login = "&lt;логин&gt;",
 
-                            token.path = &quot;metrica_token&quot;)
+                            token.path = "metrica_token")
 # получить список сегментов
 
 my_segments &lt;- rym_get_segments(counter    = &lt;0000000&gt;,
 
-                               login = &quot;&lt;логин&gt;&quot;,
+                               login = "&lt;логин&gt;",
 
-                               token.path = &quot;metrica_token&quot;)
+                               token.path = "metrica_token")
 # получить список пользователей счётчика
 users &lt;- rym_users_grants(counter    = &lt;0000000&gt;,
-                         login = &quot;&lt;логин&gt;&quot;,
-                         token.path = &quot;metrica_token&quot;)
+                         login = "&lt;логин&gt;",
+                         token.path = "metrica_token")
 </code></pre></div>
 
 <h2 id="api_2">Работа с API отчётов</h2>
@@ -313,15 +313,15 @@ users &lt;- rym_users_grants(counter    = &lt;0000000&gt;,
 <li><em>token.path</em> — путь к папке, в которой хранится файл с учётными данными.</li>
 </ol>
 <p>Пример работы с интерфейсом «API отчётов»:</p>
-<div class="codehilite"><pre><span></span><code>reporting.api.stat &lt;- rym_get_data(counters   = &quot;00000000,11111111&quot;,
-                                  date.from = &quot;2018-08-01&quot;,
-                                  date.to = &quot;yesterday&quot;,
-                                  dimensions = &quot;ym:s:date,ym:s:lastTrafficSource&quot;,
-                                  metrics = &quot;ym:s:visits,ym:s:pageviews,ym:s:users&quot;,
-                                  sort = &quot;-ym:s:date&quot;,
-                                  login = &quot;&lt;логин&gt;&quot;,
-                                  token.path = &quot;metrica_token&quot;,
-                                  lang = &quot;en&quot;)
+<div class="codehilite"><pre><span></span><code>reporting.api.stat &lt;- rym_get_data(counters   = "00000000,11111111",
+                                  date.from = "2018-08-01",
+                                  date.to = "yesterday",
+                                  dimensions = "ym:s:date,ym:s:lastTrafficSource",
+                                  metrics = "ym:s:visits,ym:s:pageviews,ym:s:users",
+                                  sort = "-ym:s:date",
+                                  login = "&lt;логин&gt;",
+                                  token.path = "metrica_token",
+                                  lang = "en")
 </code></pre></div>
 
 <h2 id="logs-api">Работа с Logs API</h2>
@@ -341,14 +341,14 @@ users &lt;- rym_users_grants(counter    = &lt;0000000&gt;,
 </ul>
 <p>Пример работы с «Logs API»:</p>
 <div class="codehilite"><pre><span></span><code>logs.api.stat      &lt;- rym_get_logs(counter    = 00000000,
-                                  date.from = &quot;2018-08-01&quot;,
-                                  date.to = &quot;2018-08-05&quot;,
-                                  fields = &quot;ym:s:date,
+                                  date.from = "2018-08-01",
+                                  date.to = "2018-08-05",
+                                  fields = "ym:s:date,
                                                 ym:s:lastTrafficSource,
-                                                ym:s:referer&quot;,
-                                  source = &quot;visits&quot;,
-                                  login = &quot;&lt;логин&gt;&quot;,
-                                  token.path = &quot;metrica_token&quot;)
+                                                ym:s:referer",
+                                  source = "visits",
+                                  login = "&lt;логин&gt;",
+                                  token.path = "metrica_token")
 </code></pre></div>
 
 <h2 id="api-core-api-google-analytics">Работа с API, совместимым с Core API Google Analytics</h2>
@@ -376,14 +376,14 @@ users &lt;- rym_users_grants(counter    = &lt;0000000&gt;,
 <li><em>token.path</em> — путь к папке, в которой хранится файл с учётными данными.</li>
 </ul>
 <p>Пример работы с API Яндекс. Метрики, совместимым с Core API Google Analytics (v3):</p>
-<div class="codehilite"><pre><span></span><code>ga.api.stat        &lt;- rym_get_ga(counter    = &quot;ga:0000000&quot;,
-                                dimensions = &quot;ga:date,ga:source&quot;,
-                                metrics = &quot;ga:sessions,ga:users&quot;,
-                                start.date = &quot;2018-08-01&quot;,
-                                end.date = &quot;2018-08-05&quot;,
-                                sort = &quot;-ga:date&quot;,
-                                login = &quot;&lt;логин&gt;&quot;,
-                                token.path = &quot;metrica_token&quot;)
+<div class="codehilite"><pre><span></span><code>ga.api.stat        &lt;- rym_get_ga(counter    = "ga:0000000",
+                                dimensions = "ga:date,ga:source",
+                                metrics = "ga:sessions,ga:users",
+                                start.date = "2018-08-01",
+                                end.date = "2018-08-05",
+                                sort = "-ga:date",
+                                login = "&lt;логин&gt;",
+                                token.path = "metrica_token")
 </code></pre></div>
 
 <h2 id="_4">Выводы</h2>

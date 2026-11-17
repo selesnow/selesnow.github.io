@@ -215,7 +215,7 @@
 <div class="codehilite"><pre><span></span><code>library(telegram.bot)
 
 # создаём экземпляр класса Updater
-updater &lt;- Updater(&#39;ТОКЕН ВАШЕГО БОТА&#39;)
+updater &lt;- Updater('ТОКЕН ВАШЕГО БОТА')
 
 # Пишем метод для приветсвия
 say_hello &lt;- function(bot, update) {
@@ -225,13 +225,13 @@ say_hello &lt;- function(bot, update) {
 
   # Отправка приветственного сообщения
   bot$sendMessage(update$message$chat_id, 
-                  text = paste0(&quot;Моё почтение, &quot;, user_name, &quot;!&quot;), 
-                  parse_mode = &quot;Markdown&quot;)
+                  text = paste0("Моё почтение, ", user_name, "!"), 
+                  parse_mode = "Markdown")
 
 }
 
 # создаём обработчик 
-hi_hendler &lt;- CommandHandler(&#39;hi&#39;, say_hello)
+hi_hendler &lt;- CommandHandler('hi', say_hello)
 
 # добаляем обработчик в диспетчер
 updater &lt;- updater + hi_hendler
@@ -264,7 +264,7 @@ updater$start_polling()
 <div class="codehilite"><pre><span></span><code>library(telegram.bot)
 
 # создаём экземпляр класса Updater
-updater &lt;- Updater(&#39;ТОКЕН ВАШЕГО БОТА&#39;)
+updater &lt;- Updater('ТОКЕН ВАШЕГО БОТА')
 
 # Пишем метод для приветсвия
 ## команда приветвия
@@ -275,8 +275,8 @@ say_hello &lt;- function(bot, update) {
 
   # Отправляем приветсвенное сообщение
   bot$sendMessage(update$message$chat_id, 
-                  text = paste0(&quot;Моё почтение, &quot;, user_name, &quot;!&quot;),
-                  parse_mode = &quot;Markdown&quot;,
+                  text = paste0("Моё почтение, ", user_name, "!"),
+                  parse_mode = "Markdown",
                   reply_to_message_id = update$message$message_id)
 
 }
@@ -286,13 +286,13 @@ MessageFilters$hi &lt;- BaseFilter(function(message) {
 
   # проверяем, встречается ли в тексте сообщения слова: привет, здравствуй, салют, хай, бонжур
   grepl(x           = message$text, 
-        pattern     = &#39;привет|здравствуй|салют|хай|бонжур&#39;,
+        pattern     = 'привет|здравствуй|салют|хай|бонжур',
         ignore.case = TRUE)
   }
 )
 
 # создаём обработчик 
-hi_hendler &lt;- CommandHandler(&#39;hi&#39;, say_hello) # обработчик команды hi
+hi_hendler &lt;- CommandHandler('hi', say_hello) # обработчик команды hi
 hi_txt_hnd &lt;- MessageHandler(say_hello, filters = MessageFilters$hi)
 
 # добаляем обработчики в диспетчер
@@ -319,7 +319,7 @@ MessageFilters$hi &lt;- BaseFilter(
 
     # проверяем, встречается ли в тексте сообщения слова приветствия
     grepl(x           = message$text, 
-          pattern     = &#39;привет|здравствуй|салют|хай|бонжур&#39;,
+          pattern     = 'привет|здравствуй|салют|хай|бонжур',
           ignore.case = TRUE)
   }
 
@@ -366,7 +366,7 @@ MessageFilters$hi &lt;- BaseFilter(
 <div class="codehilite"><pre><span></span><code>library(telegram.bot)
 
 # создаём экземпляр класса Updater
-updater &lt;- Updater(&#39;ТОКЕН ВАШЕГО БОТА&#39;)
+updater &lt;- Updater('ТОКЕН ВАШЕГО БОТА')
 
 # Пишем метод для приветсвия
 ## команда приветвия
@@ -377,68 +377,68 @@ check_date &lt;- function(bot, update, args) {
   country &lt;- args[2]  # страна
 
   # проверка введённых параметров
-  if ( !grepl(&#39;\\d{4}-\\d{2}-\\d{2}&#39;, day) ) {
+  if ( !grepl('\\d{4}-\\d{2}-\\d{2}', day) ) {
 
     # Send Custom Keyboard
     bot$sendMessage(update$message$chat_id, 
-                    text = paste0(day, &quot; - некорреткная дата, введите дату в формате ГГГГ-ММ-ДД&quot;),
-                    parse_mode = &quot;Markdown&quot;)
+                    text = paste0(day, " - некорреткная дата, введите дату в формате ГГГГ-ММ-ДД"),
+                    parse_mode = "Markdown")
 
   } else {
     day &lt;- as.Date(day)
     # переводим в формат POSIXtl
-    y &lt;- format(day, &quot;%Y&quot;)
-    m &lt;- format(day, &quot;%m&quot;)
-    d &lt;- format(day, &quot;%d&quot;)
+    y &lt;- format(day, "%Y")
+    m &lt;- format(day, "%m")
+    d &lt;- format(day, "%d")
 
   }
 
   # страна для проверки
   ## проверяем задана ли страна
   ## если не задана устанавливаем ru
-  if ( ! country %in% c(&#39;ru&#39;, &#39;ua&#39;, &#39;by&#39;, &#39;kz&#39;, &#39;us&#39;) ) {
+  if ( ! country %in% c('ru', 'ua', 'by', 'kz', 'us') ) {
 
     # Send Custom Keyboard
     bot$sendMessage(update$message$chat_id, 
-                    text = paste0(country, &quot; - некорретктный код страны, возможнные значения: ru, by, kz, ua, us. Запрошены данные по России.&quot;),
-                    parse_mode = &quot;Markdown&quot;)
+                    text = paste0(country, " - некорретктный код страны, возможнные значения: ru, by, kz, ua, us. Запрошены данные по России."),
+                    parse_mode = "Markdown")
 
-    country &lt;- &#39;ru&#39;
+    country &lt;- 'ru'
 
   }
 
   # запрос данных из API
   # компоновка HTTP запроса
-  url &lt;- paste0(&quot;https://isdayoff.ru/api/getdata?&quot;,
-                &quot;year=&quot;,  y, &quot;&amp;&quot;,
-                &quot;month=&quot;, m, &quot;&amp;&quot;,
-                &quot;day=&quot;,   d, &quot;&amp;&quot;,
-                &quot;cc=&quot;,    country, &quot;&amp;&quot;,
-                &quot;pre=1&amp;&quot;,
-                &quot;covid=1&quot;)
+  url &lt;- paste0("https://isdayoff.ru/api/getdata?",
+                "year=",  y, "&amp;",
+                "month=", m, "&amp;",
+                "day=",   d, "&amp;",
+                "cc=",    country, "&amp;",
+                "pre=1&amp;",
+                "covid=1")
 
   # получаем ответ
   res &lt;- readLines(url)
 
   # интрепретация ответа
   out &lt;- switch(res, 
-                &quot;0&quot;   = &quot;Рабочий день&quot;,
-                &quot;1&quot;   = &quot;Нерабочий день&quot;,
-                &quot;2&quot;   = &quot;Сокращённый рабочий день&quot;,
-                &quot;4&quot;   = &quot;covid-19&quot;,
-                &quot;100&quot; = &quot;Ошибка в дате&quot;,
-                &quot;101&quot; = &quot;Данные не найдены&quot;,
-                &quot;199&quot; = &quot;Ошибка сервиса&quot;)
+                "0"   = "Рабочий день",
+                "1"   = "Нерабочий день",
+                "2"   = "Сокращённый рабочий день",
+                "4"   = "covid-19",
+                "100" = "Ошибка в дате",
+                "101" = "Данные не найдены",
+                "199" = "Ошибка сервиса")
 
   # отправляем сообщение
   bot$sendMessage(update$message$chat_id, 
-                  text = paste0(day, &quot; - &quot;, out),
-                  parse_mode = &quot;Markdown&quot;)
+                  text = paste0(day, " - ", out),
+                  parse_mode = "Markdown")
 
 }
 
 # создаём обработчик 
-date_hendler &lt;- CommandHandler(&#39;check_date&#39;, check_date, pass_args = TRUE)
+date_hendler &lt;- CommandHandler('check_date', check_date, pass_args = TRUE)
 
 # добаляем обработчик в диспетчер
 updater &lt;- updater + date_hendler

@@ -250,15 +250,15 @@ from os import getlogin as user
 from Crypto.Cipher import Blowfish
 
 class Encryption:
-    def __init__(self, key=None, hash_type=&#39;sha1&#39;):
+    def __init__(self, key=None, hash_type='sha1'):
 
 
-        self.key = key.replace(&quot;+space+&quot;, &quot;_&quot;) if key else keyring.get_password(&#39;pydecoder&#39;, user()).replace(&quot;+space+&quot;, &quot;_&quot;)
-        self.md5_key = hashlib.md5(self.key.encode(&#39;utf-8&#39;)).hexdigest()
+        self.key = key.replace("+space+", "_") if key else keyring.get_password('pydecoder', user()).replace("+space+", "_")
+        self.md5_key = hashlib.md5(self.key.encode('utf-8')).hexdigest()
 
         self.hash_type = hash_type
 
-    def decrypt(self, data, data_type=&#39;num&#39;):
+    def decrypt(self, data, data_type='num'):
         try:
             data_base_64 = base64.b64decode(data)
             data = self.remove_cipher_noise(data_base_64, self.md5_key)
@@ -273,27 +273,27 @@ class Encryption:
             cipher = Blowfish.new(self.md5_key.encode(), Blowfish.MODE_CBC, init_vector)
             result = cipher.decrypt(data)
         except:
-            print(&#39;Data: {} - Decoding error. Init problem&#39;.format(data))
+            print('Data: {} - Decoding error. Init problem'.format(data))
 
-            if data_type == &#39;num&#39;:
+            if data_type == 'num':
                 return 0
             else :
-                return &#39;Decoding error. Init problem&#39;
+                return 'Decoding error. Init problem'
 
         try:
-            result = result.decode().rstrip(&#39;\\0&#39;).replace(&quot;\x00&quot;, &quot;&quot;)
-            if data_type == &#39;num&#39;:
+            result = result.decode().rstrip('\\0').replace("\x00", "")
+            if data_type == 'num':
                 result = pd.to_numeric(result)
 
         except Exception as error:
-            print(&#39;Cannot decode str - [{}]. Error - [{}]&#39;.format(data, error))
+            print('Cannot decode str - [{}]. Error - [{}]'.format(data, error))
 
-            if data_type == &#39;num&#39;:
+            if data_type == 'num':
                 return 0
             else :
-                return &#39;Decoding error&#39;
+                return 'Decoding error'
 
-        if data_type == &#39;num&#39;:
+        if data_type == 'num':
             result = pd.to_numeric(result)
 
         return result
@@ -307,17 +307,17 @@ class Encryption:
         return data
 
     def get_key(self):
-        print(&quot;User&quot;,  user())
-        return keyring.get_password(&#39;pydecoder&#39;, user()).replace(&quot;+space+&quot;, &quot;_&quot;)
+        print("User",  user())
+        return keyring.get_password('pydecoder', user()).replace("+space+", "_")
 
     def set_key(self, user=user()):
-        keyring.set_password(&quot;pydecoder&quot;, user, self.key.replace(&quot;_&quot;, &quot;+space+&quot;))
+        keyring.set_password("pydecoder", user, self.key.replace("_", "+space+"))
 
     def remove_cipher_noise(self, data, key):
         key_hash = self.hash(key)
         key_index = 0
         data_len = len(key_hash)
-        data_result = bytes(&#39;&#39;, &#39;utf-8&#39;)
+        data_result = bytes('', 'utf-8')
 
         for value in data:
             if key_index &gt;= data_len:
@@ -332,10 +332,10 @@ class Encryption:
         return data_result
 
     def hash(self, hash_str_data):
-        return self.sha1(hash_str_data) if self.hash_type == &#39;sha1&#39; else hashlib.md5(hash_str_data).hexdigest()
+        return self.sha1(hash_str_data) if self.hash_type == 'sha1' else hashlib.md5(hash_str_data).hexdigest()
 
     def sha1(self, str):
-        return hashlib.sha1(str.encode(&#39;utf-8&#39;)).hexdigest()
+        return hashlib.sha1(str.encode('utf-8')).hexdigest()
 </code></pre></div>
 
 <h2 id="_13">Заключение</h2>

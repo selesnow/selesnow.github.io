@@ -227,7 +227,7 @@
 <h2 id="rym">Устновка пакета rym</h2>
 <p>Для работы с любым пакетом в R его предварительно необходимо установить, и загрузить. Устанавливается пакет один раз с помощью команды <code>install.packages()</code>. Подключать пакет необходимо в каждой новой сессии работы в R с помощью функции <code>library()</code>.</p>
 <p>Для установки и подключения пакета <code>rym</code> воспользуйтесь следующим кодом:</p>
-<div class="codehilite"><pre><span></span><code>install.packages(&quot;rym&quot;)
+<div class="codehilite"><pre><span></span><code>install.packages("rym")
 library(rym)
 </code></pre></div>
 
@@ -243,11 +243,11 @@ library(rym)
 library(rym)
 
 # запрашиваем список счётчиков
-counters &lt;- rym_get_counters(login = &quot;ваш логин&quot;)
+counters &lt;- rym_get_counters(login = "ваш логин")
 
 # запрашиваем список целей
-goals    &lt;- rym_get_goals(&quot;0000000&quot;,  # номер нужного счётчика
-                          login      = &quot;ваш логин&quot;)
+goals    &lt;- rym_get_goals("0000000",  # номер нужного счётчика
+                          login      = "ваш логин")
 </code></pre></div>
 
 <p>Используя приведённый выше пример кода замените <code>"ваш логин"</code> на ваш логин в яндексе, под которым доступны нужные вам счётчики яндекс метрики. И <code>"0000000"</code> на номер нужного вам счётчика. Посмотреть номера доступных вам счётчиков можно в загруженной таблице <em>counters</em>.</p>
@@ -278,25 +278,25 @@ goals    &lt;- rym_get_goals(&quot;0000000&quot;,  # номер нужного �
 <li>Клик по кнопке телефон</li>
 </ul>
 <p>В дальнейшем для преобразования данных мы будем использовать пакеты входящие в библиотеку <code>tidyverse</code>: <code>tidyr</code>, <code>dplyr</code>. Поэтому перед тем, как использовать приведённый далее пример кода установите и подключите эти пакеты, или всю библиотеку <code>tidyverse</code>.</p>
-<div class="codehilite"><pre><span></span><code># install.packages(&quot;tidyverse&quot;)
+<div class="codehilite"><pre><span></span><code># install.packages("tidyverse")
 # library(tidyverse)
-install.packages(c(&quot;dplyr&quot;, &quot;tidyr&quot;))
+install.packages(c("dplyr", "tidyr"))
 library(dplyr)
 library(tidyr)
 </code></pre></div>
 
 <p>Функция <code>rym_get_logs()</code> позволяет запрашивать данные из Logs API Яндекс метрики.</p>
 <div class="codehilite"><pre><span></span><code># запрашиваем логи по всем действиям
-logs  &lt;- rym_get_logs(counter   = &quot;0000000&quot;, 
-                      date.from = &quot;2019-04-01&quot;, 
-                      date.to   = &quot;2019-06-30&quot;, 
-                      fields = &quot;ym:s:visitID,
+logs  &lt;- rym_get_logs(counter   = "0000000", 
+                      date.from = "2019-04-01", 
+                      date.to   = "2019-06-30", 
+                      fields = "ym:s:visitID,
                                 ym:s:clientID,
                                 ym:s:date,
                                 ym:s:goalsID,
                                 ym:s:lastTrafficSource,
-                                ym:s:isNewUser&quot;, 
-                      login      = &quot;ваш логин&quot;) %&gt;%
+                                ym:s:isNewUser", 
+                      login      = "ваш логин") %&gt;%
             mutate(ym.s.date     = as.Date(ym.s.date),
                    ym.s.clientID = as.character(ym.s.clientID))
 </code></pre></div>
@@ -340,8 +340,8 @@ logs  &lt;- rym_get_logs(counter   = &quot;0000000&quot;,
 </ul>
 <h2 id="funneljoin_1">Установка funneljoin</h2>
 <p>На момент написания статьи пакет <code>funneljoin</code> не был опубликован на CRAN, поэтому установить его можно с GitHub. Для установки пакетов из GitHub вам потребуется дополнительный пакет — <code>devtools</code>.</p>
-<div class="codehilite"><pre><span></span><code>install.packages(&quot;devtools&quot;)
-devtools::install_github(&quot;robinsones/funneljoin&quot;)
+<div class="codehilite"><pre><span></span><code>install.packages("devtools")
+devtools::install_github("robinsones/funneljoin")
 </code></pre></div>
 
 <h2 id="logs-api_1">Постобработка данных полученных из Logs API</h2>
@@ -358,13 +358,13 @@ devtools::install_github(&quot;robinsones/funneljoin&quot;)
 <div class="codehilite"><pre><span></span><code># приводим данные к нужному виду
 logs_goals &lt;- logs %&gt;%
   mutate(ym.s.goalsID = str_replace_all(ym.s.goalsID, # очищаем от лишних символов
-                                        &quot;\\[|\\]&quot;, 
-                                        &quot;&quot;) %&gt;% 
-                        str_split(&quot;,&quot;)) %&gt;%           # разбиваем визит на действия         
+                                        "\\[|\\]", 
+                                        "") %&gt;% 
+                        str_split(",")) %&gt;%           # разбиваем визит на действия         
   unnest(cols = c(ym.s.goalsID)) %&gt;%
   mutate(ym.s.goalsID = as.integer(ym.s.goalsID)) %&gt;% # переводим id цели в числовой формат
   left_join(goals,
-            by = c(&quot;ym.s.goalsID&quot; = &quot;id&quot;)) %&gt;%        # соединяем деймтвия со списком целей
+            by = c("ym.s.goalsID" = "id")) %&gt;%        # соединяем деймтвия со списком целей
   rename(events = name)                               # переименовываем название цели в events
 </code></pre></div>
 
@@ -389,13 +389,13 @@ first_visits &lt;- logs_goals %&gt;%
 
 # получаем данные о добавлениях в корзину
 cart &lt;- logs_goals %&gt;%
-  filter(events == &quot;Переход в корзину&quot;) %&gt;%
+  filter(events == "Переход в корзину") %&gt;%
   select(ym.s.clientID,
          ym.s.date)
 
 # таблица заказов
 orders &lt;- logs_goals  %&gt;%
-  filter(events == &quot;Страница спасибо за заказ&quot;) %&gt;%
+  filter(events == "Страница спасибо за заказ") %&gt;%
   select(ym.s.clientID,
          ym.s.date)
 </code></pre></div>
@@ -410,9 +410,9 @@ orders &lt;- logs_goals  %&gt;%
 <div class="codehilite"><pre><span></span><code># строим первую воронку first-first
 first_visits %&gt;%
   after_inner_join(orders, 
-                   by_user = &quot;ym.s.clientID&quot;,
-                   by_time = &quot;ym.s.date&quot;,
-                   type    = &quot;first-first&quot;)
+                   by_user = "ym.s.clientID",
+                   by_time = "ym.s.date",
+                   type    = "first-first")
 </code></pre></div>
 
 <div class="codehilite"><pre><span></span><code># A tibble: 42 x 3
@@ -437,9 +437,9 @@ first_visits %&gt;%
 </ul>
 <div class="codehilite"><pre><span></span><code>cart %&gt;%
   after_inner_join(orders, 
-                   by_user = &quot;ym.s.clientID&quot;,
-                   by_time = &quot;ym.s.date&quot;,
-                   type    = &quot;first-firstafter&quot;)
+                   by_user = "ym.s.clientID",
+                   by_time = "ym.s.date",
+                   type    = "first-firstafter")
 </code></pre></div>
 
 <div class="codehilite"><pre><span></span><code># A tibble: 49 x 3
@@ -463,9 +463,9 @@ first_visits %&gt;%
 </ul>
 <div class="codehilite"><pre><span></span><code>first_visits %&gt;%
   after_inner_join(orders, 
-                   by_user = &quot;ym.s.clientID&quot;,
-                   by_time = &quot;ym.s.date&quot;,
-                   type    = &quot;lastbefore-firstafter&quot;)
+                   by_user = "ym.s.clientID",
+                   by_time = "ym.s.date",
+                   type    = "lastbefore-firstafter")
 </code></pre></div>
 
 <div class="codehilite"><pre><span></span><code># A tibble: 50 x 3
@@ -490,9 +490,9 @@ first_visits %&gt;%
 </ul>
 <div class="codehilite"><pre><span></span><code>cart %&gt;%
   after_inner_join(orders, 
-                   by_user = &quot;ym.s.clientID&quot;,
-                   by_time = &quot;ym.s.date&quot;,
-                   type    = &quot;any-firstafter&quot;)
+                   by_user = "ym.s.clientID",
+                   by_time = "ym.s.date",
+                   type    = "any-firstafter")
 </code></pre></div>
 
 <div class="codehilite"><pre><span></span><code># A tibble: 239 x 3
@@ -516,9 +516,9 @@ first_visits %&gt;%
 </ul>
 <div class="codehilite"><pre><span></span><code>first_visits %&gt;%
   after_inner_join(orders, 
-                   by_user = &quot;ym.s.clientID&quot;,
-                   by_time = &quot;ym.s.date&quot;,
-                   type    = &quot;any-any&quot;)
+                   by_user = "ym.s.clientID",
+                   by_time = "ym.s.date",
+                   type    = "any-any")
 </code></pre></div>
 
 <div class="codehilite"><pre><span></span><code># A tibble: 122 x 3
@@ -551,10 +551,10 @@ first_visits %&gt;%
   select(events,
          ym.s.clientID,
          ym.s.date) %&gt;%
-  funnel_start(moment_type = &quot;Страница спасибо за заказ&quot;, 
-               moment      = &quot;events&quot;, 
-               tstamp      = &quot;ym.s.date&quot;, 
-               user        = &quot;ym.s.clientID&quot;)
+  funnel_start(moment_type = "Страница спасибо за заказ", 
+               moment      = "events", 
+               tstamp      = "ym.s.date", 
+               user        = "ym.s.clientID")
 </code></pre></div>
 
 <div class="codehilite"><pre><span></span><code># A tibble: 52 x 2
@@ -579,12 +579,12 @@ first_visits %&gt;%
   select(events,
          ym.s.clientID,
          ym.s.date) %&gt;%
-  funnel_start(moment_type = &quot;Переход в корзину&quot;, 
-               moment      = &quot;events&quot;, 
-               tstamp      = &quot;ym.s.date&quot;, 
-               user        = &quot;ym.s.clientID&quot;) %&gt;%
-  funnel_step(moment_type = &quot;Страница спасибо за заказ&quot;,
-              type = &quot;first-last&quot;)
+  funnel_start(moment_type = "Переход в корзину", 
+               moment      = "events", 
+               tstamp      = "ym.s.date", 
+               user        = "ym.s.clientID") %&gt;%
+  funnel_step(moment_type = "Страница спасибо за заказ",
+              type = "first-last")
 </code></pre></div>
 
 <div class="codehilite"><pre><span></span><code># A tibble: 319 x 3
@@ -606,10 +606,10 @@ first_visits %&gt;%
 <p>С помощью <code>funnel_step</code> можно строить воронки с любым количеством шагов. Для построения полной воронки по каждому пользователю, в моём примере, можно воспользоваться следующим кодом:<br />
 <strong>Код построения полной воронки по каждому пользователю</strong></p>
 <div class="codehilite"><pre><span></span><code># добавляем в таблицу логов данные о первом визите
-# с пометкой в поле events - &quot;Первый визит&quot;
+# с пометкой в поле events - "Первый визит"
 logs_goals &lt;- logs_goals %&gt;%
                 filter(ym.s.isNewUser == 1 ) %&gt;%
-                mutate(events = &quot;Первый визит&quot;) %&gt;%
+                mutate(events = "Первый визит") %&gt;%
                 bind_rows(logs_goals)
 
 # строим воронку полную воронку
@@ -617,16 +617,16 @@ logs_goals %&gt;%
   select(events,
          ym.s.clientID,
          ym.s.date) %&gt;%
-  funnel_start(moment_type = &quot;Первый визит&quot;, 
-               moment      = &quot;events&quot;, 
-               tstamp      = &quot;ym.s.date&quot;, 
-               user        = &quot;ym.s.clientID&quot;) %&gt;%
-  funnel_step(moment_type = &quot;Переход в корзину&quot;,
-              type = &quot;first-last&quot;) %&gt;%
-  funnel_step(moment_type = &quot;Переход к оплате&quot;,
-              type = &quot;first-last&quot;) %&gt;%
-  funnel_step(moment_type = &quot;Страница спасибо за заказ&quot;,
-              type = &quot;first-last&quot;)
+  funnel_start(moment_type = "Первый визит", 
+               moment      = "events", 
+               tstamp      = "ym.s.date", 
+               user        = "ym.s.clientID") %&gt;%
+  funnel_step(moment_type = "Переход в корзину",
+              type = "first-last") %&gt;%
+  funnel_step(moment_type = "Переход к оплате",
+              type = "first-last") %&gt;%
+  funnel_step(moment_type = "Страница спасибо за заказ",
+              type = "first-last")
 </code></pre></div>
 
 <p>А теперь вишенка на торте — <code>summarize_funnel()</code>. Функция, которая позволяет вывести процент пользователей перешедших с прошлого шага на следующий, и процент пользователей прошедших от первого шага, до каждого последующего.</p>
@@ -635,14 +635,14 @@ logs_goals %&gt;%
   select(events,
          ym.s.clientID,
          ym.s.date) %&gt;%
-  funnel_start(moment_type = &quot;Первый визит&quot;, 
-               moment      = &quot;events&quot;, 
-               tstamp      = &quot;ym.s.date&quot;, 
-               user        = &quot;ym.s.clientID&quot;) %&gt;%
-  funnel_steps(moment_type = c(&quot;Переход в корзину&quot;,
-                               &quot;Переход к оплате&quot;,
-                               &quot;Страница спасибо за заказ&quot;),
-               type = &quot;first-last&quot;) %&gt;%
+  funnel_start(moment_type = "Первый визит", 
+               moment      = "events", 
+               tstamp      = "ym.s.date", 
+               user        = "ym.s.clientID") %&gt;%
+  funnel_steps(moment_type = c("Переход в корзину",
+                               "Переход к оплате",
+                               "Страница спасибо за заказ"),
+               type = "first-last") %&gt;%
   summarize_funnel()
 </code></pre></div>
 
@@ -689,24 +689,24 @@ logs_goals &lt;- select(first_visits,
                      firstSource) %&gt;%
   left_join(logs_goals,
             .,
-            by = &quot;ym.s.clientID&quot;)
+            by = "ym.s.clientID")
 
 # Считаем воронку по каналам
-my_multi_funnel &lt;- lapply(c(&quot;ad&quot;, &quot;organic&quot;, &quot;direct&quot;), 
+my_multi_funnel &lt;- lapply(c("ad", "organic", "direct"), 
                           function(source) {
                             logs_goals %&gt;% 
                               filter(firstSource == source) %&gt;%
                               select(events,
                                      ym.s.clientID,
                                      ym.s.date) %&gt;%
-                              funnel_start(moment_type = &quot;Первый визит&quot;, 
-                                           moment      = &quot;events&quot;, 
-                                           tstamp      = &quot;ym.s.date&quot;, 
-                                           user        = &quot;ym.s.clientID&quot;) %&gt;%
-                              funnel_steps(moment_type = c(&quot;Переход в корзину&quot;,
-                                                           &quot;Переход к оплате&quot;,
-                                                           &quot;Страница спасибо за заказ&quot;),
-                                           type = &quot;first-last&quot;) %&gt;%
+                              funnel_start(moment_type = "Первый визит", 
+                                           moment      = "events", 
+                                           tstamp      = "ym.s.date", 
+                                           user        = "ym.s.clientID") %&gt;%
+                              funnel_steps(moment_type = c("Переход в корзину",
+                                                           "Переход к оплате",
+                                                           "Страница спасибо за заказ"),
+                                           type = "first-last") %&gt;%
                               summarize_funnel() %&gt;%
                               mutate(firstSource = source)
                           }) %&gt;%
@@ -735,29 +735,29 @@ my_multi_funnel &lt;- lapply(c(&quot;ad&quot;, &quot;organic&quot;, &quot;direct
 <div class="codehilite"><pre><span></span><code># Воронка по каналам
 my_multi_funnel %&gt;%
   mutate(padding = ( 1 - pct_cumulative) / 2 ) %&gt;%
-  gather(key = &quot;variable&quot;, value = &quot;val&quot;, -moment_type, -firstSource) %&gt;%
-  filter(variable %in% c(&quot;pct_cumulative&quot;, &quot;padding&quot;)) %&gt;%
+  gather(key = "variable", value = "val", -moment_type, -firstSource) %&gt;%
+  filter(variable %in% c("pct_cumulative", "padding")) %&gt;%
   arrange(desc(variable)) %&gt;%
   mutate(moment_type = factor(moment_type, 
-                              levels = c(&quot;Страница спасибо за заказ&quot;,
-                                         &quot;Переход к оплате&quot;,
-                                         &quot;Переход в корзину&quot;,
-                                         &quot;Первый визит&quot;)),
+                              levels = c("Страница спасибо за заказ",
+                                         "Переход к оплате",
+                                         "Переход в корзину",
+                                         "Первый визит")),
          variable    = factor(variable,
-                              levels = c(&quot;pct_cumulative&quot;,
-                                         &quot;padding&quot;))) %&gt;%
+                              levels = c("pct_cumulative",
+                                         "padding"))) %&gt;%
   ggplot( aes(x = moment_type) ) +
   geom_bar(aes(y = val, fill = variable),
-           stat=&#39;identity&#39;, position=&#39;stack&#39;) +
-  scale_fill_manual(values = c(&#39;coral&#39;, NA) ) +
+           stat='identity', position='stack') +
+  scale_fill_manual(values = c('coral', NA) ) +
   geom_text(data = my_multi_funnel_df,
             aes(y     = 1 / 2, 
-                label =paste(round(round(pct_cumulative * 100, 2)), &#39;%&#39;)),
-            colour=&#39;tomato4&#39;,
-            fontface = &quot;bold&quot;) +
+                label =paste(round(round(pct_cumulative * 100, 2)), '%')),
+            colour='tomato4',
+            fontface = "bold") +
   coord_flip() +
-  theme(legend.position = &#39;none&#39;) +
-  labs(x=&#39;moment&#39;, y=&#39;volume&#39;) +
+  theme(legend.position = 'none') +
+  labs(x='moment', y='volume') +
   facet_grid(. ~ firstSource)
 </code></pre></div>
 

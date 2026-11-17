@@ -182,9 +182,9 @@
 <div class="codehilite"><pre><span></span><code>
 </code></pre></div>
 
-<div class="codehilite"><pre><span></span><code>if(!&quot;devtools&quot; %in% installed.packages()[,1]){install.packages(&quot;devtools&quot;)}
+<div class="codehilite"><pre><span></span><code>if(!"devtools" %in% installed.packages()[,1]){install.packages("devtools")}
 library(devtools)
-install_github(&#39;selesnow/ryandexdirect&#39;)
+install_github('selesnow/ryandexdirect')
 </code></pre></div>
 
 <div class="codehilite"><pre><span></span><code>
@@ -220,13 +220,13 @@ ya_token &lt;- ya_token &lt;- yadirGetToken()
 library(ryandexdirect)
 
 #Получаем список кампаний
-campList &lt;- yadirGetCampaignList(logins = &quot;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&lt;&lt;/span&gt;ВАШ&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;ЛОГИН&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;НА&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;ЯНДЕКСЕ&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&quot;, token = &quot;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&lt;&lt;/span&gt;ВАШ&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;ТОКЕН&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;В&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;ВИДЕ&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;СТОКИ&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&quot;)
+campList &lt;- yadirGetCampaignList(logins = "&lt;span class="token tag"&gt;&lt;span class="token tag"&gt;&lt;span class="token punctuation"&gt;&lt;&lt;/span&gt;ВАШ&lt;/span&gt; &lt;span class="token attr-name"&gt;ЛОГИН&lt;/span&gt; &lt;span class="token attr-name"&gt;НА&lt;/span&gt; &lt;span class="token attr-name"&gt;ЯНДЕКСЕ&lt;/span&gt;&lt;span class="token punctuation"&gt;&gt;&lt;/span&gt;&lt;/span&gt;", token = "&lt;span class="token tag"&gt;&lt;span class="token tag"&gt;&lt;span class="token punctuation"&gt;&lt;&lt;/span&gt;ВАШ&lt;/span&gt; &lt;span class="token attr-name"&gt;ТОКЕН&lt;/span&gt; &lt;span class="token attr-name"&gt;В&lt;/span&gt; &lt;span class="token attr-name"&gt;ВИДЕ&lt;/span&gt; &lt;span class="token attr-name"&gt;СТОКИ&lt;/span&gt;&lt;span class="token punctuation"&gt;&gt;&lt;/span&gt;&lt;/span&gt;")
 
 #Получаем статистику по кампаниям
 Stat &lt;- yadirGetSummaryStat(campaignIDS = campList$Id,
                            dateStart = Sys.Date() - 90,
                            dateEnd = Sys.Date(),
-                           token = &quot;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&lt;&lt;/span&gt;ВАШ&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;ТОКЕН&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;В&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;ВИДЕ&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;СТОКИ&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&quot;)
+                           token = "&lt;span class="token tag"&gt;&lt;span class="token tag"&gt;&lt;span class="token punctuation"&gt;&lt;&lt;/span&gt;ВАШ&lt;/span&gt; &lt;span class="token attr-name"&gt;ТОКЕН&lt;/span&gt; &lt;span class="token attr-name"&gt;В&lt;/span&gt; &lt;span class="token attr-name"&gt;ВИДЕ&lt;/span&gt; &lt;span class="token attr-name"&gt;СТОКИ&lt;/span&gt;&lt;span class="token punctuation"&gt;&gt;&lt;/span&gt;&lt;/span&gt;")
 </code></pre></div>
 
 <div class="codehilite"><pre><span></span><code>

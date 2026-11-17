@@ -229,15 +229,15 @@
 </ol>
 <p><img loading="lazy" decoding="async" alt="Как скачать идентификатор клиента для работы с большими массивами данных" width="777" height="123" src="../images/kak-zagruzit-dannye-iz-api-google-analytics-v-r-chast-2-kak-dcdd42e3.webp" /></p>
 <p>После того, как вы создали приложение и скачали в JSON формате учетные данные, можете использовать его для авторизации:</p>
-<div class="codehilite"><pre><span></span><code>ga_auth(token = &quot;D:/ga_auth/ga.json&quot;, email = &quot;yourmail@gmail.com&quot;)
+<div class="codehilite"><pre><span></span><code>ga_auth(token = "D:/ga_auth/ga.json", email = "yourmail@gmail.com")
 </code></pre></div>
 
 <p>В представленном выше коде вам необходимо изменить путь к скачанному JSON файлу и указать свою почту, под которой есть доступ к нужным аккаунтам Google Analytics. Далее в браузере подтверждаете разрешение на доступ к данным.</p>
 <h4 id="_2">Автоматическая авторизация через свое приложение</h4>
 <p>Теперь вы можете настроить автоматическую авторизацию, сделать это можно несколькими способами.</p>
 <p>Первый заключается в установке переменных окружения с помощью R функции Sys.setenv. Важно прописать переменные до подключения пакета:</p>
-<div class="codehilite"><pre><span></span><code>Sys.setenv(GAR_CLIENT_JSON = &quot;D:/ga_auth/ga.json&quot;)
-Sys.setenv(GARGLE_EMAIL = &quot;yourmail@gmail.com&quot;)
+<div class="codehilite"><pre><span></span><code>Sys.setenv(GAR_CLIENT_JSON = "D:/ga_auth/ga.json")
+Sys.setenv(GARGLE_EMAIL = "yourmail@gmail.com")
 library(googleAnalyticsR)
 </code></pre></div>
 
@@ -248,12 +248,12 @@ Successfully auto-authenticated via yourusername@gmail.com
 </code></pre></div>
 
 <p>Второй способ — прописать эти переменные в файл <strong>.Renviron</strong>. Этот файл считывается при старте каждой R сессии, и позволяет вам задавать необходимые переменные окружения. Находится этот файл в домашнем каталоге языка R, посмотреть расположение домашнего каталога можно с помощью команды path.expand(“~”).</p>
-<div class="codehilite"><pre><span></span><code>[1] &quot;C:/Users/Alsey/Documents&quot;
+<div class="codehilite"><pre><span></span><code>[1] "C:/Users/Alsey/Documents"
 </code></pre></div>
 
 <p>Если такой файл у вас есть, то изначально он, скорее всего, будет пустой, но даже если это не так, просто добавьте в него две строки. Если файла вообще нет, создайте обычный тектовый файл, впишите в него указанные две строки и переименуйте в <strong>.Renviron</strong>:</p>
-<div class="codehilite"><pre><span></span><code>GAR_CLIENT_JSON=&quot;D:/ga_auth/ga.json&quot;
-GARGLE_EMAIL=&quot;yourusername@gmail.com&quot;
+<div class="codehilite"><pre><span></span><code>GAR_CLIENT_JSON="D:/ga_auth/ga.json"
+GARGLE_EMAIL="yourusername@gmail.com"
 </code></pre></div>
 
 <p>И последний способ, если вы работаете на Windows — создайте две переменные окружения: GAR_CLIENT_JSON, GARGLE_EMAIL.</p>
@@ -281,7 +281,7 @@ GARGLE_EMAIL=&quot;yourusername@gmail.com&quot;
 <p><img loading="lazy" decoding="async" alt="Управление правами доступа для работы с пакетами анализ данных" width="405" height="459" src="../images/kak-zagruzit-dannye-iz-api-google-analytics-v-r-chast-2-upra-a2df50ce.webp" /></p>
 <p><img loading="lazy" decoding="async" alt="Загружаем данные из API Google Analytics Power BI R" width="948" height="522" src="../images/kak-zagruzit-dannye-iz-api-google-analytics-v-r-chast-2-zagr-0d92e17d.webp" /></p>
 <p>Далее проходим авторизацию с помощью функции googleAuthR::gar_auth_service, передав в аргумент json_file путь к json файлу с учетными данными.</p>
-<div class="codehilite"><pre><span></span><code>googleAuthR::gar_auth_service(json_file = &quot;D:/ga_auth/service.json&quot;)
+<div class="codehilite"><pre><span></span><code>googleAuthR::gar_auth_service(json_file = "D:/ga_auth/service.json")
 </code></pre></div>
 
 <p>Также вы можете настроить автоматическую авторизацию через сервисный аккаунт, создав переменную среды <em>GA_AUTH_FILE</em>и передав в нее путь к скачанному JSON файлу.</p>
@@ -336,21 +336,21 @@ GARGLE_EMAIL=&quot;yourusername@gmail.com&quot;
 </ul>
 <p>Пример кода:</p>
 <div class="codehilite"><pre><span></span><code># добавление пользователя
-ga_users_add(email = c(&quot;newuser@gmail.com&quot;), 
-              permissions = &quot;EDIT&quot;, accountId = 12345)
+ga_users_add(email = c("newuser@gmail.com"), 
+              permissions = "EDIT", accountId = 12345)
 
 # добавляем прав пользователю
 # список изменений
-o &lt;- list(permissions = list(local = list(&quot;MANAGE_USERS&quot;)))
+o &lt;- list(permissions = list(local = list("MANAGE_USERS")))
 
 # расширяем права пользователю
-ga_users_update(&quot;UA-1112233-1:1234567890123456789&quot;,
+ga_users_update("UA-1112233-1:1234567890123456789",
                  update_object = o,
                  accountId = 12345,
-                 webPropertyId = &quot;UA-1112233-1&quot;)
+                 webPropertyId = "UA-1112233-1")
 
 # удаляем доступ для пользователя
-ga_users_delete(&quot;newuser@gmail.com&quot;, accountId = 12345)
+ga_users_delete("newuser@gmail.com", accountId = 12345)
 </code></pre></div>
 
 <p>LinkId можно получить из таблицы с помощью функции ga_users_list().</p>
@@ -393,9 +393,9 @@ ga_users_delete(&quot;newuser@gmail.com&quot;, accountId = 12345)
 </ul>
 <p>Простой вызов функции будет выглядеть так:</p>
 <div class="codehilite"><pre><span></span><code>google_analytics(ga_id, 
-                 date_range = c(&quot;2020-01-01&quot;, &quot;2020-01-10&quot;), 
-                 metrics = &quot;sessions&quot;, 
-                 dimensions = &quot;date&quot;)
+                 date_range = c("2020-01-01", "2020-01-10"), 
+                 metrics = "sessions", 
+                 dimensions = "date")
 </code></pre></div>
 
 <p>Вместо ga_id подставьте идентификатор представления, из которого хотите получить данные. Такой запрос вернет вам количество сеансов в разрезе дней с 1 по 10 января 2020 года.</p>
@@ -403,19 +403,19 @@ ga_users_delete(&quot;newuser@gmail.com&quot;, accountId = 12345)
 <h3 id="date_range">date_range — сравниваем данные за разные периоды</h3>
 <p>Если передать в аргумент date_range вектор из двух или четырех дат, во втором случае вы получите таблицу сравнения показателей за указанные периоды.</p>
 <div class="codehilite"><pre><span></span><code>google_analytics(ga_id, 
-                 date_range = c(&quot;16daysAgo&quot;, &quot;9daysAgo&quot;, &quot;8daysAgo&quot;, &quot;yesterday&quot;), 
-                 dimensions = &quot;source&quot;,
-                 metrics = &quot;sessions&quot;)
+                 date_range = c("16daysAgo", "9daysAgo", "8daysAgo", "yesterday"), 
+                 dimensions = "source",
+                 metrics = "sessions")
 </code></pre></div>
 
 <p>Приведенный выше код сравнит количество сессий по источникам за 7 предыдущих дней с 7 днями, которые были до них.</p>
 <p><img loading="lazy" decoding="async" alt="Код сравнения сессий пользователя" width="248" height="351" src="../images/kak-zagruzit-dannye-iz-api-google-analytics-v-r-chast-2-kod-9b943e55.webp" /></p>
-<div class="codehilite"><pre><span></span><code>delta_sess &lt;- order_type(&quot;sessions&quot;,&quot;DESCENDING&quot;, &quot;DELTA&quot;)
+<div class="codehilite"><pre><span></span><code>delta_sess &lt;- order_type("sessions","DESCENDING", "DELTA")
 
 google_analytics(ga_id, 
-                 date_range = c(&quot;16daysAgo&quot;, &quot;9daysAgo&quot;, &quot;8daysAgo&quot;, &quot;yesterday&quot;), 
-                 dimensions = &quot;source&quot;,
-                 metrics = &quot;sessions&quot;, 
+                 date_range = c("16daysAgo", "9daysAgo", "8daysAgo", "yesterday"), 
+                 dimensions = "source",
+                 metrics = "sessions", 
                  order = delta_sess)
 </code></pre></div>
 
@@ -431,47 +431,47 @@ google_analytics(ga_id,
 </ul>
 <p>При использовании функции filter_clause_ga4 объекты фильтрации необходимо обвернуть в функцию list.</p>
 <p>И аргументы dim_filters и dim_filters. Пример для одного условия фильтрации:</p>
-<div class="codehilite"><pre><span></span><code>campaign_filter &lt;- dim_filter(dimension=&quot;campaign&quot;,operator=&quot;REGEXP&quot;,expressions=&quot;welcome&quot;)
+<div class="codehilite"><pre><span></span><code>campaign_filter &lt;- dim_filter(dimension="campaign",operator="REGEXP",expressions="welcome")
 
 my_filter_clause &lt;- filter_clause_ga4(list(campaign_filter))
 
 data_fetch &lt;- google_analytics(
-                ga_id,date_range = c(&quot;2016-01-01&quot;,&quot;2016-12-31&quot;),
-                metrics = c(&quot;itemRevenue&quot;,&quot;itemQuantity&quot;),
-                dimensions = c(&quot;campaign&quot;,&quot;transactionId&quot;,&quot;dateHour&quot;),
+                ga_id,date_range = c("2016-01-01","2016-12-31"),
+                metrics = c("itemRevenue","itemQuantity"),
+                dimensions = c("campaign","transactionId","dateHour"),
                 dim_filters = my_filter_clause)
 </code></pre></div>
 
 <p>Пример применения одновременно нескольких фильтров с указанием логической связи:</p>
-<div class="codehilite"><pre><span></span><code>mf &lt;- met_filter(&quot;bounces&quot;, &quot;GREATER_THAN&quot;, 0)
-mf2 &lt;- met_filter(&quot;sessions&quot;, &quot;GREATER&quot;, 2)
+<div class="codehilite"><pre><span></span><code>mf &lt;- met_filter("bounces", "GREATER_THAN", 0)
+mf2 &lt;- met_filter("sessions", "GREATER", 2)
 
-df &lt;- dim_filter(&quot;source&quot;,&quot;BEGINS_WITH&quot;,&quot;1&quot;,not = TRUE)
-df2 &lt;- dim_filter(&quot;source&quot;,&quot;BEGINS_WITH&quot;,&quot;a&quot;,not = TRUE)
+df &lt;- dim_filter("source","BEGINS_WITH","1",not = TRUE)
+df2 &lt;- dim_filter("source","BEGINS_WITH","a",not = TRUE)
 
-fc2 &lt;- filter_clause_ga4(list(df, df2), operator = &quot;AND&quot;)
-fc &lt;- filter_clause_ga4(list(mf, mf2), operator = &quot;AND&quot;)
+fc2 &lt;- filter_clause_ga4(list(df, df2), operator = "AND")
+fc &lt;- filter_clause_ga4(list(mf, mf2), operator = "AND")
 
 ga_data1 &lt;- google_analytics(
                ga_id, 
-               date_range = c(&quot;2019-07-30&quot;,&quot;2019-10-01&quot;),
-               dimensions=c(&#39;source&#39;,&#39;medium&#39;), 
-               metrics = c(&#39;sessions&#39;,&#39;bounces&#39;), 
+               date_range = c("2019-07-30","2019-10-01"),
+               dimensions=c('source','medium'), 
+               metrics = c('sessions','bounces'), 
                met_filters = fc, 
                dim_filters = fc2)
 </code></pre></div>
 
 <h3 id="_5">Вычисляемые показатели</h3>
 <p>Вы можете вычислять собственные показатели на лету с помощью функции вычисляемых показателей. По смыслу они похожи на вычисляемые показатели в интерфейсе Google Analytics.</p>
-<div class="codehilite"><pre><span></span><code>my_custom_metric &lt;- c(visitPerVisitor = &quot;ga:visits/ga:visitors&quot;)
+<div class="codehilite"><pre><span></span><code>my_custom_metric &lt;- c(visitPerVisitor = "ga:visits/ga:visitors")
 
 ga_data4 &lt;- google_analytics(ga_id,
-                  date_range = c(&quot;2019-07-30&quot;,
-                                 &quot;2019-10-01&quot;),
-                  dimensions=c(&#39;medium&#39;), 
+                  date_range = c("2019-07-30",
+                                 "2019-10-01"),
+                  dimensions=c('medium'), 
                   metrics = c(my_custom_metric,
-                             &#39;bounces&#39;), 
-                  metricFormat = c(&quot;FLOAT&quot;,&quot;INTEGER&quot;))
+                             'bounces'), 
+                  metricFormat = c("FLOAT","INTEGER"))
 </code></pre></div>
 
 <p>Для этого достаточно создать именнованный вектор, в который необходимо передать формулу расчета. В нашем примере мы вычисляем количество сеансов на одного пользователя.</p>
@@ -487,15 +487,15 @@ ga_data4 &lt;- google_analytics(ga_id,
 <p>Более подробно о каждом типе можно узнать в <a target="_blank" rel="noopener" href="https://developers.google.com/analytics/devguides/reporting/core/v4/rest/v4/reports/batchGet#MetricType">официальной справке Google Analytics</a>.</p>
 <h3 id="_6">Сегменты</h3>
 <p>Вы можете использовать устаревший способ обращения к сегментам, позаимствованный из API v3.</p>
-<div class="codehilite"><pre><span></span><code>segment_def_for_call &lt;- &quot;sessions::condition::ga:medium=~^(cpc|ppc|cpa|cpm|cpv|cpp)$&quot;
+<div class="codehilite"><pre><span></span><code>segment_def_for_call &lt;- "sessions::condition::ga:medium=~^(cpc|ppc|cpa|cpm|cpv|cpp)$"
 
-seg_obj &lt;- segment_ga4(&quot;PaidTraffic&quot;, segment_id = segment_def_for_call)
+seg_obj &lt;- segment_ga4("PaidTraffic", segment_id = segment_def_for_call)
 
 segmented_ga1 &lt;- google_analytics(ga_id, 
-                          c(&quot;2019-07-30&quot;,&quot;2019-10-01&quot;), 
-                          dimensions=c(&#39;source&#39;,&#39;medium&#39;,&#39;segment&#39;), 
+                          c("2019-07-30","2019-10-01"), 
+                          dimensions=c('source','medium','segment'), 
                           segments = seg_obj, 
-                          metrics = c(&#39;sessions&#39;,&#39;bounces&#39;)
+                          metrics = c('sessions','bounces')
 )
 </code></pre></div>
 
@@ -508,29 +508,29 @@ segmented_ga1 &lt;- google_analytics(ga_id,
 <li><strong>segment_ga4()</strong> — позволяет задать уровень действия сегмента, то есть пользователь или сеанс, а также дать сегменту имя, которое будет отображаться в результирующей таблице при вызове параметра <em>ga:segment</em>.</li>
 </ol>
 <p>Пример создания и использования сегмента:</p>
-<div class="codehilite"><pre><span></span><code>se2 &lt;- segment_element(&quot;medium&quot;, 
-                       operator = &quot;EXACT&quot;, 
-                       type = &quot;DIMENSION&quot;, 
-                       expressions = &quot;organic&quot;)
+<div class="codehilite"><pre><span></span><code>se2 &lt;- segment_element("medium", 
+                       operator = "EXACT", 
+                       type = "DIMENSION", 
+                       expressions = "organic")
 
-se3 &lt;- segment_element(&quot;medium&quot;,
-                       operator = &quot;EXACT&quot;,
-                       type = &quot;DIMENSION&quot;,
+se3 &lt;- segment_element("medium",
+                       operator = "EXACT",
+                       type = "DIMENSION",
                        not = TRUE,
-                       expressions = &quot;organic&quot;)
+                       expressions = "organic")
 
 sv_sequence &lt;- segment_vector_sequence(list(list(se2), 
                                             list(se3)))
 
 seq_defined2 &lt;- segment_define(list(sv_sequence))
 
-segment4_seq &lt;- segment_ga4(&quot;sequence&quot;, user_segment = seq_defined2)
+segment4_seq &lt;- segment_ga4("sequence", user_segment = seq_defined2)
 
 segment_seq_example &lt;- google_analytics(ga_id, 
-                            c(&quot;2019-08-01&quot;,&quot;2019-09-01&quot;), 
-                            dimensions=c(&#39;source&#39;,&#39;segment&#39;), 
+                            c("2019-08-01","2019-09-01"), 
+                            dimensions=c('source','segment'), 
                             segments = segment4_seq,
-                            metrics = c(&#39;sessions&#39;,&#39;bounces&#39;)
+                            metrics = c('sessions','bounces')
 )
 </code></pre></div>
 
@@ -544,13 +544,13 @@ segment_seq_example &lt;- google_analytics(ga_id,
 <li>Используйте аргумент cohort в функции google_analytics().</li>
 </ol>
 <p>Пример создания когортного отчета:</p>
-<div class="codehilite"><pre><span></span><code>cohort4 &lt;- make_cohort_group(list(&quot;Oct2019&quot; = c(&quot;2019-10-01&quot;, &quot;2019-10-31&quot;), 
-                                  &quot;Feb2019&quot; = c(&quot;2019-11-01&quot;, &quot;2019-11-30&quot;),
-                                  &quot;Dec2019&quot; = c(&quot;2019-12-01&quot;, &quot;2019-12-31&quot;)))
+<div class="codehilite"><pre><span></span><code>cohort4 &lt;- make_cohort_group(list("Oct2019" = c("2019-10-01", "2019-10-31"), 
+                                  "Feb2019" = c("2019-11-01", "2019-11-30"),
+                                  "Dec2019" = c("2019-12-01", "2019-12-31")))
 
 google_analytics(ga_id, 
-             dimensions=c(&#39;cohort&#39;,&#39;ga:cohortNthMonth&#39;), 
-             metrics = c(&#39;cohortTotalUsers&#39;,&#39;ga:cohortActiveUsers&#39;),
+             dimensions=c('cohort','ga:cohortNthMonth'), 
+             metrics = c('cohortTotalUsers','ga:cohortActiveUsers'),
              cohort = cohort4
              )
 </code></pre></div>
@@ -560,14 +560,14 @@ google_analytics(ga_id,
 <p>Самый новый API из всех доступных в Google Analytics. Позволяет запрашивать данные об активности пользователя, то есть дает возможность получать сырые данные.</p>
 <p>Чтобы получить сырые данные по пользователям изначально необходимо получить список идентификаторов — client_id всех пользователей. Сделать это можно, запросив параметр clientId.</p>
 <div class="codehilite"><pre><span></span><code>cids &lt;- google_analytics(ga_id, 
-                date_range = c(&quot;16DaysAgo&quot;,&quot;yesterday&quot;), 
-                metrics = &quot;sessions&quot;, dimensions = &quot;clientId&quot;)
+                date_range = c("16DaysAgo","yesterday"), 
+                metrics = "sessions", dimensions = "clientId")
 </code></pre></div>
 
 <p>Используя функцию <em>ga_clientid_activity()</em> вы можете получить все действия любого посетителя сайта за указанный период. Также на вход можно передать вектор из идентификаторов клиентов.</p>
 <div class="codehilite"><pre><span></span><code>users &lt;- ga_clientid_activity(cids$clientId,
                               ga_id, 
-                              date_range = c(&quot;16DaysAgo&quot;,&quot;yesterday&quot;))
+                              date_range = c("16DaysAgo","yesterday"))
 </code></pre></div>
 
 <p>Аргументы функции <em>ga_clientid_activity()</em>:</p>
@@ -597,7 +597,7 @@ users$hits     # хиты
                     <div class="b-tags"><a class="b-chip" href="../?tag=google-analytics#posts">Google Analytics</a><a class="b-chip" href="../?tag=r#posts">R</a></div>
                 </div>
             </article>
-            <aside class="b-toc" aria-label="Contents"><div class="b-toc-title"><span class="ru-text">Содержание</span><span class="ua-text">Зміст</span><span class="en-text">Contents</span></div><ul><li><a href="#googleanalyticsr">Какие дополительные функции есть в googleAnalyticsR</a></li><li><a href="#_1">Авторизация</a><ul><li><a href="#1">1. Авторизация через стандартные параметры</a></li><li><a href="#2">2. Авторизация через собственное приложение</a></li><li><a href="#3">3. Авторизация с помощью сервисного аккаунта</a></li><li><a href="#google-analytics-api">Включаем Google Analytics API</a></li></ul></li><li><a href="#metadata-api">Metadata API</a></li><li><a href="#management-api">Management API</a><ul><li><a href="#google-analytics">Загрузка объектов из иерархии Google Analytics</a></li><li><a href="#_3">Управление пользователями</a></li><li><a href="#management-api_1">Другие полезные функции для работы с Management API</a></li></ul></li><li><a href="#google-analytics-reporting-api-v4">Google Analytics Reporting API v4</a><ul><li><a href="#date_range">date95range — сравниваем данные за разные периоды</a></li><li><a href="#_4">Фильтрация данных</a></li><li><a href="#_5">Вычисляемые показатели</a></li><li><a href="#_6">Сегменты</a></li><li><a href="#_7">Когортный анализ</a></li><li><a href="#user-activity-api">User Activity API</a></li></ul></li><li><a href="#_8">Выводы</a></li></ul></aside>
+            <aside class="b-toc" aria-label="Contents"><div class="b-toc-title"><span class="ru-text">Содержание</span><span class="ua-text">Зміст</span><span class="en-text">Contents</span></div><ul><li><a href="#googleanalyticsr">Какие дополительные функции есть в googleAnalyticsR</a></li><li><a href="#_1">Авторизация</a><ul><li><a href="#1">1. Авторизация через стандартные параметры</a></li><li><a href="#2">2. Авторизация через собственное приложение</a></li><li><a href="#3">3. Авторизация с помощью сервисного аккаунта</a></li><li><a href="#google-analytics-api">Включаем Google Analytics API</a></li></ul></li><li><a href="#metadata-api">Metadata API</a></li><li><a href="#management-api">Management API</a><ul><li><a href="#google-analytics">Загрузка объектов из иерархии Google Analytics</a></li><li><a href="#_3">Управление пользователями</a></li><li><a href="#management-api_1">Другие полезные функции для работы с Management API</a></li></ul></li><li><a href="#google-analytics-reporting-api-v4">Google Analytics Reporting API v4</a><ul><li><a href="#date_range">date_range — сравниваем данные за разные периоды</a></li><li><a href="#_4">Фильтрация данных</a></li><li><a href="#_5">Вычисляемые показатели</a></li><li><a href="#_6">Сегменты</a></li><li><a href="#_7">Когортный анализ</a></li><li><a href="#user-activity-api">User Activity API</a></li></ul></li><li><a href="#_8">Выводы</a></li></ul></aside>
         </div>
         <section class="b-related">
             <h2 class="outfit-font"><span class="ru-text">Читайте также</span><span class="ua-text">Читайте також</span><span class="en-text">Related posts</span></h2>

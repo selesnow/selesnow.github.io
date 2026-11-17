@@ -219,19 +219,19 @@
 </ul>
 <p><strong>Пример кода для загрузки статистики с помощью пакета ryandexdirect</strong></p>
 <div class="codehilite"><pre><span></span><code>library(ryandexdirect)
-stat &lt;- yadirGetReport(ReportType = &quot;ACCOUNT_PERFORMANCE_REPORT&quot;, 
-                       DateRangeType = &quot;CUSTOM_DATE&quot;, 
-                       DateFrom = &quot;2018-01-01&quot;, 
-                       DateTo = &quot;2018-05-10&quot;, 
-                       FieldNames = c(&quot;AdNetworkType&quot;,
-                                               &quot;Impressions&quot;,
-                                               &quot;Clicks&quot;,
-                                               &quot;Cost&quot;), 
-                       FilterList = c(&quot;CampaignId IN 123456 ,987654&quot;,&quot;Clicks GREATER_THAN 100&quot;),
-                       IncludeVAT = &quot;YES&quot;, 
-                       IncludeDiscount = &quot;NO&quot;, 
-                       Login = &quot;ваш логин&quot;, 
-                       TokenPath = &quot;C:/token_yandex&quot;)
+stat &lt;- yadirGetReport(ReportType = "ACCOUNT_PERFORMANCE_REPORT", 
+                       DateRangeType = "CUSTOM_DATE", 
+                       DateFrom = "2018-01-01", 
+                       DateTo = "2018-05-10", 
+                       FieldNames = c("AdNetworkType",
+                                               "Impressions",
+                                               "Clicks",
+                                               "Cost"), 
+                       FilterList = c("CampaignId IN 123456 ,987654","Clicks GREATER_THAN 100"),
+                       IncludeVAT = "YES", 
+                       IncludeDiscount = "NO", 
+                       Login = "ваш логин", 
+                       TokenPath = "C:/token_yandex")
 </code></pre></div>
 
 <p>Более подробно о каждом аргументе можно узнать из официальной справке <a target="_blank" rel="noopener" href="https://selesnow.github.io/ryandexdirect">ryandexdirect</a> или Яндекс. Директ <a target="_blank" rel="noopener" href="https://tech.yandex.ru/direct/doc/reports/reports-docpage/">API Reports сервис</a>.</p>
@@ -249,35 +249,35 @@ stat &lt;- yadirGetReport(ReportType = &quot;ACCOUNT_PERFORMANCE_REPORT&quot;,
 <li><code>getData</code> — Загрузка данных из API.</li>
 </ul>
 <p><strong>Пример работы с пакетом RAdwords</strong></p>
-<div class="codehilite"><pre><span></span><code>&lt;span class=&quot;hljs-keyword&quot;&gt;library&lt;/span&gt;(RAdwords)
+<div class="codehilite"><pre><span></span><code>&lt;span class="hljs-keyword"&gt;library&lt;/span&gt;(RAdwords)
 # запрос токена
 adw_token &amp;lt;- doAyth()
 
 # формирование запроса
-&lt;span class=&quot;hljs-keyword&quot;&gt;body&lt;/span&gt; &amp;lt;- statement(&lt;span class=&quot;hljs-keyword&quot;&gt;select&lt;/span&gt;=c(&lt;span class=&quot;hljs-symbol&quot;&gt;&#39;AccountDescriptiveName&lt;/span&gt;&#39;,
-                           &lt;span class=&quot;hljs-symbol&quot;&gt;&#39;ExternalCustomerId&lt;/span&gt;&#39;,
-                           &lt;span class=&quot;hljs-symbol&quot;&gt;&#39;AccountCurrencyCode&lt;/span&gt;&#39;,
-                           &lt;span class=&quot;hljs-symbol&quot;&gt;&#39;AdNetworkType1&lt;/span&gt;&#39;,
-                           &lt;span class=&quot;hljs-symbol&quot;&gt;&#39;RegionCriteriaId&lt;/span&gt;&#39;,
-                           &lt;span class=&quot;hljs-symbol&quot;&gt;&#39;CountryCriteriaId&lt;/span&gt;&#39;,
-                           &lt;span class=&quot;hljs-symbol&quot;&gt;&#39;CityCriteriaId&lt;/span&gt;&#39;,
-                           &lt;span class=&quot;hljs-symbol&quot;&gt;&#39;Device&lt;/span&gt;&#39;,
-                           &lt;span class=&quot;hljs-symbol&quot;&gt;&#39;Month&lt;/span&gt;&#39;,
-                           &lt;span class=&quot;hljs-symbol&quot;&gt;&#39;Year&lt;/span&gt;&#39;,
-                           &lt;span class=&quot;hljs-symbol&quot;&gt;&#39;Impressions&lt;/span&gt;&#39;,
-                           &lt;span class=&quot;hljs-symbol&quot;&gt;&#39;Clicks&lt;/span&gt;&#39;,
-                           &lt;span class=&quot;hljs-symbol&quot;&gt;&#39;Interactions&lt;/span&gt;&#39;,
-                           &lt;span class=&quot;hljs-symbol&quot;&gt;&#39;VideoViews&lt;/span&gt;&#39;,
-                           &lt;span class=&quot;hljs-symbol&quot;&gt;&#39;Cost&lt;/span&gt;&#39;,
-                           &lt;span class=&quot;hljs-symbol&quot;&gt;&#39;Conversions&lt;/span&gt;&#39;
+&lt;span class="hljs-keyword"&gt;body&lt;/span&gt; &amp;lt;- statement(&lt;span class="hljs-keyword"&gt;select&lt;/span&gt;=c(&lt;span class="hljs-symbol"&gt;'AccountDescriptiveName&lt;/span&gt;',
+                           &lt;span class="hljs-symbol"&gt;'ExternalCustomerId&lt;/span&gt;',
+                           &lt;span class="hljs-symbol"&gt;'AccountCurrencyCode&lt;/span&gt;',
+                           &lt;span class="hljs-symbol"&gt;'AdNetworkType1&lt;/span&gt;',
+                           &lt;span class="hljs-symbol"&gt;'RegionCriteriaId&lt;/span&gt;',
+                           &lt;span class="hljs-symbol"&gt;'CountryCriteriaId&lt;/span&gt;',
+                           &lt;span class="hljs-symbol"&gt;'CityCriteriaId&lt;/span&gt;',
+                           &lt;span class="hljs-symbol"&gt;'Device&lt;/span&gt;',
+                           &lt;span class="hljs-symbol"&gt;'Month&lt;/span&gt;',
+                           &lt;span class="hljs-symbol"&gt;'Year&lt;/span&gt;',
+                           &lt;span class="hljs-symbol"&gt;'Impressions&lt;/span&gt;',
+                           &lt;span class="hljs-symbol"&gt;'Clicks&lt;/span&gt;',
+                           &lt;span class="hljs-symbol"&gt;'Interactions&lt;/span&gt;',
+                           &lt;span class="hljs-symbol"&gt;'VideoViews&lt;/span&gt;',
+                           &lt;span class="hljs-symbol"&gt;'Cost&lt;/span&gt;',
+                           &lt;span class="hljs-symbol"&gt;'Conversions&lt;/span&gt;'
 ),
-    &lt;span class=&quot;hljs-keyword&quot;&gt;report&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&quot;GEO_PERFORMANCE_REPORT&quot;&lt;/span&gt;,
-    start=&lt;span class=&quot;hljs-string&quot;&gt;&quot;2018-09-01&quot;&lt;/span&gt;,
-    &lt;span class=&quot;hljs-keyword&quot;&gt;end&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&quot;2018-09-20&quot;&lt;/span&gt;)
+    &lt;span class="hljs-keyword"&gt;report&lt;/span&gt;=&lt;span class="hljs-string"&gt;"GEO_PERFORMANCE_REPORT"&lt;/span&gt;,
+    start=&lt;span class="hljs-string"&gt;"2018-09-01"&lt;/span&gt;,
+    &lt;span class="hljs-keyword"&gt;end&lt;/span&gt;=&lt;span class="hljs-string"&gt;"2018-09-20"&lt;/span&gt;)
 
-my_data &amp;lt;- getData(clientCustomerId = &lt;span class=&quot;hljs-string&quot;&gt;&quot;000-000-0000&quot;&lt;/span&gt;,
+my_data &amp;lt;- getData(clientCustomerId = &lt;span class="hljs-string"&gt;"000-000-0000"&lt;/span&gt;,
                    google_auth = adw_token ,
-                   statement = &lt;span class=&quot;hljs-keyword&quot;&gt;body&lt;/span&gt;,
+                   statement = &lt;span class="hljs-keyword"&gt;body&lt;/span&gt;,
                    transformation = T)
 </code></pre></div>
 
@@ -301,14 +301,14 @@ adw_token &lt;- generateAdwordsToken(saveNewToken = TRUE, addGitignore = FALSE)
 # Загрузка ранее сохранённого токена 
 adw_token &lt;- loadAdwordsToken()
 # Запрос данных
-AdWordsData &lt;- getReportData(reportType             = &quot;CAMPAIGN_PERFORMANCE_REPORT&quot;,
-                             startDate              = &quot;2018-08-01&quot;,
-                             endDate                = &quot;2018-08-15&quot;,
-                             clientCustomerId       = &quot;000-000-0000&quot;,
+AdWordsData &lt;- getReportData(reportType             = "CAMPAIGN_PERFORMANCE_REPORT",
+                             startDate              = "2018-08-01",
+                             endDate                = "2018-08-15",
+                             clientCustomerId       = "000-000-0000",
                              credentials            = adw_token,
-                             attributes             = &quot;CampaignName,CampaignStatus&quot;,
-                             segment                = &quot;Date,AdNetworkType1&quot;,
-                             metrics                = &quot;AverageCost,Clicks,Conversions&quot;,
+                             attributes             = "CampaignName,CampaignStatus",
+                             segment                = "Date,AdNetworkType1",
+                             metrics                = "AverageCost,Clicks,Conversions",
                              includeZeroImpressions = TRUE,
                              useRequestedHeaders = FALSE)
 </code></pre></div>
@@ -338,13 +338,13 @@ AdWordsData &lt;- getReportData(reportType             = &quot;CAMPAIGN_PERFORMA
 <p><strong>Пример кода для работы с rfacebookstat</strong></p>
 <div class="codehilite"><pre><span></span><code>library(rfacebookstat)
 token &lt;- fbGetToken(app_id = 00000000000000)
-fb_data &lt;- fbGetMarketingStat(accounts_id = &quot;act_00000000000000&quot;,
-                              level = &quot;campaign&quot;,
-                              fields = &quot;campaign_name,actions&quot;,
-                              action_breakdowns = &quot;action_link_click_destination&quot;,
-                              date_start = &quot;2017-11-01&quot;,
-                              date_stop = &quot;2017-11-20&quot;,
-                              interval = &quot;day&quot;,
+fb_data &lt;- fbGetMarketingStat(accounts_id = "act_00000000000000",
+                              level = "campaign",
+                              fields = "campaign_name,actions",
+                              action_breakdowns = "action_link_click_destination",
+                              date_start = "2017-11-01",
+                              date_stop = "2017-11-20",
+                              interval = "day",
                               access_token = token)
 </code></pre></div>
 
@@ -371,16 +371,16 @@ fb_data &lt;- fbGetMarketingStat(accounts_id = &quot;act_00000000000000&quot;,
 </ul>
 <p><strong>Пример кода для работы с пакетом rvkstat</strong></p>
 <div class="codehilite"><pre><span></span><code>library(rvkstat)
-my_tok &lt;- vkAuth(app_id = 111,app_secret = &quot;efbscuyewb7cb4ru4bj&quot;)
+my_tok &lt;- vkAuth(app_id = 111,app_secret = "efbscuyewb7cb4ru4bj")
 # Список рекламных кампаний
 camp &lt;- vkGetAdCampaigns(account_id = 1, access_token = my_tok$access_token)
 # Статистика по рекламным кампаниям
 vk_stat_by_campaign &lt;- vkGetAdStatistics(account_id = 1,
-                                         ids_type = &quot;campaign&quot;,
+                                         ids_type = "campaign",
                                          ids = camp$id ,
-                                         period = &quot;day&quot;,
-                                         date_from = &quot;2010-01-01&quot;, 
-                                         date_to = &quot;2017-09-10&quot;,
+                                         period = "day",
+                                         date_from = "2010-01-01", 
+                                         date_to = "2017-09-10",
                                          access_token = my_tok$access_token)
 </code></pre></div>
 
@@ -403,14 +403,14 @@ vk_stat_by_campaign &lt;- vkGetAdStatistics(account_id = 1,
 <p><strong>Пример кода для работы с rmytarget</strong></p>
 <div class="codehilite"><pre><span></span><code>library(rmytarget)
 # запрос списка объявлений 
-Ads &lt;- myTarGetAdList(login = &quot;ваш логин&quot;)
+Ads &lt;- myTarGetAdList(login = "ваш логин")
 # запрос статистики по объявлениям
-a_stat &lt;- myTarGetStats(date_from = &quot;2016-08-01&quot;,
-                        date_to = &quot;2016-08-10&quot;,
-                        object_type = &quot;banners&quot;,
+a_stat &lt;- myTarGetStats(date_from = "2016-08-01",
+                        date_to = "2016-08-10",
+                        object_type = "banners",
                         object_id = Ads$id,
-                        stat_type = &quot;day&quot;,
-            login = &quot;ваш логин&quot;)
+                        stat_type = "day",
+            login = "ваш логин")
 </code></pre></div>
 
 <h2 id="rym-api"><a target="_blank" rel="noopener" href="https://www.rdocumentation.org/packages/rym/">rym</a> — загрузка данных из API Яндекс. Метрики</h2>
@@ -435,17 +435,17 @@ a_stat &lt;- myTarGetStats(date_from = &quot;2016-08-01&quot;,
 <li><code>rym_get_logs</code> — Загрузка сырых данных из Logs API.</li>
 </ul>
 <p><strong>Пример работы с пакетом rym</strong></p>
-<div class="codehilite"><pre><span></span><code>reporting.api.stat &lt;- rym_get_data(counters   = &quot;00000000,111111111&quot;,
-                                   date.from  = &quot;2018-08-01&quot;,
-                                   date.to    = &quot;yesterday&quot;,
-                                   dimensions = &quot;ym:s:date,ym:s:lastTrafficSource&quot;,
-                                   metrics    = &quot;ym:s:visits,ym:s:pageviews,ym:s:users&quot;,
-                                   filters    = &quot;ym:s:trafficSourceName==&#39;Переходы из поисковых систем&#39; AND ym:s:isNewUser==&#39;Yes&#39;&quot;,
-                                   sort       = &quot;-ym:s:date&quot;,
-                                   accuracy   = &quot;full&quot;,
-                                   login      = &quot;ваш логин&quot;,
-                                   token.path = &quot;metrica_token&quot;,
-                                   lang       = &quot;ru&quot;)
+<div class="codehilite"><pre><span></span><code>reporting.api.stat &lt;- rym_get_data(counters   = "00000000,111111111",
+                                   date.from  = "2018-08-01",
+                                   date.to    = "yesterday",
+                                   dimensions = "ym:s:date,ym:s:lastTrafficSource",
+                                   metrics    = "ym:s:visits,ym:s:pageviews,ym:s:users",
+                                   filters    = "ym:s:trafficSourceName=='Переходы из поисковых систем' AND ym:s:isNewUser=='Yes'",
+                                   sort       = "-ym:s:date",
+                                   accuracy   = "full",
+                                   login      = "ваш логин",
+                                   token.path = "metrica_token",
+                                   lang       = "ru")
 </code></pre></div>
 
 <h1 id="_3">Заключение</h1>
@@ -458,7 +458,7 @@ a_stat &lt;- myTarGetStats(date_from = &quot;2016-08-01&quot;,
                     <div class="b-tags"><a class="b-chip" href="../?tag=api#posts">API</a><a class="b-chip" href="../?tag=veb-analitika#posts">Веб-аналитика</a><a class="b-chip" href="../?tag=r#posts">R</a><a class="b-chip" href="../?tag=pakety-r#posts">Пакеты R</a><a class="b-chip" href="../?tag=facebook#posts">Facebook</a><a class="b-chip" href="../?tag=vkontakte#posts">ВКонтакте</a><a class="b-chip" href="../?tag=yandeks-direkt#posts">Яндекс Директ</a><a class="b-chip" href="../?tag=yandeks-metrika#posts">Яндекс Метрика</a></div>
                 </div>
             </article>
-            <aside class="b-toc" aria-label="Contents"><div class="b-toc-title"><span class="ru-text">Содержание</span><span class="ua-text">Зміст</span><span class="en-text">Contents</span></div><ul><li><a href="#_1">Какой софт нам потребуется</a></li><li><a href="#r">Как начать работу с R пакетами</a></li><li><a href="#cran-github">CRAN или GitHub</a></li><li><a href="#r_1">Какие навыки нужны для работы с R пакетами</a></li><li><a href="#ryandexdirect">ryandexdirect — загрузка данных из Яндекс. Директ</a><ul><li><a href="#ryandexdirect_1">Возможности пакета ryandexdirect</a></li><li><a href="#_2">Основные функции</a></li></ul></li><li><a href="#radwords-google-ads-ex-google-adwords">RAdwords — загрузка данных из Google Ads (ex Google AdWords)</a><ul><li><a href="#radwords">Возможности пакета RAdwords</a></li><li><a href="#radwords_1">Основные функции пакета RAdwords</a></li></ul></li><li><a href="#adwordsr-google-ads-ex-google-adwords">adwordsR — более новый и функциональный пакет для загрузка=и данных из Google Ads (ex Google AdWords)</a><ul><li><a href="#adwordsr">Возможности пакета adwordsR</a></li><li><a href="#adwordsr_1">Основные функции пакета adwordsR</a></li></ul></li><li><a href="#rfacebookstat-facebook">rfacebookstat — загрузка данных из рекламных кабинетов Facebook</a><ul><li><a href="#rfacebookstat">Возможности пакета rfacebookstat</a></li><li><a href="#rfacebookstat_1">Основные функции пакета rfacebookstat</a></li></ul></li><li><a href="#rvkstat-api">rvkstat — загрузка данных из API Вконтакте</a><ul><li><a href="#rvkstat">Возможности пакета rvkstat</a></li><li><a href="#rvkstat_1">Основные функции пакета rvkstat</a></li></ul></li><li><a href="#rmytarget-api-mytarget">rmytarget — загрузка данных из API MyTarget</a><ul><li><a href="#rmytarget">Возможности пакета rmytarget</a></li><li><a href="#rmytarget_1">Основные функции пакета rmytarget</a></li></ul></li><li><a href="#rym-api">rym — загрузка данных из API Яндекс. Метрики</a><ul><li><a href="#rym">Основные возможности пакета rym</a></li><li><a href="#rym_1">Основные функции пакета rym</a></li></ul></li></ul></aside>
+            <aside class="b-toc" aria-label="Contents"><div class="b-toc-title"><span class="ru-text">Содержание</span><span class="ua-text">Зміст</span><span class="en-text">Contents</span></div><ul><li><a href="#_1">Какой софт нам потребуется</a></li><li><a href="#r">Как начать работу с R пакетами</a></li><li><a href="#cran-github">CRAN или GitHub</a></li><li><a href="#r_1">Какие навыки нужны для работы с R пакетами</a></li><li><a href="#ryandexdirect">ryandexdirect — загрузка данных из Яндекс. Директ</a><ul><li><a href="#ryandexdirect_1">Возможности пакета ryandexdirect</a></li><li><a href="#_2">Основные функции</a></li></ul></li><li><a href="#radwords-google-ads-ex-google-adwords">RAdwords — загрузка данных из Google Ads (ex Google AdWords)</a><ul><li><a href="#radwords">Возможности пакета RAdwords</a></li><li><a href="#radwords_1">Основные функции пакета RAdwords</a></li></ul></li><li><a href="#adwordsr-google-ads-ex-google-adwords">adwordsR — более новый и функциональный пакет для загрузка=и данных из Google Ads (ex Google AdWords)</a><ul><li><a href="#adwordsr">Возможности пакета adwordsR</a></li><li><a href="#adwordsr_1">Основные функции пакета adwordsR</a></li></ul></li><li><a href="#rfacebookstat-facebook">rfacebookstat — загрузка данных из рекламных кабинетов Facebook</a><ul><li><a href="#rfacebookstat">Возможности пакета rfacebookstat</a></li><li><a href="#rfacebookstat_1">Основные функции пакета rfacebookstat</a></li></ul></li><li><a href="#rvkstat-api">rvkstat — загрузка данных из API Вконтакте</a><ul><li><a href="#rvkstat">Возможности пакета rvkstat</a></li><li><a href="#rvkstat_1">Основные функции пакета rvkstat</a></li></ul></li><li><a href="#rmytarget-api-mytarget">rmytarget — загрузка данных из API MyTarget</a><ul><li><a href="#rmytarget">Возможности пакета rmytarget</a></li><li><a href="#rmytarget_1">Основные функции пакета rmytarget</a></li></ul></li><li><a href="#rym-api">rym — загрузка данных из API Яндекс. Метрики</a><ul><li><a href="#rym">Основные возможности пакета rym</a></li><li><a href="#rym_1">Основные функции пакета rym</a></li></ul></li></ul></aside>
         </div>
         <section class="b-related">
             <h2 class="outfit-font"><span class="ru-text">Читайте также</span><span class="ua-text">Читайте також</span><span class="en-text">Related posts</span></h2>

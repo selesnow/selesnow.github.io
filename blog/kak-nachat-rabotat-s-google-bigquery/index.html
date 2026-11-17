@@ -263,11 +263,11 @@ FROM (SELECT 12 AS A, 32 AS B), (SELECT 2 AS A, 29 AS B)
 <p>Запустите RStudio и с помощью сочетания клавиш «Ctrl + Alt + Shift + 0» откройте все доступные в ней панели. Чаще всего понадобятся панели Source и Console.</p>
 <p><img loading="lazy" decoding="async" alt="Как запустить в RStudio панели Source и Console" width="803" height="609" src="../images/kak-nachat-rabotat-s-google-bigquery-kak-zapustit-v-rstudio-15b4a00c.webp" /></p>
 <p>Для установки develop-версии пакета bigrquery из репозитория на GitHub предварительно установите пакет devtools. Введите в окно Source код, затем выделите его (зажмите левой кнопки мыши) и нажмите «Ctrl + Enter» для выполнения команды:</p>
-<div class="codehilite"><pre><span></span><code>install.packages(&quot;devtools&quot;)
+<div class="codehilite"><pre><span></span><code>install.packages("devtools")
 </code></pre></div>
 
 <p>Теперь установите пакет bigrquery:</p>
-<div class="codehilite"><pre><span></span><code>devtools::install_github(&quot;rstats-db/bigrquery&quot;)
+<div class="codehilite"><pre><span></span><code>devtools::install_github("rstats-db/bigrquery")
 </code></pre></div>
 
 <p>Чтобы в R были доступны функции пакета, после установки подключите их с помощью команды library или require. Например, подключим пакет bigrquery с помощью кода:</p>
@@ -281,7 +281,7 @@ FROM (SELECT 12 AS A, 32 AS B), (SELECT 2 AS A, 29 AS B)
 <img loading="lazy" decoding="async" alt="Чтобы создать набор данных с помощью языка R, воспользуйтесь командой insert_dataset" width="736" height="239" src="../images/kak-nachat-rabotat-s-google-bigquery-ctoby-sozdat-nabor-dann-caf0e098.webp" /></p>
 <p><strong>dataset</strong> — название нового набора данных.</p>
 <p>Давайте создадим первый набор данных с названием myFirstDataSet. Введите в область Source приведенный ниже код, выделите команду с помощью мыши и нажмите «Ctrl+Enter» для выполнения.</p>
-<div class="codehilite"><pre><span></span><code>insert_dataset(project = &quot;myfirstproject-185308&quot;, dataset = &quot;myFirstDataSet&quot;)
+<div class="codehilite"><pre><span></span><code>insert_dataset(project = "myfirstproject-185308", dataset = "myFirstDataSet")
 </code></pre></div>
 
 <p>В окне Console в RStudio появится запрос о создании учетных данных, чтобы в дальнейшем не требовалась повторная аутентификация.</p>
@@ -308,12 +308,12 @@ FROM (SELECT 12 AS A, 32 AS B), (SELECT 2 AS A, 29 AS B)
 “WRITE_TRUNCATE” — перезаписать данные в таблице.<br />
 “WRITE_EMPTY” — записать данные для пустой таблицы.</p>
 <p>Код для передачи в BigQuery встроенной в R таблицы mtcars:</p>
-<div class="codehilite"><pre><span></span><code>insert_upload_job(project = &quot;myfirstproject-185308&quot;,
-                 dataset = &quot;myFirstDataSet&quot;,
-                 table = &quot;mtcars_bigquery&quot;,
+<div class="codehilite"><pre><span></span><code>insert_upload_job(project = "myfirstproject-185308",
+                 dataset = "myFirstDataSet",
+                 table = "mtcars_bigquery",
                  values = mtcars,
-                 create_disposition = &quot;CREATE_IF_NEEDED&quot;,
-                 write_disposition = &quot;WRITE_APPEND&quot;)
+                 create_disposition = "CREATE_IF_NEEDED",
+                 write_disposition = "WRITE_APPEND")
 </code></pre></div>
 
 <p>При успешном выполнении операции в консоли R появится дополнительная информация, а в интерфейсе BigQuery — созданная таблица mtcars_bigquery.</p>
@@ -327,8 +327,8 @@ FROM (SELECT 12 AS A, 32 AS B), (SELECT 2 AS A, 29 AS B)
 По умолчанию задано значение TRUE с внутренним диалектом BigQuery.<br />
 Для стандартного диалекта SQL задайте в этом аргументе значение FALSE.</p>
 <p>Для обратного запроса данных, которые вы отправили в BigQuery в прошлом шаге, задайте команду:</p>
-<div class="codehilite"><pre><span></span><code>bq_mtcars_table &lt;- query_exec(query = &quot;SELECT * FROM myFirstDataSet.mtcars_bigquery&quot;,
-                             project = &quot;myfirstproject-185308&quot;,
+<div class="codehilite"><pre><span></span><code>bq_mtcars_table &lt;- query_exec(query = "SELECT * FROM myFirstDataSet.mtcars_bigquery",
+                             project = "myfirstproject-185308",
                              use_legacy_sql = TRUE)
 </code></pre></div>
 

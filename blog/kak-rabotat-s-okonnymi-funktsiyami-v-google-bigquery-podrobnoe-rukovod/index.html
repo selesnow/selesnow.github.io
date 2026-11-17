@@ -290,18 +290,18 @@ from Test_WF.test_structure
 <p>Например, результат следующего запроса выведет нарастающий итог по пяти строкам.</p>
 <div class="codehilite"><pre><span></span><code>SELECT name, value, SUM(value) OVER (ORDER BY value) AS RunningTotal
 FROM
-(SELECT &quot;a&quot; AS name, 0 AS value),
-(SELECT &quot;b&quot; AS name, 1 AS value),
-(SELECT &quot;c&quot; AS name, 2 AS value),
-(SELECT &quot;d&quot; AS name, 3 AS value),
-(SELECT &quot;e&quot; AS name, 4 AS value);
+(SELECT "a" AS name, 0 AS value),
+(SELECT "b" AS name, 1 AS value),
+(SELECT "c" AS name, 2 AS value),
+(SELECT "d" AS name, 3 AS value),
+(SELECT "e" AS name, 4 AS value);
 </code></pre></div>
 
 <p>Результат:</p>
 <p><img loading="lazy" decoding="async" alt="Нарастающий итог по пяти строкам" width="241" height="166" src="../images/209-Narastayushchiy-itog-po-pyati-strokam.webp" /></p>
 <p>Чтобы посчитать нарастающий итог по зарплатам сотрудников на тестовых данных, загруженных нами ранее, запустим следующий запрос:</p>
 <div class="codehilite"><pre><span></span><code>SELECT
-CONCAT(First_name, &quot; &quot;, Last_name) as fullName,
+CONCAT(First_name, " ", Last_name) as fullName,
 Salary,
 SUM(Salary) OVER (ORDER BY fullName) as runningTotal
 FROM Test_WF.test_structure
@@ -329,7 +329,7 @@ SUM(Salary) OVER (PARTITION BY Department) as departmentSalarySum
 FROM Test_WF.test_structure)
 
 WHERE
-Position in(&#39;Department head&#39;,&#39;CTO&#39;,&#39;CFO&#39;,&#39;Cheif Accountant&#39;)
+Position in('Department head','CTO','CFO','Cheif Accountant')
 </code></pre></div>
 
 <p>Результат:</p>
@@ -355,7 +355,7 @@ round(Salary / departmentSalarySum * 100 , 2) as headSalaryPercent
 Потом остается только отфильтровать результат запроса, чтобы итоговая таблица содержала данные только по руководителям отделов.
 
 WHERE
-Position in(&#39;Department head&#39;,&#39;CTO&#39;,&#39;CFO&#39;,&#39;Cheif Accountant&#39;)
+Position in('Department head','CTO','CFO','Cheif Accountant')
 </code></pre></div>
 
 <p>Рассмотрим все существующие на момент написания статьи оконные функции BigQuery.</p>
@@ -393,7 +393,7 @@ FROM Test_WF.test_structure
   Salary,
   CUME_DIST(Salary) OVER (PARTITION BY Department ORDER BY Salary)
 FROM Test_WF.test_structure
-WHERE Department = &#39;Finance&#39;
+WHERE Department = 'Finance'
 </code></pre></div>
 
 <p>Результат запроса:</p>
@@ -412,7 +412,7 @@ Department,
 Salary,
 DENSE_RANK(Salary) OVER (PARTITION BY Department ORDER BY Salary)
 FROM Test_WF.test_structure
-WHERE Department in (&#39;Finance&#39;,&#39;Sales&#39;)
+WHERE Department in ('Finance','Sales')
 </code></pre></div>
 
 <p>Результат запроса:</p>
@@ -425,7 +425,7 @@ Department,
 Salary,
 FIRST_VALUE(Salary) OVER (PARTITION BY Department)
 FROM Test_WF.test_structure
-WHERE Department in (&#39;Finance&#39;,&#39;Sales&#39;)
+WHERE Department in ('Finance','Sales')
 </code></pre></div>
 
 <p>Результат запроса:</p>
@@ -442,7 +442,7 @@ Department,
 Salary,
 LAG(Salary, 2) OVER (PARTITION BY Department)
 FROM Test_WF.test_structure
-WHERE Department in (&#39;Finance&#39;,&#39;Sales&#39;)
+WHERE Department in ('Finance','Sales')
 </code></pre></div>
 
 <p>Результат запроса:</p>
@@ -455,7 +455,7 @@ Department,
 Salary,
 LAST_VALUE(Salary) OVER (PARTITION BY Department)
 FROM Test_WF.test_structure
-WHERE Department in (&#39;Finance&#39;,&#39;Sales&#39;)
+WHERE Department in ('Finance','Sales')
 </code></pre></div>
 
 <p>Результат запроса:</p>
@@ -472,7 +472,7 @@ Department,
 Salary,
 LEAD(Salary, 2, INTEGER(0)) OVER (PARTITION BY Department)
 FROM Test_WF.test_structure
-WHERE Department in (&#39;Finance&#39;,&#39;Sales&#39;)
+WHERE Department in ('Finance','Sales')
 </code></pre></div>
 
 <p>Результат запроса:</p>
@@ -485,7 +485,7 @@ Department,
 Salary,
 NTH_VALUE(Salary, 2) OVER (PARTITION BY Department)
 FROM Test_WF.test_structure
-WHERE Department in (&#39;Finance&#39;,&#39;Sales&#39;)
+WHERE Department in ('Finance','Sales')
 </code></pre></div>
 
 <p>Результат запроса:</p>
@@ -498,7 +498,7 @@ Department,
 Salary,
 NTILE(4) OVER (PARTITION BY Department)
 FROM Test_WF.test_structure
-WHERE Department in (&#39;Finance&#39;,&#39;Sales&#39;)
+WHERE Department in ('Finance','Sales')
 </code></pre></div>
 
 <p>Результат запроса:</p>
@@ -511,7 +511,7 @@ Department,
 Salary,
 PERCENT_RANK(Salary) OVER (PARTITION BY Department ORDER BY Salary)
 FROM Test_WF.test_structure
-WHERE Department in (&#39;Finance&#39;,&#39;Sales&#39;)
+WHERE Department in ('Finance','Sales')
 </code></pre></div>
 
 <p>Результат запроса:</p>
@@ -534,7 +534,7 @@ Department,
 Salary,
 PERCENTILE_CONT(0.5) OVER (PARTITION BY Department ORDER BY Salary)
 FROM Test_WF.test_structure
-WHERE Department in (&#39;Finance&#39;,&#39;Sales&#39;)
+WHERE Department in ('Finance','Sales')
 </code></pre></div>
 
 <p>Результат запроса:</p>
@@ -547,7 +547,7 @@ Department,
 Salary,
 PERCENTILE_DISC(0.25) OVER (PARTITION BY Department ORDER BY Salary)
 FROM Test_WF.test_structure
-WHERE Department in (&#39;Finance&#39;,&#39;Sales&#39;)
+WHERE Department in ('Finance','Sales')
 </code></pre></div>
 
 <p>Результат запроса:</p>
@@ -565,7 +565,7 @@ Department,
 Salary,
 RANK(Salary) OVER (PARTITION BY Department ORDER BY Salary)
 FROM Test_WF.test_structure
-WHERE Department in (&#39;Finance&#39;,&#39;Sales&#39;)
+WHERE Department in ('Finance','Sales')
 </code></pre></div>
 
 <p>Результат запроса:</p>
@@ -578,7 +578,7 @@ Department,
 Salary,
 RATIO_TO_REPORT(Salary) OVER (PARTITION BY Department ORDER BY Salary)
 FROM Test_WF.test_structure
-WHERE Department in (&#39;Finance&#39;,&#39;Sales&#39;)
+WHERE Department in ('Finance','Sales')
 </code></pre></div>
 
 <p>Результат запроса:</p>
@@ -591,7 +591,7 @@ Department,
 Salary,
 ROW_NUMBER() OVER (PARTITION BY Department)
 FROM Test_WF.test_structure
-WHERE Department in (&#39;Finance&#39;,&#39;Sales&#39;)
+WHERE Department in ('Finance','Sales')
 </code></pre></div>
 
 <p>Результат запроса:</p>

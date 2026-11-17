@@ -182,7 +182,7 @@
 install.packages(“gWidgetstcltk”)
 library(“gWidgets”)
 library(“gWidgetstcltk”)
-options(&quot;guiToolkit&quot;=&quot;tcltk&quot;)
+options("guiToolkit"="tcltk")
 </code></pre></div>
 
 <h2 id="_1">Какие элементы интерфейса доступны?</h2>
@@ -192,12 +192,12 @@ options(&quot;guiToolkit&quot;=&quot;tcltk&quot;)
 <p>Если вы планируете в дальнейшем запускать разработанный интерфейс с помощью <a target="_blank" rel="noopener" href="https://netpeak.net/ru/blog/kak-nastroit-zapusk-r-skripta-po-raspisaniyu/">BAT или EXE-файла</a>, рекомендую в качестве главного контейнера использовать «gbasicdialog». При запуске из BAT-файла элемент интерфейса «gwindow» строится и мгновенно закрывается, не дождавшись действий пользователя.</p>
 <p>Все же существует способ, который позволит вам запускать интерфейс с помощью BAT-файла, даже если он построен через «gwindow». Сразу после завершения кода графического интерфейса воспользуетесь командой «Sys.sleep(300)», и окно не будет закрываться.</p>
 <h4 id="_2">Синтаксис:</h4>
-<div class="codehilite"><pre><span></span><code>gwindow(title = &quot;Window&quot;, visible = TRUE, name=title,
+<div class="codehilite"><pre><span></span><code>gwindow(title = "Window", visible = TRUE, name=title,
  width = NULL, height= NULL, parent=NULL,
  handler = NULL, action = NULL,
  ..., toolkit = guiToolkit())
 
-gbasicdialog(title = &quot;Dialog&quot;, widget, parent=NULL, do.buttons=TRUE,
+gbasicdialog(title = "Dialog", widget, parent=NULL, do.buttons=TRUE,
 handler = NULL, action=NULL,  ..., toolkit=guiToolkit())
 </code></pre></div>
 
@@ -210,7 +210,7 @@ handler = NULL, action=NULL,  ..., toolkit=guiToolkit())
 <h3 id="2-gbutton">2. Кнопка — «gbutton»</h3>
 <p>Функция «gbutton» создает кнопку в указанном контейнере.</p>
 <h4 id="_4">Синтаксис:</h4>
-<div class="codehilite"><pre><span></span><code>gbutton(text = &quot;&quot;, border=TRUE, handler = NULL, action = NULL, container = NULL,
+<div class="codehilite"><pre><span></span><code>gbutton(text = "", border=TRUE, handler = NULL, action = NULL, container = NULL,
    ..., toolkit = guiToolkit())
 </code></pre></div>
 
@@ -221,13 +221,13 @@ handler = NULL, action=NULL,  ..., toolkit=guiToolkit())
 <li><strong>container</strong> — контейнер, в котором размещается кнопка.</li>
 </ul>
 <h4 id="_6">Пример использования:</h4>
-<div class="codehilite"><pre><span></span><code>obj &amp;lt;- gbutton(&quot;Hello world&quot;, container = gwindow())
+<div class="codehilite"><pre><span></span><code>obj &amp;lt;- gbutton("Hello world", container = gwindow())
 </code></pre></div>
 
 <h3 id="3-glabel">3. Ярлык <strong>—</strong> <strong>«glabel»</strong></h3>
 <p>Текстовый блок в диалоговом окне, который используется для описания различной информации.</p>
 <h4 id="_7">Синтаксис:</h4>
-<div class="codehilite"><pre><span></span><code>glabel(text = &quot;&quot;, markup = FALSE, editable = FALSE, handler = NULL,
+<div class="codehilite"><pre><span></span><code>glabel(text = "", markup = FALSE, editable = FALSE, handler = NULL,
 action = NULL, container = NULL, ..., toolkit = guiToolkit())
 </code></pre></div>
 
@@ -238,14 +238,14 @@ action = NULL, container = NULL, ..., toolkit = guiToolkit())
 <li><strong>container</strong> — контейнер, в который будет помещен ярлык.</li>
 </ul>
 <p>Пример использования:</p>
-<div class="codehilite"><pre><span></span><code>obj &amp;lt;- glabel(&quot;Hello world&quot;, container = gwindow())
+<div class="codehilite"><pre><span></span><code>obj &amp;lt;- glabel("Hello world", container = gwindow())
 </code></pre></div>
 
 <h3 id="4-gedit">4. Текстовое поле <strong>—</strong> <strong>«gedit»</strong></h3>
 <p>В диалоговом окне появится текстовое поле, в которое пользователь может ввести свои данные.</p>
 <p><img loading="lazy" decoding="async" alt="Текстовое поле — «gedit»" width="209" height="65" src="../images/kak-razrabotat-graficheskiy-interfe-tekstovoe-pole-gedit-2a9a38a1.webp" /></p>
 <h4 id="_9">Синтаксис:</h4>
-<div class="codehilite"><pre><span></span><code>gedit(text = &quot;&quot;, width = 25, coerce.with = NULL, initial.msg=&quot;&quot;,
+<div class="codehilite"><pre><span></span><code>gedit(text = "", width = 25, coerce.with = NULL, initial.msg="",
 handler = NULL, action = NULL, container = NULL, ..., toolkit = guiToolkit())
 </code></pre></div>
 
@@ -256,7 +256,7 @@ handler = NULL, action = NULL, container = NULL, ..., toolkit = guiToolkit())
 <li><strong>container</strong> — контейнер для текстового поля.</li>
 </ul>
 <h4 id="_11">Пример использования:</h4>
-<div class="codehilite"><pre><span></span><code>obj &amp;lt;- gedit(&quot;Hello world&quot;, container = gwindow())
+<div class="codehilite"><pre><span></span><code>obj &amp;lt;- gedit("Hello world", container = gwindow())
 </code></pre></div>
 
 <h3 id="5-gradio">5. Список с возможностью выбора одного элемента <strong>—</strong> <strong>«gradio»</strong></h3>
@@ -276,7 +276,7 @@ handler = NULL, action = NULL, container = NULL, ..., toolkit = guiToolkit())
 <li><strong>container</strong> — контейнер, в котором размещается список.</li>
 </ul>
 <h4 id="_14">Пример использования:</h4>
-<div class="codehilite"><pre><span></span><code>obj &amp;lt;- gradio(c(&quot;hello&quot;,&quot;world&quot;), container=gwindow())
+<div class="codehilite"><pre><span></span><code>obj &amp;lt;- gradio(c("hello","world"), container=gwindow())
 </code></pre></div>
 
 <h3 id="6-gcombobox">6. Выпадающий список <strong>—</strong> <strong>«gcombobox»</strong></h3>
@@ -295,7 +295,7 @@ handler = NULL, action = NULL, container = NULL, ..., toolkit = guiToolkit())
 <li><strong>container</strong> — контейнер для размещения выпадающего списка.</li>
 </ul>
 <h4 id="_17">Пример использования:</h4>
-<div class="codehilite"><pre><span></span><code>obj &amp;lt;- gcombobox(c(&quot;hello&quot;,&quot;world&quot;), container=gwindow())
+<div class="codehilite"><pre><span></span><code>obj &amp;lt;- gcombobox(c("hello","world"), container=gwindow())
 </code></pre></div>
 
 <h3 id="7-gcheckboxgroup">7. Список с возможностью выбора нескольких элементов <strong>—</strong><strong>«</strong><strong>gcheckboxgroup</strong><strong>»</strong></h3>
@@ -314,14 +314,14 @@ handler = NULL, action = NULL, container = NULL, ..., toolkit = guiToolkit())
 <li><strong>container</strong> — контейнер для размещения списка.</li>
 </ul>
 <h4 id="_20">Пример использования:</h4>
-<div class="codehilite"><pre><span></span><code>obj &amp;lt;- gcheckboxgroup(c(&quot;hello&quot;,&quot;world&quot;), container=gwindow()
+<div class="codehilite"><pre><span></span><code>obj &amp;lt;- gcheckboxgroup(c("hello","world"), container=gwindow()
 </code></pre></div>
 
 <h3 id="8-gcalendar">8. Календарь — «gcalendar»</h3>
 <p>С помощью этого элемента удобно выбирать дату.</p>
 <p><img loading="lazy" decoding="async" alt="Календарь — «gcalendar»" width="278" height="267" src="../images/kak-razrabotat-graficheskiy-interfe-kalendar-gcalendar-7895c53e.webp" /></p>
 <h4 id="_21">Синтаксис:</h4>
-<div class="codehilite"><pre><span></span><code>gcalendar(text = &quot;&quot;, format = &quot;%Y-%m-%d&quot;, handler=NULL,
+<div class="codehilite"><pre><span></span><code>gcalendar(text = "", format = "%Y-%m-%d", handler=NULL,
 action=NULL, container = NULL, ..., toolkit = guiToolkit())
 </code></pre></div>
 
@@ -340,10 +340,10 @@ action=NULL, container = NULL, ..., toolkit = guiToolkit())
 <p>Данный элемент выводит на экран диалоговое окно для открытия или сохранения файлов и папок.</p>
 <p><img loading="lazy" decoding="async" alt="Выбор папки или файла — «gfile»" width="551" height="553" src="../images/kak-razrabotat-graficheskiy-interfe-vybor-papki-ili-fajla-gf-ea805f86.webp" /></p>
 <h4 id="_24">Синтаксис:</h4>
-<div class="codehilite"><pre><span></span><code>gfile(text = &quot;&quot;, type = c(&quot;open&quot;, &quot;save&quot;, &quot;selectdir&quot;), initialfilename = NULL,
-   filter = list(&quot;All files&quot; = list(patterns = c(&quot;*&quot;)), &quot;R files&quot; =
-   list(patterns = c(&quot;*.R&quot;,&quot;*.Rdata&quot;)),
-       &quot;text files&quot; = list(mime.types = c(&quot;text/plain&quot;))
+<div class="codehilite"><pre><span></span><code>gfile(text = "", type = c("open", "save", "selectdir"), initialfilename = NULL,
+   filter = list("All files" = list(patterns = c("*")), "R files" =
+   list(patterns = c("*.R","*.Rdata")),
+       "text files" = list(mime.types = c("text/plain"))
        ), multi=FALSE, handler = NULL, action = NULL, ..., toolkit = guiToolkit())
 </code></pre></div>
 
@@ -354,7 +354,7 @@ action=NULL, container = NULL, ..., toolkit = guiToolkit())
 <li><strong>handler</strong> — обработчик событий, в котором вы прописываете анонимную функцию, запускающуюся при активации элемента. Обязательные аргументы данной функции — function(h,…).</li>
 </ul>
 <h4 id="_26">Пример использования:</h4>
-<div class="codehilite"><pre><span></span><code>obj &amp;lt;- gbutton(&quot;Select file&quot;, container=gwindow(), handler = function(h,...) {gfile(text = &quot;Select file&quot;, type = &quot;selectdir&quot;)})
+<div class="codehilite"><pre><span></span><code>obj &amp;lt;- gbutton("Select file", container=gwindow(), handler = function(h,...) {gfile(text = "Select file", type = "selectdir")})
 </code></pre></div>
 
 <h2 id="_27">Как разработать простой графический интерфейс?</h2>
@@ -375,7 +375,7 @@ action=NULL, container = NULL, ..., toolkit = guiToolkit())
 </ol>
 <p>Кнопка создается с помощью функции <strong>«gbutton(“Hello!”, container = main_window, handler = function(h,…)».</strong> Первый аргумент отвечает за текст кнопки, второй — указывает контейнер, в котором будет отображаться кнопка. Аргумент «handler» обрабатывает событие, а значит в нем нужно описать функцию, которая выполнится при нажатии кнопки:</p>
 <div class="codehilite"><pre><span></span><code>function(h,...){
- gmessage(paste0(&quot;Hello &quot;,svalue(username),&quot;!&quot;))
+ gmessage(paste0("Hello ",svalue(username),"!"))
 }
 </code></pre></div>
 
@@ -384,15 +384,15 @@ action=NULL, container = NULL, ..., toolkit = guiToolkit())
 <li>В результате у вас получится такой код:</li>
 </ol>
 <div class="codehilite"><pre><span></span><code>#Создаем диалоговое окно
-main_window &amp;amp;lt;- gwindow(title = &quot;My main windows&quot;)
+main_window &amp;amp;lt;- gwindow(title = "My main windows")
 #Добавляем подпись к текстовому полю
-glable(&quot;Enter your name&quot;, container = main_window)
+glable("Enter your name", container = main_window)
 #Добавляем текстовое поле
-username &amp;amp;lt;- gedit(&quot;User name&quot;, container = main_window)
+username &amp;amp;lt;- gedit("User name", container = main_window)
 #Добавляем кнопку
-gbutton(&quot;Hello!&quot;, container = main_window, handler = function(h,...){
+gbutton("Hello!", container = main_window, handler = function(h,...){
 #Описываем действия которые будут выполнены при нажатие на кнопку
-gmessage(paste0(&quot;Hello &quot;,svalue(username),&quot;!&quot;))
+gmessage(paste0("Hello ",svalue(username),"!"))
 })
 </code></pre></div>
 
@@ -408,66 +408,66 @@ gmessage(paste0(&quot;Hello &quot;,svalue(username),&quot;!&quot;))
 <div class="codehilite"><pre><span></span><code>library(gWidgets)
 library(gWidgetstcltk)
 library(lubridate)
-options(guiToolkit=&quot;tcltk&quot;)
+options(guiToolkit="tcltk")
 #переходим в рабочую директорию
-setwd(&quot;C:/ppc_bi&quot;)
+setwd("C:/ppc_bi")
 #Период
 currentDate &amp;amp;lt;-Sys.Date()
 eopm &amp;amp;lt;- currentDate - days(day(currentDate))
 sopm &amp;amp;lt;- currentDate - days(day(currentDate))
 sopm &amp;amp;lt;- sopm - days(day(sopm) - 1)
 #Строим диалоговое окно
-win &amp;amp;lt;- gbasicdialog(&quot;BI Data Uploader System v 1.0&quot;,visible = F,do.buttons=FALSE)
+win &amp;amp;lt;- gbasicdialog("BI Data Uploader System v 1.0",visible = F,do.buttons=FALSE)
 #Выбор рабочей папки
-dirgroup &amp;amp;lt;- gframe(&quot;Work directory&quot;,container = win,horizontal = T)
-workdirblock &amp;amp;lt;- gedit(&quot;C:/ppc_bi&quot;, container = dirgroup)
-gbutton(&quot;Choice&quot;, container = dirgroup,handler = function(h,...) {
- workdir &amp;amp;lt;&amp;amp;lt;- gfile(&quot;Select directory&quot;,type=&quot;selectdir&quot;)
+dirgroup &amp;amp;lt;- gframe("Work directory",container = win,horizontal = T)
+workdirblock &amp;amp;lt;- gedit("C:/ppc_bi", container = dirgroup)
+gbutton("Choice", container = dirgroup,handler = function(h,...) {
+ workdir &amp;amp;lt;&amp;amp;lt;- gfile("Select directory",type="selectdir")
  svalue(workdirblock) &amp;amp;lt;- workdir
  setwd(svalue(workdirblock))
 })
 #Группируем учетные данные
 cred_group &amp;amp;lt;- ggroup(container = win)
 #Учетные даные MySQL
-mysqlgr &amp;amp;lt;- gframe(&quot;MySQL credentials&quot;,container = cred_group,horizontal = F)
-glabel(&quot;Host:&quot;,container = mysqlgr)
-host &amp;amp;lt;- gedit(&quot;&quot;, container = mysqlgr)
-glabel(&quot;User:&quot;,container = mysqlgr)
-user &amp;amp;lt;- gedit(&quot;&quot;, container = mysqlgr)
-glabel(&quot;Pass:&quot;,container = mysqlgr)
-pass &amp;amp;lt;- gedit(&quot;&quot;, container = mysqlgr)
+mysqlgr &amp;amp;lt;- gframe("MySQL credentials",container = cred_group,horizontal = F)
+glabel("Host:",container = mysqlgr)
+host &amp;amp;lt;- gedit("", container = mysqlgr)
+glabel("User:",container = mysqlgr)
+user &amp;amp;lt;- gedit("", container = mysqlgr)
+glabel("Pass:",container = mysqlgr)
+pass &amp;amp;lt;- gedit("", container = mysqlgr)
 
 #Учетные данные Google
-gagroup &amp;amp;lt;- gframe(&quot;Google credentials&quot;,container = cred_group,horizontal = F)
-glabel(&quot;Clientid:&quot;,container = gagroup)
-clientid &amp;amp;lt;- gedit(&quot;&quot;, container = gagroup)
-glabel(&quot;Client secret:&quot;,container = gagroup)
-clientsecret &amp;amp;lt;- gedit(&quot;&quot;, container = gagroup)
-glabel(&quot;Adwords API token:&quot;,container = gagroup)
-adwords_api_token &amp;amp;lt;- gedit(&quot;&quot;, container = gagroup)
+gagroup &amp;amp;lt;- gframe("Google credentials",container = cred_group,horizontal = F)
+glabel("Clientid:",container = gagroup)
+clientid &amp;amp;lt;- gedit("", container = gagroup)
+glabel("Client secret:",container = gagroup)
+clientsecret &amp;amp;lt;- gedit("", container = gagroup)
+glabel("Adwords API token:",container = gagroup)
+adwords_api_token &amp;amp;lt;- gedit("", container = gagroup)
 #ID докса - справочника проектов
-doxgroup &amp;amp;lt;- gframe(&quot;Project dictionary document key&quot;,container = win)
-doxid &amp;amp;lt;- gedit(&quot;&quot;, container = doxgroup, width = 50)
+doxgroup &amp;amp;lt;- gframe("Project dictionary document key",container = win)
+doxid &amp;amp;lt;- gedit("", container = doxgroup, width = 50)
 #Установка отчетного периода
-grperiod &amp;amp;lt;- gframe(&quot;Period&quot;,container = win,horizontal = F)
-glabel(&quot;From: &quot;,container = grperiod)
-date_from &amp;amp;lt;- gcalendar(text = as.character(sopm), format = &quot;%Y-%m-%d&quot;,  container = grperiod)
-glabel(&quot;To: &quot;,container = grperiod)
-date_to   &amp;amp;lt;- gcalendar(text = as.character(eopm), format = &quot;%Y-%m-%d&quot;,  container = grperiod)
+grperiod &amp;amp;lt;- gframe("Period",container = win,horizontal = F)
+glabel("From: ",container = grperiod)
+date_from &amp;amp;lt;- gcalendar(text = as.character(sopm), format = "%Y-%m-%d",  container = grperiod)
+glabel("To: ",container = grperiod)
+date_to   &amp;amp;lt;- gcalendar(text = as.character(eopm), format = "%Y-%m-%d",  container = grperiod)
 #Выбор скриптов которые необходимо запустить
-grscripts &amp;amp;lt;- gframe(&quot;Scripts&quot;,container = win,horizontal = T)
-scripts &amp;amp;lt;- gcheckboxgroup(c(&quot;AdWords&quot;,&quot;Facebook&quot;,&quot;Direct&quot;,&quot;QualityScore&quot;,&quot;LostProfit&quot;,&quot;Summary&quot;), container=grscripts)
+grscripts &amp;amp;lt;- gframe("Scripts",container = win,horizontal = T)
+scripts &amp;amp;lt;- gcheckboxgroup(c("AdWords","Facebook","Direct","QualityScore","LostProfit","Summary"), container=grscripts)
 #Кнопка Start
-gbutton(&quot;Start&quot;, container = win,handler = function(h,...) {
+gbutton("Start", container = win,handler = function(h,...) {
  dispose(win)
  for(scrnum in svalue(scripts)){
-   scriptName &amp;amp;lt;- paste0(scrnum, &quot;.R&quot;)
+   scriptName &amp;amp;lt;- paste0(scrnum, ".R")
    source(scriptName)
  }
 
 })
 #Кнопка Cancel
-gbutton(&quot;Cancel&quot;, container = win,handler = function(h,...) {
+gbutton("Cancel", container = win,handler = function(h,...) {
  dispose(win)
 })
 #Включаем окно
@@ -501,7 +501,7 @@ visible(win, set = T)
                     <div class="b-tags"><a class="b-chip" href="../?tag=avtomatizatsiya#posts">Автоматизация</a><a class="b-chip" href="../?tag=gui#posts">GUI</a><a class="b-chip" href="../?tag=r#posts">R</a></div>
                 </div>
             </article>
-            <aside class="b-toc" aria-label="Contents"><div class="b-toc-title"><span class="ru-text">Содержание</span><span class="ua-text">Зміст</span><span class="en-text">Contents</span></div><ul><li><a href="#gwidgets">Как установить пакет «gWidgets»?</a></li><li><a href="#_1">Какие элементы интерфейса доступны?</a><ul><li><a href="#1-gwindow-gbasicdialog">1. Диалоговое окно — «gwindow» и «gbasicdialog»</a></li><li><a href="#2-gbutton">2. Кнопка — «gbutton»</a></li><li><a href="#3-glabel">3. Ярлык — «glabel»</a></li><li><a href="#4-gedit">4. Текстовое поле — «gedit»</a></li><li><a href="#5-gradio">5. Список с возможностью выбора одного элемента — «gradio»</a></li><li><a href="#6-gcombobox">6. Выпадающий список — «gcombobox»</a></li><li><a href="#7-gcheckboxgroup">7. Список с возможностью выбора нескольких элементов —«gcheckboxgroup»</a></li><li><a href="#8-gcalendar">8. Календарь — «gcalendar»</a></li><li><a href="#9-gfile">9. Выбор папки или файла — «gfile»</a></li></ul></li><li><a href="#_27">Как разработать простой графический интерфейс?</a></li><li><a href="#r">Пример сложного графического интерфейса, разработанного в R</a></li><li><a href="#_28">Выводы</a></li></ul></aside>
+            <aside class="b-toc" aria-label="Contents"><div class="b-toc-title"><span class="ru-text">Содержание</span><span class="ua-text">Зміст</span><span class="en-text">Contents</span></div><ul><li><a href="#gwidgets">Как установить пакет «gWidgets»?</a></li><li><a href="#_1">Какие элементы интерфейса доступны?</a><ul><li><a href="#1-gwindow-gbasicdialog">1. Диалоговое окно — «gwindow» и «gbasicdialog»</a></li><li><a href="#2-gbutton">2. Кнопка — «gbutton»</a></li><li><a href="#3-glabel">3. Ярлык — «glabel»</a></li><li><a href="#4-gedit">4. Текстовое поле — «gedit»</a></li><li><a href="#5-gradio">5. Список с возможностью выбора одного элемента — «gradio»</a></li><li><a href="#6-gcombobox">6. Выпадающий список — «gcombobox»</a></li><li><a href="#7-gcheckboxgroup">7. Список с возможностью выбора нескольких элементов —«gcheckboxgroup»</a></li><li><a href="#8-gcalendar">8. Календарь — «gcalendar»</a></li><li><a href="#9-gfile">9. Выбор папки или файла — «gfile»</a></li></ul></li><li><a href="#_27">Как разработать простой графический интерфейс?</a></li><li><a href="#r">Пример сложного графического интерфейса, разработанного в R</a></li><li><a href="#_28">Выводы</a></li></ul></aside>
         </div>
         <section class="b-related">
             <h2 class="outfit-font"><span class="ru-text">Читайте также</span><span class="ua-text">Читайте також</span><span class="en-text">Related posts</span></h2>

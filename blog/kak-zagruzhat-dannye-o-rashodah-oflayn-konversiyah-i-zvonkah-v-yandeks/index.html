@@ -210,8 +210,8 @@
 <div class="codehilite"><pre><span></span><code>library(rym)
 
 # опции
-options(rym.user = &quot;ваш логин&quot;,
-        rym.token_path = &#39;D:/rym_tokens&#39;)
+options(rym.user = "ваш логин",
+        rym.token_path = 'D:/rym_tokens')
 
 # авторизация
 rym_auth()
@@ -247,22 +247,22 @@ rym_auth()
 </ul>
 <p>Тестовый набор данных для загрузки вы можете создать с помощью кода:</p>
 <div class="codehilite"><pre><span></span><code># данные для загрузки
-expense &lt;- data.frame(Date        = c(&quot;2020-06-01&quot;,
-                                      &quot;2020-06-02&quot;),
-                      UTMSource   = c(&quot;test_s_1&quot;,
-                                      &quot;test_s_2&quot;),
+expense &lt;- data.frame(Date        = c("2020-06-01",
+                                      "2020-06-02"),
+                      UTMSource   = c("test_s_1",
+                                      "test_s_2"),
                       Expenses    = c(88.12,
                                       92.11),
-                      UTMMedium   = c(&quot;cpc&quot;,
-                                      &quot;cpm&quot;),
-                      UTMCampaign = c(&quot;camp1&quot;,
-                                      &quot;camp2&quot;),
-                      UTMTerm     = c(&quot;term1&quot;,
-                                      &quot;term2&quot;),
-                      UTMContent  = c(&quot;cont1&quot;,
-                                      &quot;cont2&quot;),
-                      Currency    = c(&quot;RUB&quot;,
-                                      &quot;RUB&quot;),
+                      UTMMedium   = c("cpc",
+                                      "cpm"),
+                      UTMCampaign = c("camp1",
+                                      "camp2"),
+                      UTMTerm     = c("term1",
+                                      "term2"),
+                      UTMContent  = c("cont1",
+                                      "cont2"),
+                      Currency    = c("RUB",
+                                      "RUB"),
                       Clicks      = c(11, 15))
 </code></pre></div>
 
@@ -346,15 +346,15 @@ rym_allow_offline_conversion(номер_счётчика)
 <div class="codehilite"><pre><span></span><code># загрузка оффлайн конверсий
 rym_upload_offline_conversion(номер_счётчика,
                               data = conv_data,
-                              client.id.type = &quot;CLIENT_ID&quot;,
-                              login = &#39;yandex_login&#39;)
+                              client.id.type = "CLIENT_ID",
+                              login = 'yandex_login')
 </code></pre></div>
 
 <p>Получите список загрузок:</p>
 <div class="codehilite"><pre><span></span><code># список загрузок
 uploads &lt;- rym_get_uploadings_offline_conversions(
               counter = номер_счётчика,
-              login   = &#39;yandex_login&#39;)
+              login   = 'yandex_login')
 </code></pre></div>
 
 <h2 id="_13">Загрузка информации о звонках в Яндекс. Метрику</h2>
@@ -369,11 +369,11 @@ uploads &lt;- rym_get_uploadings_offline_conversions(
 <p>Изначально вам необходимо включить учёт данных о звонках в Метрике. Сделать это можно либо в веб-интерфейсе, либо с помощью функции rym_enable_calls(), а с помощью rym_allow_calls() легко узнать, с какого момента вы можете дополнять данные о визитах информацией о звонках.</p>
 <div class="codehilite"><pre><span></span><code># учёт звонков
 rym_enable_calls(номер_счётчика,
-                login = &#39;yandex_login&#39;)
+                login = 'yandex_login')
 
 # проверка можно ли загружать данные и за какой период
 rym_allow_calls(номер_счётчика,
-                login = &#39;yandex_login&#39;)
+                login = 'yandex_login')
 </code></pre></div>
 
 <p>Формат данных о звонках для загрузки в Яндекс. Метрику</p>
@@ -400,14 +400,14 @@ rym_allow_calls(номер_счётчика,
 <p>Когда у данных нужный формат, вы можете отправить их в Яндекс. Метрику:</p>
 <div class="codehilite"><pre><span></span><code>rym_upload_calls(номер_счётчика,
                 data = conv_data,
-                client.id.type = &quot;CLIENT_ID&quot;,
-                login = &#39;yandex_login&#39;)
+                client.id.type = "CLIENT_ID",
+                login = 'yandex_login')
 </code></pre></div>
 
 <p>Получить список всех загрузок можно с помощью кода ниже:</p>
 <div class="codehilite"><pre><span></span><code>uploads &lt;- rym_get_uploadings_calls(
               counter = номер_счётчика,
-              login   = &#39;yandex_login&#39;)
+              login   = 'yandex_login')
 </code></pre></div>
 
 <h2 id="_17">Выводы</h2>

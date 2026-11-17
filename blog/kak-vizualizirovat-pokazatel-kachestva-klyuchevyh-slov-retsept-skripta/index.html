@@ -197,15 +197,15 @@
 <p>Для построения диаграмм будем использовать пакет <strong>«ggplot2»</strong>, а для для выгрузки данных в Google Таблицу нам понадобится пакет <strong>«googlesheets»</strong>.</p>
 <p>Установка и подключение пакетов осуществляется с помощью команд install.packages и require.</p>
 <div class="codehilite"><pre><span></span><code>#Установка и подключение требуемых пакетов
-install.packages(&quot;devtools&quot;)
-require(&quot;devtools&quot;)
-install.packages(&quot;RGoogleAnalytics&quot;)
+install.packages("devtools")
+require("devtools")
+install.packages("RGoogleAnalytics")
 require(RGoogleAnalytics)
-install_github(&#39;jburkhardt/RAdwords&#39;)
+install_github('jburkhardt/RAdwords')
 require(RAdwords)
-install.packages(&quot;googlesheets&quot;)
+install.packages("googlesheets")
 require(googlesheets)
-install.packages(&quot;ggplot2&quot;)
+install.packages("ggplot2")
 require(ggplot2)
 </code></pre></div>
 
@@ -218,11 +218,11 @@ require(ggplot2)
 <li><strong>adwordsID</strong> — ID аккаунта AdWords.</li>
 </ul>
 <div class="codehilite"><pre><span></span><code>##Объявляем переменные
-clienid &lt;- &quot;XXXXXXXXXXXXXXXXXXXXXXXXX.apps.googleusercontent.com&quot;  #Client ID из google console
-secret  &lt;- &quot;XXXXXXXXXXXXXXXXXXXX&quot;  #Secret от Client ID из google console
-adwords_token &lt;- &quot;XXXXXXXXXXXXXXXX&quot;  #Токен AdWords API
-ga_view &lt;- &quot;ga:XXXXXXXXXX&quot;  #ID представления Google Analytics
-adwordsID &lt;- &quot;XXX-XXX-XXX&quot;  #ID аккаунта AdWords
+clienid &lt;- "XXXXXXXXXXXXXXXXXXXXXXXXX.apps.googleusercontent.com"  #Client ID из google console
+secret  &lt;- "XXXXXXXXXXXXXXXXXXXX"  #Secret от Client ID из google console
+adwords_token &lt;- "XXXXXXXXXXXXXXXX"  #Токен AdWords API
+ga_view &lt;- "ga:XXXXXXXXXX"  #ID представления Google Analytics
+adwordsID &lt;- "XXX-XXX-XXX"  #ID аккаунта AdWords
 </code></pre></div>
 
 <p>В отчёт будут выводиться не только составляющие показателя качества, но и некоторые статистические данные: показы, клики, средняя позиция и так далее. На этом этапе нужно установить период, за который планируем информацию. Введём ещё две переменные:</p>
@@ -232,12 +232,12 @@ adwordsID &lt;- &quot;XXX-XXX-XXX&quot;  #ID аккаунта AdWords
 </ul>
 <p>Хочу обратить внимание, что в AdWords нет исторических данных о динамике изменения показателя качества, вы получите только информацию на текущий момент.</p>
 <div class="codehilite"><pre><span></span><code>#Определяем отчётный период
-start_period &lt;- c(day = &quot;01&quot;,
-     month = &quot;05&quot;,
-     year = &quot;2016&quot;)
-end_period &lt;- c(day = &quot;05&quot;,
-     month = &quot;06&quot;,
-     year = &quot;2016&quot;)
+start_period &lt;- c(day = "01",
+     month = "05",
+     year = "2016")
+end_period &lt;- c(day = "05",
+     month = "06",
+     year = "2016")
 </code></pre></div>
 
 <p>В статье <a target="_blank" rel="noopener" href="http://netpeak.net/ru/blog/kak-otsenit-poteryanniy-dohod-v-google-adwords-s-pomoshchyu-yazyka-r/">«Как оценить потерянный доход с помощью языка R?»</a> я уже описывал процесс аутентификации в Google Analytics и Google AdWords, поэтому в пункте 2 и 3 приведу только пошаговый алгоритм.</p>
@@ -275,11 +275,11 @@ adwords_auth &lt;- doAuth(F)
 ga_auth &lt;- Auth(clienid,secret)
 ValidateToken(ga_auth)
 
-query.list &lt;- Init(start.date = paste(start_period[&quot;year&quot;],start_period[&quot;month&quot;],start_period[&quot;day&quot;],sep = &quot;-&quot;),
-     end.date = paste(end_period[&quot;year&quot;],end_period[&quot;month&quot;],end_period[&quot;day&quot;],sep = &quot;-&quot;),
-     dimensions = &quot;ga:adwordsCriteriaID, ga:keyword, ga:adGroup, ga:campaign, ga:adwordsAdGroupID, ga:adwordsCampaignID&quot;,
-     metrics = &quot;ga:impressions&quot;,
-     filters = &quot;ga:medium==cpc, ga:source==google&quot;,
+query.list &lt;- Init(start.date = paste(start_period["year"],start_period["month"],start_period["day"],sep = "-"),
+     end.date = paste(end_period["year"],end_period["month"],end_period["day"],sep = "-"),
+     dimensions = "ga:adwordsCriteriaID, ga:keyword, ga:adGroup, ga:campaign, ga:adwordsAdGroupID, ga:adwordsCampaignID",
+     metrics = "ga:impressions",
+     filters = "ga:medium==cpc, ga:source==google",
      table.id = ga_view,
      max.results = 10000)
 
@@ -290,39 +290,39 @@ gaData &lt;- GetReportData(ga.query, ga_auth, split_daywise = FALSE, paginate_qu
 #Получаем данные из Google AdWords
 adwords_auth &lt;- doAuth()
 
-body &lt;- statement(select=c(&#39;AccountDescriptiveName&#39;,
-       &#39;Id&#39;,
-       &#39;FinalUrls&#39;,
-       &#39;Status&#39;,
-       &#39;AdGroupId&#39;,
-       &#39;AdGroupStatus&#39;,
-       &#39;CampaignId&#39;,
-       &#39;CampaignStatus&#39;,
-       &#39;Impressions&#39;,
-       &#39;Clicks&#39;,
-       &#39;Cost&#39;,
-       &#39;Ctr&#39;,
-       &#39;AveragePosition&#39;,
-       &#39;CreativeQualityScore&#39;,
-       &#39;PostClickQualityScore&#39;,
-       &#39;SearchPredictedCtr&#39;,
-       &#39;QualityScore&#39;
+body &lt;- statement(select=c('AccountDescriptiveName',
+       'Id',
+       'FinalUrls',
+       'Status',
+       'AdGroupId',
+       'AdGroupStatus',
+       'CampaignId',
+       'CampaignStatus',
+       'Impressions',
+       'Clicks',
+       'Cost',
+       'Ctr',
+       'AveragePosition',
+       'CreativeQualityScore',
+       'PostClickQualityScore',
+       'SearchPredictedCtr',
+       'QualityScore'
 ),
-report=&quot;KEYWORDS_PERFORMANCE_REPORT&quot;,
-start=paste0(start_period[&quot;year&quot;],start_period[&quot;month&quot;],start_period[&quot;day&quot;]),
-end=paste0(end_period[&quot;year&quot;],end_period[&quot;month&quot;],end_period[&quot;day&quot;]))
+report="KEYWORDS_PERFORMANCE_REPORT",
+start=paste0(start_period["year"],start_period["month"],start_period["day"]),
+end=paste0(end_period["year"],end_period["month"],end_period["day"]))
 
 adwordsData &lt;- getData(
  clientCustomerId = adwordsID,
  google_auth = adwords_auth,
  statement = body,
  transformation = T,
- apiVersion = &quot;201605&quot;)
+ apiVersion = "201605")
 
 #Соединяем данные из Google Analytics и Google AdWords в одну таблицу
 totalDataRaw &lt;- merge(adwordsData, gaData,
-      by.x = c(&quot;KeywordID&quot;, &quot;AdgroupID&quot;, &quot;CampaignID&quot;),
-      by.y = c(&quot;adwordsCriteriaID&quot;,&quot;adwordsAdGroupID&quot;,&quot;adwordsCampaignID&quot;),
+      by.x = c("KeywordID", "AdgroupID", "CampaignID"),
+      by.y = c("adwordsCriteriaID","adwordsAdGroupID","adwordsCampaignID"),
       all.adwordsData = TRUE)
 
 #Очищаем таблицу от лишних столбцов, и пересортировываем столбцы в нужном порядке
@@ -343,9 +343,9 @@ totalData &lt;- data.frame(Campaign = totalDataRaw$campaign,
 #Группируем данные по показателю качества на низкий, средний и высокий
 for(i in 1:length(totalData$Qualityscore)){
 if(as.integer(totalData$Qualityscore[i]) &lt;= 4){
-    totalData$QSGroup[i] &lt;- &quot;Low&quot;     }else if(as.integer(totalData$Qualityscore[i]) &gt;= 5 &amp; as.integer(totalData$Qualityscore[i]) &lt;= 7){
-    totalData$QSGroup[i] &lt;- &quot;Middle&quot;     }else if(as.integer(totalData$Qualityscore[i]) &gt;= 8 &amp; as.integer(totalData$Qualityscore[i]) &lt;= 10){
-      totalData$QSGroup[i] &lt;- &quot;High&quot;
+    totalData$QSGroup[i] &lt;- "Low"     }else if(as.integer(totalData$Qualityscore[i]) &gt;= 5 &amp; as.integer(totalData$Qualityscore[i]) &lt;= 7){
+    totalData$QSGroup[i] &lt;- "Middle"     }else if(as.integer(totalData$Qualityscore[i]) &gt;= 8 &amp; as.integer(totalData$Qualityscore[i]) &lt;= 10){
+      totalData$QSGroup[i] &lt;- "High"
     }
 }
 </code></pre></div>
@@ -358,8 +358,8 @@ adrelevance &lt;- totalData[,c(1,10)]
 landingpageexperience &lt;- totalData[,c(1,11)]
 expectedclickthroughrate &lt;- totalData[,c(1,12)]
 qsgroup &lt;- totalData[,c(1,13)]
-avgQS &lt;- aggregate(as.integer(totalData$Qualityscore) ~ totalData$Campaign, FUN = &quot;mean&quot;)
-colnames(avgQS) &lt;- c(&quot;Campaign&quot;,&quot;QS&quot;)
+avgQS &lt;- aggregate(as.integer(totalData$Qualityscore) ~ totalData$Campaign, FUN = "mean")
+colnames(avgQS) &lt;- c("Campaign","QS")
 </code></pre></div>
 
 <p>Далее я приведу несколько примеров диаграмм, которые вы можете построить для анализа составляющих показателя качества.</p>
@@ -367,9 +367,9 @@ colnames(avgQS) &lt;- c(&quot;Campaign&quot;,&quot;QS&quot;)
 <p>Код для построения визуализации:</p>
 <div class="codehilite"><pre><span></span><code>#Визуализация среднего показателя качества в разрезе кампаний
 ggplot(avgQS, aes(x = Campaign, y = QS))+
-  geom_bar(stat = &quot;identity&quot;, position = &quot;dodge&quot;, fill = &quot;cyan4&quot;)+
+  geom_bar(stat = "identity", position = "dodge", fill = "cyan4")+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 7))+
-  ggtitle(&quot;Average Quality Score by Campaign&quot;)
+  ggtitle("Average Quality Score by Campaign")
 </code></pre></div>
 
 <p><img loading="lazy" decoding="async" alt="Средний показатель качества в разрезе кампаний" width="822" height="538" src="../images/kak-vizualizirovat-pokazatel-kache-sredniy-pokazatel-kachest-53f34c4f.webp" /></p>
@@ -384,10 +384,10 @@ ggplot(avgQS, aes(x = Campaign, y = QS))+
 <p>Код для построения визуализации:</p>
 <div class="codehilite"><pre><span></span><code>#Визуализация по группированному показателю качества
 ggplot(qsgroup, aes(x = Campaign, fill = QSGroup))+
-  geom_bar(stat = &quot;count&quot;, position = &quot;fill&quot;)+
-  scale_fill_manual(breaks=c(&quot;High&quot;,&quot;Middle&quot;,&quot;Low&quot;),values=c(High = &quot;forestgreen&quot;, Middle = &quot;tan1&quot; , Low = &quot;firebrick1&quot;))+
+  geom_bar(stat = "count", position = "fill")+
+  scale_fill_manual(breaks=c("High","Middle","Low"),values=c(High = "forestgreen", Middle = "tan1" , Low = "firebrick1"))+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 7))+
-  ggtitle(&quot;Number of keywords by Quality Score Group&quot;)
+  ggtitle("Number of keywords by Quality Score Group")
 </code></pre></div>
 
 <p><img loading="lazy" decoding="async" alt="Распределение ключевых слов по уровню показателя качества в разрезе рекламных кампаний" width="808" height="539" src="../images/kak-vizualizirovat-pokazatel-kache-raspredelenie-klyuchevyh-268fddc4.webp" /></p>
@@ -403,10 +403,10 @@ ggplot(qsgroup, aes(x = Campaign, fill = QSGroup))+
 <p>Код для построения визуализации:</p>
 <div class="codehilite"><pre><span></span><code>#Визуализация по релевантности объявления
 ggplot(adrelevanceAG, aes(x = AdGroup, fill = Adrelevance))+
-  geom_bar(stat = &quot;count&quot;, position = &quot;fill&quot;)+
-  scale_fill_manual(values=c(&quot;forestgreen&quot;, &quot;tan1&quot; , &quot;firebrick1&quot;,&quot;grey&quot; ))+
+  geom_bar(stat = "count", position = "fill")+
+  scale_fill_manual(values=c("forestgreen", "tan1" , "firebrick1","grey" ))+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 7))+
-  ggtitle(&quot;AdRelevance by Campaign&quot;)
+  ggtitle("AdRelevance by Campaign")
 </code></pre></div>
 
 <p><img loading="lazy" decoding="async" alt="Распределение ключевых слов по уровню релевантности объявления" width="778" height="500" src="../images/kak-vizualizirovat-pokazatel-kache-raspredelenie-klyuchevyh-75734359.webp" /></p>
@@ -415,10 +415,10 @@ ggplot(adrelevanceAG, aes(x = AdGroup, fill = Adrelevance))+
 <p>Код для построения визуализации:</p>
 <div class="codehilite"><pre><span></span><code>#Визуализация по качеству целевой страницы
 ggplot(landingpageexperience, aes(x = Campaign, fill = Landingpageexperience))+
-  geom_bar(stat = &quot;count&quot;, position = &quot;fill&quot;)+
-  scale_fill_manual(values=c(&quot;forestgreen&quot;, &quot;tan1&quot; , &quot;firebrick1&quot;,&quot;grey&quot; ))+
+  geom_bar(stat = "count", position = "fill")+
+  scale_fill_manual(values=c("forestgreen", "tan1" , "firebrick1","grey" ))+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 7))+
-  ggtitle(&quot;Landing page experience by Campaign&quot;)
+  ggtitle("Landing page experience by Campaign")
 </code></pre></div>
 
 <p><img loading="lazy" decoding="async" alt="Распределение ключевых слов по уровню релевантности целевой странице" width="930" height="559" src="../images/kak-vizualizirovat-pokazatel-kache-raspredelenie-klyuchevyh-0598ac8c.webp" /></p>
@@ -427,10 +427,10 @@ ggplot(landingpageexperience, aes(x = Campaign, fill = Landingpageexperience))+
 <p>Код для построения визуализации:</p>
 <div class="codehilite"><pre><span></span><code>#Визуализация по ожидаемому значению CTR
 ggplot(expectedclickthroughrate, aes(x = Campaign, fill = Expectedclickthroughrate))+
-  geom_bar(stat = &quot;count&quot;, position = &quot;fill&quot;)+
-  scale_fill_manual(values=c(&quot;forestgreen&quot;, &quot;tan1&quot; , &quot;firebrick1&quot;,&quot;grey&quot; ))+
+  geom_bar(stat = "count", position = "fill")+
+  scale_fill_manual(values=c("forestgreen", "tan1" , "firebrick1","grey" ))+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 7))+
-  ggtitle(&quot;Expected CTR by Campaign&quot;)
+  ggtitle("Expected CTR by Campaign")
 </code></pre></div>
 
 <p><img loading="lazy" decoding="async" alt="Распределение ключевых слов по ожидаемому показателю кликабельности" width="935" height="558" src="../images/kak-vizualizirovat-pokazatel-kache-raspredelenie-klyuchevyh-bd311528.webp" /></p>

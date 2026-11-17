@@ -243,7 +243,7 @@
 <div class="codehilite"><pre><span></span><code>body(plot)
 </code></pre></div>
 
-<div class="codehilite"><pre><span></span><code>UseMethod(&quot;plot&quot;)
+<div class="codehilite"><pre><span></span><code>UseMethod("plot")
 </code></pre></div>
 
 <p>Команда <code>body</code> выводит в консоль R тело функции. Как видите тело функции <code>body</code> состоит всего из одной команды <code>UseMethod("plot")</code>.</p>
@@ -265,7 +265,7 @@
 
 <p>Полученный результат говорит о том, что функция plot имеет 29 методов, среди которых есть <em>plot.default</em>, который срабатывает по умолчанию, если функция получает на вход объект неизвестного ей класса.</p>
 <p>С помощью функции <code>methods</code> также можно получить и набор всех обобщённых функций, у которых есть метод, написанный под какой-либо класс.</p>
-<div class="codehilite"><pre><span></span><code>methods(, &quot;data.frame&quot;)
+<div class="codehilite"><pre><span></span><code>methods(, "data.frame")
 </code></pre></div>
 
 <div class="codehilite"><pre><span></span><code> [1] $&lt;-           [             [[            [[&lt;-         
@@ -288,15 +288,15 @@
 <p>Данный класс представляет из себя список, в котором хранятся различные свойства созданного вами класса. Для создания собственного класса достаточно создать <em>list</em> и присвоить ему название класса.</p>
 <p>В книге <a target="_blank" rel="noopener" href="https://habr.com/ru/company/piter/blog/452746/">“Искусство программирования на R”</a> в качестве примера приводится класс <em>employee</em>, в котором хранится информация о сотруднике. В качестве примера к этой статье я также решил взять объект для хранения информации о сотрудниках. Но сделал его более сложным и функциональным.</p>
 <div class="codehilite"><pre><span></span><code># создаём структуру класса
-employee1 &lt;- list(name             = &quot;Oleg&quot;,
-                  surname          = &quot;Petrov&quot;,
+employee1 &lt;- list(name             = "Oleg",
+                  surname          = "Petrov",
                   salary           = 1500,
                   salary_datetime  = Sys.Date(),
                   previous_sallary = NULL,
                   update           = Sys.time())
 
 # присваиваем объекту класс
-class(employee1) &lt;- &quot;emp&quot;
+class(employee1) &lt;- "emp"
 </code></pre></div>
 
 <p>Таким образом, мы создали свой собственный класс, который в своей структуре хранит следующие данные:</p>
@@ -325,51 +325,51 @@ create_employee &lt;- function(name,
               previous_sallary = NULL,
               update           = update)
 
-  class(out) &lt;- &quot;emp&quot;
+  class(out) &lt;- "emp"
 
   return(out)
 }
 
 # создаём объект класса emp с помощью функции create_employee
-employee1 &lt;- create_employee(&quot;Oleg&quot;, &quot;Petrov&quot;, 1500)
+employee1 &lt;- create_employee("Oleg", "Petrov", 1500)
 
 # проверяем класс созданного объекта
 class(employee1)
 </code></pre></div>
 
-<div class="codehilite"><pre><span></span><code>[1] &quot;emp&quot;
+<div class="codehilite"><pre><span></span><code>[1] "emp"
 </code></pre></div>
 
 <h2 id="s3_1">Функции присваивания значений пользовательским S3 классам</h2>
 <p>Итак, мы создали собственный класс <em>emp</em>, но пока это нам ничего не дало. Давайте разберёмся, зачем мы создали свой класс и что с ним можно делать.</p>
 <p>В первую очередь вы можете написать функции присваивания для созданного класса.<br />
 <strong>Функция присваивания для [</strong></p>
-<div class="codehilite"><pre><span></span><code>&quot;[&lt;-.emp&quot; &lt;- function(x, i, value) {
+<div class="codehilite"><pre><span></span><code>"[&lt;-.emp" &lt;- function(x, i, value) {
 
-  if ( i == &quot;salary&quot; || i == 3 ) {
-    cat(x$name, x$surname, &quot;has changed salary from&quot;, x$salary, &quot;to&quot;, value)
+  if ( i == "salary" || i == 3 ) {
+    cat(x$name, x$surname, "has changed salary from", x$salary, "to", value)
     x$previous_sallary &lt;- x$salary
     x$salary           &lt;- value
     x$salary_datetime  &lt;- Sys.Date()
     x$update           &lt;- Sys.time()
   } else {
-    cat( &quot;You can`t change anything except salary&quot; )
+    cat( "You can`t change anything except salary" )
   }
   return(x)
 }
 </code></pre></div>
 
 <p><strong>Функция присваивания для [[</strong></p>
-<div class="codehilite"><pre><span></span><code>&quot;[[&lt;-.emp&quot; &lt;- function(x, i, value) {
+<div class="codehilite"><pre><span></span><code>"[[&lt;-.emp" &lt;- function(x, i, value) {
 
-  if ( i == &quot;salary&quot; || i == 3 ) {
-    cat(x$name, x$surname, &quot;has changed salary from&quot;, x$salary, &quot;to&quot;, value)
+  if ( i == "salary" || i == 3 ) {
+    cat(x$name, x$surname, "has changed salary from", x$salary, "to", value)
     x$previous_sallary &lt;- x$salary
     x$salary           &lt;- value
     x$salary_datetime  &lt;- Sys.Date()
     x$update           &lt;- Sys.time()
   } else {
-    cat( &quot;You can`t change anything except salary&quot; )
+    cat( "You can`t change anything except salary" )
   }
   return(x)
 }
@@ -384,7 +384,7 @@ class(employee1)
 <p>Далее в теле функции вы пишете, как должны измениться элементы вашего класса. В моём случае я хочу, чтобы у пользователя была возможность менять только зарплату <em>(элемент salary, индекс которого 3)</em>. Поэтому внутри функции я пишу проверку <code>if ( i == "salary" || i == 3 )</code>. В случае, если пользователь пытается редактировать другие свойства, он получает сообщение <code>"You can't change anything except salary"</code>.</p>
 <p>При изменении элемента <em>salary</em> выводится сообщение, содержащее имя и фамилию сотрудника, его текущий и новый уровень зарплаты. Текущая зарплата передаётся в свойство <em>previous_sallary</em>, а <em>salary</em> присваивается новое значение. Так же обновляются значения свойств <em>salary_datetime</em> и <em>update</em>.</p>
 <p>Теперь можно попробовать изменить зарплату.</p>
-<div class="codehilite"><pre><span></span><code>employee1[&quot;salary&quot;] &lt;- 1750
+<div class="codehilite"><pre><span></span><code>employee1["salary"] &lt;- 1750
 </code></pre></div>
 
 <div class="codehilite"><pre><span></span><code>Oleg Petrov has changed salary from 1500 to 1750
@@ -395,30 +395,30 @@ class(employee1)
 <p>Вы можете дописывать свои методы существующим обобщённым функциям и даже создавать свои обобщённые функции.</p>
 <p>Одной из наиболее часто используемых обобщённых функций является <code>print</code>. Данная функция срабатывает каждый раз, когда вы вызываете объект по его названию. Сейчас вывод на печать созданного нами объекта класса <em>emp</em> выглядит так:</p>
 <div class="codehilite"><pre><span></span><code>$name
-[1] &quot;Oleg&quot;
+[1] "Oleg"
 
 $surname
-[1] &quot;Petrov&quot;
+[1] "Petrov"
 
 $salary
 [1] 1750
 
 $salary_datetime
-[1] &quot;2019-05-29&quot;
+[1] "2019-05-29"
 
 $previous_sallary
 [1] 1500
 
 $update
-[1] &quot;2019-05-29 11:13:25 EEST&quot;
+[1] "2019-05-29 11:13:25 EEST"
 </code></pre></div>
 
 <p>Давайте напишем свой метод для функции print.</p>
 <div class="codehilite"><pre><span></span><code>print.emp &lt;- function(x) {
-  cat(&quot;Name:&quot;, x$name, x$surname, &quot;\n&quot;,
-      &quot;Current salary:&quot;, x$salary, &quot;\n&quot;,
-      &quot;Days from last udpate:&quot;, Sys.Date() - x$salary_datetime, &quot;\n&quot;,
-      &quot;Previous salary:&quot;, x$previous_sallary)
+  cat("Name:", x$name, x$surname, "\n",
+      "Current salary:", x$salary, "\n",
+      "Days from last udpate:", Sys.Date() - x$salary_datetime, "\n",
+      "Previous salary:", x$previous_sallary)
 }
 </code></pre></div>
 
@@ -436,7 +436,7 @@ $update
 <p>Большинство обобщённых функций внутри выглядят однотипно и просто используют функцию <code>UseMethod</code>.</p>
 <div class="codehilite"><pre><span></span><code># обобщённая функция
 get_salary &lt;- function(x, ...) {
-  UseMethod(&quot;get_salary&quot;)
+  UseMethod("get_salary")
 }
 </code></pre></div>
 
@@ -444,7 +444,7 @@ get_salary &lt;- function(x, ...) {
 <div class="codehilite"><pre><span></span><code># метод для обработки объектов класса emp
 get_salary.emp &lt;- function(x) x$salary
 # метод который срабатывает по умолчанию
-get_salary.default &lt;- function(x) cat(&quot;Work only with emp class objects&quot;)
+get_salary.default &lt;- function(x) cat("Work only with emp class objects")
 </code></pre></div>
 
 <p>Название метода состоит из имени функции и класса объектов, которые данный метод будет обрабатывать. Метод <em>default</em> будет запускаться каждый раз, если вы передаёте в функцию объект класса, под который не написан свой метод.</p>
@@ -466,22 +466,22 @@ get_salary.default &lt;- function(x) cat(&quot;Work only with emp class objects&
 <p>Всё, что изображено на картинке, можно отнести к классу <em>транспорт</em>. И действительно, у всех этих объектов есть общий метод — передвижение, и общие свойства, например, скорость. Но тем не менее все 6 объектов можно разделить на три подкласса: наземный, водный и воздушный. При этом подкласс унаследует свойства родительского класса, но также будет обладать дополнительными свойствами и методами. Подобное свойство в рамках объектно-ориентированного программирования называется <strong>наследование</strong>.</p>
 <p>В нашем примере мы можем выделить в отдельный подкласс <em>remote_emp</em> сотрудников, работающих удалённо. Такие сотрудники будут иметь дополнительное свойство: город проживания.</p>
 <div class="codehilite"><pre><span></span><code># создаём структуру подкласса
-employee2 &lt;- list(name             = &quot;Ivan&quot;,
-                  surname          = &quot;Ivanov&quot;,
+employee2 &lt;- list(name             = "Ivan",
+                  surname          = "Ivanov",
                   salary           = 500,
                   salary_datetime  = Sys.Date(),
                   previous_sallary = NULL,
                   update           = Sys.time(),
-                  city             = &quot;Moscow&quot;)
+                  city             = "Moscow")
 
 # присваиваем объекту подкласс remote_emp
-class(employee2) &lt;- c(&quot;remote_emp&quot;, &quot;emp&quot;)
+class(employee2) &lt;- c("remote_emp", "emp")
 
 # проверяем класс объекта
 class(employee2)
 </code></pre></div>
 
-<div class="codehilite"><pre><span></span><code>[1] &quot;remote_emp&quot; &quot;emp&quot;
+<div class="codehilite"><pre><span></span><code>[1] "remote_emp" "emp"
 </code></pre></div>
 
 <p>При операции присваивании класса создавая подкласс мы используем вектор, в котором первым элементом идёт имя подкласса, далее идёт имя родительского класса.</p>
@@ -506,7 +506,7 @@ get_salary(employee2)
 <p>Но вы можете разрабатывать методы отдельно для каждого подкласса.</p>
 <div class="codehilite"><pre><span></span><code># метод для получения свойства salary объектов подкласса remote_emp
 get_salary.remote_emp &lt;- function(x) {
-  cat(x$surname, &quot;remote from&quot;, x$city, &quot;\n&quot;)
+  cat(x$surname, "remote from", x$city, "\n")
   return(x$salary)
 }
 </code></pre></div>
@@ -525,13 +525,13 @@ get_salary(employee2)
 <p>Лично мне они пригодились в разработке пакета <a target="_blank" rel="noopener" href="https://selesnow.github.io/rfacebookstat">rfacebookstat</a>. Дело в том, что в API Facebook, для загрузки событий и реакции на рекламные публикации в различных группировках существует параметр <em>action_breakdowns</em>.</p>
 <p>При использовании таких группировок вы получаете ответ в виде JSON структуры следующего формата:</p>
 <div class="codehilite"><pre><span></span><code>{
- &quot;action_name&quot;: &quot;like&quot;,
- &quot;action_type&quot;: &quot;post_reaction&quot;,
- &quot;value&quot;: 6
+ "action_name": "like",
+ "action_type": "post_reaction",
+ "value": 6
 }
 {
- &quot;action_type&quot;: &quot;comment&quot;,
- &quot;value&quot;: 4
+ "action_type": "comment",
+ "value": 4
 }
 </code></pre></div>
 
@@ -539,9 +539,9 @@ get_salary(employee2)
 <p>При запросе статистики по событиям с группировками, в зависимости от значений аргументов определялся класс который присваивался полученному от API ответу. Ответ передавался в обощённую функцию, и в зависимости от указанного ранее класса определялся метод который осуществлял парсинг полученного результата. Кому интересно углубиться в детали реализации то <a target="_blank" rel="noopener" href="https://github.com/selesnow/rfacebookstat/blob/master/R/fbActions.R">тут</a> можно найти код создания обощённой функции и методов, а <a target="_blank" rel="noopener" href="https://github.com/selesnow/rfacebookstat/blob/master/R/fbGetMarketingStat.R">тут</a> их использование.</p>
 <p>В моём случае классы и методы их обработки я использовал исключительно внутри пакета. Если вам необходимо в целом предоставить пользователю пакета интерфейс для работы с созданными вами классами, то все методы необходимо включить в качестве директивы <code>S3method</code> в файл <strong>NAMESPACE</strong>, в следующем виде.</p>
 <div class="codehilite"><pre><span></span><code>S3method(имя_метода,класс)
-S3method(&quot;[&lt;-&quot;,emp)
-S3method(&quot;[[&lt;-&quot;,emp)
-S3method(&quot;print&quot;,emp)
+S3method("[&lt;-",emp)
+S3method("[[&lt;-",emp)
+S3method("print",emp)
 </code></pre></div>
 
 <h2 id="_8">Заключение</h2>
