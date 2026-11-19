@@ -1,7 +1,7 @@
 {
-  "updated": "2026-11-18T14:59:44+00:00",
+  "updated": "2026-11-19T15:08:39+00:00",
   "github": {
-    "stars": 16,
+    "stars": 17,
     "forks": 0,
     "clones": {
       "last14d": 723,
@@ -102,21 +102,21 @@
       "since": "2026-10-30"
     },
     "releases": {
-      "downloads": 178,
-      "count": 26
+      "downloads": 209,
+      "count": 29
     }
   },
   "npm": {
-    "version": "1.20.1",
-    "last30d": 2882,
-    "total": 2882
+    "version": "1.23.0",
+    "last30d": 3095,
+    "total": 3095
   },
   "sourcesUpdated": {
-    "github": "2026-11-18T14:59:42+00:00",
-    "npmMonth": "2026-11-18T14:59:43+00:00",
-    "npmTotal": "2026-11-18T14:59:43+00:00",
+    "github": "2026-11-19T15:08:38+00:00",
+    "npmMonth": "2026-11-19T15:08:38+00:00",
+    "npmTotal": "2026-11-19T15:08:38+00:00",
     "clones": "2026-11-17T16:32:09+00:00",
-    "releases": "2026-11-18T14:59:44+00:00"
+    "releases": "2026-11-19T15:08:39+00:00"
   },
-  "downloadsTotal": 3060
+  "downloadsTotal": 3304
 }
