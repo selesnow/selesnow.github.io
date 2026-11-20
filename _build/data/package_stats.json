@@ -1,93 +1,93 @@
 {
  "packages": {
   "rfacebookstat": {
-   "downloads": 53389,
-   "month": 822,
+   "downloads": 53411,
+   "month": 818,
    "stars": 30
   },
   "timeperiodsR": {
-   "downloads": 44901,
-   "month": 664,
+   "downloads": 44922,
+   "month": 668,
    "stars": 7
   },
   "rgoogleads": {
-   "downloads": 38626,
-   "month": 1059,
+   "downloads": 38670,
+   "month": 1074,
    "stars": 14
   },
   "getProxy": {
-   "downloads": 29395,
-   "month": 449,
+   "downloads": 29416,
+   "month": 458,
    "stars": 8
   },
   "rtgstat": {
-   "downloads": 23329,
-   "month": 619,
+   "downloads": 23344,
+   "month": 618,
    "stars": 11
   },
   "ringostat": {
-   "downloads": 14329,
-   "month": 416,
+   "downloads": 14349,
+   "month": 433,
    "stars": 0
   },
   "rappsflyer": {
-   "downloads": 14295,
-   "month": 526,
+   "downloads": 14312,
+   "month": 537,
    "stars": 1
   },
   "ractivecampaign": {
-   "downloads": 13557,
-   "month": 448,
+   "downloads": 13571,
+   "month": 451,
    "stars": 0
   },
   "rytstat": {
-   "downloads": 12871,
-   "month": 442,
+   "downloads": 12894,
+   "month": 445,
    "stars": 2
   },
   "racademyocean": {
-   "downloads": 12717,
-   "month": 421,
+   "downloads": 12735,
+   "month": 433,
    "stars": 0
   },
   "rlinkedinads": {
-   "downloads": 6889,
-   "month": 407,
+   "downloads": 6909,
+   "month": 413,
    "stars": 0
   },
   "rtiktokads": {
-   "downloads": 2751,
-   "month": 324,
+   "downloads": 2766,
+   "month": 329,
    "stars": 1
   },
   "rappleads": {
-   "downloads": 2547,
-   "month": 298,
+   "downloads": 2556,
+   "month": 303,
    "stars": 0
   },
   "galigor": {
-   "downloads": 13188,
-   "month": 142,
+   "downloads": 13195,
+   "month": 144,
    "stars": 1
   },
   "ryandexdirect": {
-   "downloads": 41215,
-   "month": 619,
+   "downloads": 41237,
+   "month": 621,
    "stars": 53
   },
   "rym": {
-   "downloads": 37777,
-   "month": 573,
+   "downloads": 37807,
+   "month": 589,
    "stars": 13
   },
   "rvkstat": {
-   "downloads": 29660,
-   "month": 567,
+   "downloads": 29685,
+   "month": 566,
    "stars": 15
   },
   "rmytarget": {
-   "downloads": 34296,
-   "month": 211,
+   "downloads": 34315,
+   "month": 228,
    "stars": 5
   },
   "rmixpanel": {
@@ -103,5 +103,5 @@
    "stars": 0
   }
  },
- "date": "2026-11-19"
+ "date": "2026-11-20"
 }
