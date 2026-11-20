@@ -36,6 +36,16 @@ The standard full rebuild is `python _build/build.py`. It also refreshes other s
 - Agent install commands were checked against the official Claude Code setup documentation, OpenAI Codex README, Gemini CLI README and Antigravity CLI quickstart. Antigravity's official installers are under `https://antigravity.google/cli/`. Claude Code and Codex require separate ACP bridge packages. Docker includes engines and bridges in its image.
 - AI Volna and Lord GPT links were confirmed by the owner; Habr: https://habr.com/ru/articles/1107278/.
 
+## Documentation page
+
+URL: `/acpgram/docs/`; source: `_build/acpgram_docs.py` and three Markdown files `_build/acpgram_docs/{ru,ua,en}.md`; generated file: `acpgram/docs/index.html`; layout and behavior: `acpgram/docs/docs.css`, `acpgram/docs/docs.js`.
+
+- Every heading has an explicit id: `## Title {#id}` (section), `### Title {#id}` (subsection). The three files must have the same headings in the same order — the build stops and names the first difference. The id is the anchor shared by all languages (`/acpgram/docs/#git-signin`). Links between sections are written as `[text](#id)`; a link to a missing id stops the build.
+- Screenshots: a line `{{shot: name | alt text}}` becomes a figure when `img/acpgram/docs/<name>.webp` (or `.png`, `.jpg`) exists and is skipped otherwise; `<name>.<lang>.webp` (`ru`, `ua`, `en`) overrides the picture for one language. The build prints the names that are still missing.
+- Rebuild: `python _build/acpgram_docs.py` (also runs in `python _build/build.py`). Use the pinned versions from `_build/requirements.txt` (the page is rendered with Python-Markdown), otherwise the nightly workflow re-renders the page slightly differently.
+- The landing links to the page from the hero, the install section and the final block (`DOCS` in `acpgram_page.py`); `sitemap.xml` has the address; the nightly workflow commits `acpgram/docs/index.html`.
+- Facts: the AcpGram README (ru and en) and `src/i18n.mjs` for button labels in the three languages. In the bot's interface an agent is called an "engine" (ru «движок», uk «рушій»); the documentation says "agent" and explains this once in the `engine` section.
+
 ## Images
 
 Original SVG and original WebP remain intact in `img/acpgram/`. The logo has a lossless WebP variant and SVG fallback; the optimized hero has a JPEG fallback. OG images are 1200×630 in JPEG and WebP. The preview poster is local. All new images have dimensions and appropriate loading priority.

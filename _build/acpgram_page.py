@@ -14,6 +14,7 @@ REPO = 'https://github.com/selesnow/acpgram'
 NPM = 'https://www.npmjs.com/package/acpgram'
 CHANNEL = 'https://t.me/R4marketing'
 BOTFATHER = 'https://t.me/BotFather'
+DOCS = '/acpgram/docs/'   # the documentation page, built by _build/acpgram_docs.py
 
 
 def text(ru, ua, en):
@@ -200,7 +201,8 @@ def install_content():
     content += more(text('Запуск из исходников', 'Запуск із вихідного коду', 'Run from source'), source)
     content += more('Docker', docker)
     content += more(text('Сервис, автозапуск и обновление', 'Сервіс, автозапуск і оновлення', 'Service, autostart and updates'), service)
-    content += f'<a class="ap-text-link" href="{REPO}#readme">{text("Полная документация на GitHub", "Повна документація на GitHub", "Full documentation on GitHub")} ↗</a></div>'
+    content += f'<a class="ap-text-link" href="{DOCS}">{text("Подробная документация", "Докладна документація", "Full documentation")} →</a>'
+    content += f'<a class="ap-text-link" href="{REPO}#readme">{text("README на GitHub", "README на GitHub", "README on GitHub")} ↗</a></div>'
     return content
 
 
@@ -338,7 +340,7 @@ def build_acpgram():
     page += f'''<section id="hero" class="ap-hero ap-section"><div><div class="ap-brand">{logo}<span>AcpGram<span class="ap-eyebrow">OPEN SOURCE · MIT</span></span></div>
     <h1>{text('Ваш кодинг-агент — в Telegram', 'Ваш кодинг-агент — у Telegram', 'Your coding agent, in Telegram')}</h1>
     {p('Поставьте задачу Claude Code, Codex, Gemini CLI, Antigravity CLI или OpenCode с телефона и занимайтесь своими делами. Агент работает на вашем компьютере, а ход работы, запросы на подтверждение и готовый результат приходят в чат.', 'Поставте завдання Claude Code, Codex, Gemini CLI, Antigravity CLI або OpenCode з телефона й займайтеся своїми справами. Агент працює на вашому комп’ютері, а хід роботи, запити на підтвердження й готовий результат надходять у чат.', 'Give a task to Claude Code, Codex, Gemini CLI, Antigravity CLI or OpenCode from your phone and get on with your day. The agent runs on your computer; its progress, approval requests and the finished result arrive in the chat.', 'ap-lead')}
-    <div class="ap-actions ap-hero-actions">{link('#install', text('Установить', 'Встановити', 'Install'), True, 'download')}{link('#video', text('Видео: 3 минуты', 'Відео: 3 хвилини', 'Video: 3 minutes'), icon='play')}</div>
+    <div class="ap-actions ap-hero-actions">{link('#install', text('Установить', 'Встановити', 'Install'), True, 'download')}{link('#video', text('Видео: 3 минуты', 'Відео: 3 хвилини', 'Video: 3 minutes'), icon='play')}{link(DOCS, text('Документация', 'Документація', 'Docs'), icon='book-open')}</div>
     <ul class="ap-trust">{''.join(f'<li><i aria-hidden="true" class="fa-solid fa-check"></i>{text(*t)}</li>' for t in [
         ('Бесплатно и с открытым кодом', 'Безкоштовно й з відкритим кодом', 'Free and open source'),
         ('Windows, Linux, macOS', 'Windows, Linux, macOS', 'Windows, Linux, macOS'),
@@ -387,7 +389,7 @@ def build_acpgram():
     page += section('how-it-works', ('Как это устроено', 'Як це влаштовано', 'How it works'), flow)
 
     features = [
-        (('Видно, что делает агент', 'Видно, що робить агент', 'See what the agent is doing'), ('Шаги агента — чтение файлов, команды, правки — и его план появляются в чате в реальном времени, в конце — ответ и журнал действий. На вопрос агента можно ответить кнопкой, а сообщение, отправленное во время работы, встанет в очередь.', 'Кроки агента — читання файлів, команди, правки — і його план з’являються в чаті в реальному часі, наприкінці — відповідь і журнал дій. На запитання агента можна відповісти кнопкою, а повідомлення, надіслане під час роботи, стане в чергу.', 'Agent steps — reading files, running commands, editing — and its plan appear in the chat live, with the answer and an action log at the end. Answer the agent’s questions with a button; a message sent while it works is queued.'), 'wave-square'),
+        (('Видно, что делает агент', 'Видно, що робить агент', 'See what the agent is doing'), ('Шаги агента — чтение файлов, команды, правки — появляются в чате в реальном времени, в конце — ответ и журнал действий. Некоторые агенты показывают и план работы. На вопрос агента можно ответить кнопкой, а сообщение, отправленное во время работы, встанет в очередь.', 'Кроки агента — читання файлів, команди, правки — з’являються в чаті в реальному часі, наприкінці — відповідь і журнал дій. Деякі агенти показують і план роботи. На запитання агента можна відповісти кнопкою, а повідомлення, надіслане під час роботи, стане в чергу.', 'Agent steps — reading files, running commands, editing — appear in the chat live, with the answer and an action log at the end. Some agents also show their plan. Answer the agent’s questions with a button; a message sent while it works is queued.'), 'wave-square'),
         (('Ничего важного без вашего «да»', 'Нічого важливого без вашого «так»', 'Nothing important without your “yes”'), ('Запросы приходят кнопками «Разрешить», «Разрешить на сессию», «Отклонить», а в запросе на правку файла виден дифф — понятно, что именно вы разрешаете. Любую задачу можно остановить командой /stop.', 'Запити надходять кнопками «Дозволити», «Дозволити на сесію», «Відхилити», а в запиті на правку файлу видно диф — зрозуміло, що саме ви дозволяєте. Будь-яке завдання можна зупинити командою /stop.', 'Requests arrive as “Allow”, “Allow for session” and “Reject” buttons, and a file-edit request shows the diff, so you know exactly what you approve. Stop any task with /stop.'), 'shield-halved'),
         (('Несколько задач параллельно', 'Кілька завдань паралельно', 'Several tasks in parallel'), ('Включите темы — и каждая тема чата станет отдельным диалогом со своим проектом, агентом и историей.', 'Увімкніть теми — і кожна тема чату стане окремим діалогом зі своїм проєктом, агентом та історією.', 'Turn on topics and every chat topic becomes its own dialog with its own project, agent and history.'), 'layer-group'),
         (('Любой агент и модель', 'Будь-який агент і модель', 'Any agent, any model'), ('Переключайте агента и модель прямо в чате: сотни моделей разложены по провайдерам, нужную найдёт /model sonnet, а последние выбранные — под рукой. Прошлые сессии продолжаются с того же места, даже после перезапуска.', 'Перемикайте агента й модель просто в чаті: сотні моделей розкладено за провайдерами, потрібну знайде /model sonnet, а останні вибрані — під рукою. Попередні сесії продовжуються з того ж місця, навіть після перезапуску.', 'Switch agent and model right in the chat: hundreds of models are grouped by provider, /model sonnet finds the one you need, and your recent picks are one tap away. Past sessions resume where they left off, even after a restart.'), 'shuffle'),
@@ -481,7 +483,7 @@ def build_acpgram():
 
     page += '<section class="ap-section bento-glass ap-final ap-reveal"><div class="bento-content"><h2>' + text('Пусть агент работает, пока вы заняты своим', 'Нехай агент працює, поки ви зайняті своїм', 'Let the agent work while you get on with your day') + '</h2>'
     page += p('Установка займёт несколько минут. Если AcpGram пригодился, поставьте проекту звезду на GitHub — это помогает его развивать.', 'Встановлення займе кілька хвилин. Якщо AcpGram став у пригоді, поставте проєкту зірку на GitHub — це допомагає його розвивати.', 'Installation takes a few minutes. If AcpGram helps you, star it on GitHub — it helps the project grow.')
-    page += '<div class="ap-actions">' + link('#install', text('Установить', 'Встановити', 'Install'), True, 'download') + link(REPO, text('★ Звезда на GitHub', '★ Зірка на GitHub', '★ Star on GitHub'), icon='star') + '</div>'
+    page += '<div class="ap-actions">' + link('#install', text('Установить', 'Встановити', 'Install'), True, 'download') + link(DOCS, text('Документация', 'Документація', 'Docs'), icon='book-open') + link(REPO, text('★ Звезда на GitHub', '★ Зірка на GitHub', '★ Star on GitHub'), icon='star') + '</div>'
     # Peerlist: голосование за проект (виджет-картинка подгружается с peerlist.io, показывает число голосов)
     page += '<div class="ap-peerlist">' + p('Понравился проект? Поддержите его голосом на Peerlist.', 'Сподобався проєкт? Підтримайте його голосом на Peerlist.', 'Like the project? Give it an upvote on Peerlist.', 'ap-small') + '<a href="https://peerlist.io/selesnow/project/acpgram--telegram-gateway-to-coding-agent" target="_blank" rel="noopener noreferrer"><img src="https://peerlist.io/api/v1/projects/embed/PRJHNN7K9L8R89AAO3NRDR9GA7L8PL?showUpvote=true&amp;theme=dark" alt="AcpGram — Telegram gateway to coding agent" width="296" height="72" loading="lazy" decoding="async"></a></div>'
     page += '</div></section></main>'

@@ -1807,6 +1807,8 @@ if __name__ == '__main__':
     build_ads()
     from acpgram_page import build_acpgram
     build_acpgram()
+    from acpgram_docs import build_acpgram_docs   # документация AcpGram: Markdown из _build/acpgram_docs → /acpgram/docs/
+    build_acpgram_docs()
     from rcourse_page import build_rcourse
     build_rcourse()
     build_css()

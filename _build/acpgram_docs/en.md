@@ -1,0 +1,949 @@
+## What AcpGram is {#intro}
+
+AcpGram is a bridge between Telegram and coding agents. You install it on your computer or server, and it runs an agent there: Claude Code, OpenAI Codex, Gemini CLI, Antigravity CLI or OpenCode. You send a task to the bot in Telegram, the agent reads files, runs commands and edits code in the selected project, and the progress, confirmation requests and result arrive in the chat.
+
+AcpGram does not replace the agent and does no “thinking” of its own. It is a remote control: one bot with a shared interface and commands, in which you switch the agent, model, project and session.
+
+The project is free and open source (MIT license). You pay only for the agent itself — a subscription or its provider’s API, just as you do when working in the terminal. With OpenCode you can start without paying anything: it has free models that need no key.
+
+### How it works {#how-it-works}
+
+1. **Telegram.** You write to the bot from your phone or computer.
+2. **AcpGram.** The bot runs on your machine and connects to Telegram itself. You need no public IP, no open ports and no cloud intermediary.
+3. **Agent.** AcpGram starts the agent as a subprocess on the same machine and talks to it over the open [Agent Client Protocol](https://agentclientprotocol.com) (ACP).
+
+The agent works where AcpGram is installed. While that machine is off or asleep, the bot does not answer. After a reboot, the service starts the bot by itself.
+
+To control several machines, create a separate bot for each one and install AcpGram on each with its own token.
+
+### Supported agents {#agents}
+
+| Agent | What the machine needs | Authorization |
+|---|---|---|
+| Claude Code | Claude Code and the `claude-agent-acp` bridge | account sign-in or `ANTHROPIC_API_KEY` |
+| OpenAI Codex | Codex CLI and the `codex-acp` bridge | `codex login` or `OPENAI_API_KEY` |
+| Gemini CLI | Gemini CLI only | account sign-in or `GEMINI_API_KEY` |
+| Antigravity CLI | Antigravity CLI 1.5 or later | Google sign-in or a Gemini API key |
+| OpenCode | OpenCode only | free models without a key, or provider keys |
+
+One agent is enough. You can connect the others later: AcpGram finds the installed ones by itself.
+
+### Requirements {#requirements}
+
+- Windows, Linux or macOS. Tested on Windows Server and Linux (Ubuntu); macOS uses the same code as Linux.
+- Node.js. The one-command installer sets up a private Node.js 24 by itself if no suitable version is found. Installing through npm needs Node.js 22.13 or later; running from source needs Node.js 24.
+- At least one agent from the table above.
+- A Telegram bot and its token from [@BotFather](https://t.me/BotFather).
+- For the Git section — `git` installed. For the sandbox on Linux — the `bubblewrap` package.
+
+AcpGram itself has no npm dependencies.
+
+## Installation {#install}
+
+Installation usually takes a few minutes. If your agent already works in the terminal, you need two or three commands.
+
+### Step 1. Prepare the agent {#install-agent}
+
+Choose the agent you use. The `npm` commands require Node.js with npm.
+
+**OpenCode** is the easiest start: it works right away on free models, with no keys or accounts.
+
+```sh
+npm install -g opencode-ai
+```
+
+You can skip this step: if the machine has no agent at all, the AcpGram setup wizard offers to install OpenCode for you.
+
+**Claude Code.** You need Claude Code itself and the bridge that AcpGram uses to talk to it:
+
+```sh
+npm install -g @anthropic-ai/claude-code@latest
+npm install -g @agentclientprotocol/claude-agent-acp
+```
+
+Run `claude` and sign in to your account, or enter the `ANTHROPIC_API_KEY` key in the AcpGram wizard. On Windows, Git for Windows comes in handy.
+
+**OpenAI Codex.** You need Codex CLI and the bridge:
+
+```sh
+npm install -g @openai/codex
+npm install -g @agentclientprotocol/codex-acp
+codex login
+```
+
+Instead of `codex login`, you can set `OPENAI_API_KEY`. On Windows, the “Read-only” and “Standard” modes need a working Codex sandbox; if commands fail with the `runner pipe-in` error, use the “Full” level.
+
+**Gemini CLI.** No bridge is needed:
+
+```sh
+npm install -g @google/gemini-cli
+```
+
+Run `gemini` and authorize, or set `GEMINI_API_KEY`.
+
+**Antigravity CLI.** Version 1.5 or later is required. No bridge is needed; signing in through Google once is enough:
+
+```sh
+agy acp --login
+```
+
+Instead of signing in, you can work with a Gemini API key: set `GEMINI_API_KEY` and add `"modelProvider": "gemini"` to the Antigravity `settings.json` (`~/.gemini/antigravity-cli/settings.json`).
+
+### Step 2. Create a bot in Telegram {#install-bot}
+
+Open [@BotFather](https://t.me/BotFather), send `/newbot` (or tap “Create a New Bot” in its window), choose a name and copy the token it sends you. This takes a minute.
+
+If you want to run several tasks in parallel, turn on topics for the bot in the @BotFather settings: each chat topic then becomes a separate dialog with the agent (see [“Dialogs” mode](#topics)).
+
+{{shot: botfather | The @BotFather window with the “Create a New Bot” button}}
+
+### Step 3. Install AcpGram {#install-acpgram}
+
+**With one command (recommended).** Windows, in PowerShell:
+
+```powershell
+irm https://raw.githubusercontent.com/selesnow/acpgram/main/install.ps1 | iex
+```
+
+Linux and macOS, in the terminal:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/selesnow/acpgram/main/install.sh | bash
+```
+
+The installer downloads the latest release, verifying its checksum, into `%LOCALAPPDATA%\acpgram` (Windows) or `~/.local/share/acpgram` (Linux, macOS), sets up a private Node.js 24 without administrator rights if needed, adds the `acpgram` command to `PATH` and starts the setup wizard right away.
+
+**Through npm.** If Node.js 22.13 or later is already installed:
+
+```sh
+npm install -g acpgram
+acpgram setup
+```
+
+With this kind of installation, the settings (`.env`) and the database (`data/bot.db`) live in `~/.acpgram` (or in the folder from `ACPGRAM_HOME`) and are not lost when the package is updated.
+
+### Step 4. Setup wizard {#setup-wizard}
+
+The wizard starts by itself after installation. You can run it again with the `acpgram setup` command: the current values are filled in.
+
+1. **Bot token.** The wizard checks it with Telegram right away and shows the bot’s name.
+2. **Administrator.** Send your bot any message — the wizard detects your Telegram ID by itself. You can also enter the ID manually.
+3. **Projects root** — optional. If you set it, the wizard also asks about [personal workspaces](#workspaces).
+4. **Sandbox** — only on Linux and only if `bubblewrap` is installed (see [agent sandbox](#sandbox)).
+5. **Agents.** The wizard finds the installed agents, writes down their full paths (so that they are also found under the service) and offers to choose the default agent. If none is installed, it offers to install OpenCode right away.
+6. **API keys** — optional. The token, keys and password are entered hidden.
+7. **Saving.** The wizard writes `.env` (readable only by the owner), creates the database and sends you a test message in Telegram.
+8. **Service.** The wizard offers to register the bot as a service so that it starts together with the system.
+
+{{shot: setup-wizard | The AcpGram setup wizard in the terminal}}
+
+After that, open the bot in Telegram and send `/start`.
+
+### Service and autostart {#service}
+
+The service starts the bot together with the system and restarts it after a failure. The wizard usually installs it, but you can also manage it manually:
+
+```sh
+acpgram service install
+acpgram service status
+acpgram service restart
+acpgram service stop
+acpgram service uninstall
+```
+
+| OS | How the service works |
+|---|---|
+| Windows | a service through [NSSM](https://nssm.cc) (`winget install --id NSSM.NSSM -e`), terminal run as administrator |
+| Linux | `systemd --user`; for the bot to work without anyone logged in, run `sudo loginctl enable-linger $USER` |
+| macOS | LaunchAgent (`launchd`) |
+
+On Windows, the service needs the **password** of your account: the agents are signed in under it. If you sign in with a Microsoft account, this is that account’s password, not the Windows PIN. An account without a password cannot run the service. The password is not shown on screen and the bot does not store it.
+
+`acpgram service stop` stops the service without removing it: after a reboot it starts again. The service log is `data/service.log` in the bot’s data folder (on Linux also `journalctl --user -u acpgram -f`).
+
+### Updating {#update}
+
+If you installed with the installer:
+
+```sh
+acpgram update
+acpgram service restart
+```
+
+If through npm:
+
+```sh
+npm install -g acpgram@latest
+acpgram service restart
+```
+
+Settings and session history are kept.
+
+### Docker {#docker}
+
+The image already contains all five agents and the bridges: you do not need to install anything on the host, and the wizard is not needed either. You need Git and Docker with Docker Compose.
+
+```sh
+git clone https://github.com/selesnow/acpgram.git
+cd acpgram
+cp .env.example .env
+```
+
+In `.env`, fill in the bot token, your Telegram ID, the agent key and the projects folder. For example, for Gemini CLI:
+
+```sh
+TELEGRAM_BOT_TOKEN=YOUR_BOT_TOKEN
+ALLOWED_USER_ID=YOUR_TELEGRAM_ID
+DEFAULT_ENGINE=gemini
+GEMINI_API_KEY=YOUR_API_KEY
+PROJECTS_DIR=./projects
+```
+
+```sh
+docker compose up -d --build
+docker compose logs -f
+```
+
+- `PROJECTS_DIR` is the projects folder on the host. In the container it becomes `/projects`: this is the root for `/project`. The agent sees only this folder.
+- Authorization uses the keys from `.env`: Gemini — `GEMINI_API_KEY`, Claude Code — `ANTHROPIC_API_KEY`, Codex — `OPENAI_API_KEY`. OpenCode also works without a key, on free models.
+- Antigravity CLI: after startup, run `docker compose exec -it bot agy acp --login` once, or work with a Gemini API key.
+- To build a lighter image, list the agents you need in `ENGINES` (`ENGINES=gemini claude`); `DEFAULT_ENGINE` must be one of those built.
+- The bot in the container runs as the `node` user (uid 1000). For the agent to be able to change files, the projects folder must be writable by this uid: `sudo chown -R 1000:1000 <folder>`.
+- Settings, sign-ins and agent history are stored in volumes and survive a container update. `docker compose down -v` deletes them.
+- If you need R, Python or other tools, make your own `Dockerfile` on top of the image.
+
+Docker or a direct installation? Installed directly, the agent gets everything installed on the machine and works with the rights of the bot’s account. In Docker it is isolated from the system and sees only the projects folder, but its tools are also limited to those in the image. The [agent sandbox](#sandbox) is not supported in Docker.
+
+### Running from source {#from-source}
+
+You need Git and Node.js 24 or later.
+
+```sh
+git clone https://github.com/selesnow/acpgram.git
+cd acpgram
+npm run setup
+```
+
+If you declined the service, start the bot with the `npm start` command. The first run without `.env` opens the setup wizard by itself. You can also do without the wizard: copy `.env.example` to `.env`, fill it in and run `npm start`.
+
+### Moving from the installer to npm {#migrate-npm}
+
+On Windows, the installer adds the `%LOCALAPPDATA%\acpgram\bin` folder to `PATH`. If you then install AcpGram through npm, Windows may keep calling the old version.
+
+1. Stop and remove the previous service: `acpgram service uninstall`. Otherwise the token stays in use, and Telegram returns a `Conflict` error.
+2. Check which command is called: `Get-Command acpgram`.
+3. Remove the old folder from the user `PATH`:
+
+```powershell
+[Environment]::SetEnvironmentVariable("Path", (([Environment]::GetEnvironmentVariable("Path", "User") -split ';') | Where-Object { $_ -notlike '*\acpgram\bin' }) -join ';', "User")
+```
+
+4. Open a new terminal window and run `acpgram setup`: the wizard finds the previous installation and offers to move `.env` and the database.
+
+## First steps in the bot {#first-steps}
+
+### The /start screen {#start-screen}
+
+The `/start` command shows what you are currently working with: the agent, model, access level and project. Under the message are buttons for the main actions, and below them the list of commands.
+
+{{shot: start | The /start screen: agent, model, access level, project and action buttons}}
+
+The buttons repeat the commands: project, new session, past sessions, agent, model, ending the session, files, Git, language, dialogs mode. The administrator also has teammates, invitation and active sessions.
+
+### How to give a task {#first-task}
+
+1. Choose a project: `/project` (see [Projects](#projects)).
+2. Write the task as a regular message, as you would to a colleague: “find out why the authorization test fails and fix it”.
+3. Follow the progress and answer permission requests with the buttons.
+4. Get the answer and, if needed, files.
+
+You can attach a screenshot, document or archive to a message: the caption becomes the request (see [Files](#files)).
+
+### Progress and the answer {#progress}
+
+While the agent is working, the bot shows a draft message:
+
+- while the agent is starting — Telegram’s animated dots;
+- then the reasoning header and the progress: the last five steps, a counter of the rest and the running time;
+- if the agent sent the bot its plan — a “Plan: 3/7” block with the items (see [Work plan](#plan));
+- as soon as the answer starts coming — the last step and the answer text itself.
+
+{{shot: progress | The draft once the answer starts: the agent’s last step and the text it is writing}}
+
+{{shot: progress-2 | The same draft at another moment: a step the agent has already completed}}
+
+The final answer arrives formatted: headings, lists, tables, code blocks. At the end there is a collapsed “Work log” block with all the steps and a footer: the agent, the actual model, the reasoning level, tokens, cost (for Claude Code and OpenCode), the project and the response time.
+
+{{shot: answer | The agent’s final answer: text, the collapsed work log and a footer with the model, tokens, cost, project and time}}
+
+### Work plan {#plan}
+
+Some agents keep a to-do list and send it to the bot. The draft then shows a “Plan: 3/7” block with the items and marks: ✅ done, ▶️ in progress, ▫️ ahead. The block is visible only while the agent works: when the answer arrives, it disappears together with the draft.
+
+This does not always happen, and it depends on the agent, not on the bot:
+
+- **OpenCode** does not send its plan to the bot. It does keep a to-do list, but in the progress it looks like an ordinary “Work plan” step.
+- **Claude Code and Codex** can send a plan, but do not do so in every task: often the agent simply writes the list as text in its answer.
+- **Gemini CLI and Antigravity CLI:** showing the plan is not confirmed.
+
+If there is no “Plan” block, you can still get a plan: ask the agent to make a to-do list first and mark the items as it goes. It will write the list as text, as in the screenshot below.
+
+{{shot: plan-text | An agent without the “Plan” block: a six-item to-do list written as text in the answer}}
+
+**Claude Code’s planning mode.** Claude Code has a planning mode of its own: the agent first writes a plan, saves it to a file and asks you to approve it. The bot shows this request with Claude Code’s own options: approve and confirm edits manually, approve and work without confirmations, approve and switch to auto mode, or reject. Options that would give the agent more freedom than your access level allows are not shown.
+
+{{shot: plan-approve | Claude Code’s request to approve a plan: options for how to continue and the reject button}}
+
+The request itself does not contain the text of the plan. If you want to read the plan before approving it, ask the agent to send it to the chat first.
+
+### Permission requests {#permissions}
+
+When the agent needs permission for a command or a file edit, the bot sends a request with buttons:
+
+- **“Allow”** — this action only;
+- **“Allow for this session”** — this action and the same kind of actions until the end of the session;
+- **“Reject”**.
+
+A command is shown as a code block, and a file edit request shows the diff: exactly what the agent will change, not just the path.
+
+{{shot: permission | A permission request for a command: the command in a code block and the “Allow”, “For this session: this exact command” and “Reject” buttons}}
+
+{{shot: permission-diff | A permission request for a file edit with the diff; below it, the mark that the edit was allowed for this session}}
+
+How “for this session” works:
+
+- the button says exactly what will be allowed;
+- file edits are allowed as a whole;
+- commands — by program name: once you allow `ls`, all `ls …` commands run without asking;
+- for programs with subcommands (`git`, `npm`, `docker` and the like) — by program and subcommand: once you allow `git status`, all `git status …` commands run, but not `git push`;
+- shells (`bash -c`, `powershell`, `cmd /c`, `sudo`), interpreters (`python`, `node`, `Rscript`, `npx`), and commands with substitutions, output to a file or variables before the program are allowed only when they are exactly the same;
+- in a compound command, every part must be allowed.
+
+The rule lives as long as the agent process runs: until `/new`, `/close`, closing on idle or a bot restart. There is no “allow forever” option in the chat.
+
+Whether requests come at all depends on the [access level](#access-levels).
+
+### Quick reply buttons {#quick-replies}
+
+When the agent offers a choice (“Which option should I apply?”), the options arrive as buttons right in its answer. Pressing one sends the option’s text to the agent as your message.
+
+{{shot: quick-reply | A question from the agent with quick reply buttons}}
+
+### A message while the agent is working {#queue}
+
+A message sent while the agent is handling a request is not lost. The bot puts it in a queue and sends it to the agent as soon as the agent finishes. Under the notification there are two buttons: “Stop and send this now” and “Do not send”. The queue holds one message: a new one replaces the previous one.
+
+{{shot: queue | The queue notification with the “Stop and send this now” and “Do not send” buttons}}
+
+### Reply with a quote {#quotes}
+
+Reply to a message from the agent with a fragment of it selected: the agent gets both your text and that fragment. This is handy for requests like “rewrite this part”.
+
+### Stopping a request {#stop}
+
+The `/stop` command or the stop button under the draft interrupts the running request. The session stays: you can write the next message right away.
+
+A typo in a command (`/modle`) is not sent to the agent: the bot asks whether you meant `/model`. The bot answers a voice message, video or sticker with a hint.
+
+## Projects {#projects}
+
+A project is the folder the agent works in. The choice is remembered for each user.
+
+### Choosing a project {#project-select}
+
+The `/project` command shows folders as buttons. Recent projects are at the top, you can browse through folders, and you select the one you need with the “Select this folder” button.
+
+{{shot: project | The /project screen: folders in the projects root and buttons to select a folder, create a project and clone from Git}}
+
+A faster way is to give a name or a path:
+
+```text
+/project landing
+/project C:\my-app
+/project ~/projects/web
+```
+
+What you can choose depends on the settings:
+
+- without `PROJECTS_ROOT` (a personal installation) — any existing folder, the home folder by default;
+- with `PROJECTS_ROOT` — only folders inside the root;
+- with `PROJECTS_ROOT` and `USER_WORKSPACES=1` — each teammate has a folder of their own inside the root (see [personal workspaces](#workspaces)).
+
+### New project {#project-new}
+
+The “➕ New project” button in `/project` asks for a name, creates a folder in the currently open place and makes it the working folder right away. If the name is not suitable (a path, a reserved name, a leading dot), the bot asks you to change it. “Cancel” or any command cancels the wait.
+
+The administrator has the button everywhere; a teammate has it in their personal workspace.
+
+### A project from a repository {#project-clone}
+
+The “⬇️ From Git” button in `/project` shows your repositories on the connected services as a list with search. The selected repository is cloned and becomes the project right away. You need to connect an account in `/git` first (see [Git](#git)).
+
+## Sessions and dialogs {#sessions}
+
+A session is one conversation with the agent: it remembers everything that was discussed.
+
+### A new session and returning to a past one {#sessions-resume}
+
+- `/new` starts a new session: the agent forgets the previous conversation.
+- `/sessions` shows the past sessions of the current project: the date, the agent, the number of requests and the beginning of the first request. Pressing one resumes the session from the same place, even after a bot restart.
+
+A session is resumed in the agent it was created in. Changing the agent with the `/engine` command starts a new session.
+
+{{shot: sessions | The /sessions screen: the project’s past sessions with the date, agent and beginning of the request}}
+
+### “Dialogs” mode: Telegram topics {#topics}
+
+If topics are turned on for the bot in the private chat (in the @BotFather settings), each chat topic becomes a separate dialog with the agent, with its own project, agent and history.
+
+- You can work in several topics at the same time.
+- When you come back to a topic later, you continue from the same place: the session is resumed by itself.
+- `/new` creates a new topic. The agent names it after the first answer, with a short project name at the beginning.
+- A topic is bound to its project.
+- General works as a regular dialog, and `/project` in it shows the dialogs of the selected project as buttons.
+
+{{shot: topics | The chat with the bot in Dialogs mode: the list of topics on the left, each topic a separate dialog with the agent}}
+
+Each user chooses the mode with the `/topics` command: “Dialogs” or “One chat”.
+
+A teammate can have up to two agents running at the same time, the administrator up to four (the `MAX_AGENTS_PER_USER` and `ADMIN_MAX_AGENTS` settings). If there is no room, the longest-idle agent of the same user is unloaded; its dialog continues when you return to it.
+
+### Closing a session {#sessions-close}
+
+`/close` (or `/exit`) closes the session and unloads the agent process. An idle session closes by itself after 30 minutes (`IDLE_MINUTES`). You can resume a closed session through `/sessions`.
+
+## Agents and models {#engines-models}
+
+### Choosing an agent {#engine}
+
+In the bot’s interface an agent is called an “engine”: the “🤖 Engine” button and the `/engine` command.
+
+The `/engine` command shows the agents available to you on this machine. The choice is remembered for each user, and changing the agent starts a new session.
+
+```text
+/engine claude
+/engine opencode
+```
+
+Agents that are not on the server are not offered. An agent that starts but is not authorized (no sign-in or API key) is marked “⚠️ sign-in needed”. The default agent is set with the `DEFAULT_ENGINE` setting.
+
+{{shot: engine | The /engine screen: the list of available agents, with the current one highlighted}}
+
+### Choosing a model {#model}
+
+The `/model` command shows the models of the current agent (the agent itself sends the list) and the reasoning level where there is one: in Claude Code and Antigravity CLI.
+
+- The default is “Auto”: the agent chooses the model itself.
+- The choice is remembered separately for each agent and applies from the next request, without restarting the session.
+- At the top of the screen are buttons with the recently selected models.
+- The fastest way is search: `/model sonnet` shows all matching models as buttons.
+
+{{shot: model | The /model screen for OpenCode: free models, the current one marked with a check}}
+
+### OpenCode and free models {#opencode}
+
+OpenCode takes the models of the providers whose keys are in the bot’s `.env` or are connected with the `opencode auth login` command, plus free models that need no key.
+
+- Each key adds a group of models to `/model`: Anthropic, OpenAI, Gemini, OpenRouter, Groq, DeepSeek, Mistral and other OpenCode providers.
+- OpenRouter gives hundreds of models from different developers with one key.
+- There are many models, so you first choose a group (“🆓 Free” or a provider), and inside it you page through the models. Aggregators also have model developers inside the group.
+- Models that cannot call tools (image or music generation) are not shown.
+- After a new key is added, the model list updates by itself: on a bot restart or on the next `/model`.
+
+> Free models may use requests for training. Do not send secrets or private code to them. Pass keys and passwords to the project through [/files](#files-project).
+
+## Files {#files}
+
+### Files for the agent {#files-to-agent}
+
+You can send the bot a photo or a file (text, PDF, spreadsheet and so on, up to 20 MB): the caption becomes the request. The file is saved on the machine with the bot, and the agent gets the path to it and reads it with its own tools. The agent also gets images as a picture if it can work with them.
+
+- An album of several photos or files is handled as one request.
+- The bot unpacks `.zip`, `.tar`, `.tar.gz` and `.tgz` archives by itself (no more than 500 files and 100 MB) and passes the list of files to the agent. `.7z` and `.rar` stay a regular file.
+- Files you send are kept for 7 days (`FILES_KEEP_DAYS`).
+
+### Files from the agent {#files-from-agent}
+
+The agent can create a file and send it to the chat: a report, a spreadsheet, a picture, an archive. Just ask: “send the result as a file”. The file appears right in the answer: JPEG and PNG as an image, everything else as a document.
+
+{{shot: files-from-agent | The agent’s answer with an image it created and sent to the chat}}
+
+Only files from the project folder and from the bot’s outgoing files folder are sent. Files with secrets (`.env`, keys, the bot’s database and logs, the `.git` folder) are not sent to the chat.
+
+### Project files and secrets: /files {#files-project}
+
+Everything you write to the bot or send it as a file goes to the agent, and therefore into a model request. That is not suitable for passwords, tokens and keys. The `/files` command puts a file straight into the project folder, bypassing the agent.
+
+{{shot: files | The /files screen: project files and folders, the “Create file” and “Upload file” buttons}}
+
+- **List.** `/files` shows the files and folders of the current project, including hidden ones such as `.env` (without `.git`, `node_modules` and links). You can browse through folders with buttons, and a file has a card with its size and modification date.
+- **“📝 Create file”.** The bot asks for a name, optionally with a subfolder: `config/.env`. Then you send the contents in one message (up to 3500 characters). The message with the contents is deleted from the chat right away; it is not written to the database or the logs.
+- **“⬆️ Upload file”.** The next file or album you send is saved to the open project folder under its own name, and the message with it is deleted from the chat. The wait is one-off and expires in 10 minutes.
+- **Deleting** — from the file card, with a confirmation. An existing file is replaced only after a “Replace?” question.
+
+{{shot: files-create | Creating a file through /files: the name prompt and the message that it was saved}}
+
+Without pressing a button, everything works as before: files and images sent to the chat go to the agent.
+
+Who can change files: the administrator; a teammate — in their personal workspace, and in a shared root — with the “Standard” or “Full” level. Anyone can view the list. The bot does not write or delete outside the project folder and does not follow links.
+
+> What this gives you and what it does not. The secret does not get into a model request from you. The file itself is available to the agent, otherwise the applications it writes and runs could not use it. The bot regularly reminds the agent: do not open or print files with secrets, refer to settings by name, and send you to `/files` for a missing value. This is an instruction, not a ban: for especially sensitive data, choose a model from a provider that does not train on requests.
+
+## Git: GitHub and GitLab {#git}
+
+The `/git` command connects projects to GitHub, GitLab.com and your own GitLab and GitHub Enterprise servers. You can connect an account, clone a repository, view changes, push code and open a merge request with buttons, without opening a terminal.
+
+{{shot: git | The /git screen: connected accounts, the buttons for publishing the project and cloning}}
+
+### What you need {#git-requirements}
+
+`git` must be installed on the machine with the bot. It is a system program, not a dependency of the bot; without it the section answers that it is unavailable. If `git` is not in `PATH`, set the path in the `GIT_COMMAND` setting.
+
+### Sign in without a token {#git-signin}
+
+GitHub and GitLab.com are connected with a link and a short code:
+
+1. `/git` → “➕ Connect GitHub” or “➕ Connect GitLab.com”.
+2. Press “🔗 Sign in without a token”. The bot shows a link and a code.
+3. Open the link, enter the code and confirm access on the service’s site.
+4. In a few seconds the bot tells you by itself that the account is connected.
+
+{{shot: git-signin | Sign-in without a token: the bot’s message with the link and the code}}
+
+You do not need to create a token or send anything secret to the chat. This works in any installation without setup.
+
+On GitLab such a sign-in lasts two hours, and the bot renews it by itself before every operation. If the service stops accepting the sign-in, the account is disconnected and the bot asks you to connect it again. On GitHub the sign-in does not expire until you disconnect the account or revoke access in the GitHub settings.
+
+### Sign in with an access token {#git-token}
+
+Press “➕ Connect …”: the bot gives you a link to the service’s tokens page and the list of required permissions. Create a token and send it in one message.
+
+- The message with the token is deleted from the chat right away and is not passed to the agent.
+- The bot checks the token with the service, shows who is connected and until what date the token is valid, and warns you if permissions are missing.
+- Required permissions: on GitLab — `api`, `read_repository`, `write_repository` (without `api`, publishing and merge requests do not work), on GitHub — `repo`.
+- A week before, a day before and when the token expires, the bot writes to the account owner.
+- Disconnecting the account on its card removes the token from the bot.
+
+### Own servers {#git-servers}
+
+The administrator adds your company’s GitLab and GitHub Enterprise right in the bot: `/git` → “⚙️ Own servers” → “➕ GitLab” or “➕ GitHub Enterprise” → the server address, for example `https://git.example.com`.
+
+The bot checks that a server of the right kind answers at the address. After that, every user can connect their account on it with an access token. The same screen renames and removes a server — together with the accounts connected to it.
+
+{{shot: git-servers | The “Own servers” screen: adding GitLab or GitHub Enterprise}}
+
+Sign-in with a link and a code works only for GitHub.com and GitLab.com. Own servers are connected with a token.
+
+### Cloning {#git-clone}
+
+“⬇️ Clone a repository” (or “⬇️ From Git” in `/project`) shows your repositories as buttons: recently changed first, with search by name. The selected one is cloned into your personal workspace (without one — next to the current project) and becomes the project.
+
+{{shot: git-clone | The list of repositories to clone: repository buttons, paging and search}}
+
+### The repository screen {#git-repo}
+
+When the project is connected to a repository, `/git` shows the branch and the number of changed files, of commits not pushed yet and of new commits on the server. When it opens and on the “Refresh” button, the screen checks with the server.
+
+{{shot: git-repo | The repository screen: branch, changed files, commits not pushed yet and action buttons}}
+
+- **“⬇️ Pull”** takes the changes from the server if that is possible without a merge. If the histories have diverged, ask the agent to merge the changes (“merge the changes from the server”) and then push.
+- **“⬆️ Push”** sends the finished commits.
+- **“💾 Save and push”** asks for a description, commits all changes and pushes.
+
+The commit author is the owner of the connected account: their name and email are passed to both the bot and the agent, so the agent’s commits are signed by you.
+
+### Changes and the diff {#git-changes}
+
+“📋 Changes” opens the list of changed files with marks (new, modified, deleted, renamed) and the number of added and removed lines. Pressing a file shows what changed in it: short changes right in the message, long ones as a file.
+
+{{shot: git-changes | The list of changed files with the number of added and removed lines}}
+
+{{shot: git-diff | A file diff in the bot’s message}}
+
+The same screen lists the commits that are not pushed yet and those waiting on the server. The contents of files with secrets are not shown. The bot does all of this by itself, without the agent and without model requests.
+
+### Branches {#git-branches}
+
+“🌿 Branches” shows local branches and server branches in one list. Pressing a branch switches to it, and “➕ New branch” creates one from the current branch.
+
+{{shot: git-branches | The list of branches: the current one is marked, the “New branch” button}}
+
+- With unsaved changes, the bot does not switch and offers to save them first.
+- While the agent is handling a request, switching is unavailable.
+- After switching, the next request starts a new agent session: the project files have changed.
+- “Push” creates the new branch on the server too.
+
+Any user can view changes and branches; switching and creating branches is for those who are allowed to change the project files.
+
+### Discarding changes {#git-discard}
+
+The card of a changed file has “↩️ Restore as it was”, and the “Changes” screen has “↩️ Discard all changes”. Modified and deleted files return to the last commit, and new files are deleted.
+
+The action cannot be undone, so the bot always asks for confirmation. Files with secrets are not touched.
+
+### Publishing a project {#git-publish}
+
+For a folder that is not connected to a server yet, there is “🚀 Publish the project”. You choose:
+
+1. the service;
+2. the place: your personal space, a GitLab group (with subgroups) or a GitHub organization — with search by name;
+3. the visibility: private, internal (on GitLab) or public;
+4. the repository name.
+
+The bot creates the repository, makes the first commit without files with secrets and pushes it.
+
+{{shot: git-publish | Publishing a project: choosing the place for the new repository}}
+
+### Merge request {#git-mr}
+
+“🔀 Merge request” opens a request from the current branch into the main branch of the repository. The bot asks for a title (or suggests the description of the last commit), creates the request and sends the link. If an open request from this branch already exists, the bot shows it.
+
+On the main branch and when there are commits not pushed yet, the bot explains what to do first.
+
+{{shot: git-mr | Creating a merge request: the title and the link to the finished request}}
+
+### When the agent offers to push {#git-agent}
+
+By default the agent has no sign-in for the server. So it handles a “commit and push” request like this: it makes the commit, and a push button appears under its answer. Nothing goes to the server until you press it.
+
+{{shot: git-offer | The agent’s answer with a button for pushing the changes to the server}}
+
+### Where the sign-in is stored and how git is run {#git-security}
+
+By default the sign-in is stored only in the bot’s database. The bot does the cloning, pulling and pushing, while the agent works with the repository locally: it checks the status, compares, commits, creates branches and merges.
+
+- The sign-in is passed to the `git` process through its environment for the duration of the operation and only for the addresses of its own service. It is not written to the repository settings or the address.
+- The bot runs `git` with hooks and credential helpers turned off, without the global and system config (on Linux and macOS), and, when the sandbox is on, inside the same teammate’s sandbox.
+- On “Save and push”, files with secrets (`.env`, keys, credentials) are left out of the commit and appended to `.gitignore`. If the agent committed such a file, the bot warns you before pushing and waits for “Push anyway”.
+
+The administrator can choose another mode: `GIT_AGENT_AUTH=1`. The sign-in is then also passed to the agent process, and the agent pulls and pushes changes by itself. This is more convenient, but the token becomes visible to the agent and may end up in a model request. Turn this mode on only if you trust the models your teammates work with.
+
+### Limitations {#git-limits}
+
+- Only HTTPS repositories from the connected services can be connected. The bot shows a repository with an SSH address or from another server, but cannot pull from or push to it.
+- While the agent is handling a request, Git operations do not start.
+- The repository’s own settings (filters) run during operations: a deliberately malicious agent could capture the token while an operation runs.
+
+## Working as a team {#team}
+
+You can install AcpGram on a shared server and give access to colleagues, including those who do not work in the terminal: everything is controlled from Telegram.
+
+### How to add a person {#team-invite}
+
+By default the bot answers only the main administrator (the `ALLOWED_USER_ID` setting). Others are added in two ways:
+
+- **Invitation.** `/invite` asks for the access level and creates a one-time link that is valid for 24 hours.
+- **Access request.** The person writes to the bot, and the administrator gets a request and approves or rejects it with buttons. A request is sent no more than once an hour; the bot ignores those who were rejected.
+
+{{shot: invite | The /invite command: choosing the access level for the invitation}}
+
+The `/users` command shows the list of teammates. A teammate’s card has the access level, the available agents and models, ending the session and revoking access.
+
+{{shot: users | The /users screen: the list of teammates with their access level}}
+
+### Access levels {#access-levels}
+
+| Level | What it means |
+|---|---|
+| Read-only | the agent only reads and analyzes, and changes nothing |
+| Standard | the agent asks permission for edits and commands; the requests go to the teammate themselves |
+| Full | the agent works with a minimum of confirmations or with none at all (depends on the agent) |
+| Administrator | full access and teammate management |
+
+Each level corresponds to its own mode in each agent:
+
+| Level | Gemini CLI | Claude Code | Antigravity CLI | Codex | OpenCode |
+|---|---|---|---|---|---|
+| Read-only | `plan` | `plan` | `plan` | `read-only` | `plan` |
+| Standard | `default` | `default` | `default` | `workspace-write` | `build` |
+| Full | `autoEdit` | `bypassPermissions` | `accept-edits` | `agent-full-access` | `build` |
+| Administrator | `autoEdit` | `bypassPermissions` | `accept-edits` | `agent-full-access` | `build` |
+
+At the “Full” level, Gemini CLI and Antigravity CLI edit files without confirmation and run commands with confirmation; Claude Code works with no confirmations at all. OpenCode has two modes, and what the agent may do is set by the bot: “Read-only” — edits and commands are denied, “Standard” — edits, commands and page fetches need confirmation, “Full” — everything without confirmation.
+
+The administrator’s mode can be changed in `.env`: `ACP_MODE`, `CLAUDE_ADMIN_MODE`, `AGY_ADMIN_MODE`, `CODEX_ADMIN_MODE`, `OPENCODE_ADMIN_MODE`.
+
+> Give the “Full” level only to people you trust. Without the [sandbox](#sandbox), the agent runs with the rights of the bot’s account and can change files outside the project.
+
+### A teammate’s agents and models {#team-engines}
+
+- **Agents.** A new teammate has only the default agent; the administrator turns on the others with toggles on the teammate’s card. The default agent cannot be turned off. If you take away the agent a teammate is working in, their session is closed and they move to the default agent.
+- **Models.** “🧠 Employee models” → agent → model toggles. All models are allowed by default. When models are restricted, the “Auto” option is unavailable: the teammate works in the allowed model they selected or in the first of the allowed ones.
+- The administrator has access to all agents and models.
+
+### Active sessions and limits {#team-limits}
+
+The `/active` command shows the active sessions and buttons to end them.
+
+{{shot: active | The /active screen: active sessions, teammate slots in use and the refresh button}}
+
+- No more than three teammate agents run at the same time across all topics and agents together (`MAX_AGENTS`). The administrator is not counted in this limit.
+- One teammate can have up to two agents at the same time, the administrator up to four.
+- A session closes after 30 minutes of idle time (`IDLE_MINUTES`).
+
+### Usage: /usage {#usage}
+
+The `/usage` command shows the administrator the requests, tokens and cost for each teammate over 24 hours, 7 and 30 days.
+
+{{shot: usage | The /usage screen: requests and tokens by teammate, period buttons}}
+
+### Personal workspaces {#workspaces}
+
+By default all teammates browse the same projects root. Personal workspaces give each one a folder of their own:
+
+```sh
+PROJECTS_ROOT=/srv/projects
+USER_WORKSPACES=1
+```
+
+The `<root>/<Telegram ID>` folder is created by itself when the teammate first contacts the bot.
+
+- A teammate chooses projects only in their own folder: other people’s folders are not shown in `/project`, are not found by search and cannot be selected by path. Going above their own folder is not possible.
+- They see paths relative to their folder (“My workspace”, `site`, `site/landing`): the location of the folders on the server is not shown to them.
+- The “➕ New project” button creates a folder in their workspace.
+- The administrator sees the whole root; personal folders are labelled with the teammates’ names, and a teammate’s folder is shown on their card in `/users`.
+- Before every agent start, the bot checks that the project folder exists and lies inside the teammate’s workspace.
+- The bot does not move or delete teammates’ folders, including when access is revoked.
+
+Personal workspaces limit which working folder can be chosen in the bot. The agent process itself is isolated by the sandbox.
+
+### Agent sandbox (Linux) {#sandbox}
+
+Without the sandbox, the agent runs with the rights of the bot’s account: the working folder sets where it starts, but does not stop it from reading and writing outside that folder. The sandbox closes this gap.
+
+```sh
+sudo apt install bubblewrap
+```
+
+```sh
+AGENT_SANDBOX=bwrap
+```
+
+Each teammate’s agent is started through [bubblewrap](https://github.com/containers/bubblewrap), a Linux system utility. The bot gets no new dependencies.
+
+Inside the sandbox the agent sees only:
+
+- read-write — the teammate’s projects folder, their separate home folder and the outgoing files folder;
+- read-only — their uploaded files, the system (`/usr`, `/etc` and the like), Node.js and the agent programs.
+
+The bot’s settings and database, the home folder of the bot’s account, other people’s folders and other people’s processes do not exist in the sandbox: when the agent tries to read someone else’s file, it gets “No such file or directory”.
+
+What else matters:
+
+- **Everyone has their own agent settings.** Each teammate has a home folder of their own, so session history, settings and agent sign-ins are separate for everyone.
+- **The agent must work without a subscription sign-in.** A sign-in saved in the home folder of the bot’s account (`codex login`, Google sign-in, a Claude subscription) is not visible in the sandbox. OpenCode on free models works with no keys at all; the other agents use an API key from `.env`.
+- **The “Full” level becomes safer.** The agent asks for no permissions, but can change only its teammate’s workspace.
+- **The administrator works without the sandbox.**
+- **Startup check.** The bot checks that bubblewrap runs, that the bot’s secrets are not visible from inside, and that the agents start in the sandbox. If the sandbox or the default agent does not work, the bot does not start and writes the reason. The other agents that did not start in the sandbox are not offered to teammates.
+- **The agent is installed in a non-standard place** — add its folder to `SANDBOX_RO_PATHS`.
+- **Sessions started before the sandbox was turned on** are not resumed in it.
+- **Windows, macOS, Docker.** There is no sandbox there. With the `AGENT_SANDBOX` setting, the bot does not start on Windows and macOS rather than silently working without isolation.
+
+Ubuntu 24.04 and later: user namespaces may be blocked by AppArmor. If the bot reports at startup that the sandbox does not work, run:
+
+```sh
+sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+```
+
+To make it permanent, add this setting as a file in `/etc/sysctl.d/` or create an AppArmor profile for `bwrap`.
+
+> What the sandbox does not do. It does not limit the network: the agent needs access to the models, so it can also reach services on the server itself and in the local network. It does not hide the agent’s own API key: the key is passed to the agent in its environment, so set a spending limit on the key at the provider. And it does not limit disk, memory or CPU.
+
+## Interface language {#language}
+
+The bot speaks Russian, Ukrainian or English, following the language of your Telegram. For other languages it uses `DEFAULT_LANG` (English by default). You can change the language with the `/language` command: your choice takes priority over the Telegram language.
+
+The `acpgram` commands in the terminal (setup wizard, service, update) use the system language: Russian, Ukrainian, and English in all other cases. You can set the language with the `ACPGRAM_LANG` setting.
+
+## Settings: the .env file {#env}
+
+All settings live in the `.env` file in the bot’s data folder: `~/.acpgram` when installed through npm, `%LOCALAPPDATA%\acpgram` or `~/.local/share/acpgram` when installed with the installer, and the repository root when running from source. The wizard (`acpgram setup`) writes most of the values. After editing the file manually, restart the service: `acpgram service restart`.
+
+The `.env` file contains the token and keys: do not commit it or send it to anyone.
+
+### Main {#env-main}
+
+| Variable | Description |
+|---|---|
+| `TELEGRAM_BOT_TOKEN` | the bot token. Required |
+| `ALLOWED_USER_ID` | the numeric Telegram ID of the main administrator. Required |
+| `DEFAULT_ENGINE` | the default agent: `gemini`, `claude`, `agy`, `codex` or `opencode`. If it is not installed, the bot does not start |
+| `DEFAULT_LANG` | the bot language when the user’s Telegram language is not Russian, Ukrainian or English: `en` (default), `ru` or `uk` |
+| `ACPGRAM_LANG` | the language of the `acpgram` commands in the terminal: `ru`, `uk` or `en`. Usually not needed: the language is taken from the system |
+| `ACPGRAM_HOME` | the data folder when installed through npm (`~/.acpgram` by default) |
+
+### Agents and keys {#env-engines}
+
+| Variable | Description |
+|---|---|
+| `GEMINI_API_KEY` | Gemini API key. Not needed if Gemini CLI is already authorized |
+| `ANTHROPIC_API_KEY` | Anthropic API key for Claude Code (API billing instead of a subscription) |
+| `OPENAI_API_KEY` | OpenAI API key for Codex and for OpenAI models in OpenCode |
+| `OPENROUTER_API_KEY`, `GROQ_API_KEY`, `DEEPSEEK_API_KEY`, `MISTRAL_API_KEY` | provider keys for OpenCode: each adds a group of models to `/model`. Other OpenCode providers work too, with their own variables |
+| `GEMINI_COMMAND` | full path to Gemini CLI. Under a service, global npm packages are often not in `PATH` |
+| `CLAUDE_COMMAND` | the Claude Code bridge command (`claude-agent-acp` by default) |
+| `CODEX_COMMAND` | full path to the Codex bridge (`codex-acp` by default) |
+| `AGY_COMMAND` | full path to Antigravity CLI (`agy` by default) |
+| `OPENCODE_COMMAND` | full path to OpenCode (`opencode` by default) |
+| `ACP_MODE`, `CLAUDE_ADMIN_MODE`, `AGY_ADMIN_MODE`, `CODEX_ADMIN_MODE`, `OPENCODE_ADMIN_MODE` | the mode of each agent for the administrator (see [access levels](#access-levels)) |
+| `AGENT_START_TIMEOUT` | how many seconds to wait for the agent to start (120 by default) |
+
+Of the API keys, the agent process gets only the keys of its own agent: Claude Code — `ANTHROPIC_API_KEY`, Codex — `OPENAI_API_KEY`, Gemini CLI and Antigravity CLI — the Google keys, OpenCode — all of them. The bot token is not passed to the agent.
+
+### Projects and team {#env-team}
+
+| Variable | Description |
+|---|---|
+| `PROJECTS_ROOT` | the projects root: the agent chooses a working folder only inside it. Without it — any folder on the machine |
+| `USER_WORKSPACES` | `1` — personal workspaces: each teammate has a folder of their own, `<root>/<Telegram ID>`. Requires `PROJECTS_ROOT` |
+| `AGENT_SANDBOX` | `bwrap` — the agent sandbox (Linux only, needs the `bubblewrap` package) |
+| `SANDBOX_RO_PATHS` | extra folders the sandbox can read, separated by colons |
+| `BWRAP_COMMAND` | path to `bwrap` if it is not in `PATH` |
+| `MAX_AGENTS` | how many teammate agents run at the same time (3 by default) |
+| `MAX_AGENTS_PER_USER` | how many agents of one teammate run at the same time in different topics (2 by default) |
+| `ADMIN_MAX_AGENTS` | the same for the administrator (4 by default) |
+| `IDLE_MINUTES` | after how many minutes an idle session is closed (30 by default) |
+
+> Choose `PROJECTS_ROOT` deliberately: do not make the home folder or a drive root the root. Without `PROJECTS_ROOT`, any user with access can choose any folder on the machine as a project — this mode is meant for a personal installation.
+
+### Git {#env-git}
+
+| Variable | Description |
+|---|---|
+| `GIT_COMMAND` | path to `git` if it is not in `PATH` |
+| `GIT_AGENT_AUTH` | `1` — the Git sign-in is also passed to agents: they pull and push changes by themselves, but the tokens are visible to them. By default only the bot has the sign-in |
+| `GITLAB_URL`, `GITHUB_URL` | the address of your own GitLab and your own GitHub Enterprise. Optional: the administrator can also add servers in the bot itself |
+| `GITLAB_NAME`, `GITHUB_NAME` | the names of your own servers on the buttons |
+| `GITHUB_CLIENT_ID`, `GITLAB_CLIENT_ID` | identifiers of your own applications for sign-in with a link and a code; `0` turns that sign-in off for the service. By default — the AcpGram applications |
+
+### Limits, files, interface {#env-other}
+
+| Variable | Description |
+|---|---|
+| `FILES_DIR` | the folder for received and outgoing files (the bot’s data folder by default) |
+| `FILES_KEEP_DAYS` | how many days to keep those files (7 by default) |
+| `WIDGETS` | `1` — show `/model` and `/sessions` as Telegram widgets. Off by default: Telegram does not accept widgets from regular bots yet |
+| `ANIMATED_ICONS` | `0` — regular emoji instead of animated icons in the draft |
+| `ACPGRAM_DEBUG` | `1` — a detailed log of what is sent to Telegram, in `data/debug.log` |
+
+## Security {#security}
+
+### What the agent sees and can do {#security-agent}
+
+- **The bot answers only those you gave access to.** It does not answer anyone else.
+- **Your data stays with you.** Code, settings and session history live on the machine with the bot, in a local SQLite database. AcpGram has no servers of its own. Messages pass through Telegram, and requests are processed by the provider of the selected agent.
+- **Without the sandbox, the agent runs with the rights of the bot’s account.** The project’s working folder does not stop it from reading and writing outside that folder, and it can read files on disk, including the bot’s `.env`. On Linux the [sandbox](#sandbox) closes this gap; on any system Docker does.
+- **The agent does not get the bot token**, and of the API keys it gets only the keys of its own agent.
+- **The agent’s text cannot press a button for you.** The bot builds the button markup; button tags in the agent’s text are neutralized.
+
+### Secrets {#security-secrets}
+
+- Put passwords and keys into the project through [/files](#files-project): that way they do not get into a model request.
+- The bot does not send files with secrets to the chat, does not show them in the diff and does not include them in commits.
+- The Git sign-in is stored only in the bot (see [where the sign-in is stored](#git-security)).
+- Free models may use requests for training: it is better not to send private code and sensitive data to them.
+
+### Verifiable releases {#security-releases}
+
+Every AcpGram version is built from the public code in GitHub Actions and signed there too, rather than uploaded manually.
+
+- The package is published with npm provenance: the “Provenance” block on the [package page on npm](https://www.npmjs.com/package/acpgram) points to the exact commit and build file.
+- To check after installation: `npm audit signatures`.
+- Release files on GitHub are signed with Sigstore.
+- The code is checked by CodeQL and OpenSSF Scorecard; the project has an [OpenSSF Best Practices](https://www.bestpractices.dev/projects/16722) badge.
+
+How to report a vulnerability is described in the [security policy](https://github.com/selesnow/acpgram/blob/main/SECURITY.md).
+
+### Recommendations {#security-tips}
+
+- Run the bot under a separate account, not under your main one.
+- On a shared server, set `PROJECTS_ROOT`, turn on personal workspaces and, on Linux, the sandbox.
+- Give the “Full” level only to people you trust.
+- Set a spending limit on API keys at the provider.
+- Keep the bot updated: new versions also bring security fixes.
+
+## Command reference {#commands}
+
+### Bot commands {#commands-bot}
+
+| Command | Who | What it does |
+|---|---|---|
+| `/start` | everyone | the screen with the agent, model, access level, project and buttons |
+| `/project [name or path]` | everyone | choosing a project with buttons, search or a path; a new project |
+| `/files` | everyone | project files: list, create, upload and delete, bypassing the agent |
+| `/git` | everyone | Git: accounts, cloning, changes, branches, pushing, publishing, merge request |
+| `/engine [name]` | everyone | choosing the agent: `gemini`, `claude`, `agy`, `codex`, `opencode` |
+| `/model [name]` | everyone | choosing the model and reasoning level; with a name — model search |
+| `/new` | everyone | a new session (in “Dialogs” mode — a new topic) |
+| `/sessions` | everyone | past sessions of the current project and returning to the selected one |
+| `/stop` | everyone | stop the running request |
+| `/close`, `/exit` | everyone | close the session and unload the agent process |
+| `/topics` | everyone | dialogs mode: “Dialogs” or “One chat” |
+| `/language` | everyone | interface language |
+| `/users` | administrator | teammates: level, agents, models, ending the session, revoking access |
+| `/invite` | administrator | a one-time invitation link valid for 24 hours |
+| `/active` | administrator | active sessions and buttons to end them |
+| `/usage` | administrator | requests, tokens and cost by teammate over 24 hours, 7 and 30 days |
+
+### Terminal commands {#commands-cli}
+
+| Command | What it does |
+|---|---|
+| `acpgram` | start the bot in the current terminal |
+| `acpgram setup` | the setup wizard; can be run again |
+| `acpgram update` | update to the latest release (for an installation made with the installer) |
+| `acpgram service install` | register the service |
+| `acpgram service status` | the service status |
+| `acpgram service restart` | restart the service, for example after an update |
+| `acpgram service stop` | stop the service without removing it |
+| `acpgram service uninstall` | remove the service |
+
+## Troubleshooting {#troubleshooting}
+
+### Where to find the log {#logs}
+
+The service log is the `data/service.log` file in the bot’s data folder. On Linux, `journalctl --user -u acpgram -f` shows the same log.
+
+In Windows PowerShell 5.1, read the log with the encoding specified, otherwise Cyrillic text turns into unreadable characters:
+
+```powershell
+Get-Content "$HOME\.acpgram\data\service.log" -Tail 30 -Encoding UTF8
+```
+
+This is the path for an npm installation. If you installed with the installer, the log is in `%LOCALAPPDATA%\acpgram\data\service.log`.
+
+At startup the bot checks the settings. If the token or the administrator ID is not set, `PROJECTS_ROOT` points to a folder that does not exist, or the default agent does not start, the bot exits right away and writes to the log what to fix.
+
+### Common situations {#common-issues}
+
+**The bot does not answer.** Check the service: `acpgram service status`, then the log. Make sure the machine is on and not asleep.
+
+**A `Conflict` error in the log.** Two instances of the bot are running with the same token, for example an old service and a new installation. Stop the extra one.
+
+**An agent is marked “⚠️ sign-in needed”.** The agent starts but is not authorized. Sign in to it in the terminal under the same account the bot runs under, or add an API key to `.env`.
+
+**An agent is not found under the service.** Under a service, global npm packages are often not in `PATH`. Run `acpgram setup` again (the wizard writes the full paths) or set the path in `GEMINI_COMMAND`, `CLAUDE_COMMAND`, `CODEX_COMMAND`, `AGY_COMMAND` or `OPENCODE_COMMAND`.
+
+**The service does not start on Windows.** The service needs the account password, not the Windows PIN. Run `acpgram service install` from an administrator terminal and enter the password.
+
+**A new provider key did not add models.** Restart the service or open `/model`: the bot updates the model list.
+
+**You see 🙂 instead of animated icons in the draft.** The Telegram client does not show them. Set `ANIMATED_ICONS=0`.
+
+**Codex commands on Windows fail with `runner pipe-in`.** The “Read-only” and “Standard” modes need the Codex sandbox. Use the “Full” level.
+
+**The `/git` section answers that it is unavailable.** `git` was not found on the machine. Install it or set the path in `GIT_COMMAND`.
+
+**“Pull” reports that the changes differ.** Your history and the server’s have diverged. Ask the agent to merge the changes and then push.
+
+**The server rejected the push.** The server has newer changes. Press “Pull” first.
+
+**The bot does not start on Linux after the sandbox is turned on.** Check that `bubblewrap` is installed. On Ubuntu 24.04 and later, AppArmor may get in the way (see [agent sandbox](#sandbox)).
+
+**A teammate does not see an agent in `/engine`.** Turn the agent on in the teammate’s card in `/users`. In the sandbox, agents that did not start in it are not offered.
+
+**After an update the bot works the old way.** The service keeps running the previous version. Restart it: `acpgram service restart`.
+
+### How to report a bug {#report-bug}
+
+Create an issue on [GitHub](https://github.com/selesnow/acpgram/issues): specify the operating system, the AcpGram version, the agent and the steps to reproduce. Do not attach tokens or API keys.
