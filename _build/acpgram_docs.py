@@ -92,72 +92,25 @@ def render(body, lang, missing):
     return segments(out, shots)
 
 
-SIDE_WIDTH = 380   # width of the screenshot column on wide screens, see docs.css
-
-
-def figure_height(fig):
-    """Rough height of a screenshot in the side column: the picture scaled to the column plus its caption."""
-    m = re.search(r'width="(\d+)" height="(\d+)"', fig)
-    if not m:
-        return 400
-    w, h = int(m.group(1)), int(m.group(2))
-    return h * min(1, SIDE_WIDTH / w) + 60
-
-
-def text_height(body):
-    """Rough height of a run of text in the text column (about 62 characters per line, 28px a line)."""
-    plain = re.sub(r'<[^>]+>', '', body)
-    lines = len(plain) / 62 + body.count('<p') + body.count('<li') * .6 + body.count('<tr') * 1.2 + body.count('class="ap-code"') * 2.5
-    return lines * 28
-
-
 def segments(out, shots):
-    """Splits a block into segments of text and screenshots.
-
-    Narrow screens keep the source order: text, its screenshots, the next text. On wide screens (docs.css, 1280px+)
-    a screenshot stands beside text when that text is long enough to fill the space next to it: first choice is the
-    text it follows, second choice is the text that comes after it. Otherwise it stays between them, and several
-    screenshots in such a place stand in a row."""
+    """Puts the screenshots back into the block. They stay outside the text, between its paragraphs, centred;
+    screenshots that follow one another stand in a row."""
     parts = re.split(r'<p>ADSHOT(\d{4})</p>', out)
-    runs, figs = [[parts[0], []]], None   # [text, screenshots that follow it]
+    result, figs = [parts[0]], []
+
+    def flush():
+        if figs:
+            result.append(f'<div class="ad-figs">{"".join(figs)}</div>')
+            figs.clear()
+
     for i in range(1, len(parts), 2):
         fig = shots[int(parts[i])]
         if fig:
-            runs[-1][1].append(fig)
+            figs.append(fig)
         if parts[i + 1].strip():
-            runs.append([parts[i + 1], []])
-
-    def fits(body, figs):
-        return bool(body and figs) and text_height(body) >= .65 * sum(figure_height(f) for f in figs)
-
-    def text_seg(body):
-        return f'<div class="ad-seg"><div class="ad-seg-text">{body}</div></div>'
-
-    def figs_seg(figs):
-        return f'<div class="ad-seg"><div class="ad-seg-figs{" ad-figs-row" if len(figs) > 1 else ""}">{"".join(figs)}</div></div>'
-
-    def side_seg(body, figs, figs_first=False):
-        text, pictures = f'<div class="ad-seg-text">{body}</div>', f'<div class="ad-seg-figs">{"".join(figs)}</div>'
-        return (f'<div class="ad-seg ad-has-figs ad-figs-first">{pictures}{text}</div>' if figs_first
-                else f'<div class="ad-seg ad-has-figs">{text}{pictures}</div>')
-
-    result, carry = [], []   # carry: screenshots waiting for the next text
-    for body, figs in runs:
-        body = body.strip()
-        if carry and fits(body, carry):
-            result.append(side_seg(body, carry, figs_first=True))
-            carry, body = [], ''
-        elif carry:
-            result.append(figs_seg(carry))
-            carry = []
-        if fits(body, figs):
-            result.append(side_seg(body, figs))
-        else:
-            if body:
-                result.append(text_seg(body))
-            carry = list(figs)
-    if carry:
-        result.append(figs_seg(carry))
+            flush()
+            result.append(parts[i + 1])
+    flush()
     return ''.join(result)
 
 

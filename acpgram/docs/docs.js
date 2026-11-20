@@ -41,21 +41,6 @@
         viewer.addEventListener('click', event => { if (event.target === viewer || event.target.closest('.ad-lightbox-close')) viewer.close(); });
     }
 
-    // ---------- side screenshots stay in view while their text scrolls, when they fit the window ----------
-    function stickFigures() {
-        document.querySelectorAll('.ad-has-figs').forEach(segment => {
-            const figures = segment.querySelector('.ad-seg-figs');
-            const text = segment.querySelector('.ad-seg-text');
-            figures.classList.remove('ad-stick');
-            const beside = getComputedStyle(segment).display === 'grid';
-            figures.classList.toggle('ad-stick', beside && figures.offsetHeight < innerHeight - 130 && text.offsetHeight > figures.offsetHeight + 60);
-        });
-    }
-    stickFigures();
-    addEventListener('load', stickFigures);
-    let resizeTimer;
-    addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(stickFigures, 150); });
-
     const toc = document.querySelector('.ad-toc');
     if (!toc) return;
     toc.classList.add('ad-js');
@@ -196,5 +181,5 @@
             input.blur();
         }
     });
-    new MutationObserver(() => { if (input.value) search(); stickFigures(); }).observe(document.body, {attributes: true, attributeFilter: ['class']});
+    new MutationObserver(() => { if (input.value) search(); }).observe(document.body, {attributes: true, attributeFilter: ['class']});
 })();

@@ -18,7 +18,7 @@
 .ap-button:hover{border-color:#a78bfa;background:#312e8155}.ap-primary{background:linear-gradient(120deg,#7c3aed,#4f46e5);border-color:#a78bfa70;color:white;box-shadow:0 8px 35px #7c3aed25}
 .ap-code{display:flex;align-items:flex-start;gap:8px;padding:16px;background:#020617cc;border:1px solid #a78bfa30;border-radius:14px;margin:16px 0;position:relative}
 .ap-code pre{margin:0;flex:1;overflow-x:auto;white-space:pre-wrap;overflow-wrap:anywhere;font: .82rem/1.9 ui-monospace,SFMono-Regular,Consolas,monospace;color:#ddd6fe;padding-right:3px}
-.ap-copy{flex-shrink:0;font-size:.68rem;color:#cbd5e1;border:1px solid #ffffff24;padding:7px 9px;border-radius:8px;cursor:pointer;background:#1e293b;min-height:34px}.ap-copy:hover{color:white;background:#334155}
+.ap-copy{flex-shrink:0;font-size:.75rem;color:#cbd5e1;border:1px solid #ffffff24;padding:7px 9px;border-radius:8px;cursor:pointer;background:#1e293b;min-height:34px}.ap-copy:hover{color:white;background:#334155}
 .ap-badges{display:flex;flex-wrap:wrap;gap:8px;font: .7rem/1.6 ui-monospace,monospace;color:#b3c1d3;margin-top:18px}.ap-badges>*{padding:6px 10px;border:1px solid #ffffff1c;border-radius:8px;background:#0f172a88}.ap-badges strong{color:#e9d5ff}
 .ap-visual{position:relative;padding-bottom:28px}.ap-visual .hero-photo-frame{aspect-ratio:1024/577;min-height:0}.ap-visual .hero-photo-frame img{object-fit:cover}.ap-visual .hero-photo{margin-bottom:28px}
 .ap-chat{width:100%;margin-top:32px;position:relative;z-index:5;padding:20px;background:#0f172aed;box-shadow:0 25px 60px #0006;font-size:.78rem}
@@ -64,3 +64,6 @@
 .ap-demo-steps{list-style:none;margin:0;padding:0;display:grid;gap:22px}.ap-demo-steps li{display:flex;gap:18px;align-items:flex-start}.ap-demo-steps h3{margin:4px 0 4px!important;font-size:1.2rem!important}.ap-demo-steps p{margin:0!important;font-size:.95rem!important}.ap-demo-cta{margin-top:30px!important;font-size:.95rem}.ap-demo-cta .ap-text-link{margin:0 0 0 6px;font-size:.95rem}
 @media(min-width:900px){.ap-demo{grid-template-columns:auto 1fr;gap:70px}.ap-demo-phone{width:320px}}
 .ap-peerlist{margin-top:34px;display:flex;flex-direction:column;align-items:center;gap:10px}.ap-final .ap-peerlist p{margin:0}.ap-peerlist img{display:block;height:72px;width:auto;max-width:100%}
+/* Readability (UI/UX check, 2026-11): lines near 75 characters in the install steps and their folded blocks; 16px body text on phones. */
+.ap-more-body p,.ap-service-panel p,.ap-start-steps .bento-content>p{max-width:62ch}
+@media(max-width:639px){.ap-main p,.ap-card p,.ap-more-body p,.ap-note p,.ap-service-panel p,.ap-faq details p{font-size:1rem}.ap-demo-steps p{font-size:1rem!important}}
