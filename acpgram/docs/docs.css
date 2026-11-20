@@ -1,9 +1,23 @@
 /* AcpGram documentation: page layout, contents and article typography.
    Shared pieces (.ap-main, .ap-code, .ap-copy, .ap-button, .ap-toast): /acpgram/acpgram.css; base styles: /assets/site.css. */
 
+/* The site hides horizontal overflow on both <html> and <body>, which turns <body> into a scroll container
+   that never scrolls — and position:sticky then never sticks. `clip` hides the overflow without that side effect. */
+body.acpgram-docs{overflow:visible;overflow-x:clip}
+
+/* Anchors and keyboard focus stop below the sticky site header (and, on phones, below the contents bar). */
+.ad-root{scroll-padding-top:140px}
+@media(prefers-reduced-motion:reduce){.ad-root{scroll-behavior:auto}}
+
 .ad-main{padding-bottom:44px}
-.ad-hero{padding:14px 0 34px;max-width:880px}
-.ad-main .ad-hero h1{font-size:clamp(2.1rem,3.6vw,3.3rem);margin:14px 0}
+.ad-hero{display:grid;gap:26px;padding:14px 0 34px}
+.ad-hero-text{min-width:0;max-width:760px}
+.ad-quick{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-content:start}
+.ad-main .ad-quick-title{grid-column:1/-1;margin:0 0 2px;font:700 .75rem/1.5 'Outfit',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#c4b5fd}
+.ad-quick a{display:flex;align-items:center;gap:11px;min-height:52px;padding:10px 14px;border:1px solid #ffffff17;border-radius:14px;background:#0b1120cc;color:#e2e8f0;font-size:.86rem;line-height:1.35;text-decoration:none}
+.ad-quick a:hover{border-color:#a78bfa;background:#7c3aed1f;color:#fff}
+.ad-quick i{flex:0 0 18px;text-align:center;color:#a78bfa}
+.ad-main .ad-hero h1{font-size:clamp(2.1rem,3.6vw,3.3rem);margin:14px 0;text-wrap:balance}
 .ad-crumbs{display:flex;flex-wrap:wrap;gap:8px;font-size:.82rem;color:#94a3b8}
 .ad-crumbs a{color:#c4b5fd;text-decoration:none}.ad-crumbs a:hover{color:#fff}
 .ad-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
@@ -13,17 +27,23 @@ a.ad-pill:hover{border-color:#a78bfa;color:#fff}
 .ad-layout{display:grid;gap:26px;align-items:start}
 
 /* ---------- contents ---------- */
-.ad-toc{border:1px solid #ffffff14;border-radius:18px;background:#0b1120cc;padding:14px}
+.ad-toc{position:sticky;top:72px;z-index:30;border:1px solid #ffffff1f;border-radius:18px;background:#0b1120f5;padding:8px 14px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.ad-toc-body{max-height:calc(100vh - 150px);overflow-y:auto;overscroll-behavior:contain}
 .ad-toc-toggle{display:flex;align-items:center;gap:10px;width:100%;padding:8px 6px;background:none;border:0;color:#f1f5f9;font:700 .95rem 'Outfit',sans-serif;cursor:pointer;text-align:left}
 .ad-toc-toggle i{color:#a78bfa}
 .ad-toc-toggle::after{content:'−';margin-left:auto;color:#94a3b8;font-weight:400;font-size:1.2rem;line-height:1}
 .ad-collapsed .ad-toc-toggle::after{content:'+'}
 .ad-collapsed .ad-toc-body{display:none}
-.ad-search{width:100%;margin:8px 0 10px;padding:9px 12px;border:1px solid #ffffff1f;border-radius:10px;background:#020617cc;color:#e2e8f0;font-size:.85rem}
-.ad-search::placeholder{color:#64748b}.ad-search:focus{outline:2px solid #a78bfa;outline-offset:1px}
+/* 16px on phones: a smaller field makes iOS zoom the page when it gets focus */
+.ad-search-box{position:relative;margin:8px 0 10px}
+.ad-search-box>i{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:#94a3b8;font-size:.82rem;pointer-events:none}
+.ad-search{width:100%;min-height:42px;padding:9px 12px 9px 36px;border:1px solid #ffffff1f;border-radius:10px;background:#020617cc;color:#e2e8f0;font-size:1rem}
+.ad-search::placeholder{color:#94a3b8}.ad-search:focus{outline:2px solid #a78bfa;outline-offset:1px}
+.ad-kbd{display:none;position:absolute;right:10px;top:50%;transform:translateY(-50%);min-width:22px;padding:1px 6px;border:1px solid #ffffff2e;border-radius:6px;background:#1e293b;color:#cbd5e1;font:.75rem/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;text-align:center;pointer-events:none}
 .ad-toc-nav ul{list-style:none;margin:0;padding:0}
 .ad-toc-nav a{display:block;padding:6px 10px;border-left:2px solid transparent;border-radius:0 8px 8px 0;color:#cbd5e1;font-size:.86rem;line-height:1.4;text-decoration:none}
 .ad-toc-nav a:hover{color:#fff;background:#ffffff0a}
+.ad-main .ad-toc-nav a:focus-visible{outline-offset:-2px}
 .ad-toc-nav ul ul{margin:2px 0 8px 10px;border-left:1px solid #ffffff14}
 .ad-toc-nav ul ul a{font-size:.8rem;color:#94a3b8;padding:4px 10px;margin-left:-1px}
 .ad-toc-nav a.ad-active{color:#fff;border-left-color:#a78bfa;background:#7c3aed1f}
@@ -34,17 +54,19 @@ a.ad-pill:hover{border-color:#a78bfa;color:#fff}
 .ad-toc-empty{margin:8px 6px 4px!important;font-size:.82rem!important;color:#94a3b8!important}
 
 /* ---------- article ---------- */
-.ad-content{min-width:0;max-width:860px}
-.ad-section{padding-top:34px;margin-top:38px;border-top:1px solid #ffffff12;scroll-margin-top:84px}
+/* 720px at 16.5px keeps a full line near 80 characters; the column is centred in the space next to the contents */
+.ad-content{min-width:0;width:100%;max-width:720px;margin-inline:auto}
+.ad-section{padding-top:34px;margin-top:38px;border-top:1px solid #ffffff12}
 .ad-section:first-child{padding-top:0;margin-top:0;border-top:0}
-.ad-sub{margin-top:34px;scroll-margin-top:84px}
-.ad-main .ad-content h2{font-size:clamp(1.6rem,2.4vw,2.1rem);letter-spacing:-.02em;margin:0 0 16px}
-.ad-main .ad-content h3{font-size:1.28rem;margin:0 0 12px}
-.ad-anchor{margin-left:.45em;color:#a78bfa;font-weight:400;text-decoration:none;opacity:.3}
+.ad-sub{margin-top:34px}
+.ad-main .ad-content h2{font-size:clamp(1.6rem,2.4vw,2.1rem);letter-spacing:-.02em;margin:0 0 16px;text-wrap:balance}
+.ad-main .ad-content h3{font-size:1.28rem;margin:0 0 12px;text-wrap:balance}
+.ad-anchor{display:inline-block;min-width:28px;margin-left:.25em;color:#a78bfa;font-weight:400;text-align:center;text-decoration:none;opacity:.5}
 h2:hover>.ad-anchor,h3:hover>.ad-anchor,.ad-anchor:focus-visible{opacity:1}
 .ad-content .ad-lang{animation:none}
 .ad-lang>:first-child{margin-top:0}
-.ad-lang ul,.ad-lang ol{margin:12px 0 20px;padding-left:1.35em;color:#b1bfd1;line-height:1.8;font-size:.98rem}
+.ad-main .ad-lang p{font-size:1.03rem;line-height:1.7}
+.ad-lang ul,.ad-lang ol{margin:12px 0 20px;padding-left:1.35em;color:#b1bfd1;line-height:1.7;font-size:1.03rem}
 .ad-lang ul{list-style:disc}.ad-lang ol{list-style:decimal}
 .ad-lang li{margin:6px 0}.ad-lang li::marker{color:#a78bfa}
 .ad-lang li>p{margin:6px 0}
@@ -53,8 +75,10 @@ h2:hover>.ad-anchor,h3:hover>.ad-anchor,.ad-anchor:focus-visible{opacity:1}
 .ad-lang a{color:#c4b5fd;text-decoration:underline;text-underline-offset:3px}.ad-lang a:hover{color:#fff}
 .ad-lang code{padding:.1em .38em;border:1px solid #a78bfa26;border-radius:6px;background:#1e1b4b59;color:#ddd6fe;font:.86em ui-monospace,SFMono-Regular,Consolas,monospace;overflow-wrap:anywhere}
 .ad-lang .ap-code code{padding:0;border:0;background:none;font:inherit;color:inherit}
-.ad-lang blockquote{margin:18px 0 24px;padding:16px 20px;border-left:3px solid #a78bfa;border-radius:0 14px 14px 0;background:#0f172a99}
-.ad-main .ad-lang blockquote p{margin:0;font-size:.93rem}
+/* notes: the round mark tells a note from body text without relying on colour alone */
+.ad-lang blockquote{position:relative;margin:18px 0 24px;padding:16px 20px 16px 54px;border-left:3px solid #a78bfa;border-radius:0 14px 14px 0;background:#0f172a99}
+.ad-lang blockquote::before{content:'i';position:absolute;left:17px;top:17px;width:22px;height:22px;border:1.5px solid #a78bfa;border-radius:50%;color:#c4b5fd;font:700 .82rem/19px Georgia,'Times New Roman',serif;text-align:center}
+.ad-main .ad-lang blockquote p{margin:0;font-size:.95rem;line-height:1.65}
 .ad-main .ad-lang blockquote p+p{margin-top:10px}
 .ad-table{margin:16px 0 24px;overflow-x:auto;border:1px solid #ffffff14;border-radius:14px;background:#0b112099}
 .ad-table table{width:100%;border-collapse:collapse;font-size:.88rem;line-height:1.6}
@@ -64,13 +88,69 @@ h2:hover>.ad-anchor,h3:hover>.ad-anchor,.ad-anchor:focus-visible{opacity:1}
 .ad-table td:first-child{color:#e2e8f0}
 .ad-shot{margin:20px 0 26px}
 .ad-shot img{display:block;max-width:100%;height:auto;border:1px solid #ffffff1a;border-radius:14px;box-shadow:0 14px 40px #0006}
+.ad-shot figcaption{max-width:60ch;margin-top:10px;color:#94a3b8;font-size:.84rem;line-height:1.5}
+/* ---------- segments: a run of text and the screenshots that illustrate it ---------- */
+.ad-seg+.ad-seg{margin-top:20px}
+.ad-seg-text>:first-child{margin-top:0}.ad-seg-text>:last-child{margin-bottom:0}
+.ad-seg-figs>.ad-shot:first-child{margin-top:0}.ad-seg-figs>.ad-shot:last-child{margin-bottom:0}
+.ad-seg-text+.ad-seg-figs{margin-top:20px}
+.ad-seg-figs+.ad-seg-text{margin-top:20px}
+.ad-zoom{display:block;width:fit-content;max-width:100%;border-radius:14px;cursor:zoom-in}
+.ad-figs-row{display:flex;flex-wrap:wrap;align-items:flex-start;gap:20px 24px}
+.ad-figs-row>.ad-shot{margin:0;min-width:0;max-width:100%}
+.ad-figs-row .ad-shot figcaption{max-width:320px}
+
+/* ---------- previous / next section ---------- */
+.ad-pager{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:40px}
+.ad-pager a{display:flex;flex-direction:column;justify-content:center;gap:4px;min-height:64px;padding:12px 16px;border:1px solid #ffffff17;border-radius:14px;background:#0b1120cc;color:#e2e8f0;font-size:.92rem;line-height:1.35;text-decoration:none}
+.ad-pager a:hover{border-color:#a78bfa;background:#7c3aed1f;color:#fff}
+.ad-pager small{color:#94a3b8;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase}
+.ad-pager .ad-next{grid-column:2;text-align:right}
+
+/* ---------- search: number of matches and the highlighted word ---------- */
+.ad-toc-count{margin:0 6px 8px!important;font-size:.78rem!important;color:#94a3b8!important}
+::highlight(ad-find){background-color:#fbbf24;color:#0b1120}
+
+/* ---------- full-size screenshot ---------- */
+.ad-lightbox{max-width:min(94vw,920px);max-height:92vh;margin:auto;padding:14px;border:1px solid #ffffff2e;border-radius:18px;background:#0b1120;color:#cbd5e1;overflow:auto}
+.ad-lightbox::backdrop{background:#020617e0}
+.ad-lightbox img{display:block;max-width:100%;height:auto;margin:0 auto;border-radius:10px}
+.ad-lightbox-cap{margin:12px 4px 2px;color:#94a3b8;font-size:.86rem;line-height:1.5}
+.ad-lightbox-close{position:sticky;top:0;z-index:2;display:block;width:40px;height:40px;margin:0 0 -40px auto;border:1px solid #ffffff2e;border-radius:50%;background:#1e293b;color:#fff;font-size:1.3rem;line-height:1;cursor:pointer}
+.ad-lightbox-close:hover{background:#334155}
 .ad-foot{margin-top:56px;padding:28px}
 .ad-foot p,.ad-foot .ap-actions{position:relative;z-index:2}
 .ad-foot .ap-actions{margin-bottom:0}
+.ad-main .ap-copy{font-size:.75rem}
+/* touch screens: controls tall enough for a finger */
+@media(pointer:coarse){.ad-toc-nav a{padding-block:12px}.ad-toc-nav ul ul a{padding-block:10px}.ad-toc-toggle{min-height:44px}.ad-search{min-height:44px}.ad-main .ap-copy{min-height:40px;padding-inline:12px}.ad-pill{min-height:40px;padding-inline:14px}}
 
 @media(min-width:1024px){
   .ad-layout{grid-template-columns:292px minmax(0,1fr);gap:46px}
-  .ad-toc{position:sticky;top:84px;max-height:calc(100vh - 104px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#334155 transparent}
+  .ad-hero{grid-template-columns:minmax(0,1fr) minmax(0,440px);gap:46px;align-items:end}
+  .ad-toc{top:84px;z-index:auto;padding:14px;background:#0b1120cc;max-height:calc(100vh - 104px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#334155 transparent}
+  .ad-toc-body{max-height:none;overflow:visible}
+  .ad-root{scroll-padding-top:84px}
+  .ad-search{min-height:40px;font-size:.88rem}
+  .ad-kbd{display:block}.ad-search{padding-right:40px}
   .ad-toc-toggle{cursor:default;pointer-events:none}.ad-toc-toggle::after{content:none}
+}
+/* Wide screens: screenshots stand beside the text they illustrate instead of interrupting it. */
+@media(min-width:1280px){
+  .ad-main{max-width:1440px}
+  .ad-content{max-width:none;margin-inline:0}
+  .ad-seg-text>*{max-width:680px}
+  .ad-seg-text>.ad-table,.ad-seg-text>.ap-code{max-width:860px}
+  .ad-has-figs{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,380px);gap:36px;align-items:start}
+  .ad-has-figs .ad-seg-text>*{max-width:none}
+  /* the pictures come first in the source (they follow the previous text) but still stand on the right */
+  .ad-figs-first>.ad-seg-text{grid-column:1;grid-row:1}.ad-figs-first>.ad-seg-figs{grid-column:2;grid-row:1;align-self:start}
+  .ad-has-figs .ad-seg-text{margin-top:0}
+  .ad-has-figs .ad-seg-figs{margin-top:0;align-self:end}
+  /* set by docs.js when the pictures fit the window: they stay in view while their text scrolls */
+  .ad-has-figs .ad-seg-figs.ad-stick{align-self:start;position:sticky;top:96px}
+  .ad-seg-figs .ad-shot{margin:0 0 18px}
+  .ad-seg-figs .ad-shot figcaption{max-width:none}
+  .ad-pager,.ad-foot{max-width:860px}
 }
 @media(prefers-reduced-motion:no-preference){.ad-anchor{transition:opacity .15s}}

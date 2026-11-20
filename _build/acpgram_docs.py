@@ -69,7 +69,9 @@ def shot_html(name, alt, lang, missing):
             size = f' width="{im.width}" height="{im.height}"'
     except Exception:
         pass
-    return f'<figure class="ad-shot"><img src="../../img/acpgram/docs/{file}" alt="{esc(alt)}"{size} loading="lazy" decoding="async"></figure>'
+    src = f'../../img/acpgram/docs/{file}'
+    return (f'<figure class="ad-shot"><a class="ad-zoom" href="{src}"><img src="{src}" alt="{esc(alt)}"{size} loading="lazy" decoding="async"></a>'
+            f'<figcaption>{esc(alt)}</figcaption></figure>')
 
 
 def render(body, lang, missing):
@@ -81,14 +83,82 @@ def render(body, lang, missing):
         return f'\n\nADSHOT{len(shots) - 1:04d}\n\n'
 
     out = markdown.markdown(SHOT_RE.sub(stash, body), extensions=['fenced_code', 'tables', 'sane_lists'])
-    out = re.sub(r'<p>ADSHOT(\d{4})</p>', lambda m: shots[int(m.group(1))], out)
     out = re.sub(r'<pre><code(?: class="[^"]*")?>(.*?)</code></pre>',
                  lambda m: f'<div class="ap-code"><pre><code>{m.group(1).rstrip()}</code></pre>'
                            f'<button type="button" class="ap-copy">{COPY[lang]}</button></div>',
                  out, flags=re.S)
     out = out.replace('<table>', '<div class="ad-table"><table>').replace('</table>', '</table></div>')
     out = re.sub(r'<a href="(https?://(?!(?:www\.)?alexey-seleznev\.pro))', r'<a target="_blank" rel="noopener" href="\1', out)
-    return out
+    return segments(out, shots)
+
+
+SIDE_WIDTH = 380   # width of the screenshot column on wide screens, see docs.css
+
+
+def figure_height(fig):
+    """Rough height of a screenshot in the side column: the picture scaled to the column plus its caption."""
+    m = re.search(r'width="(\d+)" height="(\d+)"', fig)
+    if not m:
+        return 400
+    w, h = int(m.group(1)), int(m.group(2))
+    return h * min(1, SIDE_WIDTH / w) + 60
+
+
+def text_height(body):
+    """Rough height of a run of text in the text column (about 62 characters per line, 28px a line)."""
+    plain = re.sub(r'<[^>]+>', '', body)
+    lines = len(plain) / 62 + body.count('<p') + body.count('<li') * .6 + body.count('<tr') * 1.2 + body.count('class="ap-code"') * 2.5
+    return lines * 28
+
+
+def segments(out, shots):
+    """Splits a block into segments of text and screenshots.
+
+    Narrow screens keep the source order: text, its screenshots, the next text. On wide screens (docs.css, 1280px+)
+    a screenshot stands beside text when that text is long enough to fill the space next to it: first choice is the
+    text it follows, second choice is the text that comes after it. Otherwise it stays between them, and several
+    screenshots in such a place stand in a row."""
+    parts = re.split(r'<p>ADSHOT(\d{4})</p>', out)
+    runs, figs = [[parts[0], []]], None   # [text, screenshots that follow it]
+    for i in range(1, len(parts), 2):
+        fig = shots[int(parts[i])]
+        if fig:
+            runs[-1][1].append(fig)
+        if parts[i + 1].strip():
+            runs.append([parts[i + 1], []])
+
+    def fits(body, figs):
+        return bool(body and figs) and text_height(body) >= .65 * sum(figure_height(f) for f in figs)
+
+    def text_seg(body):
+        return f'<div class="ad-seg"><div class="ad-seg-text">{body}</div></div>'
+
+    def figs_seg(figs):
+        return f'<div class="ad-seg"><div class="ad-seg-figs{" ad-figs-row" if len(figs) > 1 else ""}">{"".join(figs)}</div></div>'
+
+    def side_seg(body, figs, figs_first=False):
+        text, pictures = f'<div class="ad-seg-text">{body}</div>', f'<div class="ad-seg-figs">{"".join(figs)}</div>'
+        return (f'<div class="ad-seg ad-has-figs ad-figs-first">{pictures}{text}</div>' if figs_first
+                else f'<div class="ad-seg ad-has-figs">{text}{pictures}</div>')
+
+    result, carry = [], []   # carry: screenshots waiting for the next text
+    for body, figs in runs:
+        body = body.strip()
+        if carry and fits(body, carry):
+            result.append(side_seg(body, carry, figs_first=True))
+            carry, body = [], ''
+        elif carry:
+            result.append(figs_seg(carry))
+            carry = []
+        if fits(body, figs):
+            result.append(side_seg(body, figs))
+        else:
+            if body:
+                result.append(text_seg(body))
+            carry = list(figs)
+    if carry:
+        result.append(figs_seg(carry))
+    return ''.join(result)
 
 
 def load():
@@ -130,15 +200,25 @@ def title_html(tag, b):
             f'<a class="ad-anchor" href="#{b["id"]}" aria-label="Link to this section">#</a></{tag}>')
 
 
+def pager_html(tops, i):
+    """Previous / next section links at the end of a section."""
+    def one(b, cls, label):
+        return f'<a class="{cls}" href="#{b["id"]}"><small>{label}</small><span>{T(*(esc(t) for t in b["title"]))}</span></a>'
+    prev = one(tops[i - 1], 'ad-prev', '← ' + text('Назад', 'Назад', 'Previous')) if i > 0 else ''
+    nxt = one(tops[i + 1], 'ad-next', text('Далее', 'Далі', 'Next') + ' →') if i + 1 < len(tops) else ''
+    return f'<nav class="ad-pager" aria-label="Sections">{prev}{nxt}</nav>'
+
+
 def content_html(blocks):
-    out, open_section = '', False
+    tops = [b for b in blocks if b['level'] == 2]
+    out, open_section = '', -1
     for b in blocks:
         if b['level'] == 2:
-            out += ('</section>' if open_section else '') + f'<section id="{b["id"]}" class="ad-section">{title_html("h2", b)}{lang_blocks(b["html"])}'
-            open_section = True
+            out += (pager_html(tops, open_section) + '</section>' if open_section >= 0 else '') + f'<section id="{b["id"]}" class="ad-section">{title_html("h2", b)}{lang_blocks(b["html"])}'
+            open_section += 1
         else:
             out += f'<section id="{b["id"]}" class="ad-sub">{title_html("h3", b)}{lang_blocks(b["html"])}</section>'
-    return out + ('</section>' if open_section else '')
+    return out + (pager_html(tops, open_section) + '</section>' if open_section >= 0 else '')
 
 
 def toc_html(blocks):
@@ -178,26 +258,35 @@ def build_acpgram_docs():
     page = page.replace('content="summary"', 'content="summary_large_image"').replace('content="Алексей Селезнёв"', 'content="AcpGram — AI coding agents in Telegram"')
     page = page.replace('    <!-- Tailwind', '    <link rel="stylesheet" href="../acpgram.css">\n    <link rel="stylesheet" href="docs.css">\n    <!-- Tailwind')
     page = page.replace('class="relative lang-en"', 'class="relative lang-en acpgram-page acpgram-docs"')
+    page = page.replace('<html lang="en" class="scroll-smooth">', '<html lang="en" class="scroll-smooth ad-root">')   # scroll-padding under the sticky header, see docs.css
     page += deep(nav('acpgram'))
 
     sections = sum(1 for b in blocks if b['level'] == 2)
     page += '<main id="main-content" class="ap-main ad-main">'
-    page += f'''<header class="ad-hero"><nav class="ad-crumbs" aria-label="Breadcrumb"><a href="../../">{text('Главная', 'Головна', 'Home')}</a><span>/</span><a href="../">AcpGram</a><span>/</span><span>{text('Документация', 'Документація', 'Documentation')}</span></nav>
+    # Quick links fill the right half of the hero: the sections people open most often.
+    QUICK = (('install', 'download'), ('first-steps', 'play'), ('git', 'code-branch'), ('team', 'users'), ('env', 'sliders'), ('troubleshooting', 'life-ring'))
+    by_id = {b['id']: b for b in blocks}
+    quick = ''.join(f'<a href="#{id}"><i aria-hidden="true" class="fa-solid fa-{icon}"></i><span>{T(*(esc(t) for t in by_id[id]["title"]))}</span></a>'
+                    for id, icon in QUICK if id in by_id)
+    page += f'''<header class="ad-hero"><div class="ad-hero-text"><nav class="ad-crumbs" aria-label="Breadcrumb"><a href="../../">{text('Главная', 'Головна', 'Home')}</a><span>/</span><a href="../">AcpGram</a><span>/</span><span>{text('Документация', 'Документація', 'Documentation')}</span></nav>
     <h1>{text('Документация AcpGram', 'Документація AcpGram', 'AcpGram documentation')}</h1>
-    <p class="ap-lead">{text('Всё об установке и работе: от первого запуска до Git, работы в команде и песочницы. В содержании есть поиск по разделам, язык переключается в шапке сайта.',
-                             'Усе про встановлення й роботу: від першого запуску до Git, роботи в команді й пісочниці. У змісті є пошук за розділами, мова перемикається в шапці сайту.',
-                             'Everything about installing and using AcpGram: from the first run to Git, team work and the sandbox. The contents include a section search; switch the language in the site header.')}</p>
-    <div class="ad-meta">{f'<span class="ad-pill">AcpGram v{esc(version)}</span>' if version else ''}<span class="ad-pill">{sections} {text('разделов', 'розділів', 'sections')}</span><a class="ad-pill" href="../#install">{text('Установка за пять шагов', 'Встановлення за п’ять кроків', 'Install in five steps')} →</a><a class="ad-pill" href="{REPO}" rel="noopener">GitHub ↗</a></div></header>'''
+    <p class="ap-lead">{text('Всё об установке и работе: от первого запуска до Git, работы в команде и песочницы. Содержание с поиском по разделам всегда под рукой, язык переключается в шапке сайта.',
+                             'Усе про встановлення й роботу: від першого запуску до Git, роботи в команді й пісочниці. Зміст із пошуком за розділами завжди під рукою, мова перемикається в шапці сайту.',
+                             'Everything about installing and using AcpGram: from the first run to Git, team work and the sandbox. The contents with a section search stay within reach; switch the language in the site header.')}</p>
+    <div class="ad-meta">{f'<span class="ad-pill">AcpGram v{esc(version)}</span>' if version else ''}<span class="ad-pill">{sections} {text('разделов', 'розділів', 'sections')}</span><a class="ad-pill" href="../#install">{text('Установка за пять шагов', 'Встановлення за п’ять кроків', 'Install in five steps')} →</a><a class="ad-pill" href="{REPO}" rel="noopener">GitHub ↗</a></div></div>
+    <nav class="ad-quick" aria-label="Quick links"><p class="ad-quick-title">{text('Быстрый переход', 'Швидкий перехід', 'Jump to')}</p>{quick}</nav></header>'''
 
     page += f'''<div class="ad-layout"><aside class="ad-toc" aria-label="Contents"><button type="button" class="ad-toc-toggle" aria-expanded="true" aria-controls="ad-toc-body"><i aria-hidden="true" class="fa-solid fa-list"></i>{text('Содержание', 'Зміст', 'Contents')}</button>
-    <div class="ad-toc-body" id="ad-toc-body"><input type="search" class="ad-search" id="ad-search" placeholder="Search sections" data-ph-ru="Поиск по разделам" data-ph-ua="Пошук за розділами" data-ph-en="Search sections" aria-label="Search sections" autocomplete="off">
-    <nav class="ad-toc-nav">{toc_html(blocks)}</nav><p class="ad-toc-empty" hidden>{text('Ничего не найдено', 'Нічого не знайдено', 'Nothing found')}</p></div></aside>
+    <div class="ad-toc-body" id="ad-toc-body"><div class="ad-search-box"><i aria-hidden="true" class="fa-solid fa-magnifying-glass"></i><input type="search" class="ad-search" id="ad-search" placeholder="Search sections" data-ph-ru="Поиск по разделам" data-ph-ua="Пошук за розділами" data-ph-en="Search sections" aria-label="Search sections" aria-keyshortcuts="/" autocomplete="off"><kbd class="ad-kbd" aria-hidden="true">/</kbd></div>
+    <nav class="ad-toc-nav">{toc_html(blocks)}</nav><p class="ad-toc-count" hidden></p><p class="ad-toc-empty" hidden>{text('Ничего не найдено', 'Нічого не знайдено', 'Nothing found')}</p></div></aside>
     <article class="ad-content">{content_html(blocks)}
     <footer class="ad-foot bento-glass"><p>{text('Не нашли ответ? Напишите в GitHub Issues — и документация станет лучше.', 'Не знайшли відповіді? Напишіть у GitHub Issues — і документація стане кращою.', 'Didn’t find the answer? Open a GitHub issue — and the documentation gets better.')}</p>
     <div class="ap-actions"><a class="ap-button ap-primary" href="../#install"><i aria-hidden="true" class="fa-solid fa-download"></i>{text('Установить', 'Встановити', 'Install')}</a><a class="ap-button" href="{REPO}/issues" rel="noopener"><i aria-hidden="true" class="fa-brands fa-github"></i>GitHub Issues</a><a class="ap-button" href="../../blog/?tag=acpgram#posts"><i aria-hidden="true" class="fa-solid fa-newspaper"></i>{text('Новости', 'Новини', 'News')}</a></div></footer></article></div>'''
     page += '</main>'
     page += footer('../../')
     page += '<div class="ap-toast" role="status" aria-live="polite" id="ap-status"></div>'
+    page += ('<dialog class="ad-lightbox" id="ad-lightbox" aria-label="Screenshot"><button type="button" class="ad-lightbox-close" aria-label="Close">×</button>'
+             '<img alt=""><p class="ad-lightbox-cap"></p></dialog>')
     page += deep(tail()).replace('    <script src="../../assets/site.js"></script>', '    <script src="../../assets/site.js"></script>\n    <script src="docs.js"></script>')
 
     out = ROOT / 'acpgram' / 'docs'

@@ -22,9 +22,72 @@
         toastTimer = setTimeout(() => { status.textContent = ''; }, 4000);
     }));
 
+    // ---------- full-size screenshot (a link to the file without JS) ----------
+    const viewer = document.getElementById('ad-lightbox');
+    if (viewer?.showModal) {
+        const picture = viewer.querySelector('img');
+        const caption = viewer.querySelector('.ad-lightbox-cap');
+        document.querySelectorAll('.ad-zoom').forEach(link => link.addEventListener('click', event => {
+            event.preventDefault();
+            const small = link.querySelector('img');
+            picture.src = link.href;
+            picture.alt = small.alt;
+            picture.width = small.naturalWidth || small.width;
+            picture.height = small.naturalHeight || small.height;
+            caption.textContent = small.alt;
+            viewer.querySelector('.ad-lightbox-close').setAttribute('aria-label', label('Закрыть', 'Закрити', 'Close'));
+            viewer.showModal();
+        }));
+        viewer.addEventListener('click', event => { if (event.target === viewer || event.target.closest('.ad-lightbox-close')) viewer.close(); });
+    }
+
+    // ---------- side screenshots stay in view while their text scrolls, when they fit the window ----------
+    function stickFigures() {
+        document.querySelectorAll('.ad-has-figs').forEach(segment => {
+            const figures = segment.querySelector('.ad-seg-figs');
+            const text = segment.querySelector('.ad-seg-text');
+            figures.classList.remove('ad-stick');
+            const beside = getComputedStyle(segment).display === 'grid';
+            figures.classList.toggle('ad-stick', beside && figures.offsetHeight < innerHeight - 130 && text.offsetHeight > figures.offsetHeight + 60);
+        });
+    }
+    stickFigures();
+    addEventListener('load', stickFigures);
+    let resizeTimer;
+    addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(stickFigures, 150); });
+
     const toc = document.querySelector('.ad-toc');
     if (!toc) return;
     toc.classList.add('ad-js');
+
+    // ---------- the found word is highlighted in the text (CSS Custom Highlight API: no changes to the page itself) ----------
+    const firstMatch = new Map();   // section id → the first match in it
+    const count = toc.querySelector('.ad-toc-count');
+    function highlight(query) {
+        firstMatch.clear();
+        if (!window.CSS?.highlights || typeof Highlight === 'undefined') return -1;
+        CSS.highlights.delete('ad-find');
+        if (query.length < 2) return 0;
+        const ranges = [];
+        const current = lang() + '-text';
+        const roots = document.querySelectorAll('.ad-content .' + current + '.ad-lang, .ad-content h2 > .' + current + ', .ad-content h3 > .' + current);
+        for (const root of roots) {
+            const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+            for (let node; (node = walker.nextNode()) && ranges.length < 3000;) {
+                const text = node.nodeValue.toLowerCase();
+                for (let at = text.indexOf(query); at !== -1; at = text.indexOf(query, at + query.length)) {
+                    const range = new Range();
+                    range.setStart(node, at);
+                    range.setEnd(node, at + query.length);
+                    ranges.push(range);
+                    const section = node.parentElement.closest('.ad-sub, .ad-section');
+                    if (section && !firstMatch.has(section.id)) firstMatch.set(section.id, range);
+                }
+            }
+        }
+        if (ranges.length) CSS.highlights.set('ad-find', new Highlight(...ranges));
+        return ranges.length;
+    }
 
     // ---------- contents: collapsed on phones, always open on wide screens ----------
     const toggle = toc.querySelector('.ad-toc-toggle');
@@ -39,7 +102,14 @@
 
     const links = [...toc.querySelectorAll('.ad-toc-nav a')];
     const linkById = new Map(links.map(a => [a.hash.slice(1), a]));
-    links.forEach(a => a.addEventListener('click', () => { if (!wide.matches) setOpen(false); }));
+    links.forEach(a => a.addEventListener('click', event => {
+        if (!wide.matches) setOpen(false);
+        const match = firstMatch.get(a.hash.slice(1));
+        if (!match) return;
+        event.preventDefault();
+        history.replaceState(null, '', a.hash);
+        match.startContainer.parentElement.scrollIntoView({block: 'center', behavior: 'instant'});   // a long smooth scroll would overshoot the reader's patience
+    }));
 
     // ---------- current section ----------
     const blocks = [...document.querySelectorAll('.ad-section, .ad-sub')];
@@ -69,7 +139,8 @@
         ticking = false;
         let id = blocks[0]?.id;
         for (const block of blocks) {
-            if (block.getBoundingClientRect().top <= 130) id = block.id; else if (block.classList.contains('ad-section')) break;
+            // on phones the contents bar sticks under the site header, so headings stop lower
+            if (block.getBoundingClientRect().top <= (wide.matches ? 130 : 190)) id = block.id; else if (block.classList.contains('ad-section')) break;
         }
         activate(id);
     }
@@ -106,7 +177,24 @@
             if (any) found++;
         });
         empty.hidden = found > 0;
+        const matches = highlight(query);
+        count.hidden = matches <= 0;
+        if (matches > 0) count.textContent = label('Совпадений в тексте: ', 'Збігів у тексті: ', 'Matches in the text: ') + matches;
     }
     input.addEventListener('input', search);
-    new MutationObserver(() => { if (input.value) search(); }).observe(document.body, {attributes: true, attributeFilter: ['class']});
+    // «/» moves to the search from anywhere on the page, Esc clears it
+    addEventListener('keydown', event => {
+        const el = document.activeElement;
+        const typing = el && (/^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName) || el.isContentEditable);
+        if (event.key === '/' && !typing && !event.ctrlKey && !event.metaKey && !event.altKey) {
+            event.preventDefault();
+            if (!wide.matches) setOpen(true);
+            input.focus();
+        } else if (event.key === 'Escape' && el === input) {
+            input.value = '';
+            search();
+            input.blur();
+        }
+    });
+    new MutationObserver(() => { if (input.value) search(); stickFigures(); }).observe(document.body, {attributes: true, attributeFilter: ['class']});
 })();
