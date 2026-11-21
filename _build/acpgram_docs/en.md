@@ -44,7 +44,7 @@ Installation usually takes a few minutes. If your agent already works in the ter
 
 ### Step 1. Prepare the agent {#install-agent}
 
-Choose the agent you use. The `npm` commands require Node.js with npm.
+Choose the agent you use. The `npm` commands require Node.js with npm. If `npm` on Windows says that running scripts is disabled, see [the fix](#powershell-scripts).
 
 **OpenCode** is the easiest start: it works right away on free models, with no keys or accounts.
 
@@ -119,6 +119,8 @@ The installer downloads the latest release, verifying its checksum, into `%LOCAL
 npm install -g acpgram
 acpgram setup
 ```
+
+> On Windows, PowerShell may say that running scripts is disabled on this system and refuse to start `npm` or `acpgram`. The one-command fix: [Windows: "running scripts is disabled"](#powershell-scripts).
 
 With this kind of installation, the settings (`.env`) and the database (`data/bot.db`) live in `~/.acpgram` (or in the folder from `ACPGRAM_HOME`) and are not lost when the package is updated.
 
@@ -913,6 +915,19 @@ Get-Content "$HOME\.acpgram\data\service.log" -Tail 30 -Encoding UTF8
 This is the path for an npm installation. If you installed with the installer, the log is in `%LOCALAPPDATA%\acpgram\data\service.log`.
 
 At startup the bot checks the settings. If the token or the administrator ID is not set, `PROJECTS_ROOT` points to a folder that does not exist, or the default agent does not start, the bot exits right away and writes to the log what to fix.
+
+### Windows: "running scripts is disabled" {#powershell-scripts}
+
+In PowerShell, `npm` or `acpgram` fails with "File …
+pm.ps1 cannot be loaded because running scripts is disabled on this system". It usually happens while installing an agent or AcpGram itself through npm.
+
+PowerShell blocks scripts by default, and in it `npm` and `acpgram` run as the scripts `npm.ps1` and `acpgram.ps1`. Allow scripts for your account (administrator rights are not needed) and repeat the command:
+
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+```
+
+If you cannot change this setting, add `.cmd` to the commands: `npm.cmd install -g acpgram`, `acpgram.cmd setup`. Or run them in the classic Command Prompt (`cmd`), which has no such restriction.
 
 ### Common situations {#common-issues}
 
