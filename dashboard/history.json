@@ -99,5 +99,102 @@
     "Обнаружена, не проиндексирована"
    ]
   ]
+ },
+ {
+  "date": "2026-11-22",
+  "total": 211,
+  "states": {
+   "Страница отправлена и проиндексирована": 190,
+   "Страница является копией. Канонический вариант не выбран пользователем.": 3,
+   "URL неизвестен Google": 9,
+   "Страница просканирована, но пока не проиндексирована": 4,
+   "Обнаружена, не проиндексирована": 5
+  },
+  "not_indexed": [
+   [
+    "https://alexey-seleznev.pro/r_package_course/",
+    "Страница является копией. Канонический вариант не выбран пользователем."
+   ],
+   [
+    "https://alexey-seleznev.pro/build_telegram_bot_using_r/",
+    "Страница является копией. Канонический вариант не выбран пользователем."
+   ],
+   [
+    "https://alexey-seleznev.pro/dplyr_1_0_0_course/",
+    "URL неизвестен Google"
+   ],
+   [
+    "https://alexey-seleznev.pro/r4excel_users/",
+    "Страница является копией. Канонический вариант не выбран пользователем."
+   ],
+   [
+    "https://alexey-seleznev.pro/publications/",
+    "Страница просканирована, но пока не проиндексирована"
+   ],
+   [
+    "https://alexey-seleznev.pro/acpgram/docs/",
+    "Обнаружена, не проиндексирована"
+   ],
+   [
+    "https://alexey-seleznev.pro/blog/pishem-telegram-bota-na-yazyke-r-chast-1-sozdaem-bota-i-otpravlyaem-s/",
+    "Страница просканирована, но пока не проиндексирована"
+   ],
+   [
+    "https://alexey-seleznev.pro/blog/keys-kak-provesti-analiz-konkurentov-s-pomoschyu-similarweb/",
+    "Страница просканирована, но пока не проиндексирована"
+   ],
+   [
+    "https://alexey-seleznev.pro/blog/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-i-tablits/",
+    "Страница просканирована, но пока не проиндексирована"
+   ],
+   [
+    "https://alexey-seleznev.pro/r_for_marketing_course/module-1/",
+    "Обнаружена, не проиндексирована"
+   ],
+   [
+    "https://alexey-seleznev.pro/r_for_marketing_course/module-1/1-2/",
+    "URL неизвестен Google"
+   ],
+   [
+    "https://alexey-seleznev.pro/r_for_marketing_course/module-1/1-13/",
+    "URL неизвестен Google"
+   ],
+   [
+    "https://alexey-seleznev.pro/r_for_marketing_course/module-1/1-14/",
+    "URL неизвестен Google"
+   ],
+   [
+    "https://alexey-seleznev.pro/r_for_marketing_course/module-2/2-3/",
+    "URL неизвестен Google"
+   ],
+   [
+    "https://alexey-seleznev.pro/r_for_marketing_course/module-2/2-7/",
+    "URL неизвестен Google"
+   ],
+   [
+    "https://alexey-seleznev.pro/r_for_marketing_course/module-2/2-9/",
+    "Обнаружена, не проиндексирована"
+   ],
+   [
+    "https://alexey-seleznev.pro/r_for_marketing_course/module-2/2-10/",
+    "Обнаружена, не проиндексирована"
+   ],
+   [
+    "https://alexey-seleznev.pro/r_for_marketing_course/module-2/2-11/",
+    "URL неизвестен Google"
+   ],
+   [
+    "https://alexey-seleznev.pro/r_for_marketing_course/module-3/3-1/",
+    "Обнаружена, не проиндексирована"
+   ],
+   [
+    "https://alexey-seleznev.pro/r_for_marketing_course/module-3/3-4/",
+    "URL неизвестен Google"
+   ],
+   [
+    "https://alexey-seleznev.pro/r_for_marketing_course/module-3/3-5/",
+    "URL неизвестен Google"
+   ]
+  ]
  }
 ]
