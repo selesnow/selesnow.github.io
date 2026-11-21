@@ -1,0 +1,31 @@
+name = "acpgram-docs-chat"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+workers_dev = true
+preview_urls = false
+
+[observability]
+enabled = true
+
+[vars]
+# Сайты, с которых разрешён чат (заголовок Origin), через запятую
+ALLOWED_ORIGINS = "https://alexey-seleznev.pro"
+# Откуда воркер берёт текст справки: <DOCS_URL>/docs.<ru|ua|en>.txt (пишет _build/acpgram_docs.py)
+DOCS_URL = "https://alexey-seleznev.pro/acpgram/docs"
+OPENROUTER_URL = "https://openrouter.ai/api/v1"
+# Роутер бесплатных моделей OpenRouter: сам выбирает доступную модель
+MODEL = "openrouter/free"
+# С запасом: у «думающих» моделей рассуждения тоже входят в этот лимит
+MAX_TOKENS = "2000"
+# Лимиты: вопросов в минуту и в сутки с одного адреса, всего в сутки (UTC)
+PER_MINUTE = "5"
+PER_DAY = "40"
+TOTAL_PER_DAY = "800"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "acpgram-docs-chat"
+database_id = "a62d0054-26fd-4e8c-9799-58d2b7ab2f20"
+
+# Секрет (не хранится в репозитории), задаётся через `wrangler secret put OPENROUTER_API_KEY`:
+#   OPENROUTER_API_KEY — отдельный ключ OpenRouter для этого чата

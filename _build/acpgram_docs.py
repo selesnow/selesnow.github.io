@@ -25,6 +25,7 @@ LANGS = ('ru', 'ua', 'en')
 REPO = 'https://github.com/selesnow/acpgram'
 HEAD_RE = re.compile(r'^(#{2,3}) (.+?) \{#([a-z0-9-]+)\}\s*$')
 SHOT_RE = re.compile(r'^\{\{shot:\s*([a-z0-9-]+)\s*\|\s*(.+?)\s*\}\}\s*$', re.M)
+CHAT_API = 'https://acpgram-docs-chat.selesnow.workers.dev/api/ask'   # the worker: _worker/acpgram-docs-chat
 COPY = {'ru': 'Копировать', 'ua': 'Копіювати', 'en': 'Copy'}
 
 
@@ -144,6 +145,33 @@ def load():
     return blocks, missing
 
 
+def write_plain(out):
+    """The documentation as plain text, one file per language: docs.<lang>.txt. The chat worker puts it into
+    the model's prompt, so the headings keep their {#id} anchors and the screenshot lines are dropped.
+    A .txt and not a .md: GitHub Pages would turn a Markdown file into an HTML page."""
+    for lang in LANGS:
+        src = SHOT_RE.sub('', (SRC / f'{lang}.md').read_text(encoding='utf-8'))
+        src = re.sub(r'\n{3,}', '\n\n', src).strip()
+        (out / f'docs.{lang}.txt').write_text(f'# AcpGram documentation ({lang})\n\n{src}\n', encoding='utf-8', newline='\n')
+
+
+def chat_html():
+    """The AI chat about the documentation: a floating button and a panel, both hidden until chat.js starts."""
+    chips = (('Как установить AcpGram?', 'Як встановити AcpGram?', 'How do I install AcpGram?'),
+             ('Как подключить GitHub?', 'Як підключити GitHub?', 'How do I connect GitHub?'),
+             ('Как дать доступ коллеге?', 'Як дати доступ колезі?', 'How do I give a teammate access?'))
+    return f'''<button type="button" class="dc-fab" id="dc-fab" aria-expanded="false" aria-controls="dc-panel" hidden><i aria-hidden="true" class="fa-solid fa-wand-magic-sparkles"></i>{text('Спросить ИИ', 'Запитати ШІ', 'Ask AI')}</button>
+    <section class="dc-panel" id="dc-panel" role="dialog" aria-labelledby="dc-title" data-api="{CHAT_API}" hidden>
+    <header class="dc-head"><i aria-hidden="true" class="fa-solid fa-wand-magic-sparkles"></i><div><p class="dc-title" id="dc-title">{text('Помощник по документации', 'Помічник із документації', 'Documentation assistant')}</p><p class="dc-sub">{text('ИИ отвечает по тексту этой страницы', 'ШІ відповідає за текстом цієї сторінки', 'AI answers from the text of this page')}</p></div>
+    <button type="button" class="dc-icon" id="dc-reset" aria-label="New chat" hidden><i aria-hidden="true" class="fa-solid fa-rotate-left"></i></button><button type="button" class="dc-icon" id="dc-close" aria-label="Close">×</button></header>
+    <div class="dc-log" id="dc-log" role="log" aria-live="polite"><div class="dc-msg dc-bot dc-hello">{text('Спросите об установке, настройках, Git, работе в команде или командах бота. Отвечу по документации и дам ссылки на разделы.',
+                                                                                                           'Запитайте про встановлення, налаштування, Git, роботу в команді чи команди бота. Відповім за документацією й дам посилання на розділи.',
+                                                                                                           'Ask about installation, settings, Git, team work or the bot commands. I answer from the documentation and link the sections.')}</div></div>
+    <div class="dc-chips" id="dc-chips">{''.join(f'<button type="button">{text(*c)}</button>' for c in chips)}</div>
+    <form class="dc-form" id="dc-form"><textarea id="dc-input" rows="1" maxlength="600" placeholder="Your question" data-ph-ru="Ваш вопрос" data-ph-ua="Ваше запитання" data-ph-en="Your question" aria-label="Your question"></textarea><button type="submit" class="dc-send" aria-label="Send"><i aria-hidden="true" class="fa-solid fa-paper-plane"></i></button></form>
+    <p class="dc-note">{text('ИИ может ошибаться: сверяйтесь с разделами по ссылкам. Не отправляйте пароли и токены.', 'ШІ може помилятися: звіряйтеся з розділами за посиланнями. Не надсилайте паролі й токени.', 'AI can be wrong: check the linked sections. Do not send passwords or tokens.')}</p></section>'''
+
+
 def lang_blocks(htmls):
     return ''.join(f'<div class="{lang}-text ad-lang">{h}</div>' for lang, h in zip(LANGS, htmls) if h)
 
@@ -209,7 +237,7 @@ def build_acpgram_docs():
                      image='https://alexey-seleznev.pro/img/acpgram/og-acpgram.jpg', jsonld=ld))
     page = page.replace('    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">\n', '').replace('    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>\n', '')
     page = page.replace('content="summary"', 'content="summary_large_image"').replace('content="Алексей Селезнёв"', 'content="AcpGram — AI coding agents in Telegram"')
-    page = page.replace('    <!-- Tailwind', '    <link rel="stylesheet" href="../acpgram.css">\n    <link rel="stylesheet" href="docs.css">\n    <!-- Tailwind')
+    page = page.replace('    <!-- Tailwind', '    <link rel="stylesheet" href="../acpgram.css">\n    <link rel="stylesheet" href="docs.css">\n    <link rel="stylesheet" href="chat.css">\n    <!-- Tailwind')
     page = page.replace('class="relative lang-en"', 'class="relative lang-en acpgram-page acpgram-docs"')
     page = page.replace('<html lang="en" class="scroll-smooth">', '<html lang="en" class="scroll-smooth ad-root">')   # scroll-padding under the sticky header, see docs.css
     page += deep(nav('acpgram'))
@@ -240,11 +268,13 @@ def build_acpgram_docs():
     page += '<div class="ap-toast" role="status" aria-live="polite" id="ap-status"></div>'
     page += ('<dialog class="ad-lightbox" id="ad-lightbox" aria-label="Screenshot"><button type="button" class="ad-lightbox-close" aria-label="Close">×</button>'
              '<img alt=""><p class="ad-lightbox-cap"></p></dialog>')
-    page += deep(tail()).replace('    <script src="../../assets/site.js"></script>', '    <script src="../../assets/site.js"></script>\n    <script src="docs.js"></script>')
+    page += chat_html()
+    page += deep(tail()).replace('    <script src="../../assets/site.js"></script>', '    <script src="../../assets/site.js"></script>\n    <script src="docs.js"></script>\n    <script src="chat.js"></script>')
 
     out = ROOT / 'acpgram' / 'docs'
     out.mkdir(parents=True, exist_ok=True)
     (out / 'index.html').write_text(page, encoding='utf-8')
+    write_plain(out)
     print(f'acpgram/docs/index.html: {sections} sections, {len(blocks) - sections} subsections')
     if missing:
         print(f'  screenshots still missing ({len(missing)}): ' + ', '.join(missing))

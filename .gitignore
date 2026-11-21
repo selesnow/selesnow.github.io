@@ -4,6 +4,11 @@
 .Ruserdata
 __pycache__/
 
+# Cloudflare Worker (_worker/): локальное состояние wrangler и секреты для wrangler dev
+.wrangler/
+.dev.vars
+node_modules/
+
 # чужие навыки Claude Code, не относятся к проекту
 .claude/skills/ai-seo/
 .claude/skills/seo-audit/

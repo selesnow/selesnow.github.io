@@ -47,6 +47,15 @@ URL: `/acpgram/docs/`; source: `_build/acpgram_docs.py` and three Markdown files
 - The landing links to the page from the hero, the install section and the final block (`DOCS` in `acpgram_page.py`); `sitemap.xml` has the address; the nightly workflow commits `acpgram/docs/index.html`.
 - Facts: the AcpGram README (ru and en) and `src/i18n.mjs` for button labels in the three languages. In the bot's interface an agent is called an "engine" (ru «движок», uk «рушій»); the documentation says "agent" and explains this once in the `engine` section.
 
+### AI chat on the documentation page
+
+- A floating "Ask AI" button opens a chat window. Markup: `chat_html()` in `acpgram_docs.py`; behavior and styles: `acpgram/docs/chat.js`, `acpgram/docs/chat.css` (own classes `dc-*`, no Tailwind utilities).
+- The backend is a Cloudflare Worker in `_worker/acpgram-docs-chat/` (see its `README.md`): it checks the origin and the limits, puts the whole documentation of the reader's language into the prompt and streams the answer of an OpenRouter free model. The worker address is `CHAT_API` in `acpgram_docs.py`. The OpenRouter key is a worker secret and never appears on the site.
+- The build writes `acpgram/docs/docs.{ru,ua,en}.txt` — the Markdown sources without the screenshot lines. The worker fetches them from the site, so a documentation update needs only a rebuild and a push, not a worker deploy. `.txt`, because GitHub Pages turns `.md` files into HTML pages.
+- The model is told to answer only from the documentation and to end with links like `[Title](#id)`; the page renders a small safe subset of Markdown and keeps only links to ids that exist on the page.
+- The dialog lives in `sessionStorage` (`acpgramDocsChat`); nothing is stored on the server except request counters.
+- Local check without a key: the worker `README.md`, section «Локальная проверка без ключа».
+
 ## Images
 
 Original SVG and original WebP remain intact in `img/acpgram/`. The logo has a lossless WebP variant and SVG fallback; the optimized hero has a JPEG fallback. OG images are 1200×630 in JPEG and WebP. The preview poster is local. All new images have dimensions and appropriate loading priority.

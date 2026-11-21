@@ -37,6 +37,10 @@ GitHub Actions (`.github/workflows/update-stats.yml`) каждый день в 0
 - `404.html` в корне тоже генерируется (`build_404()`). GitHub Pages отдаёт её по любому несуществующему
   адресу, в том числе вложенному, поэтому все пути на ней абсолютные (`/assets/...`, `/courses/`).
 - `_build/` не публикуется: Jekyll игнорирует каталоги, начинающиеся с `_`.
+- `_worker/acpgram-docs-chat/` — Cloudflare Worker для AI-чата на странице справки AcpGram (`/acpgram/docs/`), тоже не публикуется.
+  Деплоится отдельно (`npx wrangler deploy` из его каталога) и только по просьбе пользователя; ключ OpenRouter — секрет воркера,
+  в репозиторий и в код страницы не попадает. Текст справки воркер берёт с сайта (`acpgram/docs/docs.<lang>.txt`, пишет сборка),
+  поэтому после правки справки передеплой не нужен. Подробности — `README.md` воркера и `_build/ACPGRAM.md`.
 - `assets/site.css`, `assets/site.js` — общие стили и скрипт внутренних страниц;
   стили повторяют лендинг (Tailwind CDN, bento-glass карточки, фон Vanta.js).
 - `assets/stats.json` — публичный снимок счётчиков (cranlogs + GitHub API), его читают лендинг
