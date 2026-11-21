@@ -3,3 +3,7 @@
 .RData
 .Ruserdata
 __pycache__/
+
+# чужие навыки Claude Code, не относятся к проекту
+.claude/skills/ai-seo/
+.claude/skills/seo-audit/

@@ -202,7 +202,7 @@ def ga_snippet():
     </script>'''
 
 
-def head(slug, title, description, image=f'{SITE}/photo.jpg', jsonld=None):
+def head(slug, title, description, image=f'{SITE}/photo.jpg', jsonld=None, lang='en', og_type='website', card='summary', extra_meta=''):
     canonical = f'{SITE}/{slug}/'
     if jsonld is None and slug != '404':
         jsonld = page_jsonld(slug, title.split(' | ')[0], description)
@@ -212,7 +212,7 @@ def head(slug, title, description, image=f'{SITE}/photo.jpg', jsonld=None):
               + json.dumps(jsonld, ensure_ascii=False, indent=2)
               + '\n    </script>')
     return f'''<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="{lang}" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -226,16 +226,16 @@ def head(slug, title, description, image=f'{SITE}/photo.jpg', jsonld=None):
     <meta name="title" content="{esc(title)}">
     <meta name="description" content="{esc(description)}">
 
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="{og_type}">
     <meta property="og:url" content="{canonical}">
     <meta property="og:site_name" content="ALEXEY-SELEZNEV.pro">
     <meta property="og:title" content="{esc(title)}">
     <meta property="og:description" content="{esc(description)}">
     <meta property="og:image" content="{image}">
     <meta property="og:image:alt" content="Алексей Селезнёв">
-    <meta property="og:locale" content="ru_RU">
+    <meta property="og:locale" content="ru_RU">{extra_meta}
 
-    <meta name="twitter:card" content="summary">
+    <meta name="twitter:card" content="{card}">
     <meta name="twitter:url" content="{canonical}">
     <meta name="twitter:title" content="{esc(title)}">
     <meta name="twitter:description" content="{esc(description)}">
@@ -444,7 +444,7 @@ VIDEO_MODAL = '''
 def tail(modal=False):
     return (VIDEO_MODAL if modal else '') + '''
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.net.min.js"></script>
     <script src="../assets/site.js"></script>
 </body>
 </html>

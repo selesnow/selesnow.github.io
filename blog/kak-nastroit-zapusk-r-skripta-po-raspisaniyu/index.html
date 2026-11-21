@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="ru" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,22 +11,24 @@
 
     <title>Как настроить запуск R-скрипта по расписанию? | Алексей Селезнёв</title>
     <meta name="title" content="Как настроить запуск R-скрипта по расписанию? | Алексей Селезнёв">
-    <meta name="description" content="С помощью скриптов R можно быстро и бесплатно собирать данные из API различных сервисов или рекламных площадок и записывать их в базу данных. Но если вы регулярно пользуетесь скриптами,…">
+    <meta name="description" content="С помощью скриптов R можно быстро и бесплатно собирать данные из API различных сервисов или рекламных площадок и записывать их в базу данных.">
 
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="article">
     <meta property="og:url" content="https://alexey-seleznev.pro/blog/kak-nastroit-zapusk-r-skripta-po-raspisaniyu/">
     <meta property="og:site_name" content="ALEXEY-SELEZNEV.pro">
     <meta property="og:title" content="Как настроить запуск R-скрипта по расписанию? | Алексей Селезнёв">
-    <meta property="og:description" content="С помощью скриптов R можно быстро и бесплатно собирать данные из API различных сервисов или рекламных площадок и записывать их в базу данных. Но если вы регулярно пользуетесь скриптами,…">
-    <meta property="og:image" content="https://alexey-seleznev.pro/photo.jpg">
+    <meta property="og:description" content="С помощью скриптов R можно быстро и бесплатно собирать данные из API различных сервисов или рекламных площадок и записывать их в базу данных.">
+    <meta property="og:image" content="https://alexey-seleznev.pro/blog/images/covers/572.webp">
     <meta property="og:image:alt" content="Алексей Селезнёв">
     <meta property="og:locale" content="ru_RU">
+    <meta property="article:published_time" content="2016-11-17">
+    <meta property="article:author" content="https://alexey-seleznev.pro/">
 
-    <meta name="twitter:card" content="summary">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://alexey-seleznev.pro/blog/kak-nastroit-zapusk-r-skripta-po-raspisaniyu/">
     <meta name="twitter:title" content="Как настроить запуск R-скрипта по расписанию? | Алексей Селезнёв">
-    <meta name="twitter:description" content="С помощью скриптов R можно быстро и бесплатно собирать данные из API различных сервисов или рекламных площадок и записывать их в базу данных. Но если вы регулярно пользуетесь скриптами,…">
-    <meta name="twitter:image" content="https://alexey-seleznev.pro/photo.jpg">
+    <meta name="twitter:description" content="С помощью скриптов R можно быстро и бесплатно собирать данные из API различных сервисов или рекламных площадок и записывать их в базу данных.">
+    <meta name="twitter:image" content="https://alexey-seleznev.pro/blog/images/covers/572.webp">
 
 
     <!-- Google tag (gtag.js) -->
@@ -51,15 +53,47 @@
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Как настроить запуск R-скрипта по расписанию?",
-  "datePublished": "2016-11-17",
-  "inLanguage": "ru",
-  "description": "С помощью скриптов R можно быстро и бесплатно собирать данные из API различных сервисов или рекламных площадок и записывать их в базу данных. Но если вы регулярно пользуетесь скриптами,…",
-  "author": {
-    "@id": "https://alexey-seleznev.pro/#person"
-  },
-  "mainEntityOfPage": "https://alexey-seleznev.pro/blog/kak-nastroit-zapusk-r-skripta-po-raspisaniyu/"
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "headline": "Как настроить запуск R-скрипта по расписанию?",
+      "datePublished": "2016-11-17",
+      "dateModified": "2016-11-17",
+      "inLanguage": "ru",
+      "description": "С помощью скриптов R можно быстро и бесплатно собирать данные из API различных сервисов или рекламных площадок и записывать их в базу данных.",
+      "author": {
+        "@id": "https://alexey-seleznev.pro/#person"
+      },
+      "publisher": {
+        "@id": "https://alexey-seleznev.pro/#person"
+      },
+      "mainEntityOfPage": "https://alexey-seleznev.pro/blog/kak-nastroit-zapusk-r-skripta-po-raspisaniyu/",
+      "image": "https://alexey-seleznev.pro/blog/images/covers/572.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Главная",
+          "item": "https://alexey-seleznev.pro/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Блог",
+          "item": "https://alexey-seleznev.pro/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Как настроить запуск R-скрипта по расписанию?",
+          "item": "https://alexey-seleznev.pro/blog/kak-nastroit-zapusk-r-skripta-po-raspisaniyu/"
+        }
+      ]
+    }
+  ]
 }
     </script>
     <link rel="stylesheet" href="../blog.css">
@@ -389,7 +423,7 @@ R CMD BATCH C:\R\myscript.R
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.net.min.js"></script>
     <script src="../../assets/site.js"></script>
 
     <script>

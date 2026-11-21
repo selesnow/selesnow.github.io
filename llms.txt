@@ -1,0 +1,59 @@
+# Alexey Seleznev (Алексей Селезнёв)
+
+> Head of Analytics at Netpeak Group, author of open source R packages for marketing and web-analytics APIs, free R courses, and the R4marketing project. Section pages and navigation are available in Russian, Ukrainian and English; blog articles are in Russian.
+
+Author profiles: [GitHub](https://github.com/selesnow), [LinkedIn](https://linkedin.com/in/selesnow), [Habr](https://habr.com/ru/users/selesnow/), [Telegram channel R4marketing](https://t.me/R4marketing), [YouTube R4marketing](https://www.youtube.com/R4marketing). Contact: me@alexey-seleznev.pro
+
+## Main sections
+
+- [Open Source packages](https://alexey-seleznev.pro/opensource/): R packages for advertising, analytics and other APIs, with CRAN and GitHub links and download statistics
+- [Courses](https://alexey-seleznev.pro/courses/): Free courses on the R language
+- [Video lessons](https://alexey-seleznev.pro/videos/): YouTube lessons on R, APIs, data processing and AI tools
+- [Talks and webinars](https://alexey-seleznev.pro/talks/): Conference talks and webinars
+- [Articles](https://alexey-seleznev.pro/articles/): External publications (Habr, Netpeak Journal and others)
+- [Interviews](https://alexey-seleznev.pro/interviews/): Interviews and expert comments
+- [Blog](https://alexey-seleznev.pro/blog/): Articles on R, web analytics, BigQuery, Power BI and AI tools (Russian)
+- [AcpGram](https://alexey-seleznev.pro/acpgram/): Open source tool that controls coding agents (Claude Code, Codex, Gemini CLI, OpenCode) from Telegram
+- [AcpGram documentation](https://alexey-seleznev.pro/acpgram/docs/): Full documentation of AcpGram
+
+## Courses
+
+- [R for Excel Users](https://alexey-seleznev.pro/r4excel_users/): The easiest way into R — through the tasks you solve in Excel today.
+- [R for Digital Marketing](https://alexey-seleznev.pro/r_for_marketing_course/): Automating marketing and web-analytics routine: from syntax basics to Telegram bots.
+- [Introduction to dplyr 1.0.0](https://alexey-seleznev.pro/dplyr_1_0_0_course/): Everything that changed in R's core data-manipulation package — from 1.0.0 to 1.2.0.
+- [Loops and Functionals in R](https://alexey-seleznev.pro/iterations_in_r/): Efficient iteration, functional style and parallel computing.
+- [Building Telegram Bots in R](https://alexey-seleznev.pro/build_telegram_bot_using_r/): A web book: from your first message to an AI bot in the cloud.
+- [R Package Development](https://alexey-seleznev.pro/r_package_course/): From your first package to CRAN — from the author of 15 CRAN packages.
+- [Building AI Tools with R](https://alexey-seleznev.pro/build_ai_tools_using_r/): Go beyond chatting with LLMs — build your own AI assistants in R.
+
+## R packages
+
+- [rfacebookstat](https://alexey-seleznev.pro/rfacebookstat/): Facebook Marketing API
+- [timeperiodsR](https://alexey-seleznev.pro/timeperiodsR/): Simple definition of time intervals
+- [rgoogleads](https://alexey-seleznev.pro/rgoogleads/docs/): Google Ads API
+- [getProxy](https://alexey-seleznev.pro/getProxy/): Free proxy servers for your R session
+- [rtgstat](https://alexey-seleznev.pro/rtgstat/): Telegram channel analytics via the TGStat API
+- [ringostat](https://github.com/selesnow/ringostat): Ringostat call-tracking API
+- [rappsflyer](https://github.com/selesnow/rappsflyer): AppsFlyer mobile attribution
+- [ractivecampaign](https://github.com/selesnow/ractivecampaign): ActiveCampaign CRM & email marketing
+- [rytstat](https://alexey-seleznev.pro/rytstat/docs/): YouTube Data, Analytics & Reporting APIs
+- [racademyocean](https://github.com/selesnow/racademyocean): AcademyOcean learning platform
+- [rlinkedinads](https://github.com/selesnow/rlinkedinads): LinkedIn Advertising API
+- [rtiktokads](https://github.com/selesnow/rtiktokads): TikTok Marketing API
+- [rappleads](https://github.com/selesnow/rappleads): Apple Ads Campaign Management API
+- [galigor](https://alexey-seleznev.pro/galigor/): A collection of internet-marketing packages
+- [rzohobooks](https://github.com/selesnow/rzohobooks): Zoho Books accounting
+- [rwayforpay](https://github.com/selesnow/rwayforpay): WayForPay payments
+- [rmixpanel](https://github.com/selesnow/rmixpanel): Mixpanel product analytics
+- [rGitHub](https://github.com/selesnow/rGitHub): GitHub repository statistics
+
+## Archived packages
+
+- [ryandexdirect](https://alexey-seleznev.pro/ryandexdirect/): Yandex.Direct API
+- [rym](https://alexey-seleznev.pro/rym/): Yandex.Metrica API
+- [rvkstat](https://alexey-seleznev.pro/rvkstat/): VK API
+- [rmytarget](https://alexey-seleznev.pro/rmytarget/): MyTarget API v2 & v3
+
+## Optional
+
+- [Sitemap](https://alexey-seleznev.pro/sitemap.xml)

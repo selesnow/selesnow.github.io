@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="ru" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,24 +9,26 @@
     <meta name="theme-color" content="#030712">
     <link rel="canonical" href="https://alexey-seleznev.pro/blog/vzaimodeystvie-r-s-bazami-dannyh-na-primere-microsoft-sql-server-i-dru/">
 
-    <title>Взаимодействие R с базами данных на примере Microsoft SQL Server и других СУБД | Алексей Селезнёв</title>
-    <meta name="title" content="Взаимодействие R с базами данных на примере Microsoft SQL Server и других СУБД | Алексей Селезнёв">
-    <meta name="description" content="Поскольку львиная доля бизнес информации храниться в базах данных. На каком бы языке программирования вы не писали, вам придётся производить различные действия с ними. В этой статье я…">
+    <title>Взаимодействие R с базами данных на примере Microsoft SQL…</title>
+    <meta name="title" content="Взаимодействие R с базами данных на примере Microsoft SQL…">
+    <meta name="description" content="Поскольку львиная доля бизнес информации храниться в базах данных. На каком бы языке программирования вы не писали, вам придётся производить различные…">
 
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="article">
     <meta property="og:url" content="https://alexey-seleznev.pro/blog/vzaimodeystvie-r-s-bazami-dannyh-na-primere-microsoft-sql-server-i-dru/">
     <meta property="og:site_name" content="ALEXEY-SELEZNEV.pro">
-    <meta property="og:title" content="Взаимодействие R с базами данных на примере Microsoft SQL Server и других СУБД | Алексей Селезнёв">
-    <meta property="og:description" content="Поскольку львиная доля бизнес информации храниться в базах данных. На каком бы языке программирования вы не писали, вам придётся производить различные действия с ними. В этой статье я…">
-    <meta property="og:image" content="https://alexey-seleznev.pro/photo.jpg">
+    <meta property="og:title" content="Взаимодействие R с базами данных на примере Microsoft SQL…">
+    <meta property="og:description" content="Поскольку львиная доля бизнес информации храниться в базах данных. На каком бы языке программирования вы не писали, вам придётся производить различные…">
+    <meta property="og:image" content="https://alexey-seleznev.pro/blog/images/vzaimodeystvie-r-s-bazami-dannyh-na-pri-925a23786a89917d9a31-30a78146.webp">
     <meta property="og:image:alt" content="Алексей Селезнёв">
     <meta property="og:locale" content="ru_RU">
+    <meta property="article:published_time" content="2020-04-28">
+    <meta property="article:author" content="https://alexey-seleznev.pro/">
 
-    <meta name="twitter:card" content="summary">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://alexey-seleznev.pro/blog/vzaimodeystvie-r-s-bazami-dannyh-na-primere-microsoft-sql-server-i-dru/">
-    <meta name="twitter:title" content="Взаимодействие R с базами данных на примере Microsoft SQL Server и других СУБД | Алексей Селезнёв">
-    <meta name="twitter:description" content="Поскольку львиная доля бизнес информации храниться в базах данных. На каком бы языке программирования вы не писали, вам придётся производить различные действия с ними. В этой статье я…">
-    <meta name="twitter:image" content="https://alexey-seleznev.pro/photo.jpg">
+    <meta name="twitter:title" content="Взаимодействие R с базами данных на примере Microsoft SQL…">
+    <meta name="twitter:description" content="Поскольку львиная доля бизнес информации храниться в базах данных. На каком бы языке программирования вы не писали, вам придётся производить различные…">
+    <meta name="twitter:image" content="https://alexey-seleznev.pro/blog/images/vzaimodeystvie-r-s-bazami-dannyh-na-pri-925a23786a89917d9a31-30a78146.webp">
 
 
     <!-- Google tag (gtag.js) -->
@@ -51,15 +53,47 @@
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Взаимодействие R с базами данных на примере Microsoft SQL Server и других СУБД",
-  "datePublished": "2020-04-28",
-  "inLanguage": "ru",
-  "description": "Поскольку львиная доля бизнес информации храниться в базах данных. На каком бы языке программирования вы не писали, вам придётся производить различные действия с ними. В этой статье я…",
-  "author": {
-    "@id": "https://alexey-seleznev.pro/#person"
-  },
-  "mainEntityOfPage": "https://alexey-seleznev.pro/blog/vzaimodeystvie-r-s-bazami-dannyh-na-primere-microsoft-sql-server-i-dru/"
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "headline": "Взаимодействие R с базами данных на примере Microsoft SQL Server и других СУБД",
+      "datePublished": "2020-04-28",
+      "dateModified": "2020-04-28",
+      "inLanguage": "ru",
+      "description": "Поскольку львиная доля бизнес информации храниться в базах данных. На каком бы языке программирования вы не писали, вам придётся производить различные…",
+      "author": {
+        "@id": "https://alexey-seleznev.pro/#person"
+      },
+      "publisher": {
+        "@id": "https://alexey-seleznev.pro/#person"
+      },
+      "mainEntityOfPage": "https://alexey-seleznev.pro/blog/vzaimodeystvie-r-s-bazami-dannyh-na-primere-microsoft-sql-server-i-dru/",
+      "image": "https://alexey-seleznev.pro/blog/images/vzaimodeystvie-r-s-bazami-dannyh-na-pri-925a23786a89917d9a31-30a78146.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Главная",
+          "item": "https://alexey-seleznev.pro/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Блог",
+          "item": "https://alexey-seleznev.pro/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Взаимодействие R с базами данных на примере Microsoft SQL Server и других СУБД",
+          "item": "https://alexey-seleznev.pro/blog/vzaimodeystvie-r-s-bazami-dannyh-na-primere-microsoft-sql-server-i-dru/"
+        }
+      ]
+    }
+  ]
 }
     </script>
     <link rel="stylesheet" href="../blog.css">
@@ -559,7 +593,7 @@ con &lt;- dbConnect(MSSQLServer(),
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.net.min.js"></script>
     <script src="../../assets/site.js"></script>
 
     <script>

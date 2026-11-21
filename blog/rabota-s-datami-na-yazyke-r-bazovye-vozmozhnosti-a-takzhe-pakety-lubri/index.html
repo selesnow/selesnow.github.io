@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="ru" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,24 +9,26 @@
     <meta name="theme-color" content="#030712">
     <link rel="canonical" href="https://alexey-seleznev.pro/blog/rabota-s-datami-na-yazyke-r-bazovye-vozmozhnosti-a-takzhe-pakety-lubri/">
 
-    <title>Работа с датами на языке R (базовые возможности, а также пакеты lubridate и timeperiodsR) | Алексей Селезнёв</title>
-    <meta name="title" content="Работа с датами на языке R (базовые возможности, а также пакеты lubridate и timeperiodsR) | Алексей Селезнёв">
-    <meta name="description" content="Получить текущую дату в любом языке программирования, операция эквивалентная “Hello world!”. Язык R не является исключением. В этой статье мы разберёмся с тем, как устроена работа с…">
+    <title>Работа с датами на языке R (базовые возможности, а также пакеты…</title>
+    <meta name="title" content="Работа с датами на языке R (базовые возможности, а также пакеты…">
+    <meta name="description" content="Получить текущую дату в любом языке программирования, операция эквивалентная “Hello world!”. Язык R не является исключением.">
 
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="article">
     <meta property="og:url" content="https://alexey-seleznev.pro/blog/rabota-s-datami-na-yazyke-r-bazovye-vozmozhnosti-a-takzhe-pakety-lubri/">
     <meta property="og:site_name" content="ALEXEY-SELEZNEV.pro">
-    <meta property="og:title" content="Работа с датами на языке R (базовые возможности, а также пакеты lubridate и timeperiodsR) | Алексей Селезнёв">
-    <meta property="og:description" content="Получить текущую дату в любом языке программирования, операция эквивалентная “Hello world!”. Язык R не является исключением. В этой статье мы разберёмся с тем, как устроена работа с…">
-    <meta property="og:image" content="https://alexey-seleznev.pro/photo.jpg">
+    <meta property="og:title" content="Работа с датами на языке R (базовые возможности, а также пакеты…">
+    <meta property="og:description" content="Получить текущую дату в любом языке программирования, операция эквивалентная “Hello world!”. Язык R не является исключением.">
+    <meta property="og:image" content="https://alexey-seleznev.pro/blog/images/rabota_s_datami_na_yazike_r-l2mgnl_5u7eejcuu1hazlp5xocg.webp">
     <meta property="og:image:alt" content="Алексей Селезнёв">
     <meta property="og:locale" content="ru_RU">
+    <meta property="article:published_time" content="2020-07-13">
+    <meta property="article:author" content="https://alexey-seleznev.pro/">
 
-    <meta name="twitter:card" content="summary">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://alexey-seleznev.pro/blog/rabota-s-datami-na-yazyke-r-bazovye-vozmozhnosti-a-takzhe-pakety-lubri/">
-    <meta name="twitter:title" content="Работа с датами на языке R (базовые возможности, а также пакеты lubridate и timeperiodsR) | Алексей Селезнёв">
-    <meta name="twitter:description" content="Получить текущую дату в любом языке программирования, операция эквивалентная “Hello world!”. Язык R не является исключением. В этой статье мы разберёмся с тем, как устроена работа с…">
-    <meta name="twitter:image" content="https://alexey-seleznev.pro/photo.jpg">
+    <meta name="twitter:title" content="Работа с датами на языке R (базовые возможности, а также пакеты…">
+    <meta name="twitter:description" content="Получить текущую дату в любом языке программирования, операция эквивалентная “Hello world!”. Язык R не является исключением.">
+    <meta name="twitter:image" content="https://alexey-seleznev.pro/blog/images/rabota_s_datami_na_yazike_r-l2mgnl_5u7eejcuu1hazlp5xocg.webp">
 
 
     <!-- Google tag (gtag.js) -->
@@ -51,15 +53,47 @@
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Работа с датами на языке R (базовые возможности, а также пакеты lubridate и timeperiodsR)",
-  "datePublished": "2020-07-13",
-  "inLanguage": "ru",
-  "description": "Получить текущую дату в любом языке программирования, операция эквивалентная “Hello world!”. Язык R не является исключением. В этой статье мы разберёмся с тем, как устроена работа с…",
-  "author": {
-    "@id": "https://alexey-seleznev.pro/#person"
-  },
-  "mainEntityOfPage": "https://alexey-seleznev.pro/blog/rabota-s-datami-na-yazyke-r-bazovye-vozmozhnosti-a-takzhe-pakety-lubri/"
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "headline": "Работа с датами на языке R (базовые возможности, а также пакеты lubridate и timeperiodsR)",
+      "datePublished": "2020-07-13",
+      "dateModified": "2020-07-13",
+      "inLanguage": "ru",
+      "description": "Получить текущую дату в любом языке программирования, операция эквивалентная “Hello world!”. Язык R не является исключением.",
+      "author": {
+        "@id": "https://alexey-seleznev.pro/#person"
+      },
+      "publisher": {
+        "@id": "https://alexey-seleznev.pro/#person"
+      },
+      "mainEntityOfPage": "https://alexey-seleznev.pro/blog/rabota-s-datami-na-yazyke-r-bazovye-vozmozhnosti-a-takzhe-pakety-lubri/",
+      "image": "https://alexey-seleznev.pro/blog/images/rabota_s_datami_na_yazike_r-l2mgnl_5u7eejcuu1hazlp5xocg.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Главная",
+          "item": "https://alexey-seleznev.pro/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Блог",
+          "item": "https://alexey-seleznev.pro/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Работа с датами на языке R (базовые возможности, а также пакеты lubridate и timeperiodsR)",
+          "item": "https://alexey-seleznev.pro/blog/rabota-s-datami-na-yazyke-r-bazovye-vozmozhnosti-a-takzhe-pakety-lubri/"
+        }
+      ]
+    }
+  ]
 }
     </script>
     <link rel="stylesheet" href="../blog.css">
@@ -688,7 +722,7 @@ period1 %right_out% period2 # получить даты из period2 котор�
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.net.min.js"></script>
     <script src="../../assets/site.js"></script>
 
     <script>

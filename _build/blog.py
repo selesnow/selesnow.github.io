@@ -532,6 +532,32 @@ def toc_html(tokens):
     return f'<ul>{walk(tokens)}</ul>'
 
 
+SEO_TITLE_MAX = 65      # длиннее Google всё равно обрезает заголовок в выдаче
+SEO_DESC_MAX = 155
+
+
+def seo_page_title(title):
+    """<title> страницы: целиком с суффиксом, если помещается; иначе без суффикса и (при необходимости) с обрезкой по слову."""
+    suffix = ' | Алексей Селезнёв'
+    if len(title) + len(suffix) <= SEO_TITLE_MAX:
+        return title + suffix
+    if len(title) <= SEO_TITLE_MAX:
+        return title
+    return title[:SEO_TITLE_MAX - 1].rsplit(' ', 1)[0].rstrip(' ,:;–—-') + '…'
+
+
+def seo_description(desc):
+    """meta description не длиннее SEO_DESC_MAX: режем по границе предложения, иначе по слову."""
+    desc = re.sub(r'\s+', ' ', desc).strip()
+    if len(desc) <= SEO_DESC_MAX:
+        return desc
+    cut = desc[:SEO_DESC_MAX]
+    sent = max(cut.rfind('. '), cut.rfind('! '), cut.rfind('? '))
+    if sent >= 90:
+        return cut[:sent + 1]
+    return cut[:SEO_DESC_MAX - 1].rsplit(' ', 1)[0].rstrip(' ,:;–—-…') + '…'
+
+
 def build_article(p, posts, norm):
     names = {**norm['cats'][0], **norm['tags'][0]}
     md = markdown.Markdown(extensions=['fenced_code', 'tables', 'toc', 'sane_lists', 'codehilite'],
@@ -572,10 +598,25 @@ def build_article(p, posts, norm):
                     f'{T(f"Материал опубликован в {p['y']} году — описанные инструменты и интерфейсы могли измениться.", f"Матеріал опубліковано у {p['y']} році — описані інструменти та інтерфейси могли змінитися.", f"Published in {p['y']} — the tools and interfaces described may have changed since.")}'
                     f'</div></div>')
     cover_img = f'<figure class="b-cover"><img src="../{esc(p["cover"])}" alt="" width="1200" height="630" decoding="async"></figure>' if (p['cover'] and p['own_cover']) else ''
-    ld = {'@context': 'https://schema.org', '@type': 'BlogPosting', 'headline': p['title'], 'datePublished': p['date'],
-          'inLanguage': 'ru', 'description': p['desc'], 'author': {'@id': B.PERSON_ID},
-          'mainEntityOfPage': f'{B.SITE}/blog/{p["slug"]}/'}
-    page = B.head(f'blog/{p["slug"]}', f'{p["title"]} | Алексей Селезнёв', p['desc'], jsonld=ld)
+    url = f'{B.SITE}/blog/{p["slug"]}/'
+    seo_desc = seo_description(p['desc'])
+    seo_title = seo_page_title(p['title'])
+    og_image = f'{B.SITE}/blog/{p["cover"]}' if p['cover'] else f'{B.SITE}/photo.jpg'
+    post_ld = {'@type': 'BlogPosting', 'headline': p['title'][:110], 'datePublished': p['date'], 'dateModified': p['date'],
+               'inLanguage': 'ru', 'description': seo_desc, 'author': {'@id': B.PERSON_ID}, 'publisher': {'@id': B.PERSON_ID},
+               'mainEntityOfPage': url}
+    if p['cover']:
+        post_ld['image'] = og_image
+    crumbs = {'@type': 'BreadcrumbList', 'itemListElement': [
+        {'@type': 'ListItem', 'position': 1, 'name': 'Главная', 'item': f'{B.SITE}/'},
+        {'@type': 'ListItem', 'position': 2, 'name': 'Блог', 'item': f'{B.SITE}/blog/'},
+        {'@type': 'ListItem', 'position': 3, 'name': p['title'], 'item': url}]}
+    ld = {'@context': 'https://schema.org', '@graph': [post_ld, crumbs]}
+    nl = chr(10) + '    '
+    extra = (f'{nl}<meta property="article:published_time" content="{esc(p["date"])}">'
+             f'{nl}<meta property="article:author" content="{B.SITE}/">')
+    page = B.head(f'blog/{p["slug"]}', seo_title, seo_desc, image=og_image, jsonld=ld, lang='ru', og_type='article',
+                  card='summary_large_image' if p['cover'] else 'summary', extra_meta=extra)
     page = with_css(deep(page), '../')
     page += deep(B.nav('blog'))
     toc_block = (f'<aside class="b-toc" aria-label="Contents"><div class="b-toc-title">{T("Содержание", "Зміст", "Contents")}</div>{toc_html(tokens)}</aside>'

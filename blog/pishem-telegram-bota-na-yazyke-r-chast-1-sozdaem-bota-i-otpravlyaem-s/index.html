@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="ru" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,24 +9,26 @@
     <meta name="theme-color" content="#030712">
     <link rel="canonical" href="https://alexey-seleznev.pro/blog/pishem-telegram-bota-na-yazyke-r-chast-1-sozdaem-bota-i-otpravlyaem-s/">
 
-    <title>Пишем telegram бота на языке R (часть 1): Создаём бота, и отправляем с его помощью сообщения в telegram | Алексей Селезнёв</title>
-    <meta name="title" content="Пишем telegram бота на языке R (часть 1): Создаём бота, и отправляем с его помощью сообщения в telegram | Алексей Селезнёв">
-    <meta name="description" content="Аудитория telegram ежедневно растёт с геометрической прогрессией, этому способствует удобство мессенджера, наличие каналов, чатов, и конечно возможность создавать ботов. Боты могут…">
+    <title>Пишем telegram бота на языке R (часть 1): Создаём бота, и…</title>
+    <meta name="title" content="Пишем telegram бота на языке R (часть 1): Создаём бота, и…">
+    <meta name="description" content="Аудитория telegram ежедневно растёт с геометрической прогрессией, этому способствует удобство мессенджера, наличие каналов, чатов, и конечно возможность…">
 
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="article">
     <meta property="og:url" content="https://alexey-seleznev.pro/blog/pishem-telegram-bota-na-yazyke-r-chast-1-sozdaem-bota-i-otpravlyaem-s/">
     <meta property="og:site_name" content="ALEXEY-SELEZNEV.pro">
-    <meta property="og:title" content="Пишем telegram бота на языке R (часть 1): Создаём бота, и отправляем с его помощью сообщения в telegram | Алексей Селезнёв">
-    <meta property="og:description" content="Аудитория telegram ежедневно растёт с геометрической прогрессией, этому способствует удобство мессенджера, наличие каналов, чатов, и конечно возможность создавать ботов. Боты могут…">
-    <meta property="og:image" content="https://alexey-seleznev.pro/photo.jpg">
+    <meta property="og:title" content="Пишем telegram бота на языке R (часть 1): Создаём бота, и…">
+    <meta property="og:description" content="Аудитория telegram ежедневно растёт с геометрической прогрессией, этому способствует удобство мессенджера, наличие каналов, чатов, и конечно возможность…">
+    <meta property="og:image" content="https://alexey-seleznev.pro/blog/images/create_telegram_bot_using_r_1-mzefopqcvltbomddoh8pmx45hzc.webp">
     <meta property="og:image:alt" content="Алексей Селезнёв">
     <meta property="og:locale" content="ru_RU">
+    <meta property="article:published_time" content="2021-01-28">
+    <meta property="article:author" content="https://alexey-seleznev.pro/">
 
-    <meta name="twitter:card" content="summary">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://alexey-seleznev.pro/blog/pishem-telegram-bota-na-yazyke-r-chast-1-sozdaem-bota-i-otpravlyaem-s/">
-    <meta name="twitter:title" content="Пишем telegram бота на языке R (часть 1): Создаём бота, и отправляем с его помощью сообщения в telegram | Алексей Селезнёв">
-    <meta name="twitter:description" content="Аудитория telegram ежедневно растёт с геометрической прогрессией, этому способствует удобство мессенджера, наличие каналов, чатов, и конечно возможность создавать ботов. Боты могут…">
-    <meta name="twitter:image" content="https://alexey-seleznev.pro/photo.jpg">
+    <meta name="twitter:title" content="Пишем telegram бота на языке R (часть 1): Создаём бота, и…">
+    <meta name="twitter:description" content="Аудитория telegram ежедневно растёт с геометрической прогрессией, этому способствует удобство мессенджера, наличие каналов, чатов, и конечно возможность…">
+    <meta name="twitter:image" content="https://alexey-seleznev.pro/blog/images/create_telegram_bot_using_r_1-mzefopqcvltbomddoh8pmx45hzc.webp">
 
 
     <!-- Google tag (gtag.js) -->
@@ -51,15 +53,47 @@
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Пишем telegram бота на языке R (часть 1): Создаём бота, и отправляем с его помощью сообщения в telegram",
-  "datePublished": "2021-01-28",
-  "inLanguage": "ru",
-  "description": "Аудитория telegram ежедневно растёт с геометрической прогрессией, этому способствует удобство мессенджера, наличие каналов, чатов, и конечно возможность создавать ботов. Боты могут…",
-  "author": {
-    "@id": "https://alexey-seleznev.pro/#person"
-  },
-  "mainEntityOfPage": "https://alexey-seleznev.pro/blog/pishem-telegram-bota-na-yazyke-r-chast-1-sozdaem-bota-i-otpravlyaem-s/"
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "headline": "Пишем telegram бота на языке R (часть 1): Создаём бота, и отправляем с его помощью сообщения в telegram",
+      "datePublished": "2021-01-28",
+      "dateModified": "2021-01-28",
+      "inLanguage": "ru",
+      "description": "Аудитория telegram ежедневно растёт с геометрической прогрессией, этому способствует удобство мессенджера, наличие каналов, чатов, и конечно возможность…",
+      "author": {
+        "@id": "https://alexey-seleznev.pro/#person"
+      },
+      "publisher": {
+        "@id": "https://alexey-seleznev.pro/#person"
+      },
+      "mainEntityOfPage": "https://alexey-seleznev.pro/blog/pishem-telegram-bota-na-yazyke-r-chast-1-sozdaem-bota-i-otpravlyaem-s/",
+      "image": "https://alexey-seleznev.pro/blog/images/create_telegram_bot_using_r_1-mzefopqcvltbomddoh8pmx45hzc.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Главная",
+          "item": "https://alexey-seleznev.pro/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Блог",
+          "item": "https://alexey-seleznev.pro/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Пишем telegram бота на языке R (часть 1): Создаём бота, и отправляем с его помощью сообщения в telegram",
+          "item": "https://alexey-seleznev.pro/blog/pishem-telegram-bota-na-yazyke-r-chast-1-sozdaem-bota-i-otpravlyaem-s/"
+        }
+      ]
+    }
+  ]
 }
     </script>
     <link rel="stylesheet" href="../blog.css">
@@ -786,7 +820,7 @@ chat_id     &lt;- config$telegram_bot$chat_id
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.net.min.js"></script>
     <script src="../../assets/site.js"></script>
 
     <script>
