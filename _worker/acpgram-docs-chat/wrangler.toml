@@ -16,7 +16,7 @@ OPENROUTER_URL = "https://openrouter.ai/api/v1"
 # Роутер бесплатных моделей OpenRouter: сам выбирает доступную модель
 MODEL = "openrouter/free"
 # С запасом: у «думающих» моделей рассуждения тоже входят в этот лимит
-MAX_TOKENS = "2000"
+MAX_TOKENS = "4000"
 # Лимиты: вопросов в минуту и в сутки с одного адреса, всего в сутки (UTC)
 PER_MINUTE = "5"
 PER_DAY = "40"

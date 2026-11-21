@@ -150,6 +150,7 @@ async function ask(request, env, ctx, cors) {
         stream: true,
         temperature: 0.2,
         max_tokens: Number(env.MAX_TOKENS),
+        reasoning: { effort: 'low' },   // a thinking model must not spend the whole limit before it starts answering
         messages: [{ role: 'system', content: systemPrompt(docs, lang) }, ...messages],
       }),
       signal: AbortSignal.timeout(60_000),
