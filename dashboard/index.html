@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#030712">
+<title>Дашборд эффективности сайта</title>
+<link rel="icon" type="image/jpeg" href="../logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;800&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+:root{--bg:#030712;--card:rgba(255,255,255,.04);--line:rgba(255,255,255,.09);--tx:#e2e8f0;--mut:#94a3b8;--pur:#a855f7;--blu:#60a5fa;--grn:#34d399;--red:#f87171;--amb:#fbbf24}
+*{box-sizing:border-box}html{background:var(--bg)}
+body{margin:0;font:15px/1.5 Inter,system-ui,sans-serif;color:var(--tx);background:radial-gradient(1200px 500px at 70% -10%,rgba(124,58,237,.18),transparent),var(--bg);min-height:100vh}
+.wrap{max-width:1200px;margin:0 auto;padding:28px 20px 64px}
+h1{font:800 clamp(26px,4vw,40px)/1.1 Outfit,sans-serif;margin:0 0 6px}
+h1 span{background:linear-gradient(90deg,#8b5cf6,#60a5fa);-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font:700 18px Outfit,sans-serif;margin:34px 0 12px;letter-spacing:.2px}
+.sub{color:var(--mut);font-size:13px}
+.grid{display:grid;gap:12px}.k4{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}.k2{grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;backdrop-filter:blur(8px)}
+.kpi .l{color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:.08em}
+.kpi .v{font:800 30px Outfit,sans-serif;margin:2px 0}
+.d{font-size:13px;font-weight:600}.up{color:var(--grn)}.dn{color:var(--red)}.fl{color:var(--mut)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{color:var(--mut);font-weight:600;text-align:left;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+th,td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+td.u{word-break:break-all}
+.tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:99px;border:1px solid rgba(251,191,36,.4);color:var(--amb);margin-left:6px;white-space:nowrap}
+.note{color:var(--mut);font-size:12.5px;margin-top:8px}
+.chart{position:relative;height:300px}
+canvas{max-width:100%}
+.empty{color:var(--mut);padding:18px 0;font-size:14px}
+a{color:#93c5fd}
+.bar{height:8px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;min-width:90px}.bar i{display:block;height:100%;background:var(--pur)}
+</style>
+</head>
+<body>
+<div class="wrap" id="app">
+  <h1>Эффективность сайта <span>alexey-seleznev.pro</span></h1>
+  <div class="sub" id="meta"></div>
+  <h2>Последние 28 дней к предыдущим 28</h2>
+  <div class="grid k4" id="kpi"></div>
+  <h2>Точка отсчёта и сейчас</h2>
+  <div class="card"><div id="base"></div></div>
+  <h2>Поиск Google: клики и показы по дням</h2>
+  <div class="card"><div class="chart"><canvas id="c1"></canvas></div><div class="note">Линии — правки сайта. Показы сглажены скользящим средним за 7 дней. Search Console отстаёт на 2–3 дня.</div></div>
+  <h2>Посещаемость по каналам, сессии в неделю</h2>
+  <div class="card"><div class="chart"><canvas id="c2"></canvas></div></div>
+  <h2>Индексация страниц из sitemap</h2>
+  <div class="card" id="idx"></div>
+  <h2>Откуда приходят и на каком языке (90 дней)</h2>
+  <div class="grid k2">
+    <div class="card"><b>Страны</b> <span class="sub">(GA4)</span><div id="t_countries"></div></div>
+    <div class="card"><b>Языки браузера</b> <span class="sub">(GA4)</span><div id="t_langs"></div></div>
+  </div>
+  <h2>Страницы и запросы</h2>
+  <div class="grid k2">
+    <div class="card"><b>Страницы в поиске Google</b> <span class="sub">(показы, 90 дней)</span><div id="t_pages"></div></div>
+    <div class="card"><b>Запросы в поиске Google</b> <span class="sub">(показы, 90 дней)</span><div id="t_queries"></div></div>
+    <div class="card"><b>Посадочные страницы из органики</b> <span class="sub">(GA4, 90 дней)</span><div id="t_landing"></div></div>
+    <div class="card"><b>Переходы из AI-ассистентов</b> <span class="sub">(GA4, 180 дней)</span><div id="t_ai"></div></div>
+  </div>
+  <div class="note" style="margin-top:28px">Служебная страница: не индексируется поиском и не связана ссылками с сайтом. Данные обновляются вручную командой <code>python _build/dashboard.py</code>. Только агрегированные цифры, без персональных данных.</div>
+</div>
+<script>
+const D = {"generated": "2026-11-21 23:53", "gsc_end": "2026-11-18", "ga_end": "2026-11-20", "events": [["2026-11-21", "SEO-правки блога, llms.txt"], ["2026-11-22", "Плашки и запись о переезде на старом блоге"]], "baseline": {"date": "2026-11-21", "gsc_clicks": 2, "gsc_impressions": 192, "gsc_position": 10.3, "ga_organic": 787, "ga_google": 186, "ga_ai": 3, "ga_sessions": 2233}, "gsc_cur": {"clicks": 2, "impressions": 192, "ctr": 0.010416666666666666, "position": 10.28125}, "gsc_prev": {"clicks": 0, "impressions": 0, "ctr": 0, "position": 0}, "gsc_90": {"clicks": 2, "impressions": 192, "ctr": 0.010416666666666666, "position": 10.28125}, "gsc_daily": [["2026-10-24", 0, 0], ["2026-10-25", 0, 0], ["2026-10-26", 0, 1], ["2026-10-27", 0, 3], ["2026-10-28", 0, 2], ["2026-10-29", 0, 2], ["2026-10-30", 0, 4], ["2026-10-31", 0, 80], ["2026-11-01", 0, 3], ["2026-11-02", 0, 1], ["2026-11-03", 0, 4], ["2026-11-04", 0, 3], ["2026-11-05", 0, 5], ["2026-11-06", 0, 4], ["2026-11-07", 0, 3], ["2026-11-08", 0, 3], ["2026-11-09", 0, 1], ["2026-11-10", 0, 4], ["2026-11-11", 0, 4], ["2026-11-12", 1, 10], ["2026-11-13", 0, 2], ["2026-11-14", 0, 2], ["2026-11-15", 0, 8], ["2026-11-16", 0, 10], ["2026-11-17", 1, 13], ["2026-11-18", 0, 20]], "gsc_pages": [["https://alexey-seleznev.pro/rgoogleads/ru.html", 0, 55, 6.4], ["https://alexey-seleznev.pro/", 0, 46, 10.0], ["https://alexey-seleznev.pro/acpgram/", 1, 15, 9], ["https://alexey-seleznev.pro/rgoogleads/docs/reference/index.html", 0, 12, 6.4], ["https://alexey-seleznev.pro/ryandexdirect/getToken/get_code.html", 0, 12, 28.5], ["https://alexey-seleznev.pro/rgoogleads/docs/news/index.html", 0, 11, 5.8], ["https://alexey-seleznev.pro/rgoogleads/docs/articles/migrate_from_radrowds_us.html", 0, 10, 5.8], ["https://alexey-seleznev.pro/opensource/", 0, 7, 29], ["https://alexey-seleznev.pro/articles/", 0, 6, 7.2], ["https://alexey-seleznev.pro/rtgstat/reference/tg_channel_views.html", 0, 5, 2], ["https://alexey-seleznev.pro/rvkstat/getCode/get_token.html", 0, 5, 13.6], ["https://alexey-seleznev.pro/talks/", 0, 5, 12.8], ["https://alexey-seleznev.pro/dplyr_1_0_0_course/%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B9.html", 1, 4, 10], ["https://alexey-seleznev.pro/interviews/", 0, 4, 6.2], ["https://alexey-seleznev.pro/rtgstat/", 0, 4, 17.5]], "gsc_queries": [["rmytarget", 0, 14, 28.6], ["{{ viewingclipcount }}", 0, 5, 2], ["site:selesnow.github.io", 0, 4, 2.8], ["netpeak kazakhstan", 0, 2, 19], ["alexey seleznev", 0, 1, 9], ["dplyr first", 0, 1, 22], ["google api r", 0, 1, 52], ["seleznevgpt", 0, 1, 10], ["tgstat group", 0, 1, 60]], "gsc_countries": [["rus", 1, 46, 10.0], ["ukr", 0, 34, 5.9], ["egy", 1, 26, 15.3], ["usa", 0, 26, 4.7], ["bra", 0, 14, 9.3], ["kaz", 0, 6, 11.5], ["arg", 0, 5, 9.6], ["bgd", 0, 4, 14.2], ["idn", 0, 4, 14.5], ["ind", 0, 3, 29.3]], "gsc_blog": {"clicks": 0, "impressions": 0, "ctr": 0, "position": 0}, "ga_cur": {"sessions": 1154.0, "activeUsers": 972.0, "engagedSessions": 293.0}, "ga_prev": {"sessions": 439.0, "activeUsers": 350.0, "engagedSessions": 179.0}, "ga_90": {"sessions": 2232.0, "activeUsers": 1820.0, "engagedSessions": 725.0}, "ga_organic_90": {"sessions": 787.0, "activeUsers": 568.0, "engagedSessions": 380.0}, "ga_google_90": {"sessions": 186.0, "activeUsers": 127.0, "engagedSessions": 93.0}, "ga_ai_90": {"sessions": 3.0, "activeUsers": 3.0, "engagedSessions": 1.0}, "ga_ai_cur": {"sessions": 0, "activeUsers": 0, "engagedSessions": 0}, "ga_ai_sources": [["chatgpt.com", 5], ["claude.ai", 2], ["perplexity.ai", 2]], "ga_weekly": {"weeks": ["2026-06-01", "2026-06-08", "2026-06-15", "2026-06-22", "2026-06-29", "2026-07-06", "2026-07-13", "2026-07-20", "2026-07-27", "2026-08-03", "2026-08-10", "2026-08-17", "2026-08-24", "2026-08-31", "2026-09-07", "2026-09-14", "2026-09-21", "2026-09-28", "2026-10-05", "2026-10-12", "2026-10-19", "2026-10-26", "2026-11-02", "2026-11-09", "2026-11-16"], "series": {"Direct": [49, 63, 79, 75, 64, 65, 40, 45, 49, 56, 39, 36, 82, 43, 51, 38, 32, 62, 54, 38, 46, 119, 324, 110, 80], "Organic Search": [65, 54, 36, 47, 51, 58, 42, 51, 48, 55, 52, 61, 53, 49, 57, 47, 92, 51, 52, 44, 60, 69, 66, 66, 73], "Referral": [9, 8, 5, 9, 9, 11, 5, 13, 13, 16, 13, 17, 12, 18, 16, 18, 10, 11, 15, 5, 8, 44, 71, 44, 13], "Organic Social": [4, 0, 1, 1, 1, 1, 4, 3, 4, 4, 2, 1, 4, 1, 2, 2, 1, 0, 0, 5, 2, 3, 4, 5, 12], "Unassigned": [1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 5, 3, 2, 11], "Organic Video": [4, 1, 1, 0, 1, 0, 0, 0, 3, 2, 2, 0, 0, 4, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 2], "AI Assistant": [0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]}}, "ga_countries": [["Russia", 872, 352], ["United States", 496, 69], ["Singapore", 221, 40], ["China", 81, 11], ["Germany", 72, 34], ["Ukraine", 60, 31], ["Netherlands", 54, 27], ["Egypt", 46, 34], ["Belarus", 37, 22], ["(not set)", 33, 18], ["United Kingdom", 32, 10], ["Brazil", 28, 5]], "ga_languages": [["Russian", 1091, 468], ["English", 949, 200], ["Chinese", 86, 11], ["Ukrainian", 35, 14], ["Romanian", 28, 14], ["Portuguese", 16, 1], ["French", 5, 4], ["German", 3, 2]], "ga_landing": [["/rym", 251, 96], ["(not set)", 58, 1], ["/build_telegram_bot_using_r/создаём-бота-и-отправляем-с-его-помощью-сообщения-в-telegram.html", 58, 18], ["/r_package_course", 37, 35], ["/selesnow/build_telegram_bot_using_r/создаём-бота-и-отправляем-с-его-помощью-сообщения-в-telegram.html", 34, 20], ["/ryandexdirect/getToken/get_token.html", 26, 26], ["/getProxy", 19, 10], ["/ryandexdirect", 18, 2], ["/rym/getToken/get_code.html", 17, 17], ["/selesnow/iterations_in_r_course/циклы-for-while-и-repeat.html", 17, 8], ["/build_ai_tools_using_r/rag-подключаем-llm-модель-к-собственной-базе-знаний.html", 16, 5], ["/r4excel_users", 13, 9], ["/r4excel_users/пакет-dplyr-вертикальное-и-горизонтальное-объединение-таблиц-join-bind.html", 13, 7], ["/ryandexdirect/getToken/get_code.html", 13, 13], ["/build_ai_tools_using_r", 12, 11]], "index_history": [{"date": "2026-11-21", "total": 211, "states": {"Страница отправлена и проиндексирована": 189, "Страница является копией. Канонический вариант не выбран пользователем.": 3, "Обнаружена, не проиндексирована": 9, "Страница просканирована, но пока не проиндексирована": 5, "URL неизвестен Google": 5}, "not_indexed": [["https://alexey-seleznev.pro/r_package_course/", "Страница является копией. Канонический вариант не выбран пользователем."], ["https://alexey-seleznev.pro/build_telegram_bot_using_r/", "Страница является копией. Канонический вариант не выбран пользователем."], ["https://alexey-seleznev.pro/dplyr_1_0_0_course/", "Обнаружена, не проиндексирована"], ["https://alexey-seleznev.pro/r4excel_users/", "Страница является копией. Канонический вариант не выбран пользователем."], ["https://alexey-seleznev.pro/publications/", "Страница просканирована, но пока не проиндексирована"], ["https://alexey-seleznev.pro/acpgram/docs/", "URL неизвестен Google"], ["https://alexey-seleznev.pro/blog/pishem-telegram-bota-na-yazyke-r-chast-1-sozdaem-bota-i-otpravlyaem-s/", "Страница просканирована, но пока не проиндексирована"], ["https://alexey-seleznev.pro/blog/keys-kak-provesti-analiz-konkurentov-s-pomoschyu-similarweb/", "Страница просканирована, но пока не проиндексирована"], ["https://alexey-seleznev.pro/blog/kak-postroit-svodnye-tablitsy-v-excel-libreoffice-openoffice-i-tablits/", "Страница просканирована, но пока не проиндексирована"], ["https://alexey-seleznev.pro/r_for_marketing_course/module-1/", "Обнаружена, не проиндексирована"], ["https://alexey-seleznev.pro/r_for_marketing_course/module-1/1-2/", "URL неизвестен Google"], ["https://alexey-seleznev.pro/r_for_marketing_course/module-1/1-9/", "Страница просканирована, но пока не проиндексирована"], ["https://alexey-seleznev.pro/r_for_marketing_course/module-1/1-13/", "URL неизвестен Google"], ["https://alexey-seleznev.pro/r_for_marketing_course/module-1/1-14/", "URL неизвестен Google"], ["https://alexey-seleznev.pro/r_for_marketing_course/module-2/2-3/", "URL неизвестен Google"], ["https://alexey-seleznev.pro/r_for_marketing_course/module-2/2-7/", "Обнаружена, не проиндексирована"], ["https://alexey-seleznev.pro/r_for_marketing_course/module-2/2-9/", "Обнаружена, не проиндексирована"], ["https://alexey-seleznev.pro/r_for_marketing_course/module-2/2-10/", "Обнаружена, не проиндексирована"], ["https://alexey-seleznev.pro/r_for_marketing_course/module-2/2-11/", "Обнаружена, не проиндексирована"], ["https://alexey-seleznev.pro/r_for_marketing_course/module-3/3-1/", "Обнаружена, не проиндексирована"], ["https://alexey-seleznev.pro/r_for_marketing_course/module-3/3-4/", "Обнаружена, не проиндексирована"], ["https://alexey-seleznev.pro/r_for_marketing_course/module-3/3-5/", "Обнаружена, не проиндексирована"]]}]};
+const $ = id => document.getElementById(id);
+const nf = new Intl.NumberFormat('ru-RU');
+const fmt = (v, t) => v == null ? '—' : t === 'pct' ? (v * 100).toFixed(1).replace('.', ',') + '%' : t === 'pos' ? v.toFixed(1).replace('.', ',') : nf.format(Math.round(v));
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+const dec = s => { try { return decodeURIComponent(s); } catch (e) { return s; } };
+
+function delta(cur, prev, lowerIsBetter) {
+  if (cur == null || prev == null) return '<span class="d fl">нет данных</span>';
+  if (prev === 0) return cur === 0 ? '<span class="d fl">без изменений</span>' : '<span class="d up">новое</span>';
+  const p = (cur - prev) / prev * 100;
+  if (Math.abs(p) < 0.5) return '<span class="d fl">без изменений</span>';
+  const good = lowerIsBetter ? p < 0 : p > 0;
+  return `<span class="d ${good ? 'up' : 'dn'}">${p > 0 ? '▲' : '▼'} ${Math.abs(p).toFixed(0)}%</span>`;
+}
+function kpi(label, cur, prev, type, lower) {
+  return `<div class="card kpi"><div class="l">${label}</div><div class="v">${fmt(cur, type)}</div>${delta(cur, prev, lower)}</div>`;
+}
+function table(rows, head, fmtRow) {
+  if (!rows || !rows.length) return '<div class="empty">Нет данных</div>';
+  return `<table><thead><tr>${head.map((h, i) => `<th class="${i ? 'n' : ''}">${h}</th>`).join('')}</tr></thead><tbody>${rows.map(fmtRow).join('')}</tbody></table>`;
+}
+
+$('meta').textContent = `Обновлено ${D.generated}. Search Console — по ${D.gsc_end}, GA4 — по ${D.ga_end}.`;
+
+// KPI
+const g = D.gsc_cur, gp = D.gsc_prev, a = D.ga_cur, ap = D.ga_prev;
+$('kpi').innerHTML =
+  kpi('Клики из поиска Google', g && g.clicks, gp && gp.clicks) +
+  kpi('Показы в поиске Google', g && g.impressions, gp && gp.impressions) +
+  kpi('CTR', g && g.ctr, gp && gp.ctr, 'pct') +
+  kpi('Средняя позиция', g && g.position, gp && gp.position, 'pos', true) +
+  kpi('Сессии на сайте', a && a.sessions, ap && ap.sessions) +
+  kpi('Пользователи', a && a.activeUsers, ap && ap.activeUsers) +
+  kpi('Вовлечённые сессии', a && a.engagedSessions, ap && ap.engagedSessions) +
+  kpi('Переходы из AI-ассистентов', D.ga_ai_cur && D.ga_ai_cur.sessions, null) + `<div class="card kpi"><div class="l">AI-ассистенты за 90 дней</div><div class="v">${fmt(D.ga_ai_90 && D.ga_ai_90.sessions)}</div><span class="d fl">сессий</span></div>`;
+const first = (D.gsc_daily || [])[0], hist = first && first[0];
+if (hist && hist > '2026-09-01') $('kpi').insertAdjacentHTML('afterend', `<div class="note">История Search Console начинается с ${hist.split('-').reverse().join('.')}: раньше данных нет, поэтому сравнение «к предыдущим 28 дням» пока показывает «новое». Цифры станут показательными через несколько недель.</div>`);
+
+// Точка отсчёта
+const B = D.baseline;
+const rows = [
+  ['Клики из Google (Search Console)', B.gsc_clicks, D.gsc_90 && D.gsc_90.clicks, false],
+  ['Показы в Google', B.gsc_impressions, D.gsc_90 && D.gsc_90.impressions, false],
+  ['Средняя позиция', B.gsc_position, D.gsc_90 && D.gsc_90.position, true],
+  ['Сессии из органического поиска (GA4)', B.ga_organic, D.ga_organic_90 && D.ga_organic_90.sessions, false],
+  ['…из них из Google', B.ga_google, D.ga_google_90 && D.ga_google_90.sessions, false],
+  ['Сессии из AI-ассистентов', B.ga_ai, D.ga_ai_90 && D.ga_ai_90.sessions, false],
+  ['Все сессии', B.ga_sessions, D.ga_90 && D.ga_90.sessions, false],
+];
+$('base').innerHTML = table(rows, ['Показатель, 90 дней', 'на ' + B.date.split('-').reverse().join('.'), 'сейчас', 'изменение'],
+  r => `<tr><td>${r[0]}</td><td class="n">${r[0].includes('позиция') ? fmt(r[1], 'pos') : fmt(r[1])}</td><td class="n">${r[0].includes('позиция') ? fmt(r[2], 'pos') : fmt(r[2])}</td><td class="n">${delta(r[2], r[1], r[3])}</td></tr>`)
+  + '<div class="note">Окна сравниваются по 90 дней; окно «сейчас» скользит вперёд, поэтому первое время цифры почти совпадают с отсчётом.</div>';
+
+// Графики
+Chart.defaults.color = '#94a3b8'; Chart.defaults.borderColor = 'rgba(255,255,255,.07)'; Chart.defaults.font.family = 'Inter, sans-serif';
+const eventLines = {id: 'ev', afterDatasetsDraw(ch, _a, o) {
+  const x = ch.scales.x, y = ch.scales.y, c = ch.ctx, labels = ch.data.labels;
+  (D.events || []).forEach(([d, text]) => {
+    let i = labels.findIndex(l => l >= d); if (i < 0) return;
+    const px = x.getPixelForValue(i); c.save(); c.strokeStyle = 'rgba(251,191,36,.7)'; c.setLineDash([4, 4]);
+    c.beginPath(); c.moveTo(px, y.top); c.lineTo(px, y.bottom); c.stroke(); c.restore();
+    c.save(); c.fillStyle = '#fbbf24'; c.font = '11px Inter'; c.textAlign = px > x.right - 160 ? 'right' : 'left';
+    c.fillText(text, px + (c.textAlign === 'left' ? 4 : -4), y.top + 12); c.restore();
+  });
+}};
+const daily = D.gsc_daily || [];
+const ma = (arr, n) => arr.map((_, i) => { const s = arr.slice(Math.max(0, i - n + 1), i + 1); return +(s.reduce((p, q) => p + q, 0) / s.length).toFixed(1); });
+new Chart($('c1'), {data: {labels: daily.map(r => r[0]), datasets: [
+  {type: 'bar', label: 'Клики', data: daily.map(r => r[1]), backgroundColor: '#a855f7', yAxisID: 'y', order: 2},
+  {type: 'line', label: 'Показы (7 дн.)', data: ma(daily.map(r => r[2]), 7), borderColor: '#60a5fa', backgroundColor: 'rgba(96,165,250,.15)', fill: true, pointRadius: 0, tension: .3, yAxisID: 'y1', order: 1}]},
+  options: {maintainAspectRatio: false, interaction: {mode: 'index', intersect: false}, scales: {x: {ticks: {maxTicksLimit: 9}}, y: {beginAtZero: true, title: {display: true, text: 'клики'}, ticks: {precision: 0}}, y1: {position: 'right', beginAtZero: true, grid: {drawOnChartArea: false}, title: {display: true, text: 'показы'}}}},
+  plugins: [eventLines]});
+const W = D.ga_weekly || {weeks: [], series: {}};
+const pal = ['#a855f7', '#60a5fa', '#34d399', '#fbbf24', '#f87171', '#22d3ee', '#f472b6', '#94a3b8'];
+new Chart($('c2'), {type: 'bar', data: {labels: W.weeks, datasets: Object.keys(W.series).map((k, i) => ({label: k, data: W.series[k], backgroundColor: pal[i % pal.length], stack: 's'}))},
+  options: {maintainAspectRatio: false, interaction: {mode: 'index', intersect: false}, scales: {x: {stacked: true, ticks: {maxTicksLimit: 10}}, y: {stacked: true, beginAtZero: true}}}, plugins: [eventLines]});
+
+// Индексация
+const H = D.index_history || [];
+if (!H.length) {
+  $('idx').innerHTML = '<div class="empty">Снимок индексации ещё не сделан. Запусти <code>python _build/dashboard.py --index</code>.</div>';
+} else {
+  const L = H[H.length - 1], keys = Object.entries(L.states).sort((p, q) => q[1] - p[1]);
+  const okKey = keys.find(([k]) => /проиндексирована$/i.test(k) && !/не /i.test(k));
+  const ok = keys.filter(([k]) => /проиндексирована/i.test(k) && !/не\s+(пока\s+)?проиндексирована/i.test(k)).reduce((s, [, v]) => s + v, 0);
+  let h = `<div class="kpi"><div class="l">Снимок на ${L.date.split('-').reverse().join('.')}</div><div class="v">${ok} из ${L.total}</div><span class="d fl">страниц проиндексировано (${(ok / L.total * 100).toFixed(0)}%)</span></div>`;
+  h += table(keys, ['Состояние', 'страниц', 'доля'], ([k, v]) => `<tr><td>${esc(k)}</td><td class="n">${v}</td><td class="n"><div class="bar"><i style="width:${(v / L.total * 100).toFixed(0)}%"></i></div></td></tr>`);
+  if (H.length > 1) h += '<div style="margin-top:14px"><b>История снимков</b>' + table(H.slice().reverse(), ['Дата', 'проиндексировано', 'всего'], s => {
+    const o = Object.entries(s.states).filter(([k]) => /проиндексирована/i.test(k) && !/не\s+(пока\s+)?проиндексирована/i.test(k)).reduce((x, [, v]) => x + v, 0);
+    return `<tr><td>${s.date.split('-').reverse().join('.')}</td><td class="n">${o}</td><td class="n">${s.total}</td></tr>`; }) + '</div>';
+  if (L.not_indexed && L.not_indexed.length) h += '<div style="margin-top:14px"><b>Не в индексе</b> <span class="sub">(первые ' + L.not_indexed.length + ')</span>' + table(L.not_indexed, ['Страница', 'состояние'], r => `<tr><td class="u"><a href="${esc(r[0])}">${esc(dec(r[0]).replace('https://alexey-seleznev.pro', ''))}</a></td><td class="n" style="white-space:normal">${esc(r[1])}</td></tr>`) + '</div>';
+  $('idx').innerHTML = h;
+}
+
+// Таблицы
+const share = (e, s) => s ? e / s : 0;
+$('t_countries').innerHTML = table(D.ga_countries, ['Страна', 'сессии', 'вовлечённых'], r => {
+  const sh = share(r[2], r[1]), sus = r[1] >= 30 && sh < 0.2;
+  return `<tr><td>${esc(r[0])}${sus ? '<span class="tag">похоже на ботов</span>' : ''}</td><td class="n">${fmt(r[1])}</td><td class="n">${(sh * 100).toFixed(0)}%</td></tr>`; })
+  + '<div class="note">Метка ставится, если сессий не меньше 30, а вовлечено меньше 20%.</div>';
+$('t_langs').innerHTML = table(D.ga_languages, ['Язык', 'сессии', 'вовлечённых'], r => `<tr><td>${esc(r[0])}</td><td class="n">${fmt(r[1])}</td><td class="n">${(share(r[2], r[1]) * 100).toFixed(0)}%</td></tr>`);
+const path = u => esc(dec(u).replace('https://alexey-seleznev.pro', '') || '/');
+$('t_pages').innerHTML = table(D.gsc_pages, ['Страница', 'клики', 'показы', 'позиция'], r => `<tr><td class="u">${path(r[0])}</td><td class="n">${fmt(r[1])}</td><td class="n">${fmt(r[2])}</td><td class="n">${fmt(r[3], 'pos')}</td></tr>`);
+$('t_queries').innerHTML = table(D.gsc_queries, ['Запрос', 'клики', 'показы', 'позиция'], r => `<tr><td>${esc(r[0])}</td><td class="n">${fmt(r[1])}</td><td class="n">${fmt(r[2])}</td><td class="n">${fmt(r[3], 'pos')}</td></tr>`);
+$('t_landing').innerHTML = table(D.ga_landing, ['Страница', 'сессии', 'вовлечённых'], r => `<tr><td class="u">${esc(dec(r[0]))}</td><td class="n">${fmt(r[1])}</td><td class="n">${(share(r[2], r[1]) * 100).toFixed(0)}%</td></tr>`);
+$('t_ai').innerHTML = table(D.ga_ai_sources, ['Источник', 'сессии'], r => `<tr><td>${esc(r[0])}</td><td class="n">${fmt(r[1])}</td></tr>`)
+  + '<div class="note">Многие ассистенты не передают реферер, поэтому часть переходов видна как «direct».</div>';
+</script>
+</body>
+</html>
