@@ -138,7 +138,7 @@
         answer.classList.add('dc-wait');
         answer.innerHTML = '<span class="dc-dots" aria-hidden="true"><i></i><i></i><i></i></span>';
         log.scrollTop = log.scrollHeight;
-        track('docs_chat_question', {language: lang(), turn: messages.filter(m => m.role === 'user').length});
+        track('docs_chat_question', {chat_language: lang(), chat_turn: messages.filter(m => m.role === 'user').length});
         try {
             const res = await fetch(API, {
                 method: 'POST',
@@ -182,7 +182,7 @@
         fab.setAttribute('aria-expanded', 'true');
         log.scrollTop = log.scrollHeight;
         input.focus();
-        track('docs_chat_open', {language: lang()});
+        track('docs_chat_open', {chat_language: lang()});
     }
     function close(focus = true) {
         panel.hidden = true;

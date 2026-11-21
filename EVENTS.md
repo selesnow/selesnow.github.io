@@ -26,8 +26,8 @@
 | **`social_click`** | Переход в соцсети автора (LinkedIn, GitHub, Facebook, Instagram) | Нет | Блок контактов, футер |
 | **`ad_stat_service_click`** | Клик по ссылкам внешней статистики канала (TGStat, Telemetr) | Нет | `/ads/` |
 | **`ad_poll_click`** | Переход к опросам аудитории канала в Telegram | Нет | `/ads/` |
-| **`docs_chat_open`** | Открытие AI-чата по справке AcpGram (параметр `language`) | Нет | `/acpgram/docs/` |
-| **`docs_chat_question`** | Вопрос в AI-чате (параметры `language`, `turn` — номер вопроса в диалоге; текст вопроса не передаётся) | Нет | `/acpgram/docs/` |
+| **`docs_chat_open`** | Открытие AI-чата по справке AcpGram (параметр `chat_language`) | Нет | `/acpgram/docs/` |
+| **`docs_chat_question`** | Вопрос в AI-чате (параметры `chat_language`, `chat_turn` — номер вопроса в диалоге; текст вопроса не передаётся) | Нет | `/acpgram/docs/` |
 | **`docs_chat_section_click`** | Переход из ответа чата к разделу справки (параметр `section_id`) | Нет | `/acpgram/docs/` |
 | **`docs_chat_error`** | Чат не смог ответить (параметр `error_code`: `rate_minute`, `rate_day`, `quota`, `busy`, `unavailable`, `too_long`) | Нет | `/acpgram/docs/` |
 
@@ -196,6 +196,10 @@
 | **Значение фильтра** | Событие | `filter_value` | Значение фильтра |
 | **Выбранный язык** | Событие | `selected_language` | `en`, `ru`, `ua` |
 | **Направление слайдера** | Событие | `direction` | `left`, `right` |
+| **Язык чата справки** | Событие | `chat_language` | Язык страницы в момент вопроса: `ru`, `ua`, `en` |
+| **Номер вопроса в чате** | Событие | `chat_turn` | Какой по счёту вопрос в диалоге: `1`, `2`, … |
+| **Раздел справки** | Событие | `section_id` | Якорь раздела, к которому перешли из ответа чата (`install`, `git-signin` и т. д.) |
+| **Код ошибки чата** | Событие | `error_code` | `rate_minute`, `rate_day`, `quota`, `busy`, `unavailable`, `too_long` |
 
 ---
 
