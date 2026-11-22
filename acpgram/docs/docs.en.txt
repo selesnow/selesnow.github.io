@@ -34,6 +34,7 @@ One agent is enough. You can connect the others later: AcpGram finds the install
 
 - Windows, Linux or macOS. Tested on Windows Server and Linux (Ubuntu); macOS uses the same code as Linux.
 - Node.js. The one-command installer sets up a private Node.js 24 by itself if no suitable version is found. Installing through npm needs Node.js 22.13 or later; running from source needs Node.js 24.
+- For the Windows service — NSSM: the one-command installer sets it up by itself without administrator rights; with npm, run `winget install --id NSSM.NSSM -e`. NSSM is not needed for console runs.
 - At least one agent from the table above.
 - A Telegram bot and its token from [@BotFather](https://t.me/BotFather).
 - For the Git section — `git` installed. For the sandbox on Linux — the `bubblewrap` package.
@@ -111,7 +112,7 @@ Linux and macOS, in the terminal:
 curl -fsSL https://raw.githubusercontent.com/selesnow/acpgram/main/install.sh | bash
 ```
 
-The installer downloads the latest release, verifying its checksum, into `%LOCALAPPDATA%\acpgram` (Windows) or `~/.local/share/acpgram` (Linux, macOS), sets up a private Node.js 24 without administrator rights if needed, adds the `acpgram` command to `PATH` and starts the setup wizard right away.
+The installer downloads the latest release, verifying its checksum, into `%LOCALAPPDATA%\acpgram` (Windows) or `~/.local/share/acpgram` (Linux, macOS), sets up a private Node.js 24 and NSSM for the Windows service without administrator rights if needed, adds the `acpgram` command to `PATH` and starts the setup wizard right away.
 
 **Through npm.** If Node.js 22.13 or later is already installed:
 
@@ -119,6 +120,8 @@ The installer downloads the latest release, verifying its checksum, into `%LOCAL
 npm install -g acpgram
 acpgram setup
 ```
+
+> On Windows, NSSM is only needed for the service. The one-command installer sets it up by itself; with npm, run `winget install --id NSSM.NSSM -e`. NSSM is not needed to run the bot in a console.
 
 > On Windows, PowerShell may say that running scripts is disabled on this system and refuse to start `npm` or `acpgram`. The one-command fix: [Windows: "running scripts is disabled"](#powershell-scripts).
 
@@ -153,7 +156,7 @@ acpgram service uninstall
 
 | OS | How the service works |
 |---|---|
-| Windows | a service through [NSSM](https://nssm.cc) (`winget install --id NSSM.NSSM -e`), terminal run as administrator |
+| Windows | a service through [NSSM](https://nssm.cc): the AcpGram installer sets it up by itself, with npm run `winget install --id NSSM.NSSM -e`; terminal run as administrator |
 | Linux | `systemd --user`; for the bot to work without anyone logged in, run `sudo loginctl enable-linger $USER` |
 | macOS | LaunchAgent (`launchd`) |
 
@@ -871,7 +874,7 @@ If you cannot change this setting, add `.cmd` to the commands: `npm.cmd install 
 
 **An agent is not found under the service.** Under a service, global npm packages are often not in `PATH`. Run `acpgram setup` again (the wizard writes the full paths) or set the path in `GEMINI_COMMAND`, `CLAUDE_COMMAND`, `CODEX_COMMAND`, `AGY_COMMAND` or `OPENCODE_COMMAND`.
 
-**The service does not start on Windows.** The service needs the account password, not the Windows PIN. Run `acpgram service install` from an administrator terminal and enter the password.
+**The service does not start on Windows.** The service needs the account password, not the Windows PIN. Run `acpgram service install` from an administrator terminal and enter the password. If NSSM is not found: the one-command installer sets it up by itself; with npm, run `winget install --id NSSM.NSSM -e`. NSSM is not needed for console runs.
 
 **A new provider key did not add models.** Restart the service or open `/model`: the bot updates the model list.
 

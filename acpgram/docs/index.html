@@ -310,6 +310,7 @@
 <p>One agent is enough. You can connect the others later: AcpGram finds the installed ones by itself.</p></div></section><section id="requirements" class="ad-sub"><h3><span class="ru-text">Требования</span><span class="ua-text">Вимоги</span><span class="en-text">Requirements</span><a class="ad-anchor" href="#requirements" aria-label="Link to this section">#</a></h3><div class="ru-text ad-lang"><ul>
 <li>Windows, Linux или macOS. Проверено на Windows Server и Linux (Ubuntu); на macOS используется тот же код, что и на Linux.</li>
 <li>Node.js. Установщик одной командой сам поставит приватный Node.js 24, если подходящего нет. Для установки через npm нужен Node.js 22.13 или новее, для запуска из исходников — Node.js 24.</li>
+<li>Для службы Windows — NSSM: установщик одной командой ставит его сам без прав администратора; при установке через npm — <code>winget install --id NSSM.NSSM -e</code>. Для запуска в консоли NSSM не нужен.</li>
 <li>Хотя бы один агент из таблицы выше.</li>
 <li>Бот в Telegram и его токен от <a target="_blank" rel="noopener" href="https://t.me/BotFather">@BotFather</a>.</li>
 <li>Для раздела Git — установленный <code>git</code>. Для песочницы на Linux — пакет <code>bubblewrap</code>.</li>
@@ -317,6 +318,7 @@
 <p>У самого AcpGram нет зависимостей npm.</p></div><div class="ua-text ad-lang"><ul>
 <li>Windows, Linux або macOS. Перевірено на Windows Server і Linux (Ubuntu); на macOS використовується той самий код, що й на Linux.</li>
 <li>Node.js. Інсталятор однією командою сам встановить приватний Node.js 24, якщо відповідного немає. Для встановлення через npm потрібен Node.js 22.13 або новіший, для запуску з вихідного коду — Node.js 24.</li>
+<li>Для служби Windows — NSSM: інсталятор однією командою встановлює його сам без прав адміністратора; при встановленні через npm — <code>winget install --id NSSM.NSSM -e</code>. Для запуску в консолі NSSM не потрібен.</li>
 <li>Хоча б один агент із таблиці вище.</li>
 <li>Бот у Telegram і його токен від <a target="_blank" rel="noopener" href="https://t.me/BotFather">@BotFather</a>.</li>
 <li>Для розділу Git — встановлений <code>git</code>. Для пісочниці на Linux — пакет <code>bubblewrap</code>.</li>
@@ -324,6 +326,7 @@
 <p>У самого AcpGram немає залежностей npm.</p></div><div class="en-text ad-lang"><ul>
 <li>Windows, Linux or macOS. Tested on Windows Server and Linux (Ubuntu); macOS uses the same code as Linux.</li>
 <li>Node.js. The one-command installer sets up a private Node.js 24 by itself if no suitable version is found. Installing through npm needs Node.js 22.13 or later; running from source needs Node.js 24.</li>
+<li>For the Windows service — NSSM: the one-command installer sets it up by itself without administrator rights; with npm, run <code>winget install --id NSSM.NSSM -e</code>. NSSM is not needed for console runs.</li>
 <li>At least one agent from the table above.</li>
 <li>A Telegram bot and its token from <a target="_blank" rel="noopener" href="https://t.me/BotFather">@BotFather</a>.</li>
 <li>For the Git section — <code>git</code> installed. For the sandbox on Linux — the <code>bubblewrap</code> package.</li>
@@ -392,33 +395,36 @@ codex login</code></pre><button type="button" class="ap-copy">Copy</button></div
 <div class="ap-code"><pre><code>irm https://raw.githubusercontent.com/selesnow/acpgram/main/install.ps1 | iex</code></pre><button type="button" class="ap-copy">Копировать</button></div>
 <p>Linux и macOS, в терминале:</p>
 <div class="ap-code"><pre><code>curl -fsSL https://raw.githubusercontent.com/selesnow/acpgram/main/install.sh | bash</code></pre><button type="button" class="ap-copy">Копировать</button></div>
-<p>Установщик скачивает последний релиз с проверкой контрольной суммы в <code>%LOCALAPPDATA%\acpgram</code> (Windows) или <code>~/.local/share/acpgram</code> (Linux, macOS), при необходимости ставит приватный Node.js 24 без прав администратора, добавляет команду <code>acpgram</code> в <code>PATH</code> и сразу запускает мастер настройки.</p>
+<p>Установщик скачивает последний релиз с проверкой контрольной суммы в <code>%LOCALAPPDATA%\acpgram</code> (Windows) или <code>~/.local/share/acpgram</code> (Linux, macOS), при необходимости ставит приватный Node.js 24 и NSSM для службы Windows без прав администратора, добавляет команду <code>acpgram</code> в <code>PATH</code> и сразу запускает мастер настройки.</p>
 <p><strong>Через npm.</strong> Если Node.js 22.13 или новее уже установлен:</p>
 <div class="ap-code"><pre><code>npm install -g acpgram
 acpgram setup</code></pre><button type="button" class="ap-copy">Копировать</button></div>
 <blockquote>
+<p>На Windows NSSM нужен только для службы. Установщик одной командой ставит его сам; при установке через npm: <code>winget install --id NSSM.NSSM -e</code>. Для запуска в консоли NSSM не нужен.</p>
 <p>На Windows PowerShell может ответить, что выполнение сценариев отключено в этой системе, и не запустить <code>npm</code> или <code>acpgram</code>. Как это исправить одной командой: <a href="#powershell-scripts">Windows: «выполнение сценариев отключено»</a>.</p>
 </blockquote>
 <p>Настройки (<code>.env</code>) и база (<code>data/bot.db</code>) при такой установке лежат в <code>~/.acpgram</code> (или в папке из <code>ACPGRAM_HOME</code>) и не теряются при обновлении пакета.</p></div><div class="ua-text ad-lang"><p><strong>Однією командою (рекомендовано).</strong> Windows, у PowerShell:</p>
 <div class="ap-code"><pre><code>irm https://raw.githubusercontent.com/selesnow/acpgram/main/install.ps1 | iex</code></pre><button type="button" class="ap-copy">Копіювати</button></div>
 <p>Linux і macOS, у терміналі:</p>
 <div class="ap-code"><pre><code>curl -fsSL https://raw.githubusercontent.com/selesnow/acpgram/main/install.sh | bash</code></pre><button type="button" class="ap-copy">Копіювати</button></div>
-<p>Інсталятор завантажує останній реліз із перевіркою контрольної суми в <code>%LOCALAPPDATA%\acpgram</code> (Windows) або <code>~/.local/share/acpgram</code> (Linux, macOS), за потреби встановлює приватний Node.js 24 без прав адміністратора, додає команду <code>acpgram</code> у <code>PATH</code> і одразу запускає майстер налаштування.</p>
+<p>Інсталятор завантажує останній реліз із перевіркою контрольної суми в <code>%LOCALAPPDATA%\acpgram</code> (Windows) або <code>~/.local/share/acpgram</code> (Linux, macOS), за потреби встановлює приватний Node.js 24 і NSSM для служби Windows без прав адміністратора, додає команду <code>acpgram</code> у <code>PATH</code> і одразу запускає майстер налаштування.</p>
 <p><strong>Через npm.</strong> Якщо Node.js 22.13 або новіший уже встановлено:</p>
 <div class="ap-code"><pre><code>npm install -g acpgram
 acpgram setup</code></pre><button type="button" class="ap-copy">Копіювати</button></div>
 <blockquote>
+<p>На Windows NSSM потрібен лише для служби. Інсталятор однією командою встановлює його сам; при встановленні через npm: <code>winget install --id NSSM.NSSM -e</code>. Для запуску в консолі NSSM не потрібен.</p>
 <p>На Windows PowerShell може відповісти, що виконання сценаріїв вимкнено в цій системі, і не запустити <code>npm</code> або <code>acpgram</code>. Як це виправити однією командою: <a href="#powershell-scripts">Windows: «виконання сценаріїв вимкнено»</a>.</p>
 </blockquote>
 <p>Налаштування (<code>.env</code>) і база (<code>data/bot.db</code>) за такого встановлення лежать у <code>~/.acpgram</code> (або в папці з <code>ACPGRAM_HOME</code>) і не втрачаються під час оновлення пакета.</p></div><div class="en-text ad-lang"><p><strong>With one command (recommended).</strong> Windows, in PowerShell:</p>
 <div class="ap-code"><pre><code>irm https://raw.githubusercontent.com/selesnow/acpgram/main/install.ps1 | iex</code></pre><button type="button" class="ap-copy">Copy</button></div>
 <p>Linux and macOS, in the terminal:</p>
 <div class="ap-code"><pre><code>curl -fsSL https://raw.githubusercontent.com/selesnow/acpgram/main/install.sh | bash</code></pre><button type="button" class="ap-copy">Copy</button></div>
-<p>The installer downloads the latest release, verifying its checksum, into <code>%LOCALAPPDATA%\acpgram</code> (Windows) or <code>~/.local/share/acpgram</code> (Linux, macOS), sets up a private Node.js 24 without administrator rights if needed, adds the <code>acpgram</code> command to <code>PATH</code> and starts the setup wizard right away.</p>
+<p>The installer downloads the latest release, verifying its checksum, into <code>%LOCALAPPDATA%\acpgram</code> (Windows) or <code>~/.local/share/acpgram</code> (Linux, macOS), sets up a private Node.js 24 and NSSM for the Windows service without administrator rights if needed, adds the <code>acpgram</code> command to <code>PATH</code> and starts the setup wizard right away.</p>
 <p><strong>Through npm.</strong> If Node.js 22.13 or later is already installed:</p>
 <div class="ap-code"><pre><code>npm install -g acpgram
 acpgram setup</code></pre><button type="button" class="ap-copy">Copy</button></div>
 <blockquote>
+<p>On Windows, NSSM is only needed for the service. The one-command installer sets it up by itself; with npm, run <code>winget install --id NSSM.NSSM -e</code>. NSSM is not needed to run the bot in a console.</p>
 <p>On Windows, PowerShell may say that running scripts is disabled on this system and refuse to start <code>npm</code> or <code>acpgram</code>. The one-command fix: <a href="#powershell-scripts">Windows: "running scripts is disabled"</a>.</p>
 </blockquote>
 <p>With this kind of installation, the settings (<code>.env</code>) and the database (<code>data/bot.db</code>) live in <code>~/.acpgram</code> (or in the folder from <code>ACPGRAM_HOME</code>) and are not lost when the package is updated.</p></div></section><section id="setup-wizard" class="ad-sub"><h3><span class="ru-text">Шаг 4. Мастер настройки</span><span class="ua-text">Крок 4. Майстер налаштування</span><span class="en-text">Step 4. Setup wizard</span><a class="ad-anchor" href="#setup-wizard" aria-label="Link to this section">#</a></h3><div class="ru-text ad-lang"><p>Мастер запускается сам после установки. Его можно запускать повторно командой <code>acpgram setup</code>: текущие значения подставляются.</p>
@@ -473,7 +479,7 @@ acpgram service uninstall</code></pre><button type="button" class="ap-copy">Ко
 <tbody>
 <tr>
 <td>Windows</td>
-<td>служба через <a target="_blank" rel="noopener" href="https://nssm.cc">NSSM</a> (<code>winget install --id NSSM.NSSM -e</code>), терминал от имени администратора</td>
+<td>служба через <a target="_blank" rel="noopener" href="https://nssm.cc">NSSM</a>: установщик AcpGram ставит его сам, при установке через npm — <code>winget install --id NSSM.NSSM -e</code>; терминал от имени администратора</td>
 </tr>
 <tr>
 <td>Linux</td>
@@ -502,7 +508,7 @@ acpgram service uninstall</code></pre><button type="button" class="ap-copy">Ко
 <tbody>
 <tr>
 <td>Windows</td>
-<td>служба через <a target="_blank" rel="noopener" href="https://nssm.cc">NSSM</a> (<code>winget install --id NSSM.NSSM -e</code>), термінал від імені адміністратора</td>
+<td>служба через <a target="_blank" rel="noopener" href="https://nssm.cc">NSSM</a>: інсталятор AcpGram встановлює його сам, при встановленні через npm — <code>winget install --id NSSM.NSSM -e</code>; термінал від імені адміністратора</td>
 </tr>
 <tr>
 <td>Linux</td>
@@ -531,7 +537,7 @@ acpgram service uninstall</code></pre><button type="button" class="ap-copy">Copy
 <tbody>
 <tr>
 <td>Windows</td>
-<td>a service through <a target="_blank" rel="noopener" href="https://nssm.cc">NSSM</a> (<code>winget install --id NSSM.NSSM -e</code>), terminal run as administrator</td>
+<td>a service through <a target="_blank" rel="noopener" href="https://nssm.cc">NSSM</a>: the AcpGram installer sets it up by itself, with npm run <code>winget install --id NSSM.NSSM -e</code>; terminal run as administrator</td>
 </tr>
 <tr>
 <td>Linux</td>
@@ -2675,7 +2681,7 @@ pm.ps1 cannot be loaded because running scripts is disabled on this system". It 
 <p><strong>Ошибка <code>Conflict</code> в журнале.</strong> С одним токеном запущены два экземпляра бота, например старая служба и новая установка. Остановите лишний.</p>
 <p><strong>У агента пометка «⚠️ нужен вход».</strong> Агент запускается, но не авторизован. Войдите в него в терминале под той же учётной записью, под которой работает бот, либо добавьте ключ API в <code>.env</code>.</p>
 <p><strong>Агент не находится под службой.</strong> Под службой глобальные пакеты npm часто не в <code>PATH</code>. Запустите <code>acpgram setup</code> ещё раз (мастер запишет полные пути) либо укажите путь в <code>GEMINI_COMMAND</code>, <code>CLAUDE_COMMAND</code>, <code>CODEX_COMMAND</code>, <code>AGY_COMMAND</code> или <code>OPENCODE_COMMAND</code>.</p>
-<p><strong>Служба на Windows не запускается.</strong> Службе нужен пароль учётной записи, а не PIN-код Windows. Запустите <code>acpgram service install</code> из терминала администратора и введите пароль.</p>
+<p><strong>Служба на Windows не запускается.</strong> Службе нужен пароль учётной записи, а не PIN-код Windows. Запустите <code>acpgram service install</code> из терминала администратора и введите пароль. Если NSSM не найден: установщик одной командой ставит его сам, а при установке через npm выполните <code>winget install --id NSSM.NSSM -e</code>. Для запуска в консоли NSSM не нужен.</p>
 <p><strong>Новый ключ провайдера не добавил модели.</strong> Перезапустите службу или откройте <code>/model</code>: бот обновит список моделей.</p>
 <p><strong>Вместо анимированных иконок в черновике видны 🙂.</strong> Клиент Telegram их не показывает. Задайте <code>ANIMATED_ICONS=0</code>.</p>
 <p><strong>Команды Codex на Windows падают с <code>runner pipe-in</code>.</strong> Режимам «Чтение» и «Обычный» нужна песочница Codex. Используйте уровень «Полный».</p>
@@ -2688,7 +2694,7 @@ pm.ps1 cannot be loaded because running scripts is disabled on this system". It 
 <p><strong>Помилка <code>Conflict</code> у журналі.</strong> З одним токеном запущено два екземпляри бота, наприклад стара служба й нове встановлення. Зупиніть зайвий.</p>
 <p><strong>В агента позначка «⚠️ потрібен вхід».</strong> Агент запускається, але не авторизований. Увійдіть у нього в терміналі під тим самим обліковим записом, під яким працює бот, або додайте ключ API в <code>.env</code>.</p>
 <p><strong>Агент не знаходиться під службою.</strong> Під службою глобальні пакети npm часто не в <code>PATH</code>. Запустіть <code>acpgram setup</code> ще раз (майстер запише повні шляхи) або вкажіть шлях у <code>GEMINI_COMMAND</code>, <code>CLAUDE_COMMAND</code>, <code>CODEX_COMMAND</code>, <code>AGY_COMMAND</code> чи <code>OPENCODE_COMMAND</code>.</p>
-<p><strong>Служба на Windows не запускається.</strong> Службі потрібен пароль облікового запису, а не PIN-код Windows. Запустіть <code>acpgram service install</code> із термінала адміністратора і введіть пароль.</p>
+<p><strong>Служба на Windows не запускається.</strong> Службі потрібен пароль облікового запису, а не PIN-код Windows. Запустіть <code>acpgram service install</code> із термінала адміністратора і введіть пароль. Якщо NSSM не знайдено: інсталятор однією командою встановлює його сам, а при встановленні через npm виконайте <code>winget install --id NSSM.NSSM -e</code>. Для запуску в консолі NSSM не потрібен.</p>
 <p><strong>Новий ключ провайдера не додав моделі.</strong> Перезапустіть службу або відкрийте <code>/model</code>: бот оновить список моделей.</p>
 <p><strong>Замість анімованих іконок у чернетці видно 🙂.</strong> Клієнт Telegram їх не показує. Задайте <code>ANIMATED_ICONS=0</code>.</p>
 <p><strong>Команди Codex на Windows завершуються помилкою <code>runner pipe-in</code>.</strong> Режимам «Читання» і «Звичайний» потрібна пісочниця Codex. Використовуйте рівень «Повний».</p>
@@ -2701,7 +2707,7 @@ pm.ps1 cannot be loaded because running scripts is disabled on this system". It 
 <p><strong>A <code>Conflict</code> error in the log.</strong> Two instances of the bot are running with the same token, for example an old service and a new installation. Stop the extra one.</p>
 <p><strong>An agent is marked “⚠️ sign-in needed”.</strong> The agent starts but is not authorized. Sign in to it in the terminal under the same account the bot runs under, or add an API key to <code>.env</code>.</p>
 <p><strong>An agent is not found under the service.</strong> Under a service, global npm packages are often not in <code>PATH</code>. Run <code>acpgram setup</code> again (the wizard writes the full paths) or set the path in <code>GEMINI_COMMAND</code>, <code>CLAUDE_COMMAND</code>, <code>CODEX_COMMAND</code>, <code>AGY_COMMAND</code> or <code>OPENCODE_COMMAND</code>.</p>
-<p><strong>The service does not start on Windows.</strong> The service needs the account password, not the Windows PIN. Run <code>acpgram service install</code> from an administrator terminal and enter the password.</p>
+<p><strong>The service does not start on Windows.</strong> The service needs the account password, not the Windows PIN. Run <code>acpgram service install</code> from an administrator terminal and enter the password. If NSSM is not found: the one-command installer sets it up by itself; with npm, run <code>winget install --id NSSM.NSSM -e</code>. NSSM is not needed for console runs.</p>
 <p><strong>A new provider key did not add models.</strong> Restart the service or open <code>/model</code>: the bot updates the model list.</p>
 <p><strong>You see 🙂 instead of animated icons in the draft.</strong> The Telegram client does not show them. Set <code>ANIMATED_ICONS=0</code>.</p>
 <p><strong>Codex commands on Windows fail with <code>runner pipe-in</code>.</strong> The “Read-only” and “Standard” modes need the Codex sandbox. Use the “Full” level.</p>

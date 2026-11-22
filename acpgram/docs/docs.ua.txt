@@ -34,6 +34,7 @@ AcpGram не замінює агента і сам нічого не «дума�
 
 - Windows, Linux або macOS. Перевірено на Windows Server і Linux (Ubuntu); на macOS використовується той самий код, що й на Linux.
 - Node.js. Інсталятор однією командою сам встановить приватний Node.js 24, якщо відповідного немає. Для встановлення через npm потрібен Node.js 22.13 або новіший, для запуску з вихідного коду — Node.js 24.
+- Для служби Windows — NSSM: інсталятор однією командою встановлює його сам без прав адміністратора; при встановленні через npm — `winget install --id NSSM.NSSM -e`. Для запуску в консолі NSSM не потрібен.
 - Хоча б один агент із таблиці вище.
 - Бот у Telegram і його токен від [@BotFather](https://t.me/BotFather).
 - Для розділу Git — встановлений `git`. Для пісочниці на Linux — пакет `bubblewrap`.
@@ -111,7 +112,7 @@ Linux і macOS, у терміналі:
 curl -fsSL https://raw.githubusercontent.com/selesnow/acpgram/main/install.sh | bash
 ```
 
-Інсталятор завантажує останній реліз із перевіркою контрольної суми в `%LOCALAPPDATA%\acpgram` (Windows) або `~/.local/share/acpgram` (Linux, macOS), за потреби встановлює приватний Node.js 24 без прав адміністратора, додає команду `acpgram` у `PATH` і одразу запускає майстер налаштування.
+Інсталятор завантажує останній реліз із перевіркою контрольної суми в `%LOCALAPPDATA%\acpgram` (Windows) або `~/.local/share/acpgram` (Linux, macOS), за потреби встановлює приватний Node.js 24 і NSSM для служби Windows без прав адміністратора, додає команду `acpgram` у `PATH` і одразу запускає майстер налаштування.
 
 **Через npm.** Якщо Node.js 22.13 або новіший уже встановлено:
 
@@ -119,6 +120,8 @@ curl -fsSL https://raw.githubusercontent.com/selesnow/acpgram/main/install.sh | 
 npm install -g acpgram
 acpgram setup
 ```
+
+> На Windows NSSM потрібен лише для служби. Інсталятор однією командою встановлює його сам; при встановленні через npm: `winget install --id NSSM.NSSM -e`. Для запуску в консолі NSSM не потрібен.
 
 > На Windows PowerShell може відповісти, що виконання сценаріїв вимкнено в цій системі, і не запустити `npm` або `acpgram`. Як це виправити однією командою: [Windows: «виконання сценаріїв вимкнено»](#powershell-scripts).
 
@@ -153,7 +156,7 @@ acpgram service uninstall
 
 | ОС | Як працює служба |
 |---|---|
-| Windows | служба через [NSSM](https://nssm.cc) (`winget install --id NSSM.NSSM -e`), термінал від імені адміністратора |
+| Windows | служба через [NSSM](https://nssm.cc): інсталятор AcpGram встановлює його сам, при встановленні через npm — `winget install --id NSSM.NSSM -e`; термінал від імені адміністратора |
 | Linux | `systemd --user`; щоб бот працював без входу в систему, виконайте `sudo loginctl enable-linger $USER` |
 | macOS | LaunchAgent (`launchd`) |
 
@@ -871,7 +874,7 @@ Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
 
 **Агент не знаходиться під службою.** Під службою глобальні пакети npm часто не в `PATH`. Запустіть `acpgram setup` ще раз (майстер запише повні шляхи) або вкажіть шлях у `GEMINI_COMMAND`, `CLAUDE_COMMAND`, `CODEX_COMMAND`, `AGY_COMMAND` чи `OPENCODE_COMMAND`.
 
-**Служба на Windows не запускається.** Службі потрібен пароль облікового запису, а не PIN-код Windows. Запустіть `acpgram service install` із термінала адміністратора і введіть пароль.
+**Служба на Windows не запускається.** Службі потрібен пароль облікового запису, а не PIN-код Windows. Запустіть `acpgram service install` із термінала адміністратора і введіть пароль. Якщо NSSM не знайдено: інсталятор однією командою встановлює його сам, а при встановленні через npm виконайте `winget install --id NSSM.NSSM -e`. Для запуску в консолі NSSM не потрібен.
 
 **Новий ключ провайдера не додав моделі.** Перезапустіть службу або відкрийте `/model`: бот оновить список моделей.
 
