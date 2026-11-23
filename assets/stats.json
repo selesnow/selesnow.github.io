@@ -1,95 +1,95 @@
 {
- "updated": "2026-11-22",
- "total_downloads": 426745,
+ "updated": "2026-11-23",
+ "total_downloads": 426924,
  "packages": {
   "rfacebookstat": {
-   "downloads": 53478,
-   "month": 833,
+   "downloads": 53485,
+   "month": 824,
    "stars": 30
   },
   "timeperiodsR": {
-   "downloads": 44966,
-   "month": 649,
+   "downloads": 44976,
+   "month": 642,
    "stars": 7
   },
   "rgoogleads": {
-   "downloads": 38731,
-   "month": 1071,
+   "downloads": 38754,
+   "month": 1063,
    "stars": 14
   },
   "getProxy": {
-   "downloads": 29450,
-   "month": 479,
+   "downloads": 29461,
+   "month": 483,
    "stars": 8
   },
   "rtgstat": {
-   "downloads": 23393,
-   "month": 631,
+   "downloads": 23405,
+   "month": 626,
    "stars": 11
   },
   "ringostat": {
-   "downloads": 14377,
-   "month": 446,
+   "downloads": 14389,
+   "month": 448,
    "stars": 0
   },
   "rappsflyer": {
-   "downloads": 14352,
-   "month": 545,
+   "downloads": 14362,
+   "month": 542,
    "stars": 1
   },
   "ractivecampaign": {
-   "downloads": 13610,
-   "month": 476,
+   "downloads": 13622,
+   "month": 475,
    "stars": 0
   },
   "rytstat": {
-   "downloads": 12932,
-   "month": 471,
+   "downloads": 12945,
+   "month": 472,
    "stars": 2
   },
   "racademyocean": {
-   "downloads": 12766,
-   "month": 450,
+   "downloads": 12775,
+   "month": 447,
    "stars": 0
   },
   "rlinkedinads": {
-   "downloads": 6933,
-   "month": 423,
+   "downloads": 6945,
+   "month": 420,
    "stars": 0
   },
   "rtiktokads": {
-   "downloads": 2780,
-   "month": 328,
+   "downloads": 2785,
+   "month": 324,
    "stars": 1
   },
   "rappleads": {
-   "downloads": 2569,
-   "month": 306,
+   "downloads": 2579,
+   "month": 305,
    "stars": 0
   },
   "galigor": {
-   "downloads": 13212,
-   "month": 159,
+   "downloads": 13213,
+   "month": 160,
    "stars": 1
   },
   "ryandexdirect": {
-   "downloads": 41284,
+   "downloads": 41295,
    "month": 626,
    "stars": 53
   },
   "rym": {
-   "downloads": 37848,
-   "month": 586,
+   "downloads": 37859,
+   "month": 581,
    "stars": 13
   },
   "rvkstat": {
-   "downloads": 29731,
-   "month": 583,
+   "downloads": 29741,
+   "month": 580,
    "stars": 15
   },
   "rmytarget": {
    "downloads": 34333,
-   "month": 242,
+   "month": 239,
    "stars": 5
   },
   "rmixpanel": {
