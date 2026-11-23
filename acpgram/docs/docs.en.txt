@@ -134,7 +134,7 @@ The wizard starts by itself after installation. You can run it again with the `a
 1. **Bot token.** The wizard checks it with Telegram right away and shows the bot’s name.
 2. **Administrator.** Send your bot any message — the wizard detects your Telegram ID by itself. You can also enter the ID manually.
 3. **Projects root** — optional. If you set it, the wizard also asks about [personal workspaces](#workspaces).
-4. **Sandbox** — only on Linux and only if `bubblewrap` is installed (see [agent sandbox](#sandbox)).
+4. **Sandbox** — only on Linux and only if `bubblewrap` is installed (see [agent sandbox](#sandbox)). The wizard also offers to enable `ADMIN_SANDBOX=1` to sandbox the administrator’s agent.
 5. **Agents.** The wizard finds the installed agents, writes down their full paths (so that they are also found under the service) and offers to choose the default agent. If none is installed, it offers to install OpenCode right away.
 6. **API keys** — optional. The token, keys and password are entered hidden.
 7. **Saving.** The wizard writes `.env` (readable only by the owner), creates the database and sends you a test message in Telegram.
@@ -306,6 +306,8 @@ How “for this session” works:
 - shells (`bash -c`, `powershell`, `cmd /c`, `sudo`), interpreters (`python`, `node`, `Rscript`, `npx`), and commands with substitutions, output to a file or variables before the program are allowed only when they are exactly the same;
 - in a compound command, every part must be allowed.
 
+A long command is shown as its beginning and end with a truncation mark; log lines are truncated too.
+
 The rule lives as long as the agent process runs: until `/new`, `/close`, closing on idle or a bot restart. There is no “allow forever” option in the chat.
 
 Whether requests come at all depends on the [access level](#access-levels).
@@ -324,7 +326,7 @@ Reply to a message from the agent with a fragment of it selected: the agent gets
 
 ### Stopping a request {#stop}
 
-The `/stop` command or the stop button under the draft interrupts the running request. The session stays: you can write the next message right away.
+The `/stop` command or the stop button under the draft interrupts the running request, and terminates the agent process if it did not respond to the cancellation. The session stays: you can write the next message right away.
 
 A typo in a command (`/modle`) is not sent to the agent: the bot asks whether you meant `/model`. The bot answers a voice message, video or sticker with a hint.
 
@@ -434,6 +436,8 @@ You can send the bot a photo or a file (text, PDF, spreadsheet and so on, up to 
 - An album of several photos or files is handled as one request.
 - The bot unpacks `.zip`, `.tar`, `.tar.gz` and `.tgz` archives by itself (no more than 500 files and 100 MB) and passes the list of files to the agent. `.7z` and `.rar` stay a regular file.
 - Files you send are kept for 7 days (`FILES_KEEP_DAYS`).
+- Uploads are handled one at a time: if the agent is busy, the extra file is deleted and you get a “busy” message.
+- The space for uploads can be limited with `UPLOADS_QUOTA_MB`.
 
 ### Files from the agent {#files-from-agent}
 
@@ -450,7 +454,11 @@ Everything you write to the bot or send it as a file goes to the agent, and ther
 - **“⬆️ Upload file”.** The next file or album you send is saved to the open project folder under its own name, and the message with it is deleted from the chat. The wait is one-off and expires in 10 minutes.
 - **Deleting** — from the file card, with a confirmation. An existing file is replaced only after a “Replace?” question.
 
+Pending secret input is stored in the database: after a bot restart, the old message with the token is not accepted — you need to press the button again.
+
 Without pressing a button, everything works as before: files and images sent to the chat go to the agent.
+
+At the “Read” level, agent settings folders (`.claude`, `.gemini`, `.codex`, `.opencode`, `opencode.json`) are hidden in `/files`; regular files, `.env` and cloning stay available as before.
 
 Who can change files: the administrator; a teammate — in their personal workspace, and in a shared root — with the “Standard” or “Full” level. Anyone can view the list. The bot does not write or delete outside the project folder and does not follow links.
 
@@ -609,7 +617,7 @@ The administrator’s mode can be changed in `.env`: `ACP_MODE`, `CLAUDE_ADMIN_M
 ### A teammate’s agents and models {#team-engines}
 
 - **Agents.** A new teammate has only the default agent; the administrator turns on the others with toggles on the teammate’s card. The default agent cannot be turned off. If you take away the agent a teammate is working in, their session is closed and they move to the default agent.
-- **Models.** “🧠 Employee models” → agent → model toggles. All models are allowed by default. When models are restricted, the “Auto” option is unavailable: the teammate works in the allowed model they selected or in the first of the allowed ones.
+- **Models.** “🧠 Employee models” → agent → model toggles. All models are allowed by default. When models are restricted, the “Auto” option is unavailable: the teammate works in the allowed model they selected or in the first of the allowed ones. If the agent actually used a model outside the allowed list, the request is stopped and the session is closed with a clear message.
 - The administrator has access to all agents and models.
 
 ### Active sessions and limits {#team-limits}
@@ -670,8 +678,8 @@ What else matters:
 - **Everyone has their own agent settings.** Each teammate has a home folder of their own, so session history, settings and agent sign-ins are separate for everyone.
 - **The agent must work without a subscription sign-in.** A sign-in saved in the home folder of the bot’s account (`codex login`, Google sign-in, a Claude subscription) is not visible in the sandbox. OpenCode on free models works with no keys at all; the other agents use an API key from `.env`.
 - **The “Full” level becomes safer.** The agent asks for no permissions, but can change only its teammate’s workspace.
-- **The administrator works without the sandbox.**
-- **Startup check.** The bot checks that bubblewrap runs, that the bot’s secrets are not visible from inside, and that the agents start in the sandbox. If the sandbox or the default agent does not work, the bot does not start and writes the reason. The other agents that did not start in the sandbox are not offered to teammates.
+- **The administrator works without the sandbox** unless `ADMIN_SANDBOX=1` is set. With it, the administrator’s agent is also isolated in folders inside `PROJECTS_ROOT`: a teammate cannot leave an agent config file in a shared folder that would run with the bot’s rights. The bot tells the administrator once in the chat when teammates have no sandbox, when the administrator works without one in a shared folder, or when `.env` is readable by local user groups on Windows.
+- **Startup check.** The bot checks that bubblewrap runs, that the bot’s secrets are not visible from inside, and that the agents start in the sandbox. If the sandbox or the default agent does not work, the bot does not start and writes the reason. The other agents that did not start in the sandbox are not offered to teammates. Without `PROJECTS_ROOT`, the bot with `AGENT_SANDBOX=bwrap` does not start; the bot’s data folders and other teammates’ folders are not mounted into the sandbox.
 - **The agent is installed in a non-standard place** — add its folder to `SANDBOX_RO_PATHS`.
 - **Sessions started before the sandbox was turned on** are not resumed in it.
 - **Windows, macOS, Docker.** There is no sandbox there. With the `AGENT_SANDBOX` setting, the bot does not start on Windows and macOS rather than silently working without isolation.
@@ -723,9 +731,10 @@ The `.env` file contains the token and keys: do not commit it or send it to anyo
 | `AGY_COMMAND` | full path to Antigravity CLI (`agy` by default) |
 | `OPENCODE_COMMAND` | full path to OpenCode (`opencode` by default) |
 | `ACP_MODE`, `CLAUDE_ADMIN_MODE`, `AGY_ADMIN_MODE`, `CODEX_ADMIN_MODE`, `OPENCODE_ADMIN_MODE` | the mode of each agent for the administrator (see [access levels](#access-levels)) |
+| `AGENT_ENV_HIDE`, `AGENT_ENV_PASS` | extra environment variables to hide from the agent or, respectively, to pass through (comma-separated lists) |
 | `AGENT_START_TIMEOUT` | how many seconds to wait for the agent to start (120 by default) |
 
-Of the API keys, the agent process gets only the keys of its own agent: Claude Code — `ANTHROPIC_API_KEY`, Codex — `OPENAI_API_KEY`, Gemini CLI and Antigravity CLI — the Google keys, OpenCode — all of them. The bot token is not passed to the agent.
+Of the API keys, the agent process gets only the keys of its own agent: Claude Code — `ANTHROPIC_API_KEY`, Codex — `OPENAI_API_KEY`, Gemini CLI and Antigravity CLI — the Google keys, OpenCode — all of them. The bot token is not passed to the agent. In the sandbox, only a minimal set of system variables and the agent’s keys are passed.
 
 ### Projects and team {#env-team}
 
@@ -734,6 +743,7 @@ Of the API keys, the agent process gets only the keys of its own agent: Claude C
 | `PROJECTS_ROOT` | the projects root: the agent chooses a working folder only inside it. Without it — any folder on the machine |
 | `USER_WORKSPACES` | `1` — personal workspaces: each teammate has a folder of their own, `<root>/<Telegram ID>`. Requires `PROJECTS_ROOT` |
 | `AGENT_SANDBOX` | `bwrap` — the agent sandbox (Linux only, needs the `bubblewrap` package) |
+| `ADMIN_SANDBOX` | `1` — sandbox the administrator too in folders inside `PROJECTS_ROOT` (only with `AGENT_SANDBOX=bwrap`; off by default) |
 | `SANDBOX_RO_PATHS` | extra folders the sandbox can read, separated by colons |
 | `BWRAP_COMMAND` | path to `bwrap` if it is not in `PATH` |
 | `MAX_AGENTS` | how many teammate agents run at the same time (3 by default) |
@@ -759,6 +769,10 @@ Of the API keys, the agent process gets only the keys of its own agent: Claude C
 |---|---|
 | `FILES_DIR` | the folder for received and outgoing files (the bot’s data folder by default) |
 | `FILES_KEEP_DAYS` | how many days to keep those files (7 by default) |
+| `UPLOADS_QUOTA_MB` | quota for the uploads folder in MB; `0` (default) means no quota |
+| `TURN_IDLE_MINUTES` | stop a request when the agent sends no updates for this many minutes; `0` (default) disables the timer |
+| `HISTORY_KEEP_DAYS` | delete request history and closed sessions older than this many days; `0` (default) keeps everything |
+| `LOGS_KEEP` | delete `data/debug.log.N` archives older than this many days; `0` (default) keeps everything |
 | `WIDGETS` | `1` — show `/model` and `/sessions` as Telegram widgets. Off by default: Telegram does not accept widgets from regular bots yet |
 | `ANIMATED_ICONS` | `0` — regular emoji instead of animated icons in the draft |
 | `ACPGRAM_DEBUG` | `1` — a detailed log of what is sent to Telegram, in `data/debug.log` |
@@ -772,6 +786,8 @@ Of the API keys, the agent process gets only the keys of its own agent: Claude C
 - **Without the sandbox, the agent runs with the rights of the bot’s account.** The project’s working folder does not stop it from reading and writing outside that folder, and it can read files on disk, including the bot’s `.env`. On Linux the [sandbox](#sandbox) closes this gap; on any system Docker does.
 - **The agent does not get the bot token**, and of the API keys it gets only the keys of its own agent.
 - **The agent’s text cannot press a button for you.** The bot builds the button markup; button tags in the agent’s text are neutralized.
+- **The bot names unsafe combinations itself.** It tells the administrator once in the chat when teammates have no sandbox, when the administrator works without one in a shared folder, or when `.env` is readable by local user groups on Windows.
+- **The data folder is protected.** On Linux and macOS, the data folder and the database are created with restricted permissions; on Windows, the wizard removes broad permissions from `.env` and `data`.
 
 ### Secrets {#security-secrets}
 
@@ -794,7 +810,7 @@ How to report a vulnerability is described in the [security policy](https://gith
 ### Recommendations {#security-tips}
 
 - Run the bot under a separate account, not under your main one.
-- On a shared server, set `PROJECTS_ROOT`, turn on personal workspaces and, on Linux, the sandbox.
+- On a shared server, set `PROJECTS_ROOT`, turn on personal workspaces and the sandbox, and, on Linux, enable `ADMIN_SANDBOX=1` for the administrator if needed.
 - Give the “Full” level only to people you trust.
 - Set a spending limit on API keys at the provider.
 - Keep the bot updated: new versions also bring security fixes.

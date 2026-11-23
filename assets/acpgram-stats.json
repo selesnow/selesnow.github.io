@@ -1,12 +1,12 @@
 {
-  "updated": "2026-11-23T17:13:35+00:00",
+  "updated": "2026-11-23T21:24:28+00:00",
   "github": {
     "stars": 18,
     "forks": 0,
     "clones": {
-      "last14d": 873,
-      "uniques14d": 239,
-      "total": 873,
+      "last14d": 1216,
+      "uniques14d": 324,
+      "total": 1216,
       "history": [
         {
           "date": "2026-10-30",
@@ -112,26 +112,41 @@
           "date": "2026-11-19",
           "count": 109,
           "uniques": 56
+        },
+        {
+          "date": "2026-11-20",
+          "count": 163,
+          "uniques": 44
+        },
+        {
+          "date": "2026-11-21",
+          "count": 72,
+          "uniques": 33
+        },
+        {
+          "date": "2026-11-22",
+          "count": 108,
+          "uniques": 41
         }
       ],
       "since": "2026-10-30"
     },
     "releases": {
-      "downloads": 308,
-      "count": 42
+      "downloads": 315,
+      "count": 43
     }
   },
   "npm": {
-    "version": "1.31.8",
+    "version": "1.32.1",
     "last30d": 5430,
     "total": 5430
   },
   "sourcesUpdated": {
-    "github": "2026-11-23T17:13:33+00:00",
-    "npmMonth": "2026-11-23T17:13:34+00:00",
-    "npmTotal": "2026-11-23T17:13:34+00:00",
-    "clones": "2026-11-21T08:33:07+00:00",
-    "releases": "2026-11-23T17:13:35+00:00"
+    "github": "2026-11-23T21:24:26+00:00",
+    "npmMonth": "2026-11-23T21:24:26+00:00",
+    "npmTotal": "2026-11-23T21:24:27+00:00",
+    "clones": "2026-11-23T21:24:28+00:00",
+    "releases": "2026-11-23T21:24:28+00:00"
   },
-  "downloadsTotal": 5738
+  "downloadsTotal": 5745
 }
