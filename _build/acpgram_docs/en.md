@@ -121,7 +121,7 @@ npm install -g acpgram
 acpgram setup
 ```
 
-> On Windows, NSSM is only needed for the service. The one-command installer sets it up by itself; with npm, run `winget install --id NSSM.NSSM -e`. NSSM is not needed to run the bot in a console.
+> On Windows, NSSM is only needed for the service. The one-command installer sets it up by itself; `ACPGRAM_NO_NSSM=1` skips that installation. With npm, run `winget install --id NSSM.NSSM -e`. NSSM is not needed to run the bot in a console.
 
 > On Windows, PowerShell may say that running scripts is disabled on this system and refuse to start `npm` or `acpgram`. The one-command fix: [Windows: "running scripts is disabled"](#powershell-scripts).
 
@@ -182,7 +182,7 @@ npm install -g acpgram@latest
 acpgram service restart
 ```
 
-Settings and session history are kept.
+The installer and `acpgram update` download the latest public GitHub release, not the `main` branch. Settings and session history are kept.
 
 ### Docker {#docker}
 
@@ -278,6 +278,8 @@ While the agent is working, the bot shows a draft message:
 {{shot: progress-2 | The same draft at another moment: a step the agent has already completed}}
 
 The final answer arrives formatted: headings, lists, tables, code blocks. At the end there is a collapsed “Work log” block with all the steps and a footer: the agent, the actual model, the reasoning level, tokens, cost (for Claude Code and OpenCode), the project and the response time.
+
+If Telegram fails to accept the final message temporarily, the bot retries; if formatting fails, it sends plain text. If the bot restarts while the agent is working, the request is marked as interrupted: you get a clear message instead of silence.
 
 {{shot: answer | The agent’s final answer: text, the collapsed work log and a footer with the model, tokens, cost, project and time}}
 
@@ -475,6 +477,8 @@ You can send the bot a photo or a file (text, PDF, spreadsheet and so on, up to 
 
 The agent can create a file and send it to the chat: a report, a spreadsheet, a picture, an archive. Just ask: “send the result as a file”. The file appears right in the answer: JPEG and PNG as an image, everything else as a document.
 
+Agent output is limited: one output line is up to 32 MB, and the final answer is additionally limited by size and number of steps. Large file lists are read asynchronously and do not block the bot.
+
 {{shot: files-from-agent | The agent’s answer with an image it created and sent to the chat}}
 
 Only files from the project folder and from the bot’s outgoing files folder are sent. Files with secrets (`.env`, keys, the bot’s database and logs, the `.git` folder) are not sent to the chat.
@@ -645,8 +649,8 @@ You can install AcpGram on a shared server and give access to colleagues, includ
 
 By default the bot answers only the main administrator (the `ALLOWED_USER_ID` setting). Others are added in two ways:
 
-- **Invitation.** `/invite` asks for the access level and creates a one-time link that is valid for 24 hours.
-- **Access request.** The person writes to the bot, and the administrator gets a request and approves or rejects it with buttons. A request is sent no more than once an hour; the bot ignores those who were rejected.
+- **Invitation.** `/invite` asks for the access level and creates a one-time link that is valid for 24 hours. The `/start` code works immediately, even if the invited person has just sent a regular message to the bot.
+- **Access request.** The person writes to the bot, and the administrator gets a separate request and approves or rejects it with buttons. Requests from different people arrive independently; repeats from one person do not flood the chat — the next request can be sent after an hour. The bot ignores those who were rejected.
 
 {{shot: invite | The /invite command: choosing the access level for the invitation}}
 
@@ -768,6 +772,8 @@ The bot speaks Russian, Ukrainian or English, following the language of your Tel
 
 The `acpgram` commands in the terminal (setup wizard, service, update) use the system language: Russian, Ukrainian, and English in all other cases. You can set the language with the `ACPGRAM_LANG` setting.
 
+The bot’s error messages — agent checks, timeouts, Git exit codes, sign-in with a link and a code, the sandbox, and `acpgram` errors — are translated into en, ru and uk too.
+
 ## Settings: the .env file {#env}
 
 All settings live in the `.env` file in the bot’s data folder: `~/.acpgram` when installed through npm, `%LOCALAPPDATA%\acpgram` or `~/.local/share/acpgram` when installed with the installer, and the repository root when running from source. The wizard (`acpgram setup`) writes most of the values. After editing the file manually, restart the service: `acpgram service restart`.
@@ -784,12 +790,14 @@ The `.env` file contains the token and keys: do not commit it or send it to anyo
 | `DEFAULT_LANG` | the bot language when the user’s Telegram language is not Russian, Ukrainian or English: `en` (default), `ru` or `uk` |
 | `ACPGRAM_LANG` | the language of the `acpgram` commands in the terminal: `ru`, `uk` or `en`. Usually not needed: the language is taken from the system |
 | `ACPGRAM_HOME` | the data folder when installed through npm (`~/.acpgram` by default) |
+| `NSSM_PATH` | full path to `nssm.exe` (Windows only): needed to install and restart the service when NSSM is not in `PATH`; otherwise the bot looks for a private `bin\nssm.exe` and `PATH` |
 
 ### Agents and keys {#env-engines}
 
 | Variable | Description |
 |---|---|
 | `GEMINI_API_KEY` | Gemini API key. Not needed if Gemini CLI is already authorized |
+| `GOOGLE_API_KEY` | an alternative Google key for Google provider models in OpenCode (instead of `GEMINI_API_KEY`); the bot passes it to the OpenCode process as `GOOGLE_GENERATIVE_AI_API_KEY` |
 | `ANTHROPIC_API_KEY` | Anthropic API key for Claude Code (API billing instead of a subscription) |
 | `OPENAI_API_KEY` | OpenAI API key for Codex and for OpenAI models in OpenCode |
 | `OPENROUTER_API_KEY`, `GROQ_API_KEY`, `DEEPSEEK_API_KEY`, `MISTRAL_API_KEY` | provider keys for OpenCode: each adds a group of models to `/model`. Other OpenCode providers work too, with their own variables |
@@ -850,6 +858,8 @@ Of the API keys, the agent process gets only the keys of its own agent: Claude C
 ### What the agent sees and can do {#security-agent}
 
 - **The bot answers only those you gave access to.** It does not answer anyone else.
+- **Errors do not reveal server paths.** Paths are masked in messages; details stay in the log only.
+- **Frequent notices do not get in the way.** Repeated messages from strangers and administrator notifications are throttled.
 - **Your data stays with you.** Code, settings and session history live on the machine with the bot, in a local SQLite database. AcpGram has no servers of its own. Messages pass through Telegram, and requests are processed by the provider of the selected agent.
 - **Without the sandbox, the agent runs with the rights of the bot’s account.** The project’s working folder does not stop it from reading and writing outside that folder, and it can read files on disk, including the bot’s `.env`. On Linux the [sandbox](#sandbox) closes this gap; on any system Docker does.
 - **The agent does not get the bot token**, and of the API keys it gets only the keys of its own agent.
@@ -899,8 +909,9 @@ How to report a vulnerability is described in the [security policy](https://gith
 | `/sessions` | everyone | past sessions of the current project and returning to the selected one |
 | `/stop` | everyone | stop the running request |
 | `/close`, `/exit` | everyone | close the session and unload the agent process |
-| `/topics` | everyone | dialogs mode: “Dialogs” or “One chat” |
+| `/topics` | everyone | dialogs mode when Telegram topics are enabled: “Dialogs” or “One chat” |
 | `/language` | everyone | interface language |
+| `/help` | everyone | a short guide to commands and buttons |
 | `/users` | administrator | teammates: level, agents, models, ending the session, revoking access |
 | `/invite` | administrator | a one-time invitation link valid for 24 hours |
 | `/active` | administrator | active sessions and buttons to end them |
@@ -958,7 +969,7 @@ If you cannot change this setting, add `.cmd` to the commands: `npm.cmd install 
 
 **An agent is not found under the service.** Under a service, global npm packages are often not in `PATH`. Run `acpgram setup` again (the wizard writes the full paths) or set the path in `GEMINI_COMMAND`, `CLAUDE_COMMAND`, `CODEX_COMMAND`, `AGY_COMMAND` or `OPENCODE_COMMAND`.
 
-**The service does not start on Windows.** The service needs the account password, not the Windows PIN. Run `acpgram service install` from an administrator terminal and enter the password. If NSSM is not found: the one-command installer sets it up by itself; with npm, run `winget install --id NSSM.NSSM -e`. NSSM is not needed for console runs.
+**The service does not start on Windows.** The service needs the account password, not the Windows PIN. Run `acpgram service install` from an administrator terminal and enter the password. If NSSM is not found: the one-command installer sets it up by itself; with npm, run `winget install --id NSSM.NSSM -e`. If the utility is in a non-standard location, set `NSSM_PATH`. NSSM is not needed for console runs.
 
 **A new provider key did not add models.** Restart the service or open `/model`: the bot updates the model list.
 
