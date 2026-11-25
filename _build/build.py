@@ -91,8 +91,8 @@ PERSON = {
     'image': f'{SITE}/photo.jpg',
     'email': 'mailto:me@alexey-seleznev.pro',
     'jobTitle': 'Head of Analytics',
-    'worksFor': {'@type': 'Organization', 'name': 'Netpeak Group'},
-    'description': 'Head of Analytics at Netpeak Group, author of open source R packages, free R courses and the R4marketing project.',
+    'worksFor': {'@type': 'Organization', 'name': 'Fractal (ex. Netpeak Group)'},
+    'description': 'Head of Analytics at Fractal (ex. Netpeak Group), author of open source R packages, free R courses and the R4marketing project.',
     'knowsAbout': ['R', 'Data analytics', 'Marketing analytics', 'Web analytics', 'Business intelligence',
                    'Google BigQuery', 'Power BI', 'API integration', 'LLM tools'],
     'sameAs': [
@@ -372,9 +372,9 @@ def footer(prefix='../'):
         f'<li><div class="text-[11px] uppercase tracking-widest text-slate-600 font-bold mb-1">{label}</div>'
         f'<a href="{href}"{"" if href.startswith("mailto") else new_tab} class="text-sm text-slate-300 {hover} transition-colors break-all">{text}</a></li>'
         for label, href, text, hover in contacts)
-    tagline = T('Head of Analytics в Netpeak Group. Автор open source R-пакетов, бесплатных курсов по R и проекта R4marketing.',
-                'Head of Analytics у Netpeak Group. Автор open source R-пакетів, безкоштовних курсів з R та проєкту R4marketing.',
-                'Head of Analytics at Netpeak Group. Author of open source R packages, free R courses and the R4marketing project.')
+    tagline = T('Head of Analytics в Fractal (ex. Netpeak Group). Автор open source R-пакетов, бесплатных курсов по R и проекта R4marketing.',
+                'Head of Analytics у Fractal (ex. Netpeak Group). Автор open source R-пакетів, безкоштовних курсів з R та проєкту R4marketing.',
+                'Head of Analytics at Fractal (ex. Netpeak Group). Author of open source R packages, free R courses and the R4marketing project.')
     to_top = "window.scrollTo({top: 0, behavior: 'smooth'}); return false;"
     return f'''
     <!-- FOOTER -->
