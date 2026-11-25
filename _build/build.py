@@ -739,11 +739,15 @@ def build_courses():
                     <p class="text-slate-400 text-sm leading-relaxed">{T('Автор и лектор онлайн-курса для платформы NeedForData: методичка, видеолекции и практические задания по автоматизации маркетинговой аналитики на R.', 'Автор і лектор онлайн-курсу для платформи NeedForData: методичка, відеолекції та практичні завдання з автоматизації маркетингової аналітики на R.', 'Author and lecturer of the online course for NeedForData: a handbook, video lectures and hands-on tasks on automating marketing analytics with R.')}</p>
                 </div>
             </a>
-            <div class="bento-glass p-8 rounded-3xl">
-                <div class="bento-content">
+            <div class="bento-glass p-8 rounded-3xl flex flex-col">
+                <div class="bento-content flex flex-col h-full">
                     <div class="text-xs font-mono font-bold uppercase tracking-widest text-blue-400 mb-3">WebPromoExperts</div>
                     <h3 class="text-2xl font-bold text-white outfit-font mb-3">{T('«Веб-аналитика PRO»', '«Веб-аналітика PRO»', '“Web Analytics PRO”')}</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">{T('Соавтор программы и лектор продвинутого курса по веб-аналитике в академии WebPromoExperts.', 'Співавтор програми та лектор просунутого курсу з веб-аналітики в академії WebPromoExperts.', 'Co-author and lecturer of the advanced web analytics course at the WebPromoExperts Academy.')}</p>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-5">{T('Соавтор программы и лектор продвинутого курса по веб-аналитике в академии WebPromoExperts.', 'Співавтор програми та лектор просунутого курсу з веб-аналітики в академії WebPromoExperts.', 'Co-author and lecturer of the advanced web analytics course at the WebPromoExperts Academy.')}</p>
+                    <div class="mt-auto flex flex-wrap gap-3">
+                        <a href="https://webpromoexperts.net/ua/blog/analitika-dlya-onlain-biznesa/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold bg-purple-500/15 border border-purple-500/40 text-purple-200 hover:bg-purple-500 hover:text-white transition-all"><i class="fa-solid fa-arrow-up-right-from-square"></i> {T('О курсе', 'Про курс', 'About the course')}</a>
+                        <a href="https://webpromoexperts.net/ua/lectors/aleksej-seleznev/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold bg-slate-900/70 border border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-slate-800 transition-all"><i class="fa-solid fa-chalkboard-user"></i> {T('Страница лектора', 'Сторінка лектора', 'Lecturer profile')}</a>
+                    </div>
                 </div>
             </div>
         </div>
