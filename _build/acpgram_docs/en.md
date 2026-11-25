@@ -94,7 +94,7 @@ Instead of signing in, you can work with a Gemini API key: set `GEMINI_API_KEY` 
 
 Open [@BotFather](https://t.me/BotFather), send `/newbot` (or tap “Create a New Bot” in its window), choose a name and copy the token it sends you. This takes a minute.
 
-If you want to run several tasks in parallel, turn on topics for the bot in the @BotFather settings: each chat topic then becomes a separate dialog with the agent (see [“Dialogs” mode](#topics)).
+You do not have to turn on topics in `@BotFather` manually: the setup wizard and `/topics` can enable private chat topics with a sidebar and disallow adding the bot to groups by themselves (see [“Dialogs” mode](#topics)).
 
 {{shot: botfather | The @BotFather window with the “Create a New Bot” button}}
 
@@ -131,14 +131,15 @@ With this kind of installation, the settings (`.env`) and the database (`data/bo
 
 The wizard starts by itself after installation. You can run it again with the `acpgram setup` command: the current values are filled in.
 
-1. **Bot token.** The wizard checks it with Telegram right away and shows the bot’s name.
-2. **Administrator.** Send your bot any message — the wizard detects your Telegram ID by itself. You can also enter the ID manually.
-3. **Projects root** — optional. If you set it, the wizard also asks about [personal workspaces](#workspaces).
-4. **Sandbox** — only on Linux and only if `bubblewrap` is installed (see [agent sandbox](#sandbox)). The wizard also offers to enable `ADMIN_SANDBOX=1` to sandbox the administrator’s agent.
-5. **Agents.** The wizard finds the installed agents, writes down their full paths (so that they are also found under the service) and offers to choose the default agent. If none is installed, it offers to install OpenCode right away.
-6. **API keys** — optional. The token, keys and password are entered hidden.
-7. **Saving.** The wizard writes `.env` (readable only by the owner), creates the database and sends you a test message in Telegram.
-8. **Service.** The wizard offers to register the bot as a service so that it starts together with the system.
+1. **Bot token.** The wizard checks it with Telegram right away and shows the bot’s name (falling back to an active username if the primary username is disabled).
+2. **Telegram bot settings.** If topics, the topic sidebar or group restrictions are not configured yet, the wizard offers to apply the recommended settings in one step — without opening `@BotFather`.
+3. **Administrator.** Send your bot any message — the wizard detects your Telegram ID by itself. You can also enter the ID manually.
+4. **Projects root** — optional. If you set it, the wizard also asks about [personal workspaces](#workspaces).
+5. **Sandbox** — only on Linux and only if `bubblewrap` is installed (see [agent sandbox](#sandbox)). The wizard also offers to enable `ADMIN_SANDBOX=1` to sandbox the administrator’s agent.
+6. **Agents.** The wizard finds the installed agents, writes down their full paths (so that they are also found under the service) and offers to choose the default agent. If none is installed, it offers to install OpenCode right away.
+7. **API keys** — optional. The token, keys and password are entered hidden.
+8. **Saving.** The wizard writes `.env` (readable only by the owner, with `GIT_AGENT_AUTH=1` by default for new installations), creates the database and sends you a test message in Telegram.
+9. **Service.** The wizard offers to register the bot as a service so that it starts together with the system.
 
 {{shot: setup-wizard | The AcpGram setup wizard in the terminal}}
 
@@ -319,7 +320,7 @@ When the agent needs permission for a command or a file edit, the bot sends a re
 - **“Allow for this session”** — this action and the same kind of actions until the end of the session;
 - **“Reject”**.
 
-A command is shown as a code block, and a file edit request shows the diff: exactly what the agent will change, not just the path.
+A command is shown as a code block, and a file edit request shows the diff: exactly what the agent will change, not just the path. Long commands and multi-line diffs collapse into an expandable quote with a preview of the beginning, keeping the action buttons immediately visible on screen.
 
 {{shot: permission | A permission request for a command: the command in a code block and the “Allow”, “For this session: this exact command” and “Reject” buttons}}
 
@@ -411,13 +412,15 @@ A session is resumed in the agent it was created in. Changing the agent with the
 
 ### “Dialogs” mode: Telegram topics {#topics}
 
-If topics are turned on for the bot in the private chat (in the @BotFather settings), each chat topic becomes a separate dialog with the agent, with its own project, agent and history.
+If topics are turned on for the bot in the private chat, each chat topic becomes a separate dialog with the agent, with its own project, agent and history.
 
+- The administrator can enable or disable topics, the topic sidebar (a convenient sidebar listing all dialogs), user topic creation and group join restrictions right in `/topics` or during `acpgram setup` — without opening `@BotFather`. `/topics` is always available in the administrator’s command menu.
 - You can work in several topics at the same time.
 - When you come back to a topic later, you continue from the same place: the session is resumed by itself.
 - `/new` creates a new topic. The agent names it after the first answer, with a short project name at the beginning.
+- The agent can also create a new topic on your request (“create a separate topic for …”): the bot opens the topic with the current project, agent and reply keyboard and sends a link button.
 - A topic is bound to its project.
-- General works as a regular dialog, and `/project` in it shows the dialogs of the selected project as buttons.
+- General works as a regular dialog, and `/project` in it shows the dialogs of the selected project as buttons. If you send a command from the chat list (when Telegram automatically starts an empty topic for it), the bot runs it in General and deletes the empty topic.
 
 {{shot: topics | The chat with the bot in Dialogs mode: the list of topics on the left, each topic a separate dialog with the agent}}
 
@@ -579,7 +582,7 @@ The commit author is the owner of the connected account: their name and email ar
 
 ### Changes and the diff {#git-changes}
 
-“📋 Changes” opens the list of changed files with marks (new, modified, deleted, renamed) and the number of added and removed lines. Pressing a file shows what changed in it: short changes right in the message, long ones as a file.
+“📋 Changes” opens the list of changed files with marks (new, modified, deleted, renamed) and the number of added and removed lines. Pressing a file shows what changed in it: short changes appear directly in the message, medium and longer ones (up to 8,000 characters) open in a collapsible code block inside the same message, and very large ones arrive as a `.diff` file.
 
 {{shot: git-changes | The list of changed files with the number of added and removed lines}}
 
@@ -629,19 +632,19 @@ On the main branch and when there are commits not pushed yet, the bot explains w
 
 ### When the agent offers to push {#git-agent}
 
-By default the agent has no sign-in for the server. So it handles a “commit and push” request like this: it makes the commit, and a push button appears under its answer. Nothing goes to the server until you press it.
+When `GIT_AGENT_AUTH=0` is set, the agent has no sign-in for the server. It handles a “commit and push” request like this: it makes the commit, and a push button appears under its answer. Nothing goes to the server until you press it.
 
 {{shot: git-offer | The agent’s answer with a button for pushing the changes to the server}}
 
 ### Where the sign-in is stored and how git is run {#git-security}
 
-By default the sign-in is stored only in the bot’s database. The bot does the cloning, pulling and pushing, while the agent works with the repository locally: it checks the status, compares, commits, creates branches and merges.
+With `GIT_AGENT_AUTH=0`, the sign-in is stored only in the bot’s database. The bot does the cloning, pulling and pushing, while the agent works with the repository locally: it checks the status, compares, commits, creates branches and merges.
 
 - The sign-in is passed to the `git` process through its environment for the duration of the operation and only for the addresses of its own service. It is not written to the repository settings or the address.
 - The bot runs `git` with hooks and credential helpers turned off, without the global and system config (on Linux and macOS), and, when the sandbox is on, inside the same teammate’s sandbox.
 - On “Save and push”, files with secrets (`.env`, keys, credentials) are left out of the commit and appended to `.gitignore`. If the agent committed such a file, the bot warns you before pushing and waits for “Push anyway”.
 
-The administrator can choose another mode: `GIT_AGENT_AUTH=1`. The sign-in is then also passed to the agent process, and the agent pulls and pushes changes by itself. This is more convenient, but the token becomes visible to the agent and may end up in a model request. Turn this mode on only if you trust the models your teammates work with.
+For new installations, the setup wizard and `.env.example` write `GIT_AGENT_AUTH=1` by default: the sign-in is also passed to the agent process so it can pull and push changes without extra buttons. This is more convenient, but the token becomes visible to the agent and may end up in a model request. If you do not trust the models your teammates work with, set `GIT_AGENT_AUTH=0`.
 
 ### Limitations {#git-limits}
 
@@ -655,9 +658,10 @@ You can install AcpGram on a shared server and give access to colleagues, includ
 
 ### How to add a person {#team-invite}
 
-By default the bot answers only the main administrator (the `ALLOWED_USER_ID` setting). Others are added in two ways:
+By default the bot answers only the main administrator (the `ALLOWED_USER_ID` setting). Others are added in three ways:
 
-- **Invitation.** `/invite` asks for the access level and creates a one-time link that is valid for 24 hours. The `/start` code works immediately, even if the invited person has just sent a regular message to the bot.
+- **One-time link.** `/invite` asks for the access level and creates a one-time link that is valid for 24 hours. The `/start` code works immediately, even if the invited person has just sent a regular message to the bot.
+- **Invite from contacts (up to 10 at once).** Along with the link, `/invite` shows a “👥 Invite from contacts (up to 10)” button (`https://t.me/botinvite/<bot>`, for the bot owner). Everyone added within the next 15 minutes immediately gets that access level and a welcome message from the bot. If the owner invites someone directly via this link outside `/invite`, the bot sends the administrator a level-selection card instead of showing “no access” to the invited person.
 - **Access request.** The person writes to the bot, and the administrator gets a separate request and approves or rejects it with buttons. Requests from different people arrive independently; repeats from one person do not flood the chat — the next request can be sent after an hour. The bot ignores those who were rejected.
 
 {{shot: invite | The /invite command: choosing the access level for the invitation}}
@@ -842,7 +846,7 @@ Of the API keys, the agent process gets only the keys of its own agent: Claude C
 | Variable | Description |
 |---|---|
 | `GIT_COMMAND` | path to `git` if it is not in `PATH` |
-| `GIT_AGENT_AUTH` | `1` — the Git sign-in is also passed to agents: they pull and push changes by themselves, but the tokens are visible to them. By default only the bot has the sign-in |
+| `GIT_AGENT_AUTH` | `1` — the Git sign-in is also passed to agents (written by default in new setups and `.env.example`): they pull and push changes by themselves, but the tokens are visible to them. `0` — only the bot has the sign-in |
 | `GITLAB_URL`, `GITHUB_URL` | the address of your own GitLab and your own GitHub Enterprise. Optional: the administrator can also add servers in the bot itself |
 | `GITLAB_NAME`, `GITHUB_NAME` | the names of your own servers on the buttons |
 | `GITHUB_CLIENT_ID`, `GITLAB_CLIENT_ID` | identifiers of your own applications for sign-in with a link and a code; `0` turns that sign-in off for the service. By default — the AcpGram applications |
@@ -917,12 +921,12 @@ How to report a vulnerability is described in the [security policy](https://gith
 | `/sessions` | everyone | past sessions of the current project and returning to the selected one |
 | `/stop` | everyone | stop the running request |
 | `/close`, `/exit` | everyone | close the session and unload the agent process |
-| `/topics` | everyone | dialogs mode when Telegram topics are enabled: “Dialogs” or “One chat” |
+| `/topics` | everyone | dialogs mode (“Dialogs” or “One chat”); for the administrator — also bot topic, sidebar and group settings |
 | `/language` | everyone | interface language |
 | `/keyboard` | everyone | show the button menu if the keyboard is hidden |
 | `/help` | everyone | a short guide to commands and buttons |
 | `/users` | administrator | teammates: level, agents, models, ending the session, revoking access |
-| `/invite` | administrator | a one-time invitation link valid for 24 hours |
+| `/invite` | administrator | one-time invite link (24 h) and invite-from-contacts button (up to 10 via `t.me/botinvite`) |
 | `/active` | administrator | active sessions and buttons to end them |
 | `/usage` | administrator | requests, tokens and cost by teammate over 24 hours, 7 and 30 days |
 
@@ -957,8 +961,7 @@ At startup the bot checks the settings. If the token or the administrator ID is 
 
 ### Windows: "running scripts is disabled" {#powershell-scripts}
 
-In PowerShell, `npm` or `acpgram` fails with "File …
-pm.ps1 cannot be loaded because running scripts is disabled on this system". It usually happens while installing an agent or AcpGram itself through npm.
+In PowerShell, `npm` or `acpgram` fails with "File …\npm.ps1 cannot be loaded because running scripts is disabled on this system". It usually happens while installing an agent or AcpGram itself through npm.
 
 PowerShell blocks scripts by default, and in it `npm` and `acpgram` run as the scripts `npm.ps1` and `acpgram.ps1`. Allow scripts for your account (administrator rights are not needed) and repeat the command:
 
