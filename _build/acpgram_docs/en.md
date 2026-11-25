@@ -253,7 +253,15 @@ The `/start` command shows what you are currently working with: the agent, model
 
 {{shot: start | The /start screen: agent, model, access level, project and action buttons}}
 
-The buttons repeat the commands: project, new session, past sessions, agent, model, ending the session, files, Git, language, dialogs mode. The administrator also has teammates, invitation and active sessions.
+The buttons repeat the commands: project, new session, past sessions, agent, model, ending the session, files, Git, language, dialogs mode. The administrator also has teammates, invitation and active sessions. You can bring back the hidden keyboard with `/keyboard` (see the [button menu](#reply-keyboard)).
+
+### Button menu and /keyboard {#reply-keyboard}
+
+The `/start` command attaches the keyboard with the main actions once and remembers that. Later greetings and `/language` do not change it, so the menu does not pop up every time you return to the chat.
+
+If the keyboard is hidden or has disappeared, send `/keyboard`. In [“Dialogs” mode](#topics), it is attached by itself in every new topic together with the greeting.
+
+When the keyboard is attached, Telegram expands it in the chat. You can hide it with Telegram’s keyboard icon in the input field and open it from there; the bot has no separate “Hide menu” button. On some Android clients with topics, the keyboard may appear only inside a topic, not in General: that is a client limitation, the bot sends it correctly.
 
 ### How to give a task {#first-task}
 
@@ -911,6 +919,7 @@ How to report a vulnerability is described in the [security policy](https://gith
 | `/close`, `/exit` | everyone | close the session and unload the agent process |
 | `/topics` | everyone | dialogs mode when Telegram topics are enabled: “Dialogs” or “One chat” |
 | `/language` | everyone | interface language |
+| `/keyboard` | everyone | show the button menu if the keyboard is hidden |
 | `/help` | everyone | a short guide to commands and buttons |
 | `/users` | administrator | teammates: level, agents, models, ending the session, revoking access |
 | `/invite` | administrator | a one-time invitation link valid for 24 hours |
