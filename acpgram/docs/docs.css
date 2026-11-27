@@ -4,30 +4,32 @@
 /* The site hides horizontal overflow on both <html> and <body>, which turns <body> into a scroll container
    that never scrolls — and position:sticky then never sticks. `clip` hides the overflow without that side effect. */
 body.acpgram-docs{overflow:visible;overflow-x:clip}
+body.acpgram-docs #vanta-bg{opacity:.18}
+@media(prefers-reduced-motion:reduce){body.acpgram-docs #vanta-bg{display:none}}
 
 /* Anchors and keyboard focus stop below the sticky site header (and, on phones, below the contents bar). */
 .ad-root{scroll-padding-top:140px}
 @media(prefers-reduced-motion:reduce){.ad-root{scroll-behavior:auto}}
 
 .ad-main{padding-bottom:44px}
-.ad-hero{display:grid;gap:26px;padding:14px 0 34px}
+.ad-hero{display:grid;gap:24px;margin-bottom:24px;padding:24px 20px;border:1px solid #ffffff14;border-radius:24px;background:#080d1ceb}
 .ad-hero-text{min-width:0;max-width:760px}
 .ad-quick{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-content:start}
 .ad-main .ad-quick-title{grid-column:1/-1;margin:0 0 2px;font:700 .75rem/1.5 'Outfit',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#c4b5fd}
-.ad-quick a{display:flex;align-items:center;gap:11px;min-height:52px;padding:10px 14px;border:1px solid #ffffff17;border-radius:14px;background:#0b1120cc;color:#e2e8f0;font-size:.86rem;line-height:1.35;text-decoration:none}
-.ad-quick a:hover{border-color:#a78bfa;background:#7c3aed1f;color:#fff}
+.ad-quick a{display:flex;align-items:center;gap:11px;min-height:52px;padding:10px 14px;border:1px solid #ffffff1a;border-radius:14px;background:#0f172ab3;color:#e2e8f0;font-size:.86rem;line-height:1.35;text-decoration:none}
+.ad-quick a:hover{border-color:#a78bfa;background:#7c3aed26;color:#fff}
 .ad-quick i{flex:0 0 18px;text-align:center;color:#a78bfa}
 .ad-main .ad-hero h1{font-size:clamp(2.1rem,3.6vw,3.3rem);margin:14px 0;text-wrap:balance}
 .ad-crumbs{display:flex;flex-wrap:wrap;gap:8px;font-size:.82rem;color:#94a3b8}
 .ad-crumbs a{color:#c4b5fd;text-decoration:none}.ad-crumbs a:hover{color:#fff}
 .ad-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
-.ad-pill{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid #ffffff1f;border-radius:999px;background:#0f172a99;color:#cbd5e1;font-size:.78rem;text-decoration:none}
+.ad-pill{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid #ffffff1f;border-radius:999px;background:#0f172acc;color:#cbd5e1;font-size:.78rem;text-decoration:none}
 a.ad-pill:hover{border-color:#a78bfa;color:#fff}
 
 .ad-layout{display:grid;gap:26px;align-items:start}
 
 /* ---------- contents ---------- */
-.ad-toc{position:sticky;top:72px;z-index:30;border:1px solid #ffffff1f;border-radius:18px;background:#0b1120f5;padding:8px 14px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.ad-toc{position:sticky;top:72px;z-index:30;border:1px solid #ffffff1a;border-radius:18px;background:#080d1cf5;padding:8px 14px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
 .ad-toc-body{max-height:calc(100vh - 150px);overflow-y:auto;overscroll-behavior:contain}
 .ad-toc-toggle{display:flex;align-items:center;gap:10px;width:100%;padding:8px 6px;background:none;border:0;color:#f1f5f9;font:700 .95rem 'Outfit',sans-serif;cursor:pointer;text-align:left}
 .ad-toc-toggle i{color:#a78bfa}
@@ -54,36 +56,37 @@ a.ad-pill:hover{border-color:#a78bfa;color:#fff}
 .ad-toc-empty{margin:8px 6px 4px!important;font-size:.82rem!important;color:#94a3b8!important}
 
 /* ---------- article ---------- */
-/* 720px at 16.5px keeps a full line near 80 characters; the column is centred in the space next to the contents */
-.ad-content{min-width:0;width:100%;max-width:720px;margin-inline:auto}
-.ad-section{padding-top:34px;margin-top:38px;border-top:1px solid #ffffff12}
-.ad-section:first-child{padding-top:0;margin-top:0;border-top:0}
-.ad-sub{margin-top:34px}
+/* The column fills the grid track so section cards align flush with the hero; prose stays near 80 characters */
+.ad-content{min-width:0;width:100%}
+.ad-section{padding:24px 20px;margin-top:22px;border:1px solid #ffffff14;border-radius:24px;background:#080d1ceb}
+.ad-section:first-child{margin-top:0}
+.ad-sub{margin-top:32px;padding-top:24px;border-top:1px solid #ffffff0d}
 .ad-main .ad-content h2{font-size:clamp(1.6rem,2.4vw,2.1rem);letter-spacing:-.02em;margin:0 0 16px;text-wrap:balance}
 .ad-main .ad-content h3{font-size:1.28rem;margin:0 0 12px;text-wrap:balance}
 .ad-anchor{display:inline-block;min-width:28px;margin-left:.25em;color:#a78bfa;font-weight:400;text-align:center;text-decoration:none;opacity:.5}
 h2:hover>.ad-anchor,h3:hover>.ad-anchor,.ad-anchor:focus-visible{opacity:1}
 .ad-content .ad-lang{animation:none}
 .ad-lang>:first-child{margin-top:0}
-.ad-main .ad-lang p{font-size:1.03rem;line-height:1.7}
-.ad-lang ul,.ad-lang ol{margin:12px 0 20px;padding-left:1.35em;color:#b1bfd1;line-height:1.7;font-size:1.03rem}
+.ad-main .ad-lang p{font-size:1.03rem;line-height:1.7;max-width:74ch}
+.ad-lang ul,.ad-lang ol{margin:12px 0 20px;padding-left:1.35em;color:#b1bfd1;line-height:1.7;font-size:1.03rem;max-width:74ch}
 .ad-lang ul{list-style:disc}.ad-lang ol{list-style:decimal}
 .ad-lang li{margin:6px 0}.ad-lang li::marker{color:#a78bfa}
 .ad-lang li>p{margin:6px 0}
 .ad-lang li>.ap-code{margin:10px 0}
+.ad-content .ap-code{background:#020617;border-color:#a78bfa38}
 .ad-lang strong{color:#e8edf5;font-weight:600}
 .ad-lang a{color:#c4b5fd;text-decoration:underline;text-underline-offset:3px}.ad-lang a:hover{color:#fff}
 .ad-lang code{padding:.1em .38em;border:1px solid #a78bfa26;border-radius:6px;background:#1e1b4b59;color:#ddd6fe;font:.86em ui-monospace,SFMono-Regular,Consolas,monospace;overflow-wrap:anywhere}
 .ad-lang .ap-code code{padding:0;border:0;background:none;font:inherit;color:inherit}
 /* notes: the round mark tells a note from body text without relying on colour alone */
-.ad-lang blockquote{position:relative;margin:18px 0 24px;padding:16px 20px 16px 54px;border-left:3px solid #a78bfa;border-radius:0 14px 14px 0;background:#0f172a99}
+.ad-lang blockquote{position:relative;margin:18px 0 24px;padding:16px 20px 16px 54px;border-left:3px solid #a78bfa;border-radius:0 14px 14px 0;background:#0f172acc}
 .ad-lang blockquote::before{content:'i';position:absolute;left:17px;top:17px;width:22px;height:22px;border:1.5px solid #a78bfa;border-radius:50%;color:#c4b5fd;font:700 .82rem/19px Georgia,'Times New Roman',serif;text-align:center}
 .ad-main .ad-lang blockquote p{margin:0;font-size:.95rem;line-height:1.65}
 .ad-main .ad-lang blockquote p+p{margin-top:10px}
-.ad-table{margin:16px 0 24px;overflow-x:auto;border:1px solid #ffffff14;border-radius:14px;background:#0b112099}
+.ad-table{margin:16px 0 24px;overflow-x:auto;border:1px solid #ffffff1a;border-radius:14px;background:#0f172a99}
 .ad-table table{width:100%;border-collapse:collapse;font-size:.88rem;line-height:1.6}
 .ad-table th,.ad-table td{padding:10px 14px;text-align:left;vertical-align:top;border-bottom:1px solid #ffffff10;color:#b1bfd1}
-.ad-table th{color:#e2e8f0;font-weight:600;background:#0f172acc;white-space:nowrap}
+.ad-table th{color:#e2e8f0;font-weight:600;background:#1e293b80;white-space:nowrap}
 .ad-table tr:last-child td{border-bottom:0}
 .ad-table td:first-child{color:#e2e8f0}
 .ad-shot img{display:block;max-width:100%;height:auto;border:1px solid #ffffff1a;border-radius:14px;box-shadow:0 14px 40px #0006}
@@ -94,9 +97,9 @@ h2:hover>.ad-anchor,h3:hover>.ad-anchor,.ad-anchor:focus-visible{opacity:1}
 .ad-zoom{display:block;width:fit-content;max-width:100%;margin-inline:auto;border-radius:14px;cursor:zoom-in}
 
 /* ---------- previous / next section ---------- */
-.ad-pager{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:40px}
-.ad-pager a{display:flex;flex-direction:column;justify-content:center;gap:4px;min-height:64px;padding:12px 16px;border:1px solid #ffffff17;border-radius:14px;background:#0b1120cc;color:#e2e8f0;font-size:.92rem;line-height:1.35;text-decoration:none}
-.ad-pager a:hover{border-color:#a78bfa;background:#7c3aed1f;color:#fff}
+.ad-pager{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:34px;padding-top:24px;border-top:1px solid #ffffff10}
+.ad-pager a{display:flex;flex-direction:column;justify-content:center;gap:4px;min-height:64px;padding:12px 16px;border:1px solid #ffffff1a;border-radius:14px;background:#0f172ab3;color:#e2e8f0;font-size:.92rem;line-height:1.35;text-decoration:none}
+.ad-pager a:hover{border-color:#a78bfa;background:#7c3aed26;color:#fff}
 .ad-pager small{color:#94a3b8;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase}
 .ad-pager .ad-next{grid-column:2;text-align:right}
 
@@ -111,17 +114,23 @@ h2:hover>.ad-anchor,h3:hover>.ad-anchor,.ad-anchor:focus-visible{opacity:1}
 .ad-lightbox-cap{margin:12px 4px 2px;color:#94a3b8;font-size:.86rem;line-height:1.5}
 .ad-lightbox-close{position:sticky;top:0;z-index:2;display:block;width:40px;height:40px;margin:0 0 -40px auto;border:1px solid #ffffff2e;border-radius:50%;background:#1e293b;color:#fff;font-size:1.3rem;line-height:1;cursor:pointer}
 .ad-lightbox-close:hover{background:#334155}
-.ad-foot{margin-top:56px;padding:28px}
+.ad-foot{margin-top:26px;padding:28px;background:#080d1ceb}
 .ad-foot p,.ad-foot .ap-actions{position:relative;z-index:2}
 .ad-foot .ap-actions{margin-bottom:0}
 .ad-main .ap-copy{font-size:.75rem}
 /* touch screens: controls tall enough for a finger */
 @media(pointer:coarse){.ad-toc-nav a{padding-block:12px}.ad-toc-nav ul ul a{padding-block:10px}.ad-toc-toggle{min-height:44px}.ad-search{min-height:44px}.ad-main .ap-copy{min-height:40px;padding-inline:12px}.ad-pill{min-height:40px;padding-inline:14px}}
 
+@media(min-width:640px){
+  .ad-hero{padding:30px 32px}
+  .ad-section{padding:32px 36px}
+}
+
 @media(min-width:1024px){
-  .ad-layout{grid-template-columns:292px minmax(0,1fr);gap:46px}
-  .ad-hero{grid-template-columns:minmax(0,1fr) minmax(0,440px);gap:46px;align-items:end}
-  .ad-toc{top:84px;z-index:auto;padding:14px;background:#0b1120cc;max-height:calc(100vh - 104px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#334155 transparent}
+  .ad-layout{grid-template-columns:292px minmax(0,1fr);gap:28px}
+  .ad-hero{grid-template-columns:minmax(0,1fr) minmax(0,440px);gap:40px;align-items:end;margin-bottom:28px;padding:34px 38px}
+  .ad-section{padding:38px 48px;margin-top:26px}
+  .ad-toc{top:84px;z-index:auto;padding:14px;background:#080d1ceb;max-height:calc(100vh - 104px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#334155 transparent}
   .ad-toc-body{max-height:none;overflow:visible}
   .ad-root{scroll-padding-top:84px}
   .ad-search{min-height:40px;font-size:.88rem}
