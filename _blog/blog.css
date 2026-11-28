@@ -118,6 +118,7 @@
 [data-extra][hidden] { display: none !important; }
 .b-toggle { min-width: 2.75rem; justify-content: center; color: #c4b5fd; }
 .b-video.b-slides { aspect-ratio: 4 / 3; }
+.b-video.b-short { aspect-ratio: 9 / 16; max-width: 22rem; margin-inline: auto; }
 .b-embed-link { margin-top: .6rem !important; font-size: .85rem; }
 .b-embed-link a { display: inline-flex; gap: .5rem; align-items: center; color: #94a3b8; text-decoration: none; }
 .b-embed-link a:hover { color: #fff; }

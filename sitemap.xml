@@ -102,9 +102,15 @@
   </url>
   <url>
     <loc>https://alexey-seleznev.pro/blog/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://alexey-seleznev.pro/blog/acpgram-proekty-fayly-i-sessii-s-telefona/</loc>
+    <lastmod>2026-11-28</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://alexey-seleznev.pro/blog/acpgram-1-30-proekty-fayly-i-git-iz-telegram/</loc>

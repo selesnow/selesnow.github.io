@@ -501,9 +501,11 @@ def video_html(m):
     и прочие известные хосты; для неизвестного хоста — просто ссылка."""
     u = m.group(1).replace('\\_', '_')         # конвертер экранировал подчёркивания: embed\_code → embed_code
     kind, src = 'video', None
-    yt = re.search(r'(?:youtube(?:-nocookie)?\.com/embed/|youtu\.be/|youtube\.com/watch\?v=)([\w-]{11})', u)
+    yt = re.search(r'(?:youtube(?:-nocookie)?\.com/(?:embed/|shorts/)|youtu\.be/|youtube\.com/watch\?v=)([\w-]{11})', u)
     sl = re.search(r'slideshare\.net/slideshow/embed_code/(?:key/)?([\w-]+)', u)
     if yt:
+        if 'youtube.com/shorts/' in u:
+            kind = 'short'
         src = f'https://www.youtube-nocookie.com/embed/{yt.group(1)}'
     elif sl:
         # числовые id работают как есть, буквенно-цифровые — только через /key/
