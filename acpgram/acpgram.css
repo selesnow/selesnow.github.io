@@ -69,12 +69,13 @@
 @media(max-width:639px){.ap-main p,.ap-card p,.ap-more-body p,.ap-note p,.ap-service-panel p,.ap-faq details p{font-size:1rem}.ap-demo-steps p{font-size:1rem!important}}
 
 /* News Telegram channel card */
-.ap-channel-card { display: block; margin-top: 18px; text-decoration: none; border-color: rgba(42, 171, 238, 0.22); background: linear-gradient(135deg, rgba(42,171,238,0.12), rgba(255,255,255,0.03)); }
-.ap-channel-card:hover { border-color: rgba(42,171,238,0.45); transform: translateY(-2px); }
-.ap-channel-card-inner { display: grid; grid-template-columns: auto 1fr auto; gap: 16px; align-items: center; }
-.ap-channel-icon { width: 52px; height: 52px; border-radius: 16px; display: grid; place-items: center; font-size: 1.6rem; color: #fff; background: linear-gradient(135deg, #2AABEE, #229ED9); box-shadow: 0 10px 30px rgba(42,171,238,0.28); }
-.ap-channel-copy h3 { margin: 4px 0 6px; font-size: clamp(1.2rem, 2vw, 1.55rem); }
-.ap-channel-copy p { margin: 0; color: var(--ap-muted); }
-.ap-channel-cta { color: #7fd3ff; font-weight: 700; white-space: nowrap; }
-.ap-channel-card:hover .ap-channel-cta { color: #fff; }
-@media (max-width: 720px) { .ap-channel-card-inner { grid-template-columns: auto 1fr; } .ap-channel-cta { grid-column: 1 / -1; } }
+.ap-channel-card { display: block; margin-top: 18px; padding: 26px 28px; text-decoration: none; border-color: rgba(42, 171, 238, 0.25); background: linear-gradient(135deg, rgba(42, 171, 238, 0.14), rgba(15, 23, 42, 0.55)); }
+.ap-channel-card:hover { border-color: rgba(42, 171, 238, 0.5); transform: translateY(-3px); box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6), 0 0 24px rgba(42, 171, 238, 0.18); }
+.ap-channel-card-inner { display: grid; grid-template-columns: auto 1fr auto; gap: 20px; align-items: center; }
+.ap-channel-icon { width: 54px; height: 54px; border-radius: 16px; display: grid; place-items: center; font-size: 1.6rem; color: #fff; background: linear-gradient(135deg, #2AABEE, #229ED9); box-shadow: 0 10px 28px rgba(42, 171, 238, 0.28); flex-shrink: 0; }
+.ap-channel-copy .ap-eyebrow { color: #7fd3ff; }
+.ap-channel-copy h3 { margin: 4px 0 6px; font-size: clamp(1.2rem, 2vw, 1.5rem); }
+.ap-channel-copy p { margin: 0; color: #b1bfd1; font-size: .92rem; line-height: 1.6; }
+.ap-channel-cta { display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; border-radius: 999px; border: 1px solid rgba(42, 171, 238, 0.35); background: rgba(42, 171, 238, 0.14); color: #7fd3ff; font-size: .9rem; font-weight: 700; white-space: nowrap; transition: background .25s, border-color .25s, color .25s; }
+.ap-channel-card:hover .ap-channel-cta { background: rgba(42, 171, 238, 0.25); border-color: rgba(127, 211, 255, 0.65); color: #fff; }
+@media (max-width: 720px) { .ap-channel-card { padding: 22px; } .ap-channel-card-inner { grid-template-columns: auto 1fr; gap: 14px 16px; align-items: start; } .ap-channel-icon { width: 46px; height: 46px; border-radius: 14px; font-size: 1.35rem; } .ap-channel-cta { grid-column: 1 / -1; justify-self: start; margin-top: 2px; } }
