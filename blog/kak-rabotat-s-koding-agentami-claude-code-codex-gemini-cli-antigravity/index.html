@@ -211,6 +211,8 @@
 <p>Хотелось получить ту же свободу, что дает расширение Claude Code для VS Code, но прямо в мессенджере — чтобы агент шуршал по кодовой базе на домашнем или рабочем сервере, пока я занимаюсь своими делами, а я мог в любой момент глянуть прогресс или одобрить критический шаг.</p>
 <p><img loading="lazy" decoding="async" alt="" width="1024" height="577" src="../images/kak-rabotat-s-koding-agentami-claude-code-codex-gemini-c-59c-75b40654.webp" /></p>
 <p>Так родился <strong>AcpGram</strong> — открытый Telegram‑шлюз, который запускает консольных агентов в качестве подпроцессов и позволяет управлять ими через привычный чат. Проект написан на чистом Node.js 24 без единой <code>npm</code>‑зависимости, работает на Windows, Linux и macOS и уже полностью готов к использованию.</p>
+<div class="b-video b-short"><iframe src="https://www.youtube-nocookie.com/embed/3CIc8QJZpkk" title="Video" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+
 <h3 id="acp">Архитектура: почему именно ACP?</h3>
 <p>В основе проекта лежит <strong>Agent Client Protocol (ACP)</strong> — протокол взаимодействия на базе JSON‑RPC поверх стандартных потоков ввода‑вывода (<code>stdin</code>/<code>stdout</code>).</p>
 <p>Поскольку разные вендоры поставляют свои CLI‑утилиты по‑разному (Gemini и Antigravity поддерживают ACP «из коробки», а для Claude Code и OpenAI Codex написаны специальные легкие ACP‑мосты), AcpGram предоставляет <strong>единый унифицированный интерфейс</strong> для абсолютно разных движков.</p>

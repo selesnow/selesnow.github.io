@@ -27,7 +27,9 @@ cover_generated: true
 
 ## Как установить и настроить
 
-Записал видео, где показываю весь путь от установки до первого запуска: [видео на Facebook](https://www.facebook.com/share/v/1JC9AFdbwz/).
+Записал видео, где показываю весь путь от установки до первого запуска (также доступно [на Facebook](https://www.facebook.com/share/v/1JC9AFdbwz/)):
+
+{{video: https://youtube.com/shorts/OF82gVwjEUE}}
 
 ## Ответы на вопросы из комментариев
 
