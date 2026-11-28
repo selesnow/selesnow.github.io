@@ -1,10 +1,12 @@
 ## What AcpGram is {#intro}
 
-AcpGram is a bridge between Telegram and coding agents. You install it on your computer or server, and it runs an agent there: Claude Code, OpenAI Codex, Gemini CLI, Antigravity CLI or OpenCode. You send a task to the bot in Telegram, the agent reads files, runs commands and edits code in the selected project, and the progress, confirmation requests and result arrive in the chat.
+AcpGram is a bridge between Telegram and coding agents. You install it on your computer or server, and it runs an agent there: Claude Code, OpenAI Codex, Gemini CLI, Antigravity CLI, OpenCode or Qwen Code. You send a task to the bot in Telegram, the agent reads files, runs commands and edits code in the selected project, and the progress, confirmation requests and result arrive in the chat.
 
 AcpGram does not replace the agent and does no “thinking” of its own. It is a remote control: one bot with a shared interface and commands, in which you switch the agent, model, project and session.
 
 The project is free and open source (MIT license). You pay only for the agent itself — a subscription or its provider’s API, just as you do when working in the terminal. With OpenCode you can start without paying anything: it has free models that need no key.
+News channels in Telegram: [@acpgram](https://t.me/acpgram) (English), [@acpgram_ru](https://t.me/acpgram_ru) (Russian), [@acpgram_ua](https://t.me/acpgram_ua) (Ukrainian).
+
 
 ### How it works {#how-it-works}
 
@@ -25,6 +27,7 @@ To control several machines, create a separate bot for each one and install AcpG
 | Gemini CLI | Gemini CLI only | account sign-in or `GEMINI_API_KEY` |
 | Antigravity CLI | Antigravity CLI 1.5 or later | Google sign-in or a Gemini API key |
 | OpenCode | OpenCode only | free models without a key, or provider keys |
+| Qwen Code | Qwen Code only | OpenAI-compatible API: OpenRouter, your own endpoint, or provider keys |
 
 One agent is enough. You can connect the others later: AcpGram finds the installed ones by itself.
 
@@ -54,6 +57,14 @@ npm install -g opencode-ai
 ```
 
 You can skip this step: if the machine has no agent at all, the AcpGram setup wizard offers to install OpenCode for you.
+
+**Qwen Code.** Installs through npm and connects over ACP via an OpenAI-compatible API. The easiest start is free OpenRouter models: set `OPENROUTER_API_KEY` in `.env`, and AcpGram prepares Qwen settings automatically.
+
+```sh
+npm install -g @qwen-code/qwen-code
+```
+
+By default AcpGram uses free OpenRouter models: Nemotron 3.5 Lightning, Nemotron 3 Ultra 550B and ERNIE 5.5 Flash Preview. You can set your own model list in `QWEN_MODELS`, or point Qwen to another OpenAI-compatible endpoint with `QWEN_BASE_URL`.
 
 **Claude Code.** You need Claude Code itself and the bridge that AcpGram uses to talk to it:
 
@@ -187,7 +198,7 @@ The installer and `acpgram update` download the latest public GitHub release, no
 
 ### Docker {#docker}
 
-The image already contains all five agents and the bridges: you do not need to install anything on the host, and the wizard is not needed either. You need Git and Docker with Docker Compose.
+The image already contains all six agents and the bridges: you do not need to install anything on the host, and the wizard is not needed either. You need Git and Docker with Docker Compose.
 
 ```sh
 git clone https://github.com/selesnow/acpgram.git
@@ -472,6 +483,15 @@ OpenCode takes the models of the providers whose keys are in the bot’s `.env` 
 
 > Free models may use requests for training. Do not send secrets or private code to them. Pass keys and passwords to the project through [/files](#files-project).
 
+### Qwen Code models {#qwen}
+
+Qwen Code runs over ACP with an OpenAI-compatible API. AcpGram manages Qwen settings in the per-user Qwen home and does not require the native Qwen OAuth flow.
+
+- By default AcpGram seeds free OpenRouter models: Nemotron 3.5 Lightning, Nemotron 3 Ultra 550B and ERNIE 5.5 Flash Preview.
+- Set `OPENROUTER_API_KEY` for the default OpenRouter setup, or `QWEN_BASE_URL` for another OpenAI-compatible endpoint.
+- Use `QWEN_MODELS` (`id|Name;id|Name`) to define your own model list. Model priority is `QWEN_MODELS` > per-user `settings.json` > global `~/.qwen/settings.json`/`QWEN_SETTINGS_FILE` > defaults.
+- Be careful with secrets in free models: they may use requests for training.
+
 ## Files {#files}
 
 ### Files for the agent {#files-to-agent}
@@ -681,7 +701,7 @@ The `/users` command shows the list of teammates. A teammate’s card has the ac
 
 Each level corresponds to its own mode in each agent:
 
-| Level | Gemini CLI | Claude Code | Antigravity CLI | Codex | OpenCode |
+| Level | Gemini CLI | Claude Code | Antigravity CLI | Codex | OpenCode | Qwen Code |
 |---|---|---|---|---|---|
 | Read-only | `plan` | `plan` | `plan` | `read-only` | `plan` |
 | Standard | `default` | `default` | `default` | `workspace-write` | `build` |
@@ -798,7 +818,7 @@ The `.env` file contains the token and keys: do not commit it or send it to anyo
 |---|---|
 | `TELEGRAM_BOT_TOKEN` | the bot token. Required |
 | `ALLOWED_USER_ID` | the numeric Telegram ID of the main administrator. Required |
-| `DEFAULT_ENGINE` | the default agent: `gemini`, `claude`, `agy`, `codex` or `opencode`. If it is not installed, the bot does not start |
+| `DEFAULT_ENGINE` | the default agent: `gemini`, `claude`, `agy`, `codex`, `opencode` or `qwen`. If it is not installed, the bot does not start |
 | `DEFAULT_LANG` | the bot language when the user’s Telegram language is not Russian, Ukrainian or English: `en` (default), `ru` or `uk` |
 | `ACPGRAM_LANG` | the language of the `acpgram` commands in the terminal: `ru`, `uk` or `en`. Usually not needed: the language is taken from the system |
 | `ACPGRAM_HOME` | the data folder when installed through npm (`~/.acpgram` by default) |
@@ -818,7 +838,11 @@ The `.env` file contains the token and keys: do not commit it or send it to anyo
 | `CODEX_COMMAND` | full path to the Codex bridge (`codex-acp` by default) |
 | `AGY_COMMAND` | full path to Antigravity CLI (`agy` by default) |
 | `OPENCODE_COMMAND` | full path to OpenCode (`opencode` by default) |
-| `ACP_MODE`, `CLAUDE_ADMIN_MODE`, `AGY_ADMIN_MODE`, `CODEX_ADMIN_MODE`, `OPENCODE_ADMIN_MODE` | the mode of each agent for the administrator (see [access levels](#access-levels)) |
+| `QWEN_COMMAND` | full path to Qwen Code (`qwen` by default) |
+| `QWEN_MODELS` | Qwen model list: `id|Name;id|Name`. By default, free OpenRouter models |
+| `QWEN_BASE_URL` | OpenAI-compatible base URL for Qwen Code. If omitted and `OPENROUTER_API_KEY` is set, AcpGram uses OpenRouter |
+| `QWEN_SETTINGS_FILE` | path to global Qwen `settings.json` to read as a fallback model source |
+| `ACP_MODE`, `CLAUDE_ADMIN_MODE`, `AGY_ADMIN_MODE`, `CODEX_ADMIN_MODE`, `OPENCODE_ADMIN_MODE`, `QWEN_ADMIN_MODE` | the mode of each agent for the administrator (see [access levels](#access-levels)) |
 | `AGENT_ENV_HIDE`, `AGENT_ENV_PASS` | extra environment variables to hide from the agent or, respectively, to pass through (comma-separated lists) |
 | `AGENT_START_TIMEOUT` | how many seconds to wait for the agent to start (120 by default) |
 
@@ -915,7 +939,7 @@ How to report a vulnerability is described in the [security policy](https://gith
 | `/project [name or path]` | everyone | choosing a project with buttons, search or a path; a new project |
 | `/files` | everyone | project files: list, create, upload and delete, bypassing the agent |
 | `/git` | everyone | Git: accounts, cloning, changes, branches, pushing, publishing, merge request |
-| `/engine [name]` | everyone | choosing the agent: `gemini`, `claude`, `agy`, `codex`, `opencode` |
+| `/engine [name]` | everyone | choosing the agent: `gemini`, `claude`, `agy`, `codex`, `opencode`, `qwen` |
 | `/model [name]` | everyone | choosing the model and reasoning level; with a name — model search |
 | `/new` | everyone | a new session (in “Dialogs” mode — a new topic) |
 | `/sessions` | everyone | past sessions of the current project and returning to the selected one |

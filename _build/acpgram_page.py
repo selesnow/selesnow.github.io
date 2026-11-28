@@ -120,9 +120,19 @@ def agent_panels():
                        'Each provider key adds that provider’s models: Anthropic, OpenAI, Gemini, OpenRouter (hundreds of models with one key), Groq, DeepSeek, Mistral. The AcpGram wizard asks for the keys, or add them to .env later. Free models may use requests for training — keep secrets out of them.')
                      + node + '<a class="ap-text-link" href="https://opencode.ai/docs">' + text('Документация OpenCode', 'Документація OpenCode', 'OpenCode docs') + ' ↗</a>')
 
+    qwen = p('Qwen Code подключается по протоколу ACP через OpenAI-совместимый API. Проще всего начать с бесплатных моделей OpenRouter: укажите OPENROUTER_API_KEY, а AcpGram сам подготовит настройки.',
+             'Qwen Code підключається за протоколом ACP через OpenAI-сумісний API. Найпростіше почати з безкоштовних моделей OpenRouter: вкажіть OPENROUTER_API_KEY, а AcpGram сам підготує налаштування.',
+             'Qwen Code connects over ACP through an OpenAI-compatible API. The easiest start is free OpenRouter models: set OPENROUTER_API_KEY and AcpGram prepares the settings for you.')
+    qwen += code('npm install -g @qwen-code/qwen-code')
+    qwen += more(text('Модели и API', 'Моделі та API', 'Models and API'),
+                 p('По умолчанию AcpGram использует бесплатные модели OpenRouter (Nemotron 3.5 Lightning, Nemotron 3 Ultra 550B, ERNIE 5.5 Flash Preview). Можно задать свой список в QWEN_MODELS или использовать другой OpenAI-совместимый endpoint через QWEN_BASE_URL.',
+                   'За замовчуванням AcpGram використовує безкоштовні моделі OpenRouter (Nemotron 3.5 Lightning, Nemotron 3 Ultra 550B, ERNIE 5.5 Flash Preview). Можна задати власний список у QWEN_MODELS або використати інший OpenAI-сумісний endpoint через QWEN_BASE_URL.',
+                   'By default AcpGram uses free OpenRouter models (Nemotron 3.5 Lightning, Nemotron 3 Ultra 550B, ERNIE 5.5 Flash Preview). You can set your own list in QWEN_MODELS or use another OpenAI-compatible endpoint via QWEN_BASE_URL.')
+                 + node + '<a class="ap-text-link" href="https://github.com/QwenLM/qwen-code">' + text('Репозиторий Qwen Code', 'Репозиторій Qwen Code', 'Qwen Code repository') + ' ↗</a>')
+
     return tabs('agent', 'Agent', [('claude', 'Claude Code', claude), ('codex', 'Codex', codex),
                                    ('gemini', 'Gemini CLI', gemini), ('agy', 'Antigravity CLI', agy),
-                                   ('opencode', 'OpenCode', opencode)])
+                                   ('opencode', 'OpenCode', opencode), ('qwen', 'Qwen Code', qwen)])
 
 
 def os_panels():
@@ -176,18 +186,18 @@ def install_content():
     source = (p('Нужны Git и Node.js 24+. Зависимости npm самому AcpGram не нужны.', 'Потрібні Git і Node.js 24+. Залежності npm самому AcpGram не потрібні.', 'Requires Git and Node.js 24+. AcpGram itself has no npm dependencies.')
               + code('git clone https://github.com/selesnow/acpgram.git\ncd acpgram\nnpm run setup')
               + p('Если отказались от сервиса, бот запускается командой:', 'Якщо відмовилися від сервісу, бот запускається командою:', 'If you skipped the service, start the bot with:') + code('npm start'))
-    docker = (p('Нужны Git и Docker с Docker Compose. Все пять агентов и мосты уже внутри образа — на хост ничего ставить не нужно, мастер тоже не нужен.',
-                'Потрібні Git і Docker із Docker Compose. Усі п’ять агентів і мости вже всередині образу — на хост нічого встановлювати не потрібно, майстер теж не потрібен.',
-                'Requires Git and Docker with Docker Compose. All five agents and bridges ship in the image — nothing to install on the host, no wizard needed.')
+    docker = (p('Нужны Git и Docker с Docker Compose. Все шесть агентов и мосты уже внутри образа — на хост ничего ставить не нужно, мастер тоже не нужен.',
+                'Потрібні Git і Docker із Docker Compose. Усі шість агентів і мости вже всередині образу — на хост нічого встановлювати не потрібно, майстер теж не потрібен.',
+                'Requires Git and Docker with Docker Compose. All six agents and bridges ship in the image — nothing to install on the host, no wizard needed.')
               + code('git clone https://github.com/selesnow/acpgram.git\ncd acpgram\ncp .env.example .env')
               + p('Заполните в .env токен бота, свой Telegram ID, ключ агента и папку с проектами. Например, для Gemini CLI:',
                   'Заповніть у .env токен бота, свій Telegram ID, ключ агента й папку з проєктами. Наприклад, для Gemini CLI:',
                   'Fill in .env with the bot token, your Telegram ID, the agent key and the projects folder. For example, for Gemini CLI:')
               + code('TELEGRAM_BOT_TOKEN=YOUR_BOT_TOKEN\nALLOWED_USER_ID=YOUR_TELEGRAM_ID\nDEFAULT_ENGINE=gemini\nGEMINI_API_KEY=YOUR_API_KEY\nPROJECTS_DIR=./projects')
               + code('docker compose up -d --build')
-              + p('Для Claude Code — ANTHROPIC_API_KEY, для Codex — OPENAI_API_KEY. OpenCode (DEFAULT_ENGINE=opencode) работает и без ключа — на бесплатных моделях, а любые ключи провайдеров добавляют их модели. Antigravity CLI: после запуска один раз выполните docker compose exec -it bot agy acp --login. В контейнере агент видит только папку проектов. На Windows вместо cp используйте Copy-Item.',
-                  'Для Claude Code — ANTHROPIC_API_KEY, для Codex — OPENAI_API_KEY. OpenCode (DEFAULT_ENGINE=opencode) працює й без ключа — на безкоштовних моделях, а будь-які ключі провайдерів додають їхні моделі. Antigravity CLI: після запуску один раз виконайте docker compose exec -it bot agy acp --login. У контейнері агент бачить лише папку проєктів. На Windows замість cp використовуйте Copy-Item.',
-                  'Claude Code uses ANTHROPIC_API_KEY, Codex uses OPENAI_API_KEY. OpenCode (DEFAULT_ENGINE=opencode) works without a key on free models, and any provider key adds that provider’s models. Antigravity CLI: after start, run docker compose exec -it bot agy acp --login once. Inside the container the agent sees only the projects folder. On Windows use Copy-Item instead of cp.', 'ap-small'))
+              + p('Для Claude Code — ANTHROPIC_API_KEY, для Codex — OPENAI_API_KEY. OpenCode (DEFAULT_ENGINE=opencode) работает и без ключа — на бесплатных моделях, а любые ключи провайдеров добавляют их модели. Qwen Code (DEFAULT_ENGINE=qwen) подключается через OpenAI-совместимый API: для быстрого старта укажите OPENROUTER_API_KEY. Antigravity CLI: после запуска один раз выполните docker compose exec -it bot agy acp --login. В контейнере агент видит только папку проектов. На Windows вместо cp используйте Copy-Item.',
+                  'Для Claude Code — ANTHROPIC_API_KEY, для Codex — OPENAI_API_KEY. OpenCode (DEFAULT_ENGINE=opencode) працює й без ключа — на безкоштовних моделях, а будь-які ключі провайдерів додають їхні моделі. Qwen Code (DEFAULT_ENGINE=qwen) підключається через OpenAI-сумісний API: для швидкого старту вкажіть OPENROUTER_API_KEY. Antigravity CLI: після запуску один раз виконайте docker compose exec -it bot agy acp --login. У контейнері агент бачить лише папку проєктів. На Windows замість cp використовуйте Copy-Item.',
+                  'Claude Code uses ANTHROPIC_API_KEY, Codex uses OPENAI_API_KEY. OpenCode (DEFAULT_ENGINE=opencode) works without a key on free models, and any provider key adds that provider’s models. Qwen Code (DEFAULT_ENGINE=qwen) connects through an OpenAI-compatible API: set OPENROUTER_API_KEY for a quick start. Antigravity CLI: after start, run docker compose exec -it bot agy acp --login once. Inside the container the agent sees only the projects folder. On Windows use Copy-Item instead of cp.', 'ap-small'))
     service = (p('Обычно сервис ставит мастер. Управлять им можно так:', 'Зазвичай сервіс встановлює майстер. Керувати ним можна так:', 'The wizard normally installs the service. To manage it:')
                + code('acpgram service install\nacpgram service status\nacpgram service restart\nacpgram service uninstall')
                 + p('Windows: сервис ставится через NSSM из терминала администратора и просит пароль вашей учётной записи (для аккаунта Microsoft — его пароль, не PIN). Установщик одной командой ставит NSSM сам, при npm-установке выполните winget install --id NSSM.NSSM -e. Для запуска в консоли NSSM не нужен. Linux: systemd --user; чтобы бот работал без входа в систему, выполните sudo loginctl enable-linger $USER. macOS: LaunchAgent.',
@@ -282,9 +292,9 @@ FAQ = [
       'Українською, російською або англійською — за мовою вашого Telegram. Змінити можна командою /language.',
       'English, Ukrainian or Russian — matching your Telegram language. Change it with /language.')),
     (('Чем отличается от OpenACP и telegram-acp-bot?', 'Чим відрізняється від OpenACP і telegram-acp-bot?', 'How is it different from OpenACP and telegram-acp-bot?'),
-     ('AcpGram объединяет пять агентов в одном боте, поддерживает темы Telegram как отдельные диалоги, командный доступ и журнал действий, и работает на чистом Node.js без зависимостей. У каждого проекта свои сильные стороны — сравните README и выберите подходящий.',
-      'AcpGram об’єднує п’ять агентів в одному боті, підтримує теми Telegram як окремі діалоги, командний доступ і журнал дій, і працює на чистому Node.js без залежностей. Кожен проєкт має свої сильні сторони — порівняйте README й виберіть відповідний.',
-      'AcpGram combines five agents in one bot, supports Telegram topics as separate dialogs, team access and an audit log, and runs on plain Node.js with no dependencies. Each project has its strengths — compare the READMEs and pick what suits you.')),
+     ('AcpGram объединяет шесть агентов в одном боте, поддерживает темы Telegram как отдельные диалоги, командный доступ и журнал действий, и работает на чистом Node.js без зависимостей. У каждого проекта свои сильные стороны — сравните README и выберите подходящий.',
+      'AcpGram об’єднує шість агентів в одному боті, підтримує теми Telegram як окремі діалоги, командний доступ і журнал дій, і працює на чистому Node.js без залежностей. Кожен проєкт має свої сильні сторони — порівняйте README й виберіть відповідний.',
+      'AcpGram combines six agents in one bot, supports Telegram topics as separate dialogs, team access and an audit log, and runs on plain Node.js with no dependencies. Each project has its strengths — compare the READMEs and pick what suits you.')),
     (('Чем отличается от T3 Code, OpenClaw и Hermes?', 'Чим відрізняється від T3 Code, OpenClaw і Hermes?', 'How is it different from T3 Code, OpenClaw and Hermes?'),
      ('T3 Code решает близкую задачу — единый интерфейс к кодинг-агентам, но как отдельное приложение, а не через Telegram, и с более широким выбором агентов. OpenClaw, Hermes и NanoClaw — самостоятельные ИИ-агенты, а AcpGram не заменяет агента, а управляет вашими кодинг-агентами (Claude Code, Codex и другими) из Telegram.',
       'T3 Code розв’язує близьке завдання — єдиний інтерфейс до кодинг-агентів, але як окремий застосунок, а не через Telegram, і з ширшим вибором агентів. OpenClaw, Hermes і NanoClaw — самостійні ШІ-агенти, а AcpGram не замінює агента, а керує вашими кодинг-агентами (Claude Code, Codex та іншими) з Telegram.',
@@ -304,7 +314,7 @@ def build_acpgram():
         for key in path.split('.'):
             result = result.get(key) if isinstance(result, dict) else None
         return f'<strong data-stat="{path}">{esc(result) if result is not None else "—"}</strong>'
-    desc = 'AcpGram — бесплатный open source бот: управляйте Claude Code, Codex, Gemini CLI, Antigravity CLI и OpenCode на своём компьютере из Telegram. Установка за пару минут.'
+    desc = 'AcpGram — бесплатный open source бот: управляйте Claude Code, Codex, Gemini CLI, Antigravity CLI, OpenCode и Qwen Code на своём компьютере из Telegram. Установка за пару минут.'
     ld = {'@context': 'https://schema.org', '@graph': [
         {'@type': 'SoftwareApplication', 'name': 'AcpGram', 'description': desc,
          'applicationCategory': 'DeveloperApplication', 'operatingSystem': 'Windows, Linux, macOS',
@@ -342,7 +352,7 @@ def build_acpgram():
     logo = '<picture><source srcset="/img/acpgram/acpgram-logo.webp" type="image/webp"><img class="ap-logo" src="/img/acpgram/acpgram-logo-light.svg" alt="AcpGram" width="353" height="285" fetchpriority="high"></picture>'
     page += f'''<section id="hero" class="ap-hero ap-section"><div><div class="ap-brand">{logo}<span>AcpGram<span class="ap-eyebrow">OPEN SOURCE · MIT</span></span></div>
     <h1>{text('Ваш кодинг-агент — в Telegram', 'Ваш кодинг-агент — у Telegram', 'Your coding agent, in Telegram')}</h1>
-    {p('Поставьте задачу Claude Code, Codex, Gemini CLI, Antigravity CLI или OpenCode с телефона и занимайтесь своими делами. Агент работает на вашем компьютере, а ход работы, запросы на подтверждение и готовый результат приходят в чат.', 'Поставте завдання Claude Code, Codex, Gemini CLI, Antigravity CLI або OpenCode з телефона й займайтеся своїми справами. Агент працює на вашому комп’ютері, а хід роботи, запити на підтвердження й готовий результат надходять у чат.', 'Give a task to Claude Code, Codex, Gemini CLI, Antigravity CLI or OpenCode from your phone and get on with your day. The agent runs on your computer; its progress, approval requests and the finished result arrive in the chat.', 'ap-lead')}
+    {p('Поставьте задачу Claude Code, Codex, Gemini CLI, Antigravity CLI, OpenCode или Qwen Code с телефона и занимайтесь своими делами. Агент работает на вашем компьютере, а ход работы, запросы на подтверждение и готовый результат приходят в чат.', 'Поставте завдання Claude Code, Codex, Gemini CLI, Antigravity CLI, OpenCode або Qwen Code з телефона й займайтеся своїми справами. Агент працює на вашому комп’ютері, а хід роботи, запити на підтвердження й готовий результат надходять у чат.', 'Give a task to Claude Code, Codex, Gemini CLI, Antigravity CLI, OpenCode or Qwen Code from your phone and get on with your day. The agent runs on your computer; its progress, approval requests and the finished result arrive in the chat.', 'ap-lead')}
     <div class="ap-actions ap-hero-actions">{link('#install', text('Установить', 'Встановити', 'Install'), True, 'download')}{link('#video', text('Видео: 3 минуты', 'Відео: 3 хвилини', 'Video: 3 minutes'), icon='play')}{link(DOCS, text('Документация', 'Документація', 'Docs'), icon='book-open')}</div>
     <ul class="ap-trust">{''.join(f'<li><i aria-hidden="true" class="fa-solid fa-check"></i>{text(*t)}</li>' for t in [
         ('Бесплатно и с открытым кодом', 'Безкоштовно й з відкритим кодом', 'Free and open source'),
@@ -383,7 +393,7 @@ def build_acpgram():
     nodes = [
         ('Telegram', ('Вы пишете задачу боту с телефона или компьютера', 'Ви пишете завдання боту з телефона чи комп’ютера', 'You message the bot from your phone or computer')),
         ('AcpGram', ('Бот, запущенный на вашем компьютере или сервере', 'Бот, запущений на вашому комп’ютері чи сервері', 'A bot running on your computer or server')),
-        (text('Ваш агент', 'Ваш агент', 'Your agent'), ('Claude Code, Codex, Gemini CLI, Antigravity CLI или OpenCode работает в папке проекта', 'Claude Code, Codex, Gemini CLI, Antigravity CLI або OpenCode працює в папці проєкту', 'Claude Code, Codex, Gemini CLI, Antigravity CLI or OpenCode works in the project folder')),
+        (text('Ваш агент', 'Ваш агент', 'Your agent'), ('Claude Code, Codex, Gemini CLI, Antigravity CLI, OpenCode или Qwen Code работает в папке проекта', 'Claude Code, Codex, Gemini CLI, Antigravity CLI, OpenCode або Qwen Code працює в папці проєкту', 'Claude Code, Codex, Gemini CLI, Antigravity CLI or OpenCode works in the project folder')),
     ]
     flow = '<ol class="ap-flow ap-flow-3 ap-reveal">' + ''.join(f'<li><span class="ap-step-num">{i+1}</span><strong>{name}</strong><span class="ap-flow-desc">{text(*desc)}</span></li>' for i, (name, desc) in enumerate(nodes)) + '</ol>'
     flow += p('AcpGram сам подключается к Telegram, поэтому не нужны ни публичный IP, ни открытые порты, ни облачный посредник. С агентом он общается по открытому протоколу Agent Client Protocol (ACP).',
@@ -431,8 +441,9 @@ def build_acpgram():
         ('Gemini CLI', ('Только Gemini CLI', 'Лише Gemini CLI', 'Just Gemini CLI'), ('Вход в аккаунт или API-ключ', 'Вхід в акаунт або API-ключ', 'Account login or API key')),
         ('Antigravity CLI', ('Только Antigravity CLI 1.5+', 'Лише Antigravity CLI 1.5+', 'Just Antigravity CLI 1.5+'), ('Вход через Google или ключ Gemini API', 'Вхід через Google або ключ Gemini API', 'Google sign-in or Gemini API key')),
         ('OpenCode', ('Только OpenCode', 'Лише OpenCode', 'Just OpenCode'), ('Бесплатные модели без ключа или ключи провайдеров', 'Безкоштовні моделі без ключа або ключі провайдерів', 'Free models with no key, or provider keys')),
+        ('Qwen Code', ('Только Qwen Code', 'Лише Qwen Code', 'Just Qwen Code'), ('OpenAI-совместимый API: OpenRouter, свой endpoint или ключи провайдера', 'OpenAI-сумісний API: OpenRouter, власний endpoint або ключі провайдера', 'OpenAI-compatible API: OpenRouter, your own endpoint, or provider keys')),
     ]
-    content = '<div class="ap-grid ap-five">' + ''.join(f'<article class="bento-glass ap-card ap-reveal"><div class="bento-content"><h3>{name}</h3><p><span class="ap-small">{text("Нужно:", "Потрібно:", "Needs:")}</span><br>{text(*need)}</p><p class="ap-small">{text(*auth)}</p></div></article>' for name, need, auth in engines) + '</div>'
+    content = '<div class="ap-grid ap-six">' + ''.join(f'<article class="bento-glass ap-card ap-reveal"><div class="bento-content"><h3>{name}</h3><p><span class="ap-small">{text("Нужен:", "Потрібен:", "Needs:")}</span><br>{text(*need)}</p><p class="ap-small">{text(*auth)}</p></div></article>' for name, need, auth in engines) + '</div>'
     content += p('Достаточно одного агента. Остальные можно подключить позже — AcpGram сам найдёт установленные.', 'Достатньо одного агента. Інших можна підключити пізніше — AcpGram сам знайде встановлені.', 'One agent is enough. Add others later — AcpGram finds installed ones on its own.', 'ap-small')
     page += section('agents', ('Поддерживаемые агенты', 'Підтримувані агенти', 'Supported agents'), content)
 
@@ -469,7 +480,10 @@ def build_acpgram():
         f'<a href="{href}" class="bento-glass ap-card ap-press ap-reveal"><div class="bento-content"><span class="ap-eyebrow">{text(*date)}</span><h3>{text(*title)}</h3>{p(*desc)}<span aria-hidden="true">→</span></div></a>'
         for date, href, title, desc in NEWS[:2])
     news += f'<a href="/blog/?tag=acpgram#posts" class="bento-glass ap-card ap-press ap-reveal"><div class="bento-content"><span class="ap-eyebrow">{text("Блог", "Блог", "Blog")}</span><h3>{text("Все статьи об AcpGram", "Усі статті про AcpGram", "All posts about AcpGram")}</h3>{p("Обзоры версий, инструкции и ответы на вопросы.", "Огляди версій, інструкції й відповіді на запитання.", "Release write-ups, how-tos and answers to questions.")}<span aria-hidden="true">→</span></div></a>'
-    page += section('news', ('Новости', 'Новини', 'News'), '<div class="ap-grid ap-three">' + news + '</div>',
+    channel_link = ('<span class="ru-text"><a class="ap-text-link" href="https://t.me/acpgram_ru"><i aria-hidden="true" class="fa-brands fa-telegram"></i> Новости AcpGram в Telegram: @acpgram_ru</a></span>'
+                     '<span class="ua-text"><a class="ap-text-link" href="https://t.me/acpgram_ua"><i aria-hidden="true" class="fa-brands fa-telegram"></i> Новини AcpGram у Telegram: @acpgram_ua</a></span>'
+                     '<span class="en-text"><a class="ap-text-link" href="https://t.me/acpgram"><i aria-hidden="true" class="fa-brands fa-telegram"></i> AcpGram news on Telegram: @acpgram</a></span>')
+    page += section('news', ('Новости', 'Новини', 'News'), '<div class="ap-grid ap-three">' + news + '</div>' + channel_link,
                     ('Что появилось в последних версиях — в блоге автора.', 'Що з’явилося в останніх версіях — у блозі автора.', 'What the latest versions brought, from the author’s blog.'))
 
     content = '<div class="ap-faq">' + ''.join(f'<details class="bento-glass"><summary>{text(*q)}<span aria-hidden="true">+</span></summary>{p(*a)}</details>' for q, a in FAQ) + f'</div><a class="ap-text-link" href="{REPO}/issues">GitHub Issues ↗</a>'

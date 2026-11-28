@@ -8,6 +8,10 @@ AcpGram не заменяет агента и сам ничего не «дум�
 
 Проект бесплатный, с открытым кодом (лицензия MIT). Вы платите только за самого агента — подписку или API его провайдера, как и при работе в терминале. С OpenCode можно начать совсем без оплаты: у него есть бесплатные модели, которым не нужен ключ.
 
+#
+
+Новостные каналы в Telegram: [@acpgram](https://t.me/acpgram) (English), [@acpgram_ru](https://t.me/acpgram_ru) (русский), [@acpgram_ua](https://t.me/acpgram_ua) (українська).
+
 ### Как это устроено {#how-it-works}
 
 1. **Telegram.** Вы пишете боту с телефона или компьютера.
@@ -27,6 +31,7 @@ AcpGram не заменяет агента и сам ничего не «дум�
 | Gemini CLI | только Gemini CLI | вход в аккаунт или `GEMINI_API_KEY` |
 | Antigravity CLI | Antigravity CLI 1.5 или новее | вход через Google или ключ Gemini API |
 | OpenCode | только OpenCode | бесплатные модели без ключа или ключи провайдеров |
+| Qwen Code | только Qwen Code | OpenAI-совместимый API: OpenRouter, свой endpoint или ключи провайдера |
 
 Достаточно одного агента. Остальные можно подключить позже: AcpGram сам находит установленные.
 
@@ -56,6 +61,14 @@ npm install -g opencode-ai
 ```
 
 Этот шаг можно пропустить: если на машине нет ни одного агента, мастер настройки AcpGram сам предложит установить OpenCode.
+
+**Qwen Code.** Ставится через npm и подключается по ACP через OpenAI-совместимый API. Проще всего начать с бесплатных моделей OpenRouter: укажите `OPENROUTER_API_KEY` в `.env`, и AcpGram сам подготовит настройки Qwen.
+
+```sh
+npm install -g @qwen-code/qwen-code
+```
+
+По умолчанию AcpGram использует бесплатные модели OpenRouter: Nemotron 3.5 Lightning, Nemotron 3 Ultra 550B и ERNIE 5.5 Flash Preview. Свой список моделей можно задать в `QWEN_MODELS`, а другой OpenAI-совместимый endpoint — через `QWEN_BASE_URL`.
 
 **Claude Code.** Нужен сам Claude Code и мост, через который AcpGram с ним общается:
 
@@ -185,7 +198,7 @@ acpgram service restart
 
 ### Docker {#docker}
 
-В образе уже есть все пять агентов и мосты: на хост ничего ставить не нужно, мастер тоже не нужен. Понадобятся Git и Docker с Docker Compose.
+В образе уже есть все шесть агентов и мосты: на хост ничего ставить не нужно, мастер тоже не нужен. Понадобятся Git и Docker с Docker Compose.
 
 ```sh
 git clone https://github.com/selesnow/acpgram.git
@@ -440,6 +453,15 @@ OpenCode берёт модели тех провайдеров, чьи ключ�
 
 > Бесплатные модели могут использовать запросы для обучения. Не отправляйте в них секреты и закрытый код. Ключи и пароли передавайте проекту через [/files](#files-project).
 
+### Модели Qwen Code {#qwen}
+
+Qwen Code работает по ACP через OpenAI-совместимый API. AcpGram управляет настройками Qwen в отдельном Qwen home пользователя и не требует нативного Qwen OAuth.
+
+- По умолчанию AcpGram добавляет бесплатные модели OpenRouter: Nemotron 3.5 Lightning, Nemotron 3 Ultra 550B и ERNIE 5.5 Flash Preview.
+- Для настройки по умолчанию укажите `OPENROUTER_API_KEY`, для другого OpenAI-совместимого endpoint — `QWEN_BASE_URL`.
+- Свой список моделей задаётся в `QWEN_MODELS` (`id|Название;id|Название`). Приоритет: `QWEN_MODELS` > per-user `settings.json` > глобальный `~/.qwen/settings.json`/`QWEN_SETTINGS_FILE` > значения по умолчанию.
+- С бесплатными моделями будьте осторожны с секретами: провайдер может использовать запросы для обучения.
+
 ## Файлы {#files}
 
 ### Файлы для агента {#files-to-agent}
@@ -617,7 +639,7 @@ AcpGram можно поставить на общий сервер и выдат
 
 Каждый уровень соответствует своему режиму у каждого агента:
 
-| Уровень | Gemini CLI | Claude Code | Antigravity CLI | Codex | OpenCode |
+| Уровень | Gemini CLI | Claude Code | Antigravity CLI | Codex | OpenCode | Qwen Code |
 |---|---|---|---|---|---|
 | Чтение | `plan` | `plan` | `plan` | `read-only` | `plan` |
 | Обычный | `default` | `default` | `default` | `workspace-write` | `build` |
@@ -750,7 +772,11 @@ sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
 | `CODEX_COMMAND` | полный путь к мосту Codex (по умолчанию `codex-acp`) |
 | `AGY_COMMAND` | полный путь к Antigravity CLI (по умолчанию `agy`) |
 | `OPENCODE_COMMAND` | полный путь к OpenCode (по умолчанию `opencode`) |
-| `ACP_MODE`, `CLAUDE_ADMIN_MODE`, `AGY_ADMIN_MODE`, `CODEX_ADMIN_MODE`, `OPENCODE_ADMIN_MODE` | режим каждого агента для администратора (см. [уровни доступа](#access-levels)) |
+| `QWEN_COMMAND` | полный путь к Qwen Code (по умолчанию `qwen`) |
+| `QWEN_MODELS` | список моделей Qwen: `id|Название;id|Название`. По умолчанию — бесплатные модели OpenRouter |
+| `QWEN_BASE_URL` | базовый URL OpenAI-совместимого API для Qwen Code. Если не задан, а `OPENROUTER_API_KEY` есть, AcpGram использует OpenRouter |
+| `QWEN_SETTINGS_FILE` | путь к глобальному `settings.json` Qwen для чтения как резервного источника моделей |
+| `ACP_MODE`, `CLAUDE_ADMIN_MODE`, `AGY_ADMIN_MODE`, `CODEX_ADMIN_MODE`, `OPENCODE_ADMIN_MODE`, `QWEN_ADMIN_MODE` | режим каждого агента для администратора (см. [уровни доступа](#access-levels)) |
 | `AGENT_ENV_HIDE`, `AGENT_ENV_PASS` | дополнительные переменные окружения, которые соответственно скрыть от агента или передать ему (списки через запятую) |
 | `AGENT_START_TIMEOUT` | сколько секунд ждать запуска агента (по умолчанию 120) |
 
@@ -847,7 +873,7 @@ sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
 | `/project [название или путь]` | все | выбор проекта кнопками, поиском или путём; новый проект |
 | `/files` | все | файлы проекта: список, создание, загрузка и удаление в обход агента |
 | `/git` | все | Git: аккаунты, клонирование, изменения, ветки, отправка, публикация, запрос на слияние |
-| `/engine [название]` | все | выбор агента: `gemini`, `claude`, `agy`, `codex`, `opencode` |
+| `/engine [название]` | все | выбор агента: `gemini`, `claude`, `agy`, `codex`, `opencode`, `qwen` |
 | `/model [название]` | все | выбор модели и уровня рассуждений; с названием — поиск модели |
 | `/new` | все | новая сессия (в режиме «Диалоги» — новая тема) |
 | `/sessions` | все | прошлые сессии текущего проекта и возврат в выбранную |
