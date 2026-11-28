@@ -5,7 +5,7 @@ AcpGram is a bridge between Telegram and coding agents. You install it on your c
 AcpGram does not replace the agent and does no “thinking” of its own. It is a remote control: one bot with a shared interface and commands, in which you switch the agent, model, project and session.
 
 The project is free and open source (MIT license). You pay only for the agent itself — a subscription or its provider’s API, just as you do when working in the terminal. With OpenCode you can start without paying anything: it has free models that need no key.
-News channels in Telegram: [@acpgram](https://t.me/acpgram) (English), [@acpgram_ru](https://t.me/acpgram_ru) (Russian), [@acpgram_ua](https://t.me/acpgram_ua) (Ukrainian).
+News channel in Telegram: [@acpgram](https://t.me/acpgram).
 
 
 ### How it works {#how-it-works}

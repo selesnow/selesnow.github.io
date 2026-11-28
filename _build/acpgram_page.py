@@ -480,10 +480,19 @@ def build_acpgram():
         f'<a href="{href}" class="bento-glass ap-card ap-press ap-reveal"><div class="bento-content"><span class="ap-eyebrow">{text(*date)}</span><h3>{text(*title)}</h3>{p(*desc)}<span aria-hidden="true">→</span></div></a>'
         for date, href, title, desc in NEWS[:2])
     news += f'<a href="/blog/?tag=acpgram#posts" class="bento-glass ap-card ap-press ap-reveal"><div class="bento-content"><span class="ap-eyebrow">{text("Блог", "Блог", "Blog")}</span><h3>{text("Все статьи об AcpGram", "Усі статті про AcpGram", "All posts about AcpGram")}</h3>{p("Обзоры версий, инструкции и ответы на вопросы.", "Огляди версій, інструкції й відповіді на запитання.", "Release write-ups, how-tos and answers to questions.")}<span aria-hidden="true">→</span></div></a>'
-    channel_link = ('<span class="ru-text"><a class="ap-text-link" href="https://t.me/acpgram_ru"><i aria-hidden="true" class="fa-brands fa-telegram"></i> Новости AcpGram в Telegram: @acpgram_ru</a></span>'
-                     '<span class="ua-text"><a class="ap-text-link" href="https://t.me/acpgram_ua"><i aria-hidden="true" class="fa-brands fa-telegram"></i> Новини AcpGram у Telegram: @acpgram_ua</a></span>'
-                     '<span class="en-text"><a class="ap-text-link" href="https://t.me/acpgram"><i aria-hidden="true" class="fa-brands fa-telegram"></i> AcpGram news on Telegram: @acpgram</a></span>')
-    page += section('news', ('Новости', 'Новини', 'News'), '<div class="ap-grid ap-three">' + news + '</div>' + channel_link,
+    channel = (
+        '<a class="bento-glass ap-channel-card ap-reveal" href="https://t.me/acpgram_ru" data-lang-href-ru="https://t.me/acpgram_ru" data-lang-href-ua="https://t.me/acpgram_ua" data-lang-href-en="https://t.me/acpgram">'
+        '<div class="bento-content ap-channel-card-inner">'
+        '<span class="ap-channel-icon" aria-hidden="true"><i class="fa-brands fa-telegram"></i></span>'
+        '<div class="ap-channel-copy">'
+        '<span class="ap-eyebrow">' + text('Telegram-канал', 'Telegram-канал', 'Telegram channel') + '</span>'
+        '<h3>' + text('Новости AcpGram', 'Новини AcpGram', 'AcpGram news') + '</h3>'
+        '<p>' + text('Релизы, заметки и советы по новой версии — на вашем языке.', 'Релізи, нотатки й поради щодо нових версій — вашою мовою.', 'Release notes, tips and updates in your language.') + '</p>'
+        '</div>'
+        '<span class="ap-channel-cta"><span class="ru-text">@acpgram_ru</span><span class="ua-text">@acpgram_ua</span><span class="en-text">@acpgram</span> <i aria-hidden="true" class="fa-solid fa-arrow-right"></i></span>'
+        '</div></a>'
+    )
+    page += section('news', ('Новости', 'Новини', 'News'), '<div class="ap-grid ap-three">' + news + '</div>' + channel,
                     ('Что появилось в последних версиях — в блоге автора.', 'Що з’явилося в останніх версіях — у блозі автора.', 'What the latest versions brought, from the author’s blog.'))
 
     content = '<div class="ap-faq">' + ''.join(f'<details class="bento-glass"><summary>{text(*q)}<span aria-hidden="true">+</span></summary>{p(*a)}</details>' for q, a in FAQ) + f'</div><a class="ap-text-link" href="{REPO}/issues">GitHub Issues ↗</a>'

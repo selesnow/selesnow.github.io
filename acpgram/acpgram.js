@@ -18,6 +18,7 @@
         document.querySelectorAll('#tab-os-win').forEach(el => el.parentElement.setAttribute('aria-label', label('Операционная система','Операційна система','Operating system')));
         const iframe = document.querySelector('#ap-video iframe');
         if (iframe) iframe.title = label('AcpGram: установка, настройка и демонстрация','AcpGram: встановлення, налаштування та демонстрація','AcpGram: installation, setup and demo');
+                document.querySelectorAll('[data-lang-href-' + lang + ']').forEach(el => { el.href = el.getAttribute('data-lang-href-' + lang); });
         document.querySelectorAll('[data-stat]').forEach(el => {
             const value = pathValue(el.dataset.stat);
             if (value !== null && value !== undefined) el.textContent = typeof value === 'number' ? format(value) : value;
