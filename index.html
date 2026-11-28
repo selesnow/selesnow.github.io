@@ -159,6 +159,27 @@
         }
 
         .no-scrollbar::-webkit-scrollbar { display: none; }
+
+        /* Шестиугольник для пакетов без PNG-логотипа */
+        .hex { clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); }
+
+        /* Плавное раскрытие дополнительных пакетов без анимации height */
+        .pkg-collapse {
+            display: grid;
+            grid-template-rows: 0fr;
+            opacity: 0;
+            transition: grid-template-rows 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+        }
+        .pkg-collapse.is-open {
+            grid-template-rows: 1fr;
+            opacity: 1;
+        }
+        .pkg-collapse > .pkg-collapse-inner {
+            overflow: hidden;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .pkg-collapse { transition: none; }
+        }
     </style>
     <!-- Tailwind собран заранее (_build/build.py) и подключается последним, как это делал CDN-скрипт -->
     <link rel="stylesheet" href="assets/tailwind.css">
@@ -464,301 +485,500 @@
             </p>
         </div>
 
-		<div id="github-repos-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-			
-			<a id="rgoogleads" href="https://github.com/selesnow/rgoogleads" class="bento-glass p-6 rounded-2xl block group" data-aos="zoom-in" data-aos-delay="0">
-				<div class="bento-content flex justify-between items-start mb-4"><h4 class="font-bold text-lg text-white group-hover:text-purple-400 outfit-font">rgoogleads</h4><i class="fa-brands fa-google text-slate-500 text-xl group-hover:text-purple-400 transition-colors"></i></div>
-				<p class="bento-content text-sm text-slate-400 mb-5">Google Ads API</p>
-				<div class="bento-content flex items-center gap-4 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5">
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-yellow-500 transition-colors">
-						<i class="fa-solid fa-star"></i><span class="star-count font-bold">...</span>
-					</div>
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-blue-400 transition-colors cran-downloads">
-						<i class="fa-solid fa-download"></i><span class="download-count font-bold">...</span>
-					</div>
-				</div>
-			</a>
+		<div id="github-repos-container" class="space-y-4">
 
-			<a id="rfacebookstat" href="https://github.com/selesnow/rfacebookstat" class="bento-glass p-6 rounded-2xl block group" data-aos="zoom-in" data-aos-delay="50">
-				<div class="bento-content flex justify-between items-start mb-4"><h4 class="font-bold text-lg text-white group-hover:text-purple-400 outfit-font">rfacebookstat</h4><i class="fa-brands fa-facebook text-slate-500 text-xl group-hover:text-blue-500 transition-colors"></i></div>
-				<p class="bento-content text-sm text-slate-400 mb-5">FB Marketing API</p>
-				<div class="bento-content flex items-center gap-4 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5">
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-yellow-500 transition-colors">
-						<i class="fa-solid fa-star"></i><span class="star-count font-bold">...</span>
-					</div>
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-blue-400 transition-colors cran-downloads">
-						<i class="fa-solid fa-download"></i><span class="download-count font-bold">...</span>
-					</div>
-				</div>
-			</a>
+			<!-- ROW 1: 2 FLAGSHIP PACKAGES (BENTO FEATURED) -->
+			<div id="repos-featured" class="grid grid-cols-1 lg:grid-cols-2 gap-4">
 
-			<a id="rym" href="https://github.com/selesnow/rym" class="bento-glass p-6 rounded-2xl block group" data-aos="zoom-in" data-aos-delay="100">
-				<div class="bento-content flex justify-between items-start mb-4"><h4 class="font-bold text-lg text-white group-hover:text-purple-400 outfit-font">rym</h4><i class="fa-brands fa-yandex text-slate-500 text-xl group-hover:text-red-500 transition-colors"></i></div>
-				<div class="bento-content flex items-center justify-between gap-2 mb-5"><p class="text-sm text-slate-400">Yandex Metrica API</p><span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-amber-500/15 text-amber-300 border border-amber-500/30 inline-flex items-center gap-1 shrink-0"><i class="fa-solid fa-box-archive"></i><span class="ru-text">Архив</span><span class="ua-text">Архів</span><span class="en-text">Archived</span></span></div>
-				<div class="bento-content flex items-center gap-4 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5">
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-yellow-500 transition-colors">
-						<i class="fa-solid fa-star"></i><span class="star-count font-bold">...</span>
+				<a id="rfacebookstat" href="https://github.com/selesnow/rfacebookstat" target="_blank" rel="noopener" data-archived="0" data-stars="30" data-downloads="53565" class="bento-glass p-6 sm:p-7 rounded-3xl flex flex-col sm:flex-row items-start gap-5 group border-purple-500/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400" data-aos="fade-up" data-aos-delay="0">
+					<img src="assets/logos/rfacebookstat.png" alt="rfacebookstat logo" width="76" height="88" loading="lazy" class="bento-content w-[68px] h-[79px] sm:w-[76px] sm:h-[88px] object-contain shrink-0 drop-shadow-[0_10px_22px_rgba(0,0,0,0.5)] group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500">
+					<div class="bento-content min-w-0 flex-1 flex flex-col w-full h-full">
+						<div class="flex flex-wrap items-center gap-1.5 mb-2">
+							<span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-blue-500/15 text-blue-300 border border-blue-500/30 whitespace-nowrap">CRAN</span>
+							<span class="px-2 py-0.5 rounded-md text-[10px] font-bold tracking-wider bg-yellow-500/10 text-yellow-300 border border-yellow-500/25 inline-flex items-center gap-1 whitespace-nowrap"><i class="fa-solid fa-trophy text-[9px]" aria-hidden="true"></i>Top-40 CRAN</span>
+						</div>
+						<h4 class="font-extrabold text-2xl text-white group-hover:text-purple-300 transition-colors outfit-font break-words">rfacebookstat</h4>
+						<p class="text-sm text-slate-300 leading-relaxed mt-1.5 mb-4 flex-1">
+							<span class="ru-text">Facebook Marketing API: кампании, статистика с разбивками, конверсии и управление доступами.</span><span class="ua-text">Facebook Marketing API: кампанії, статистика з розбивками, конверсії та керування доступами.</span><span class="en-text">Facebook Marketing API: campaigns, breakdown insights, conversions &amp; access management.</span>
+						</p>
+						<div class="mt-auto flex items-center justify-between gap-4 text-xs font-mono tabular-nums bg-slate-900/60 px-3.5 py-2.5 rounded-xl border border-white/5">
+							<div class="flex items-center gap-4">
+								<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-yellow-400 transition-colors">
+									<i class="fa-solid fa-star text-yellow-500/80" aria-hidden="true"></i><span class="star-count font-bold">30</span>
+								</div>
+								<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-blue-400 transition-colors cran-downloads">
+									<i class="fa-solid fa-download text-blue-400/80" aria-hidden="true"></i><span class="download-count font-bold">53.6k</span>
+								</div>
+							</div>
+							<span class="text-slate-500 group-hover:text-purple-300 transition-colors inline-flex items-center gap-1.5"><i class="fa-brands fa-github" aria-hidden="true"></i>GitHub</span>
+						</div>
 					</div>
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-blue-400 transition-colors cran-downloads">
-						<i class="fa-solid fa-download"></i><span class="download-count font-bold">...</span>
-					</div>
-				</div>
-			</a>
+				</a>
 
-			<a id="rtiktokads" href="https://github.com/selesnow/rtiktokads" class="bento-glass p-6 rounded-2xl block group" data-aos="zoom-in" data-aos-delay="150">
-				<div class="bento-content flex justify-between items-start mb-4"><h4 class="font-bold text-lg text-white group-hover:text-purple-400 outfit-font">rtiktokads</h4><i class="fa-brands fa-tiktok text-slate-500 text-xl group-hover:text-white transition-colors"></i></div>
-				<p class="bento-content text-sm text-slate-400 mb-5">TikTok Ads API</p>
-				<div class="bento-content flex items-center gap-4 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5">
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-yellow-500 transition-colors">
-						<i class="fa-solid fa-star"></i><span class="star-count font-bold">...</span>
+				<a id="rgoogleads" href="https://github.com/selesnow/rgoogleads" target="_blank" rel="noopener" data-archived="0" data-stars="14" data-downloads="38887" class="bento-glass p-6 sm:p-7 rounded-3xl flex flex-col sm:flex-row items-start gap-5 group border-purple-500/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400" data-aos="fade-up" data-aos-delay="80">
+					<img src="assets/logos/rgoogleads.png" alt="rgoogleads logo" width="76" height="88" loading="lazy" class="bento-content w-[68px] h-[79px] sm:w-[76px] sm:h-[88px] object-contain shrink-0 drop-shadow-[0_10px_22px_rgba(0,0,0,0.5)] group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500">
+					<div class="bento-content min-w-0 flex-1 flex flex-col w-full h-full">
+						<div class="flex flex-wrap items-center gap-1.5 mb-2">
+							<span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-blue-500/15 text-blue-300 border border-blue-500/30 whitespace-nowrap">CRAN</span>
+						</div>
+						<h4 class="font-extrabold text-2xl text-white group-hover:text-purple-300 transition-colors outfit-font break-words">rgoogleads</h4>
+						<p class="text-sm text-slate-300 leading-relaxed mt-1.5 mb-4 flex-1">
+							<span class="ru-text">Google Ads API: иерархия MCC-аккаунтов, GAQL-отчёты и метрики Keyword Planner.</span><span class="ua-text">Google Ads API: ієрархія MCC-акаунтів, GAQL-звіти та метрики Keyword Planner.</span><span class="en-text">Google Ads API: MCC account hierarchy, GAQL reports &amp; Keyword Planner metrics.</span>
+						</p>
+						<div class="mt-auto flex items-center justify-between gap-4 text-xs font-mono tabular-nums bg-slate-900/60 px-3.5 py-2.5 rounded-xl border border-white/5">
+							<div class="flex items-center gap-4">
+								<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-yellow-400 transition-colors">
+									<i class="fa-solid fa-star text-yellow-500/80" aria-hidden="true"></i><span class="star-count font-bold">14</span>
+								</div>
+								<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-blue-400 transition-colors cran-downloads">
+									<i class="fa-solid fa-download text-blue-400/80" aria-hidden="true"></i><span class="download-count font-bold">38.9k</span>
+								</div>
+							</div>
+							<span class="text-slate-500 group-hover:text-purple-300 transition-colors inline-flex items-center gap-1.5"><i class="fa-brands fa-github" aria-hidden="true"></i>GitHub</span>
+						</div>
 					</div>
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-blue-400 transition-colors cran-downloads">
-						<i class="fa-solid fa-download"></i><span class="download-count font-bold">...</span>
-					</div>
-				</div>
-			</a>
+				</a>
 
-			<a id="rappleads" href="https://github.com/selesnow/rappleads" class="bento-glass p-6 rounded-2xl block group" data-aos="zoom-in" data-aos-delay="0">
-				<div class="bento-content flex justify-between items-start mb-4"><h4 class="font-bold text-lg text-white group-hover:text-purple-400 outfit-font">rappleads</h4><i class="fa-brands fa-apple text-slate-500 text-xl group-hover:text-white transition-colors"></i></div>
-				<p class="bento-content text-sm text-slate-400 mb-5">Apple Search Ads</p>
-				<div class="bento-content flex items-center gap-4 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5">
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-yellow-500 transition-colors">
-						<i class="fa-solid fa-star"></i><span class="star-count font-bold">...</span>
-					</div>
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-blue-400 transition-colors cran-downloads">
-						<i class="fa-solid fa-download"></i><span class="download-count font-bold">...</span>
-					</div>
-				</div>
-			</a>
+			</div>
 
-			<a id="rytstat" href="https://github.com/selesnow/rytstat" class="bento-glass p-6 rounded-2xl block group" data-aos="zoom-in" data-aos-delay="50">
-				<div class="bento-content flex justify-between items-start mb-4"><h4 class="font-bold text-lg text-white group-hover:text-purple-400 outfit-font">rytstat</h4><i class="fa-brands fa-youtube text-slate-500 text-xl group-hover:text-red-500 transition-colors"></i></div>
-				<p class="bento-content text-sm text-slate-400 mb-5">YouTube Analytics API</p>
-				<div class="bento-content flex items-center gap-4 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5">
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-yellow-500 transition-colors">
-						<i class="fa-solid fa-star"></i><span class="star-count font-bold">...</span>
-					</div>
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-blue-400 transition-colors cran-downloads">
-						<i class="fa-solid fa-download"></i><span class="download-count font-bold">...</span>
-					</div>
-				</div>
-			</a>
+			<!-- ROW 2: NEXT 4 TOP ACTIVE PACKAGES -->
+			<div id="repos-core" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
 
-			<a id="timeperiodsR" href="https://github.com/selesnow/timeperiodsR" class="bento-glass p-6 rounded-2xl block group" data-aos="zoom-in" data-aos-delay="100">
-				<div class="bento-content flex justify-between items-start mb-4"><h4 class="font-bold text-lg text-white group-hover:text-purple-400 outfit-font">timeperiodsR</h4><i class="fa-solid fa-clock text-slate-500 text-xl group-hover:text-purple-400 transition-colors"></i></div>
-				<p class="bento-content text-sm text-slate-400 mb-5">Date Manipulation</p>
-				<div class="bento-content flex items-center gap-4 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5">
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-yellow-500 transition-colors">
-						<i class="fa-solid fa-star"></i><span class="star-count font-bold">...</span>
+				<a id="rtgstat" href="https://github.com/selesnow/rtgstat" target="_blank" rel="noopener" data-archived="0" data-stars="11" data-downloads="23490" class="bento-glass p-5 rounded-2xl flex flex-col group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400" data-aos="fade-up" data-aos-delay="0">
+					<div class="bento-content flex items-center gap-3.5 mb-3">
+						<img src="assets/logos/rtgstat.png" alt="rtgstat logo" width="52" height="60" loading="lazy" class="w-[52px] h-[60px] object-contain shrink-0 drop-shadow-[0_6px_14px_rgba(0,0,0,0.45)] group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500">
+						<div class="min-w-0 flex-1">
+							<span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-blue-500/15 text-blue-300 border border-blue-500/30 whitespace-nowrap mb-1">CRAN</span>
+							<h4 class="font-bold text-lg text-white group-hover:text-purple-300 transition-colors outfit-font truncate">rtgstat</h4>
+						</div>
 					</div>
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-blue-400 transition-colors cran-downloads">
-						<i class="fa-solid fa-download"></i><span class="download-count font-bold">...</span>
+					<p class="bento-content text-sm text-slate-400 mb-4 flex-1">TGStat API</p>
+					<div class="bento-content mt-auto flex items-center gap-4 text-xs font-mono tabular-nums bg-slate-900/50 px-3 py-2.5 rounded-xl border border-white/5">
+						<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-yellow-400 transition-colors">
+							<i class="fa-solid fa-star text-yellow-500/80" aria-hidden="true"></i><span class="star-count font-bold">11</span>
+						</div>
+						<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-blue-400 transition-colors cran-downloads">
+							<i class="fa-solid fa-download text-blue-400/80" aria-hidden="true"></i><span class="download-count font-bold">23.5k</span>
+						</div>
 					</div>
-				</div>
-			</a>
+				</a>
 
-			<a id="getProxy" href="https://github.com/selesnow/getProxy" class="bento-glass p-6 rounded-2xl block group" data-aos="zoom-in" data-aos-delay="150">
-				<div class="bento-content flex justify-between items-start mb-4"><h4 class="font-bold text-lg text-white group-hover:text-purple-400 outfit-font">getProxy</h4><i class="fa-solid fa-shield-halved text-slate-500 text-xl group-hover:text-green-400 transition-colors"></i></div>
-				<p class="bento-content text-sm text-slate-400 mb-5">Free Proxy Management</p>
-				<div class="bento-content flex items-center gap-4 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5">
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-yellow-500 transition-colors">
-						<i class="fa-solid fa-star"></i><span class="star-count font-bold">...</span>
+				<a id="getProxy" href="https://github.com/selesnow/getProxy" target="_blank" rel="noopener" data-archived="0" data-stars="8" data-downloads="29535" class="bento-glass p-5 rounded-2xl flex flex-col group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400" data-aos="fade-up" data-aos-delay="50">
+					<div class="bento-content flex items-center gap-3.5 mb-3">
+						<img src="assets/logos/getProxy.png" alt="getProxy logo" width="52" height="60" loading="lazy" class="w-[52px] h-[60px] object-contain shrink-0 drop-shadow-[0_6px_14px_rgba(0,0,0,0.45)] group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500">
+						<div class="min-w-0 flex-1">
+							<span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-blue-500/15 text-blue-300 border border-blue-500/30 whitespace-nowrap mb-1">CRAN</span>
+							<h4 class="font-bold text-lg text-white group-hover:text-purple-300 transition-colors outfit-font truncate">getProxy</h4>
+						</div>
 					</div>
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-blue-400 transition-colors cran-downloads">
-						<i class="fa-solid fa-download"></i><span class="download-count font-bold">...</span>
+					<p class="bento-content text-sm text-slate-400 mb-4 flex-1">Free Proxy Management</p>
+					<div class="bento-content mt-auto flex items-center gap-4 text-xs font-mono tabular-nums bg-slate-900/50 px-3 py-2.5 rounded-xl border border-white/5">
+						<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-yellow-400 transition-colors">
+							<i class="fa-solid fa-star text-yellow-500/80" aria-hidden="true"></i><span class="star-count font-bold">8</span>
+						</div>
+						<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-blue-400 transition-colors cran-downloads">
+							<i class="fa-solid fa-download text-blue-400/80" aria-hidden="true"></i><span class="download-count font-bold">29.5k</span>
+						</div>
 					</div>
-				</div>
-			</a>
+				</a>
 
-			<a id="ractivecampaign" href="https://github.com/selesnow/ractivecampaign" class="bento-glass p-6 rounded-2xl block group" data-aos="zoom-in" data-aos-delay="0">
-				<div class="bento-content flex justify-between items-start mb-4"><h4 class="font-bold text-lg text-white group-hover:text-purple-400 outfit-font">ractivecampaign</h4><i class="fa-solid fa-envelope text-slate-500 text-xl group-hover:text-blue-300 transition-colors"></i></div>
-				<p class="bento-content text-sm text-slate-400 mb-5">ActiveCampaign API</p>
-				<div class="bento-content flex items-center gap-4 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5">
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-yellow-500 transition-colors">
-						<i class="fa-solid fa-star"></i><span class="star-count font-bold">...</span>
+				<a id="timeperiodsR" href="https://github.com/selesnow/timeperiodsR" target="_blank" rel="noopener" data-archived="0" data-stars="7" data-downloads="45063" class="bento-glass p-5 rounded-2xl flex flex-col group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400" data-aos="fade-up" data-aos-delay="100">
+					<div class="bento-content flex items-center gap-3.5 mb-3">
+						<img src="assets/logos/timeperiodsR.png" alt="timeperiodsR logo" width="52" height="60" loading="lazy" class="w-[52px] h-[60px] object-contain shrink-0 drop-shadow-[0_6px_14px_rgba(0,0,0,0.45)] group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500">
+						<div class="min-w-0 flex-1">
+							<span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-blue-500/15 text-blue-300 border border-blue-500/30 whitespace-nowrap mb-1">CRAN</span>
+							<h4 class="font-bold text-lg text-white group-hover:text-purple-300 transition-colors outfit-font truncate">timeperiodsR</h4>
+						</div>
 					</div>
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-blue-400 transition-colors cran-downloads">
-						<i class="fa-solid fa-download"></i><span class="download-count font-bold">...</span>
+					<p class="bento-content text-sm text-slate-400 mb-4 flex-1">Date Manipulation</p>
+					<div class="bento-content mt-auto flex items-center gap-4 text-xs font-mono tabular-nums bg-slate-900/50 px-3 py-2.5 rounded-xl border border-white/5">
+						<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-yellow-400 transition-colors">
+							<i class="fa-solid fa-star text-yellow-500/80" aria-hidden="true"></i><span class="star-count font-bold">7</span>
+						</div>
+						<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-blue-400 transition-colors cran-downloads">
+							<i class="fa-solid fa-download text-blue-400/80" aria-hidden="true"></i><span class="download-count font-bold">45.1k</span>
+						</div>
 					</div>
-				</div>
-			</a>
+				</a>
 
-			<a id="rappsflyer" href="https://github.com/selesnow/rappsflyer" class="bento-glass p-6 rounded-2xl block group" data-aos="zoom-in" data-aos-delay="50">
-				<div class="bento-content flex justify-between items-start mb-4"><h4 class="font-bold text-lg text-white group-hover:text-purple-400 outfit-font">rappsflyer</h4><i class="fa-solid fa-plane text-slate-500 text-xl group-hover:text-cyan-400 transition-colors"></i></div>
-				<p class="bento-content text-sm text-slate-400 mb-5">AppsFlyer API</p>
-				<div class="bento-content flex items-center gap-4 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5">
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-yellow-500 transition-colors">
-						<i class="fa-solid fa-star"></i><span class="star-count font-bold">...</span>
+				<a id="rytstat" href="https://github.com/selesnow/rytstat" target="_blank" rel="noopener" data-archived="0" data-stars="2" data-downloads="13009" class="bento-glass p-5 rounded-2xl flex flex-col group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400" data-aos="fade-up" data-aos-delay="150">
+					<div class="bento-content flex items-center gap-3.5 mb-3">
+						<img src="assets/logos/rytstat.png" alt="rytstat logo" width="52" height="60" loading="lazy" class="w-[52px] h-[60px] object-contain shrink-0 drop-shadow-[0_6px_14px_rgba(0,0,0,0.45)] group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500">
+						<div class="min-w-0 flex-1">
+							<span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-blue-500/15 text-blue-300 border border-blue-500/30 whitespace-nowrap mb-1">CRAN</span>
+							<h4 class="font-bold text-lg text-white group-hover:text-purple-300 transition-colors outfit-font truncate">rytstat</h4>
+						</div>
 					</div>
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-blue-400 transition-colors cran-downloads">
-						<i class="fa-solid fa-download"></i><span class="download-count font-bold">...</span>
+					<p class="bento-content text-sm text-slate-400 mb-4 flex-1">YouTube Analytics API</p>
+					<div class="bento-content mt-auto flex items-center gap-4 text-xs font-mono tabular-nums bg-slate-900/50 px-3 py-2.5 rounded-xl border border-white/5">
+						<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-yellow-400 transition-colors">
+							<i class="fa-solid fa-star text-yellow-500/80" aria-hidden="true"></i><span class="star-count font-bold">2</span>
+						</div>
+						<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-blue-400 transition-colors cran-downloads">
+							<i class="fa-solid fa-download text-blue-400/80" aria-hidden="true"></i><span class="download-count font-bold">13k</span>
+						</div>
 					</div>
-				</div>
-			</a>
+				</a>
 
-			<a id="rlinkedinads" href="https://github.com/selesnow/rlinkedinads" class="bento-glass p-6 rounded-2xl block group" data-aos="zoom-in" data-aos-delay="100">
-				<div class="bento-content flex justify-between items-start mb-4"><h4 class="font-bold text-lg text-white group-hover:text-purple-400 outfit-font">rlinkedinads</h4><i class="fa-brands fa-linkedin text-slate-500 text-xl group-hover:text-blue-600 transition-colors"></i></div>
-				<p class="bento-content text-sm text-slate-400 mb-5">LinkedIn Ads API</p>
-				<div class="bento-content flex items-center gap-4 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5">
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-yellow-500 transition-colors">
-						<i class="fa-solid fa-star"></i><span class="star-count font-bold">...</span>
-					</div>
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-blue-400 transition-colors cran-downloads">
-						<i class="fa-solid fa-download"></i><span class="download-count font-bold">...</span>
-					</div>
-				</div>
-			</a>
+			</div>
 
-			<a id="rtgstat" href="https://github.com/selesnow/rtgstat" class="bento-glass p-6 rounded-2xl block group" data-aos="zoom-in" data-aos-delay="150">
-				<div class="bento-content flex justify-between items-start mb-4"><h4 class="font-bold text-lg text-white group-hover:text-purple-400 outfit-font">rtgstat</h4><i class="fa-brands fa-telegram text-slate-500 text-xl group-hover:text-blue-400 transition-colors"></i></div>
-				<p class="bento-content text-sm text-slate-400 mb-5">TGStat API</p>
-				<div class="bento-content flex items-center gap-4 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5">
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-yellow-500 transition-colors">
-						<i class="fa-solid fa-star"></i><span class="star-count font-bold">...</span>
-					</div>
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-blue-400 transition-colors cran-downloads">
-						<i class="fa-solid fa-download"></i><span class="download-count font-bold">...</span>
-					</div>
-				</div>
-			</a>
+			<!-- COLLAPSIBLE: REMAINING 12 ACTIVE + 4 ARCHIVED PACKAGES -->
+			<div id="repos-more-wrap" class="pkg-collapse" aria-hidden="true" inert>
+				<div class="pkg-collapse-inner pt-4 pb-2 space-y-6">
 
-			<a id="racademyocean" href="https://github.com/selesnow/racademyocean" class="bento-glass p-6 rounded-2xl block group" data-aos="zoom-in" data-aos-delay="0">
-				<div class="bento-content flex justify-between items-start mb-4"><h4 class="font-bold text-lg text-white group-hover:text-purple-400 outfit-font">racademyocean</h4><i class="fa-solid fa-graduation-cap text-slate-500 text-xl group-hover:text-yellow-400 transition-colors"></i></div>
-				<p class="bento-content text-sm text-slate-400 mb-5">AcademyOcean API</p>
-				<div class="bento-content flex items-center gap-4 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5">
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-yellow-500 transition-colors">
-						<i class="fa-solid fa-star"></i><span class="star-count font-bold">...</span>
-					</div>
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-blue-400 transition-colors cran-downloads">
-						<i class="fa-solid fa-download"></i><span class="download-count font-bold">...</span>
-					</div>
-				</div>
-			</a>
+					<div id="repos-more-active" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
 
-			<a id="ringostat" href="https://github.com/selesnow/ringostat" class="bento-glass p-6 rounded-2xl block group" data-aos="zoom-in" data-aos-delay="50">
-				<div class="bento-content flex justify-between items-start mb-4"><h4 class="font-bold text-lg text-white group-hover:text-purple-400 outfit-font">ringostat</h4><i class="fa-solid fa-phone text-slate-500 text-xl group-hover:text-green-500 transition-colors"></i></div>
-				<p class="bento-content text-sm text-slate-400 mb-5">Ringostat API</p>
-				<div class="bento-content flex items-center gap-4 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5">
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-yellow-500 transition-colors">
-						<i class="fa-solid fa-star"></i><span class="star-count font-bold">...</span>
-					</div>
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-blue-400 transition-colors cran-downloads">
-						<i class="fa-solid fa-download"></i><span class="download-count font-bold">...</span>
-					</div>
-				</div>
-			</a>
+						<a id="rappsflyer" href="https://github.com/selesnow/rappsflyer" target="_blank" rel="noopener" data-archived="0" data-stars="1" data-downloads="14448" class="bento-glass p-5 rounded-2xl flex flex-col group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400">
+							<div class="bento-content flex items-center gap-3.5 mb-3">
+								<img src="assets/logos/rappsflyer.png" alt="rappsflyer logo" width="52" height="60" loading="lazy" class="w-[52px] h-[60px] object-contain shrink-0 drop-shadow-[0_6px_14px_rgba(0,0,0,0.45)] group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500">
+								<div class="min-w-0 flex-1">
+									<span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-blue-500/15 text-blue-300 border border-blue-500/30 whitespace-nowrap mb-1">CRAN</span>
+									<h4 class="font-bold text-lg text-white group-hover:text-purple-300 transition-colors outfit-font truncate">rappsflyer</h4>
+								</div>
+							</div>
+							<p class="bento-content text-sm text-slate-400 mb-4 flex-1">AppsFlyer API</p>
+							<div class="bento-content mt-auto flex items-center gap-4 text-xs font-mono tabular-nums bg-slate-900/50 px-3 py-2.5 rounded-xl border border-white/5">
+								<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-yellow-400 transition-colors">
+									<i class="fa-solid fa-star text-yellow-500/80" aria-hidden="true"></i><span class="star-count font-bold">1</span>
+								</div>
+								<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-blue-400 transition-colors cran-downloads">
+									<i class="fa-solid fa-download text-blue-400/80" aria-hidden="true"></i><span class="download-count font-bold">14.4k</span>
+								</div>
+							</div>
+						</a>
 
-			<!-- Additional 7 packages -->
-			<a id="ryandexdirect" href="https://github.com/selesnow/ryandexdirect" class="bento-glass p-6 rounded-2xl block group" data-aos="zoom-in" data-aos-delay="100">
-				<div class="bento-content flex justify-between items-start mb-4"><h4 class="font-bold text-lg text-white group-hover:text-purple-400 outfit-font">ryandexdirect</h4><i class="fa-brands fa-yandex text-slate-500 text-xl group-hover:text-red-500 transition-colors"></i></div>
-				<div class="bento-content flex items-center justify-between gap-2 mb-5"><p class="text-sm text-slate-400">Yandex.Direct API</p><span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-amber-500/15 text-amber-300 border border-amber-500/30 inline-flex items-center gap-1 shrink-0"><i class="fa-solid fa-box-archive"></i><span class="ru-text">Архив</span><span class="ua-text">Архів</span><span class="en-text">Archived</span></span></div>
-				<div class="bento-content flex items-center gap-4 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5">
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-yellow-500 transition-colors">
-						<i class="fa-solid fa-star"></i><span class="star-count font-bold">...</span>
-					</div>
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-blue-400 transition-colors cran-downloads">
-						<i class="fa-solid fa-download"></i><span class="download-count font-bold">...</span>
-					</div>
-				</div>
-			</a>
+						<a id="galigor" href="https://github.com/selesnow/galigor" target="_blank" rel="noopener" data-archived="0" data-stars="1" data-downloads="13233" class="bento-glass p-5 rounded-2xl flex flex-col group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400">
+							<div class="bento-content flex items-center gap-3.5 mb-3">
+								<img src="assets/logos/galigor.png" alt="galigor logo" width="52" height="60" loading="lazy" class="w-[52px] h-[60px] object-contain shrink-0 drop-shadow-[0_6px_14px_rgba(0,0,0,0.45)] group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500">
+								<div class="min-w-0 flex-1">
+									<span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-slate-500/15 text-slate-300 border border-white/10 whitespace-nowrap mb-1">GitHub</span>
+									<h4 class="font-bold text-lg text-white group-hover:text-purple-300 transition-colors outfit-font truncate">galigor</h4>
+								</div>
+							</div>
+							<p class="bento-content text-sm text-slate-400 mb-4 flex-1">Internet Marketing Kit</p>
+							<div class="bento-content mt-auto flex items-center gap-4 text-xs font-mono tabular-nums bg-slate-900/50 px-3 py-2.5 rounded-xl border border-white/5">
+								<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-yellow-400 transition-colors">
+									<i class="fa-solid fa-star text-yellow-500/80" aria-hidden="true"></i><span class="star-count font-bold">1</span>
+								</div>
+								<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-blue-400 transition-colors cran-downloads">
+									<i class="fa-solid fa-download text-blue-400/80" aria-hidden="true"></i><span class="download-count font-bold">13.2k</span>
+								</div>
+							</div>
+						</a>
 
-			<a id="rmytarget" href="https://github.com/selesnow/rmytarget" class="bento-glass p-6 rounded-2xl block group" data-aos="zoom-in" data-aos-delay="150">
-				<div class="bento-content flex justify-between items-start mb-4"><h4 class="font-bold text-lg text-white group-hover:text-purple-400 outfit-font">rmytarget</h4><i class="fa-solid fa-bullseye text-slate-500 text-xl group-hover:text-orange-500 transition-colors"></i></div>
-				<div class="bento-content flex items-center justify-between gap-2 mb-5"><p class="text-sm text-slate-400">MyTarget API v2</p><span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-amber-500/15 text-amber-300 border border-amber-500/30 inline-flex items-center gap-1 shrink-0"><i class="fa-solid fa-box-archive"></i><span class="ru-text">Архив</span><span class="ua-text">Архів</span><span class="en-text">Archived</span></span></div>
-				<div class="bento-content flex items-center gap-4 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5">
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-yellow-500 transition-colors">
-						<i class="fa-solid fa-star"></i><span class="star-count font-bold">...</span>
-					</div>
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-blue-400 transition-colors cran-downloads">
-						<i class="fa-solid fa-download"></i><span class="download-count font-bold">...</span>
-					</div>
-				</div>
-			</a>
+						<a id="rtiktokads" href="https://github.com/selesnow/rtiktokads" target="_blank" rel="noopener" data-archived="0" data-stars="1" data-downloads="2848" class="bento-glass p-5 rounded-2xl flex flex-col group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400">
+							<div class="bento-content flex items-center gap-3.5 mb-3">
+								<div class="hex relative w-[52px] h-[60px] shrink-0 bg-gradient-to-br from-purple-500/40 via-slate-800 to-blue-500/30 flex items-center justify-center group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500" aria-hidden="true">
+									<div class="hex absolute inset-[2px] bg-slate-900/95"></div>
+									<i class="fa-brands fa-tiktok text-lg text-purple-200 relative"></i>
+								</div>
+								<div class="min-w-0 flex-1">
+									<span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-blue-500/15 text-blue-300 border border-blue-500/30 whitespace-nowrap mb-1">CRAN</span>
+									<h4 class="font-bold text-lg text-white group-hover:text-purple-300 transition-colors outfit-font truncate">rtiktokads</h4>
+								</div>
+							</div>
+							<p class="bento-content text-sm text-slate-400 mb-4 flex-1">TikTok Ads API</p>
+							<div class="bento-content mt-auto flex items-center gap-4 text-xs font-mono tabular-nums bg-slate-900/50 px-3 py-2.5 rounded-xl border border-white/5">
+								<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-yellow-400 transition-colors">
+									<i class="fa-solid fa-star text-yellow-500/80" aria-hidden="true"></i><span class="star-count font-bold">1</span>
+								</div>
+								<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-blue-400 transition-colors cran-downloads">
+									<i class="fa-solid fa-download text-blue-400/80" aria-hidden="true"></i><span class="download-count font-bold">2.8k</span>
+								</div>
+							</div>
+						</a>
 
-			<a id="rvkstat" href="https://github.com/selesnow/rvkstat" class="bento-glass p-6 rounded-2xl block group" data-aos="zoom-in" data-aos-delay="0">
-				<div class="bento-content flex justify-between items-start mb-4"><h4 class="font-bold text-lg text-white group-hover:text-purple-400 outfit-font">rvkstat</h4><i class="fa-brands fa-vk text-slate-500 text-xl group-hover:text-blue-500 transition-colors"></i></div>
-				<div class="bento-content flex items-center justify-between gap-2 mb-5"><p class="text-sm text-slate-400">VKontakte API</p><span class="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-amber-500/15 text-amber-300 border border-amber-500/30 inline-flex items-center gap-1 shrink-0"><i class="fa-solid fa-box-archive"></i><span class="ru-text">Архив</span><span class="ua-text">Архів</span><span class="en-text">Archived</span></span></div>
-				<div class="bento-content flex items-center gap-4 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5">
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-yellow-500 transition-colors">
-						<i class="fa-solid fa-star"></i><span class="star-count font-bold">...</span>
-					</div>
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-blue-400 transition-colors cran-downloads">
-						<i class="fa-solid fa-download"></i><span class="download-count font-bold">...</span>
-					</div>
-				</div>
-			</a>
+						<a id="ringostat" href="https://github.com/selesnow/ringostat" target="_blank" rel="noopener" data-archived="0" data-stars="0" data-downloads="14454" class="bento-glass p-5 rounded-2xl flex flex-col group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400">
+							<div class="bento-content flex items-center gap-3.5 mb-3">
+								<img src="assets/logos/ringostat.png" alt="ringostat logo" width="52" height="60" loading="lazy" class="w-[52px] h-[60px] object-contain shrink-0 drop-shadow-[0_6px_14px_rgba(0,0,0,0.45)] group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500">
+								<div class="min-w-0 flex-1">
+									<span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-blue-500/15 text-blue-300 border border-blue-500/30 whitespace-nowrap mb-1">CRAN</span>
+									<h4 class="font-bold text-lg text-white group-hover:text-purple-300 transition-colors outfit-font truncate">ringostat</h4>
+								</div>
+							</div>
+							<p class="bento-content text-sm text-slate-400 mb-4 flex-1">Ringostat API</p>
+							<div class="bento-content mt-auto flex items-center gap-4 text-xs font-mono tabular-nums bg-slate-900/50 px-3 py-2.5 rounded-xl border border-white/5">
+								<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-yellow-400 transition-colors">
+									<i class="fa-solid fa-star text-yellow-500/80" aria-hidden="true"></i><span class="star-count font-bold">0</span>
+								</div>
+								<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-blue-400 transition-colors cran-downloads">
+									<i class="fa-solid fa-download text-blue-400/80" aria-hidden="true"></i><span class="download-count font-bold">14.5k</span>
+								</div>
+							</div>
+						</a>
 
-			<a id="galigor" href="https://github.com/selesnow/galigor" class="bento-glass p-6 rounded-2xl block group" data-aos="zoom-in" data-aos-delay="50">
-				<div class="bento-content flex justify-between items-start mb-4"><h4 class="font-bold text-lg text-white group-hover:text-purple-400 outfit-font">galigor</h4><i class="fa-solid fa-toolbox text-slate-500 text-xl group-hover:text-gray-400 transition-colors"></i></div>
-				<p class="bento-content text-sm text-slate-400 mb-5">Internet Marketing Kit</p>
-				<div class="bento-content flex items-center gap-4 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5">
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-yellow-500 transition-colors">
-						<i class="fa-solid fa-star"></i><span class="star-count font-bold">...</span>
-					</div>
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-blue-400 transition-colors cran-downloads">
-						<i class="fa-solid fa-download"></i><span class="download-count font-bold">...</span>
-					</div>
-				</div>
-			</a>
+						<a id="ractivecampaign" href="https://github.com/selesnow/ractivecampaign" target="_blank" rel="noopener" data-archived="0" data-stars="0" data-downloads="13692" class="bento-glass p-5 rounded-2xl flex flex-col group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400">
+							<div class="bento-content flex items-center gap-3.5 mb-3">
+								<img src="assets/logos/ractivecampaign.png" alt="ractivecampaign logo" width="52" height="60" loading="lazy" class="w-[52px] h-[60px] object-contain shrink-0 drop-shadow-[0_6px_14px_rgba(0,0,0,0.45)] group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500">
+								<div class="min-w-0 flex-1">
+									<span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-blue-500/15 text-blue-300 border border-blue-500/30 whitespace-nowrap mb-1">CRAN</span>
+									<h4 class="font-bold text-lg text-white group-hover:text-purple-300 transition-colors outfit-font truncate">ractivecampaign</h4>
+								</div>
+							</div>
+							<p class="bento-content text-sm text-slate-400 mb-4 flex-1">ActiveCampaign API</p>
+							<div class="bento-content mt-auto flex items-center gap-4 text-xs font-mono tabular-nums bg-slate-900/50 px-3 py-2.5 rounded-xl border border-white/5">
+								<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-yellow-400 transition-colors">
+									<i class="fa-solid fa-star text-yellow-500/80" aria-hidden="true"></i><span class="star-count font-bold">0</span>
+								</div>
+								<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-blue-400 transition-colors cran-downloads">
+									<i class="fa-solid fa-download text-blue-400/80" aria-hidden="true"></i><span class="download-count font-bold">13.7k</span>
+								</div>
+							</div>
+						</a>
 
-			<a id="rmixpanel" href="https://github.com/selesnow/rmixpanel" class="bento-glass p-6 rounded-2xl block group" data-aos="zoom-in" data-aos-delay="100">
-				<div class="bento-content flex justify-between items-start mb-4"><h4 class="font-bold text-lg text-white group-hover:text-purple-400 outfit-font">rmixpanel</h4><i class="fa-solid fa-chart-pie text-slate-500 text-xl group-hover:text-purple-400 transition-colors"></i></div>
-				<p class="bento-content text-sm text-slate-400 mb-5">Mixpanel API</p>
-				<div class="bento-content flex items-center gap-4 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5">
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-yellow-500 transition-colors">
-						<i class="fa-solid fa-star"></i><span class="star-count font-bold">...</span>
-					</div>
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-blue-400 transition-colors">
-						<i class="fa-brands fa-github"></i>
-					</div>
-				</div>
-			</a>
+						<a id="racademyocean" href="https://github.com/selesnow/racademyocean" target="_blank" rel="noopener" data-archived="0" data-stars="0" data-downloads="12859" class="bento-glass p-5 rounded-2xl flex flex-col group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400">
+							<div class="bento-content flex items-center gap-3.5 mb-3">
+								<img src="assets/logos/racademyocean.png" alt="racademyocean logo" width="52" height="60" loading="lazy" class="w-[52px] h-[60px] object-contain shrink-0 drop-shadow-[0_6px_14px_rgba(0,0,0,0.45)] group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500">
+								<div class="min-w-0 flex-1">
+									<span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-blue-500/15 text-blue-300 border border-blue-500/30 whitespace-nowrap mb-1">CRAN</span>
+									<h4 class="font-bold text-lg text-white group-hover:text-purple-300 transition-colors outfit-font truncate">racademyocean</h4>
+								</div>
+							</div>
+							<p class="bento-content text-sm text-slate-400 mb-4 flex-1">AcademyOcean API</p>
+							<div class="bento-content mt-auto flex items-center gap-4 text-xs font-mono tabular-nums bg-slate-900/50 px-3 py-2.5 rounded-xl border border-white/5">
+								<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-yellow-400 transition-colors">
+									<i class="fa-solid fa-star text-yellow-500/80" aria-hidden="true"></i><span class="star-count font-bold">0</span>
+								</div>
+								<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-blue-400 transition-colors cran-downloads">
+									<i class="fa-solid fa-download text-blue-400/80" aria-hidden="true"></i><span class="download-count font-bold">12.9k</span>
+								</div>
+							</div>
+						</a>
 
-			<a id="rGitHub" href="https://github.com/selesnow/rGitHub" class="bento-glass p-6 rounded-2xl block group" data-aos="zoom-in" data-aos-delay="150">
-				<div class="bento-content flex justify-between items-start mb-4"><h4 class="font-bold text-lg text-white group-hover:text-purple-400 outfit-font">rGitHub</h4><i class="fa-brands fa-github text-slate-500 text-xl group-hover:text-white transition-colors"></i></div>
-				<p class="bento-content text-sm text-slate-400 mb-5">GitHub API stats</p>
-				<div class="bento-content flex items-center gap-4 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5">
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-yellow-500 transition-colors">
-						<i class="fa-solid fa-star"></i><span class="star-count font-bold">...</span>
-					</div>
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-blue-400 transition-colors">
-						<i class="fa-brands fa-github"></i>
-					</div>
-				</div>
-			</a>
+						<a id="rlinkedinads" href="https://github.com/selesnow/rlinkedinads" target="_blank" rel="noopener" data-archived="0" data-stars="0" data-downloads="7016" class="bento-glass p-5 rounded-2xl flex flex-col group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400">
+							<div class="bento-content flex items-center gap-3.5 mb-3">
+								<div class="hex relative w-[52px] h-[60px] shrink-0 bg-gradient-to-br from-purple-500/40 via-slate-800 to-blue-500/30 flex items-center justify-center group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500" aria-hidden="true">
+									<div class="hex absolute inset-[2px] bg-slate-900/95"></div>
+									<i class="fa-brands fa-linkedin text-lg text-purple-200 relative"></i>
+								</div>
+								<div class="min-w-0 flex-1">
+									<span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-blue-500/15 text-blue-300 border border-blue-500/30 whitespace-nowrap mb-1">CRAN</span>
+									<h4 class="font-bold text-lg text-white group-hover:text-purple-300 transition-colors outfit-font truncate">rlinkedinads</h4>
+								</div>
+							</div>
+							<p class="bento-content text-sm text-slate-400 mb-4 flex-1">LinkedIn Ads API</p>
+							<div class="bento-content mt-auto flex items-center gap-4 text-xs font-mono tabular-nums bg-slate-900/50 px-3 py-2.5 rounded-xl border border-white/5">
+								<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-yellow-400 transition-colors">
+									<i class="fa-solid fa-star text-yellow-500/80" aria-hidden="true"></i><span class="star-count font-bold">0</span>
+								</div>
+								<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-blue-400 transition-colors cran-downloads">
+									<i class="fa-solid fa-download text-blue-400/80" aria-hidden="true"></i><span class="download-count font-bold">7k</span>
+								</div>
+							</div>
+						</a>
 
-			<a id="rzohobooks" href="https://github.com/selesnow/rzohobooks" class="bento-glass p-6 rounded-2xl block group" data-aos="zoom-in" data-aos-delay="0">
-				<div class="bento-content flex justify-between items-start mb-4"><h4 class="font-bold text-lg text-white group-hover:text-purple-400 outfit-font">rzohobooks</h4><i class="fa-solid fa-file-invoice-dollar text-slate-500 text-xl group-hover:text-emerald-400 transition-colors"></i></div>
-				<p class="bento-content text-sm text-slate-400 mb-5">Zoho Books API</p>
-				<div class="bento-content flex items-center gap-4 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5">
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-yellow-500 transition-colors">
-						<i class="fa-solid fa-star"></i><span class="star-count font-bold">...</span>
-					</div>
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-blue-400 transition-colors">
-						<i class="fa-brands fa-github"></i>
-					</div>
-				</div>
-			</a>
+						<a id="rappleads" href="https://github.com/selesnow/rappleads" target="_blank" rel="noopener" data-archived="0" data-stars="0" data-downloads="2638" class="bento-glass p-5 rounded-2xl flex flex-col group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400">
+							<div class="bento-content flex items-center gap-3.5 mb-3">
+								<div class="hex relative w-[52px] h-[60px] shrink-0 bg-gradient-to-br from-purple-500/40 via-slate-800 to-blue-500/30 flex items-center justify-center group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500" aria-hidden="true">
+									<div class="hex absolute inset-[2px] bg-slate-900/95"></div>
+									<i class="fa-brands fa-apple text-lg text-purple-200 relative"></i>
+								</div>
+								<div class="min-w-0 flex-1">
+									<span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-blue-500/15 text-blue-300 border border-blue-500/30 whitespace-nowrap mb-1">CRAN</span>
+									<h4 class="font-bold text-lg text-white group-hover:text-purple-300 transition-colors outfit-font truncate">rappleads</h4>
+								</div>
+							</div>
+							<p class="bento-content text-sm text-slate-400 mb-4 flex-1">Apple Search Ads</p>
+							<div class="bento-content mt-auto flex items-center gap-4 text-xs font-mono tabular-nums bg-slate-900/50 px-3 py-2.5 rounded-xl border border-white/5">
+								<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-yellow-400 transition-colors">
+									<i class="fa-solid fa-star text-yellow-500/80" aria-hidden="true"></i><span class="star-count font-bold">0</span>
+								</div>
+								<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-blue-400 transition-colors cran-downloads">
+									<i class="fa-solid fa-download text-blue-400/80" aria-hidden="true"></i><span class="download-count font-bold">2.6k</span>
+								</div>
+							</div>
+						</a>
 
-			<a id="rwayforpay" href="https://github.com/selesnow/rwayforpay" class="bento-glass p-6 rounded-2xl block group" data-aos="zoom-in" data-aos-delay="50">
-				<div class="bento-content flex justify-between items-start mb-4"><h4 class="font-bold text-lg text-white group-hover:text-purple-400 outfit-font">rwayforpay</h4><i class="fa-solid fa-credit-card text-slate-500 text-xl group-hover:text-sky-400 transition-colors"></i></div>
-				<p class="bento-content text-sm text-slate-400 mb-5">WayForPay API</p>
-				<div class="bento-content flex items-center gap-4 text-xs font-mono bg-slate-900/50 p-3 rounded-xl border border-white/5">
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-yellow-500 transition-colors">
-						<i class="fa-solid fa-star"></i><span class="star-count font-bold">...</span>
+						<a id="rmixpanel" href="https://github.com/selesnow/rmixpanel" target="_blank" rel="noopener" data-archived="0" data-stars="0" data-downloads="0" class="bento-glass p-5 rounded-2xl flex flex-col group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400">
+							<div class="bento-content flex items-center gap-3.5 mb-3">
+								<div class="hex relative w-[52px] h-[60px] shrink-0 bg-gradient-to-br from-purple-500/40 via-slate-800 to-blue-500/30 flex items-center justify-center group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500" aria-hidden="true">
+									<div class="hex absolute inset-[2px] bg-slate-900/95"></div>
+									<i class="fa-solid fa-chart-pie text-lg text-purple-200 relative"></i>
+								</div>
+								<div class="min-w-0 flex-1">
+									<span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-slate-500/15 text-slate-300 border border-white/10 whitespace-nowrap mb-1">GitHub</span>
+									<h4 class="font-bold text-lg text-white group-hover:text-purple-300 transition-colors outfit-font truncate">rmixpanel</h4>
+								</div>
+							</div>
+							<p class="bento-content text-sm text-slate-400 mb-4 flex-1">Mixpanel API</p>
+							<div class="bento-content mt-auto flex items-center gap-4 text-xs font-mono tabular-nums bg-slate-900/50 px-3 py-2.5 rounded-xl border border-white/5">
+								<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-yellow-400 transition-colors">
+									<i class="fa-solid fa-star text-yellow-500/80" aria-hidden="true"></i><span class="star-count font-bold">0</span>
+								</div>
+								<div class="flex items-center gap-1.5 text-slate-400">
+									<i class="fa-brands fa-github" aria-hidden="true"></i>GitHub
+								</div>
+							</div>
+						</a>
+
+						<a id="rGitHub" href="https://github.com/selesnow/rGitHub" target="_blank" rel="noopener" data-archived="0" data-stars="0" data-downloads="0" class="bento-glass p-5 rounded-2xl flex flex-col group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400">
+							<div class="bento-content flex items-center gap-3.5 mb-3">
+								<div class="hex relative w-[52px] h-[60px] shrink-0 bg-gradient-to-br from-purple-500/40 via-slate-800 to-blue-500/30 flex items-center justify-center group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500" aria-hidden="true">
+									<div class="hex absolute inset-[2px] bg-slate-900/95"></div>
+									<i class="fa-brands fa-github text-lg text-purple-200 relative"></i>
+								</div>
+								<div class="min-w-0 flex-1">
+									<span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-slate-500/15 text-slate-300 border border-white/10 whitespace-nowrap mb-1">GitHub</span>
+									<h4 class="font-bold text-lg text-white group-hover:text-purple-300 transition-colors outfit-font truncate">rGitHub</h4>
+								</div>
+							</div>
+							<p class="bento-content text-sm text-slate-400 mb-4 flex-1">GitHub API stats</p>
+							<div class="bento-content mt-auto flex items-center gap-4 text-xs font-mono tabular-nums bg-slate-900/50 px-3 py-2.5 rounded-xl border border-white/5">
+								<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-yellow-400 transition-colors">
+									<i class="fa-solid fa-star text-yellow-500/80" aria-hidden="true"></i><span class="star-count font-bold">0</span>
+								</div>
+								<div class="flex items-center gap-1.5 text-slate-400">
+									<i class="fa-brands fa-github" aria-hidden="true"></i>GitHub
+								</div>
+							</div>
+						</a>
+
+						<a id="rzohobooks" href="https://github.com/selesnow/rzohobooks" target="_blank" rel="noopener" data-archived="0" data-stars="0" data-downloads="0" class="bento-glass p-5 rounded-2xl flex flex-col group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400">
+							<div class="bento-content flex items-center gap-3.5 mb-3">
+								<div class="hex relative w-[52px] h-[60px] shrink-0 bg-gradient-to-br from-purple-500/40 via-slate-800 to-blue-500/30 flex items-center justify-center group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500" aria-hidden="true">
+									<div class="hex absolute inset-[2px] bg-slate-900/95"></div>
+									<i class="fa-solid fa-file-invoice-dollar text-lg text-purple-200 relative"></i>
+								</div>
+								<div class="min-w-0 flex-1">
+									<span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-slate-500/15 text-slate-300 border border-white/10 whitespace-nowrap mb-1">GitHub</span>
+									<h4 class="font-bold text-lg text-white group-hover:text-purple-300 transition-colors outfit-font truncate">rzohobooks</h4>
+								</div>
+							</div>
+							<p class="bento-content text-sm text-slate-400 mb-4 flex-1">Zoho Books API</p>
+							<div class="bento-content mt-auto flex items-center gap-4 text-xs font-mono tabular-nums bg-slate-900/50 px-3 py-2.5 rounded-xl border border-white/5">
+								<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-yellow-400 transition-colors">
+									<i class="fa-solid fa-star text-yellow-500/80" aria-hidden="true"></i><span class="star-count font-bold">0</span>
+								</div>
+								<div class="flex items-center gap-1.5 text-slate-400">
+									<i class="fa-brands fa-github" aria-hidden="true"></i>GitHub
+								</div>
+							</div>
+						</a>
+
+						<a id="rwayforpay" href="https://github.com/selesnow/rwayforpay" target="_blank" rel="noopener" data-archived="0" data-stars="0" data-downloads="0" class="bento-glass p-5 rounded-2xl flex flex-col group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400">
+							<div class="bento-content flex items-center gap-3.5 mb-3">
+								<div class="hex relative w-[52px] h-[60px] shrink-0 bg-gradient-to-br from-purple-500/40 via-slate-800 to-blue-500/30 flex items-center justify-center group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500" aria-hidden="true">
+									<div class="hex absolute inset-[2px] bg-slate-900/95"></div>
+									<i class="fa-solid fa-credit-card text-lg text-purple-200 relative"></i>
+								</div>
+								<div class="min-w-0 flex-1">
+									<span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-slate-500/15 text-slate-300 border border-white/10 whitespace-nowrap mb-1">GitHub</span>
+									<h4 class="font-bold text-lg text-white group-hover:text-purple-300 transition-colors outfit-font truncate">rwayforpay</h4>
+								</div>
+							</div>
+							<p class="bento-content text-sm text-slate-400 mb-4 flex-1">WayForPay API</p>
+							<div class="bento-content mt-auto flex items-center gap-4 text-xs font-mono tabular-nums bg-slate-900/50 px-3 py-2.5 rounded-xl border border-white/5">
+								<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-yellow-400 transition-colors">
+									<i class="fa-solid fa-star text-yellow-500/80" aria-hidden="true"></i><span class="star-count font-bold">0</span>
+								</div>
+								<div class="flex items-center gap-1.5 text-slate-400">
+									<i class="fa-brands fa-github" aria-hidden="true"></i>GitHub
+								</div>
+							</div>
+						</a>
+
 					</div>
-					<div class="flex items-center gap-2 text-slate-400 group-hover:text-blue-400 transition-colors">
-						<i class="fa-brands fa-github"></i>
+
+					<!-- ARCHIVED PACKAGES (LOWEST PRIORITY, AT THE END) -->
+					<div class="flex items-center gap-3 pt-2">
+						<span class="text-xs font-mono font-bold uppercase tracking-widest text-slate-400 whitespace-nowrap inline-flex items-center gap-2"><i class="fa-solid fa-box-archive text-amber-400/80" aria-hidden="true"></i><span class="ru-text">Архивные пакеты</span><span class="ua-text">Архівні пакети</span><span class="en-text">Archived packages</span></span>
+						<div class="h-px flex-1 bg-white/10"></div>
 					</div>
+
+					<div id="repos-more-archived" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
+						<a id="ryandexdirect" href="https://github.com/selesnow/ryandexdirect" target="_blank" rel="noopener" data-archived="1" data-stars="53" data-downloads="41378" class="bento-glass p-5 rounded-2xl flex flex-col group opacity-80 hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400">
+							<div class="bento-content flex items-center gap-3.5 mb-3">
+								<img src="assets/logos/ryandexdirect.png" alt="ryandexdirect logo" width="52" height="60" loading="lazy" class="w-[52px] h-[60px] object-contain shrink-0 grayscale-[35%] group-hover:grayscale-0 drop-shadow-[0_6px_14px_rgba(0,0,0,0.45)] group-hover:scale-105 group-hover:-rotate-3 transition-all duration-500">
+								<div class="min-w-0 flex-1">
+									<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-amber-500/15 text-amber-300 border border-amber-500/30 whitespace-nowrap mb-1"><i class="fa-solid fa-box-archive text-[9px]" aria-hidden="true"></i><span class="ru-text">Архив</span><span class="ua-text">Архів</span><span class="en-text">Archived</span></span>
+									<h4 class="font-bold text-lg text-white group-hover:text-purple-300 transition-colors outfit-font truncate">ryandexdirect</h4>
+								</div>
+							</div>
+							<p class="bento-content text-sm text-slate-400 mb-4 flex-1">Yandex.Direct API</p>
+							<div class="bento-content mt-auto flex items-center gap-4 text-xs font-mono tabular-nums bg-slate-900/50 px-3 py-2.5 rounded-xl border border-white/5">
+								<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-yellow-400 transition-colors">
+									<i class="fa-solid fa-star text-yellow-500/80" aria-hidden="true"></i><span class="star-count font-bold">53</span>
+								</div>
+								<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-blue-400 transition-colors cran-downloads">
+									<i class="fa-solid fa-download text-blue-400/80" aria-hidden="true"></i><span class="download-count font-bold">41.4k</span>
+								</div>
+							</div>
+						</a>
+
+						<a id="rvkstat" href="https://github.com/selesnow/rvkstat" target="_blank" rel="noopener" data-archived="1" data-stars="15" data-downloads="29820" class="bento-glass p-5 rounded-2xl flex flex-col group opacity-80 hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400">
+							<div class="bento-content flex items-center gap-3.5 mb-3">
+								<img src="assets/logos/rvkstat.png" alt="rvkstat logo" width="52" height="60" loading="lazy" class="w-[52px] h-[60px] object-contain shrink-0 grayscale-[35%] group-hover:grayscale-0 drop-shadow-[0_6px_14px_rgba(0,0,0,0.45)] group-hover:scale-105 group-hover:-rotate-3 transition-all duration-500">
+								<div class="min-w-0 flex-1">
+									<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-amber-500/15 text-amber-300 border border-amber-500/30 whitespace-nowrap mb-1"><i class="fa-solid fa-box-archive text-[9px]" aria-hidden="true"></i><span class="ru-text">Архив</span><span class="ua-text">Архів</span><span class="en-text">Archived</span></span>
+									<h4 class="font-bold text-lg text-white group-hover:text-purple-300 transition-colors outfit-font truncate">rvkstat</h4>
+								</div>
+							</div>
+							<p class="bento-content text-sm text-slate-400 mb-4 flex-1">VKontakte API</p>
+							<div class="bento-content mt-auto flex items-center gap-4 text-xs font-mono tabular-nums bg-slate-900/50 px-3 py-2.5 rounded-xl border border-white/5">
+								<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-yellow-400 transition-colors">
+									<i class="fa-solid fa-star text-yellow-500/80" aria-hidden="true"></i><span class="star-count font-bold">15</span>
+								</div>
+								<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-blue-400 transition-colors cran-downloads">
+									<i class="fa-solid fa-download text-blue-400/80" aria-hidden="true"></i><span class="download-count font-bold">29.8k</span>
+								</div>
+							</div>
+						</a>
+
+						<a id="rym" href="https://github.com/selesnow/rym" target="_blank" rel="noopener" data-archived="1" data-stars="13" data-downloads="37939" class="bento-glass p-5 rounded-2xl flex flex-col group opacity-80 hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400">
+							<div class="bento-content flex items-center gap-3.5 mb-3">
+								<img src="assets/logos/rym.png" alt="rym logo" width="52" height="60" loading="lazy" class="w-[52px] h-[60px] object-contain shrink-0 grayscale-[35%] group-hover:grayscale-0 drop-shadow-[0_6px_14px_rgba(0,0,0,0.45)] group-hover:scale-105 group-hover:-rotate-3 transition-all duration-500">
+								<div class="min-w-0 flex-1">
+									<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-amber-500/15 text-amber-300 border border-amber-500/30 whitespace-nowrap mb-1"><i class="fa-solid fa-box-archive text-[9px]" aria-hidden="true"></i><span class="ru-text">Архив</span><span class="ua-text">Архів</span><span class="en-text">Archived</span></span>
+									<h4 class="font-bold text-lg text-white group-hover:text-purple-300 transition-colors outfit-font truncate">rym</h4>
+								</div>
+							</div>
+							<p class="bento-content text-sm text-slate-400 mb-4 flex-1">Yandex Metrica API</p>
+							<div class="bento-content mt-auto flex items-center gap-4 text-xs font-mono tabular-nums bg-slate-900/50 px-3 py-2.5 rounded-xl border border-white/5">
+								<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-yellow-400 transition-colors">
+									<i class="fa-solid fa-star text-yellow-500/80" aria-hidden="true"></i><span class="star-count font-bold">13</span>
+								</div>
+								<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-blue-400 transition-colors cran-downloads">
+									<i class="fa-solid fa-download text-blue-400/80" aria-hidden="true"></i><span class="download-count font-bold">37.9k</span>
+								</div>
+							</div>
+						</a>
+
+						<a id="rmytarget" href="https://github.com/selesnow/rmytarget" target="_blank" rel="noopener" data-archived="1" data-stars="5" data-downloads="34351" class="bento-glass p-5 rounded-2xl flex flex-col group opacity-80 hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400">
+							<div class="bento-content flex items-center gap-3.5 mb-3">
+								<img src="assets/logos/rmytarget.png" alt="rmytarget logo" width="52" height="60" loading="lazy" class="w-[52px] h-[60px] object-contain shrink-0 grayscale-[35%] group-hover:grayscale-0 drop-shadow-[0_6px_14px_rgba(0,0,0,0.45)] group-hover:scale-105 group-hover:-rotate-3 transition-all duration-500">
+								<div class="min-w-0 flex-1">
+									<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-amber-500/15 text-amber-300 border border-amber-500/30 whitespace-nowrap mb-1"><i class="fa-solid fa-box-archive text-[9px]" aria-hidden="true"></i><span class="ru-text">Архив</span><span class="ua-text">Архів</span><span class="en-text">Archived</span></span>
+									<h4 class="font-bold text-lg text-white group-hover:text-purple-300 transition-colors outfit-font truncate">rmytarget</h4>
+								</div>
+							</div>
+							<p class="bento-content text-sm text-slate-400 mb-4 flex-1">MyTarget API v2</p>
+							<div class="bento-content mt-auto flex items-center gap-4 text-xs font-mono tabular-nums bg-slate-900/50 px-3 py-2.5 rounded-xl border border-white/5">
+								<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-yellow-400 transition-colors">
+									<i class="fa-solid fa-star text-yellow-500/80" aria-hidden="true"></i><span class="star-count font-bold">5</span>
+								</div>
+								<div class="flex items-center gap-1.5 text-slate-300 group-hover:text-blue-400 transition-colors cran-downloads">
+									<i class="fa-solid fa-download text-blue-400/80" aria-hidden="true"></i><span class="download-count font-bold">34.4k</span>
+								</div>
+							</div>
+						</a>
+
+					</div>
+
 				</div>
-			</a>
+			</div>
 
 		</div>
 
-        <div class="mt-8 flex justify-end" data-aos="fade-up">
-            <a href="opensource/" class="group inline-flex items-center gap-3 text-sm font-semibold text-slate-400 hover:text-white transition-colors">
+        <div class="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <button type="button" id="toggle-more-repos" aria-expanded="false" aria-controls="repos-more-wrap" class="min-h-[44px] px-5 py-2.5 rounded-full border border-purple-500/30 bg-purple-500/10 hover:bg-purple-500/20 text-sm font-semibold text-white inline-flex items-center gap-2.5 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 transition-all">
+                <span id="toggle-more-repos-label-closed"><span class="ru-text">Показать ещё 16 пакетов</span><span class="ua-text">Показати ще 16 пакетів</span><span class="en-text">Show 16 more packages</span></span>
+                <span id="toggle-more-repos-label-open" class="hidden"><span class="ru-text">Свернуть список</span><span class="ua-text">Згорнути список</span><span class="en-text">Show less</span></span>
+                <i id="toggle-more-repos-icon" class="fa-solid fa-chevron-down text-xs text-purple-300 transition-transform duration-300" aria-hidden="true"></i>
+            </button>
+            <a href="opensource/" class="group inline-flex items-center gap-3 text-sm font-semibold text-slate-400 hover:text-white transition-colors min-h-[44px]">
                 <span><span class="ru-text">Все пакеты с подробным описанием и видеоуроками</span><span class="ua-text">Усі пакети з докладним описом і відеоуроками</span><span class="en-text">All packages with detailed descriptions &amp; video lessons</span></span>
-                <span class="w-9 h-9 rounded-full border border-white/10 bg-slate-900/50 flex items-center justify-center group-hover:bg-purple-500 group-hover:border-purple-500 transition-all"><i class="fa-solid fa-arrow-right text-xs"></i></span>
+                <span class="w-9 h-9 rounded-full border border-white/10 bg-slate-900/50 flex items-center justify-center group-hover:bg-purple-500 group-hover:border-purple-500 transition-all shrink-0"><i class="fa-solid fa-arrow-right text-xs"></i></span>
             </a>
         </div>
     </section>
@@ -2360,12 +2580,12 @@
                 if (response.ok) {
                     const data = await response.json();
                     starSpan.textContent = data.stargazers_count;
-                } else {
+                } else if (starSpan.textContent.trim() === '...') {
                     starSpan.textContent = '0';
                 }
             } catch (error) {
                 console.error('Error fetching stars for', repoName, ':', error);
-                starSpan.textContent = '-';
+                if (starSpan.textContent.trim() === '...') starSpan.textContent = '-';
             }
         }
     }
@@ -2416,16 +2636,47 @@
                         downloadContainer.title = 'No downloads recorded';
                     }
                 } else {
-                    downloadSpan.textContent = '-';
+                    if (downloadSpan.textContent.trim() === '...') downloadSpan.textContent = '-';
                     downloadContainer.title = 'Failed to load CRAN stats';
                 }
             } catch (error) {
                 console.error(`Error fetching CRAN downloads for ${packageName}:`, error);
-                downloadSpan.textContent = '-';
+                if (downloadSpan.textContent.trim() === '...') downloadSpan.textContent = '-';
                 downloadContainer.title = 'Error loading CRAN stats';
             }
             
             await new Promise(resolve => setTimeout(resolve, 150));
+        }
+    }
+
+    // Сортировка карточек пакетов: приоритет звёзды (desc), при равенстве — скачивания CRAN (desc).
+    // Архивные всегда остаются в своём блоке в самом конце.
+    function sortPackageCards() {
+        const cmp = (a, b) => {
+            const ds = (Number(b.dataset.stars) || 0) - (Number(a.dataset.stars) || 0);
+            if (ds !== 0) return ds;
+            return (Number(b.dataset.downloads) || 0) - (Number(a.dataset.downloads) || 0);
+        };
+
+        const featured = document.getElementById('repos-featured');
+        if (featured) {
+            Array.from(featured.querySelectorAll('a[id]')).sort(cmp).forEach(el => featured.appendChild(el));
+        }
+
+        const core = document.getElementById('repos-core');
+        const moreActive = document.getElementById('repos-more-active');
+        if (core && moreActive) {
+            const pool = [
+                ...Array.from(core.querySelectorAll('a[id]')),
+                ...Array.from(moreActive.querySelectorAll('a[id]'))
+            ].sort(cmp);
+            pool.slice(0, 4).forEach(el => core.appendChild(el));
+            pool.slice(4).forEach(el => moreActive.appendChild(el));
+        }
+
+        const moreArchived = document.getElementById('repos-more-archived');
+        if (moreArchived) {
+            Array.from(moreArchived.querySelectorAll('a[id]')).sort(cmp).forEach(el => moreArchived.appendChild(el));
         }
     }
 
@@ -2444,6 +2695,9 @@
         if (!container) return;
         container.querySelectorAll('a[id]').forEach(card => {
             const s = (stats.packages || {})[card.id] || {};
+            if (s.stars != null) card.dataset.stars = s.stars;
+            if (s.downloads != null) card.dataset.downloads = s.downloads;
+
             const starSpan = card.querySelector('.star-count');
             if (starSpan && s.stars != null) starSpan.textContent = s.stars;
 
@@ -2459,9 +2713,46 @@
                 downloadContainer.title = 'Not on CRAN';
             }
         });
+        sortPackageCards();
+    }
+
+    // Раскрытие / сворачивание дополнительных пакетов Open Source
+    function initReposToggle() {
+        const btn = document.getElementById('toggle-more-repos');
+        const wrap = document.getElementById('repos-more-wrap');
+        const icon = document.getElementById('toggle-more-repos-icon');
+        const labelClosed = document.getElementById('toggle-more-repos-label-closed');
+        const labelOpen = document.getElementById('toggle-more-repos-label-open');
+        if (!btn || !wrap) return;
+
+        btn.addEventListener('click', () => {
+            const isOpen = wrap.classList.toggle('is-open');
+            btn.setAttribute('aria-expanded', String(isOpen));
+            wrap.setAttribute('aria-hidden', String(!isOpen));
+            if (isOpen) {
+                wrap.removeAttribute('inert');
+            } else {
+                wrap.setAttribute('inert', '');
+            }
+            if (icon) icon.classList.toggle('rotate-180', isOpen);
+            if (labelClosed) labelClosed.classList.toggle('hidden', isOpen);
+            if (labelOpen) labelOpen.classList.toggle('hidden', !isOpen);
+            sendGAEvent('packages_expand_toggle', {
+                expanded: isOpen,
+                section: 'opensource'
+            });
+            setTimeout(() => {
+                if (typeof AOS !== 'undefined') AOS.refresh();
+            }, 350);
+        });
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+        initReposToggle();
+        if (window.location.protocol === 'file:') {
+            sortPackageCards();
+            return;
+        }
         loadStatsFile().catch(() => {
             fetchGitHubStars();
             fetchCRANDownloads();
